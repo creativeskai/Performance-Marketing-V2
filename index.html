@@ -1559,8 +1559,9 @@ function lC(){try{return JSON.parse(localStorage.getItem(CFG)||'{}')}catch{retur
 function sC(c){localStorage.setItem(CFG,JSON.stringify(c));cfg=c}
 
 const DATA={
-  today:{label:'Today — August 2, 2026 (partial · Sunday)',campaigns:[
-    {id:'ess31',sn:'ESSENTIALS_31072026',product:'Essentials v3',spend:146.66,revenue:0,purchases:0,atc:0,checkouts:0,reach:1350,impressions:1523,cpm:96.30,freq:1.18,ctr:0.92,lpv:14,cpp:0,status:'active',color:'#c0392b'}
+  today:{label:'Today — August 17, 2026 (verified via Meta Ads MCP, partial day · Monday)',campaigns:[
+    {id:'kagetof',sn:'Kage_TOF',product:'Kage Tee',spend:86.28,revenue:0,purchases:0,atc:0,checkouts:0,reach:9848,impressions:10235,cpm:8.43,freq:1.04,ctr:1.19,lpv:82,cpp:0,status:'active',color:'#1a6bb5'},
+    {id:'kagesales1608',sn:'Kage_sales_1608',product:'Kage Tee',spend:199.19,revenue:0,purchases:0,atc:0,checkouts:0,reach:1047,impressions:1447,cpm:137.66,freq:1.38,ctr:1.52,lpv:13,cpp:0,status:'active',color:'#b85c00'}
   ]},
   last3:{label:'Last 3 days (Jul 30 – Aug 1, 2026)',campaigns:[
     {id:'ess31',sn:'ESSENTIALS_31072026',product:'Essentials v3',spend:721.21,revenue:0,purchases:0,atc:0,checkouts:0,reach:5256,impressions:7339,cpm:98.27,freq:1.40,ctr:1.58,lpv:116,cpp:0,status:'active',color:'#c0392b'}
@@ -2304,18 +2305,70 @@ document.getElementById('adv-area').addEventListener('keydown',function(e){
 function init(){
   if(!cfg.anthropicKey&&!cfg.geminiKey){sC(Object.assign({},cfg,{anthropicKey:GEMINI_KEY,geminiKey:GEMINI_KEY}));}
   document.getElementById('tdate').textContent=new Date().toLocaleDateString('en-IN',{day:'numeric',month:'short',year:'numeric'});
-  document.getElementById('sync-dot').style.animation='pulse 1s ease infinite';
-  document.getElementById('sync-label').textContent='Syncing...';
-  setTimeout(function(){
-    document.getElementById('sync-dot').style.animation='';
-    document.getElementById('sync-label').textContent='Meta live \u00b7 June 20, 2026';
-  },1200);
   sM('daily');rAdvTabs();refreshDash();
 
   if(typeof renderGeo === "function") renderGeo();
+  fetchLiveData();
 }
 
-// ── Auto-fetch live data from /api/meta on page load ─────────────────────────
+// ── Auto-fetch live data from /api/meta on page load ──────────────────────────
+const LINK_CLICK_OBJS = ['LINK_CLICKS','OUTCOME_AWARENESS','OUTCOME_LEADS'];
+const CAMP_COLOR_PALETTE = ['#1a6bb5','#1e7a45','#b85c00','#7a1fa2','#c0392b','#0e7c86','#8a6d1f','#c2185b'];
+
+function colorFor(key){
+  let h=0; const s=String(key||'');
+  for(let i=0;i<s.length;i++) h=(h*31+s.charCodeAt(i))>>>0;
+  return CAMP_COLOR_PALETTE[h%CAMP_COLOR_PALETTE.length];
+}
+function statusFromEffective(es){
+  if(es==='ACTIVE') return 'active';
+  if(es==='PAUSED'||es==='CAMPAIGN_PAUSED'||es==='ADSET_PAUSED') return 'paused';
+  return 'off';
+}
+function titleCase(s){ return s.replace(/\w\S*/g, t=>t.charAt(0).toUpperCase()+t.slice(1).toLowerCase()); }
+function guessProduct(n) {
+  if(!n) return 'Other';
+  const parts = n.split('|').map(s=>s.trim()).filter(Boolean);
+  if(parts.length > 1) {
+    const seg = parts.find(p => !/^\d{4,}$/.test(p) && p.toLowerCase()!=='kai' && p.toLowerCase()!=='sales') || parts[parts.length-1];
+    return titleCase(seg);
+  }
+  const base = n.replace(/[_\-]?\d{6,}$/,'').replace(/[_\-]+/g,' ').trim();
+  return titleCase(base) || 'Other';
+}
+function getAct(actions, type) {
+  if(!actions||!Array.isArray(actions)) return 0;
+  const a = actions.find(x=>x.action_type===type||x.action_type==='omni_'+type);
+  return a ? parseFloat(a.value)||0 : 0;
+}
+
+function buildCamps(rawArr, metaMap) {
+  return (rawArr||[])
+    .filter(c => {
+      const meta = metaMap[c.campaign_id];
+      return parseFloat(c.spend)>0 && !(meta && LINK_CLICK_OBJS.includes(meta.objective));
+    })
+    .map(c => {
+      const spend = parseFloat(c.spend)||0;
+      const roas = c.purchase_roas ? parseFloat(c.purchase_roas[0]?.value||c.purchase_roas) : 0;
+      const revenue = roas * spend;
+      const purchases = getAct(c.actions,'omni_purchase');
+      const atc = getAct(c.actions,'add_to_cart') || Math.round(purchases*7);
+      const checkouts = getAct(c.actions,'initiate_checkout') || Math.round(purchases*4.5);
+      const sn = c.campaign_name;
+      const id = c.campaign_id || sn.toLowerCase().replace(/[^a-z0-9]/g,'').slice(0,12);
+      return {
+        id, sn, product: guessProduct(sn), spend, revenue, purchases, roas,
+        atc, checkouts, reach:parseInt(c.reach)||0, impressions:parseInt(c.impressions)||0,
+        cpm:parseFloat(c.cpm)||0, freq:parseFloat(c.frequency)||1,
+        ctr:parseFloat(c.ctr)||0, lpv:Math.round((parseInt(c.clicks)||0)*0.7),
+        cpp:purchases>0?spend/purchases:0,
+        status: (metaMap[c.campaign_id]||{}).status || 'active',
+        color: colorFor(id)
+      };
+    });
+}
+
 async function fetchLiveData() {
   const dot = document.getElementById('sync-dot');
   const label = document.getElementById('sync-label');
@@ -2323,9 +2376,13 @@ async function fetchLiveData() {
   if(label) label.textContent = 'Fetching live data...';
 
   try {
-    // Fetch all endpoints in parallel
-    const [ins7d, insDaily, insPlace, insDev, insAge, insHourly] = await Promise.all([
+    const [camps, insToday, ins7d, ins14d, ins30d, insMonth, insDaily, insPlace, insDev, insAge, insHourly] = await Promise.all([
+      fetch('/api/meta?endpoint=campaigns').then(r=>r.json()).catch(()=>({data:[]})),
+      fetch('/api/meta?endpoint=insights_today').then(r=>r.json()).catch(()=>({data:[]})),
       fetch('/api/meta?endpoint=insights_7d').then(r=>r.json()),
+      fetch('/api/meta?endpoint=insights_14d').then(r=>r.json()).catch(()=>({data:[]})),
+      fetch('/api/meta?endpoint=insights_30d').then(r=>r.json()).catch(()=>({data:[]})),
+      fetch('/api/meta?endpoint=insights_month').then(r=>r.json()).catch(()=>({data:[]})),
       fetch('/api/meta?endpoint=insights_daily').then(r=>r.json()),
       fetch('/api/meta?endpoint=insights_placement').then(r=>r.json().catch(()=>({data:[]}))),
       fetch('/api/meta?endpoint=insights_device').then(r=>r.json().catch(()=>({data:[]}))),
@@ -2335,40 +2392,37 @@ async function fetchLiveData() {
 
     if(ins7d.error) throw new Error(ins7d.error.message || ins7d.error);
 
-    // Map campaigns from live API
-    const LINK_CLICK_OBJS = ['LINK_CLICKS','OUTCOME_AWARENESS','OUTCOME_LEADS'];
-    const camps7d = (ins7d.data||[]).filter(c => parseFloat(c.spend)>0 && !LINK_CLICK_OBJS.includes(c.objective));
+    const metaMap = {};
+    (camps.data||[]).forEach(c=>{ metaMap[c.id] = { status: statusFromEffective(c.effective_status||c.status), objective: c.objective }; });
 
-    const COLORS = {'Kage_12052026':'#1a6bb5','Kage_Retargeting_16052025':'#b85c00','Kabuto_Caps_24042026':'#1e7a45'};
-    
-    const liveCamps = camps7d.map(c => {
-      const spend = parseFloat(c.spend)||0;
-      const roas = c.purchase_roas ? parseFloat(c.purchase_roas[0]?.value||c.purchase_roas) : 0;
-      const revenue = roas * spend;
-      const purchases = getAct(c.actions,'omni_purchase');
-      const atc = getAct(c.actions,'add_to_cart') || Math.round(purchases*7);
-      const checkouts = getAct(c.actions,'initiate_checkout') || Math.round(purchases*4.5);
-      const sn = c.campaign_name;
-      return {
-        id: sn.toLowerCase().replace(/[^a-z0-9]/g,'').slice(0,12),
-        sn, product: guessProduct(sn), spend, revenue, purchases, roas,
-        atc, checkouts, reach:parseInt(c.reach)||0, impressions:parseInt(c.impressions)||0,
-        cpm:parseFloat(c.cpm)||0, freq:parseFloat(c.frequency)||1,
-        ctr:parseFloat(c.ctr)||0, lpv:Math.round((parseInt(c.clicks)||0)*0.7),
-        cpp:purchases>0?spend/purchases:0, status:'active',
-        color:COLORS[sn]||'#1a6bb5'
-      };
+    const periodMap = { today: insToday, last7: ins7d, last14: ins14d, last30: ins30d, month: insMonth };
+    const periodLabels = {
+      today: 'Today (live · '+new Date().toLocaleDateString('en-IN',{day:'numeric',month:'short',year:'numeric'})+')',
+      last7: 'Last 7 days (live)', last14: 'Last 14 days (live)',
+      last30: 'Last 30 days (live)', month: 'This month (live)'
+    };
+    let updatedAny = false;
+    Object.keys(periodMap).forEach(p=>{
+      const raw = periodMap[p];
+      if(!raw || raw.error) return;
+      const liveCamps = buildCamps(raw.data, metaMap);
+      if(liveCamps.length>0){
+        DATA[p].campaigns = liveCamps;
+        DATA[p].label = periodLabels[p];
+        updatedAny = true;
+      }
     });
 
-    if(liveCamps.length > 0) {
-      // Update the DATA object for all periods with live last7d
-      DATA.last7.campaigns = liveCamps;
-      DATA.last7.label = 'Last 7 days (live)';
+    if(!updatedAny) throw new Error('No campaigns with spend returned for any period');
 
+    {
       // Update daily pacing in INSIGHTS_DATA
       if(insDaily.data && insDaily.data.length>0) {
         const byDate = {};
-        insDaily.data.filter(r=>parseFloat(r.spend)>0 && !LINK_CLICK_OBJS.includes(r.objective)).forEach(r => {
+        insDaily.data.filter(r=>{
+          const meta = metaMap[r.campaign_id];
+          return parseFloat(r.spend)>0 && !(meta && LINK_CLICK_OBJS.includes(meta.objective));
+        }).forEach(r => {
           const dt = r.date_start;
           if(!byDate[dt]) byDate[dt]={spend:0,revenue:0,purchases:0,cpm:[]};
           const sp=parseFloat(r.spend)||0, ro=r.purchase_roas?parseFloat(r.purchase_roas[0]?.value||r.purchase_roas):0;
@@ -2431,29 +2485,21 @@ async function fetchLiveData() {
       }
 
       // Re-render current view
-      const now = new Date().toLocaleTimeString('en-IN',{hour:'2-digit',minute:'2-digit'});
-      if(dot){dot.style.background='#1e7a45';dot.style.animation='';}
-      if(label) label.textContent='Meta live · '+liveCamps.length+' campaigns · '+now;
-      refreshDash();
     }
+
+    const plEl = document.getElementById('period-label');
+    if(plEl && DATA[period]) plEl.textContent = DATA[period].label;
+    const now = new Date().toLocaleTimeString('en-IN',{hour:'2-digit',minute:'2-digit'});
+    if(dot){dot.style.background='#1e7a45';dot.style.animation='';}
+    if(label) label.textContent='Meta live · '+now;
+    refreshDash();
   } catch(err) {
     console.warn('Live fetch failed, using cached data:', err.message);
-    if(dot){dot.style.background='#c97a18';dot.style.animation='';}
-    if(label) label.textContent='Meta · May 18–24 (cached)';
+    if(dot){dot.style.background='#c0392b';dot.style.animation='';}
+    if(label) label.textContent='Live fetch failed — showing cached data';
   }
 }
 
-function getAct(actions, type) {
-  if(!actions||!Array.isArray(actions)) return 0;
-  const a = actions.find(x=>x.action_type===type||x.action_type==='omni_'+type);
-  return a ? parseFloat(a.value)||0 : 0;
-}
-function guessProduct(n) {
-  n=n.toLowerCase();
-  if(n.includes('kabuto')||n.includes('cap')) return 'Kabuto Cap';
-  if(n.includes('bundle')||n.includes('combo')) return 'Bundle';
-  return 'Kage Tee';
-}
 function fmtPlacement(plat,pos) {
   const m={'instagram_reels':'IG Reels','instagram_stories':'IG Stories','feed':plat==='instagram'?'IG Feed':'FB Feed','facebook_reels':'FB Reels','threads_feed':'Threads','facebook_stories':'FB Stories'};
   return m[pos]||(plat+' '+pos).replace(/_/g,' ');

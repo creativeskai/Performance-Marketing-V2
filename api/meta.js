@@ -3,6 +3,7 @@
 // It never reaches the browser.
 
 const AD_ACCOUNT = 'act_704523148804803';
+const CAMPAIGN_FIELDS = 'campaign_id,campaign_name,impressions,reach,frequency,spend,cpm,ctr,clicks,purchase_roas,actions,cost_per_action_type';
 
 export default async function handler(req, res) {
   // CORS — allow your domain only in production
@@ -22,18 +23,47 @@ export default async function handler(req, res) {
     let data;
 
     if (endpoint === 'campaigns') {
-      // Active campaigns with 7-day stats
+      // All campaigns with status/objective (used to merge real status + filter by objective)
       const url = `https://graph.facebook.com/v19.0/${AD_ACCOUNT}/campaigns` +
         `?fields=id,name,status,effective_status,objective` +
-        `&limit=50&access_token=${token}`;
+        `&limit=500&access_token=${token}`;
+      const r = await fetch(url);
+      data = await r.json();
+
+    } else if (endpoint === 'insights_today') {
+      const url = `https://graph.facebook.com/v19.0/${AD_ACCOUNT}/insights` +
+        `?fields=${CAMPAIGN_FIELDS}` +
+        `&level=campaign&date_preset=today&limit=100&access_token=${token}`;
       const r = await fetch(url);
       data = await r.json();
 
     } else if (endpoint === 'insights_7d') {
-      // Account-level 7-day insights
+      // Active campaigns with 7-day stats
       const url = `https://graph.facebook.com/v19.0/${AD_ACCOUNT}/insights` +
-        `?fields=campaign_id,campaign_name,impressions,reach,frequency,spend,cpm,ctr,clicks,purchase_roas,actions,cost_per_action_type` +
-        `&level=campaign&date_preset=last_7d&limit=50&access_token=${token}`;
+        `?fields=${CAMPAIGN_FIELDS}` +
+        `&level=campaign&date_preset=last_7d&limit=100&access_token=${token}`;
+      const r = await fetch(url);
+      data = await r.json();
+
+    } else if (endpoint === 'insights_14d') {
+      const url = `https://graph.facebook.com/v19.0/${AD_ACCOUNT}/insights` +
+        `?fields=${CAMPAIGN_FIELDS}` +
+        `&level=campaign&date_preset=last_14d&limit=100&access_token=${token}`;
+      const r = await fetch(url);
+      data = await r.json();
+
+    } else if (endpoint === 'insights_30d') {
+      // 30-day insights
+      const url = `https://graph.facebook.com/v19.0/${AD_ACCOUNT}/insights` +
+        `?fields=${CAMPAIGN_FIELDS}` +
+        `&level=campaign&date_preset=last_30d&limit=100&access_token=${token}`;
+      const r = await fetch(url);
+      data = await r.json();
+
+    } else if (endpoint === 'insights_month') {
+      const url = `https://graph.facebook.com/v19.0/${AD_ACCOUNT}/insights` +
+        `?fields=${CAMPAIGN_FIELDS}` +
+        `&level=campaign&date_preset=this_month&limit=100&access_token=${token}`;
       const r = await fetch(url);
       data = await r.json();
 
@@ -41,7 +71,7 @@ export default async function handler(req, res) {
       // Daily breakdown for last 7 days
       const url = `https://graph.facebook.com/v19.0/${AD_ACCOUNT}/insights` +
         `?fields=campaign_id,campaign_name,impressions,spend,cpm,ctr,purchase_roas,actions` +
-        `&level=campaign&date_preset=last_7d&time_increment=1&limit=100&access_token=${token}`;
+        `&level=campaign&date_preset=last_7d&time_increment=1&limit=200&access_token=${token}`;
       const r = await fetch(url);
       data = await r.json();
 
@@ -87,14 +117,6 @@ export default async function handler(req, res) {
       const url = `https://graph.facebook.com/v19.0/${AD_ACCOUNT}` +
         `?fields=opportunity_score_recommendations` +
         `&access_token=${token}`;
-      const r = await fetch(url);
-      data = await r.json();
-
-    } else if (endpoint === 'insights_30d') {
-      // 30-day insights
-      const url = `https://graph.facebook.com/v19.0/${AD_ACCOUNT}/insights` +
-        `?fields=campaign_id,campaign_name,impressions,reach,frequency,spend,cpm,ctr,clicks,purchase_roas,actions` +
-        `&level=campaign&date_preset=last_30d&limit=50&access_token=${token}`;
       const r = await fetch(url);
       data = await r.json();
 
