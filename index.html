@@ -306,10 +306,10 @@ input,textarea,button,select{font-family:inherit}button{cursor:pointer;border:no
           <div style="background:#fff;border:1px solid var(--border);border-radius:10px;padding:16px;box-shadow:0 1px 3px rgba(0,0,0,.04)">
             <div style="font-family:var(--mono);font-size:.68rem;color:var(--text3);letter-spacing:.05em;text-transform:uppercase;margin-bottom:12px;font-weight:500">Product summary</div>
             <div style="display:flex;flex-direction:column;gap:10px">
-              <div style="padding:10px 14px;background:#f3e5f5;border-radius:8px;border-left:3px solid #9c27b0"><div style="font-weight:700;font-size:.88rem">Sneaker</div><div style="font-size:.78rem;color:var(--text2);margin-top:3px">5.5x avg 30d &#x2014; KAI ONE 16.85x &#x2605; &#x2014; <strong style="color:var(--red)">reactivate KAIONE_BIRTHDAY</strong></div></div>
-              <div style="padding:10px 14px;background:var(--blue-bg);border-radius:8px;border-left:3px solid var(--blue)"><div style="font-weight:700;font-size:.88rem">Tee</div><div style="font-size:.78rem;color:var(--text2);margin-top:3px">3.88x avg 30d &#x2014; BUNDLE 7.28x &#x2605; &#x2014; <strong style="color:var(--red)">reactivate BUNDLE_07052026</strong></div></div>
-              <div style="padding:10px 14px;background:var(--green-bg);border-radius:8px;border-left:3px solid var(--green)"><div style="font-weight:700;font-size:.88rem">Cap</div><div style="font-size:.78rem;color:var(--text2);margin-top:3px">Kabuto historical 8.99x &#x2014; OFF for 35+ days &#x2014; <strong style="color:var(--red)">reactivate for Aug–Nov</strong></div></div>
-              <div style="padding:10px 14px;background:#ffebee;border-radius:8px;border-left:3px solid var(--red)"><div style="font-weight:700;font-size:.88rem">Sweat (Essentials)</div><div style="font-size:.78rem;color:var(--text2);margin-top:3px">0.83x avg 30d &#x2014; 3 straight failures &#x2014; <strong style="color:var(--red)">KILL angle, zero budget</strong></div></div>
+              <div style="padding:10px 14px;background:var(--orange-bg);border-radius:8px;border-left:3px solid var(--orange)"><div style="font-weight:700;font-size:.88rem">Kage Tee (Kage_Sales)</div><div style="font-size:.78rem;color:var(--text2);margin-top:3px">4.30x real 30d ROAS on ₹6,195 spend, 10 purchases &#x2014; your best-volume winner, currently <strong style="color:var(--red)">paused</strong></div></div>
+              <div style="padding:10px 14px;background:var(--green-bg);border-radius:8px;border-left:3px solid var(--green)"><div style="font-weight:700;font-size:.88rem">Bundle</div><div style="font-size:.78rem;color:var(--text2);margin-top:3px">7.28x real 30d ROAS on ₹1,281 spend, 3 purchases &#x2014; small but strong, currently <strong style="color:var(--red)">paused</strong></div></div>
+              <div style="padding:10px 14px;background:#ffebee;border-radius:8px;border-left:3px solid var(--red)"><div style="font-weight:700;font-size:.88rem">Essentials (v2 + v3)</div><div style="font-size:.78rem;color:var(--text2);margin-top:3px">0.44–0.69x real 30d ROAS on ₹3,955 combined spend &#x2014; both already correctly paused, no action needed</div></div>
+              <div style="padding:10px 14px;background:var(--blue-bg);border-radius:8px;border-left:3px solid var(--blue)"><div style="font-weight:700;font-size:.88rem">Kage_TOF + Kage_sales_1608</div><div style="font-size:.78rem;color:var(--text2);margin-top:3px">Currently the only active campaigns &#x2014; launched today, ₹287 spent so far, 0 purchases yet. Too early to call.</div></div>
             </div>
           </div>
         </div>
@@ -1597,82 +1597,94 @@ const DATA={
 };
 
 const WEEKLY_TRENDS={
-  weeks:['May 4','May 11','May 18','May 25','Jun 1','Jun 6','Jun 13','Jun 20','Jun 27','Jul 4','Jul 11','Jul 18','Jul 25','Aug 1'],
+  weeks:['Jul 18–24','Jul 25–31','Aug 1–7','Aug 8–14','Aug 15–17'],
   products:{
-    'Tee':{cpm:[38.3,48.8,40.6,36.2,51.9,93.2,0,0,0,0,69.3,117.4,125,0],ctr:[2.7,2.5,2.6,2.5,2.4,1.96,0,0,0,0,1.88,2.18,2.35,0],roas:[6.8,5.0,7.1,3.6,4.5,5.03,0,0,0,0,0,7.28,4.5,0]},
-    'Sneaker':{cpm:[0,0,0,24.0,25.1,56,87.7,0,118,108,72,78,85,0],ctr:[0,0,0,1.8,1.6,1.75,1.73,0,1.58,1.65,1.85,1.95,1.90,0],roas:[0,0,0,3.2,3.2,4.05,0,0,8.5,6.15,12.85,4.5,1.5,0]},
-    'Cap':{cpm:[27.4,28.1,29.2,0,0,0,0,73.1,63.6,0,0,0,0,0],ctr:[2.1,2.0,2.0,0,0,0,0,2.46,2.60,0,0,0,0,0],roas:[8.2,8.4,7.1,0,0,0,0,5.66,5.58,0,0,0,0,0]},
-    'Sweat':{cpm:[0,0,0,0,0,0,0,0,0,0,116,90,80,98],ctr:[0,0,0,0,0,0,0,0,0,0,2.34,1.71,1.45,1.58],roas:[0,0,0,0,0,0,0,0,0,0,1.12,1.0,0.69,0]}
+    'Kage Tee':{cpm:[0,0,126.38,95.16,291.05],ctr:[0,0,2.38,1.87,3.20],roas:[0,0,11.59,2.51,5.31]},
+    'Essentials v2':{cpm:[58.43,148.04,0,0,0],ctr:[1.33,1.53,0,0,0],roas:[1.19,0,0,0,0]},
+    'Essentials v3':{cpm:[0,0,95.71,0,0],ctr:[0,0,1.28,0,0],roas:[0,0,0.44,0,0]},
+    'Bundle':{cpm:[117.37,0,0,0,0],ctr:[2.18,0,0,0,0],roas:[0.50,0,0,0,0]},
+    'Fudoshin':{cpm:[0,0,0,173.06,195.45],ctr:[0,0,0,1.04,1.88],roas:[0,0,0,0,0]},
+    'Kage Refresh':{cpm:[82.01,0,0,0,0],ctr:[2.28,0,0,0,0],roas:[0,0,0,0,0]}
   }
 };
 
 const GEO_DATA={
   last7:{
-    label:'Last 7 days (Jul 9\u201315, 2026)',
-    note:'ROAS estimated from CTR \u00d7 account avg. Account-level last 7d: \u20b93,900 spend, 4 purchases.',
-    states:[{name:'Maharashtra',tier:'T1',spend:1142,revenue:6098,roas:5.34,purchases:1,cpm:47.1,ctr:1.27,atc:4,co:3,lpv:72},{name:'Karnataka',tier:'T1',spend:691,revenue:4070,roas:5.89,purchases:1,cpm:61.69,ctr:1.40,atc:4,co:3,lpv:72},{name:'Telangana',tier:'T1',spend:403,revenue:2660,roas:6.60,purchases:0,cpm:52.58,ctr:1.57,atc:0,co:0,lpv:72},{name:'Tamil Nadu',tier:'T1',spend:265,revenue:1081,roas:4.08,purchases:0,cpm:29.39,ctr:0.97,atc:0,co:0,lpv:72},{name:'Gujarat',tier:'T2',spend:218,revenue:595,roas:2.73,purchases:0,cpm:19.85,ctr:0.65,atc:0,co:0,lpv:72},{name:'Kerala',tier:'T2',spend:165,revenue:818,roas:4.96,purchases:0,cpm:32.77,ctr:1.18,atc:0,co:0,lpv:72},{name:'Delhi NCR',tier:'T1',spend:119,revenue:511,roas:4.29,purchases:0,cpm:56.61,ctr:1.02,atc:0,co:0,lpv:72},{name:'Uttar Pradesh',tier:'T2',spend:114,revenue:81,roas:0.71,purchases:0,cpm:7.73,ctr:0.17,atc:0,co:0,lpv:72},{name:'Haryana',tier:'T2',spend:104,revenue:223,roas:2.14,purchases:0,cpm:29.73,ctr:0.51,atc:0,co:0,lpv:72},{name:'Rajasthan',tier:'T2',spend:69,revenue:41,roas:0.59,purchases:0,cpm:10.16,ctr:0.14,atc:0,co:0,lpv:72},{name:'Andhra Pradesh',tier:'T2',spend:68,revenue:123,roas:1.81,purchases:0,cpm:20.27,ctr:0.43,atc:0,co:0,lpv:72},{name:'West Bengal',tier:'T1',spend:57,revenue:38,roas:0.67,purchases:0,cpm:10.51,ctr:0.16,atc:0,co:0,lpv:72},{name:'Punjab',tier:'T2',spend:54,revenue:100,roas:1.85,purchases:0,cpm:16.43,ctr:0.44,atc:0,co:0,lpv:72},{name:'Madhya Pradesh',tier:'T2',spend:39,revenue:23,roas:0.59,purchases:0,cpm:5.91,ctr:0.14,atc:0,co:0,lpv:72}]
+    label:'Last 7 days (Aug 11\u201317, 2026, verified via Meta Ads MCP)',
+    note:'Spend/impressions/CTR/CPM are real region-breakdown data. Meta does not return purchase attribution at region-level breakdown, so revenue/ROAS/purchases/ATC/CO are estimated from CTR \u00d7 account avg ROAS \u2014 same methodology as before. Account-level last 7d (sales campaigns): \u20b94,763 spend, 3 purchases, 1.64x ROAS.',
+    states:[{name:'Maharashtra',tier:'T1',spend:1887.89,revenue:3138.30,roas:1.66,purchases:1,cpm:40.99,ctr:1.17,atc:15,co:10,lpv:75},{name:'Karnataka',tier:'T1',spend:903.03,revenue:1642.11,roas:1.82,purchases:1,cpm:52.21,ctr:1.28,atc:6,co:4,lpv:75},{name:'Delhi',tier:'T1',spend:483.27,revenue:1242.47,roas:2.57,purchases:0,cpm:74.62,ctr:1.81,atc:3,co:2,lpv:75},{name:'Telangana',tier:'T1',spend:540.10,revenue:897.66,roas:1.66,purchases:0,cpm:45.15,ctr:1.17,atc:4,co:3,lpv:75},{name:'Haryana',tier:'T2',spend:387.57,revenue:693.75,roas:1.79,purchases:0,cpm:44.88,ctr:1.26,atc:3,co:2,lpv:75},{name:'Tamil Nadu',tier:'T1',spend:306.67,revenue:631.74,roas:2.06,purchases:0,cpm:34.90,ctr:1.45,atc:4,co:2,lpv:75},{name:'Uttar Pradesh',tier:'T2',spend:163.78,revenue:265.16,roas:1.62,purchases:0,cpm:6.05,ctr:1.14,atc:9,co:6,lpv:75},{name:'Kerala',tier:'T2',spend:134.02,revenue:455.10,roas:3.40,purchases:0,cpm:45.08,ctr:2.39,atc:2,co:1,lpv:75},{name:'West Bengal',tier:'T1',spend:62.83,revenue:147.28,roas:2.34,purchases:0,cpm:9.89,ctr:1.65,atc:3,co:2,lpv:75},{name:'Andhra Pradesh',tier:'T2',spend:59.11,revenue:83.94,roas:1.42,purchases:0,cpm:9.49,ctr:1.00,atc:2,co:1,lpv:75},{name:'Gujarat',tier:'T2',spend:38.49,revenue:49.18,roas:1.28,purchases:0,cpm:3.00,ctr:0.90,atc:3,co:2,lpv:75},{name:'Rajasthan',tier:'T2',spend:36.61,revenue:44.19,roas:1.21,purchases:0,cpm:2.50,ctr:0.85,atc:4,co:2,lpv:75},{name:'Madhya Pradesh',tier:'T2',spend:29.44,revenue:31.80,roas:1.08,purchases:0,cpm:1.88,ctr:0.76,atc:3,co:2,lpv:75},{name:'Punjab',tier:'T2',spend:26.71,revenue:41.71,roas:1.56,purchases:0,cpm:4.33,ctr:1.10,atc:2,co:1,lpv:75}]
   },
   last30:{
-    label:'Last 30 days (Jun 16 \u2013 Jul 15, 2026)',
-    note:'ROAS estimated from CTR \u00d7 account avg. Account-level: \u20b917,495 spend, 44 purchases, 3.83x ROAS.',
-    states:[{name:'Maharashtra',tier:'T1',spend:5121,revenue:30368,roas:5.93,purchases:13,cpm:47.1,ctr:1.27,atc:58,co:38,lpv:73},{name:'Karnataka',tier:'T1',spend:3101,revenue:20281,roas:6.54,purchases:8,cpm:61.69,ctr:1.40,atc:36,co:23,lpv:73},{name:'Telangana',tier:'T1',spend:1808,revenue:13253,roas:7.33,purchases:5,cpm:52.58,ctr:1.57,atc:22,co:14,lpv:73},{name:'Tamil Nadu',tier:'T1',spend:1189,revenue:5386,roas:4.53,purchases:3,cpm:29.39,ctr:0.97,atc:14,co:9,lpv:73},{name:'Gujarat',tier:'T2',spend:979,revenue:2976,roas:3.04,purchases:2,cpm:19.85,ctr:0.65,atc:9,co:6,lpv:73},{name:'Kerala',tier:'T2',spend:739,revenue:4072,roas:5.51,purchases:2,cpm:32.77,ctr:1.18,atc:9,co:6,lpv:73},{name:'Delhi NCR',tier:'T1',spend:536,revenue:2551,roas:4.76,purchases:1,cpm:56.61,ctr:1.02,atc:4,co:3,lpv:73},{name:'Uttar Pradesh',tier:'T2',spend:511,revenue:404,roas:0.79,purchases:1,cpm:7.73,ctr:0.17,atc:4,co:3,lpv:73},{name:'Haryana',tier:'T2',spend:465,revenue:1107,roas:2.38,purchases:1,cpm:29.73,ctr:0.51,atc:4,co:3,lpv:73},{name:'Rajasthan',tier:'T2',spend:308,revenue:200,roas:0.65,purchases:1,cpm:10.16,ctr:0.14,atc:4,co:3,lpv:73},{name:'Andhra Pradesh',tier:'T2',spend:307,revenue:617,roas:2.01,purchases:1,cpm:20.27,ctr:0.43,atc:4,co:3,lpv:73},{name:'West Bengal',tier:'T1',spend:255,revenue:191,roas:0.75,purchases:1,cpm:10.51,ctr:0.16,atc:4,co:3,lpv:73},{name:'Punjab',tier:'T2',spend:244,revenue:503,roas:2.06,purchases:1,cpm:16.43,ctr:0.44,atc:4,co:3,lpv:73},{name:'Madhya Pradesh',tier:'T2',spend:176,revenue:114,roas:0.65,purchases:1,cpm:5.91,ctr:0.14,atc:4,co:3,lpv:73}]
+    label:'Last 30 days (Jul 19\u2013Aug 17, 2026, verified via Meta Ads MCP)',
+    note:'Spend/impressions/CTR/CPM are real region-breakdown data. Meta does not return purchase attribution at region-level breakdown, so revenue/ROAS/purchases/ATC/CO are estimated from CTR \u00d7 account avg ROAS \u2014 same methodology as before. Account-level 30d (sales campaigns): \u20b914,267 spend, 19 purchases, 2.84x ROAS.',
+    states:[{name:'Maharashtra',tier:'T1',spend:5303.28,revenue:14966.65,roas:2.82,purchases:7,cpm:54.35,ctr:1.42,atc:75,co:49,lpv:71},{name:'Karnataka',tier:'T1',spend:3086.97,revenue:8836.91,roas:2.86,purchases:4,cpm:71.47,ctr:1.44,atc:34,co:22,lpv:71},{name:'Telangana',tier:'T1',spend:1302.20,revenue:3339.24,roas:2.56,purchases:2,cpm:51.87,ctr:1.29,atc:18,co:11,lpv:71},{name:'Delhi',tier:'T1',spend:1248.05,revenue:4537.91,roas:3.64,purchases:2,cpm:71.93,ctr:1.83,atc:17,co:11,lpv:71},{name:'Haryana',tier:'T2',spend:1128.39,revenue:3699.99,roas:3.28,purchases:2,cpm:57.73,ctr:1.65,atc:17,co:11,lpv:71},{name:'Tamil Nadu',tier:'T1',spend:864.23,revenue:2318.71,roas:2.68,purchases:1,cpm:42.38,ctr:1.35,atc:15,co:10,lpv:71},{name:'Uttar Pradesh',tier:'T2',spend:628.02,revenue:1709.99,roas:2.72,purchases:1,cpm:13.02,ctr:1.37,atc:36,co:23,lpv:71},{name:'Kerala',tier:'T2',spend:443.97,revenue:2196.49,roas:4.95,purchases:1,cpm:47.91,ctr:2.49,atc:13,co:8,lpv:71},{name:'West Bengal',tier:'T1',spend:265.03,revenue:1295.60,roas:4.89,purchases:1,cpm:17.49,ctr:2.46,atc:20,co:13,lpv:71},{name:'Gujarat',tier:'T2',spend:177.81,revenue:374.72,roas:2.11,purchases:0,cpm:8.29,ctr:1.06,atc:12,co:8,lpv:71},{name:'Andhra Pradesh',tier:'T2',spend:174.25,revenue:415.60,roas:2.39,purchases:0,cpm:16.43,ctr:1.20,atc:7,co:4,lpv:71},{name:'Rajasthan',tier:'T2',spend:134.87,revenue:297.52,roas:2.21,purchases:0,cpm:5.83,ctr:1.11,atc:14,co:9,lpv:71},{name:'Punjab',tier:'T2',spend:131.07,revenue:356.98,roas:2.72,purchases:0,cpm:11.03,ctr:1.37,atc:9,co:6,lpv:71},{name:'Madhya Pradesh',tier:'T2',spend:100.85,revenue:190.40,roas:1.89,purchases:0,cpm:4.47,ctr:0.95,atc:12,co:8,lpv:71}]
   }
 };
 
 const CREATIVES=[
-  {id:'c1',name:'KAIONE_BIRTHDAY',product:'KAI ONE Birthday',format:'Mixed',angle:'birthday-sale',hook:'celebrate',spend:729,revenue:12285,roas:16.85,cpm:106.03,ctr:1.57,freq:1.35,purchases:4,status:'paused',rankQ:null,rankE:null,rankC:null,weeks:[],weekCPM:[],weekCTR:[],fatigueRisk:'paused',age:'paused, residual delivery',note:'\u2605\u2605 EXTRAORDINARY. 16.85x ROAS on 30d residual spend. Warm audience primed. REACTIVATE at \u20b9300/day \u2014 highest-leverage action in account.'},
-  {id:'c2',name:'BUNDLE_07052026',product:'Bundle',format:'Static Image',angle:'bundle-value',hook:'save-more',spend:1281,revenue:9328,roas:7.28,cpm:117.37,ctr:2.18,freq:1.63,purchases:3,status:'paused',rankQ:'Above Avg',rankE:'Above Avg',rankC:'Above Avg',weeks:[],weekCPM:[],weekCTR:[],fatigueRisk:'paused',age:'paused',note:'\u2605 7.28x ROAS 30d. 2.18% CTR (strong). Bundle value proposition working. REACTIVATE at \u20b9300/day.'},
-  {id:'c3',name:'KAI | Sales | Retargeting | 13072026',product:'Retargeting',format:'TBD',angle:'retargeting',hook:'reminder',spend:600,revenue:2219,roas:3.70,cpm:85.59,ctr:1.20,freq:1.23,purchases:3,status:'active',rankQ:null,rankE:null,rankC:null,weeks:['Jul 13','Jul 20','Jul 27','Aug 1'],weekCPM:[75,88,90,89],weekCTR:[1.15,1.20,1.24,1.24],fatigueRisk:'low',age:'active 20 days',note:'\u2605 SOLID PERFORMER. 3.70x ROAS on \u20b9600. 24.6x ROAS on last 14d residual. Warm audience working.'},
-  {id:'c4',name:'ESSENTIALS_31072026',product:'Essentials v3 \u26a0',format:'Mixed',angle:'product-line',hook:'essentials',spend:872,revenue:0,roas:0,cpm:98.06,ctr:1.48,freq:1.37,purchases:0,status:'active',rankQ:null,rankE:null,rankC:null,weeks:['Jul 31','Aug 1','Aug 2'],weekCPM:[100,98,96],weekCTR:[1.60,1.58,0.92],fatigueRisk:'watch',age:'active 3 days',note:'\u26a0 THIRD ESSENTIALS FAILURE PATTERN. \u20b9872 spent, 0 purchases. CTR fell 1.58 \u2192 0.92% today. Kill by end Aug 2.'},
-  {id:'c5',name:'KAI | Sales | Kage | 13072026',product:'Kage Refresh',format:'TBD',angle:'refresh',hook:'TBD',spend:2504,revenue:2804,roas:1.12,cpm:72.55,ctr:1.96,freq:1.41,purchases:1,status:'paused',rankQ:null,rankE:null,rankC:null,weeks:['Jul 13','Jul 16','Jul 20','Jul 25'],weekCPM:[65,72,80,85],weekCTR:[2.00,1.61,1.85,1.90],fatigueRisk:'paused',age:'paused after 20-day run',note:'\u26a0 EARLY PROMISE FAILED. Day 1 hit 12.85x, lifetime ended 1.12x. \u20b92,504 for 1 purchase. Refresh needed.'},
-  {id:'c6',name:'Essentials_21072026',product:'Essentials v2',format:'Mixed',angle:'product-line',hook:'essentials',spend:2109,revenue:1463,roas:0.69,cpm:78.26,ctr:1.38,freq:1.74,purchases:2,status:'paused',rankQ:null,rankE:null,rankC:null,weeks:['Jul 21','Jul 25','Jul 30'],weekCPM:[75,80,82],weekCTR:[1.55,1.38,1.30],fatigueRisk:'paused',age:'paused',note:'\u26a0 SECOND ESSENTIALS FAILURE. \u20b92,109 for 2 purchases. 0.69x ROAS (worst in account).'},
-  {id:'c7',name:'Essentials_08072026',product:'Essentials v1',format:'Mixed',angle:'product-line',hook:'essentials',spend:3154,revenue:3518,roas:1.12,cpm:76.55,ctr:1.81,freq:1.63,purchases:4,status:'paused',rankQ:null,rankE:null,rankC:null,weeks:[],weekCPM:[],weekCTR:[],fatigueRisk:'paused',age:'paused Jul 13',note:'\u26a0 FIRST ESSENTIALS FAILURE. 1.12x ROAS on \u20b93,154. Origin of the failing pattern.'},
-  {id:'c8',name:'Apparels_Bundle_16072026',product:'Apparels Bundle',format:'Mixed',angle:'bundle',hook:'assortment',spend:661,revenue:0,roas:0,cpm:133.65,ctr:2.61,freq:1.27,purchases:0,status:'paused',rankQ:null,rankE:null,rankC:null,weeks:[],weekCPM:[],weekCTR:[],fatigueRisk:'paused',age:'paused',note:'\u26a0 High CTR (2.61%) but 0 purchases on \u20b9661. Curiosity clicks, not intent.'}
+  {id:'c1',name:'Kage_TOF',product:'Kage Tee',format:'Not tagged',angle:'\u2014',hook:'\u2014',spend:86.91,revenue:0,roas:0,cpm:8.43,ctr:1.19,freq:1.03,purchases:0,status:'active',rankQ:null,rankE:null,rankC:null,weeks:[],weekCPM:[],weekCTR:[],fatigueRisk:'low',age:'active, launched today',note:'\u20b987 spent so far today, 0 purchases yet \u2014 too early to call.'},
+  {id:'c2',name:'Kage_sales_1608',product:'Kage Tee',format:'Not tagged',angle:'\u2014',hook:'\u2014',spend:201.05,revenue:0,roas:0,cpm:136.77,ctr:1.56,freq:1.36,purchases:0,status:'active',rankQ:null,rankE:null,rankC:null,weeks:[],weekCPM:[],weekCTR:[],fatigueRisk:'low',age:'active, launched today',note:'\u20b9201 spent so far today, 0 purchases yet \u2014 too early to call.'},
+  {id:'c3',name:'Kage_Sales',product:'Kage Tee',format:'Not tagged',angle:'\u2014',hook:'\u2014',spend:6195.22,revenue:26618.71,roas:4.30,cpm:110.95,ctr:2.01,freq:1.46,purchases:10,status:'paused',rankQ:null,rankE:null,rankC:null,weeks:['Aug 1\u20137','Aug 8\u201314','Aug 15\u201317'],weekCPM:[126.38,95.16,291.05],weekCTR:[2.38,1.87,3.20],fatigueRisk:'low',age:'paused',note:'Real 30d numbers: 4.30x ROAS on \u20b96,195 spend, 10 purchases \u2014 best-volume winner in the account, currently paused.'},
+  {id:'c4',name:'Bundle_07052026',product:'Bundle',format:'Not tagged',angle:'\u2014',hook:'\u2014',spend:1280.96,revenue:9327.99,roas:7.28,cpm:117.37,ctr:2.18,freq:1.63,purchases:3,status:'paused',rankQ:null,rankE:null,rankC:null,weeks:[],weekCPM:[],weekCTR:[],fatigueRisk:'low',age:'paused',note:'7.28x ROAS on \u20b91,281 spend, 3 purchases \u2014 small but strong, currently paused.'},
+  {id:'c5',name:'Ad 1 \u2013 Best Seller',product:'Retargeting',format:'Not tagged',angle:'\u2014',hook:'\u2014',spend:120.52,revenue:899.03,roas:7.46,cpm:85.35,ctr:0.99,freq:1.21,purchases:1,status:'paused',rankQ:null,rankE:null,rankC:null,weeks:[],weekCPM:[],weekCTR:[],fatigueRisk:'low',age:'paused',note:'7.46x ROAS on \u20b9121 spend, 1 purchase.'},
+  {id:'c6',name:'Ad 2 \u2013 Lifestyle',product:'Retargeting',format:'Not tagged',angle:'\u2014',hook:'\u2014',spend:113.44,revenue:699.09,roas:6.16,cpm:95.17,ctr:1.34,freq:1.20,purchases:1,status:'paused',rankQ:null,rankE:null,rankC:null,weeks:[],weekCPM:[],weekCTR:[],fatigueRisk:'low',age:'paused',note:'6.16x ROAS on \u20b9113 spend, 1 purchase.'},
+  {id:'c7',name:'Kage_0208',product:'Kage 0208',format:'Not tagged',angle:'\u2014',hook:'\u2014',spend:617.19,revenue:726.02,roas:1.18,cpm:170.45,ctr:2.79,freq:1.75,purchases:1,status:'paused',rankQ:null,rankE:null,rankC:null,weeks:[],weekCPM:[],weekCTR:[],fatigueRisk:'medium',age:'paused',note:'1.18x ROAS on \u20b9617 spend, 1 purchase.'},
+  {id:'c8',name:'Essentials_Hoodie',product:'Essentials v2',format:'Not tagged',angle:'\u2014',hook:'\u2014',spend:2108.85,revenue:1463.03,roas:0.69,cpm:78.26,ctr:1.38,freq:1.74,purchases:2,status:'paused',rankQ:null,rankE:null,rankC:null,weeks:[],weekCPM:[],weekCTR:[],fatigueRisk:'medium',age:'paused',note:'0.69x ROAS on \u20b92,109 spend, 2 purchases \u2014 below break-even, already paused.'},
+  {id:'c9',name:'Essentials_ad_3107',product:'Essentials v3',format:'Not tagged',angle:'\u2014',hook:'\u2014',spend:1846.26,revenue:809.07,roas:0.44,cpm:95.71,ctr:1.28,freq:1.65,purchases:1,status:'paused',rankQ:null,rankE:null,rankC:null,weeks:[],weekCPM:[],weekCTR:[],fatigueRisk:'medium',age:'paused',note:'0.44x ROAS on \u20b91,846 spend, 1 purchase \u2014 worst ROAS in account, already paused.'},
+  {id:'c10',name:'Ad 2 (Lifestyle)',product:'Kage Refresh',format:'Not tagged',angle:'\u2014',hook:'\u2014',spend:518.00,revenue:0,roas:0,cpm:84.65,ctr:2.26,freq:1.14,purchases:0,status:'paused',rankQ:null,rankE:null,rankC:null,weeks:[],weekCPM:[],weekCTR:[],fatigueRisk:'low',age:'paused',note:'\u20b9518 spent, 0 purchases.'},
+  {id:'c11',name:'Ad 1 (Hero)',product:'Kage Refresh',format:'Not tagged',angle:'\u2014',hook:'\u2014',spend:160.51,revenue:0,roas:0,cpm:74.48,ctr:2.37,freq:1.09,purchases:0,status:'paused',rankQ:null,rankE:null,rankC:null,weeks:[],weekCPM:[],weekCTR:[],fatigueRisk:'low',age:'paused',note:'\u20b9161 spent, 0 purchases.'},
+  {id:'c12',name:'Bundle_1607',product:'Apparels Bundle',format:'Not tagged',angle:'\u2014',hook:'\u2014',spend:358.74,revenue:0,roas:0,cpm:133.61,ctr:2.50,freq:1.33,purchases:0,status:'paused',rankQ:null,rankE:null,rankC:null,weeks:[],weekCPM:[],weekCTR:[],fatigueRisk:'low',age:'paused',note:'\u20b9359 spent, 0 purchases.'},
+  {id:'c13',name:'Kage_0208 (New Web)',product:'Kage 0208 (New Web)',format:'Not tagged',angle:'\u2014',hook:'\u2014',spend:78.92,revenue:0,roas:0,cpm:120.49,ctr:3.05,freq:1.06,purchases:0,status:'paused',rankQ:null,rankE:null,rankC:null,weeks:[],weekCPM:[],weekCTR:[],fatigueRisk:'low',age:'paused',note:'\u20b979 spent, 0 purchases.'},
+  {id:'c14',name:'Fudoshin_Sales',product:'Fudoshin',format:'Not tagged',angle:'\u2014',hook:'\u2014',spend:868.24,revenue:0,roas:0,cpm:184.46,ctr:1.47,freq:1.64,purchases:0,status:'paused',rankQ:null,rankE:null,rankC:null,weeks:['Aug 8\u201314','Aug 15\u201317'],weekCPM:[173.06,195.45],weekCTR:[1.04,1.88],fatigueRisk:'medium',age:'paused',note:'\u20b9868 spent, 0 purchases.'}
 ];
 
 const AUD_DATA={
   prospecting:{
-    note:'Real Meta data \u2014 30d breakdown (Jun 16 \u2013 Jul 15). Account-level: \u20b917,495 spend, 44 purchases, 3.83x avg ROAS.',
+    note:'Real Meta breakdown data (spend/impressions/CTR/CPM) \u2014 30d (Jul 19\u2013Aug 17, 2026), verified via Meta Ads MCP. Meta does not return purchase attribution at breakdown level, so revenue/ROAS/purchases are estimated from CTR \u00d7 account avg ROAS, scaled to match the real account total (\u20b940,544 revenue, 19 purchases, 2.84x blended ROAS).',
     age:[
-      {g:'18-24',spend:3956,purchases:7,roas:2.38,cpm:9.49,ctr:0.34,share:22.6},
-      {g:'25-34',spend:8780,purchases:25,roas:4.69,cpm:49.26,ctr:1.24,share:50.2},
-      {g:'35-44',spend:3343,purchases:8,roas:1.86,cpm:88.42,ctr:1.70,share:19.1},
-      {g:'45-54',spend:929,purchases:4,roas:9.49,cpm:80.68,ctr:1.44,share:5.3},
-      {g:'55+',spend:307,purchases:0,roas:0,cpm:52,ctr:1.02,share:1.8}
+      {g:'18-24',spend:2656.59,purchases:2,roas:1.78,cpm:40.32,ctr:1.45,share:16.3},
+      {g:'25-34',spend:7965.37,purchases:8,roas:2.23,cpm:73.20,ctr:1.82,share:48.9},
+      {g:'35-44',spend:3245.74,purchases:5,roas:3.28,cpm:107.18,ctr:2.67,share:19.9},
+      {g:'45-54',spend:1028.67,purchases:2,roas:3.80,cpm:87.16,ctr:3.10,share:6.3},
+      {g:'55+',spend:705.47,purchases:2,roas:4.95,cpm:41.89,ctr:4.03,share:4.3}
     ],
     gender:[
-      {g:'Male',spend:16463,purchases:43,roas:3.79,cpm:31.07,ctr:0.82,share:94.1},
-      {g:'Female',spend:804,purchases:1,roas:4.10,cpm:6.73,ctr:0.11,share:4.6},
-      {g:'Unknown',spend:228,purchases:0,roas:0,cpm:137.07,ctr:3.01,share:1.3}
+      {g:'Male',spend:14820.38,purchases:18,roas:2.59,cpm:70.94,ctr:2.02,share:90.9},
+      {g:'Female',spend:744.27,purchases:1,roas:3.01,cpm:31.27,ctr:2.35,share:4.6},
+      {g:'Unknown',spend:740.43,purchases:0,roas:0,cpm:3.23,ctr:0.79,share:4.5}
     ],
     devices:[
-      {d:'iPhone',spend:9141,purchases:19,roas:2.98,cpm:76.85,ctr:1.57,share:52.2},
-      {d:'Android phone',spend:8029,purchases:25,roas:4.79,cpm:15.26,ctr:0.49,share:45.9},
-      {d:'iPad',spend:50,purchases:0,roas:0,cpm:29.88,ctr:0.89,share:0.3},
-      {d:'Android tablet',spend:38,purchases:0,roas:0,cpm:9.95,ctr:0.34,share:0.2},
-      {d:'Desktop',spend:59,purchases:0,roas:0,cpm:172.84,ctr:3.81,share:0.3},
-      {d:'Other',spend:179,purchases:0,roas:0,cpm:860.53,ctr:15.38,share:1.0}
+      {d:'Android phone',spend:8656.48,purchases:10,roas:2.35,cpm:23.08,ctr:1.39,share:53.1},
+      {d:'iPhone',spend:7067.05,purchases:8,roas:2.62,cpm:83.30,ctr:1.55,share:43.3},
+      {d:'Other',spend:413.89,purchases:1,roas:2.84,cpm:1261.86,ctr:11.59,share:2.5},
+      {d:'Desktop',spend:73.31,purchases:0,roas:4.88,cpm:235.73,ctr:2.89,share:0.4},
+      {d:'iPad',spend:56.82,purchases:0,roas:1.92,cpm:108.22,ctr:1.14,share:0.3},
+      {d:'Android tablet',spend:37.54,purchases:0,roas:2.45,cpm:45.23,ctr:1.45,share:0.2}
     ],
     placements:[
-      {p:'Instagram Reels',spend:9033,purchases:21,roas:3.43,cpm:15.86,ctr:0.53,share:51.6},
-      {p:'Instagram Feed',spend:5507,purchases:13,roas:2.96,cpm:102.19,ctr:1.56,share:31.5},
-      {p:'Instagram Stories',spend:2317,purchases:9,roas:6.50,cpm:148.69,ctr:3.45,share:13.2},
-      {p:'Facebook Reels',spend:321,purchases:1,roas:10.27,cpm:52.89,ctr:1.37,share:1.8},
-      {p:'Threads Feed',spend:56,purchases:0,roas:0,cpm:66.97,ctr:3.23,share:0.3},
-      {p:'Other',spend:261,purchases:0,roas:0,cpm:0,ctr:0,share:1.5}
+      {p:'Instagram Reels',spend:6691.79,purchases:5,roas:1.52,cpm:45.56,ctr:1.45,share:41.0},
+      {p:'Feed (FB+IG)',spend:6023.85,purchases:10,roas:3.53,cpm:107.86,ctr:3.37,share:36.9},
+      {p:'Instagram Stories',spend:2255.26,purchases:3,roas:3.16,cpm:222.06,ctr:3.02,share:13.8},
+      {p:'Facebook Reels',spend:439.79,purchases:1,roas:2.43,cpm:55.07,ctr:2.32,share:2.7},
+      {p:'Threads Feed',spend:24.86,purchases:0,roas:5.88,cpm:279.29,ctr:5.62,share:0.2},
+      {p:'Other',spend:869.54,purchases:0,roas:0.91,cpm:196,ctr:0.87,share:5.3}
     ]
   }
 };
 
 const AMOD={
-  ess31:{adset:'Essentials_v3_AdSet',type:'Cold',targeting:'Broad India',placement:'Advantage+',budget:'\u20b9750/day',audienceSize:'45M+',notes:'\u26a0 ACTIVE. 3 days delivering. \u20b9872 spent, 0 attributed purchases. CTR collapsed 1.58 \u2192 0.92% today. Recommend killing.'},
-  retarget:{adset:'Retargeting_AdSet',type:'Warm',targeting:'Website visitors, IG engagers',placement:'Advantage+',budget:'~\u20b950/day',audienceSize:'~5-7K reach',notes:'\u2605 ACTIVE. Solid warm play. 3.70x ROAS on \u20b9600. 24.6x on last 14d residual. Keep active.'},
-  birthday:{adset:'KAIONE_Birthday_AdSet',type:'Cold',targeting:'Broad India',placement:'Advantage+',budget:'Paused',audienceSize:'45M+',notes:'\u2605\u2605 EXTRAORDINARY. 16.85x ROAS on \u20b9729 residual 30d spend. REACTIVATE at \u20b9300/day.'},
-  bundle:{adset:'Bundle_AdSet',type:'Cold',targeting:'Broad India',placement:'Advantage+',budget:'Paused',audienceSize:'45M+',notes:'\u2605 7.28x ROAS on \u20b91,281. 2.18% CTR. Bundle value angle working. REACTIVATE.'},
-  kagenew:{adset:'Kage_Sales_AdSet',type:'Cold',targeting:'Broad India \u2014 Tees',placement:'Advantage+',budget:'Paused',audienceSize:'~50M+',notes:'\u26a0 20-day run failed. Day 1 hit 12.85x, lifetime 1.12x. Creative fatigued fast.'},
-  ess21:{adset:'Essentials_v2_AdSet',type:'Cold',targeting:'Broad India',placement:'Advantage+',budget:'Paused',audienceSize:'45M+',notes:'\u26a0 Second Essentials failure. 0.69x ROAS \u2014 worst campaign in account.'},
-  ess8:{adset:'Essentials_v1_AdSet',type:'Cold',targeting:'Broad India',placement:'Advantage+',budget:'Paused',audienceSize:'45M+',notes:'\u26a0 Original Essentials failure. Paused Jul 13. 1.12x ROAS.'},
-  apparels:{adset:'Apparels_Bundle_AdSet',type:'Cold',targeting:'Broad India',placement:'Advantage+',budget:'Paused',audienceSize:'45M+',notes:'\u26a0 High CTR 2.61% but 0 purchases. Curiosity clicks.'}
+  kagetof:{adset:'Not pulled this session',type:'Cold (LINK_CLICKS objective)',targeting:'Not pulled this session',placement:'Not pulled this session',budget:'Active',audienceSize:'Not pulled this session',notes:'\u2605 ACTIVE, launched today. \u20b987 spent, 0 purchases yet (traffic objective \u2014 not sales-optimized). Too early to call.'},
+  kagesales1608:{adset:'Not pulled this session',type:'Cold',targeting:'Not pulled this session',placement:'Not pulled this session',budget:'Active',audienceSize:'Not pulled this session',notes:'\u2605 ACTIVE, launched today. \u20b9201 spent, 0 purchases yet. Too early to call.'},
+  fudoshin:{adset:'Not pulled this session',type:'Cold',targeting:'Not pulled this session',placement:'Not pulled this session',budget:'Paused',audienceSize:'Not pulled this session',notes:'\u26a0 PAUSED. \u20b9868 spent (30d), 0 purchases. No conversions recorded.'},
+  kagesales:{adset:'Not pulled this session',type:'Cold',targeting:'Not pulled this session',placement:'Not pulled this session',budget:'Paused',audienceSize:'Not pulled this session',notes:'\u2605 PAUSED. Best-volume winner: 4.30x ROAS on \u20b96,195 spend (30d), 10 purchases. Worth reactivating.'},
+  kage0208new:{adset:'Not pulled this session',type:'Cold',targeting:'Not pulled this session',placement:'Not pulled this session',budget:'Paused',audienceSize:'Not pulled this session',notes:'\u26a0 PAUSED. \u20b979 spent (30d), 0 purchases.'},
+  kage0208:{adset:'Not pulled this session',type:'Cold',targeting:'Not pulled this session',placement:'Not pulled this session',budget:'Paused',audienceSize:'Not pulled this session',notes:'PAUSED. 1.18x ROAS on \u20b9617 spend (30d), 1 purchase.'},
+  ess31:{adset:'Not pulled this session',type:'Cold',targeting:'Not pulled this session',placement:'Not pulled this session',budget:'Paused',audienceSize:'Not pulled this session',notes:'\u26a0 PAUSED. 0.44x ROAS on \u20b91,846 spend (30d), 1 purchase \u2014 worst ROAS in account. Already correctly killed.'},
+  retarget:{adset:'Not pulled this session',type:'Warm',targeting:'Not pulled this session',placement:'Not pulled this session',budget:'Paused',audienceSize:'Not pulled this session',notes:'\u2605 PAUSED. 6.83x ROAS on \u20b9234 spend (30d), 2 purchases. Small but strong \u2014 worth reactivating.'},
+  bundle:{adset:'Not pulled this session',type:'Cold',targeting:'Not pulled this session',placement:'Not pulled this session',budget:'Paused',audienceSize:'Not pulled this session',notes:'\u2605 PAUSED. 7.28x ROAS on \u20b91,281 spend (30d), 3 purchases. Worth reactivating.'},
+  kagenew:{adset:'Not pulled this session',type:'Cold',targeting:'Not pulled this session',placement:'Not pulled this session',budget:'Paused',audienceSize:'Not pulled this session',notes:'PAUSED. \u20b9679 spent (30d), 0 purchases.'},
+  ess21:{adset:'Not pulled this session',type:'Cold',targeting:'Not pulled this session',placement:'Not pulled this session',budget:'Paused',audienceSize:'Not pulled this session',notes:'\u26a0 PAUSED. 0.69x ROAS on \u20b92,109 spend (30d), 2 purchases. Already correctly killed.'},
+  apparels:{adset:'Not pulled this session',type:'Cold',targeting:'Not pulled this session',placement:'Not pulled this session',budget:'Paused',audienceSize:'Not pulled this session',notes:'PAUSED. \u20b9359 spent (30d), 0 purchases.'}
 };
 
 let period='last7',activeCamp='ALL',advMode='daily',isStr=false,sc=null,fo='',aHist=[],charts={};
@@ -1701,7 +1713,7 @@ function showView(v){
   });
   if(v==='dash')refreshDash();
   if(v==='products')renderProducts();
-  if(v==='geo'){renderGeo();renderGeoCharts([...GEO_DATA.states].sort((a,b)=>b.spend-a.spend));}
+  if(v==='geo'){renderGeo();renderGeoCharts([...GEO_DATA[window.geoPeriod||'last30'].states].sort((a,b)=>b.spend-a.spend));}
   if(v==='creatives')renderCreatives();
   if(v==='audience')renderAudience();
   if(v==='insights')renderInsights();
@@ -1912,12 +1924,12 @@ document.getElementById('camp-modal').addEventListener('click',function(e){if(e.
 // ── Products ───────────────────────────────────────────────────────────────────
 function renderProducts(){
   const prods=Object.keys(WEEKLY_TRENDS.products);const wks=WEEKLY_TRENDS.weeks;
-  const colors={'Tee':'#1a6bb5','Sneaker':'#9c27b0','Cap':'#1e7a45','Sweat':'#c0392b'};
+  const colors={'Kage Tee':'#b85c00','Essentials v2':'#c0392b','Essentials v3':'#c2185b','Bundle':'#1e7a45','Fudoshin':'#0e7c86','Kage Refresh':'#1a6bb5'};
   mkChart('ch-prod-cpm','line',wks,prods.map(p=>({label:p,data:WEEKLY_TRENDS.products[p].cpm,borderColor:colors[p],backgroundColor:colors[p]+'20',fill:false,tension:.4,pointRadius:4,borderWidth:2})),{plugins:{legend:{display:true}},scales:{y:{ticks:{callback:function(v){return '\u20b9'+v},color:'#666',font:{family:'DM Mono',size:10}},grid:{color:'#f0f0f0'}},x:{grid:{color:'#f0f0f0'},ticks:{color:'#666',font:{family:'DM Mono',size:10}}}}});
   mkChart('ch-prod-ctr','line',wks,prods.map(p=>({label:p,data:WEEKLY_TRENDS.products[p].ctr,borderColor:colors[p],backgroundColor:colors[p]+'20',fill:false,tension:.4,pointRadius:4,borderWidth:2})),{plugins:{legend:{display:true}},scales:{y:{ticks:{callback:function(v){return v+'%'},color:'#666',font:{family:'DM Mono',size:10}},grid:{color:'#f0f0f0'}},x:{grid:{color:'#f0f0f0'},ticks:{color:'#666',font:{family:'DM Mono',size:10}}}}});
   const lastRoas=prods.map(p=>{const d=WEEKLY_TRENDS.products[p].roas;return d.find(v=>v>0)||0;});
   mkChart('ch-prod-roas','bar',prods,[{data:lastRoas,backgroundColor:lastRoas.map(r=>roasColor(r)),borderWidth:0}],{plugins:{legend:{display:false}},scales:{y:{ticks:{callback:function(v){return v+'x'},color:'#666',font:{family:'DM Mono',size:10}},grid:{color:'#f0f0f0'}},x:{grid:{color:'#f0f0f0'},ticks:{color:'#666',font:{family:'DM Mono',size:10}}}}});
-  var pfd={'Tee':{lpv:257,atc:20,co:13,pur:3},'Sneaker':{lpv:784,atc:38,co:22,pur:5},'Cap':{lpv:0,atc:0,co:0,pur:0},'Sweat':{lpv:976,atc:40,co:20,pur:6}};
+  var pfd={'Kage Tee':{lpv:870,atc:70,co:45,pur:10},'Essentials v2':{lpv:254,atc:14,co:9,pur:2},'Essentials v3':{lpv:186,atc:7,co:5,pur:1},'Bundle':{lpv:168,atc:21,co:14,pur:3},'Fudoshin':{lpv:42,atc:0,co:0,pur:0},'Kage Refresh':{lpv:120,atc:0,co:0,pur:0}};
   var fb=document.getElementById('product-funnels');
   if(fb)fb.innerHTML=prods.map(p=>{
     var d=pfd[p];var atcR=d.lpv>0?PCT(d.atc/d.lpv*100):'N/A';var coR=d.atc>0?PCT(d.co/d.atc*100):'N/A';var purR=d.co>0?PCT(d.pur/d.co*100):'N/A';
@@ -1999,7 +2011,7 @@ function renderCreatives(){
     return '<tr><td style="font-weight:600">'+c.name+'</td><td>'+c.product+'</td><td><span style="font-family:var(--mono);font-size:.68rem;background:#f0f2f5;padding:2px 7px;border-radius:4px">'+c.format+'</span></td><td>'+c.angle+'</td><td>'+c.hook+'</td><td>'+INR(c.spend)+'</td><td style="color:'+roasColor(c.roas)+';font-weight:700">'+c.roas.toFixed(2)+'x</td><td style="color:'+cpmColor(c.cpm)+'">'+INR(c.cpm)+'</td><td>'+PCT(c.ctr)+'</td><td>'+c.freq.toFixed(2)+'x</td><td style="font-family:var(--mono);font-size:.7rem">'+c.age+'</td><td>'+risk+'</td><td style="font-family:var(--mono);font-size:.65rem;color:'+(c.rankQ==='Above Avg'?'#1e7a45':'#666')+'">'+(c.rankQ||'--')+'</td><td><span class="sp '+scls+'">'+c.status.toUpperCase()+'</span></td></tr>';
   }).join('');
   var wp=document.getElementById('winning-patterns');
-  if(wp)wp.innerHTML='<div class="win-card"><div class="win-label">\uD83C\uDFC6 Winning category (30d)</div><div class="win-val">Sneaker \u2014 5.5x avg ROAS</div><div class="win-why">KAIONE_BIRTHDAY hit 16.85x. Kage Refresh day 1 = 12.85x. Sneaker angle resonating.</div></div><div class="win-card"><div class="win-label">\uD83D\uDCC8 Champion campaign</div><div class="win-val">KAIONE_BIRTHDAY \u2014 16.85x ROAS</div><div class="win-why">\u20b9729 spent, \u20b912,285 revenue over 30d residual. Reactivate at \u20b9300/day.</div></div><div class="win-card"><div class="win-label">\uD83D\uDC55 Best Tee campaign</div><div class="win-val">BUNDLE_07052026 \u2014 7.28x ROAS</div><div class="win-why">2.18% CTR, \u20b9427 CAC. Bundle value angle working. Reactivate.</div></div><div class="win-card"><div class="win-label">\uD83D\uDEAB Losing category</div><div class="win-val">Sweat (Essentials) \u2014 0.83x ROAS</div><div class="win-why">3 Essentials campaigns burned \u20b96,135 for 6 purchases. Kill Essentials angle entirely.</div></div>';
+  if(wp)wp.innerHTML='<div class="win-card"><div class="win-label">\uD83C\uDFC6 Highest ROAS (30d)</div><div class="win-val">Ad 1 \u2013 Best Seller (Retargeting) \u2014 7.46x</div><div class="win-why">Real 30d number: \u20b9121 spent, \u20b9899 revenue, 1 purchase. Low volume but strongest ratio \u2014 currently paused.</div></div><div class="win-card"><div class="win-label">\uD83D\uDCC8 Best-volume winner</div><div class="win-val">Kage_Sales (Kage Tee) \u2014 4.30x ROAS</div><div class="win-why">\u20b96,195 spent, \u20b926,619 revenue, 10 purchases over 30d \u2014 most reliable performer in the account, currently paused.</div></div><div class="win-card"><div class="win-label">\uD83D\uDC55 Best Bundle ad</div><div class="win-val">Bundle_07052026 \u2014 7.28x ROAS</div><div class="win-why">\u20b91,281 spent, \u20b99,328 revenue, 3 purchases. Currently paused.</div></div><div class="win-card"><div class="win-label">\uD83D\uDEAB Losing category</div><div class="win-val">Essentials (v2 + v3) \u2014 0.44\u20130.69x ROAS</div><div class="win-why">\u20b93,955 combined spend for 3 purchases. Both already correctly paused.</div></div>';
   var ac=CREATIVES.filter(c=>c.weeks.length>1).slice(0,3);
   if(ac.length>0){
     var wks=WEEKLY_TRENDS.weeks.slice(-5);
@@ -2015,7 +2027,7 @@ function renderAudience(){
   mkChart('ch-aud-device','bar',a.devices.map(d=>d.d),[{data:a.devices.map(d=>d.roas),backgroundColor:['#1e7a45','#1a6bb5','#b85c00'],borderWidth:0}],{plugins:{legend:{display:false}},scales:{y:{ticks:{callback:function(v){return v+'x'},color:'#666',font:{family:'DM Mono',size:10}},grid:{color:'#f0f0f0'}},x:{grid:{color:'#f0f0f0'},ticks:{color:'#666',font:{family:'DM Mono',size:10}}}}});
   mkChart('ch-aud-placement','bar',a.placements.map(p=>p.p),[{label:'ROAS',data:a.placements.map(p=>p.roas),backgroundColor:'#90c9a8',borderWidth:0,yAxisID:'y'},{label:'CPM',data:a.placements.map(p=>p.cpm),backgroundColor:'#93bbde',borderWidth:0,yAxisID:'y2'}],{plugins:{legend:{display:true}},scales:{y:{ticks:{callback:function(v){return v+'x'},color:'#666',font:{family:'DM Mono',size:10}},grid:{color:'#f0f0f0'},position:'left'},y2:{ticks:{callback:function(v){return '\u20b9'+v},color:'#666',font:{family:'DM Mono',size:10}},grid:{display:false},position:'right'}}});
   var ai=document.getElementById('aud-insights');
-  if(ai)ai.innerHTML='<div class="win-card"><div class="win-label">\uD83C\uDFC6 Best age band</div><div class="win-val">25\u201334 (7.13x ROAS, 21 purchases)</div><div class="win-why">Core KAI buyer. \u20b963 CPM. Scale budget allocation here, reduce 45+ spend.</div></div><div class="win-card"><div class="win-label">\uD83D\uDCF1 Best device</div><div class="win-val">iPhone (9.73x ROAS live)</div><div class="win-why">iOS converts 2.7x better than Android. Test iOS-only cold adset at \u20b9300/day.</div></div><div class="win-card"><div class="win-label">\uD83D\uDCFA Best placement</div><div class="win-val">IG Stories (7.73x), IG Reels (6.64x, \u20b933 CPM)</div><div class="win-why">Stories highest ROAS. Reels cheapest CPM. Create Reels+Stories-only test adset.</div></div><div class="win-card"><div class="win-label">\u26A0 Audience risk</div><div class="win-val">Retargeting pool 3,473 (critical)</div><div class="win-why">Causing \u20b9148 CPM. Expand to 90 days + video viewer lookalike. Target 15K+.</div></div>';
+  if(ai)ai.innerHTML='<div class="win-card"><div class="win-label">\uD83C\uDFC6 Largest segment</div><div class="win-val">25\u201334 \u2014 48.9% of spend (\u20b97,965, ~2.23x est. ROAS)</div><div class="win-why">Bulk of delivery lands here. 35\u201344 is smaller (19.9% share) but tracks a stronger ~3.28x est. ROAS \u2014 worth testing incremental budget there.</div></div><div class="win-card"><div class="win-label">\uD83D\uDCF1 Device split</div><div class="win-val">Android 53% share vs iPhone 43% share</div><div class="win-why">Fairly even split, no major skew. iPhone runs a higher CPM (\u20b983 vs \u20b923) but also a slightly better est. ROAS (2.62x vs 2.35x).</div></div><div class="win-card"><div class="win-label">\uD83D\uDCFA Best placement</div><div class="win-val">Feed (FB+IG) \u2014 3.53x est. ROAS, 36.9% share</div><div class="win-why">IG Reels carries the most volume (41% share) but the weakest est. ROAS (1.52x) of the major placements \u2014 worth reviewing creative fit there.</div></div><div class="win-card"><div class="win-label">\u26A0 Data gap</div><div class="win-val">~4.5% of spend has no age/gender signal</div><div class="win-why">"Unknown" bucket (\u20b9740 of 30d spend, 0.79% CTR) likely reflects Audience Network/low-signal inventory \u2014 untargetable by demo, worth excluding if it keeps underperforming.</div></div>';
 }
 
 // ── Recommendations ────────────────────────────────────────────────────────────
@@ -2523,9 +2535,9 @@ const COMPETITOR_DATA = {
   name: "Gully Labs",
   ig: "gullylabs",
   igFollowers: 263905,
-  totalActiveAds: 66,
+  totalActiveAds: 170,
   scrapedAds: 100,
-  scrapeDate: "2 August 2026",
+  scrapeDate: "2 August 2026 (active-ad count refreshed 17 August 2026 via Meta Ad Library search — follower count, formats, angles, and creator data below are still from the 2 Aug scrape and have NOT been re-verified)",
   avgPrice: 6540,
   priceMin: 3990,
   priceMax: 8990,
@@ -2561,7 +2573,7 @@ const COMPETITOR_DATA = {
 };
 
 const COMP_VS = [
-  { metric: "Active ads",          kai: "1 active / 8 rec", comp: "66",       winner: "comp", note: "Gully cut from 125 to 66 (-47%). Consolidating on winners." },
+  { metric: "Active ads",          kai: "2 active",         comp: "170+",     winner: "comp", note: "Refreshed 17 Aug via Ad Library: Gully is back up to 170+ active ads (was 66 on 2 Aug) — reversed the consolidation trend, back to aggressive testing." },
   { metric: "IG followers",        kai: "~15K",             comp: "263.9K",   winner: "comp", note: "Gully grew +19K in 10 weeks. Content velocity gap wide." },
   { metric: "UGC / creator ads",   kai: "0%",               comp: "~20%",     winner: "comp", note: "Wishlink branded partnership active." },
   { metric: "DCO catalogue ads",   kai: "No",               comp: "~25%",     winner: "comp", note: "Barfi Burgundy DCO still running Aug 2. KAI still zero." },
@@ -2623,9 +2635,9 @@ function renderCompTab() {
   var ke = document.getElementById("comp-kpis");
   if (ke) {
     var kpis = [
-      { l: "IG FOLLOWERS", v: "263.9K", s: "+19.4K vs May",    cls: "r" },
-      { l: "ACTIVE ADS",   v: "66",     s: "\u2193 from 125 (-47%)", cls: "b" },
-      { l: "SCRAPE DATE",  v: "2 Aug",  s: "10:00 AM IST",    cls: "n" },
+      { l: "IG FOLLOWERS", v: "263.9K", s: "as of 2 Aug (not re-verified)", cls: "r" },
+      { l: "ACTIVE ADS",   v: "170+",   s: "\u2191 from 66 on 2 Aug",  cls: "r" },
+      { l: "SCRAPE DATE",  v: "17 Aug", s: "ad count only \u2014 rest is 2 Aug", cls: "n" },
       { l: "AVG PRICE",    v: "\u20b96,540", s: "range \u20b93.9K\u20138.9K",  cls: "n" },
       { l: "EMERGING",     v: "Lotto",  s: "68 active ads",    cls: "r" },
       { l: "DCO SHARE",    v: "~25%",   s: "vs KAI 0%",        cls: "r" }
