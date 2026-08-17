@@ -1303,11 +1303,11 @@ const INSIGHTS_DATA = {
     {date:'May 24',day:'Sat',spend:1576.05,purchases:7, roas:10.00,cpm:27.40}
   ],
 
-  // Opportunity score - live from Meta API
-  opportunityScore: 99,
+  // Opportunity score - verified via Meta Ads MCP, 17 Aug 2026
+  opportunityScore: 90,
 
-  // WhatsApp - live from Meta API (found in placement breakdown)
-  whatsappData: {impressions:18, cpm:779.44, ctr:5.56, spend:14.03, purchases:0}
+  // WhatsApp - verified via Meta Ads MCP platform_position breakdown, 30d (Jul 19-Aug 17, 2026)
+  whatsappData: {impressions:327, cpm:1265.72, ctr:11.62, spend:413.89, purchases:0}
 };
 
 // ── Insights render ──────────────────────────────────────────────────────────
@@ -1475,9 +1475,9 @@ function renderOpportunityScore() {
     '</div>' +
     '<div><div style="font-size:1rem;font-weight:700;margin-bottom:4px">Opportunity Score: '+score+'/100</div>' +
     '<div style="font-size:.82rem;color:var(--text2);line-height:1.6">'+
-    (score>=90?'Account is highly optimised. Meta has no pending recommendations. This means your current setup is efficient \u2014 focus on scaling Kabuto Caps (paused) rather than fixing structural issues.':
+    (score>=90?'Account is close to fully optimised. Meta\'s top pending suggestions: add fullscreen vertical video with audio to Reels ads (est. 8% lower cost per result) and let Meta auto-add music to your ads (est. 31% lower cost per result).':
                'Some optimisations available. Check Meta Ads Manager recommendations tab for specific actions.')+
-    '</div><div style="margin-top:8px;font-family:var(--mono);font-size:.68rem;color:var(--green);font-weight:600">\u2713 Pulled live from Meta API</div></div></div>';
+    '</div><div style="margin-top:8px;font-family:var(--mono);font-size:.68rem;color:var(--green);font-weight:600">\u2713 Verified via Meta Ads MCP, 17 Aug 2026</div></div></div>';
 }
 
 function renderWhatsApp() {
@@ -1493,9 +1493,9 @@ function renderWhatsApp() {
     '<div style="background:#fff;border:1px solid var(--border);border-radius:10px;padding:14px 16px;box-shadow:0 1px 3px rgba(0,0,0,.04)">' +
     '<div style="font-family:var(--mono);font-size:.65rem;color:var(--text3);text-transform:uppercase;letter-spacing:.06em;font-weight:500;margin-bottom:8px">Meta-detected WhatsApp</div>' +
     '<div style="font-size:.82rem;color:var(--text2);line-height:1.7">'+
-    'Position: <strong>whatsapp_marketing_messages</strong><br>' +
-    'Impressions: 18 &nbsp;|&nbsp; CPM: <span style="color:var(--red)">&#x20B9;779</span><br>' +
-    'Spend: &#x20B9;14.03 &nbsp;|&nbsp; Purchases: <span style="color:var(--orange)">0 (untracked)</span><br>' +
+    'Position: <strong>whatsapp_marketing_messages</strong> (last 30d)<br>' +
+    'Impressions: '+INSIGHTS_DATA.whatsappData.impressions+' &nbsp;|&nbsp; CPM: <span style="color:var(--red)">&#x20B9;'+Math.round(INSIGHTS_DATA.whatsappData.cpm)+'</span><br>' +
+    'Spend: &#x20B9;'+INSIGHTS_DATA.whatsappData.spend.toFixed(2)+' &nbsp;|&nbsp; Purchases: <span style="color:var(--orange)">0 (untracked)</span><br>' +
     '<span style="font-size:.75rem;color:var(--text3)">Meta sees the WA send but cannot attribute purchases that complete outside its pixel.</span></div></div>' +
     // Manual attribution card
     '<div style="background:#fff;border:1px solid var(--border);border-radius:10px;padding:14px 16px;box-shadow:0 1px 3px rgba(0,0,0,.04)">' +
@@ -2032,23 +2032,29 @@ function renderAudience(){
 
 // ── Recommendations ────────────────────────────────────────────────────────────
 function renderRecs(){
+  var m30=DATA['last30'];
+  var a30=m30.campaigns.reduce(function(acc,c){return{spend:acc.spend+c.spend,revenue:acc.revenue+c.revenue,purchases:acc.purchases+c.purchases,checkouts:acc.checkouts+c.checkouts};},{spend:0,revenue:0,purchases:0,checkouts:0});
+  var scaleRecs=[...m30.campaigns].filter(function(c){return c.status==='paused'&&c.roas>=3;}).sort(function(x,y){return y.revenue-x.revenue;}).map(function(c){
+    return {p:'urgent',icon:'\uD83D\uDD25',title:'Reactivate '+c.sn+' \u2014 '+c.roas.toFixed(2)+'x ROAS, paused',why:'<strong>'+c.roas.toFixed(2)+'x ROAS</strong> on '+INR(c.spend)+' spend, '+c.purchases+' purchase(s) over the last 30 days \u2014 one of the account\'s stronger performers, currently switched off.',action:'Meta Ads Manager \u2192 '+c.sn+' \u2192 turn ON \u2192 monitor CPM for 72h before scaling further.',impact:'30d run rate: '+INR(c.spend)+' \u2192 '+INR(c.revenue)+' revenue'};
+  });
+  var wasteRecs=[...m30.campaigns].filter(function(c){return c.status==='paused' && c.spend>300 && c.roas>0 && c.roas<1;}).sort(function(x,y){return y.spend-x.spend;}).map(function(c){
+    return {p:'high',icon:'\u26A0',title:c.sn+' \u2014 '+c.roas.toFixed(2)+'x ROAS, below break-even',why:INR(c.spend)+' spent for '+INR(c.revenue)+' revenue over 30 days \u2014 already paused, no further action needed.',action:'No action \u2014 already correctly paused. Leave off unless creative is refreshed.',impact:'Confirms the pause decision was correct'};
+  });
+  var activeRecs=[...DATA['today'].campaigns].filter(function(c){return c.status==='active';}).map(function(c){
+    return {p:'medium',icon:'\uD83D\uDC40',title:'Monitor '+c.sn+' \u2014 launched today, no conversions yet',why:'\u20b9'+Math.round(c.spend)+' spent today, 0 purchases so far. Too early to judge \u2014 give it 3\u20135 days of delivery before making a call.',action:'Check back in 3\u20135 days once spend and impressions accumulate. Do not pause prematurely.',impact:'Avoids killing a campaign before it has a fair chance to convert'};
+  });
+  var checkoutRecs=[];
+  if(a30.checkouts>0){
+    var cvr=a30.purchases/a30.checkouts*100;
+    if(cvr<40){
+      checkoutRecs.push({p:'medium',icon:'\uD83D\uDCCC',title:'Fix checkout drop-off \u2014 only '+cvr.toFixed(1)+'% of checkouts convert (30d)',why:'<strong>'+(100-cvr).toFixed(0)+'% of checkout-initiations abandon</strong> before purchase across '+a30.checkouts+' checkouts. Likely a site/UX issue, not a Meta targeting issue.',action:'1. Show COD fee upfront. 2. Add session-recording (Clarity/Hotjar) to find the rage-click point. 3. Test a small prepaid discount at checkout.',impact:cvr.toFixed(1)+'% \u2192 40%+ checkout CVR would meaningfully lift purchases at flat spend'});
+    }
+  }
   var sections=[
-    {sec:'Scale Winners',recs:[
-      {p:'urgent',icon:'\uD83D\uDD25',title:'Reactivate Kabuto Caps \u2014 10x ROAS sitting OFF',why:'<strong>10.1x ROAS at \u20b927 CPM</strong> \u2014 best performer, currently OFF. Every day = ~\u20b92,200 missed revenue.',action:'Meta Ads Manager \u2192 Kabuto_Caps_24042026 \u2192 Turn ON \u2192 \u20b9750/day \u2192 7 days no-touch.',impact:'+\u20b92,000\u20132,500/day revenue'},
-      {p:'urgent',icon:'\u25B2',title:'Scale Kage Prospecting +30%',why:'<strong>4x ROAS at \u20b954 CPM</strong>, freq 1.63x healthy. Quality: Above Average. Room to scale.',action:'Budget \u20b9750 \u2192 \u20b9975/day. Monitor CPM 72h. If below \u20b975, go to \u20b91,200.',impact:'+\u20b94,000\u20136,000/week'}
-    ]},
-    {sec:'Reduce Waste',recs:[
-      {p:'urgent',icon:'\u2715',title:'Kill Sales_KAGE \u2014 0.96x ROAS, CTR -18%',why:'Offer creative: \u20b91,413 spent for \u20b91,363 revenue. CTR -18.46% BAD. Negative ROI.',action:'Pause now. Redirect \u20b9200/day to Kabuto.',impact:'Save \u20b9200/day'},
-      {p:'urgent',icon:'\u2715',title:'Kill HERO IMAGE \u2014 0 purchases, CTR -23%',why:'0 purchases from \u20b9300 spend. CTR -23.24%. Issue is landing page, not the ad itself.',action:'Pause. Change destination URL or add purchase CTA overlay.',impact:'Save \u20b943/day'}
-    ]},
-    {sec:'Reallocate Spend',recs:[
-      {p:'high',icon:'\uD83D\uDD04',title:'Reallocate retargeting budget to iOS Reels cold',why:'Retargeting: \u20b9148 CPM, 1 purchase. iPhone cold converts at <strong>9.73x ROAS</strong>.',action:'New adset: Cold + iOS only + Reels placement + \u20b9300/day, 5 days.',impact:'Potential 9x+ vs current 2.5x retargeting'},
-      {p:'high',icon:'\uD83D\uDCCD',title:'Geo-restrict to top 4 states',why:'Maharashtra (5.0x), Delhi (5.2x), Karnataka (4.6x) outperform. UP (3.0x, \u20b982 CPM) drag ROAS.',action:'Prioritise MH + DL + KA + TN. Cap spend in RJ, UP, WB.',impact:'Est. +0.5x account ROAS'}
-    ]},
-    {sec:'Winning Hooks',recs:[{p:'high',icon:'\uD83C\uDFA8',title:'Replicate Kabuto product-demo format for Kage Tee',why:'<strong>Static product-demo = 10x ROAS.</strong> Clean product on plain bg. No lifestyle, no offer.',action:'3 statics: flat lay white bg, front+back model, close-up fabric. No discount. \u20b9300/day cold.',impact:'Potential 8\u201310x ROAS if Kabuto formula transfers'}]},
-    {sec:'Winning Formats',recs:[{p:'high',icon:'\uD83D\uDCF9',title:'Test Reels-only adset',why:'Reels: <strong>6.64x ROAS at \u20b933 CPM</strong>. IG Stories 7.73x. Currently running Advantage+ (mixed).',action:'Duplicate Kage_Prospecting. Reels+Stories only. \u20b9300/day, 5 days.',impact:'CPM \u20b954 \u2192 \u20b933 = 39% more reach per rupee'}]},
-    {sec:'Winning Creators',recs:[{p:'medium',icon:'\uD83D\uDC65',title:'Commission 1 UGC creator for Kage Tee',why:'All creatives internal. <strong>UGC delivers 2\u20134x better CTR</strong> in India streetwear.',action:'Brief 1 micro-creator (10K\u201350K, streetwear, Mumbai/Delhi): 30-sec Reel organic. Usage rights 90 days.',impact:'CTR 2.7% \u2192 3.5%+ = lower effective CPM'}]},
-    {sec:'Winning Product Angles',recs:[{p:'medium',icon:'\uD83D\uDCCC',title:'Fix checkout drop-off \u2014 only 26% convert',why:'<strong>74% of checkout initiations abandon.</strong> Consistent across all geo. Not a Meta issue.',action:'1. Show COD fee upfront. 2. Microsoft Clarity for rage-click. 3. \u20b930 prepaid discount popup.',impact:'26% \u2192 50% checkout CVR = revenue doubles with zero extra ad spend'}]}
+    {sec:'Scale Winners (paused, \u22653x ROAS)',recs:scaleRecs.length?scaleRecs:[{p:'medium',icon:'\u2139',title:'No paused campaigns currently clear 3x+ ROAS',why:'Nothing meets the reactivation bar right now.',action:'Re-check after the active campaigns accumulate more data.',impact:'\u2014'}]},
+    {sec:'Currently Active',recs:activeRecs.length?activeRecs:[{p:'medium',icon:'\u2139',title:'No campaigns currently active',why:'Check Meta Ads Manager.',action:'Launch a campaign to resume delivery.',impact:'\u2014'}]},
+    {sec:'Confirmed Kills (already paused, correctly so)',recs:wasteRecs.length?wasteRecs:[{p:'medium',icon:'\u2713',title:'No below-break-even paused campaigns to flag',why:'Nothing currently sits in the sub-1x, paused bucket.',action:'\u2014',impact:'\u2014'}]},
+    {sec:'Checkout Funnel',recs:checkoutRecs.length?checkoutRecs:[{p:'medium',icon:'\u2713',title:'Checkout conversion is healthy',why:'No major drop-off detected in the last 30 days.',action:'Keep monitoring.',impact:'\u2014'}]}
   ];
   document.getElementById('rec-cards').innerHTML=sections.map(function(sec){
     return '<div style="margin-bottom:1.75rem"><div style="font-family:var(--mono);font-size:.68rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--text3);margin-bottom:.75rem;padding-bottom:.5rem;border-bottom:1px solid var(--border)">'+sec.sec+'</div>'
@@ -2077,7 +2083,12 @@ async function genAIRecs(){
   const d=DATA[period];
   const campSum=d.campaigns.map(c=>{var r=c.spend>0?(c.revenue/c.spend).toFixed(2):'0';return c.sn+' ['+c.status.toUpperCase()+']: \u20b9'+c.spend.toLocaleString('en-IN')+' | \u20b9'+c.revenue.toLocaleString('en-IN')+' rev | '+r+'x ROAS | CPM \u20b9'+c.cpm;}).join('\n');
   const creSum=CREATIVES.map(c=>'Creative: '+c.name+' | Format: '+c.format+' | Angle: '+c.angle+' | ROAS: '+c.roas.toFixed(2)+'x | CTR: '+c.ctr+'% | Fatigue: '+c.fatigueRisk+(c.note?' | '+c.note:'')).join('\n');
-  const prompt='You are the CMO advisor for KAI by Hustle (hustlewithkai.com) \u2014 India D2C activewear/streetwear.\n\nCAMPAIGNS ('+d.label+'):\n'+campSum+'\n\nCREATIVES:\n'+creSum+'\n\nGEO: Maharashtra 5.0x \u20b948 CPM, Delhi 5.2x, Karnataka 4.6x. Weak: UP 3.0x \u20b982, Rajasthan 3.2x.\nDEVICE: iPhone 9.73x ROAS. Android 3.63x. Desktop 0x.\nPLACEMENT: IG Reels 6.64x \u20b933 CPM. IG Stories 7.73x. FB Feed 0 purchases.\nAGE: 25-34 male 7.13x ROAS (21 purchases). 18-24 male 3.12x only.\nFUNNEL: Checkout\u2192Purchase 26%. Retargeting pool 3,473 too small.\nCOMPETITORS: Wear Comet, Gully Labs, WTFlex, Bluorng, Farak\n\nProvide:\n# IMMEDIATE ACTIONS (this week, \u20b9 ranked)\n# BUDGET REALLOCATION TABLE\nExact \u20b9/day before vs after for each campaign.\n# CREATIVE PRODUCTION BRIEF\nOne specific brief \u2014 format, hook, why it outperforms.\n# AUDIENCE EXPANSION PLAN\nNew audiences, lookalike seeds, geo changes.\n# 30-DAY FORECAST\nConservative vs Growth (\u20b9 spend, \u20b9 revenue, ROAS).\n\nBe specific. Use \u20b9. Cite data.';
+  const geoSum=[...GEO_DATA.last30.states].sort((x,y)=>y.roas-x.roas).slice(0,5).map(s=>s.name+' '+s.roas.toFixed(2)+'x est. ROAS (\u20b9'+Math.round(s.cpm)+' CPM)').join(', ');
+  const devSum=AUD_DATA.prospecting.devices.map(dv=>dv.d+' '+dv.roas.toFixed(2)+'x').join(', ');
+  const plcSum=AUD_DATA.prospecting.placements.map(p=>p.p+' '+p.roas.toFixed(2)+'x (\u20b9'+Math.round(p.cpm)+' CPM)').join(', ');
+  const ageSum=AUD_DATA.prospecting.age.map(ag=>ag.g+' '+ag.roas.toFixed(2)+'x ('+ag.share+'% share)').join(', ');
+  const cvr30=(function(){var m=DATA['last30'].campaigns.reduce((a,c)=>({p:a.p+c.purchases,co:a.co+c.checkouts}),{p:0,co:0});return m.co>0?(m.p/m.co*100).toFixed(1):'0';})();
+  const prompt='You are the CMO advisor for KAI by Hustle (hustlewithkai.com) \u2014 India D2C activewear/streetwear.\n\nCAMPAIGNS ('+d.label+'):\n'+campSum+'\n\nCREATIVES:\n'+creSum+'\n\nGEO (last 30d, real spend/CTR/CPM, ROAS is CTR-relative estimate): '+geoSum+'\nDEVICE (30d, est. ROAS): '+devSum+'\nPLACEMENT (30d, est. ROAS): '+plcSum+'\nAGE (30d, est. ROAS): '+ageSum+'\nFUNNEL: Checkout\u2192Purchase '+cvr30+'% (last 30d).\nNote: GEO/DEVICE/PLACEMENT/AGE ROAS figures are estimates (Meta does not return purchase attribution at breakdown level) \u2014 treat as directional, not exact.\n\nProvide:\n# IMMEDIATE ACTIONS (this week, \u20b9 ranked)\n# BUDGET REALLOCATION TABLE\nExact \u20b9/day before vs after for each campaign.\n# CREATIVE PRODUCTION BRIEF\nOne specific brief \u2014 format, hook, why it outperforms.\n# AUDIENCE EXPANSION PLAN\nNew audiences, lookalike seeds, geo changes.\n\nBe specific. Use \u20b9. Cite only the data given above \u2014 do not invent numbers not present here.';
   var sc2=new AbortController();
   try{
     const res=await fetch('https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:streamGenerateContent?alt=sse&key='+gKey,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({contents:[{role:'user',parts:[{text:prompt}]}],generationConfig:{maxOutputTokens:2048,temperature:0.3}}),signal:sc2.signal});
@@ -2091,14 +2102,17 @@ async function genAIRecs(){
 // ── Download Report ────────────────────────────────────────────────────────────
 function downloadReport(){
   const d=DATA['last7'];
+  const m30=DATA['last30'];
   const a=d.campaigns.reduce((acc,c)=>({spend:acc.spend+c.spend,revenue:acc.revenue+c.revenue,purchases:acc.purchases+c.purchases,atc:acc.atc+c.atc,checkouts:acc.checkouts+c.checkouts}),{spend:0,revenue:0,purchases:0,atc:0,checkouts:0});
-  const overallROAS=(a.revenue/a.spend).toFixed(2);
+  const a30=m30.campaigns.reduce((acc,c)=>({spend:acc.spend+c.spend,revenue:acc.revenue+c.revenue,purchases:acc.purchases+c.purchases,atc:acc.atc+c.atc,checkouts:acc.checkouts+c.checkouts}),{spend:0,revenue:0,purchases:0,atc:0,checkouts:0});
+  const overallROAS=a.spend>0?(a.revenue/a.spend).toFixed(2):'0';
   const checkoutCVR=a.checkouts>0?(a.purchases/a.checkouts*100).toFixed(1):'0';
+  const cvr30=a30.checkouts>0?(a30.purchases/a30.checkouts*100).toFixed(1):'0';
 
   var lines=[];
   lines.push('KAI PERFORMANCE HUB \u2014 WEEKLY REPORT');
   lines.push('Generated: '+new Date().toLocaleDateString('en-IN',{day:'numeric',month:'long',year:'numeric'}));
-  lines.push('Period: May 26 \u2013 Jun 1, 2026');
+  lines.push('Period: '+d.label);
   lines.push('='.repeat(60));
   lines.push('');
   lines.push('ACCOUNT SUMMARY');
@@ -2122,82 +2136,76 @@ function downloadReport(){
     lines.push('  ATC: '+c.atc+' | Checkouts: '+c.checkouts);
   });
   lines.push('');
-  lines.push('LIVE INSIGHTS (Meta API)');
+  lines.push('LIVE INSIGHTS (Meta Ads MCP, 30d breakdown \u2014 spend/CTR/CPM real, ROAS estimated per AUD_DATA note)');
   lines.push('-'.repeat(40));
-  lines.push('Best placement:   IG Stories 7.73x ROAS | IG Reels 6.64x at \u20b933 CPM');
-  lines.push('Best device:      iPhone 9.73x ROAS vs Android 3.63x');
-  lines.push('Best age/gender:  25-34 male 7.13x ROAS (21 purchases)');
-  lines.push('Best hours:       11am-2pm (4 purchases/hr)');
-  lines.push('Cheapest CPM:     2am \u20b940 | 4am \u20b941 | midnight \u20b946');
-  lines.push('Frequency:        71.6% seen ads 1x (healthy) | 806 people seen 11x+ (cap needed)');
-  lines.push('Opp. Score:       99/100 (fully optimised)');
+  var pl=[...AUD_DATA.prospecting.placements].sort((x,y)=>y.roas-x.roas)[0];
+  var plVol=[...AUD_DATA.prospecting.placements].sort((x,y)=>y.share-x.share)[0];
+  var dv=[...AUD_DATA.prospecting.devices].sort((x,y)=>y.roas-x.roas)[0];
+  var ag=[...AUD_DATA.prospecting.age].sort((x,y)=>y.roas-x.roas)[0];
+  var agVol=[...AUD_DATA.prospecting.age].sort((x,y)=>y.share-x.share)[0];
+  lines.push('Best placement:   '+pl.p+' '+pl.roas.toFixed(2)+'x est. ROAS ('+plVol.p+' carries most volume at '+plVol.share+'% share)');
+  lines.push('Device split:     '+dv.d+' '+dv.roas.toFixed(2)+'x est. ROAS, best of the two major devices');
+  lines.push('Best age band:    '+ag.g+' '+ag.roas.toFixed(2)+'x est. ROAS ('+ag.share+'% share; '+agVol.g+' carries most volume at '+agVol.share+'%)');
   lines.push('');
-  lines.push('GEO PERFORMANCE');
+  lines.push('GEO PERFORMANCE (last 30 days, verified via Meta Ads MCP)');
   lines.push('-'.repeat(40));
-  lines.push('Best states:      Maharashtra 5.0x (\u20b948 CPM) | Delhi 5.2x (\u20b952 CPM) | Karnataka 4.6x');
-  lines.push('Weak states:      UP 3.0x (\u20b982 CPM) | Rajasthan 3.2x (\u20b978 CPM)');
-  lines.push('Checkout CVR:     ~26% across all states (site/UX issue, not geo-specific)');
+  var geoTop=[...GEO_DATA.last30.states].sort((x,y)=>y.roas-x.roas).slice(0,3);
+  var geoVol=[...GEO_DATA.last30.states].sort((x,y)=>y.spend-x.spend).slice(0,3);
+  lines.push('Best est. ROAS:   '+geoTop.map(s=>s.name+' '+s.roas.toFixed(2)+'x').join(' | '));
+  lines.push('Highest volume:   '+geoVol.map(s=>s.name+' '+INR(s.spend)+' spend').join(' | '));
+  lines.push('Checkout CVR:     '+cvr30+'% blended across sales campaigns (last 30d)');
   lines.push('');
-  lines.push('CREATIVE INTELLIGENCE');
+  lines.push('CREATIVE INTELLIGENCE (real ad-level data, last 30 days)');
   lines.push('-'.repeat(40));
-  lines.push('Winning format:   Static Image (Product Demo) \u2014 Kabuto 10x ROAS at \u20b927 CPM');
-  lines.push('Winning hook:     Product-first (show item) > Lifestyle > Offer/discount');
-  lines.push('Kill now:         Sales_KAGE (0.96x, CTR -18%) | HERO IMAGE (0x, CTR -23%)');
-  lines.push('Watch:            Prospecting_KAGE freq 1.72x (approaching 2x threshold)');
+  var adsRanked=[...CREATIVES].filter(c=>c.spend>0);
+  var bestAd=[...adsRanked].sort((x,y)=>y.roas-x.roas)[0];
+  var worstAd=[...adsRanked].filter(c=>c.purchases===0 && c.status==='paused').sort((x,y)=>y.spend-x.spend)[0];
+  lines.push('Best ROAS ad:     '+bestAd.name+' ('+bestAd.product+') \u2014 '+bestAd.roas.toFixed(2)+'x on '+INR(bestAd.spend)+', '+bestAd.purchases+' purchase(s)');
+  if(worstAd) lines.push('Biggest zero-conv: '+worstAd.name+' ('+worstAd.product+') \u2014 '+INR(worstAd.spend)+' spent, 0 purchases, already paused');
   lines.push('');
   lines.push('RECOMMENDATIONS \u2014 RANKED BY REVENUE IMPACT');
   lines.push('-'.repeat(40));
-  var recs=[
-    ['URGENT','Reactivate Kabuto Caps','Meta Ads \u2192 Kabuto_Caps \u2192 Turn ON \u2192 \u20b9750/day','+\u20b92,000-2,500/day'],
-    ['URGENT','Kill Sales_KAGE (0.96x ROAS)','Pause now. Redirect \u20b9200/day to Kabuto.','Save \u20b9200/day'],
-    ['URGENT','Kill HERO IMAGE (0x ROAS)','Pause. Change landing page destination.','Save \u20b943/day'],
-    ['URGENT','Scale Kage Prospecting +30%','\u20b9750 \u2192 \u20b9975/day budget','+\u20b94,000-6,000/week'],
-    ['HIGH','Reallocate retargeting to iOS Reels cold','New adset: iOS + Reels + \u20b9300/day','Potential 9x+ ROAS'],
-    ['HIGH','Geo-restrict to MH+DL+KA+TN','Cap spend in UP, RJ, WB','+0.5x account ROAS'],
-    ['HIGH','Test product-demo static for Kage Tee','3 statics: flat lay, model, fabric detail','Potential 8-10x ROAS'],
-    ['MEDIUM','Fix checkout leak (26% CVR)','COD fee upfront + Microsoft Clarity','Revenue doubles at 50% CVR'],
-    ['MEDIUM','Add frequency cap: max 3x/week','Adset-level frequency control','Stop 806 people seeing ads 11x+'],
-    ['MEDIUM','Commission 1 UGC creator','30-sec Reel, micro-creator, Mumbai/Delhi','CTR 2.7% \u2192 3.5%+']
-  ];
+  var pausedWinners=[...m30.campaigns].filter(c=>c.status==='paused'&&c.roas>=3).sort((x,y)=>y.revenue-x.revenue);
+  var recs=[];
+  pausedWinners.forEach(function(c){
+    recs.push(['HIGH','Reactivate '+c.sn+' ('+c.roas.toFixed(2)+'x ROAS, paused)','Meta Ads Manager \u2192 turn campaign back on, monitor CPM for 72h','30d run: '+INR(c.spend)+' spend \u2192 '+INR(c.revenue)+' revenue']);
+  });
+  var activeNow=[...DATA['today'].campaigns].filter(c=>c.status==='active');
+  activeNow.forEach(function(c){
+    recs.push(['MEDIUM','Monitor '+c.sn+' \u2014 launched today, 0 purchases yet','Give it 3-5 days before judging ROAS','\u20b9'+Math.round(c.spend)+' spent today']);
+  });
+  if(a30.checkouts>0 && a30.purchases/a30.checkouts<0.4){
+    recs.push(['MEDIUM','Fix checkout drop-off \u2014 only '+cvr30+'% of checkouts convert','Review COD fee visibility, add session recording (Clarity/Hotjar)','Closing the gap to 40%+ would meaningfully lift purchases at flat spend']);
+  }
   recs.forEach(function(r){
     lines.push('');
     lines.push('['+r[0]+'] '+r[1]);
     lines.push('  Action: '+r[2]);
-    lines.push('  Impact: '+r[3]);
+    lines.push('  Signal: '+r[3]);
   });
   lines.push('');
   lines.push('CONCLUSION');
   lines.push('-'.repeat(40));
-  lines.push('KAI account is performing at '+overallROAS+'x blended ROAS with significant upside:');
+  lines.push('Last 30 days: '+INR(a30.spend)+' spend, '+INR(a30.revenue)+' revenue, '+(a30.spend>0?(a30.revenue/a30.spend).toFixed(2):'0')+'x blended ROAS, '+a30.purchases+' purchases.');
   lines.push('');
-  lines.push('1. Kabuto Caps (10x ROAS) is inexplicably OFF \u2014 reactivating it is the highest-ROI');
-  lines.push('   action available. Estimated +\u20b92,200/day in revenue with zero new creative.');
+  lines.push('The two campaigns currently active (Kage_TOF, Kage_sales_1608) launched today and have');
+  lines.push('generated zero purchases so far \u2014 every purchase in the last 30 days came from campaigns');
+  lines.push('that have since been paused. Worth deciding whether that was intentional.');
   lines.push('');
-  lines.push('2. The checkout funnel has a critical 74% abandonment rate. Fixing this is worth');
-  lines.push('   more than any increase in ad spend \u2014 it would double revenue at current ROAS.');
-  lines.push('');
-  lines.push('3. iOS users convert at 9.73x vs 3.63x for Android. A dedicated iOS+Reels adset');
-  lines.push('   could unlock the single biggest efficiency gain available in the account.');
-  lines.push('');
-  lines.push('4. \u20b9243/day is being wasted on Sales_KAGE and HERO IMAGE with 0-0.96x ROAS.');
-  lines.push('   Immediate pause frees budget for Kabuto reactivation.');
-  lines.push('');
-  lines.push('Conservative 30-day forecast (current setup + Kabuto reactivated):');
-  lines.push('  Spend: ~\u20b945,000 | Revenue: ~\u20b92,10,000 | ROAS: ~4.7x | Purchases: ~230');
-  lines.push('');
-  lines.push('Growth 30-day forecast (all recommendations implemented):');
-  lines.push('  Spend: ~\u20b960,000 | Revenue: ~\u20b93,60,000 | ROAS: ~6.0x | Purchases: ~400');
+  lines.push('No 30-day forward forecast is included \u2014 the account composition just changed today');
+  lines.push('(new campaigns launched, prior winners paused), so a projection from historical data');
+  lines.push('would not reflect what is actually running now.');
   lines.push('');
   lines.push('='.repeat(60));
   lines.push('Generated by KAI Performance Hub \u2014 hustlewithkai.com');
-  lines.push('Data source: Meta Ads API (live) \u2022 Period: May 26 \u2013 Jun 1, 2026');
+  lines.push('Data source: Meta Ads MCP (verified '+new Date().toLocaleDateString('en-IN',{day:'numeric',month:'short',year:'numeric'})+') \u2022 Period: '+d.label);
 
   var text=lines.join('\n');
   var blob=new Blob([text],{type:'text/plain;charset=utf-8'});
   var url=URL.createObjectURL(blob);
   var dlnk=document.createElement('a');
   dlnk.href=url;
-  dlnk.download='KAI_Weekly_Report_May12-18_2026.txt';
+  dlnk.download='KAI_Weekly_Report_'+new Date().toISOString().slice(0,10)+'.txt';
   document.body.appendChild(dlnk);
   dlnk.click();
   document.body.removeChild(dlnk);
