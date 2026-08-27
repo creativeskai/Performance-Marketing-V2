@@ -73,3 +73,19 @@ No values below — this section documents *what* exists and *where it's managed
 | Gemini API key | Stored client-side in the browser's `localStorage` (`kai_v10` key), entered via the dashboard's Settings modal | Used for the AI Advisor / AI Recommendations features. Per-browser, not server-side. |
 
 **Recommendation:** if you want a durable, shared record of actual credential values, use a password manager (1Password, Bitwarden, etc.) — never a markdown file in a git repo, public or private.
+
+## 8. Session update — 2026-08-27
+
+Refreshed the static fallback data baked into `index.html` with fresh pulls via the Meta Ads MCP (account `704523148804803`). Note: during this pull, firing multiple `ads_get_ad_entities` calls in parallel with identical `ad_account_id`+`level`+`fields` but different `date_preset` returned duplicated/incorrect results (all periods came back identical) — had to be re-run sequentially to get correct per-period numbers. Worth remembering for future sessions.
+
+**What was refreshed:**
+- Dashboard (Today/7d/14d/30d/Month campaign tables) — real, verified numbers as of 27 Aug 2026.
+- Geography tab (state-level, 7d & 30d) — spend/impressions/CTR/CPM real; revenue/ROAS/purchases still estimated (same disclosed CTR-relative methodology; Meta doesn't return purchase attribution at region granularity).
+- Audience tab (age/gender/device/placement, 30d) — this time **purchases and ROAS are real Meta-attributed figures at this breakdown level**, not estimated (an improvement over the prior session's methodology — Meta does return purchase attribution for age/gender/device/platform_position, just not for region).
+- Creatives tab — rebuilt from real 30d campaign data (still campaign-level, not true per-ad; format/angle/hook remain honestly "Not tagged").
+- Insights tab — hourly, placement, device, age×gender, and daily-pacing (Aug 20–26) charts rebuilt from real 30d/7d breakdowns. **Frequency-decay chart was NOT refreshed** — Meta Ads MCP has no direct reach-by-frequency-bucket breakdown; those numbers are still the original stale placeholder (now labeled as such in a code comment).
+- Opportunity Score: now **100/100, zero pending recommendations** (was 90/100 on 17 Aug).
+- Competitors tab: only the stale "1.94x" KAI ROAS comparison figure was corrected to 2.09x. The Gully Labs / Lotto Sport scrape data is still from 2 Aug (ad count from 17 Aug) — re-scraping was out of scope again this session, same as before.
+- `WEEKLY_TRENDS` (the multi-week product trend chart) was **not extended** — still ends at the Aug 18–24 week.
+
+**Current real account state (verified 27 Aug 2026):** Same two campaigns active — `Kage_sales_1908` (sales) and `Kage_TOF` (traffic). Zero spend recorded yet today. 30-day account totals: ₹17,258 spend, ₹36,129 revenue, 2.09x blended ROAS, 15 purchases.
