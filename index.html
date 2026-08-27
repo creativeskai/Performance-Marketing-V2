@@ -197,9 +197,44 @@ input,textarea,button,select{font-family:inherit}button{cursor:pointer;border:no
 .alert-title{font-size:.85rem;font-weight:600;color:var(--text);margin-bottom:3px}
 .alert-body{font-size:.78rem;color:var(--text2);line-height:1.6}
 
+body.locked #shell{display:none}
+#login-gate{position:fixed;inset:0;z-index:200;background:linear-gradient(135deg,#11141a,#1d2129);display:flex;align-items:center;justify-content:center;padding:1rem}
+#login-gate.hidden{display:none}
+#login-box{background:#fff;border-radius:14px;padding:2.25rem 2.25rem 2rem;width:100%;max-width:360px;box-shadow:0 20px 60px rgba(0,0,0,.4)}
+#login-box .logo-wrap{margin-bottom:1.5rem;justify-content:center}
+.login-field{margin-bottom:14px}
+.login-field label{display:block;font-family:var(--mono);font-size:.68rem;color:var(--text2);letter-spacing:.05em;text-transform:uppercase;margin-bottom:5px;font-weight:500}
+.login-field input{width:100%;background:var(--bg2);border:1.5px solid var(--border);border-radius:8px;padding:10px 12px;color:var(--text);font-family:var(--body);font-size:.88rem}
+.login-field input:focus{outline:none;border-color:var(--blue)}
+#login-err{color:var(--red);font-size:.78rem;margin-top:2px;margin-bottom:10px;display:none}
+#login-submit{width:100%;margin-top:6px;padding:10px;background:var(--blue);border-radius:8px;color:#fff;font-family:var(--mono);font-size:.82rem;font-weight:600}
+#login-submit:hover{background:#1558a0}
+.nav-group-label{font-family:var(--mono);font-size:.58rem;letter-spacing:.1em;color:var(--text4);align-self:center;padding:0 10px 0 2px;text-transform:uppercase;white-space:nowrap}
+.nav-sep{width:1px;align-self:stretch;background:var(--border);margin:8px 8px 8px 0}
+.proposal-card{background:#fff;border:1px solid var(--border);border-radius:10px;padding:16px 18px;margin-bottom:12px;box-shadow:0 1px 3px rgba(0,0,0,.04)}
+.proposal-head{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:6px}
+.proposal-id{font-family:var(--mono);font-size:.65rem;color:var(--text3);font-weight:600;letter-spacing:.04em}
+.proposal-action{font-size:.82rem;color:var(--text);background:var(--bg2);border-left:3px solid var(--blue);padding:8px 12px;border-radius:0 6px 6px 0;line-height:1.6;margin-top:8px;font-family:var(--mono)}
+.proposal-meta{font-family:var(--mono);font-size:.68rem;color:var(--text3);margin-top:8px}
+.auto-empty{text-align:center;padding:2.5rem 1rem;color:var(--text3);font-size:.85rem}
+
 </style>
 </head>
-<body>
+<body class="locked">
+
+<div id="login-gate">
+  <div id="login-box">
+    <div class="logo-wrap">
+      <span class="logo-name" style="font-size:1.2rem">KAI</span><span class="logo-sub" style="margin-left:6px">Performance Hub</span>
+    </div>
+    <form id="login-form" onsubmit="return doLogin(event)">
+      <div class="login-field"><label>Username</label><input type="text" id="login-user" autocomplete="username" autofocus></div>
+      <div class="login-field"><label>Password</label><input type="password" id="login-pass" autocomplete="current-password"></div>
+      <div id="login-err">Incorrect username or password.</div>
+      <button type="submit" id="login-submit">Sign in</button>
+    </form>
+  </div>
+</div>
 
 <div id="sov"><div id="sbox">
   <div class="ch"><div><div class="ct">Configuration</div><div class="cn">Key stored in localStorage only</div></div><button type="button" onclick="cS()" style="color:#999;font-size:1.2rem;line-height:1;background:none;border:none;cursor:pointer">&#x2715;</button></div>
@@ -234,15 +269,19 @@ input,textarea,button,select{font-family:inherit}button{cursor:pointer;border:no
   </div>
 
   <div id="navtabs">
-    <button class="nav-tab active" onclick="showView('dash')">DASHBOARD</button>
-    <button class="nav-tab" onclick="showView('products')">PRODUCTS</button>
-    <button class="nav-tab" onclick="showView('geo')">GEOGRAPHY</button>
-    <button class="nav-tab" onclick="showView('creatives')">CREATIVES</button>
-    <button class="nav-tab" onclick="showView('audience')">AUDIENCE</button>
-    <button class="nav-tab" onclick="showView('comp')">COMPETITORS</button>
-    <button class="nav-tab" onclick="showView('insights')">INSIGHTS</button>
-    <button class="nav-tab" onclick="showView('rec')">RECOMMENDATIONS</button>
-    <button class="nav-tab" onclick="showView('advisor')">AI ADVISOR</button>
+    <span class="nav-group-label">Management</span>
+    <button class="nav-tab" data-view="automation" onclick="showView('automation')">AUTOMATION</button>
+    <div class="nav-sep"></div>
+    <span class="nav-group-label">Reporting</span>
+    <button class="nav-tab active" data-view="dash" onclick="showView('dash')">DASHBOARD</button>
+    <button class="nav-tab" data-view="products" onclick="showView('products')">PRODUCTS</button>
+    <button class="nav-tab" data-view="geo" onclick="showView('geo')">GEOGRAPHY</button>
+    <button class="nav-tab" data-view="creatives" onclick="showView('creatives')">CREATIVES</button>
+    <button class="nav-tab" data-view="audience" onclick="showView('audience')">AUDIENCE</button>
+    <button class="nav-tab" data-view="comp" onclick="showView('comp')">COMPETITORS</button>
+    <button class="nav-tab" data-view="insights" onclick="showView('insights')">INSIGHTS</button>
+    <button class="nav-tab" data-view="rec" onclick="showView('rec')">RECOMMENDATIONS</button>
+    <button class="nav-tab" data-view="advisor" onclick="showView('advisor')">AI ADVISOR</button>
   </div>
 
   <div id="body">
@@ -1206,6 +1245,40 @@ input,textarea,button,select{font-family:inherit}button{cursor:pointer;border:no
       </div>
     </div>
 
+    <!-- AUTOMATION -->
+    <div id="view-automation" class="view">
+      <div class="pad">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:1.25rem;flex-wrap:wrap;gap:10px">
+          <div>
+            <div style="font-family:var(--mono);font-size:.65rem;color:var(--text3);letter-spacing:.07em;text-transform:uppercase;margin-bottom:4px">Management</div>
+            <div style="font-size:1.1rem;font-weight:700">Automation</div>
+          </div>
+          <span style="font-family:var(--mono);font-size:.68rem;color:var(--text3)" id="auto-generated"></span>
+        </div>
+        <div style="background:var(--blue-bg);border:1px solid #93bbde;border-radius:10px;padding:12px 16px;margin-bottom:1.25rem;font-size:.82rem;color:var(--text2);line-height:1.6">
+          Proposals below are generated on a schedule from live account data. Nothing here executes on its own — review a proposal, then tell Claude <strong>"approve &lt;id&gt;"</strong> (in this chat, or by replying to the automation's notification) and it will run via the Meta Ads MCP connection and log the result here.
+        </div>
+
+        <div class="sec">Pending proposals (<span id="auto-proposal-count">0</span>)</div>
+        <div id="auto-proposals"><div class="auto-empty">Loading&#x2026;</div></div>
+
+        <div class="sec">Alerts</div>
+        <div id="auto-alerts"><div class="auto-empty">Loading&#x2026;</div></div>
+
+        <div class="sec">Recent activity</div>
+        <table class="ctbl" id="auto-log-tbl" style="background:#fff;border:1px solid var(--border);border-radius:10px;overflow:hidden">
+          <thead><tr><th>When</th><th>Proposal</th><th>Action</th><th>Result</th></tr></thead>
+          <tbody id="auto-log"><tr><td colspan="4" class="auto-empty">Loading&#x2026;</td></tr></tbody>
+        </table>
+
+        <div class="sec">Settings</div>
+        <div class="cbox">
+          <div class="ctitle">Thresholds this run used</div>
+          <div id="auto-settings"></div>
+        </div>
+      </div>
+    </div>
+
   </div>
 </div>
 <script>
@@ -1556,6 +1629,36 @@ function updateWAReconciled(){
 
 
 // ── DATA ──────────────────────────────────────────────────────────────────────
+// ── Login gate ───────────────────────────────────────────────────────────────
+// NOTE: this is a client-side visibility gate only, not real access control —
+// anyone who views this file's source (this repo is public) can read the
+// credential below. Kept this way deliberately per product decision; planned
+// to move to Vercel's native deployment Password Protection once the project
+// is on a Pro plan.
+const AUTH_USER='contact0us@hustlewithkai.com';
+const AUTH_PASS='September@2025';
+function doLogin(e){
+  e.preventDefault();
+  const u=document.getElementById('login-user').value.trim();
+  const p=document.getElementById('login-pass').value;
+  const err=document.getElementById('login-err');
+  if(u===AUTH_USER&&p===AUTH_PASS){
+    localStorage.setItem('kai_auth_v1','1');
+    document.getElementById('login-gate').classList.add('hidden');
+    document.body.classList.remove('locked');
+    err.style.display='none';
+  } else {
+    err.style.display='block';
+  }
+  return false;
+}
+function checkAuth(){
+  if(localStorage.getItem('kai_auth_v1')==='1'){
+    document.getElementById('login-gate').classList.add('hidden');
+    document.body.classList.remove('locked');
+  }
+}
+
 const GEMINI_KEY='AIzaSyCyXiTv4JoRvcXDfzxwexhFwbDIEaXK9BA';
 const CFG='kai_v9';
 let cfg=lC();
@@ -1708,11 +1811,8 @@ function getAccount(){
 // ── Routing ────────────────────────────────────────────────────────────────────
 function showView(v){
   document.querySelectorAll('.view').forEach(e=>e.classList.remove('active'));
-  document.querySelectorAll('.nav-tab').forEach(e=>e.classList.remove('active'));
+  document.querySelectorAll('.nav-tab').forEach(e=>e.classList.toggle('active',e.dataset.view===v));
   document.getElementById('view-'+v).classList.add('active');
-  ['dash','products','geo','creatives','audience','insights','rec','advisor'].forEach((x,i)=>{
-    if(x===v)document.querySelectorAll('.nav-tab')[i].classList.add('active');
-  });
   if(v==='dash')refreshDash();
   if(v==='products')renderProducts();
   if(v==='geo'){renderGeo();renderGeoCharts([...GEO_DATA[window.geoPeriod||'last30'].states].sort((a,b)=>b.spend-a.spend));}
@@ -1720,6 +1820,7 @@ function showView(v){
   if(v==='audience')renderAudience();
   if(v==='insights')renderInsights();
   if(v==='rec')renderRecs();
+  if(v==='automation')renderAutomation();
 }
 
 function setPeriod(p){
@@ -2326,6 +2427,7 @@ document.getElementById('adv-area').addEventListener('keydown',function(e){
 });
 
 function init(){
+  checkAuth();
   if(!cfg.anthropicKey&&!cfg.geminiKey){sC(Object.assign({},cfg,{anthropicKey:GEMINI_KEY,geminiKey:GEMINI_KEY}));}
   document.getElementById('tdate').textContent=new Date().toLocaleDateString('en-IN',{day:'numeric',month:'short',year:'numeric'});
   sM('daily');rAdvTabs();refreshDash();
@@ -2720,6 +2822,59 @@ function renderCompTab() {
         + "<div class='rec-impact'>&#x2191; " + r.impact + "</div></div>";
     }).join("");
   }
+}
+
+// ── Automation (Management) tab ─────────────────────────────────────────────
+let AUTO_QUEUE=null;
+function renderAutomation(){
+  fetch('automation/queue.json?_=' + Date.now())
+    .then(r=>r.json())
+    .then(q=>{ AUTO_QUEUE=q; paintAutomation(q); })
+    .catch(err=>{
+      document.getElementById('auto-proposals').innerHTML='<div class="auto-empty">Couldn\'t load automation/queue.json (' + err.message + ')</div>';
+      document.getElementById('auto-alerts').innerHTML='';
+      document.getElementById('auto-log').innerHTML='<tr><td colspan="4" class="auto-empty">—</td></tr>';
+    });
+}
+function severityColor(s){return s==='high'?'var(--red)':s==='medium'?'var(--orange)':'var(--blue)';}
+function paintAutomation(q){
+  document.getElementById('auto-generated').textContent = q.generatedAt ? 'Last run: ' + new Date(q.generatedAt).toLocaleString('en-IN',{day:'numeric',month:'short',hour:'2-digit',minute:'2-digit'}) : '';
+
+  const pending = (q.proposals||[]).filter(p=>p.status==='pending');
+  document.getElementById('auto-proposal-count').textContent = pending.length;
+  const pEl = document.getElementById('auto-proposals');
+  pEl.innerHTML = pending.length ? pending.map(p=>
+    '<div class="proposal-card">'
+    + '<div class="proposal-head"><div class="proposal-id">' + p.id + ' &middot; ' + (p.module||'') + '</div></div>'
+    + '<div class="rec-title" style="margin-bottom:6px">' + p.title + '</div>'
+    + '<div class="rec-why">' + p.reasoning + '</div>'
+    + '<div class="proposal-action">' + p.actionSummary + '</div>'
+    + '<div class="proposal-meta">tell Claude: "approve ' + p.id + '" &middot; created ' + new Date(p.createdAt).toLocaleDateString('en-IN',{day:'numeric',month:'short'}) + '</div>'
+    + '</div>'
+  ).join('') : '<div class="auto-empty">No pending proposals right now.</div>';
+
+  const alerts = (q.alerts||[]).filter(a=>!a.dismissed);
+  const aEl = document.getElementById('auto-alerts');
+  aEl.innerHTML = alerts.length ? alerts.map(a=>
+    '<div class="alert-card alert-' + (a.severity==='high'?'warn':a.severity==='low'?'info':'warn') + '">'
+    + '<div class="alert-icon">' + (a.severity==='high'?'&#x26A0;':'&#x2139;') + '</div>'
+    + '<div><div class="alert-title">' + a.title + '</div><div class="alert-body">' + a.detail + '</div></div>'
+    + '</div>'
+  ).join('') : '<div class="auto-empty">No active alerts.</div>';
+
+  const log = q.log||[];
+  const lEl = document.getElementById('auto-log');
+  lEl.innerHTML = log.length ? log.slice().reverse().map(l=>
+    '<tr><td style="white-space:nowrap">' + new Date(l.executedAt).toLocaleString('en-IN',{day:'numeric',month:'short',hour:'2-digit',minute:'2-digit'}) + '</td>'
+    + '<td>' + l.proposalId + '</td><td>' + l.action + '</td>'
+    + '<td style="color:' + (l.result==='success'?'var(--green)':'var(--red)') + ';font-weight:600">' + l.result + '</td></tr>'
+  ).join('') : '<tr><td colspan="4" class="auto-empty">No actions executed yet.</td></tr>';
+
+  const sEl = document.getElementById('auto-settings');
+  const s = q.settings||{};
+  sEl.innerHTML = Object.keys(s).length ? Object.entries(s).map(([k,v])=>
+    '<div class="insight-row"><div class="insight-label">' + k + '</div><div class="insight-val">' + v + '</div></div>'
+  ).join('') : '<div class="auto-empty">No settings configured yet.</div>';
 }
 
 // Data is now baked directly into DATA object above — no external dependencies

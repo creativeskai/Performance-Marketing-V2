@@ -1,0 +1,74 @@
+{
+  "generatedAt": "2026-08-27T00:00:00.000Z",
+  "settings": {
+    "kill_roas_threshold": "pause if ROAS < 1.0x after ₹500 spend on a sales-objective campaign",
+    "reactivate_min_historic_roas": "surface for reactivation if a paused campaign's last active-period ROAS >= 3.0x",
+    "retarget_window_days": 14,
+    "fatigue_frequency_threshold": 3.0,
+    "budget_reallocation_min_roas_gap": "shift budget when one active campaign's ROAS is 1.5x+ another's",
+    "monthly_spend_goal_inr": null,
+    "note": "Defaults seeded manually this session. Tell Claude to change any of these and it will update this file."
+  },
+  "proposals": [
+    {
+      "id": "A-001",
+      "module": "reactivate-winner",
+      "title": "Reactivate Kage_Sales",
+      "reasoning": "Kage_Sales is currently paused but was the best-volume winner in the account: 4.30x ROAS on ₹6,195 spend and 10 purchases over its last active 30-day window — well above every other campaign, active or paused, and above the 3.0x reactivation threshold.",
+      "actionSummary": "Reactivate campaign 'Kage_Sales' (id 120255012429830159) with a conservative starting daily budget (≈₹200–300/day, versus its historical pace) and monitor for 3 days before scaling further.",
+      "metaAction": { "tool": "ads_activate_entity", "params": { "entity_id": "120255012429830159", "entity_type": "campaign" }, "followUp": { "tool": "ads_update_entity", "params": { "entity_id": "120255012429830159", "field": "daily_budget", "note": "set an explicit conservative daily budget before or immediately after activation" } } },
+      "status": "pending",
+      "createdAt": "2026-08-27T00:00:00.000Z"
+    },
+    {
+      "id": "A-002",
+      "module": "retargeting",
+      "title": "Launch a retargeting campaign against 30d add-to-cart non-purchasers",
+      "reasoning": "Account-level 30d data: 83 add-to-cart events vs 15 purchases — roughly 68 people added to cart in the last 30 days without completing a purchase. No retargeting campaign currently exists against this group.",
+      "actionSummary": "Create a custom audience of site visitors who added to cart or initiated checkout in the last 14 days without purchasing (pixel-based), then launch a small retargeting campaign using the Kage_Sales creative (highest historical ROAS in the account, 4.30x).",
+      "metaAction": { "tool": "ads_create_custom_audience", "params": { "name": "ATC/Checkout - No Purchase 14d", "subtype": "WEBSITE", "retention_days": 14, "rule_note": "add_to_cart OR initiate_checkout events, excluding purchase event" }, "followUp": { "tool": "ads_create_campaign", "params": { "objective": "OUTCOME_SALES", "note": "pair with ads_create_ad_set targeting the new custom audience and ads_create_ad reusing the Kage_Sales creative" } } },
+      "status": "pending",
+      "createdAt": "2026-08-27T00:00:00.000Z"
+    },
+    {
+      "id": "A-003",
+      "module": "catalog-dpa",
+      "title": "Launch a Dynamic Product Ads (DPA) campaign from the connected Shopify catalog",
+      "reasoning": "A Shopify product catalog is already connected to this ad account (catalog_id 1149969713295773), but zero DPA/catalog-based campaigns are currently running. Gully Labs (main competitor) runs DCO/catalog ads as ~25% of their active mix; KAI runs none. This is a structural gap, not a performance one — there's no dynamic retargeting or catalog sales campaign to even measure yet.",
+      "actionSummary": "Check catalog health (ads_catalog_get_diagnostics), create a product set for best-sellers, and launch a catalog sales (DPA) campaign targeting site visitors/past purchasers.",
+      "metaAction": { "tool": "ads_catalog_create_product_set", "params": { "catalog_id": "1149969713295773", "note": "start with a best-sellers product set before a full-catalog campaign" }, "followUp": { "tool": "ads_create_ad", "params": { "note": "catalog-based dynamic ad against the new product set" } } },
+      "status": "pending",
+      "createdAt": "2026-08-27T00:00:00.000Z"
+    }
+  ],
+  "alerts": [
+    {
+      "id": "AL-001",
+      "module": "spend-pacing",
+      "title": "No monthly spend goal configured",
+      "detail": "Spend-pacing alerts are off until a monthly_spend_goal_inr is set in Settings below. Tell Claude your target monthly budget to turn this on.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-08-27T00:00:00.000Z"
+    },
+    {
+      "id": "AL-002",
+      "module": "underperformer-watch",
+      "title": "Kage_TOF: ₹1,312 spent (30d), 0 purchases",
+      "detail": "Traffic-objective campaign, not sales-optimized, so 0 purchases is expected — not a kill signal on its own. Flagging so it stays on your radar if it doesn't start feeding a retargeting/conversion campaign soon.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-08-27T00:00:00.000Z"
+    },
+    {
+      "id": "AL-003",
+      "module": "campaign-consolidation",
+      "title": "126 total campaigns on the account, 2 active",
+      "detail": "The account has a long tail of old paused/dead campaigns (Black Friday, Diwali, and other one-off pushes going back over a year). Not urgent, but worth an archive/cleanup pass — a fragmented account history makes some of Meta's own learning-phase and benchmark signals less reliable.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-08-27T00:00:00.000Z"
+    }
+  ],
+  "log": []
+}
