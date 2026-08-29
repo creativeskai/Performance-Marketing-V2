@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-29T18:49:54.000Z",
+  "generatedAt": "2026-08-29T20:46:11.000Z",
   "settings": {
     "kill_roas_threshold": "pause if ROAS < 1.0x after ₹500 spend on a sales-objective campaign",
     "reactivate_min_historic_roas": "surface for reactivation if a paused campaign's last active-period ROAS >= 3.0x",
@@ -16,10 +16,10 @@
       "Kage_TOF": { "cpm": 14.36, "ctr": 1.92, "as_of": "2026-08-29" }
     },
     "competitor_last_scrape": {
-      "gully_labs_active_ads": 114,
-      "lotto_sport_india_active_ads": 112,
-      "scraped_at": "2026-08-29T18:49:54.000Z",
-      "note": "Both page-matched this run (Gully Labs page_id 107479854297817, estimated_total_count 114, down from 116, -1.7%; Lotto Sport India page_id 426015150606378, estimated_total_count 112, up from 105, +6.7%). Both moves are well below the 20% spike threshold, so no new competitor-spike alert."
+      "gully_labs_active_ads": 126,
+      "lotto_sport_india_active_ads": 148,
+      "scraped_at": "2026-08-29T20:46:11.000Z",
+      "note": "Both page-matched this run (Gully Labs page_id 107479854297817, estimated_total_count 126, up from 114, +10.5% - below the 20% spike threshold; Lotto Sport India page_id 426015150606378, estimated_total_count 148, up from 112, +32.1% - crosses the 20% spike threshold, see AL-011)."
     },
     "note": "hard_spend_ceiling_inr is a placeholder — set to roughly 3x trailing-30-day avg daily spend (~₹663/day as of 29 Aug 2026). All fields here are editable directly in the Automation tab (Save button) or by telling Claude."
   },
@@ -272,6 +272,24 @@
       "severity": "medium",
       "dismissed": false,
       "createdAt": "2026-08-29T23:55:00.000Z"
+    },
+    {
+      "id": "AL-011",
+      "module": "competitor-spike",
+      "title": "Lotto Sport India active-ad count spiked 32.1% since last scrape",
+      "detail": "Page-matched Ad Library recheck (page_id 426015150606378, 'Lotto Sport India' confirmed as the matched page name): estimated_total_count is now 148 active ads, up from the last recorded 112 (+32.1%) — the first move to cross the module's 20% competitor-spike threshold across this account's several rescrapes today (prior moves were -1.7%, +6.7%, +1.9%, -11.2%, all below threshold). Gully Labs (page_id 107479854297817) also moved up this pass, 114 to 126 (+10.5%), still below threshold. Informational only — no proposal generated, this module never mutates the account. Worth a manual look at what Lotto Sport India is pushing (new collection launch, sale event, etc.) given the scale of the jump.",
+      "severity": "medium",
+      "dismissed": false,
+      "createdAt": "2026-08-29T20:46:11.000Z"
+    },
+    {
+      "id": "AL-012",
+      "module": "routine-run-notes",
+      "title": "Fifth pass today: steady state confirmed, one new competitor-spike alert",
+      "detail": "Fifth pass (2026-08-29, real-clock ~20:46 UTC): circuit breaker not tripped (today's spend ₹6.52 vs ₹2,000 ceiling); pixel quality gate re-passed (composite EMQ 4.4-9.3, core match keys — ip_address/user_agent/fbp — at 100%), so ROAS-driven modules were not suppressed. All 7 pending proposals (A-001 through A-007) re-verified against fresh Meta Ads MCP pulls and still stand, numbers essentially unchanged (sub-1% drift or identical): Kage_sales_1908 30d ROAS 1.827x on ₹6,169.40 spend; Kage_Sales (paused) 4.297x on ₹6,195.22; live targeting re-confirmed no excluded_custom_audiences and whatsapp still in publisher_platforms on Kage_sales_1908's ad set (whatsapp placement ₹290.17 spend, 0 purchases, CPM ₹1,368.73); age/gender re-pull confirms 18-24 male still the weak cell (₹808.29, 0 purchases) while 25-34 male (2.10x) and 35-44 male (3.82x) remain healthy; 'Purchasers 30D' (120249907176770159) confirmed still ACTIVE; purchase-pixel lookalike (120250736441810159) confirmed still the only one of its kind, ~94 days old. A-002's pixel event numbers: 51 AddToCart vs 12 Purchase over the trailing 7 days — consistent with the prior 54/12 reading. Catalog diagnostics and Opportunity Score (81, same top two recommendations) unchanged. No anomaly signal data available. Competitor rescrape produced a real, above-threshold move this pass — see AL-011 (Lotto Sport India +32.1%) — settings.competitor_last_scrape updated for both pages. Coverage gaps unchanged (learning-phase-stuck field still unavailable; Phase 3 modules still blocked on no Higgsfield MCP connection this session). Read-only safety mode remains in effect; A-004 and A-007 (tier:auto) remain unexecuted pending human approval.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-08-29T20:46:11.000Z"
     }
   ],
   "log": []
