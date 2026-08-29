@@ -1004,29 +1004,45 @@ body.locked #shell{display:none}
           <strong>Auto-tier</strong> modules execute on their own during each scheduled run (rate-limited, logged, reversible) — no approval needed, they just show up in Recent activity. <strong>Approval-tier</strong> proposals below need a decision — click Approve or Reject, or tell Claude "approve/reject &lt;id&gt;" in chat. Either path executes the same way and logs here.
         </div>
 
-        <div class="sec" style="display:flex;align-items:center;justify-content:space-between">
-          <span>Pending proposals (<span id="auto-proposal-count">0</span>)</span>
-          <button type="button" onclick="toggleNewCampaignBuilder()" id="new-campaign-toggle-btn" style="background:var(--text);color:#fff;border:none;border-radius:8px;padding:6px 14px;font-size:.74rem;font-weight:600;cursor:pointer;text-transform:none;letter-spacing:0">+ New campaign</button>
+        <div style="display:flex;gap:6px;margin:4px 0 1.25rem;overflow-x:auto;padding-bottom:2px" id="automation-toplevel-tabs">
+          <button type="button" data-atab="proposals" onclick="switchAutomationTab('proposals')" style="font-family:var(--mono);font-size:.74rem;padding:7px 16px;border-radius:20px;border:1.5px solid var(--text);background:var(--text);color:#fff;cursor:pointer;white-space:nowrap">Proposals (<span id="auto-proposal-count">0</span>)</button>
+          <button type="button" data-atab="alerts" onclick="switchAutomationTab('alerts')" style="font-family:var(--mono);font-size:.74rem;padding:7px 16px;border-radius:20px;border:1.5px solid var(--border);background:#fff;color:var(--text3);cursor:pointer;white-space:nowrap">Alerts</button>
+          <button type="button" data-atab="activity" onclick="switchAutomationTab('activity')" style="font-family:var(--mono);font-size:.74rem;padding:7px 16px;border-radius:20px;border:1.5px solid var(--border);background:#fff;color:var(--text3);cursor:pointer;white-space:nowrap">Activity</button>
+          <button type="button" data-atab="settings" onclick="switchAutomationTab('settings')" style="font-family:var(--mono);font-size:.74rem;padding:7px 16px;border-radius:20px;border:1.5px solid var(--border);background:#fff;color:var(--text3);cursor:pointer;white-space:nowrap">Settings</button>
         </div>
-        <div id="new-campaign-builder" style="display:none;margin-bottom:1.25rem"></div>
-        <div id="auto-proposals"><div class="auto-empty">Loading&#x2026;</div></div>
 
-        <div class="sec">Alerts</div>
-        <div id="auto-alerts"><div class="auto-empty">Loading&#x2026;</div></div>
+        <div id="automation-panel-proposals">
+          <div class="sec" style="display:flex;align-items:center;justify-content:space-between">
+            <span>Pending proposals</span>
+            <button type="button" onclick="toggleNewCampaignBuilder()" id="new-campaign-toggle-btn" style="background:var(--text);color:#fff;border:none;border-radius:8px;padding:6px 14px;font-size:.74rem;font-weight:600;cursor:pointer;text-transform:none;letter-spacing:0">+ New campaign</button>
+          </div>
+          <div id="new-campaign-builder" style="display:none;margin-bottom:1.25rem"></div>
+          <div id="auto-proposal-tabs" style="display:flex;gap:6px;margin-bottom:12px;overflow-x:auto;padding-bottom:2px"></div>
+          <div id="auto-proposals"><div class="auto-empty">Loading&#x2026;</div></div>
+        </div>
 
-        <div class="sec">Recent activity</div>
-        <table class="ctbl" id="auto-log-tbl" style="background:#fff;border:1px solid var(--border);border-radius:10px;overflow:hidden">
-          <thead><tr><th>When</th><th>Proposal</th><th>Action</th><th>Result</th></tr></thead>
-          <tbody id="auto-log"><tr><td colspan="4" class="auto-empty">Loading&#x2026;</td></tr></tbody>
-        </table>
+        <div id="automation-panel-alerts" style="display:none">
+          <div class="sec">Alerts</div>
+          <div id="auto-alerts"><div class="auto-empty">Loading&#x2026;</div></div>
+        </div>
 
-        <div class="sec">Settings</div>
-        <div class="cbox">
-          <div class="ctitle">Thresholds this run used &mdash; editable</div>
-          <div id="auto-settings"></div>
-          <div style="margin-top:10px;display:flex;align-items:center;gap:10px">
-            <button type="button" onclick="saveAutoSettings()" style="background:var(--text);color:#fff;border:none;border-radius:8px;padding:8px 16px;font-size:.8rem;font-weight:600;cursor:pointer">Save settings</button>
-            <span id="auto-settings-status" style="font-size:.76rem;color:var(--text3)"></span>
+        <div id="automation-panel-activity" style="display:none">
+          <div class="sec">Recent activity</div>
+          <table class="ctbl" id="auto-log-tbl" style="background:#fff;border:1px solid var(--border);border-radius:10px;overflow:hidden">
+            <thead><tr><th>When</th><th>Proposal</th><th>Action</th><th>Result</th></tr></thead>
+            <tbody id="auto-log"><tr><td colspan="4" class="auto-empty">Loading&#x2026;</td></tr></tbody>
+          </table>
+        </div>
+
+        <div id="automation-panel-settings" style="display:none">
+          <div class="sec">Settings</div>
+          <div class="cbox">
+            <div class="ctitle">Thresholds this run used &mdash; editable</div>
+            <div id="auto-settings"></div>
+            <div style="margin-top:10px;display:flex;align-items:center;gap:10px">
+              <button type="button" onclick="saveAutoSettings()" style="background:var(--text);color:#fff;border:none;border-radius:8px;padding:8px 16px;font-size:.8rem;font-weight:600;cursor:pointer">Save settings</button>
+              <span id="auto-settings-status" style="font-size:.76rem;color:var(--text3)"></span>
+            </div>
           </div>
         </div>
       </div>
@@ -2621,6 +2637,30 @@ const AUTOMATION_KEY='30c48dcb08d9473380ca24b1e69c4f5afd5cdd7331c4413b';
 let AUTO_QUEUE=null;
 let AUTO_LOOKUPS=null; // {custom_audiences, creatives, regions, images, videos} — real, pickable options for the parameter editor
 let AUTO_LOOKUPS_FAILED=[]; // which of the above came back as an error (token/permission issue), not just empty
+let SELECTED_PROPOSAL_ID=null; // which proposal tab is currently shown
+function selectProposalTab(id){ SELECTED_PROPOSAL_ID=id; paintAutomation(AUTO_QUEUE); }
+function switchAutomationTab(name){
+  ['proposals','alerts','activity','settings'].forEach(n=>{
+    document.getElementById('automation-panel-'+n).style.display = (n===name) ? '' : 'none';
+    const btn = document.querySelector('[data-atab="'+n+'"]');
+    if(btn) btn.setAttribute('style', 'font-family:var(--mono);font-size:.74rem;padding:7px 16px;border-radius:20px;border:1.5px solid '+(n===name?'var(--text)':'var(--border)')+';background:'+(n===name?'var(--text)':'#fff')+';color:'+(n===name?'#fff':'var(--text3)')+';cursor:pointer;white-space:nowrap');
+  });
+}
+function proposalCardHtml(p){
+  return '<div class="proposal-card" id="proposal-' + p.id + '">'
+    + '<div class="proposal-head"><div class="proposal-id">' + p.id + ' &middot; ' + (p.module||'') + tierBadge(p.tier) + '</div></div>'
+    + '<div class="rec-title" style="margin-bottom:6px">' + p.title + '</div>'
+    + '<div class="rec-why">' + p.reasoning + '</div>'
+    + '<div class="proposal-action">' + p.actionSummary + '</div>'
+    + paramEditorHtml(p)
+    + '<div style="display:flex;align-items:center;gap:8px;margin-top:10px">'
+    + '<button type="button" onclick="approveProposal(\'' + p.id + '\')" style="background:var(--green);color:#fff;border:none;border-radius:8px;padding:7px 14px;font-size:.78rem;font-weight:600;cursor:pointer">Approve</button>'
+    + '<button type="button" onclick="rejectProposal(\'' + p.id + '\')" style="background:#fff;color:var(--text2);border:1px solid var(--border);border-radius:8px;padding:7px 14px;font-size:.78rem;font-weight:600;cursor:pointer">Reject</button>'
+    + '<span id="proposal-status-' + p.id + '" style="font-size:.76rem;color:var(--text3)"></span>'
+    + '</div>'
+    + '<div class="proposal-meta" style="margin-top:6px">created ' + new Date(p.createdAt).toLocaleDateString('en-IN',{day:'numeric',month:'short'}) + '</div>'
+    + '</div>';
+}
 function renderAutomation(){
   fetch('automation/queue.json?_=' + Date.now())
     .then(r=>r.json())
@@ -3277,22 +3317,17 @@ function paintAutomation(q){
   // activity, so this list is approval-only by construction.
   const pending = (q.proposals||[]).filter(p=>p.status==='pending');
   document.getElementById('auto-proposal-count').textContent = pending.length;
+  // Each pending proposal gets its own horizontal tab instead of every card
+  // stacking vertically — pick the previously-selected one if it's still
+  // pending, otherwise default to the first.
+  if(!pending.some(p=>p.id===SELECTED_PROPOSAL_ID)) SELECTED_PROPOSAL_ID = pending.length ? pending[0].id : null;
+  const tabsEl = document.getElementById('auto-proposal-tabs');
+  tabsEl.innerHTML = pending.map(p=>
+    '<button type="button" onclick="selectProposalTab(\'' + p.id + '\')" style="' + chainTabStyle(p.id===SELECTED_PROPOSAL_ID) + '">' + p.id + '</button>'
+  ).join('');
   const pEl = document.getElementById('auto-proposals');
-  pEl.innerHTML = pending.length ? pending.map(p=>
-    '<div class="proposal-card" id="proposal-' + p.id + '">'
-    + '<div class="proposal-head"><div class="proposal-id">' + p.id + ' &middot; ' + (p.module||'') + tierBadge(p.tier) + '</div></div>'
-    + '<div class="rec-title" style="margin-bottom:6px">' + p.title + '</div>'
-    + '<div class="rec-why">' + p.reasoning + '</div>'
-    + '<div class="proposal-action">' + p.actionSummary + '</div>'
-    + paramEditorHtml(p)
-    + '<div style="display:flex;align-items:center;gap:8px;margin-top:10px">'
-    + '<button type="button" onclick="approveProposal(\'' + p.id + '\')" style="background:var(--green);color:#fff;border:none;border-radius:8px;padding:7px 14px;font-size:.78rem;font-weight:600;cursor:pointer">Approve</button>'
-    + '<button type="button" onclick="rejectProposal(\'' + p.id + '\')" style="background:#fff;color:var(--text2);border:1px solid var(--border);border-radius:8px;padding:7px 14px;font-size:.78rem;font-weight:600;cursor:pointer">Reject</button>'
-    + '<span id="proposal-status-' + p.id + '" style="font-size:.76rem;color:var(--text3)"></span>'
-    + '</div>'
-    + '<div class="proposal-meta" style="margin-top:6px">created ' + new Date(p.createdAt).toLocaleDateString('en-IN',{day:'numeric',month:'short'}) + '</div>'
-    + '</div>'
-  ).join('') : '<div class="auto-empty">No pending proposals right now.</div>';
+  const selP = pending.find(p=>p.id===SELECTED_PROPOSAL_ID);
+  pEl.innerHTML = selP ? proposalCardHtml(selP) : '<div class="auto-empty">No pending proposals right now.</div>';
 
   const alerts = (q.alerts||[]).filter(a=>!a.dismissed);
   const aEl = document.getElementById('auto-alerts');
