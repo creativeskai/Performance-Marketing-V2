@@ -152,16 +152,18 @@ export default async function handler(req, res) {
       // every currently-delivering campaign: campaign -> ad sets -> ads,
       // full targeting spec included. Read-only inspection, not a proxy for
       // the automation proposal/editor flow.
+      // Fetch unfiltered (matches the proven-working 'campaigns' endpoint
+      // above) and filter to ACTIVE client-side — the `filtering` query
+      // param on this edge trips a permission check this token doesn't
+      // clear, even though plain field reads work fine.
       const campFields = 'id,name,objective,status,effective_status,buying_type,' +
         'daily_budget,lifetime_budget,special_ad_categories,created_time,start_time,stop_time';
-      const campFilter = JSON.stringify([{ field: 'effective_status', operator: 'IN', value: ['ACTIVE'] }]);
       const campUrl = `https://graph.facebook.com/v19.0/${AD_ACCOUNT}/campaigns` +
-        `?fields=${campFields}&filtering=${encodeURIComponent(campFilter)}` +
-        `&limit=50&access_token=${token}`;
+        `?fields=${campFields}&limit=500&access_token=${token}`;
       const campResp = await fetch(campUrl);
       const campJson = await campResp.json();
       if (campJson.error) throw new Error(`Campaign list failed: ${campJson.error.message}`);
-      const campaigns = campJson.data || [];
+      const campaigns = (campJson.data || []).filter(c => c.effective_status === 'ACTIVE');
 
       const adsetFields = 'id,name,status,effective_status,daily_budget,lifetime_budget,' +
         'optimization_goal,billing_event,bid_strategy,bid_amount,promoted_object,targeting,' +
