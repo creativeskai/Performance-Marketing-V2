@@ -7,17 +7,23 @@
     "fatigue_frequency_threshold": 3.0,
     "budget_reallocation_min_roas_gap": "shift budget when one active campaign's ROAS is 1.5x+ another's",
     "monthly_spend_goal_inr": null,
+    "hard_spend_ceiling_inr": 2000,
+    "max_auto_actions_per_entity_per_day": 1,
+    "lookalike_refresh_days": 14,
+    "pixel_quality_min_match_rate": 0.6,
     "competitor_last_scrape": {
       "gully_labs_active_ads": 116,
       "lotto_sport_india_active_ads": 117,
       "scraped_at": "2026-08-29T01:39:20.000Z"
     },
-    "note": "Defaults seeded manually this session. Tell Claude to change any of these and it will update this file."
+    "note": "hard_spend_ceiling_inr is a placeholder — set to roughly 3x trailing-30-day avg daily spend (~₹663/day as of 29 Aug 2026). All fields here are editable directly in the Automation tab (Save button) or by telling Claude."
   },
+  "circuitBreaker": { "tripped": false, "trippedAt": null, "reason": null },
   "proposals": [
     {
       "id": "A-001",
       "module": "reactivate-winner",
+      "tier": "approval",
       "title": "Reactivate Kage_Sales",
       "reasoning": "Kage_Sales is currently paused but was the best-volume winner in the account: 4.30x ROAS on ₹6,195 spend and 10 purchases over its last active 30-day window — well above every other campaign, active or paused, and above the 3.0x reactivation threshold.",
       "actionSummary": "Reactivate campaign 'Kage_Sales' (id 120255012429830159) with a conservative starting daily budget (≈₹200–300/day, versus its historical pace) and monitor for 3 days before scaling further.",
@@ -27,7 +33,8 @@
     },
     {
       "id": "A-002",
-      "module": "retargeting",
+      "module": "high-intent-retargeting",
+      "tier": "approval",
       "title": "Launch a retargeting campaign against 30d add-to-cart non-purchasers",
       "reasoning": "Account-level 30d data: 83 add-to-cart events vs 15 purchases — roughly 68 people added to cart in the last 30 days without completing a purchase. Refreshed pixel-level check on 2026-08-29 (trailing 7d window) shows the same pattern continuing: ~50 AddToCart events vs 11 Purchases. No retargeting campaign currently exists against this group.",
       "actionSummary": "Create a custom audience of site visitors who added to cart or initiated checkout in the last 14 days without purchasing (pixel-based), then launch a small retargeting campaign using the Kage_Sales creative (highest historical ROAS in the account, 4.30x).",
@@ -37,7 +44,8 @@
     },
     {
       "id": "A-003",
-      "module": "catalog-dpa",
+      "module": "catalog-dpa-launch",
+      "tier": "approval",
       "title": "Launch a Dynamic Product Ads (DPA) campaign from the connected Shopify catalog",
       "reasoning": "A Shopify product catalog is already connected to this ad account (catalog_id 1149969713295773), but zero DPA/catalog-based campaigns are currently running. Gully Labs (main competitor) runs DCO/catalog ads as part of their active mix; KAI runs none. This is a structural gap, not a performance one. Meta's own Opportunity Score tool (account score 85/100 as of 2026-08-29, down from 88) still flags Advantage+ catalog ads as a top recommendation (+4 points, 'lower cost per action'). Catalog health check re-run on 2026-08-29 found the same 3 diagnostic issues, one improved: 18 items still marked out-of-stock (must_fix — these won't appear in dynamic ads, unchanged), 24 items with fewer than 2 images (opportunity, unchanged), and only 1 unmatched content ID between the catalog and pixel now (opportunity, down from 4).",
       "actionSummary": "Fix the 18 out-of-stock catalog items first (update availability), check catalog health (ads_catalog_get_diagnostics), create a product set for best-sellers, and launch a catalog sales (DPA) campaign targeting site visitors/past purchasers.",
@@ -47,7 +55,8 @@
     },
     {
       "id": "A-004",
-      "module": "auto-exclusion",
+      "module": "purchaser-exclusion",
+      "tier": "auto",
       "title": "Exclude existing purchasers from Kage_sales_1908 prospecting targeting",
       "reasoning": "Kage_sales_1908 is the account's only active sales-objective prospecting campaign (₹5,089.63 spent in the last 30 days, ROAS 1.57x — down from 1.84x on 2026-08-28's smaller spend base). Its ad set (id 120255351569140159) targets broad interest/behavior segments (Footwear, Sneakers, Street fashion, Frequent Travelers, Engaged Shoppers) with Advantage+ audience expansion on, but the targeting spec still has no excluded_custom_audiences entry — re-checked directly against the live targeting spec on 2026-08-29. A re-check of the account's custom audiences on 2026-08-29 found an existing 'Purchasers 30D' audience (id 120249907176770159, subtype PLATFORM/website pixel-based, delivery_status ACTIVE) that was not previously known — no need to create a new audience, it can be applied directly. Some fraction of prospecting spend is likely re-reaching people who already bought, which understates true new-customer efficiency.",
       "actionSummary": "Add the existing 'Purchasers 30D' custom audience (id 120249907176770159) as an excluded audience on Kage_sales_1908's ad set targeting, leaving all other targeting unchanged. No new audience needs to be created.",

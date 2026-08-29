@@ -991,8 +991,13 @@ body.locked #shell{display:none}
           </div>
           <span style="font-family:var(--mono);font-size:.68rem;color:var(--text3)" id="auto-generated"></span>
         </div>
+
+        <div id="cb-banner" style="display:none;background:#fde8e8;border:1px solid var(--red);border-radius:10px;padding:12px 16px;margin-bottom:1.25rem;font-size:.82rem;color:#7a1f1f;line-height:1.6">
+          <strong>&#x26A0; Hard spend circuit breaker tripped.</strong> <span id="cb-banner-detail"></span> Every active campaign was auto-paused. Review, then approve a "resume-after-circuit-breaker" proposal below to bring campaigns back.
+        </div>
+
         <div style="background:var(--blue-bg);border:1px solid #93bbde;border-radius:10px;padding:12px 16px;margin-bottom:1.25rem;font-size:.82rem;color:var(--text2);line-height:1.6">
-          Proposals below are generated on a schedule from live account data. Nothing here executes on its own — review a proposal, then tell Claude <strong>"approve &lt;id&gt;"</strong> (in this chat, or by replying to the automation's notification) and it will run via the Meta Ads MCP connection and log the result here.
+          <strong>Auto-tier</strong> modules execute on their own during each scheduled run (rate-limited, logged, reversible) — no approval needed, they just show up in Recent activity. <strong>Approval-tier</strong> proposals below need a decision — click Approve or Reject, or tell Claude "approve/reject &lt;id&gt;" in chat. Either path executes the same way and logs here.
         </div>
 
         <div class="sec">Pending proposals (<span id="auto-proposal-count">0</span>)</div>
@@ -1009,8 +1014,12 @@ body.locked #shell{display:none}
 
         <div class="sec">Settings</div>
         <div class="cbox">
-          <div class="ctitle">Thresholds this run used</div>
+          <div class="ctitle">Thresholds this run used &mdash; editable</div>
           <div id="auto-settings"></div>
+          <div style="margin-top:10px;display:flex;align-items:center;gap:10px">
+            <button type="button" onclick="saveAutoSettings()" style="background:var(--ink);color:#fff;border:none;border-radius:8px;padding:8px 16px;font-size:.8rem;font-weight:600;cursor:pointer">Save settings</button>
+            <span id="auto-settings-status" style="font-size:.76rem;color:var(--text3)"></span>
+          </div>
         </div>
       </div>
     </div>
@@ -2574,6 +2583,11 @@ function renderCompTab() {
 }
 
 // ── Automation (Management) tab ─────────────────────────────────────────────
+// AUTOMATION_KEY gates api/automation-action.js — same accepted client-side
+// security model as AUTH_USER/AUTH_PASS above (see PROJECT_NOTES.md #9): not
+// real protection against someone reading the public repo source, just stops
+// casual/automated abuse. Must match the AUTOMATION_API_KEY env var in Vercel.
+const AUTOMATION_KEY='30c48dcb08d9473380ca24b1e69c4f5afd5cdd7331c4413b';
 let AUTO_QUEUE=null;
 function renderAutomation(){
   fetch('automation/queue.json?_=' + Date.now())
@@ -2586,19 +2600,41 @@ function renderAutomation(){
     });
 }
 function severityColor(s){return s==='high'?'var(--red)':s==='medium'?'var(--orange)':'var(--blue)';}
+function tierBadge(tier){
+  const t=tier||'approval';
+  const bg=t==='auto'?'#e7f5ea':'#fff3e0', fg=t==='auto'?'var(--green)':'var(--orange)';
+  return '<span style="background:'+bg+';color:'+fg+';font-size:.66rem;font-weight:700;letter-spacing:.04em;text-transform:uppercase;padding:2px 8px;border-radius:20px;margin-left:8px">'+(t==='auto'?'Auto':'Approval')+'</span>';
+}
 function paintAutomation(q){
   document.getElementById('auto-generated').textContent = q.generatedAt ? 'Last run: ' + new Date(q.generatedAt).toLocaleString('en-IN',{day:'numeric',month:'short',hour:'2-digit',minute:'2-digit'}) : '';
 
+  const cb = q.circuitBreaker;
+  const cbEl = document.getElementById('cb-banner');
+  if(cb && cb.tripped){
+    cbEl.style.display='block';
+    document.getElementById('cb-banner-detail').textContent = (cb.reason||'') + (cb.trippedAt ? (' (tripped ' + new Date(cb.trippedAt).toLocaleString('en-IN',{day:'numeric',month:'short',hour:'2-digit',minute:'2-digit'}) + ')') : '');
+  } else {
+    cbEl.style.display='none';
+  }
+
+  // Approval-tier proposals awaiting a decision. Auto-tier items never sit
+  // pending — the routine executes them itself and they land in Recent
+  // activity, so this list is approval-only by construction.
   const pending = (q.proposals||[]).filter(p=>p.status==='pending');
   document.getElementById('auto-proposal-count').textContent = pending.length;
   const pEl = document.getElementById('auto-proposals');
   pEl.innerHTML = pending.length ? pending.map(p=>
-    '<div class="proposal-card">'
-    + '<div class="proposal-head"><div class="proposal-id">' + p.id + ' &middot; ' + (p.module||'') + '</div></div>'
+    '<div class="proposal-card" id="proposal-' + p.id + '">'
+    + '<div class="proposal-head"><div class="proposal-id">' + p.id + ' &middot; ' + (p.module||'') + tierBadge(p.tier) + '</div></div>'
     + '<div class="rec-title" style="margin-bottom:6px">' + p.title + '</div>'
     + '<div class="rec-why">' + p.reasoning + '</div>'
     + '<div class="proposal-action">' + p.actionSummary + '</div>'
-    + '<div class="proposal-meta">tell Claude: "approve ' + p.id + '" &middot; created ' + new Date(p.createdAt).toLocaleDateString('en-IN',{day:'numeric',month:'short'}) + '</div>'
+    + '<div style="display:flex;align-items:center;gap:8px;margin-top:10px">'
+    + '<button type="button" onclick="approveProposal(\'' + p.id + '\')" style="background:var(--green);color:#fff;border:none;border-radius:8px;padding:7px 14px;font-size:.78rem;font-weight:600;cursor:pointer">Approve</button>'
+    + '<button type="button" onclick="rejectProposal(\'' + p.id + '\')" style="background:#fff;color:var(--text2);border:1px solid var(--border);border-radius:8px;padding:7px 14px;font-size:.78rem;font-weight:600;cursor:pointer">Reject</button>'
+    + '<span id="proposal-status-' + p.id + '" style="font-size:.76rem;color:var(--text3)"></span>'
+    + '</div>'
+    + '<div class="proposal-meta" style="margin-top:6px">created ' + new Date(p.createdAt).toLocaleDateString('en-IN',{day:'numeric',month:'short'}) + '</div>'
     + '</div>'
   ).join('') : '<div class="auto-empty">No pending proposals right now.</div>';
 
@@ -2615,15 +2651,66 @@ function paintAutomation(q){
   const lEl = document.getElementById('auto-log');
   lEl.innerHTML = log.length ? log.slice().reverse().map(l=>
     '<tr><td style="white-space:nowrap">' + new Date(l.executedAt).toLocaleString('en-IN',{day:'numeric',month:'short',hour:'2-digit',minute:'2-digit'}) + '</td>'
-    + '<td>' + l.proposalId + '</td><td>' + l.action + '</td>'
-    + '<td style="color:' + (l.result==='success'?'var(--green)':'var(--red)') + ';font-weight:600">' + l.result + '</td></tr>'
+    + '<td>' + l.proposalId + tierBadge(l.tier) + '</td><td>' + l.action + '</td>'
+    + '<td style="color:' + (l.result==='success'?'var(--green)':l.result==='rejected'?'var(--text3)':'var(--red)') + ';font-weight:600">' + l.result + '</td></tr>'
   ).join('') : '<tr><td colspan="4" class="auto-empty">No actions executed yet.</td></tr>';
 
   const sEl = document.getElementById('auto-settings');
   const s = q.settings||{};
-  sEl.innerHTML = Object.keys(s).length ? Object.entries(s).map(([k,v])=>
-    '<div class="insight-row"><div class="insight-label">' + k + '</div><div class="insight-val">' + v + '</div></div>'
-  ).join('') : '<div class="auto-empty">No settings configured yet.</div>';
+  const keys = Object.keys(s).filter(k=>k!=='note' && typeof s[k]!=='object');
+  sEl.innerHTML = keys.length ? keys.map(k=>
+    '<div class="insight-row"><div class="insight-label">' + k + '</div><div class="insight-val">'
+    + '<input type="text" id="setting-' + k + '" value="' + (s[k]===null?'':String(s[k])) + '" style="border:1px solid var(--border);border-radius:6px;padding:4px 8px;font-size:.8rem;font-family:var(--mono);width:180px">'
+    + '</div></div>'
+  ).join('') + (s.note ? '<div class="auto-empty" style="margin-top:8px">' + s.note + '</div>' : '')
+    : '<div class="auto-empty">No settings configured yet.</div>';
+}
+
+function callAutomationAction(body, statusElId, onSuccess){
+  const statusEl = statusElId ? document.getElementById(statusElId) : null;
+  if(statusEl) statusEl.textContent = 'Working…';
+  return fetch('/api/automation-action', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', 'x-automation-key': AUTOMATION_KEY },
+    body: JSON.stringify(body)
+  })
+  .then(r=>r.json().then(j=>({ok:r.ok, body:j})))
+  .then(({ok, body})=>{
+    if(!ok || body.error){
+      if(statusEl) statusEl.textContent = 'Failed: ' + (body.error||'unknown error');
+      return;
+    }
+    AUTO_QUEUE = body.queue;
+    if(body.executionResult==='failed'){
+      if(statusEl) statusEl.textContent = 'Executed but Meta returned an error: ' + (body.executionError||'');
+    } else {
+      if(onSuccess) onSuccess();
+      paintAutomation(AUTO_QUEUE);
+    }
+  })
+  .catch(err=>{ if(statusEl) statusEl.textContent = 'Failed: ' + err.message; });
+}
+function approveProposal(id){
+  callAutomationAction({action:'approve', proposalId:id}, 'proposal-status-'+id);
+}
+function rejectProposal(id){
+  callAutomationAction({action:'reject', proposalId:id}, 'proposal-status-'+id);
+}
+function saveAutoSettings(){
+  const s = (AUTO_QUEUE && AUTO_QUEUE.settings) || {};
+  const keys = Object.keys(s).filter(k=>k!=='note' && typeof s[k]!=='object');
+  const updated = {};
+  keys.forEach(k=>{
+    const el = document.getElementById('setting-'+k);
+    if(!el) return;
+    const raw = el.value.trim();
+    if(raw===''){ updated[k]=null; return; }
+    const num = Number(raw);
+    updated[k] = (raw!=='' && !isNaN(num)) ? num : raw;
+  });
+  callAutomationAction({action:'update-settings', settings:updated}, 'auto-settings-status', ()=>{
+    document.getElementById('auto-settings-status').textContent = 'Saved.';
+  });
 }
 
 // Data is now baked directly into DATA object above — no external dependencies
