@@ -2589,6 +2589,7 @@ function renderCompTab() {
 // casual/automated abuse. Must match the AUTOMATION_API_KEY env var in Vercel.
 const AUTOMATION_KEY='30c48dcb08d9473380ca24b1e69c4f5afd5cdd7331c4413b';
 let AUTO_QUEUE=null;
+let AUTO_LOOKUPS=null; // {custom_audiences, creatives, regions} — real, pickable options for the parameter editor
 function renderAutomation(){
   fetch('automation/queue.json?_=' + Date.now())
     .then(r=>r.json())
@@ -2598,6 +2599,85 @@ function renderAutomation(){
       document.getElementById('auto-alerts').innerHTML='';
       document.getElementById('auto-log').innerHTML='<tr><td colspan="4" class="auto-empty">—</td></tr>';
     });
+  if(!AUTO_LOOKUPS){
+    fetch('/api/meta?endpoint=lookups').then(r=>r.json()).then(l=>{
+      AUTO_LOOKUPS = l;
+      if(AUTO_QUEUE) paintAutomation(AUTO_QUEUE); // re-paint so dropdowns populate once lookups land
+    }).catch(()=>{ AUTO_LOOKUPS = {custom_audiences:[],creatives:[],regions:[]}; });
+  }
+}
+// Field-name heuristics deciding which params get a real dropdown vs a plain input.
+const AUDIENCE_KEY_RE = /audience/i, CREATIVE_KEY_RE = /creative|image|video/i, GEO_KEY_RE = /region|geo|location/i;
+const SKIP_PARAM_KEYS = new Set(['note','rule_note','entity_type']);
+function paramFieldHtml(proposalId, group, key, value){
+  const inputId = 'param-' + group + '-' + proposalId + '-' + key;
+  const isObj = value !== null && typeof value === 'object';
+  if(!isObj && AUDIENCE_KEY_RE.test(key) && AUTO_LOOKUPS && AUTO_LOOKUPS.custom_audiences){
+    const opts = AUTO_LOOKUPS.custom_audiences.map(a=>
+      '<option value="' + a.id + '"' + (String(value)===String(a.id)?' selected':'') + '>' + (a.name||a.id) + (a.approximate_count_lower_bound?' (~'+a.approximate_count_lower_bound+')':'') + '</option>'
+    ).join('');
+    return fieldRow(key, '<select id="' + inputId + '" style="' + selStyle() + '"><option value="">— choose an audience —</option>' + opts + '</select>');
+  }
+  if(!isObj && CREATIVE_KEY_RE.test(key) && AUTO_LOOKUPS && AUTO_LOOKUPS.creatives){
+    const opts = AUTO_LOOKUPS.creatives.map(c=>
+      '<option value="' + c.id + '"' + (String(value)===String(c.id)?' selected':'') + '>' + (c.name||c.id) + '</option>'
+    ).join('');
+    return fieldRow(key, '<select id="' + inputId + '" style="' + selStyle() + '"><option value="">— choose a creative —</option>' + opts + '</select>');
+  }
+  if(!isObj && GEO_KEY_RE.test(key) && AUTO_LOOKUPS && AUTO_LOOKUPS.regions){
+    const opts = AUTO_LOOKUPS.regions.map(g=>
+      '<option value="' + (g.key||g.region_id||g.name) + '"' + (String(value)===String(g.key)?' selected':'') + '>' + g.name + '</option>'
+    ).join('');
+    return fieldRow(key, '<select id="' + inputId + '" multiple size="4" style="' + selStyle() + '">' + opts + '</select>');
+  }
+  if(isObj){
+    return fieldRow(key, '<textarea id="' + inputId + '" rows="3" style="' + selStyle() + ';font-family:var(--mono);font-size:.72rem">' + JSON.stringify(value, null, 2) + '</textarea>');
+  }
+  const type = typeof value === 'number' ? 'number' : 'text';
+  return fieldRow(key, '<input type="' + type + '" id="' + inputId + '" value="' + (value===undefined||value===null?'':String(value)) + '" style="' + selStyle() + '">');
+}
+function selStyle(){ return 'border:1px solid var(--border);border-radius:6px;padding:5px 8px;font-size:.78rem;width:100%;box-sizing:border-box'; }
+function fieldRow(label, inputHtml){
+  return '<div style="margin-bottom:8px"><label style="display:block;font-family:var(--mono);font-size:.66rem;color:var(--text3);text-transform:uppercase;letter-spacing:.04em;margin-bottom:3px">' + label + '</label>' + inputHtml + '</div>';
+}
+function paramEditorHtml(p){
+  const mainParams = Object.entries(p.metaAction.params||{}).filter(([k])=>!SKIP_PARAM_KEYS.has(k));
+  const fuParams = p.metaAction.followUp ? Object.entries(p.metaAction.followUp.params||{}).filter(([k])=>!SKIP_PARAM_KEYS.has(k)) : [];
+  if(!mainParams.length && !fuParams.length) return '';
+  let html = '<details style="margin-top:10px;border:1px solid var(--border);border-radius:8px;padding:8px 12px" open>'
+    + '<summary style="cursor:pointer;font-family:var(--mono);font-size:.68rem;color:var(--text3);text-transform:uppercase;letter-spacing:.04em">Adjust parameters before approving</summary>'
+    + '<div style="margin-top:10px">'
+    + mainParams.map(([k,v])=>paramFieldHtml(p.id,'m',k,v)).join('');
+  if(fuParams.length){
+    html += '<div style="font-family:var(--mono);font-size:.66rem;color:var(--text3);text-transform:uppercase;letter-spacing:.04em;margin:10px 0 6px;border-top:1px dashed var(--border);padding-top:8px">Follow-up action</div>'
+      + fuParams.map(([k,v])=>paramFieldHtml(p.id,'f',k,v)).join('');
+  }
+  html += '</div></details>';
+  return html;
+}
+function collectOverrides(p){
+  const read = (group, key) => {
+    const el = document.getElementById('param-' + group + '-' + p.id + '-' + key);
+    if(!el) return undefined;
+    if(el.tagName==='SELECT' && el.multiple) return Array.from(el.selectedOptions).map(o=>o.value).filter(Boolean);
+    if(el.tagName==='TEXTAREA'){ try{ return JSON.parse(el.value); }catch{ return el.value; } }
+    if(el.type==='number') return el.value===''?undefined:Number(el.value);
+    return el.value===''?undefined:el.value;
+  };
+  const overrides = {};
+  Object.keys(p.metaAction.params||{}).filter(k=>!SKIP_PARAM_KEYS.has(k)).forEach(k=>{
+    const v = read('m', k);
+    if(v!==undefined) overrides[k]=v;
+  });
+  let followUpOverrides = undefined;
+  if(p.metaAction.followUp){
+    followUpOverrides = {};
+    Object.keys(p.metaAction.followUp.params||{}).filter(k=>!SKIP_PARAM_KEYS.has(k)).forEach(k=>{
+      const v = read('f', k);
+      if(v!==undefined) followUpOverrides[k]=v;
+    });
+  }
+  return {overrides, followUpOverrides};
 }
 function severityColor(s){return s==='high'?'var(--red)':s==='medium'?'var(--orange)':'var(--blue)';}
 function tierBadge(tier){
@@ -2629,6 +2709,7 @@ function paintAutomation(q){
     + '<div class="rec-title" style="margin-bottom:6px">' + p.title + '</div>'
     + '<div class="rec-why">' + p.reasoning + '</div>'
     + '<div class="proposal-action">' + p.actionSummary + '</div>'
+    + paramEditorHtml(p)
     + '<div style="display:flex;align-items:center;gap:8px;margin-top:10px">'
     + '<button type="button" onclick="approveProposal(\'' + p.id + '\')" style="background:var(--green);color:#fff;border:none;border-radius:8px;padding:7px 14px;font-size:.78rem;font-weight:600;cursor:pointer">Approve</button>'
     + '<button type="button" onclick="rejectProposal(\'' + p.id + '\')" style="background:#fff;color:var(--text2);border:1px solid var(--border);border-radius:8px;padding:7px 14px;font-size:.78rem;font-weight:600;cursor:pointer">Reject</button>'
@@ -2691,7 +2772,9 @@ function callAutomationAction(body, statusElId, onSuccess){
   .catch(err=>{ if(statusEl) statusEl.textContent = 'Failed: ' + err.message; });
 }
 function approveProposal(id){
-  callAutomationAction({action:'approve', proposalId:id}, 'proposal-status-'+id);
+  const p = (AUTO_QUEUE.proposals||[]).find(x=>x.id===id);
+  const {overrides, followUpOverrides} = p ? collectOverrides(p) : {};
+  callAutomationAction({action:'approve', proposalId:id, overrides, followUpOverrides}, 'proposal-status-'+id);
 }
 function rejectProposal(id){
   callAutomationAction({action:'reject', proposalId:id}, 'proposal-status-'+id);

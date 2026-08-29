@@ -40,7 +40,7 @@ export default async function handler(req, res) {
     return res.status(500).json({ error: 'Server misconfigured: missing META_ACCESS_TOKEN or GITHUB_TOKEN env var' });
   }
 
-  const { action, proposalId, settings } = req.body || {};
+  const { action, proposalId, settings, overrides, followUpOverrides } = req.body || {};
   if (!['approve', 'reject', 'update-settings'].includes(action)) {
     return res.status(400).json({ error: 'action must be approve, reject, or update-settings' });
   }
@@ -86,13 +86,25 @@ export default async function handler(req, res) {
         queue.log.push({ proposalId, action: proposal.actionSummary, result: 'rejected', tier: proposal.tier, executedAt: resolvedAt });
 
       } else {
-        // approve
-        const previousState = await captureState(proposal.metaAction, metaToken);
+        // approve — merge any user-adjusted parameters (audience/geo/creative/budget/etc,
+        // edited in the dashboard's parameter editor) over the proposal's stored defaults
+        // before executing. Nothing here re-derives the action, it only overrides values.
+        const effectiveAction = {
+          ...proposal.metaAction,
+          params: { ...proposal.metaAction.params, ...(overrides || {}) }
+        };
+        if (proposal.metaAction.followUp) {
+          effectiveAction.followUp = {
+            ...proposal.metaAction.followUp,
+            params: { ...proposal.metaAction.followUp.params, ...(followUpOverrides || {}) }
+          };
+        }
+        const previousState = await captureState(effectiveAction, metaToken);
         let detail;
         try {
-          detail = await execute(proposal.metaAction, metaToken);
-          if (proposal.metaAction.followUp) {
-            detail.followUp = await execute(proposal.metaAction.followUp, metaToken);
+          detail = await execute(effectiveAction, metaToken);
+          if (effectiveAction.followUp) {
+            detail.followUp = await execute(effectiveAction.followUp, metaToken);
           }
           proposal.status = 'executed';
         } catch (e) {
@@ -100,6 +112,7 @@ export default async function handler(req, res) {
           detail = { error: String((e && e.message) || e) };
         }
         proposal.resolvedAt = resolvedAt;
+        if (overrides || followUpOverrides) proposal.appliedOverrides = { overrides, followUpOverrides };
         queue.log = queue.log || [];
         queue.log.push({
           proposalId,

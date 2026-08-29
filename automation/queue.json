@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-29T01:39:20.000Z",
+  "generatedAt": "2026-08-29T10:15:00.000Z",
   "settings": {
     "kill_roas_threshold": "pause if ROAS < 1.0x after ₹500 spend on a sales-objective campaign",
     "reactivate_min_historic_roas": "surface for reactivation if a paused campaign's last active-period ROAS >= 3.0x",
@@ -63,6 +63,17 @@
       "metaAction": { "tool": "ads_update_entity", "params": { "entity_id": "120255351569140159", "entity_type": "adset", "field": "targeting", "note": "add existing custom audience id 120249907176770159 ('Purchasers 30D') to excluded_custom_audiences in the existing targeting spec; do not otherwise modify targeting" } },
       "status": "pending",
       "createdAt": "2026-08-28T01:41:31.000Z"
+    },
+    {
+      "id": "A-005",
+      "module": "placement-optimization",
+      "tier": "approval",
+      "title": "Exclude WhatsApp placement from Kage_sales_1908",
+      "reasoning": "30d placement breakdown for Kage_sales_1908 (the account's only active sales campaign): the 'whatsapp_marketing_messages' placement spent ₹262.34 on 195 impressions with 0 attributed purchases, at a CPM of ₹1,345.33 — roughly 11x the campaign's android_smartphone CPM (₹117.96) and 8x its iPhone CPM (₹160.51). This same spend shows up identically in the device breakdown as the 'other' impression_device bucket (₹262.34, CPM ₹1,345.33, 0 purchases) — same underlying placement, two views of the same number, not a separate issue. ₹262.34 is ~5.2% of the campaign's ₹5,089.64 30d spend going to a placement with zero conversions at a wildly elevated CPM. By contrast, this campaign's two dominant placements — instagram_reels (₹2,217.98, 1 purchase, 1.13x ROAS) and instagram_stories (₹780.12, 2 purchases, 7.01x ROAS) — are both converting, so this isn't a whole-campaign problem, just this one placement.",
+      "actionSummary": "Remove 'whatsapp' from Kage_sales_1908's ad set targeting.publisher_platforms (keep facebook, instagram, audience_network, threads as-is). Note: Meta's targeting spec is inclusion-based (no separate excluded_publisher_platforms field), so this is applied by narrowing the publisher_platforms list rather than adding an exclusion.",
+      "metaAction": { "tool": "ads_update_entity", "params": { "entity_id": "120255351569140159", "entity_type": "adset", "field": "targeting", "note": "remove 'whatsapp' from the existing targeting.publisher_platforms list; leave every other targeting parameter (including the purchaser exclusion from A-004, if already applied) unchanged" } },
+      "status": "pending",
+      "createdAt": "2026-08-29T10:15:00.000Z"
     }
   ],
   "alerts": [
@@ -92,6 +103,15 @@
       "severity": "low",
       "dismissed": false,
       "createdAt": "2026-08-27T00:00:00.000Z"
+    },
+    {
+      "id": "AL-004",
+      "module": "geo-scaling",
+      "title": "Geo scaling/suppression can't run yet — Meta doesn't return purchase attribution at region level",
+      "detail": "Checked the 30d region breakdown for both active campaigns. Kage_sales_1908 (the only sales campaign) has real spend concentration — Maharashtra ₹1,985.20 (2.16% CTR), Karnataka ₹902.39 (2.33% CTR), Telangana ₹584.60, Delhi ₹543.81 — but every single region row came back with omni_purchase/purchase_roas = null. This isn't a spend-volume problem (Maharashtra alone clears any reasonable meaningful-spend bar); it's the same Meta API limitation already disclosed on the dashboard's Geography tab (purchase attribution isn't returned cross-tabbed with region breakdowns). geo-scaling, geo-suppression, and new-geo-testing can only run on a CTR proxy until that changes, so skipped this run rather than propose budget moves off a proxy metric alone. Re-evaluate once spend is high enough to justify the same CTR-relative-ROAS estimation methodology the dashboard already uses for this tab.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-08-29T10:15:00.000Z"
     }
   ],
   "log": []
