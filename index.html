@@ -2640,20 +2640,181 @@ function selStyle(){ return 'border:1px solid var(--border);border-radius:6px;pa
 function fieldRow(label, inputHtml){
   return '<div style="margin-bottom:8px"><label style="display:block;font-family:var(--mono);font-size:.66rem;color:var(--text3);text-transform:uppercase;letter-spacing:.04em;margin-bottom:3px">' + label + '</label>' + inputHtml + '</div>';
 }
+function isTargetingParams(params){ return !!(params && params.field === 'targeting'); }
 function paramEditorHtml(p){
-  const mainParams = Object.entries(p.metaAction.params||{}).filter(([k])=>!SKIP_PARAM_KEYS.has(k));
-  const fuParams = p.metaAction.followUp ? Object.entries(p.metaAction.followUp.params||{}).filter(([k])=>!SKIP_PARAM_KEYS.has(k)) : [];
+  const mainIsTgt = isTargetingParams(p.metaAction.params);
+  const fuIsTgt = p.metaAction.followUp && isTargetingParams(p.metaAction.followUp.params);
+  const mainParams = Object.entries(p.metaAction.params||{}).filter(([k])=>!SKIP_PARAM_KEYS.has(k) && !(mainIsTgt && k==='field'));
+  const fuParams = p.metaAction.followUp ? Object.entries(p.metaAction.followUp.params||{}).filter(([k])=>!SKIP_PARAM_KEYS.has(k) && !(fuIsTgt && k==='field')) : [];
   if(!mainParams.length && !fuParams.length) return '';
   let html = '<details style="margin-top:10px;border:1px solid var(--border);border-radius:8px;padding:8px 12px" open>'
     + '<summary style="cursor:pointer;font-family:var(--mono);font-size:.68rem;color:var(--text3);text-transform:uppercase;letter-spacing:.04em">Adjust parameters before approving</summary>'
     + '<div style="margin-top:10px">'
     + mainParams.map(([k,v])=>paramFieldHtml(p.id,'m',k,v)).join('');
+  if(mainIsTgt){
+    html += '<div id="targeting-editor-m-' + p.id + '" class="auto-empty">Loading current targeting&#x2026;</div>';
+    setTimeout(()=>renderTargetingEditor(p, 'm', p.metaAction.params.entity_id), 0);
+  }
   if(fuParams.length){
     html += '<div style="font-family:var(--mono);font-size:.66rem;color:var(--text3);text-transform:uppercase;letter-spacing:.04em;margin:10px 0 6px;border-top:1px dashed var(--border);padding-top:8px">Follow-up action</div>'
       + fuParams.map(([k,v])=>paramFieldHtml(p.id,'f',k,v)).join('');
   }
+  if(fuIsTgt){
+    html += '<div id="targeting-editor-f-' + p.id + '" class="auto-empty">Loading current targeting&#x2026;</div>';
+    setTimeout(()=>renderTargetingEditor(p, 'f', p.metaAction.followUp.params.entity_id), 0);
+  }
   html += '</div></details>';
   return html;
+}
+
+// ── Targeting editor: geo/audience/interest/behavior/device/placement,
+// pre-filled from the ad set's real live targeting spec, not blank. ──────────
+const TARGETING_STATE={}; // key `${proposalId}-${group}` -> {interests:[{id,name}], behaviors:[{id,name}]}
+function renderTargetingEditor(p, group, adsetId){
+  if(!adsetId){
+    const el0=document.getElementById('targeting-editor-'+group+'-'+p.id);
+    if(el0) el0.innerHTML='<div class="auto-empty">No entity_id on this proposal to load targeting for.</div>';
+    return;
+  }
+  fetch('/api/meta?endpoint=adset_targeting&adset_id='+encodeURIComponent(adsetId))
+    .then(r=>r.json())
+    .then(d=>{
+      const t = d.targeting || {};
+      const grp = (t.flexible_spec && t.flexible_spec[0]) || {};
+      TARGETING_STATE[p.id+'-'+group] = { interests: grp.interests||[], behaviors: grp.behaviors||[] };
+      const el = document.getElementById('targeting-editor-'+group+'-'+p.id);
+      if(!el) return;
+      el.className=''; el.innerHTML = targetingEditorHtml(p.id, group, t, adsetId, d.name);
+    })
+    .catch(err=>{
+      const el = document.getElementById('targeting-editor-'+group+'-'+p.id);
+      if(el) el.innerHTML = '<div class="auto-empty">Couldn\'t load current targeting (' + err.message + ').</div>';
+    });
+}
+function targetingEditorHtml(pid, group, t, adsetId, adsetName){
+  const base = 'tgt-' + group + '-' + pid;
+  const genders = t.genders || [];
+  const geoInc = (t.geo_locations && t.geo_locations.regions) || [];
+  const geoExc = (t.excluded_geo_locations && t.excluded_geo_locations.regions) || [];
+  const devs = t.device_platforms || [];
+  const pubs = t.publisher_platforms || [];
+  const exAud = t.excluded_custom_audiences || [];
+  const regions = (AUTO_LOOKUPS && AUTO_LOOKUPS.regions) || [];
+  const auds = (AUTO_LOOKUPS && AUTO_LOOKUPS.custom_audiences) || [];
+  const geoIncOpts = regions.map(r=>'<option value="'+r.key+'"'+(geoInc.some(x=>x.key===r.key)?' selected':'')+'>'+r.name+'</option>').join('');
+  const geoExcOpts = regions.map(r=>'<option value="'+r.key+'"'+(geoExc.some(x=>x.key===r.key)?' selected':'')+'>'+r.name+'</option>').join('');
+  const exAudOpts = auds.map(a=>'<option value="'+a.id+'"'+(exAud.some(x=>x.id===a.id)?' selected':'')+'>'+(a.name||a.id)+'</option>').join('');
+  const devChk=(v,label)=>'<label style="margin-right:12px;font-size:.78rem"><input type="checkbox" id="'+base+'-dev-'+v+'" '+(devs.includes(v)?'checked':'')+'> '+label+'</label>';
+  const pubChk=(v,label)=>'<label style="margin-right:12px;font-size:.78rem"><input type="checkbox" id="'+base+'-pub-'+v+'" '+(pubs.includes(v)?'checked':'')+'> '+label+'</label>';
+  return '<div style="background:var(--bg2);border-radius:8px;padding:10px;margin-top:4px">'
+    + '<div style="font-size:.72rem;color:var(--text3);margin-bottom:8px">Editing live targeting for ad set <strong>' + (adsetName||adsetId) + '</strong> &mdash; pre-filled with what\'s actually running now.</div>'
+    + fieldRow('Age range', '<div style="display:flex;gap:8px;align-items:center"><input type="number" id="'+base+'-agemin" value="'+(t.age_min||18)+'" min="13" max="65" style="'+selStyle()+'"><span>to</span><input type="number" id="'+base+'-agemax" value="'+(t.age_max||65)+'" min="13" max="65" style="'+selStyle()+'"></div>')
+    + fieldRow('Gender', '<label style="margin-right:14px;font-size:.78rem"><input type="checkbox" id="'+base+'-gender-1" '+(genders.includes(1)?'checked':'')+'> Male</label><label style="font-size:.78rem"><input type="checkbox" id="'+base+'-gender-2" '+(genders.includes(2)?'checked':'')+'> Female</label><div class="auto-empty" style="margin-top:2px">Leave both unchecked for all genders</div>')
+    + fieldRow('Geo &mdash; include', '<select id="'+base+'-geo-inc" multiple size="5" style="'+selStyle()+'">'+geoIncOpts+'</select>')
+    + fieldRow('Geo &mdash; exclude', '<select id="'+base+'-geo-exc" multiple size="4" style="'+selStyle()+'">'+geoExcOpts+'</select>')
+    + fieldRow('Devices', devChk('mobile','Mobile')+devChk('desktop','Desktop'))
+    + fieldRow('Placements', pubChk('facebook','Facebook')+pubChk('instagram','Instagram')+pubChk('audience_network','Audience Network')+pubChk('messenger','Messenger')+pubChk('whatsapp','WhatsApp'))
+    + fieldRow('Exclude audiences', '<select id="'+base+'-exaud" multiple size="4" style="'+selStyle()+'">'+exAudOpts+'</select>')
+    + fieldRow('Interests &amp; behaviors', targetingChipsHtml(pid, group))
+    + '<div class="auto-empty" style="margin-top:6px">Interests/behaviors are combined as "any of these" (one OR group) &mdash; finer AND/OR logic isn\'t supported by this editor yet.</div>'
+    + '</div>';
+}
+function tgtChipboxId(pid,group){return 'tgt-'+group+'-'+pid+'-chiplist';}
+function tgtSearchboxId(pid,group){return 'tgt-'+group+'-'+pid+'-searchbox';}
+function tgtSearchclassId(pid,group){return 'tgt-'+group+'-'+pid+'-searchclass';}
+function tgtSearchresultsId(pid,group){return 'tgt-'+group+'-'+pid+'-searchresults';}
+function targetingChipsHtml(pid, group){
+  return '<div>'
+    + '<div id="'+tgtChipboxId(pid,group)+'">' + renderChips(pid,group) + '</div>'
+    + '<div style="display:flex;gap:6px;margin-top:6px">'
+    + '<select id="'+tgtSearchclassId(pid,group)+'" style="'+selStyle()+';flex:0 0 110px"><option value="interests">Interest</option><option value="behaviors">Behavior</option></select>'
+    + '<input type="text" id="'+tgtSearchboxId(pid,group)+'" placeholder="Search e.g. Sneakers, Streetwear&#x2026;" oninput="onTargetingSearch(\''+pid+'\',\''+group+'\')" style="'+selStyle()+'">'
+    + '</div>'
+    + '<div id="'+tgtSearchresultsId(pid,group)+'" style="margin-top:4px;max-height:160px;overflow:auto"></div>'
+    + '</div>';
+}
+function renderChips(pid, group){
+  const state = TARGETING_STATE[pid+'-'+group] || {interests:[],behaviors:[]};
+  const chips = [...state.interests.map(x=>({...x,type:'interest'})), ...state.behaviors.map(x=>({...x,type:'behavior'}))];
+  return chips.length ? chips.map((c,i)=>
+    '<span style="display:inline-flex;align-items:center;gap:4px;background:#fff;border:1px solid var(--border);border-radius:20px;padding:3px 10px;margin:2px;font-size:.74rem">'
+    + c.name + ' <span style="color:var(--text3);font-size:.66rem">(' + c.type + ')</span>'
+    + ' <button type="button" onclick="removeTargetingChip(\''+pid+'\',\''+group+'\','+i+')" style="border:none;background:none;cursor:pointer;color:var(--red);font-weight:700">&times;</button>'
+    + '</span>'
+  ).join('') : '<span class="auto-empty">None selected</span>';
+}
+let TARGETING_SEARCH_TIMER=null;
+function onTargetingSearch(pid, group){
+  clearTimeout(TARGETING_SEARCH_TIMER);
+  const q = document.getElementById(tgtSearchboxId(pid,group)).value.trim();
+  const cls = document.getElementById(tgtSearchclassId(pid,group)).value;
+  const resEl = document.getElementById(tgtSearchresultsId(pid,group));
+  if(q.length<2){ resEl.innerHTML=''; return; }
+  TARGETING_SEARCH_TIMER = setTimeout(()=>{
+    fetch('/api/meta?endpoint=targeting_search&q='+encodeURIComponent(q)+'&class='+cls)
+      .then(r=>r.json())
+      .then(d=>{
+        const items=(d.data||[]);
+        resEl.innerHTML = items.length ? items.map(it=>
+          '<div style="cursor:pointer;padding:5px 8px;font-size:.76rem;border-bottom:1px solid var(--border)" onclick="addTargetingChip(\''+pid+'\',\''+group+'\',\''+String(it.id)+'\',\''+String(it.name).replace(/'/g,"&#39;")+'\',\''+(cls==='behaviors'?'behavior':'interest')+'\')">'
+          + it.name + (it.audience_size_lower_bound?' <span style="color:var(--text3)">(~'+Math.round(it.audience_size_lower_bound/1000)+'k)</span>':'')
+          + '</div>'
+        ).join('') : '<div class="auto-empty">No matches</div>';
+      })
+      .catch(()=>{ resEl.innerHTML='<div class="auto-empty">Search failed.</div>'; });
+  }, 350);
+}
+function addTargetingChip(pid, group, id, name, type){
+  const stateKey = pid+'-'+group;
+  const state = TARGETING_STATE[stateKey] = TARGETING_STATE[stateKey] || {interests:[],behaviors:[]};
+  const arr = type==='behavior' ? state.behaviors : state.interests;
+  if(!arr.some(x=>x.id===id)) arr.push({id,name});
+  document.getElementById(tgtChipboxId(pid,group)).innerHTML = renderChips(pid,group);
+  document.getElementById(tgtSearchboxId(pid,group)).value='';
+  document.getElementById(tgtSearchresultsId(pid,group)).innerHTML='';
+}
+function removeTargetingChip(pid, group, idx){
+  const state = TARGETING_STATE[pid+'-'+group];
+  if(!state) return;
+  const chips = [...state.interests.map(x=>({...x,type:'interest'})), ...state.behaviors.map(x=>({...x,type:'behavior'}))];
+  const removed = chips[idx];
+  if(!removed) return;
+  if(removed.type==='interest') state.interests = state.interests.filter(x=>x.id!==removed.id);
+  else state.behaviors = state.behaviors.filter(x=>x.id!==removed.id);
+  document.getElementById(tgtChipboxId(pid,group)).innerHTML = renderChips(pid,group);
+}
+function buildTargetingOverride(pid, group){
+  const base = 'tgt-' + group + '-' + pid;
+  const g = id => document.getElementById(id);
+  const ageMin = g(base+'-agemin');
+  if(!ageMin) return null; // editor hasn't finished loading for this proposal/group yet
+  const ageMax = g(base+'-agemax');
+  const genders=[];
+  if(g(base+'-gender-1') && g(base+'-gender-1').checked) genders.push(1);
+  if(g(base+'-gender-2') && g(base+'-gender-2').checked) genders.push(2);
+  const geoInc = Array.from(g(base+'-geo-inc').selectedOptions).map(o=>({key:o.value,name:o.textContent}));
+  const geoExc = Array.from(g(base+'-geo-exc').selectedOptions).map(o=>({key:o.value,name:o.textContent}));
+  const devices = ['mobile','desktop'].filter(d=>g(base+'-dev-'+d) && g(base+'-dev-'+d).checked);
+  const pubs = ['facebook','instagram','audience_network','messenger','whatsapp'].filter(pl=>g(base+'-pub-'+pl) && g(base+'-pub-'+pl).checked);
+  const exAud = Array.from(g(base+'-exaud').selectedOptions).map(o=>({id:o.value}));
+  const state = TARGETING_STATE[pid+'-'+group] || {interests:[],behaviors:[]};
+  const targeting = {
+    age_min: Number(ageMin.value)||18,
+    age_max: Number(ageMax.value)||65,
+    geo_locations: { regions: geoInc },
+    device_platforms: devices,
+    publisher_platforms: pubs
+  };
+  if(genders.length) targeting.genders = genders;
+  if(geoExc.length) targeting.excluded_geo_locations = { regions: geoExc };
+  if(exAud.length) targeting.excluded_custom_audiences = exAud;
+  if(state.interests.length || state.behaviors.length){
+    const spec = {};
+    if(state.interests.length) spec.interests = state.interests;
+    if(state.behaviors.length) spec.behaviors = state.behaviors;
+    targeting.flexible_spec = [spec];
+  }
+  return targeting;
 }
 function collectOverrides(p){
   const read = (group, key) => {
@@ -2669,6 +2830,10 @@ function collectOverrides(p){
     const v = read('m', k);
     if(v!==undefined) overrides[k]=v;
   });
+  if(isTargetingParams(p.metaAction.params)){
+    const t = buildTargetingOverride(p.id, 'm');
+    if(t) overrides.value = t;
+  }
   let followUpOverrides = undefined;
   if(p.metaAction.followUp){
     followUpOverrides = {};
@@ -2676,6 +2841,10 @@ function collectOverrides(p){
       const v = read('f', k);
       if(v!==undefined) followUpOverrides[k]=v;
     });
+    if(isTargetingParams(p.metaAction.followUp.params)){
+      const t = buildTargetingOverride(p.id, 'f');
+      if(t) followUpOverrides.value = t;
+    }
   }
   return {overrides, followUpOverrides};
 }

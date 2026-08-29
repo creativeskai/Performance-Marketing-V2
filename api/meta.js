@@ -140,6 +140,30 @@ export default async function handler(req, res) {
         regions: geo.data || geo
       };
 
+    } else if (endpoint === 'adset_targeting') {
+      // Live current targeting spec for one ad set — lets the dashboard's
+      // targeting editor pre-fill with what's actually running, not blank.
+      const { adset_id } = req.query;
+      if (!adset_id) return res.status(400).json({ error: 'adset_id required' });
+      const url = `https://graph.facebook.com/v19.0/${adset_id}` +
+        `?fields=name,targeting&access_token=${token}`;
+      const r = await fetch(url);
+      data = await r.json();
+
+    } else if (endpoint === 'targeting_search') {
+      // Powers the targeting editor's interest/behavior suggestion search box.
+      // ?q=<term>&class=interests|behaviors (default interests)
+      const { q = '', class: cls = 'interests' } = req.query;
+      if (!q || q.trim().length < 2) {
+        return res.status(200).json({ data: [] }); // don't hit Graph for 0-1 char queries
+      }
+      const type = cls === 'behaviors' ? 'adTargetingCategory' : 'adinterest';
+      const classParam = cls === 'behaviors' ? '&class=behaviors' : '';
+      const url = `https://graph.facebook.com/v19.0/search` +
+        `?type=${type}${classParam}&q=${encodeURIComponent(q)}&limit=15&access_token=${token}`;
+      const r = await fetch(url);
+      data = await r.json();
+
     } else {
       return res.status(400).json({ error: 'Unknown endpoint: ' + endpoint });
     }
