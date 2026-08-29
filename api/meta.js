@@ -154,11 +154,13 @@ export default async function handler(req, res) {
       // the automation proposal/editor flow.
       const campFields = 'id,name,objective,status,effective_status,buying_type,' +
         'daily_budget,lifetime_budget,special_ad_categories,created_time,start_time,stop_time';
+      const campFilter = JSON.stringify([{ field: 'effective_status', operator: 'IN', value: ['ACTIVE'] }]);
       const campUrl = `https://graph.facebook.com/v19.0/${AD_ACCOUNT}/campaigns` +
-        `?fields=${campFields}&effective_status=${encodeURIComponent('["ACTIVE"]')}` +
+        `?fields=${campFields}&filtering=${encodeURIComponent(campFilter)}` +
         `&limit=50&access_token=${token}`;
       const campResp = await fetch(campUrl);
       const campJson = await campResp.json();
+      if (campJson.error) throw new Error(`Campaign list failed: ${campJson.error.message}`);
       const campaigns = campJson.data || [];
 
       const adsetFields = 'id,name,status,effective_status,daily_budget,lifetime_budget,' +
