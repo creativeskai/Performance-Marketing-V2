@@ -156,8 +156,7 @@ export default async function handler(req, res) {
       // above) and filter to ACTIVE client-side — the `filtering` query
       // param on this edge trips a permission check this token doesn't
       // clear, even though plain field reads work fine.
-      const campFields = 'id,name,objective,status,effective_status,buying_type,' +
-        'daily_budget,lifetime_budget,special_ad_categories,created_time,start_time,stop_time';
+      const campFields = 'id,name,objective,status,effective_status';
       const campUrl = `https://graph.facebook.com/v19.0/${AD_ACCOUNT}/campaigns` +
         `?fields=${campFields}&limit=500&access_token=${token}`;
       const campResp = await fetch(campUrl);

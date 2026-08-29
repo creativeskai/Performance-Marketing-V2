@@ -996,6 +996,9 @@ body.locked #shell{display:none}
         <div id="cb-banner" style="display:none;background:#fde8e8;border:1px solid var(--red);border-radius:10px;padding:12px 16px;margin-bottom:1.25rem;font-size:.82rem;color:#7a1f1f;line-height:1.6">
           <strong>&#x26A0; Hard spend circuit breaker tripped.</strong> <span id="cb-banner-detail"></span> Every active campaign was auto-paused. Review, then approve a "resume-after-circuit-breaker" proposal below to bring campaigns back.
         </div>
+        <div id="lookups-fail-banner" style="display:none;background:#fff3e0;border:1px solid var(--orange);border-radius:10px;padding:12px 16px;margin-bottom:1.25rem;font-size:.82rem;color:#6b3f00;line-height:1.6">
+          <strong>&#x26A0; Meta account token issue.</strong> <span id="lookups-fail-detail"></span> Audience/creative/image/video dropdowns below will be empty until this is fixed — see PROJECT_NOTES.md #6 for the fix (a new System User token with ads_read/ads_management scope, set as META_ACCESS_TOKEN in Vercel).
+        </div>
 
         <div style="background:var(--blue-bg);border:1px solid #93bbde;border-radius:10px;padding:12px 16px;margin-bottom:1.25rem;font-size:.82rem;color:var(--text2);line-height:1.6">
           <strong>Auto-tier</strong> modules execute on their own during each scheduled run (rate-limited, logged, reversible) — no approval needed, they just show up in Recent activity. <strong>Approval-tier</strong> proposals below need a decision — click Approve or Reject, or tell Claude "approve/reject &lt;id&gt;" in chat. Either path executes the same way and logs here.
@@ -2616,7 +2619,8 @@ function renderCompTab() {
 // casual/automated abuse. Must match the AUTOMATION_API_KEY env var in Vercel.
 const AUTOMATION_KEY='30c48dcb08d9473380ca24b1e69c4f5afd5cdd7331c4413b';
 let AUTO_QUEUE=null;
-let AUTO_LOOKUPS=null; // {custom_audiences, creatives, regions} — real, pickable options for the parameter editor
+let AUTO_LOOKUPS=null; // {custom_audiences, creatives, regions, images, videos} — real, pickable options for the parameter editor
+let AUTO_LOOKUPS_FAILED=[]; // which of the above came back as an error (token/permission issue), not just empty
 function renderAutomation(){
   fetch('automation/queue.json?_=' + Date.now())
     .then(r=>r.json())
@@ -2628,9 +2632,22 @@ function renderAutomation(){
     });
   if(!AUTO_LOOKUPS){
     fetch('/api/meta?endpoint=lookups').then(r=>r.json()).then(l=>{
-      AUTO_LOOKUPS = l;
+      // Meta returns HTTP 200 with an {error:...} object per key on a
+      // permission/token failure, not an array — never let that reach
+      // .map() downstream. Normalize to [] and track what failed so we can
+      // warn instead of silently showing empty dropdowns as if there's
+      // simply nothing to pick.
+      const failed = [];
+      const clean = {};
+      ['custom_audiences','creatives','regions','images','videos'].forEach(k=>{
+        const v = l ? l[k] : undefined;
+        if(Array.isArray(v)) clean[k] = v;
+        else { clean[k] = []; if(v && v.error) failed.push(k); }
+      });
+      AUTO_LOOKUPS = clean;
+      AUTO_LOOKUPS_FAILED = failed;
       if(AUTO_QUEUE) paintAutomation(AUTO_QUEUE); // re-paint so dropdowns populate once lookups land
-    }).catch(()=>{ AUTO_LOOKUPS = {custom_audiences:[],creatives:[],regions:[]}; });
+    }).catch(()=>{ AUTO_LOOKUPS = {custom_audiences:[],creatives:[],regions:[],images:[],videos:[]}; AUTO_LOOKUPS_FAILED=['custom_audiences','creatives','regions','images','videos']; });
   }
 }
 // Field-name heuristics deciding which params get a real dropdown vs a plain input.
@@ -2951,11 +2968,23 @@ function renderTargetingEditor(p, group, adsetId, delta){
   fetch('/api/meta?endpoint=adset_targeting&adset_id='+encodeURIComponent(adsetId))
     .then(r=>r.json())
     .then(d=>{
+      const el = document.getElementById('targeting-editor-'+group+'-'+p.id);
+      if(!el) return;
+      // Meta returns HTTP 200 with an {error:...} body on a permission/token
+      // failure — do NOT silently fall back to blank defaults here. That
+      // would render a form that looks real but isn't, and approving it
+      // would overwrite the ad set's actual targeting with near-empty
+      // defaults. Refuse to render the editor at all in that case.
+      if(d.error){
+        el.innerHTML = '<div style="background:#fde8e8;border:1px solid var(--red);border-radius:8px;padding:10px 12px;color:#7a1f1f;font-size:.78rem;line-height:1.5">'
+          + '<strong>&#x26A0; Could not load this ad set\'s real targeting</strong> (' + escHtml(d.error.message || 'unknown error') + '). '
+          + 'The account token may be missing ads_read/ads_management permission. <strong>Do not approve this step</strong> until it loads correctly, or you risk overwriting real targeting with incomplete defaults — check Live Campaigns tab or fix the token, then reopen this proposal.'
+          + '</div>';
+        return;
+      }
       const t = applyTargetingDelta(d.targeting || {}, delta);
       const grp = (t.flexible_spec && t.flexible_spec[0]) || {};
       TARGETING_STATE[p.id+'-'+group] = { interests: grp.interests||[], behaviors: grp.behaviors||[] };
-      const el = document.getElementById('targeting-editor-'+group+'-'+p.id);
-      if(!el) return;
       el.className='';
       el.innerHTML = targetingEditorHtml(p.id, group, t, adsetId, d.name)
         + (delta ? '<div class="auto-empty" style="margin-top:6px">Pre-filled with this proposal\'s recommended change on top of live current targeting &mdash; edit anything you want to adjust.</div>' : '');
@@ -3224,6 +3253,14 @@ function paintAutomation(q){
     document.getElementById('cb-banner-detail').textContent = (cb.reason||'') + (cb.trippedAt ? (' (tripped ' + new Date(cb.trippedAt).toLocaleString('en-IN',{day:'numeric',month:'short',hour:'2-digit',minute:'2-digit'}) + ')') : '');
   } else {
     cbEl.style.display='none';
+  }
+
+  const lfEl = document.getElementById('lookups-fail-banner');
+  if(AUTO_LOOKUPS_FAILED && AUTO_LOOKUPS_FAILED.length){
+    lfEl.style.display='block';
+    document.getElementById('lookups-fail-detail').textContent = 'Could not load: ' + AUTO_LOOKUPS_FAILED.join(', ') + '.';
+  } else if(lfEl){
+    lfEl.style.display='none';
   }
 
   // Approval-tier proposals awaiting a decision. Auto-tier items never sit
