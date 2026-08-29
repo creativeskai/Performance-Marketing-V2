@@ -102,6 +102,20 @@ image or video from the account (see `lookups`' `images`/`videos`, and
 `automation-action.js`'s `createCreativeFromFields`, which builds a standard
 `link_data` object_story_spec against the account's connected Page).
 
+**`targetingDelta`** (optional, proposal-level, sibling to `metaAction`): a
+small structured "what should change" object — e.g.
+`{"add_excluded_custom_audiences":[{"id":"..."}]}`,
+`{"remove_publisher_platforms":["whatsapp"]}`, `{"age_min":28}` — used when a
+module's action is a single-field `targeting` update on an entity that other
+pending proposals *also* touch (e.g. A-004/A-005/A-006 all update the same ad
+set). The dashboard applies this delta on top of a fresh live fetch of the
+entity's current targeting every time the editor opens, rather than baking a
+static snapshot into the proposal — so approving A-004 first and then opening
+A-005 still starts from A-004's real result, whatever order they're approved
+in. Write a module's `metaAction` with no concrete `value` and a
+`targetingDelta` instead of trying to pre-compute a full static targeting
+object when the action shares an entity with other open proposals.
+
 Execution walks the full chain (`main` → `followUp` → `followUp.followUp` →
 …) to arbitrary depth, resolving `"{{stepN.field}}"` placeholders in a later
 step's params against an earlier step's real Meta API response (e.g. an ad

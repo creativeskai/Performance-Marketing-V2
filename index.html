@@ -2688,7 +2688,7 @@ function paramEditorHtml(p){
     }
     if(isTgt){
       html += '<div id="targeting-editor-' + group + '-' + p.id + '" class="auto-empty">Loading current targeting&#x2026;</div>';
-      setTimeout(()=>renderTargetingEditor(p, group, step.params.entity_id), 0);
+      setTimeout(()=>renderTargetingEditor(p, group, step.params.entity_id, p.targetingDelta), 0);
     }
     if(isCrea){ html += creativeEditorHtml(p.id, group); }
     if(!hasContent) html = '<div class="auto-empty">Nothing to adjust for this step.</div>';
@@ -2785,7 +2785,26 @@ function buildCreativeOverride(pid, group){
 // ── Targeting editor: geo/audience/interest/behavior/device/placement,
 // pre-filled from the ad set's real live targeting spec, not blank. ──────────
 const TARGETING_STATE={}; // key `${proposalId}-${group}` -> {interests:[{id,name}], behaviors:[{id,name}]}
-function renderTargetingEditor(p, group, adsetId){
+// Applies a proposal's small structured "what should change" delta on top of
+// whatever targeting is actually live right now. Computed at render time (not
+// baked into a stored static object) so that if you approve A-004 first and
+// then open A-005 — same ad set — A-005 still starts from A-004's real result,
+// not a stale snapshot from whenever the proposal was written.
+function applyTargetingDelta(t, delta){
+  const out = JSON.parse(JSON.stringify(t||{}));
+  if(!delta) return out;
+  if(delta.add_excluded_custom_audiences){
+    out.excluded_custom_audiences = [...(out.excluded_custom_audiences||[]), ...delta.add_excluded_custom_audiences];
+  }
+  if(delta.remove_publisher_platforms){
+    out.publisher_platforms = (out.publisher_platforms||[]).filter(pl=>!delta.remove_publisher_platforms.includes(pl));
+  }
+  if(delta.age_min!==undefined) out.age_min = delta.age_min;
+  if(delta.age_max!==undefined) out.age_max = delta.age_max;
+  if(delta.genders!==undefined) out.genders = delta.genders;
+  return out;
+}
+function renderTargetingEditor(p, group, adsetId, delta){
   if(!adsetId){
     const el0=document.getElementById('targeting-editor-'+group+'-'+p.id);
     if(el0) el0.innerHTML='<div class="auto-empty">No entity_id on this proposal to load targeting for.</div>';
@@ -2794,12 +2813,14 @@ function renderTargetingEditor(p, group, adsetId){
   fetch('/api/meta?endpoint=adset_targeting&adset_id='+encodeURIComponent(adsetId))
     .then(r=>r.json())
     .then(d=>{
-      const t = d.targeting || {};
+      const t = applyTargetingDelta(d.targeting || {}, delta);
       const grp = (t.flexible_spec && t.flexible_spec[0]) || {};
       TARGETING_STATE[p.id+'-'+group] = { interests: grp.interests||[], behaviors: grp.behaviors||[] };
       const el = document.getElementById('targeting-editor-'+group+'-'+p.id);
       if(!el) return;
-      el.className=''; el.innerHTML = targetingEditorHtml(p.id, group, t, adsetId, d.name);
+      el.className='';
+      el.innerHTML = targetingEditorHtml(p.id, group, t, adsetId, d.name)
+        + (delta ? '<div class="auto-empty" style="margin-top:6px">Pre-filled with this proposal\'s recommended change on top of live current targeting &mdash; edit anything you want to adjust.</div>' : '');
     })
     .catch(err=>{
       const el = document.getElementById('targeting-editor-'+group+'-'+p.id);

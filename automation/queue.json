@@ -29,9 +29,9 @@
       "module": "reactivate-winner",
       "tier": "approval",
       "title": "Reactivate Kage_Sales",
-      "reasoning": "Kage_Sales is currently paused but was the best-volume winner in the account: 4.30x ROAS on ₹6,195 spend and 10 purchases over its last active 30-day window — well above every other campaign, active or paused, and above the 3.0x reactivation threshold.",
-      "actionSummary": "Reactivate campaign 'Kage_Sales' (id 120255012429830159) with a conservative starting daily budget (≈₹200–300/day, versus its historical pace) and monitor for 3 days before scaling further.",
-      "metaAction": { "tool": "ads_activate_entity", "params": { "entity_id": "120255012429830159", "entity_type": "campaign" }, "followUp": { "tool": "ads_update_entity", "params": { "entity_id": "120255012429830159", "field": "daily_budget", "note": "set an explicit conservative daily budget before or immediately after activation" } } },
+      "reasoning": "Kage_Sales is currently paused but was the best-volume winner in the account: 4.30x ROAS on ₹6,195 spend and 10 purchases over its last active 30-day window (≈₹206/day average pace) — well above every other campaign, active or paused, and above the 3.0x reactivation threshold. Updated 2026-08-29: the follow-up budget step previously had no concrete value (would have failed on approval) — set to a real number below, editable in the parameter editor.",
+      "actionSummary": "Reactivate campaign 'Kage_Sales' (id 120255012429830159), then set its daily budget to 25000 (Meta's minor-currency-unit field — this is ₹250/day, slightly above its historical ₹206/day average pace to compensate for reactivation ramp-up, still conservative). Monitor for 3 days before scaling further.",
+      "metaAction": { "tool": "ads_activate_entity", "params": { "entity_id": "120255012429830159", "entity_type": "campaign" }, "followUp": { "tool": "ads_update_entity", "params": { "entity_id": "120255012429830159", "field": "daily_budget", "value": 25000 } } },
       "status": "pending",
       "createdAt": "2026-08-27T00:00:00.000Z"
     },
@@ -83,9 +83,30 @@
       "module": "catalog-dpa-launch",
       "tier": "approval",
       "title": "Launch a Dynamic Product Ads (DPA) campaign from the connected Shopify catalog",
-      "reasoning": "A Shopify product catalog is already connected to this ad account (catalog_id 1149969713295773), but zero DPA/catalog-based campaigns are currently running. Gully Labs (main competitor) runs DCO/catalog ads as part of their active mix; KAI runs none. This is a structural gap, not a performance one. Meta's own Opportunity Score tool (account score 85/100 as of 2026-08-29, down from 88) still flags Advantage+ catalog ads as a top recommendation (+4 points, 'lower cost per action'). Catalog health check re-run on 2026-08-29 found the same 3 diagnostic issues, one improved: 18 items still marked out-of-stock (must_fix — these won't appear in dynamic ads, unchanged), 24 items with fewer than 2 images (opportunity, unchanged), and only 1 unmatched content ID between the catalog and pixel now (opportunity, down from 4).",
-      "actionSummary": "Fix the 18 out-of-stock catalog items first (update availability), check catalog health (ads_catalog_get_diagnostics), create a product set for best-sellers, and launch a catalog sales (DPA) campaign targeting site visitors/past purchasers.",
-      "metaAction": { "tool": "ads_catalog_create_product_set", "params": { "catalog_id": "1149969713295773", "note": "start with a best-sellers product set before a full-catalog campaign; confirm out-of-stock items are resolved first" }, "followUp": { "tool": "ads_create_ad", "params": { "note": "catalog-based dynamic ad against the new product set" } } },
+      "reasoning": "A Shopify product catalog is already connected to this ad account (catalog_id 1149969713295773), but zero DPA/catalog-based campaigns are currently running. Gully Labs (main competitor) runs DCO/catalog ads as part of their active mix; KAI runs none. This is a structural gap, not a performance one. Meta's own Opportunity Score tool (account score 85/100 as of 2026-08-29, down from 88) still flags Advantage+ catalog ads as a top recommendation (+4 points, 'lower cost per action'). Catalog health check re-run on 2026-08-29 found the same 3 diagnostic issues, one improved: 18 items still marked out-of-stock (must_fix — these won't appear in dynamic ads, unchanged), 24 items with fewer than 2 images (opportunity, unchanged), and only 1 unmatched content ID between the catalog and pixel now (opportunity, down from 4). Rebuilt 2026-08-29 into a real chain: pulled live catalog product data (81 products total) and found no 'best-seller' field available via the catalog API — that framing was aspirational, not backed by real data, so downgraded to a defensible, real filter instead: in-stock only (availability=in stock), which also structurally avoids advertising the 18 out-of-stock items flagged above.",
+      "actionSummary": "3-step chain, each real: (1) create a product set filtered to in-stock items only; (2) create the campaign (OUTCOME_SALES, PAUSED); (3) create the ad set targeting India broadly with Advantage+ audience (matching the account's existing targeting_automation pattern on Kage_sales_1908), promoted_object pointing at the new product set, daily_budget 25000 (that's ₹250/day), PAUSED. Honest scope limit: the 4th step — the actual dynamic template ad (Meta's product-template creative format, distinct from a static image/video ad) — isn't wired into this automation's creative editor yet, which only builds static ads. Approving this proposal completes steps 1-3; the ad set will sit ready with its promoted_object set, and the final template ad needs one more manual step in Ads Manager (or a follow-up once template-creative support is built).",
+      "metaAction": {
+        "tool": "ads_catalog_create_product_set",
+        "params": { "catalog_id": "1149969713295773", "name": "In-Stock Products - Auto DPA", "filter": { "availability": { "eq": "in stock" } } },
+        "followUp": {
+          "tool": "ads_create_campaign",
+          "params": { "name": "KAI Catalog Sales (DPA)", "objective": "OUTCOME_SALES", "status": "PAUSED", "special_ad_categories": [] },
+          "followUp": {
+            "tool": "ads_create_ad_set",
+            "params": {
+              "name": "DPA - In Stock Catalog",
+              "campaign_id": "{{step1.id}}",
+              "daily_budget": 25000,
+              "billing_event": "IMPRESSIONS",
+              "optimization_goal": "OFFSITE_CONVERSIONS",
+              "bid_strategy": "LOWEST_COST_WITHOUT_CAP",
+              "promoted_object": { "product_set_id": "{{step0.id}}", "custom_event_type": "PURCHASE" },
+              "targeting": { "geo_locations": { "countries": ["IN"] }, "targeting_automation": { "advantage_audience": 1 } },
+              "status": "PAUSED"
+            }
+          }
+        }
+      },
       "status": "pending",
       "createdAt": "2026-08-27T00:00:00.000Z"
     },
@@ -97,6 +118,7 @@
       "reasoning": "Kage_sales_1908 is the account's only active sales-objective prospecting campaign (₹5,089.63 spent in the last 30 days, ROAS 1.57x — down from 1.84x on 2026-08-28's smaller spend base). Its ad set (id 120255351569140159) targets broad interest/behavior segments (Footwear, Sneakers, Street fashion, Frequent Travelers, Engaged Shoppers) with Advantage+ audience expansion on, but the targeting spec still has no excluded_custom_audiences entry — re-checked directly against the live targeting spec on 2026-08-29. A re-check of the account's custom audiences on 2026-08-29 found an existing 'Purchasers 30D' audience (id 120249907176770159, subtype PLATFORM/website pixel-based, delivery_status ACTIVE) that was not previously known — no need to create a new audience, it can be applied directly. Some fraction of prospecting spend is likely re-reaching people who already bought, which understates true new-customer efficiency.",
       "actionSummary": "Add the existing 'Purchasers 30D' custom audience (id 120249907176770159) as an excluded audience on Kage_sales_1908's ad set targeting, leaving all other targeting unchanged. No new audience needs to be created.",
       "metaAction": { "tool": "ads_update_entity", "params": { "entity_id": "120255351569140159", "entity_type": "adset", "field": "targeting", "note": "add existing custom audience id 120249907176770159 ('Purchasers 30D') to excluded_custom_audiences in the existing targeting spec; do not otherwise modify targeting" } },
+      "targetingDelta": { "add_excluded_custom_audiences": [ { "id": "120249907176770159" } ] },
       "status": "pending",
       "createdAt": "2026-08-28T01:41:31.000Z"
     },
@@ -108,6 +130,7 @@
       "reasoning": "30d placement breakdown for Kage_sales_1908 (the account's only active sales campaign): the 'whatsapp_marketing_messages' placement spent ₹262.34 on 195 impressions with 0 attributed purchases, at a CPM of ₹1,345.33 — roughly 11x the campaign's android_smartphone CPM (₹117.96) and 8x its iPhone CPM (₹160.51). This same spend shows up identically in the device breakdown as the 'other' impression_device bucket (₹262.34, CPM ₹1,345.33, 0 purchases) — same underlying placement, two views of the same number, not a separate issue. ₹262.34 is ~5.2% of the campaign's ₹5,089.64 30d spend going to a placement with zero conversions at a wildly elevated CPM. By contrast, this campaign's two dominant placements — instagram_reels (₹2,217.98, 1 purchase, 1.13x ROAS) and instagram_stories (₹780.12, 2 purchases, 7.01x ROAS) — are both converting, so this isn't a whole-campaign problem, just this one placement.",
       "actionSummary": "Remove 'whatsapp' from Kage_sales_1908's ad set targeting.publisher_platforms (keep facebook, instagram, audience_network, threads as-is). Note: Meta's targeting spec is inclusion-based (no separate excluded_publisher_platforms field), so this is applied by narrowing the publisher_platforms list rather than adding an exclusion.",
       "metaAction": { "tool": "ads_update_entity", "params": { "entity_id": "120255351569140159", "entity_type": "adset", "field": "targeting", "note": "remove 'whatsapp' from the existing targeting.publisher_platforms list; leave every other targeting parameter (including the purchaser exclusion from A-004, if already applied) unchanged" } },
+      "targetingDelta": { "remove_publisher_platforms": ["whatsapp"] },
       "status": "pending",
       "createdAt": "2026-08-29T10:15:00.000Z"
     },
@@ -117,8 +140,9 @@
       "tier": "approval",
       "title": "Shift Kage_sales_1908 budget weight from 25-34 male toward 35-44 male",
       "reasoning": "30d age/gender breakdown for Kage_sales_1908 (the account's only active sales campaign): the 25-34 male cell spent ₹2,408.32 (the single largest demo allocation in the campaign) for 1 purchase, ROAS 1.11x — below the campaign's own 30d blended ROAS (1.57x) and well below account average. The 35-44 male cell spent ₹1,118.80, less than half as much, but returned 2 purchases at 4.74x ROAS — over 4x more efficient per rupee spent. Both cells clear a ₹500+ meaningful-spend bar. 18-24 male (₹694.96, 0 purchases) is also underperforming. This is a real, spend-backed efficiency gap within one active campaign, not a cross-objective comparison.",
-      "actionSummary": "Reduce budget weight/targeting emphasis on the 25-34 male age-gender cell and increase it on 35-44 male within Kage_sales_1908's ad set targeting. Suggest tightening age_max toward 44 or applying an Advantage+ audience budget skew if available, rather than a hard age cutoff, since sample size (3 total purchases) is still thin.",
-      "metaAction": { "tool": "ads_update_entity", "params": { "entity_id": "120255351569140159", "entity_type": "adset", "field": "targeting", "note": "adjust age range / demo weighting to favor 35-44 male over 25-34 male based on 30d ROAS gap (4.74x vs 1.11x); sample is thin (3 purchases total) so treat as a lean, not a hard cutoff" } },
+      "actionSummary": "Corrected 2026-08-29: the original note said 'tighten age_max toward 44', which was backwards — favoring the OLDER 35-44 group means raising the floor (age_min), not lowering the ceiling. Concrete change: raise age_min from the current 21 to 28 (current live targeting confirmed: age_min 21, age_max 65). This is a partial lean, not a hard cutoff — it cuts the weakest 21-27 slice entirely, retains the back half of 25-34 (28-34), and keeps all of 35-44 and everything above. Fully editable in the age-range fields below if you want a different split.",
+      "metaAction": { "tool": "ads_update_entity", "params": { "entity_id": "120255351569140159", "entity_type": "adset", "field": "targeting", "note": "raise age_min toward 28-30 to lean away from 25-34 male (1.11x ROAS) toward 35-44 male (4.74x ROAS); sample is thin (3 purchases total) so treat as a lean, not a hard cutoff" } },
+      "targetingDelta": { "age_min": 28 },
       "status": "pending",
       "createdAt": "2026-08-29T11:30:00.000Z"
     },
@@ -128,8 +152,31 @@
       "tier": "auto",
       "title": "Refresh the stale purchase-based lookalike audience",
       "reasoning": "The account's only active purchase-based lookalike ('Lookalike (1%) - Shopify Meta Pixel - Website using Purchase', id 120250736441810159, subtype LOOKALIKE, delivery_status ACTIVE) was created 2026-05-27 — 94 days old as of 2026-08-29, well past the 14-day lookalike_refresh_days threshold. No 2%/5% variants exist at all. Note: the 'Purchasers 30D' PLATFORM custom audience (id 120249907176770159, used in A-004) only shows an approximate matched size of ~20 users — too small to be a reliable independent LAL source on its own; the existing pixel-purchase-event LAL is the better-matched source and is the one that needs refreshing, not a new build from 'Purchasers 30D'.",
-      "actionSummary": "Rebuild the 1% purchase-based lookalike off current pixel purchase-event data (refresh, same source definition), and create matching 2% and 5% variants that don't currently exist, so retargeting/prospecting campaigns have a size ladder to test against.",
-      "metaAction": { "tool": "ads_create_custom_audience", "params": { "name": "Lookalike (IN, 1%) - Purchase Pixel - Refresh 2026-08-29", "subtype": "LOOKALIKE", "note": "rebuild off the same Shopify/Meta Pixel purchase-event source as audience 120250736441810159; also create 2% and 5% variants" } },
+      "actionSummary": "3-step chain, all real: create matching 1%/2%/5% lookalikes off the exact same pixel purchase-event source the existing (94-day-stale) audience 120250736441810159 uses — confirmed via a live pull of its lookalike_spec (origin_event_sources pointing at pixel 833131719490535, event Purchase, action_source website). No fabricated origin_audience_id or guessed spec — this mirrors the real, currently-working definition, just refreshed and laddered.",
+      "metaAction": {
+        "tool": "ads_create_custom_audience",
+        "params": {
+          "name": "Lookalike (IN 1%) - Purchase Pixel - Refresh 2026-08-29",
+          "subtype": "LOOKALIKE",
+          "lookalike_spec": { "country": "IN", "ratio": 0.01, "origin_event_sources": [ { "id": "833131719490535", "seed_provider": "fb_pixel", "event_names": ["Purchase"], "action_source": "website" } ] }
+        },
+        "followUp": {
+          "tool": "ads_create_custom_audience",
+          "params": {
+            "name": "Lookalike (IN 2%) - Purchase Pixel - New 2026-08-29",
+            "subtype": "LOOKALIKE",
+            "lookalike_spec": { "country": "IN", "ratio": 0.02, "origin_event_sources": [ { "id": "833131719490535", "seed_provider": "fb_pixel", "event_names": ["Purchase"], "action_source": "website" } ] }
+          },
+          "followUp": {
+            "tool": "ads_create_custom_audience",
+            "params": {
+              "name": "Lookalike (IN 5%) - Purchase Pixel - New 2026-08-29",
+              "subtype": "LOOKALIKE",
+              "lookalike_spec": { "country": "IN", "ratio": 0.05, "origin_event_sources": [ { "id": "833131719490535", "seed_provider": "fb_pixel", "event_names": ["Purchase"], "action_source": "website" } ] }
+            }
+          }
+        }
+      },
       "status": "pending",
       "createdAt": "2026-08-29T11:30:00.000Z"
     }
