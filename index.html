@@ -2654,35 +2654,68 @@ function chainSteps(p){
   while(node){ steps.push(node); node=node.followUp; }
   return steps;
 }
+const CHAIN_TOOL_LABELS = {
+  ads_update_entity:'Update', ads_activate_entity:'Activate',
+  ads_create_custom_audience:'Audience', ads_create_campaign:'Campaign',
+  ads_create_ad_set:'Ad set', ads_create_ad:'Ad', ads_create_creative:'Creative',
+  ads_catalog_create_product_set:'Product set', ads_experiment_abtest_create_test:'A/B test',
+  ads_creative_upload_image:'Image upload', ads_creative_upload_video:'Video upload'
+};
+function chainTabStyle(active){
+  return 'font-family:var(--mono);font-size:.72rem;padding:6px 14px;border-radius:20px;border:1.5px solid '+(active?'var(--text)':'var(--border)')+';background:'+(active?'var(--text)':'#fff')+';color:'+(active?'#fff':'var(--text3)')+';cursor:pointer;white-space:nowrap;flex:0 0 auto';
+}
+function switchChainTab(pid, activeIdx){
+  document.querySelectorAll('[data-chainpanel="'+pid+'"]').forEach(el=>{
+    el.style.display = (Number(el.dataset.step)===activeIdx) ? 'block' : 'none';
+  });
+  document.querySelectorAll('[data-chaintab="'+pid+'"]').forEach(el=>{
+    el.setAttribute('style', chainTabStyle(Number(el.dataset.step)===activeIdx));
+  });
+}
 function paramEditorHtml(p){
   const steps = chainSteps(p);
-  let inner = '';
-  let anyContent = false;
-  steps.forEach((step, i)=>{
+  const panels = steps.map((step, i)=>{
     const group = groupForStep(i);
     const isTgt = isTargetingParams(step.params);
     const isCrea = isCreativeAction(step.tool);
     const entries = Object.entries(step.params||{});
     const autoKeys = entries.filter(([,v])=>isTemplateRef(v)).map(([k])=>k);
     const stepParams = entries.filter(([k,v])=>!SKIP_PARAM_KEYS.has(k) && !(isTgt && k==='field') && !isTemplateRef(v));
-    if(stepParams.length || isTgt || isCrea || autoKeys.length) anyContent = true;
-    if(i>0){
-      inner += '<div style="font-family:var(--mono);font-size:.66rem;color:var(--text3);text-transform:uppercase;letter-spacing:.04em;margin:10px 0 6px;border-top:1px dashed var(--border);padding-top:8px">Step ' + (i+1) + ' &mdash; ' + step.tool + '</div>';
-    }
-    inner += stepParams.map(([k,v])=>paramFieldHtml(p.id,group,k,v)).join('');
+    const hasContent = !!(stepParams.length || isTgt || isCrea || autoKeys.length);
+    let html = stepParams.map(([k,v])=>paramFieldHtml(p.id,group,k,v)).join('');
     if(autoKeys.length){
-      inner += '<div class="auto-empty">' + autoKeys.join(', ') + ' filled in automatically from the previous step\'s result.</div>';
+      html += '<div class="auto-empty">' + autoKeys.join(', ') + ' filled in automatically from the previous step\'s result.</div>';
     }
     if(isTgt){
-      inner += '<div id="targeting-editor-' + group + '-' + p.id + '" class="auto-empty">Loading current targeting&#x2026;</div>';
+      html += '<div id="targeting-editor-' + group + '-' + p.id + '" class="auto-empty">Loading current targeting&#x2026;</div>';
       setTimeout(()=>renderTargetingEditor(p, group, step.params.entity_id), 0);
     }
-    if(isCrea){ inner += creativeEditorHtml(p.id, group); }
+    if(isCrea){ html += creativeEditorHtml(p.id, group); }
+    if(!hasContent) html = '<div class="auto-empty">Nothing to adjust for this step.</div>';
+    return { i, tool: step.tool, hasContent, html };
   });
-  if(!anyContent) return '';
+  if(!panels.some(pn=>pn.hasContent)) return '';
+
+  if(panels.length===1){
+    return '<details style="margin-top:10px;border:1px solid var(--border);border-radius:8px;padding:8px 12px" open>'
+      + '<summary style="cursor:pointer;font-family:var(--mono);font-size:.68rem;color:var(--text3);text-transform:uppercase;letter-spacing:.04em">Adjust parameters before approving</summary>'
+      + '<div style="margin-top:10px">' + panels[0].html + '</div></details>';
+  }
+
+  // Multi-step chain — horizontal tab strip, one screen per step, instead of
+  // stacking every step's fields in one long vertical scroll.
+  const tabs = panels.map((pn,idx)=>
+    '<button type="button" data-chaintab="'+p.id+'" data-step="'+pn.i+'" onclick="switchChainTab(\''+p.id+'\','+pn.i+')" style="'+chainTabStyle(idx===0)+'">'
+    + (pn.i+1) + '. ' + (CHAIN_TOOL_LABELS[pn.tool]||pn.tool) + '</button>'
+  ).join('');
+  const screens = panels.map((pn,idx)=>
+    '<div data-chainpanel="'+p.id+'" data-step="'+pn.i+'" style="display:'+(idx===0?'block':'none')+'">' + pn.html + '</div>'
+  ).join('');
   return '<details style="margin-top:10px;border:1px solid var(--border);border-radius:8px;padding:8px 12px" open>'
-    + '<summary style="cursor:pointer;font-family:var(--mono);font-size:.68rem;color:var(--text3);text-transform:uppercase;letter-spacing:.04em">Adjust parameters before approving</summary>'
-    + '<div style="margin-top:10px">' + inner + '</div></details>';
+    + '<summary style="cursor:pointer;font-family:var(--mono);font-size:.68rem;color:var(--text3);text-transform:uppercase;letter-spacing:.04em">Adjust parameters before approving &mdash; ' + panels.length + ' steps</summary>'
+    + '<div style="display:flex;gap:6px;margin:10px 0;overflow-x:auto;padding-bottom:2px">' + tabs + '</div>'
+    + '<div style="margin-top:4px">' + screens + '</div>'
+    + '</details>';
 }
 
 // ── Creative editor: reuse an existing ad creative, or write new primary
