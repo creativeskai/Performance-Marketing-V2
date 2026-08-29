@@ -249,6 +249,21 @@ the dashboard like any other field, not a placeholder note.
 | 34 | `campaign-consolidation` | Confirmed duplicate campaigns (flagged by #11) targeting the same product+audience | `ads_get_ad_entities` (campaign) | `ads_update_entity` (pause the weaker one) |
 | 35 | `catalog-dpa-launch` | Catalog connected, zero DPA/catalog-based campaigns running | `ads_catalog_get_diagnostics`, `ads_catalog_list_product_sets` | `ads_catalog_create_product_set` + `ads_create_ad` |
 
+## Manually creating a proposal (new campaigns)
+
+The Automation tab has a "+ New campaign" builder (independent of the routine)
+for composing a brand-new campaign → ad set → ad chain from scratch — full
+targeting editor (age/gender/geo/devices/placements/excluded audiences/
+interest &amp; behavior search) and creative editor (reuse existing or write
+new), same components proposals use. Submitting it calls
+`api/automation-action.js` with `{action:"create-proposal", title, reasoning,
+actionSummary, metaAction, module:"manual-campaign"}` — the server assigns
+the next `A-###` id, sets `tier:"approval"`, `status:"pending"`, and appends
+it to `queue.json.proposals` exactly like a routine-generated one. From there
+it goes through the identical Approve/Reject flow — no special-casing.
+Defaults to `status:"PAUSED"` at every step (campaign/ad set/ad), same
+safety posture as everything else in this file.
+
 ## Settings editing
 
 `settings` in `queue.json` is a flat key/value map (numbers or short strings;

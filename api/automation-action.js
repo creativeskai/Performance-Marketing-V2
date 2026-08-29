@@ -40,13 +40,13 @@ export default async function handler(req, res) {
     return res.status(500).json({ error: 'Server misconfigured: missing META_ACCESS_TOKEN or GITHUB_TOKEN env var' });
   }
 
-  const { action, proposalId, settings, overrides, followUpOverrides, overridesChain } = req.body || {};
+  const { action, proposalId, settings, overrides, followUpOverrides, overridesChain, title, reasoning, actionSummary, metaAction, module } = req.body || {};
   // overridesChain (array, index 0 = main step, 1 = followUp, 2 = followUp.followUp, ...)
   // is the current shape sent by the dashboard's chain-aware editor. overrides/
   // followUpOverrides are kept accepted for backward compatibility (old 2-step UI).
   const chainOverrides = overridesChain || [overrides, followUpOverrides];
-  if (!['approve', 'reject', 'update-settings'].includes(action)) {
-    return res.status(400).json({ error: 'action must be approve, reject, or update-settings' });
+  if (!['approve', 'reject', 'update-settings', 'create-proposal'].includes(action)) {
+    return res.status(400).json({ error: 'action must be approve, reject, update-settings, or create-proposal' });
   }
 
   try {
@@ -69,6 +69,31 @@ export default async function handler(req, res) {
       }
       queue.settings = { ...queue.settings, ...settings };
       commitMessage = `Settings update via dashboard: ${Object.keys(settings).join(', ')}`;
+
+    } else if (action === 'create-proposal') {
+      // Manual campaign built from scratch via the dashboard's "+ New campaign"
+      // builder — same proposal shape and execution path as a routine-generated
+      // one, just authored by a person instead of a rule module.
+      if (!title || !metaAction || !metaAction.tool) {
+        return res.status(400).json({ error: 'title and metaAction.tool are required' });
+      }
+      queue.proposals = queue.proposals || [];
+      const existingNums = queue.proposals.map(p => Number(String(p.id).split('-')[1]) || 0);
+      const nextId = 'A-' + String(Math.max(0, ...existingNums) + 1).padStart(3, '0');
+      const newProposal = {
+        id: nextId,
+        module: module || 'manual-campaign',
+        tier: 'approval',
+        title,
+        reasoning: reasoning || 'Created manually via the dashboard campaign builder.',
+        actionSummary: actionSummary || 'Manually configured campaign chain.',
+        metaAction,
+        status: 'pending',
+        createdAt: new Date().toISOString()
+      };
+      queue.proposals.push(newProposal);
+      commitMessage = `New manual proposal ${nextId} created via dashboard`;
+      responsePayload.newProposalId = nextId;
 
     } else {
       const proposal = (queue.proposals || []).find(p => p.id === proposalId);
