@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-29T10:15:00.000Z",
+  "generatedAt": "2026-08-29T11:30:00.000Z",
   "settings": {
     "kill_roas_threshold": "pause if ROAS < 1.0x after ₹500 spend on a sales-objective campaign",
     "reactivate_min_historic_roas": "surface for reactivation if a paused campaign's last active-period ROAS >= 3.0x",
@@ -11,6 +11,10 @@
     "max_auto_actions_per_entity_per_day": 1,
     "lookalike_refresh_days": 14,
     "pixel_quality_min_match_rate": 0.6,
+    "metric_baselines": {
+      "Kage_sales_1908": { "cpm": 140.74, "ctr": 2.14, "as_of": "2026-08-29" },
+      "Kage_TOF": { "cpm": 14.36, "ctr": 1.92, "as_of": "2026-08-29" }
+    },
     "competitor_last_scrape": {
       "gully_labs_active_ads": 116,
       "lotto_sport_india_active_ads": 117,
@@ -74,6 +78,28 @@
       "metaAction": { "tool": "ads_update_entity", "params": { "entity_id": "120255351569140159", "entity_type": "adset", "field": "targeting", "note": "remove 'whatsapp' from the existing targeting.publisher_platforms list; leave every other targeting parameter (including the purchaser exclusion from A-004, if already applied) unchanged" } },
       "status": "pending",
       "createdAt": "2026-08-29T10:15:00.000Z"
+    },
+    {
+      "id": "A-006",
+      "module": "age-gender-auto-shift",
+      "tier": "approval",
+      "title": "Shift Kage_sales_1908 budget weight from 25-34 male toward 35-44 male",
+      "reasoning": "30d age/gender breakdown for Kage_sales_1908 (the account's only active sales campaign): the 25-34 male cell spent ₹2,408.32 (the single largest demo allocation in the campaign) for 1 purchase, ROAS 1.11x — below the campaign's own 30d blended ROAS (1.57x) and well below account average. The 35-44 male cell spent ₹1,118.80, less than half as much, but returned 2 purchases at 4.74x ROAS — over 4x more efficient per rupee spent. Both cells clear a ₹500+ meaningful-spend bar. 18-24 male (₹694.96, 0 purchases) is also underperforming. This is a real, spend-backed efficiency gap within one active campaign, not a cross-objective comparison.",
+      "actionSummary": "Reduce budget weight/targeting emphasis on the 25-34 male age-gender cell and increase it on 35-44 male within Kage_sales_1908's ad set targeting. Suggest tightening age_max toward 44 or applying an Advantage+ audience budget skew if available, rather than a hard age cutoff, since sample size (3 total purchases) is still thin.",
+      "metaAction": { "tool": "ads_update_entity", "params": { "entity_id": "120255351569140159", "entity_type": "adset", "field": "targeting", "note": "adjust age range / demo weighting to favor 35-44 male over 25-34 male based on 30d ROAS gap (4.74x vs 1.11x); sample is thin (3 purchases total) so treat as a lean, not a hard cutoff" } },
+      "status": "pending",
+      "createdAt": "2026-08-29T11:30:00.000Z"
+    },
+    {
+      "id": "A-007",
+      "module": "lookalike-refresh",
+      "tier": "auto",
+      "title": "Refresh the stale purchase-based lookalike audience",
+      "reasoning": "The account's only active purchase-based lookalike ('Lookalike (1%) - Shopify Meta Pixel - Website using Purchase', id 120250736441810159, subtype LOOKALIKE, delivery_status ACTIVE) was created 2026-05-27 — 94 days old as of 2026-08-29, well past the 14-day lookalike_refresh_days threshold. No 2%/5% variants exist at all. Note: the 'Purchasers 30D' PLATFORM custom audience (id 120249907176770159, used in A-004) only shows an approximate matched size of ~20 users — too small to be a reliable independent LAL source on its own; the existing pixel-purchase-event LAL is the better-matched source and is the one that needs refreshing, not a new build from 'Purchasers 30D'.",
+      "actionSummary": "Rebuild the 1% purchase-based lookalike off current pixel purchase-event data (refresh, same source definition), and create matching 2% and 5% variants that don't currently exist, so retargeting/prospecting campaigns have a size ladder to test against.",
+      "metaAction": { "tool": "ads_create_custom_audience", "params": { "name": "Lookalike (IN, 1%) - Purchase Pixel - Refresh 2026-08-29", "subtype": "LOOKALIKE", "note": "rebuild off the same Shopify/Meta Pixel purchase-event source as audience 120250736441810159; also create 2% and 5% variants" } },
+      "status": "pending",
+      "createdAt": "2026-08-29T11:30:00.000Z"
     }
   ],
   "alerts": [
@@ -112,6 +138,51 @@
       "severity": "low",
       "dismissed": false,
       "createdAt": "2026-08-29T10:15:00.000Z"
+    },
+    {
+      "id": "AL-005",
+      "module": "dayparting",
+      "title": "Account-wide hourly pattern: 00:00-13:59 converts ~2.3x more efficiently than 14:00-23:59",
+      "detail": "30d hourly breakdown (advertiser timezone), account-wide: the 00:00-13:59 window spent ₹8,813.10 for 10 purchases (~₹881/purchase); the 14:00-23:59 window spent ₹9,935.47 for only 5 purchases (~₹1,987/purchase) — comparable spend, roughly half the conversion efficiency. Caveat: this pull is account-wide, not isolated to Kage_sales_1908 (the only sales campaign) — Kage_TOF (traffic-only, always 0 purchases) shares the same hourly spend pattern and could be diluting the read. Not filing a dayparting schedule-change proposal off a mixed-campaign signal; recommend a Kage_sales_1908-only hourly pull to confirm before acting.",
+      "severity": "medium",
+      "dismissed": false,
+      "createdAt": "2026-08-29T11:30:00.000Z"
+    },
+    {
+      "id": "AL-006",
+      "module": "creative-fatigue",
+      "title": "Kage_TOF: CTR down 38% week-over-week, not frequency-driven",
+      "detail": "Kage_TOF's single active ad: CTR dropped from 2.35% (16-22 Aug) to 1.45% (23-29 Aug) — a 38.3% week-over-week decline, crossing the 30% creative-fatigue trigger — while spend rose (₹840.76 → ₹945.47) and frequency stayed flat (1.071 → 1.077, so this isn't frequency/audience-saturation driven, more likely creative wear-out or an auction/algorithm shift). Not filed as an executable proposal: there's no ready replacement creative to rotate in yet (that needs the Phase 3 auto-creative-generation pipeline, not yet built). Recommend a manual creative refresh review for this ad in the meantime.",
+      "severity": "medium",
+      "dismissed": false,
+      "createdAt": "2026-08-29T11:30:00.000Z"
+    },
+    {
+      "id": "AL-007",
+      "module": "self-audit-check",
+      "title": "Dashboard's static 30d snapshot is 2 days stale but reconciles correctly",
+      "detail": "Dashboard shows a 30d snapshot dated 'Jul 29-Aug 27': ₹17,258 spend, ₹36,129 revenue, 15 purchases, 2.09x ROAS. Fresh pull today (30d window now Jul 31-Aug 29): ₹18,748.59 spend, ~₹36,126 revenue, 15 purchases, ~1.93x ROAS. Purchases and revenue are unchanged (matches the day-wise Aug 27-29 data showing 0 new purchases those days) — the spend/ROAS difference is fully explained by the 30d window rolling forward 2 days (higher-spend late-July days dropped off, replaced by Aug 28-29), not a data or pipeline error. Recommend refreshing the baked-in dashboard snapshot on the next content session so the displayed window stays current.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-08-29T11:30:00.000Z"
+    },
+    {
+      "id": "AL-008",
+      "module": "weekly-digest",
+      "title": "Week of Aug 23-29: automation build week, spend steady, ROAS soft",
+      "detail": "This week: both active campaigns combined spent roughly ₹4,517 (Kage_sales_1908 ₹3,571.52 + Kage_TOF ₹945.47, 23-29 Aug ad-level). Kage_sales_1908 CTR held at 2.12% (vs 2.11% prior week); Kage_TOF CTR fell 38% (see AL-006). On the automation side: shipped the in-app parameter/targeting editor (audience, geo, interests, behaviors, devices, placements, all real dropdowns/search, pre-filled from live targeting), extended the in-app dispatcher to cover creative uploads and A/B test creation, and ran a full module pass adding A-005 through A-007 and this batch of alerts. Three proposals (A-001, A-002, A-003) plus the two new ones (A-006, A-007) remain pending approval.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-08-29T11:30:00.000Z"
+    },
+    {
+      "id": "AL-009",
+      "module": "routine-run-notes",
+      "title": "Modules evaluated this run with no action taken",
+      "detail": "anomaly: ads_insights_anomaly_signal returned no data for the account — nothing to report. budget-reallocation: only 1 sales-objective and 1 traffic-objective campaign are active; different objectives make a direct ROAS-gap comparison invalid, so skipped rather than force a proposal. campaign-consolidation: confirmed only 2 active campaigns with different objectives — no duplicate targeting to flag beyond the existing long-tail note in AL-003. ab-test: the account's active creatives are DCO-style auto-named assets (date+hash suffixes, e.g. 'KAI — MOVE DIFFERENT. 2026-08-28-...') rather than clearly deliberate manual variants of one concept — too ambiguous to responsibly propose a structured split test off naming alone. engagement-tier-segmentation: no retargeting audience is live yet to segment (depends on A-002 being approved first). frequency-capping: both active ads show healthy, flat frequency (Kage_TOF ~1.08, Kage_sales_1908 ~1.68) — no segment shows the rising-frequency/falling-ROAS pattern this module looks for.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-08-29T11:30:00.000Z"
     }
   ],
   "log": []
