@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-29T11:30:00.000Z",
+  "generatedAt": "2026-08-29T19:45:00.000Z",
   "settings": {
     "kill_roas_threshold": "pause if ROAS < 1.0x after ₹500 spend on a sales-objective campaign",
     "reactivate_min_historic_roas": "surface for reactivation if a paused campaign's last active-period ROAS >= 3.0x",
@@ -17,8 +17,8 @@
     },
     "competitor_last_scrape": {
       "gully_labs_active_ads": 116,
-      "lotto_sport_india_active_ads": 117,
-      "scraped_at": "2026-08-29T01:39:20.000Z"
+      "lotto_sport_india_active_ads": 116,
+      "scraped_at": "2026-08-29T19:45:00.000Z"
     },
     "note": "hard_spend_ceiling_inr is a placeholder — set to roughly 3x trailing-30-day avg daily spend (~₹663/day as of 29 Aug 2026). All fields here are editable directly in the Automation tab (Save button) or by telling Claude."
   },
@@ -40,7 +40,7 @@
       "module": "high-intent-retargeting",
       "tier": "approval",
       "title": "Launch a retargeting campaign against 30d add-to-cart non-purchasers",
-      "reasoning": "Account-level 30d data: 83 add-to-cart events vs 15 purchases — roughly 68 people added to cart in the last 30 days without completing a purchase. Refreshed pixel-level check on 2026-08-29 (trailing 7d window) shows the same pattern continuing: ~50 AddToCart events vs 11 Purchases. No retargeting campaign currently exists against this group. Rebuilt 2026-08-29 into a real, executable 4-step chain (previously only had 2 of 4 steps specced, with no real budget/creative/audience-rule values — approving it as originally written would have failed or produced an empty campaign shell). Uses the account's real active pixel ('Shopify Meta Pixel', dataset_id 833131719490535, last fired 2026-08-29) and the real Kage_Sales creative (id 1063318642863205, the account's best-ROAS creative at 4.30x, ad copy 'GRAB THE MOST CLICK-WORTHY SNEAKERS EVER').",
+      "reasoning": "Account-level 30d data: 83 add-to-cart events vs 15 purchases — roughly 68 people added to cart in the last 30 days without completing a purchase. Refreshed pixel-level check on 2026-08-29 (trailing 7d window, later same-day re-check) shows the pattern continuing and building: ~60 AddToCart events vs 11 Purchases (up from ~50 AddToCart earlier the same day — Purchase count unchanged at 11). No retargeting campaign currently exists against this group. Rebuilt 2026-08-29 into a real, executable 4-step chain (previously only had 2 of 4 steps specced, with no real budget/creative/audience-rule values — approving it as originally written would have failed or produced an empty campaign shell). Uses the account's real active pixel ('Shopify Meta Pixel', dataset_id 833131719490535, last fired 2026-08-29) and the real Kage_Sales creative (id 1063318642863205, the account's best-ROAS creative at 4.30x, ad copy 'GRAB THE MOST CLICK-WORTHY SNEAKERS EVER').",
       "actionSummary": "4-step chain, each step feeding the next real Meta-assigned ID (not guessed): (1) create the WEBSITE pixel audience — AddToCart OR InitiateCheckout in the last 14 days, excluding Purchase; (2) create the campaign (OUTCOME_SALES); (3) create the ad set targeting that new audience, India, Facebook+Instagram, optimizing for purchases, daily_budget 25000 (Meta's minor-currency-unit field — this is ₹250/day, editable via the parameter editor below, same conservative range as A-001's reactivation budget); (4) create the ad reusing the Kage_Sales creative. Every step is created PAUSED — approving this does NOT start spending. You'd review it in Ads Manager and activate manually, or tell Claude to activate once you're satisfied.",
       "metaAction": {
         "tool": "ads_create_custom_audience",
@@ -221,17 +221,17 @@
     {
       "id": "AL-005",
       "module": "dayparting",
-      "title": "Account-wide hourly pattern: 00:00-13:59 converts ~2.3x more efficiently than 14:00-23:59",
-      "detail": "30d hourly breakdown (advertiser timezone), account-wide: the 00:00-13:59 window spent ₹8,813.10 for 10 purchases (~₹881/purchase); the 14:00-23:59 window spent ₹9,935.47 for only 5 purchases (~₹1,987/purchase) — comparable spend, roughly half the conversion efficiency. Caveat: this pull is account-wide, not isolated to Kage_sales_1908 (the only sales campaign) — Kage_TOF (traffic-only, always 0 purchases) shares the same hourly spend pattern and could be diluting the read. Not filing a dayparting schedule-change proposal off a mixed-campaign signal; recommend a Kage_sales_1908-only hourly pull to confirm before acting.",
-      "severity": "medium",
+      "title": "Kage_sales_1908-only hourly pull resolves the earlier account-wide caveat: no actionable dayparting pattern",
+      "detail": "Follow-up requested by this alert's own earlier note: re-pulled the 30d hourly breakdown filtered to Kage_sales_1908 alone (the only sales campaign) instead of account-wide. Result is the OPPOSITE of the original account-wide read: 00:00-13:59 spent ₹2,111.83 for 1 purchase (~₹2,112/purchase) while 14:00-23:59 spent ₹2,977.92 for 2 purchases (~₹1,489/purchase) — the evening window converts better once Kage_TOF (traffic-only, always 0 purchases, same hourly spend shape) is excluded. Total sample is just 3 purchases across the whole 30d window, far too thin to support a schedule-change proposal either direction. Original account-wide numbers (₹8,813.10/10 purchases vs ₹9,935.47/5 purchases) were confirmed to be diluted by Kage_TOF as suspected. Downgrading to low severity and not filing a dayparting proposal — will keep watching as purchase volume grows.",
+      "severity": "low",
       "dismissed": false,
       "createdAt": "2026-08-29T11:30:00.000Z"
     },
     {
       "id": "AL-006",
       "module": "creative-fatigue",
-      "title": "Kage_TOF: CTR down 38% week-over-week, not frequency-driven",
-      "detail": "Kage_TOF's single active ad: CTR dropped from 2.35% (16-22 Aug) to 1.45% (23-29 Aug) — a 38.3% week-over-week decline, crossing the 30% creative-fatigue trigger — while spend rose (₹840.76 → ₹945.47) and frequency stayed flat (1.071 → 1.077, so this isn't frequency/audience-saturation driven, more likely creative wear-out or an auction/algorithm shift). Not filed as an executable proposal: there's no ready replacement creative to rotate in yet (that needs the Phase 3 auto-creative-generation pipeline, not yet built). Recommend a manual creative refresh review for this ad in the meantime.",
+      "title": "Kage_TOF: CTR still soft week-over-week, just under the auto-trigger threshold, not frequency-driven",
+      "detail": "Refreshed same-day (2026-08-29, later re-check): Kage_TOF's single active ad CTR is 1.65% over the last 7d vs 2.31% the prior 7d (15-21 Aug) — a 28.6% week-over-week decline, just under the 30% creative-fatigue trigger this run (earlier same-day numbers read 2.35%→1.45%, a 38.3% decline, using a slightly different day-boundary window — both pulls agree directionally: real, sustained softening, not a one-off blip). Frequency stayed flat (1.078 → 1.039), so this remains not frequency/audience-saturation driven — more likely creative wear-out or an auction/algorithm shift. Still not filed as an executable proposal: no ready replacement creative to rotate in yet (needs the Phase 3 auto-creative-generation pipeline, not yet built). Recommend a manual creative refresh review for this ad in the meantime.",
       "severity": "medium",
       "dismissed": false,
       "createdAt": "2026-08-29T11:30:00.000Z"
@@ -262,6 +262,15 @@
       "severity": "low",
       "dismissed": false,
       "createdAt": "2026-08-29T11:30:00.000Z"
+    },
+    {
+      "id": "AL-010",
+      "module": "routine-run-notes",
+      "title": "This run executed in read-only safety mode — A-004 and A-007 (tier:auto) remain unexecuted pending human approval",
+      "detail": "This scheduled run operated under an explicit read-only constraint: no Meta Ads MCP write/mutation tool was called at any point, including for the two currently-pending tier:'auto' proposals (A-004 purchaser-exclusion, A-007 lookalike-refresh) that ROUTINE.md's step 7 would normally auto-execute on sight. Both were re-verified against fresh data this run (excluded_custom_audiences still missing from Kage_sales_1908's live targeting; the 'Purchasers 30D' audience id 120249907176770159 confirmed still ACTIVE; the purchase-pixel lookalike id 120250736441810159 confirmed still the only one of its kind, now 94 days old) and remain valid — they just weren't executed. Approve either via the dashboard's chat path or in-app to run them. Safety checks this run: hard-spend circuit breaker not tripped (today's spend ₹548.16 vs ₹2,000 ceiling); pixel/data-quality gate passed (composite EMQ scores 4.4-9.3, core match keys — ip_address/user_agent/fbp — at 100% coverage across events), so ROAS-driven modules were not suppressed. Coverage gaps this run: learning-phase-stuck could not be evaluated — no learning-stage/learning-phase field was available through the connected Meta Ads MCP tools at ad set level; hook-angle-tagging and auto-creative-generation-launch remain skipped — no Higgsfield MCP connection is attached to this session (Phase 3 work, per ROUTINE.md's build-phasing notes). Anomaly signal, budget-reallocation, campaign-consolidation, ab-test, engagement-tier-segmentation, frequency-capping, and bid-strategy-adjustment were all re-evaluated against fresh data and reached the same 'no action' conclusions as the prior run (see AL-009).",
+      "severity": "medium",
+      "dismissed": false,
+      "createdAt": "2026-08-29T19:45:00.000Z"
     }
   ],
   "log": []
