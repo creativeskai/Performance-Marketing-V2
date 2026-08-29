@@ -199,11 +199,35 @@ async function execute(action, token) {
       const r = await fetch(`${GRAPH}/${catalog_id}/product_sets?${qs({ ...rest, access_token: token })}`, { method: 'POST' });
       return await r.json();
     }
+    case 'ads_creative_upload_image': {
+      // params: { image_url, name? } — fetch the image and push it as base64 bytes.
+      const { image_url, name } = params;
+      if (!image_url) throw new Error('ads_creative_upload_image needs an image_url param');
+      const imgResp = await fetch(image_url);
+      if (!imgResp.ok) throw new Error(`Couldn't fetch image_url (${imgResp.status})`);
+      const b64 = Buffer.from(await imgResp.arrayBuffer()).toString('base64');
+      const r = await fetch(`${GRAPH}/${AD_ACCOUNT}/adimages`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: `bytes=${encodeURIComponent(b64)}${name ? `&name=${encodeURIComponent(name)}` : ''}&access_token=${token}`
+      });
+      return await r.json();
+    }
+    case 'ads_creative_upload_video': {
+      // params: { file_url, name? } — Graph accepts a remote URL directly for videos.
+      const { file_url, name } = params;
+      if (!file_url) throw new Error('ads_creative_upload_video needs a file_url param');
+      const r = await fetch(`${GRAPH}/${AD_ACCOUNT}/advideos?${qs({ file_url, name, access_token: token })}`, { method: 'POST' });
+      return await r.json();
+    }
+    case 'ads_experiment_abtest_create_test': {
+      // params: name, description?, start_time, end_time, cells (array of
+      // {name, treatment_percentage, campaign_ids|adset_ids}), objectives?
+      const r = await fetch(`${GRAPH}/${AD_ACCOUNT}/ad_studies?${qs({ ...params, type: 'SPLIT_TEST', access_token: token })}`, { method: 'POST' });
+      return await r.json();
+    }
     default:
-      // Multipart uploads (ads_creative_upload_image/video) and the split-test API
-      // (ads_experiment_abtest_create_test) aren't wired into the app dispatcher yet —
-      // those proposals still need "approve <id>" in chat. Fail loudly, not silently.
-      throw new Error(`"${tool}" isn't supported by in-app execution yet — approve this one via chat instead.`);
+      throw new Error(`"${tool}" isn't supported by in-app execution — approve this one via chat instead.`);
   }
 }
 

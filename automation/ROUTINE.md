@@ -85,15 +85,17 @@ never mutate the account, so they're always written directly, same as before.
 anything. Both the in-app endpoint and chat execution run exactly what's
 stored here.
 
-**In-app execution support is currently limited to a specific tool
-vocabulary** (see `api/automation-action.js`'s dispatcher): `ads_update_entity`,
-`ads_activate_entity`, `ads_create_custom_audience`, `ads_create_campaign`,
-`ads_create_ad_set`, `ads_create_ad`, `ads_create_creative`,
-`ads_catalog_create_product_set`. Proposals whose `metaAction.tool` is a
-multipart upload (`ads_creative_upload_image`/`video`) or the split-test API
-(`ads_experiment_abtest_create_test`) will fail gracefully in-app with a
-message pointing back to chat approval — those two tools aren't wired into
-the serverless dispatcher yet (Phase 3 follow-up).
+**In-app execution support** (see `api/automation-action.js`'s dispatcher)
+covers: `ads_update_entity`, `ads_activate_entity`, `ads_create_custom_audience`,
+`ads_create_campaign`, `ads_create_ad_set`, `ads_create_ad`, `ads_create_creative`,
+`ads_catalog_create_product_set`, `ads_creative_upload_image`, `ads_creative_upload_video`,
+`ads_experiment_abtest_create_test`. Any `metaAction.tool` outside this list
+fails gracefully in-app with a message pointing back to chat approval instead.
+Proposals whose `metaAction.params.field === "targeting"` get the full
+targeting editor in the dashboard (age/gender/geo include-exclude/devices/
+placements/excluded audiences/interest &amp; behavior search) instead of a raw
+JSON field — see `api/meta.js`'s `adset_targeting` and `targeting_search`
+endpoints.
 
 ## Alert schema
 
@@ -284,8 +286,17 @@ Self-audit check→★`self-audit-check`.
   new segmentation dimensions, same MCP calls as existing breakdown-driven
   modules).
 - **Phase 3**: modules 14 and 29 (`hook-angle-tagging`,
-  `auto-creative-generation-launch`) — need the Higgsfield MCP connection for
-  generation/vision analysis, not just a new Graph API call. Also extend
-  `api/automation-action.js`'s dispatcher to cover
-  `ads_creative_upload_image`/`video` and `ads_experiment_abtest_create_test`
-  so those proposal types stop falling back to chat-only execution.
+  `auto-creative-generation-launch`). `api/automation-action.js`'s dispatcher
+  now covers `ads_creative_upload_image`/`video` and
+  `ads_experiment_abtest_create_test`, so proposal execution is no longer the
+  blocker. `hook-angle-tagging` got a one-time manual bootstrap on 2026-08-29
+  — the 9 creatives with real spend history were tagged (angle/hook) directly
+  from their actual primary-text/headline via the Meta Ads MCP, recorded in
+  `index.html`'s `CREATIVES` array. This was a manual pass in this session,
+  not yet an automatic routine step — the routine still needs to (a) call
+  this same tagging logic on every new creative going forward and (b) add a
+  real vision pass (via Higgsfield) to also read the image/video content
+  itself, not just the ad copy text, before `format` can distinguish e.g.
+  lifestyle vs. studio photography. `auto-creative-generation-launch` (briefing
+  Higgsfield off the current top performer to generate new variants) hasn't
+  been attempted yet — next build step for this module.
