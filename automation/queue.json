@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-28T01:41:31.000Z",
+  "generatedAt": "2026-08-29T01:39:20.000Z",
   "settings": {
     "kill_roas_threshold": "pause if ROAS < 1.0x after ₹500 spend on a sales-objective campaign",
     "reactivate_min_historic_roas": "surface for reactivation if a paused campaign's last active-period ROAS >= 3.0x",
@@ -8,9 +8,9 @@
     "budget_reallocation_min_roas_gap": "shift budget when one active campaign's ROAS is 1.5x+ another's",
     "monthly_spend_goal_inr": null,
     "competitor_last_scrape": {
-      "gully_labs_active_ads": 117,
-      "lotto_sport_india_active_ads": 119,
-      "scraped_at": "2026-08-28T01:41:31.000Z"
+      "gully_labs_active_ads": 116,
+      "lotto_sport_india_active_ads": 117,
+      "scraped_at": "2026-08-29T01:39:20.000Z"
     },
     "note": "Defaults seeded manually this session. Tell Claude to change any of these and it will update this file."
   },
@@ -29,7 +29,7 @@
       "id": "A-002",
       "module": "retargeting",
       "title": "Launch a retargeting campaign against 30d add-to-cart non-purchasers",
-      "reasoning": "Account-level 30d data: 83 add-to-cart events vs 15 purchases — roughly 68 people added to cart in the last 30 days without completing a purchase. Refreshed pixel-level check on 2026-08-28 (trailing 7d window) shows the same pattern continuing: ~66 AddToCart events vs 11 Purchases. No retargeting campaign currently exists against this group.",
+      "reasoning": "Account-level 30d data: 83 add-to-cart events vs 15 purchases — roughly 68 people added to cart in the last 30 days without completing a purchase. Refreshed pixel-level check on 2026-08-29 (trailing 7d window) shows the same pattern continuing: ~50 AddToCart events vs 11 Purchases. No retargeting campaign currently exists against this group.",
       "actionSummary": "Create a custom audience of site visitors who added to cart or initiated checkout in the last 14 days without purchasing (pixel-based), then launch a small retargeting campaign using the Kage_Sales creative (highest historical ROAS in the account, 4.30x).",
       "metaAction": { "tool": "ads_create_custom_audience", "params": { "name": "ATC/Checkout - No Purchase 14d", "subtype": "WEBSITE", "retention_days": 14, "rule_note": "add_to_cart OR initiate_checkout events, excluding purchase event" }, "followUp": { "tool": "ads_create_campaign", "params": { "objective": "OUTCOME_SALES", "note": "pair with ads_create_ad_set targeting the new custom audience and ads_create_ad reusing the Kage_Sales creative" } } },
       "status": "pending",
@@ -39,7 +39,7 @@
       "id": "A-003",
       "module": "catalog-dpa",
       "title": "Launch a Dynamic Product Ads (DPA) campaign from the connected Shopify catalog",
-      "reasoning": "A Shopify product catalog is already connected to this ad account (catalog_id 1149969713295773), but zero DPA/catalog-based campaigns are currently running. Gully Labs (main competitor) runs DCO/catalog ads as part of their active mix; KAI runs none. This is a structural gap, not a performance one. Meta's own Opportunity Score tool (account score 88/100) also flags Advantage+ catalog ads as a top recommendation (+3 points, 'lower cost per action'). Catalog health check on 2026-08-28 found 3 diagnostic issues worth fixing first: 18 items marked out-of-stock (must_fix — these won't appear in dynamic ads), 24 items with fewer than 2 images (opportunity), and 4 unmatched content IDs between the catalog and pixel (opportunity).",
+      "reasoning": "A Shopify product catalog is already connected to this ad account (catalog_id 1149969713295773), but zero DPA/catalog-based campaigns are currently running. Gully Labs (main competitor) runs DCO/catalog ads as part of their active mix; KAI runs none. This is a structural gap, not a performance one. Meta's own Opportunity Score tool (account score 85/100 as of 2026-08-29, down from 88) still flags Advantage+ catalog ads as a top recommendation (+4 points, 'lower cost per action'). Catalog health check re-run on 2026-08-29 found the same 3 diagnostic issues, one improved: 18 items still marked out-of-stock (must_fix — these won't appear in dynamic ads, unchanged), 24 items with fewer than 2 images (opportunity, unchanged), and only 1 unmatched content ID between the catalog and pixel now (opportunity, down from 4).",
       "actionSummary": "Fix the 18 out-of-stock catalog items first (update availability), check catalog health (ads_catalog_get_diagnostics), create a product set for best-sellers, and launch a catalog sales (DPA) campaign targeting site visitors/past purchasers.",
       "metaAction": { "tool": "ads_catalog_create_product_set", "params": { "catalog_id": "1149969713295773", "note": "start with a best-sellers product set before a full-catalog campaign; confirm out-of-stock items are resolved first" }, "followUp": { "tool": "ads_create_ad", "params": { "note": "catalog-based dynamic ad against the new product set" } } },
       "status": "pending",
@@ -49,9 +49,9 @@
       "id": "A-004",
       "module": "auto-exclusion",
       "title": "Exclude existing purchasers from Kage_sales_1908 prospecting targeting",
-      "reasoning": "Kage_sales_1908 is the account's only active sales-objective prospecting campaign (₹4,321.85 spent in the last 30 days, ROAS 1.84x). Its ad set (id 120255351569140159) targets broad interest/behavior segments (Footwear, Sneakers, Street fashion, Frequent Travelers, Engaged Shoppers) with Advantage+ audience expansion on, but the targeting spec has no excluded_custom_audiences entry for existing purchasers — checked directly against the live targeting spec on 2026-08-28. Some fraction of prospecting spend is likely re-reaching people who already bought, which understates true new-customer efficiency.",
-      "actionSummary": "Create a 'Purchasers - All Time' custom audience from the Shopify Meta Pixel's Purchase event, then add it as an excluded audience on Kage_sales_1908's ad set targeting, leaving all other targeting unchanged.",
-      "metaAction": { "tool": "ads_create_custom_audience", "params": { "name": "Purchasers - All Time", "subtype": "WEBSITE", "rule_note": "purchase event, longest available retention window" }, "followUp": { "tool": "ads_update_entity", "params": { "entity_id": "120255351569140159", "entity_type": "adset", "field": "targeting", "note": "add the new Purchasers custom audience to excluded_custom_audiences in the existing targeting spec; do not otherwise modify targeting" } } },
+      "reasoning": "Kage_sales_1908 is the account's only active sales-objective prospecting campaign (₹5,089.63 spent in the last 30 days, ROAS 1.57x — down from 1.84x on 2026-08-28's smaller spend base). Its ad set (id 120255351569140159) targets broad interest/behavior segments (Footwear, Sneakers, Street fashion, Frequent Travelers, Engaged Shoppers) with Advantage+ audience expansion on, but the targeting spec still has no excluded_custom_audiences entry — re-checked directly against the live targeting spec on 2026-08-29. A re-check of the account's custom audiences on 2026-08-29 found an existing 'Purchasers 30D' audience (id 120249907176770159, subtype PLATFORM/website pixel-based, delivery_status ACTIVE) that was not previously known — no need to create a new audience, it can be applied directly. Some fraction of prospecting spend is likely re-reaching people who already bought, which understates true new-customer efficiency.",
+      "actionSummary": "Add the existing 'Purchasers 30D' custom audience (id 120249907176770159) as an excluded audience on Kage_sales_1908's ad set targeting, leaving all other targeting unchanged. No new audience needs to be created.",
+      "metaAction": { "tool": "ads_update_entity", "params": { "entity_id": "120255351569140159", "entity_type": "adset", "field": "targeting", "note": "add existing custom audience id 120249907176770159 ('Purchasers 30D') to excluded_custom_audiences in the existing targeting spec; do not otherwise modify targeting" } },
       "status": "pending",
       "createdAt": "2026-08-28T01:41:31.000Z"
     }
@@ -69,8 +69,8 @@
     {
       "id": "AL-002",
       "module": "underperformer-watch",
-      "title": "Kage_TOF: ₹1,407 spent (30d), 0 purchases",
-      "detail": "Traffic-objective campaign, not sales-optimized, so 0 purchases is expected — not a kill signal on its own. Frequency (1.06) and CTR (2.20%) are both healthy, no fatigue. Flagging so it stays on your radar if it doesn't start feeding a retargeting/conversion campaign soon.",
+      "title": "Kage_TOF: ₹1,691 spent (month-to-date), 0 purchases",
+      "detail": "Traffic-objective campaign, not sales-optimized, so 0 purchases is expected — not a kill signal on its own. As of 2026-08-29: frequency (1.04, trailing 7d) is still healthy, no fatigue. CTR has softened to 1.65% (trailing 7d) from 2.20% previously — worth watching but not yet a trigger on its own. Flagging so it stays on your radar if it doesn't start feeding a retargeting/conversion campaign soon.",
       "severity": "low",
       "dismissed": false,
       "createdAt": "2026-08-27T00:00:00.000Z"
