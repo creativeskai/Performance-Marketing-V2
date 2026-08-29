@@ -40,7 +40,11 @@ export default async function handler(req, res) {
     return res.status(500).json({ error: 'Server misconfigured: missing META_ACCESS_TOKEN or GITHUB_TOKEN env var' });
   }
 
-  const { action, proposalId, settings, overrides, followUpOverrides } = req.body || {};
+  const { action, proposalId, settings, overrides, followUpOverrides, overridesChain } = req.body || {};
+  // overridesChain (array, index 0 = main step, 1 = followUp, 2 = followUp.followUp, ...)
+  // is the current shape sent by the dashboard's chain-aware editor. overrides/
+  // followUpOverrides are kept accepted for backward compatibility (old 2-step UI).
+  const chainOverrides = overridesChain || [overrides, followUpOverrides];
   if (!['approve', 'reject', 'update-settings'].includes(action)) {
     return res.status(400).json({ error: 'action must be approve, reject, or update-settings' });
   }
@@ -86,41 +90,42 @@ export default async function handler(req, res) {
         queue.log.push({ proposalId, action: proposal.actionSummary, result: 'rejected', tier: proposal.tier, executedAt: resolvedAt });
 
       } else {
-        // approve — merge any user-adjusted parameters (audience/geo/creative/budget/etc,
-        // edited in the dashboard's parameter editor) over the proposal's stored defaults
-        // before executing. Nothing here re-derives the action, it only overrides values.
-        const effectiveAction = {
-          ...proposal.metaAction,
-          params: { ...proposal.metaAction.params, ...(overrides || {}) }
-        };
-        if (proposal.metaAction.followUp) {
-          effectiveAction.followUp = {
-            ...proposal.metaAction.followUp,
-            params: { ...proposal.metaAction.followUp.params, ...(followUpOverrides || {}) }
-          };
+        // approve — flatten the whole chain (main, followUp, followUp.followUp, ...)
+        // into a list of steps, merging each step's dashboard overrides over its
+        // stored defaults. Nothing here re-derives an action, it only overrides values.
+        const steps = [];
+        let node = proposal.metaAction;
+        let i = 0;
+        while (node) {
+          steps.push({ tool: node.tool, params: { ...node.params, ...(chainOverrides[i] || {}) } });
+          node = node.followUp;
+          i++;
         }
-        const previousState = await captureState(effectiveAction, metaToken);
-        let detail;
-        try {
-          // Walk the chain — main, then followUp, then followUp.followUp, etc.
-          // Overrides from the dashboard only apply to the first two steps
-          // (main + immediate followUp); anything deeper runs with its stored
-          // defaults, since there's no editor UI for step 3+ yet.
-          detail = await execute(effectiveAction, metaToken);
-          let step = effectiveAction.followUp;
-          let cursor = detail;
-          while (step) {
-            cursor.followUp = await execute(step, metaToken);
-            cursor = cursor.followUp;
-            step = step.followUp;
+        const previousState = await captureState(steps[0], metaToken);
+        const stepResults = [];
+        let failedAt = -1;
+        let failureError = null;
+        for (let idx = 0; idx < steps.length; idx++) {
+          try {
+            // Resolve {{stepN.field}} placeholders against prior steps' real API
+            // responses — a new ad set can't know its campaign_id until Meta
+            // actually returns one from the campaign-creation call, etc.
+            const resolvedParams = resolveTemplates(steps[idx].params, stepResults);
+            const result = await execute({ tool: steps[idx].tool, params: resolvedParams }, metaToken);
+            if (result && result.error) throw new Error(result.error.message || JSON.stringify(result.error));
+            stepResults.push(result);
+          } catch (e) {
+            failedAt = idx;
+            failureError = String((e && e.message) || e);
+            break;
           }
-          proposal.status = 'executed';
-        } catch (e) {
-          proposal.status = 'failed';
-          detail = { error: String((e && e.message) || e) };
         }
+        proposal.status = failedAt === -1 ? 'executed' : 'failed';
         proposal.resolvedAt = resolvedAt;
-        if (overrides || followUpOverrides) proposal.appliedOverrides = { overrides, followUpOverrides };
+        if (chainOverrides.some(Boolean)) proposal.appliedOverrides = chainOverrides;
+        const detail = failedAt === -1
+          ? { steps: stepResults }
+          : { steps: stepResults, failedAtStep: failedAt, error: failureError };
         queue.log = queue.log || [];
         queue.log.push({
           proposalId,
@@ -133,7 +138,7 @@ export default async function handler(req, res) {
         });
         commitMessage = `${proposal.status === 'executed' ? 'Executed' : 'Failed executing'} ${proposalId} via dashboard`;
         responsePayload.executionResult = proposal.status;
-        if (proposal.status === 'failed') responsePayload.executionError = detail.error;
+        if (proposal.status === 'failed') responsePayload.executionError = failureError;
       }
     }
 
@@ -189,6 +194,26 @@ async function createCreativeFromFields(fields, token) {
   });
   const r = await fetch(`${GRAPH}/${AD_ACCOUNT}/adcreatives`, { method: 'POST', headers: { 'Content-Type': 'application/x-www-form-urlencoded' }, body });
   return await r.json();
+}
+
+// Resolves "{{stepN.field}}" placeholder strings against earlier steps' real
+// API responses in a multi-step chain (e.g. an ad set's campaign_id can't be
+// known until the campaign-creation call actually returns one from Meta).
+// Walks arrays/objects recursively; non-matching strings pass through unchanged.
+function resolveTemplates(value, stepResults) {
+  if (typeof value === 'string') {
+    const m = value.match(/^\{\{step(\d+)\.(\w+)\}\}$/);
+    if (!m) return value;
+    const stepResult = stepResults[Number(m[1])];
+    return stepResult ? stepResult[m[2]] : value;
+  }
+  if (Array.isArray(value)) return value.map(v => resolveTemplates(v, stepResults));
+  if (value && typeof value === 'object') {
+    const out = {};
+    for (const [k, v] of Object.entries(value)) out[k] = resolveTemplates(v, stepResults);
+    return out;
+  }
+  return value;
 }
 
 // Generic dispatcher covering the finite metaAction.tool vocabulary used in ROUTINE.md.

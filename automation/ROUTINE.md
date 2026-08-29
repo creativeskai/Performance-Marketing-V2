@@ -103,15 +103,21 @@ image or video from the account (see `lookups`' `images`/`videos`, and
 `link_data` object_story_spec against the account's connected Page).
 
 Execution walks the full chain (`main` → `followUp` → `followUp.followUp` →
-…), not just one hop — needed for proposals like `high-intent-retargeting`
-that go audience → campaign → ad set → ad. **Known gap**: dashboard overrides
-(including the creative/targeting editors) only apply to the first two steps
-(main + immediate followUp) — anything deeper in the chain runs with its
-stored defaults, since there's no editor UI yet for step 3+. `A-002` itself
-is still only a 2-step proposal (audience + a bare campaign shell) as of
-2026-08-29 — it doesn't yet reach ad-set/ad creation, so approving it won't
-produce a fully live campaign on its own. Extending it into a real 3–4 step
-chain needs real budget/bid decisions filled in, not just schema support.
+…) to arbitrary depth, resolving `"{{stepN.field}}"` placeholders in a later
+step's params against an earlier step's real Meta API response (e.g. an ad
+set's `campaign_id` can't be known until the campaign-creation call actually
+returns one). Every step in a chain gets its own editor panel in the
+dashboard (numbered "Step N — tool"), including the targeting/creative
+editors wherever they apply — the earlier "overrides only apply to the first
+two steps" limitation is gone; the dashboard sends a full `overridesChain`
+array, one entry per step. `A-002` (`high-intent-retargeting`) is now a real
+4-step chain (audience → campaign → ad set → ad) using the account's actual
+active pixel (`833131719490535`) and the real Kage_Sales creative
+(`1063318642863205`), rebuilt 2026-08-29 — every step is created `PAUSED`,
+so approving it does not start spending; it needs a manual activate after
+review. The `ads_create_ad_set`'s `daily_budget` (25000, i.e. ₹250/day in
+Meta's minor-currency-unit field) is a concrete committed number, editable in
+the dashboard like any other field, not a placeholder note.
 
 ## Alert schema
 

@@ -40,11 +40,43 @@
       "module": "high-intent-retargeting",
       "tier": "approval",
       "title": "Launch a retargeting campaign against 30d add-to-cart non-purchasers",
-      "reasoning": "Account-level 30d data: 83 add-to-cart events vs 15 purchases — roughly 68 people added to cart in the last 30 days without completing a purchase. Refreshed pixel-level check on 2026-08-29 (trailing 7d window) shows the same pattern continuing: ~50 AddToCart events vs 11 Purchases. No retargeting campaign currently exists against this group.",
-      "actionSummary": "Create a custom audience of site visitors who added to cart or initiated checkout in the last 14 days without purchasing (pixel-based), then launch a small retargeting campaign using the Kage_Sales creative (highest historical ROAS in the account, 4.30x).",
-      "metaAction": { "tool": "ads_create_custom_audience", "params": { "name": "ATC/Checkout - No Purchase 14d", "subtype": "WEBSITE", "retention_days": 14, "rule_note": "add_to_cart OR initiate_checkout events, excluding purchase event" }, "followUp": { "tool": "ads_create_campaign", "params": { "objective": "OUTCOME_SALES", "note": "pair with ads_create_ad_set targeting the new custom audience and ads_create_ad reusing the Kage_Sales creative" } } },
+      "reasoning": "Account-level 30d data: 83 add-to-cart events vs 15 purchases — roughly 68 people added to cart in the last 30 days without completing a purchase. Refreshed pixel-level check on 2026-08-29 (trailing 7d window) shows the same pattern continuing: ~50 AddToCart events vs 11 Purchases. No retargeting campaign currently exists against this group. Rebuilt 2026-08-29 into a real, executable 4-step chain (previously only had 2 of 4 steps specced, with no real budget/creative/audience-rule values — approving it as originally written would have failed or produced an empty campaign shell). Uses the account's real active pixel ('Shopify Meta Pixel', dataset_id 833131719490535, last fired 2026-08-29) and the real Kage_Sales creative (id 1063318642863205, the account's best-ROAS creative at 4.30x, ad copy 'GRAB THE MOST CLICK-WORTHY SNEAKERS EVER').",
+      "actionSummary": "4-step chain, each step feeding the next real Meta-assigned ID (not guessed): (1) create the WEBSITE pixel audience — AddToCart OR InitiateCheckout in the last 14 days, excluding Purchase; (2) create the campaign (OUTCOME_SALES); (3) create the ad set targeting that new audience, India, Facebook+Instagram, optimizing for purchases, daily_budget 25000 (Meta's minor-currency-unit field — this is ₹250/day, editable via the parameter editor below, same conservative range as A-001's reactivation budget); (4) create the ad reusing the Kage_Sales creative. Every step is created PAUSED — approving this does NOT start spending. You'd review it in Ads Manager and activate manually, or tell Claude to activate once you're satisfied.",
+      "metaAction": {
+        "tool": "ads_create_custom_audience",
+        "params": {
+          "name": "ATC-Checkout No Purchase 14d",
+          "subtype": "WEBSITE",
+          "rule": {
+            "inclusions": { "operator": "or", "rules": [ { "event_sources": [ { "id": "833131719490535", "type": "pixel" } ], "retention_seconds": 1209600, "filter": { "operator": "or", "filters": [ { "field": "event", "operator": "=", "value": "AddToCart" }, { "field": "event", "operator": "=", "value": "InitiateCheckout" } ] } } ] },
+            "exclusions": { "operator": "or", "rules": [ { "event_sources": [ { "id": "833131719490535", "type": "pixel" } ], "retention_seconds": 1209600, "filter": { "field": "event", "operator": "=", "value": "Purchase" } } ] }
+          }
+        },
+        "followUp": {
+          "tool": "ads_create_campaign",
+          "params": { "name": "KAI Retargeting - ATC Non-Purchasers", "objective": "OUTCOME_SALES", "status": "PAUSED", "special_ad_categories": [] },
+          "followUp": {
+            "tool": "ads_create_ad_set",
+            "params": {
+              "name": "ATC Non-Purchasers 14d",
+              "campaign_id": "{{step1.id}}",
+              "daily_budget": 25000,
+              "billing_event": "IMPRESSIONS",
+              "optimization_goal": "OFFSITE_CONVERSIONS",
+              "bid_strategy": "LOWEST_COST_WITHOUT_CAP",
+              "promoted_object": { "pixel_id": "833131719490535", "custom_event_type": "PURCHASE" },
+              "targeting": { "geo_locations": { "countries": ["IN"] }, "custom_audiences": [ { "id": "{{step0.id}}" } ], "publisher_platforms": ["facebook", "instagram"] },
+              "status": "PAUSED"
+            },
+            "followUp": {
+              "tool": "ads_create_ad",
+              "params": { "name": "Retargeting - Kage_Sales creative", "adset_id": "{{step2.id}}", "creative": { "creative_id": "1063318642863205" }, "status": "PAUSED" }
+            }
+          }
+        }
+      },
       "status": "pending",
-      "createdAt": "2026-08-27T00:00:00.000Z"
+      "createdAt": "2026-08-29T12:15:00.000Z"
     },
     {
       "id": "A-003",

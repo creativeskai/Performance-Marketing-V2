@@ -2647,34 +2647,42 @@ function fieldRow(label, inputHtml){
 }
 function isTargetingParams(params){ return !!(params && params.field === 'targeting'); }
 function isCreativeAction(tool){ return tool==='ads_create_ad' || tool==='ads_create_creative'; }
+function isTemplateRef(v){ return typeof v==='string' && /^\{\{step\d+\.\w+\}\}$/.test(v); }
+function groupForStep(i){ return i===0 ? 'm' : (i===1 ? 'f' : 'f'+i); }
+function chainSteps(p){
+  const steps=[]; let node=p.metaAction;
+  while(node){ steps.push(node); node=node.followUp; }
+  return steps;
+}
 function paramEditorHtml(p){
-  const mainIsTgt = isTargetingParams(p.metaAction.params);
-  const fuIsTgt = p.metaAction.followUp && isTargetingParams(p.metaAction.followUp.params);
-  const mainIsCrea = isCreativeAction(p.metaAction.tool);
-  const fuIsCrea = p.metaAction.followUp && isCreativeAction(p.metaAction.followUp.tool);
-  const mainParams = Object.entries(p.metaAction.params||{}).filter(([k])=>!SKIP_PARAM_KEYS.has(k) && !(mainIsTgt && k==='field'));
-  const fuParams = p.metaAction.followUp ? Object.entries(p.metaAction.followUp.params||{}).filter(([k])=>!SKIP_PARAM_KEYS.has(k) && !(fuIsTgt && k==='field')) : [];
-  if(!mainParams.length && !fuParams.length && !mainIsCrea && !fuIsCrea) return '';
-  let html = '<details style="margin-top:10px;border:1px solid var(--border);border-radius:8px;padding:8px 12px" open>'
+  const steps = chainSteps(p);
+  let inner = '';
+  let anyContent = false;
+  steps.forEach((step, i)=>{
+    const group = groupForStep(i);
+    const isTgt = isTargetingParams(step.params);
+    const isCrea = isCreativeAction(step.tool);
+    const entries = Object.entries(step.params||{});
+    const autoKeys = entries.filter(([,v])=>isTemplateRef(v)).map(([k])=>k);
+    const stepParams = entries.filter(([k,v])=>!SKIP_PARAM_KEYS.has(k) && !(isTgt && k==='field') && !isTemplateRef(v));
+    if(stepParams.length || isTgt || isCrea || autoKeys.length) anyContent = true;
+    if(i>0){
+      inner += '<div style="font-family:var(--mono);font-size:.66rem;color:var(--text3);text-transform:uppercase;letter-spacing:.04em;margin:10px 0 6px;border-top:1px dashed var(--border);padding-top:8px">Step ' + (i+1) + ' &mdash; ' + step.tool + '</div>';
+    }
+    inner += stepParams.map(([k,v])=>paramFieldHtml(p.id,group,k,v)).join('');
+    if(autoKeys.length){
+      inner += '<div class="auto-empty">' + autoKeys.join(', ') + ' filled in automatically from the previous step\'s result.</div>';
+    }
+    if(isTgt){
+      inner += '<div id="targeting-editor-' + group + '-' + p.id + '" class="auto-empty">Loading current targeting&#x2026;</div>';
+      setTimeout(()=>renderTargetingEditor(p, group, step.params.entity_id), 0);
+    }
+    if(isCrea){ inner += creativeEditorHtml(p.id, group); }
+  });
+  if(!anyContent) return '';
+  return '<details style="margin-top:10px;border:1px solid var(--border);border-radius:8px;padding:8px 12px" open>'
     + '<summary style="cursor:pointer;font-family:var(--mono);font-size:.68rem;color:var(--text3);text-transform:uppercase;letter-spacing:.04em">Adjust parameters before approving</summary>'
-    + '<div style="margin-top:10px">'
-    + mainParams.map(([k,v])=>paramFieldHtml(p.id,'m',k,v)).join('');
-  if(mainIsTgt){
-    html += '<div id="targeting-editor-m-' + p.id + '" class="auto-empty">Loading current targeting&#x2026;</div>';
-    setTimeout(()=>renderTargetingEditor(p, 'm', p.metaAction.params.entity_id), 0);
-  }
-  if(mainIsCrea){ html += creativeEditorHtml(p.id, 'm'); }
-  if(fuParams.length || fuIsCrea){
-    html += '<div style="font-family:var(--mono);font-size:.66rem;color:var(--text3);text-transform:uppercase;letter-spacing:.04em;margin:10px 0 6px;border-top:1px dashed var(--border);padding-top:8px">Follow-up action</div>'
-      + fuParams.map(([k,v])=>paramFieldHtml(p.id,'f',k,v)).join('');
-  }
-  if(fuIsTgt){
-    html += '<div id="targeting-editor-f-' + p.id + '" class="auto-empty">Loading current targeting&#x2026;</div>';
-    setTimeout(()=>renderTargetingEditor(p, 'f', p.metaAction.followUp.params.entity_id), 0);
-  }
-  if(fuIsCrea){ html += creativeEditorHtml(p.id, 'f'); }
-  html += '</div></details>';
-  return html;
+    + '<div style="margin-top:10px">' + inner + '</div></details>';
 }
 
 // ── Creative editor: reuse an existing ad creative, or write new primary
@@ -2899,34 +2907,24 @@ function collectOverrides(p){
     if(el.type==='number') return el.value===''?undefined:Number(el.value);
     return el.value===''?undefined:el.value;
   };
-  const overrides = {};
-  Object.keys(p.metaAction.params||{}).filter(k=>!SKIP_PARAM_KEYS.has(k)).forEach(k=>{
-    const v = read('m', k);
-    if(v!==undefined) overrides[k]=v;
-  });
-  if(isTargetingParams(p.metaAction.params)){
-    const t = buildTargetingOverride(p.id, 'm');
-    if(t) overrides.value = t;
-  }
-  if(isCreativeAction(p.metaAction.tool)){
-    Object.assign(overrides, buildCreativeOverride(p.id, 'm') || {});
-  }
-  let followUpOverrides = undefined;
-  if(p.metaAction.followUp){
-    followUpOverrides = {};
-    Object.keys(p.metaAction.followUp.params||{}).filter(k=>!SKIP_PARAM_KEYS.has(k)).forEach(k=>{
-      const v = read('f', k);
-      if(v!==undefined) followUpOverrides[k]=v;
+  const steps = chainSteps(p);
+  const overridesChain = steps.map((step, i)=>{
+    const group = groupForStep(i);
+    const stepOverrides = {};
+    Object.keys(step.params||{}).filter(k=>!SKIP_PARAM_KEYS.has(k) && !isTemplateRef(step.params[k])).forEach(k=>{
+      const v = read(group, k);
+      if(v!==undefined) stepOverrides[k]=v;
     });
-    if(isTargetingParams(p.metaAction.followUp.params)){
-      const t = buildTargetingOverride(p.id, 'f');
-      if(t) followUpOverrides.value = t;
+    if(isTargetingParams(step.params)){
+      const t = buildTargetingOverride(p.id, group);
+      if(t) stepOverrides.value = t;
     }
-    if(isCreativeAction(p.metaAction.followUp.tool)){
-      Object.assign(followUpOverrides, buildCreativeOverride(p.id, 'f') || {});
+    if(isCreativeAction(step.tool)){
+      Object.assign(stepOverrides, buildCreativeOverride(p.id, group) || {});
     }
-  }
-  return {overrides, followUpOverrides};
+    return stepOverrides;
+  });
+  return overridesChain;
 }
 function severityColor(s){return s==='high'?'var(--red)':s==='medium'?'var(--orange)':'var(--blue)';}
 function tierBadge(tier){
@@ -3022,8 +3020,8 @@ function callAutomationAction(body, statusElId, onSuccess){
 }
 function approveProposal(id){
   const p = (AUTO_QUEUE.proposals||[]).find(x=>x.id===id);
-  const {overrides, followUpOverrides} = p ? collectOverrides(p) : {};
-  callAutomationAction({action:'approve', proposalId:id, overrides, followUpOverrides}, 'proposal-status-'+id);
+  const overridesChain = p ? collectOverrides(p) : [];
+  callAutomationAction({action:'approve', proposalId:id, overridesChain}, 'proposal-status-'+id);
 }
 function rejectProposal(id){
   callAutomationAction({action:'reject', proposalId:id}, 'proposal-status-'+id);
