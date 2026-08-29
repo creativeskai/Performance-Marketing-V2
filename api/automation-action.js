@@ -102,9 +102,17 @@ export default async function handler(req, res) {
         const previousState = await captureState(effectiveAction, metaToken);
         let detail;
         try {
+          // Walk the chain — main, then followUp, then followUp.followUp, etc.
+          // Overrides from the dashboard only apply to the first two steps
+          // (main + immediate followUp); anything deeper runs with its stored
+          // defaults, since there's no editor UI for step 3+ yet.
           detail = await execute(effectiveAction, metaToken);
-          if (effectiveAction.followUp) {
-            detail.followUp = await execute(effectiveAction.followUp, metaToken);
+          let step = effectiveAction.followUp;
+          let cursor = detail;
+          while (step) {
+            cursor.followUp = await execute(step, metaToken);
+            cursor = cursor.followUp;
+            step = step.followUp;
           }
           proposal.status = 'executed';
         } catch (e) {
@@ -153,15 +161,56 @@ export default async function handler(req, res) {
   }
 }
 
+// Resolves the Facebook Page connected to this ad account — needed as
+// object_story_spec.page_id whenever the dashboard's creative editor is used
+// in "write new ad copy" mode (vs. reusing an existing creative_id).
+async function resolvePageId(token) {
+  const r = await fetch(`${GRAPH}/${AD_ACCOUNT}/promote_pages?fields=id&limit=1&access_token=${token}`);
+  const j = await r.json();
+  const id = j.data && j.data[0] && j.data[0].id;
+  if (!id) throw new Error('Could not resolve a connected Facebook Page for this ad account — needed to build a new creative.');
+  return id;
+}
+
+// Turns the dashboard creative editor's flat fields (body/title/cta/image_hash|
+// video_id) into a real Meta ad creative via a standard link_data object_story_spec.
+async function createCreativeFromFields(fields, token) {
+  const pageId = await resolvePageId(token);
+  const destLink = fields.link || 'https://hustlewithkai.com';
+  const linkData = { message: fields.body, name: fields.title, link: destLink };
+  if (fields.call_to_action_type) linkData.call_to_action = { type: fields.call_to_action_type, value: { link: destLink } };
+  if (fields.video_id) linkData.video_id = fields.video_id;
+  else if (fields.image_hash) linkData.image_hash = fields.image_hash;
+  const objectStorySpec = { page_id: pageId, link_data: linkData };
+  const body = new URLSearchParams({
+    name: fields.name || 'New creative',
+    object_story_spec: JSON.stringify(objectStorySpec),
+    access_token: token
+  });
+  const r = await fetch(`${GRAPH}/${AD_ACCOUNT}/adcreatives`, { method: 'POST', headers: { 'Content-Type': 'application/x-www-form-urlencoded' }, body });
+  return await r.json();
+}
+
 // Generic dispatcher covering the finite metaAction.tool vocabulary used in ROUTINE.md.
 // Mirrors what chat-driven execution does via the Meta Ads MCP, re-implemented as plain
 // Graph API calls since a Vercel function can't call MCP tools directly.
 async function execute(action, token) {
-  const { tool, params = {} } = action;
+  let { tool, params = {} } = action;
   const qs = (obj) => Object.entries(obj)
     .filter(([, v]) => v !== undefined && v !== null)
     .map(([k, v]) => `${encodeURIComponent(k)}=${encodeURIComponent(typeof v === 'object' ? JSON.stringify(v) : v)}`)
     .join('&');
+
+  // The dashboard's creative editor ("write new ad copy" mode) sends its fields
+  // under params.new_creative regardless of the target tool. Resolve that into
+  // a real creative before doing anything else.
+  if (params.new_creative) {
+    const created = await createCreativeFromFields(params.new_creative, token);
+    if (created.error) throw new Error(`Creative creation failed: ${created.error.message || JSON.stringify(created.error)}`);
+    if (tool === 'ads_create_creative') return created; // the creative itself is the requested output
+    const { new_creative, ...rest } = params;
+    params = { ...rest, creative: { creative_id: created.id } };
+  }
 
   switch (tool) {
     case 'ads_update_entity': {

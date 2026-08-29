@@ -95,7 +95,23 @@ Proposals whose `metaAction.params.field === "targeting"` get the full
 targeting editor in the dashboard (age/gender/geo include-exclude/devices/
 placements/excluded audiences/interest &amp; behavior search) instead of a raw
 JSON field — see `api/meta.js`'s `adset_targeting` and `targeting_search`
-endpoints.
+endpoints. Proposals whose `metaAction.tool` (or `followUp.tool`) is
+`ads_create_ad` or `ads_create_creative` get a creative editor — reuse an
+existing creative by id, or write new primary text/headline/CTA and pick an
+image or video from the account (see `lookups`' `images`/`videos`, and
+`automation-action.js`'s `createCreativeFromFields`, which builds a standard
+`link_data` object_story_spec against the account's connected Page).
+
+Execution walks the full chain (`main` → `followUp` → `followUp.followUp` →
+…), not just one hop — needed for proposals like `high-intent-retargeting`
+that go audience → campaign → ad set → ad. **Known gap**: dashboard overrides
+(including the creative/targeting editors) only apply to the first two steps
+(main + immediate followUp) — anything deeper in the chain runs with its
+stored defaults, since there's no editor UI yet for step 3+. `A-002` itself
+is still only a 2-step proposal (audience + a bare campaign shell) as of
+2026-08-29 — it doesn't yet reach ad-set/ad creation, so approving it won't
+produce a fully live campaign on its own. Extending it into a real 3–4 step
+chain needs real budget/bid decisions filled in, not just schema support.
 
 ## Alert schema
 

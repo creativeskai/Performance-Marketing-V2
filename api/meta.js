@@ -122,22 +122,29 @@ export default async function handler(req, res) {
 
     } else if (endpoint === 'lookups') {
       // Powers the Automation tab's parameter editor — real, pickable options
-      // (not free text) for audience/creative/geo fields on a proposal.
-      const [audRes, creaRes, geoRes] = await Promise.all([
+      // (not free text) for audience/creative/geo/image/video fields on a proposal.
+      const [audRes, creaRes, geoRes, imgRes, vidRes] = await Promise.all([
         fetch(`https://graph.facebook.com/v19.0/${AD_ACCOUNT}/customaudiences` +
           `?fields=id,name,subtype,approximate_count_lower_bound,delivery_status` +
           `&limit=200&access_token=${token}`),
         fetch(`https://graph.facebook.com/v19.0/${AD_ACCOUNT}/adcreatives` +
-          `?fields=id,name&limit=200&access_token=${token}`),
+          `?fields=id,name,body,title,image_url,thumbnail_url,call_to_action_type` +
+          `&limit=100&access_token=${token}`),
         fetch(`https://graph.facebook.com/v19.0/search` +
           `?type=adgeolocation&location_types=${encodeURIComponent('["region"]')}` +
-          `&country_code=IN&limit=200&access_token=${token}`)
+          `&country_code=IN&limit=200&access_token=${token}`),
+        fetch(`https://graph.facebook.com/v19.0/${AD_ACCOUNT}/adimages` +
+          `?fields=hash,name,url_128&limit=60&access_token=${token}`),
+        fetch(`https://graph.facebook.com/v19.0/${AD_ACCOUNT}/advideos` +
+          `?fields=id,title,picture&limit=60&access_token=${token}`)
       ]);
-      const [aud, crea, geo] = await Promise.all([audRes.json(), creaRes.json(), geoRes.json()]);
+      const [aud, crea, geo, img, vid] = await Promise.all([audRes.json(), creaRes.json(), geoRes.json(), imgRes.json(), vidRes.json()]);
       data = {
         custom_audiences: aud.data || aud,
         creatives: crea.data || crea,
-        regions: geo.data || geo
+        regions: geo.data || geo,
+        images: img.data || img,
+        videos: vid.data || vid
       };
 
     } else if (endpoint === 'adset_targeting') {

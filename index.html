@@ -2646,12 +2646,15 @@ function fieldRow(label, inputHtml){
   return '<div style="margin-bottom:8px"><label style="display:block;font-family:var(--mono);font-size:.66rem;color:var(--text3);text-transform:uppercase;letter-spacing:.04em;margin-bottom:3px">' + label + '</label>' + inputHtml + '</div>';
 }
 function isTargetingParams(params){ return !!(params && params.field === 'targeting'); }
+function isCreativeAction(tool){ return tool==='ads_create_ad' || tool==='ads_create_creative'; }
 function paramEditorHtml(p){
   const mainIsTgt = isTargetingParams(p.metaAction.params);
   const fuIsTgt = p.metaAction.followUp && isTargetingParams(p.metaAction.followUp.params);
+  const mainIsCrea = isCreativeAction(p.metaAction.tool);
+  const fuIsCrea = p.metaAction.followUp && isCreativeAction(p.metaAction.followUp.tool);
   const mainParams = Object.entries(p.metaAction.params||{}).filter(([k])=>!SKIP_PARAM_KEYS.has(k) && !(mainIsTgt && k==='field'));
   const fuParams = p.metaAction.followUp ? Object.entries(p.metaAction.followUp.params||{}).filter(([k])=>!SKIP_PARAM_KEYS.has(k) && !(fuIsTgt && k==='field')) : [];
-  if(!mainParams.length && !fuParams.length) return '';
+  if(!mainParams.length && !fuParams.length && !mainIsCrea && !fuIsCrea) return '';
   let html = '<details style="margin-top:10px;border:1px solid var(--border);border-radius:8px;padding:8px 12px" open>'
     + '<summary style="cursor:pointer;font-family:var(--mono);font-size:.68rem;color:var(--text3);text-transform:uppercase;letter-spacing:.04em">Adjust parameters before approving</summary>'
     + '<div style="margin-top:10px">'
@@ -2660,7 +2663,8 @@ function paramEditorHtml(p){
     html += '<div id="targeting-editor-m-' + p.id + '" class="auto-empty">Loading current targeting&#x2026;</div>';
     setTimeout(()=>renderTargetingEditor(p, 'm', p.metaAction.params.entity_id), 0);
   }
-  if(fuParams.length){
+  if(mainIsCrea){ html += creativeEditorHtml(p.id, 'm'); }
+  if(fuParams.length || fuIsCrea){
     html += '<div style="font-family:var(--mono);font-size:.66rem;color:var(--text3);text-transform:uppercase;letter-spacing:.04em;margin:10px 0 6px;border-top:1px dashed var(--border);padding-top:8px">Follow-up action</div>'
       + fuParams.map(([k,v])=>paramFieldHtml(p.id,'f',k,v)).join('');
   }
@@ -2668,8 +2672,73 @@ function paramEditorHtml(p){
     html += '<div id="targeting-editor-f-' + p.id + '" class="auto-empty">Loading current targeting&#x2026;</div>';
     setTimeout(()=>renderTargetingEditor(p, 'f', p.metaAction.followUp.params.entity_id), 0);
   }
+  if(fuIsCrea){ html += creativeEditorHtml(p.id, 'f'); }
   html += '</div></details>';
   return html;
+}
+
+// ── Creative editor: reuse an existing ad creative, or write new primary
+// text/headline/CTA/image-or-video, wherever a proposal actually creates an ad. ──
+function creaId(pid,group,suffix){ return 'crea-'+group+'-'+pid+'-'+suffix; }
+function creativeEditorHtml(pid, group){
+  const creatives = (AUTO_LOOKUPS && AUTO_LOOKUPS.creatives) || [];
+  const images = (AUTO_LOOKUPS && AUTO_LOOKUPS.images) || [];
+  const videos = (AUTO_LOOKUPS && AUTO_LOOKUPS.videos) || [];
+  const existOpts = creatives.map(c=>
+    '<option value="'+c.id+'">'+ (c.title||c.name||c.id) + (c.body?' — '+String(c.body).slice(0,60).replace(/"/g,'&quot;')+(c.body.length>60?'…':''):'') +'</option>'
+  ).join('');
+  const imgOpts = images.map(i=>'<option value="'+i.hash+'">'+(i.name||i.hash)+'</option>').join('');
+  const vidOpts = videos.map(v=>'<option value="'+v.id+'">'+(v.title||v.id)+'</option>').join('');
+  const ctaOpts = ['SHOP_NOW','LEARN_MORE','SIGN_UP','SEE_DETAILS','BUY_NOW','GET_OFFER','SUBSCRIBE','CONTACT_US']
+    .map(c=>'<option value="'+c+'">'+c.replace(/_/g,' ')+'</option>').join('');
+  return '<div style="background:var(--bg2);border-radius:8px;padding:10px;margin-top:8px">'
+    + '<div style="font-size:.72rem;color:var(--text3);margin-bottom:8px">This step creates an ad &mdash; choose its creative.</div>'
+    + '<label style="margin-right:16px;font-size:.78rem"><input type="radio" name="'+creaId(pid,group,'mode')+'" value="existing" checked onclick="toggleCreaMode(\''+pid+'\',\''+group+'\',\'existing\')"> Reuse an existing creative</label>'
+    + '<label style="font-size:.78rem"><input type="radio" name="'+creaId(pid,group,'mode')+'" value="new" onclick="toggleCreaMode(\''+pid+'\',\''+group+'\',\'new\')"> Write new ad copy</label>'
+    + '<div id="'+creaId(pid,group,'existing-block')+'" style="margin-top:8px">'
+      + fieldRow('Existing creative', '<select id="'+creaId(pid,group,'existing-id')+'" style="'+selStyle()+'"><option value="">— choose —</option>'+existOpts+'</select>')
+    + '</div>'
+    + '<div id="'+creaId(pid,group,'new-block')+'" style="margin-top:8px;display:none">'
+      + fieldRow('Creative name (internal)', '<input type="text" id="'+creaId(pid,group,'new-name')+'" style="'+selStyle()+'" placeholder="e.g. Kage_Sales - Aug refresh">')
+      + fieldRow('Primary text', '<textarea id="'+creaId(pid,group,'new-body')+'" rows="3" style="'+selStyle()+'" placeholder="The main ad copy people read above the image/video"></textarea>')
+      + fieldRow('Headline', '<input type="text" id="'+creaId(pid,group,'new-title')+'" style="'+selStyle()+'" placeholder="Short headline shown near the CTA button">')
+      + fieldRow('Call to action', '<select id="'+creaId(pid,group,'new-cta')+'" style="'+selStyle()+'">'+ctaOpts+'</select>')
+      + '<label style="margin-right:16px;font-size:.78rem"><input type="radio" name="'+creaId(pid,group,'media')+'" value="image" checked onclick="toggleCreaMedia(\''+pid+'\',\''+group+'\',\'image\')"> Image</label>'
+      + '<label style="font-size:.78rem"><input type="radio" name="'+creaId(pid,group,'media')+'" value="video" onclick="toggleCreaMedia(\''+pid+'\',\''+group+'\',\'video\')"> Video</label>'
+      + '<div id="'+creaId(pid,group,'image-block')+'" style="margin-top:6px">'+fieldRow('Image', '<select id="'+creaId(pid,group,'new-image')+'" style="'+selStyle()+'"><option value="">— choose —</option>'+imgOpts+'</select>')+'</div>'
+      + '<div id="'+creaId(pid,group,'video-block')+'" style="margin-top:6px;display:none">'+fieldRow('Video', '<select id="'+creaId(pid,group,'new-video')+'" style="'+selStyle()+'"><option value="">— choose —</option>'+vidOpts+'</select>')+'</div>'
+    + '</div>'
+    + '</div>';
+}
+function toggleCreaMode(pid, group, mode){
+  document.getElementById(creaId(pid,group,'existing-block')).style.display = mode==='existing' ? '' : 'none';
+  document.getElementById(creaId(pid,group,'new-block')).style.display = mode==='new' ? '' : 'none';
+}
+function toggleCreaMedia(pid, group, media){
+  document.getElementById(creaId(pid,group,'image-block')).style.display = media==='image' ? '' : 'none';
+  document.getElementById(creaId(pid,group,'video-block')).style.display = media==='video' ? '' : 'none';
+}
+function buildCreativeOverride(pid, group){
+  const g = id => document.getElementById(id);
+  const modeEl = document.querySelector('input[name="'+creaId(pid,group,'mode')+'"]:checked');
+  if(!modeEl) return null; // editor not present for this proposal/group
+  if(modeEl.value==='existing'){
+    const id = g(creaId(pid,group,'existing-id')).value;
+    return id ? { creative: { creative_id: id } } : {};
+  }
+  const mediaEl = document.querySelector('input[name="'+creaId(pid,group,'media')+'"]:checked');
+  const newCreative = {
+    name: g(creaId(pid,group,'new-name')).value || undefined,
+    body: g(creaId(pid,group,'new-body')).value || undefined,
+    title: g(creaId(pid,group,'new-title')).value || undefined,
+    call_to_action_type: g(creaId(pid,group,'new-cta')).value || undefined
+  };
+  if(mediaEl && mediaEl.value==='video'){
+    newCreative.video_id = g(creaId(pid,group,'new-video')).value || undefined;
+  } else {
+    newCreative.image_hash = g(creaId(pid,group,'new-image')).value || undefined;
+  }
+  return { new_creative: newCreative };
 }
 
 // ── Targeting editor: geo/audience/interest/behavior/device/placement,
@@ -2839,6 +2908,9 @@ function collectOverrides(p){
     const t = buildTargetingOverride(p.id, 'm');
     if(t) overrides.value = t;
   }
+  if(isCreativeAction(p.metaAction.tool)){
+    Object.assign(overrides, buildCreativeOverride(p.id, 'm') || {});
+  }
   let followUpOverrides = undefined;
   if(p.metaAction.followUp){
     followUpOverrides = {};
@@ -2849,6 +2921,9 @@ function collectOverrides(p){
     if(isTargetingParams(p.metaAction.followUp.params)){
       const t = buildTargetingOverride(p.id, 'f');
       if(t) followUpOverrides.value = t;
+    }
+    if(isCreativeAction(p.metaAction.followUp.tool)){
+      Object.assign(followUpOverrides, buildCreativeOverride(p.id, 'f') || {});
     }
   }
   return {overrides, followUpOverrides};
