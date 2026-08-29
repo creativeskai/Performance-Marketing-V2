@@ -2681,8 +2681,10 @@ function paramFieldHtml(proposalId, group, key, value){
   return fieldRow(key, '<input type="' + type + '" id="' + inputId + '" value="' + (value===undefined||value===null?'':String(value)) + '" style="' + selStyle() + '">');
 }
 function selStyle(){ return 'border:1px solid var(--border);border-radius:6px;padding:5px 8px;font-size:.78rem;width:100%;box-sizing:border-box'; }
-function fieldRow(label, inputHtml){
-  return '<div style="margin-bottom:8px"><label style="display:block;font-family:var(--mono);font-size:.66rem;color:var(--text3);text-transform:uppercase;letter-spacing:.04em;margin-bottom:3px">' + label + '</label>' + inputHtml + '</div>';
+function fieldRow(label, inputHtml, hint){
+  return '<div style="margin-bottom:8px"><label style="display:block;font-family:var(--mono);font-size:.66rem;color:var(--text3);text-transform:uppercase;letter-spacing:.04em;margin-bottom:3px">' + label + '</label>' + inputHtml
+    + (hint ? '<div style="font-size:.7rem;color:var(--text3);margin-top:3px;font-style:italic">' + hint + '</div>' : '')
+    + '</div>';
 }
 function isTargetingParams(params){ return !!(params && params.field === 'targeting'); }
 function isCreativeAction(tool){ return tool==='ads_create_ad' || tool==='ads_create_creative'; }
@@ -3011,15 +3013,22 @@ function targetingEditorHtml(pid, group, t, adsetId, adsetName){
   const pubChk=(v,label)=>'<label style="margin-right:12px;font-size:.78rem"><input type="checkbox" id="'+base+'-pub-'+v+'" '+(pubs.includes(v)?'checked':'')+'> '+label+'</label>';
   return '<div style="background:var(--bg2);border-radius:8px;padding:10px;margin-top:4px">'
     + '<div style="font-size:.72rem;color:var(--text3);margin-bottom:8px">Editing live targeting for ad set <strong>' + (adsetName||adsetId) + '</strong> &mdash; pre-filled with what\'s actually running now.</div>'
-    + fieldRow('Age range', '<div style="display:flex;gap:8px;align-items:center"><input type="number" id="'+base+'-agemin" value="'+(t.age_min||18)+'" min="13" max="65" style="'+selStyle()+'"><span>to</span><input type="number" id="'+base+'-agemax" value="'+(t.age_max||65)+'" min="13" max="65" style="'+selStyle()+'"></div>')
-    + fieldRow('Gender', '<label style="margin-right:14px;font-size:.78rem"><input type="checkbox" id="'+base+'-gender-1" '+(genders.includes(1)?'checked':'')+'> Male</label><label style="font-size:.78rem"><input type="checkbox" id="'+base+'-gender-2" '+(genders.includes(2)?'checked':'')+'> Female</label><div class="auto-empty" style="margin-top:2px">Leave both unchecked for all genders</div>')
-    + fieldRow('Geo &mdash; include', '<select id="'+base+'-geo-inc" multiple size="5" style="'+selStyle()+'">'+geoIncOpts+'</select>')
-    + fieldRow('Geo &mdash; exclude', '<select id="'+base+'-geo-exc" multiple size="4" style="'+selStyle()+'">'+geoExcOpts+'</select>')
-    + fieldRow('Devices', devChk('mobile','Mobile')+devChk('desktop','Desktop'))
-    + fieldRow('Placements', pubChk('facebook','Facebook')+pubChk('instagram','Instagram')+pubChk('audience_network','Audience Network')+pubChk('messenger','Messenger')+pubChk('whatsapp','WhatsApp'))
-    + fieldRow('Exclude audiences', '<select id="'+base+'-exaud" multiple size="4" style="'+selStyle()+'">'+exAudOpts+'</select>')
-    + fieldRow('Interests &amp; behaviors', targetingChipsHtml(pid, group))
-    + '<div class="auto-empty" style="margin-top:6px">Interests/behaviors are combined as "any of these" (one OR group) &mdash; finer AND/OR logic isn\'t supported by this editor yet.</div>'
+    + fieldRow('Age range', '<div style="display:flex;gap:8px;align-items:center"><input type="number" id="'+base+'-agemin" value="'+(t.age_min||18)+'" min="13" max="65" style="'+selStyle()+'"><span>to</span><input type="number" id="'+base+'-agemax" value="'+(t.age_max||65)+'" min="13" max="65" style="'+selStyle()+'"></div>',
+      'Meta recommends starting broad and letting delivery data narrow it &mdash; this account\'s own 25-44 male analysis found a real 4x ROAS gap between age bands (see A-006), which is a much stronger reason to narrow than a guess.')
+    + fieldRow('Gender', '<label style="margin-right:14px;font-size:.78rem"><input type="checkbox" id="'+base+'-gender-1" '+(genders.includes(1)?'checked':'')+'> Male</label><label style="font-size:.78rem"><input type="checkbox" id="'+base+'-gender-2" '+(genders.includes(2)?'checked':'')+'> Female</label>',
+      'Leave both unchecked for all genders. Only restrict if you have a real spend-backed ROAS gap, not a guess.')
+    + fieldRow('Geo &mdash; include', '<select id="'+base+'-geo-inc" multiple size="5" style="'+selStyle()+'">'+geoIncOpts+'</select>',
+      'This ad set\'s real top-spend states are Maharashtra, Karnataka, Telangana, Delhi. Meta doesn\'t return purchase-attribution at region level for this account, so treat geo moves as CTR/CPM-informed, not ROAS-informed, until that changes (see AL-004).')
+    + fieldRow('Geo &mdash; exclude', '<select id="'+base+'-geo-exc" multiple size="4" style="'+selStyle()+'">'+geoExcOpts+'</select>',
+      'Use to cut a state with real spend and poor CTR &mdash; excluding on a hunch with no spend behind it usually just shrinks reach for no benefit.')
+    + fieldRow('Devices', devChk('mobile','Mobile')+devChk('desktop','Desktop'),
+      'This account\'s own analysis found the "other" device bucket running 8-11x higher CPM than mobile with zero purchases (see A-005) &mdash; a real reason to exclude, not a default.')
+    + fieldRow('Placements', pubChk('facebook','Facebook')+pubChk('instagram','Instagram')+pubChk('audience_network','Audience Network')+pubChk('messenger','Messenger')+pubChk('whatsapp','WhatsApp'),
+      'WhatsApp on this exact ad set: ₹262 spent, 0 purchases, 8-11x higher CPM than Instagram Reels/Stories (see A-005) &mdash; a concrete candidate to uncheck.')
+    + fieldRow('Exclude audiences', '<select id="'+base+'-exaud" multiple size="4" style="'+selStyle()+'">'+exAudOpts+'</select>',
+      'Excluding recent purchasers from a prospecting ad set avoids paying to re-reach people who already bought (see A-004).')
+    + fieldRow('Interests &amp; behaviors', targetingChipsHtml(pid, group),
+      'Keep this list short (roughly 3-6). Stacking many interests in one OR group mostly widens reach &mdash; it doesn\'t multiply precision. Finer AND/OR logic across multiple groups isn\'t supported by this editor yet.')
     + '</div>';
 }
 function tgtChipboxId(pid,group){return 'tgt-'+group+'-'+pid+'-chiplist';}
