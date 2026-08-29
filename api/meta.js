@@ -147,6 +147,43 @@ export default async function handler(req, res) {
         videos: vid.data || vid
       };
 
+    } else if (endpoint === 'active_campaigns_full') {
+      // Powers the "Live Campaigns" page — every real config variable for
+      // every currently-delivering campaign: campaign -> ad sets -> ads,
+      // full targeting spec included. Read-only inspection, not a proxy for
+      // the automation proposal/editor flow.
+      const campFields = 'id,name,objective,status,effective_status,buying_type,' +
+        'daily_budget,lifetime_budget,special_ad_categories,created_time,start_time,stop_time';
+      const campUrl = `https://graph.facebook.com/v19.0/${AD_ACCOUNT}/campaigns` +
+        `?fields=${campFields}&effective_status=${encodeURIComponent('["ACTIVE"]')}` +
+        `&limit=50&access_token=${token}`;
+      const campResp = await fetch(campUrl);
+      const campJson = await campResp.json();
+      const campaigns = campJson.data || [];
+
+      const adsetFields = 'id,name,status,effective_status,daily_budget,lifetime_budget,' +
+        'optimization_goal,billing_event,bid_strategy,bid_amount,promoted_object,targeting,' +
+        'start_time,end_time,created_time';
+      const adFields = 'id,name,status,effective_status,creative{id,name,body,title,image_url,thumbnail_url,video_id,call_to_action_type}';
+
+      data = { campaigns: [] };
+      for (const camp of campaigns) {
+        const adsetResp = await fetch(
+          `https://graph.facebook.com/v19.0/${camp.id}/adsets?fields=${adsetFields}&limit=50&access_token=${token}`
+        );
+        const adsetJson = await adsetResp.json();
+        const adsets = adsetJson.data || [];
+        for (const adset of adsets) {
+          const adResp = await fetch(
+            `https://graph.facebook.com/v19.0/${adset.id}/ads?fields=${adFields}&limit=50&access_token=${token}`
+          );
+          const adJson = await adResp.json();
+          adset.ads = adJson.data || [];
+        }
+        camp.adsets = adsets;
+        data.campaigns.push(camp);
+      }
+
     } else if (endpoint === 'adset_targeting') {
       // Live current targeting spec for one ad set — lets the dashboard's
       // targeting editor pre-fill with what's actually running, not blank.

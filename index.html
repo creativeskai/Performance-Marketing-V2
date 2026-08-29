@@ -271,6 +271,7 @@ body.locked #shell{display:none}
   <div id="navtabs">
     <span class="nav-group-label">Management</span>
     <button class="nav-tab" data-view="automation" onclick="showView('automation')">AUTOMATION</button>
+    <button class="nav-tab" data-view="livecamp" onclick="showView('livecamp')">LIVE CAMPAIGNS</button>
     <div class="nav-sep"></div>
     <span class="nav-group-label">Reporting</span>
     <button class="nav-tab active" data-view="dash" onclick="showView('dash')">DASHBOARD</button>
@@ -1028,6 +1029,22 @@ body.locked #shell{display:none}
       </div>
     </div>
 
+    <div id="view-livecamp" class="view">
+      <div class="pad">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:1.25rem;flex-wrap:wrap;gap:10px">
+          <div>
+            <div style="font-family:var(--mono);font-size:.65rem;color:var(--text3);letter-spacing:.07em;text-transform:uppercase;margin-bottom:4px">Management</div>
+            <div style="font-size:1.1rem;font-weight:700">Live Campaigns</div>
+          </div>
+          <button type="button" onclick="renderLiveCampaigns()" style="background:#fff;border:1px solid var(--border);border-radius:8px;padding:6px 14px;font-size:.76rem;cursor:pointer;color:var(--text2)">Refresh</button>
+        </div>
+        <div style="background:var(--blue-bg);border:1px solid #93bbde;border-radius:10px;padding:12px 16px;margin-bottom:1.25rem;font-size:.82rem;color:var(--text2);line-height:1.6">
+          Every currently-delivering campaign, pulled live from Meta — full config, not just performance numbers: campaign settings, every ad set's complete targeting spec (age, gender, geo, devices, placements, interests, behaviors, excluded audiences, Advantage+ flags), budget/bid/optimization, and every ad's real creative. Read-only — to change something, use a proposal in the Automation tab.
+        </div>
+        <div id="livecamp-body"><div class="auto-empty">Loading&#x2026;</div></div>
+      </div>
+    </div>
+
   </div>
 </div>
 <script>
@@ -1576,6 +1593,7 @@ function showView(v){
   if(v==='insights')renderInsights();
   if(v==='rec')renderRecs();
   if(v==='automation')renderAutomation();
+  if(v==='livecamp')renderLiveCampaigns();
 }
 
 function setPeriod(p){
@@ -3102,6 +3120,93 @@ function collectOverrides(p){
     return stepOverrides;
   });
   return overridesChain;
+}
+// ── Live Campaigns page: every real config variable for every currently ──
+// delivering campaign, pulled fresh from Meta. Read-only inspector.
+function escHtml(s){ return s===undefined||s===null?'':String(s).replace(/[&<>"']/g, c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
+function lcKv(label, value){
+  return '<div style="display:flex;justify-content:space-between;gap:12px;padding:5px 0;border-bottom:1px solid var(--bg3);font-size:.8rem"><span style="color:var(--text3)">' + label + '</span><span style="font-weight:600;text-align:right;max-width:60%">' + (value===undefined||value===null||value==='' ? '—' : value) + '</span></div>';
+}
+function lcMoney(minorUnits){ return (minorUnits===undefined||minorUnits===null) ? null : ('₹' + (Number(minorUnits)/100).toLocaleString('en-IN') + '/day'); }
+function renderLiveCampaigns(){
+  const el = document.getElementById('livecamp-body');
+  el.innerHTML = '<div class="auto-empty">Loading live campaign data from Meta&#x2026;</div>';
+  fetch('/api/meta?endpoint=active_campaigns_full')
+    .then(r=>r.json())
+    .then(d=>{
+      if(d.error){ el.innerHTML = '<div class="auto-empty">Couldn\'t load (' + escHtml(d.error) + ').</div>'; return; }
+      const camps = d.campaigns || [];
+      el.innerHTML = camps.length ? camps.map(lcCampaignHtml).join('') : '<div class="auto-empty">No active campaigns right now.</div>';
+    })
+    .catch(err=>{ el.innerHTML = '<div class="auto-empty">Couldn\'t load live campaign data (' + escHtml(err.message) + ').</div>'; });
+}
+function lcCampaignHtml(c){
+  return '<div class="cbox" style="margin-bottom:16px">'
+    + '<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;flex-wrap:wrap;gap:8px">'
+    + '<div style="font-size:1rem;font-weight:700">' + escHtml(c.name) + '</div>'
+    + '<span style="background:#e7f5ea;color:var(--green);font-size:.68rem;font-weight:700;padding:3px 10px;border-radius:20px;text-transform:uppercase">' + escHtml(c.effective_status||c.status) + '</span>'
+    + '</div>'
+    + '<div style="display:grid;grid-template-columns:1fr 1fr;gap:0 24px">'
+    + lcKv('Campaign ID', c.id)
+    + lcKv('Objective', c.objective)
+    + lcKv('Buying type', c.buying_type)
+    + lcKv('Budget (campaign-level)', lcMoney(c.daily_budget) || (c.lifetime_budget ? ('₹'+(c.lifetime_budget/100).toLocaleString('en-IN')+' lifetime') : 'Set at ad set level'))
+    + lcKv('Special ad categories', (c.special_ad_categories&&c.special_ad_categories.length) ? c.special_ad_categories.join(', ') : 'None')
+    + lcKv('Created', c.created_time ? new Date(c.created_time).toLocaleDateString('en-IN',{day:'numeric',month:'short',year:'numeric'}) : '—')
+    + '</div>'
+    + (c.adsets||[]).map(lcAdsetHtml).join('')
+    + '</div>';
+}
+function lcAdsetHtml(as){
+  const t = as.targeting || {};
+  const geo = t.geo_locations || {};
+  const geoIncLabel = [
+    geo.countries ? geo.countries.join(', ') : null,
+    geo.regions ? geo.regions.map(r=>r.name).join(', ') : null,
+    geo.cities ? geo.cities.map(x=>x.name).join(', ') : null
+  ].filter(Boolean).join(' · ') || '—';
+  const geoExcLabel = (t.excluded_geo_locations && t.excluded_geo_locations.regions) ? t.excluded_geo_locations.regions.map(r=>r.name).join(', ') : null;
+  const flex = (t.flexible_spec && t.flexible_spec[0]) || {};
+  const interests = (flex.interests||[]).map(i=>i.name).join(', ') || 'None';
+  const behaviors = (flex.behaviors||[]).map(b=>b.name).join(', ') || 'None';
+  const exAud = (t.excluded_custom_audiences||[]).map(a=>a.name||a.id).join(', ') || 'None';
+  const gendersLabel = (t.genders&&t.genders.length) ? t.genders.map(g=>g===1?'Male':g===2?'Female':g).join(', ') : 'All';
+  return '<div style="margin-top:14px;padding-top:14px;border-top:1px dashed var(--border)">'
+    + '<div style="font-size:.85rem;font-weight:700;margin-bottom:8px">Ad set: ' + escHtml(as.name) + ' <span style="font-weight:400;color:var(--text3);font-size:.72rem">(' + escHtml(as.effective_status||as.status) + ')</span></div>'
+    + '<div style="display:grid;grid-template-columns:1fr 1fr;gap:0 24px">'
+    + lcKv('Ad set ID', as.id)
+    + lcKv('Daily budget', lcMoney(as.daily_budget) || (as.lifetime_budget ? ('₹'+(as.lifetime_budget/100).toLocaleString('en-IN')+' lifetime') : '—'))
+    + lcKv('Optimization goal', as.optimization_goal)
+    + lcKv('Billing event', as.billing_event)
+    + lcKv('Bid strategy', as.bid_strategy)
+    + lcKv('Promoted object', as.promoted_object ? escHtml(JSON.stringify(as.promoted_object)) : '—')
+    + '</div>'
+    + '<div style="margin-top:10px;font-family:var(--mono);font-size:.66rem;color:var(--text3);text-transform:uppercase;letter-spacing:.04em">Targeting</div>'
+    + '<div style="display:grid;grid-template-columns:1fr 1fr;gap:0 24px">'
+    + lcKv('Age range', (t.age_min||'—') + ' – ' + (t.age_max||'—'))
+    + lcKv('Gender', gendersLabel)
+    + lcKv('Geo — include', escHtml(geoIncLabel))
+    + lcKv('Geo — exclude', geoExcLabel ? escHtml(geoExcLabel) : 'None')
+    + lcKv('Devices', (t.device_platforms||[]).join(', ') || 'All')
+    + lcKv('Placements', (t.publisher_platforms||[]).join(', ') || 'Advantage+ (auto)')
+    + lcKv('Excluded audiences', escHtml(exAud))
+    + lcKv('Advantage+ audience', (t.targeting_automation && t.targeting_automation.advantage_audience) ? 'On' : 'Off')
+    + '</div>'
+    + lcKv('Interests', escHtml(interests)) + lcKv('Behaviors', escHtml(behaviors))
+    + (as.ads||[]).map(lcAdHtml).join('')
+    + '</div>';
+}
+function lcAdHtml(ad){
+  const cr = ad.creative || {};
+  return '<div style="margin-top:10px;padding:10px;background:var(--bg2);border-radius:8px">'
+    + '<div style="display:flex;gap:10px;align-items:flex-start">'
+    + (cr.thumbnail_url ? '<img src="'+cr.thumbnail_url+'" style="width:52px;height:52px;object-fit:cover;border-radius:6px;flex:0 0 auto" alt="">' : '')
+    + '<div style="flex:1 1 auto;min-width:0">'
+    + '<div style="font-size:.8rem;font-weight:700">Ad: ' + escHtml(ad.name) + ' <span style="font-weight:400;color:var(--text3);font-size:.7rem">(' + escHtml(ad.effective_status||ad.status) + ')</span></div>'
+    + '<div style="font-size:.76rem;color:var(--text2);margin-top:4px"><strong>' + escHtml(cr.title||'—') + '</strong></div>'
+    + '<div style="font-size:.76rem;color:var(--text3);margin-top:2px;white-space:pre-wrap">' + escHtml(cr.body||'—') + '</div>'
+    + '<div style="font-size:.7rem;color:var(--text3);margin-top:4px">CTA: ' + escHtml(cr.call_to_action_type||'—') + (cr.video_id?' · Video':' · Image') + '</div>'
+    + '</div></div></div>';
 }
 function severityColor(s){return s==='high'?'var(--red)':s==='medium'?'var(--orange)':'var(--blue)';}
 function tierBadge(tier){
