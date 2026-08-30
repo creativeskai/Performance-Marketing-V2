@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-29T22:47:31.000Z",
+  "generatedAt": "2026-08-30T00:00:00.000Z",
   "settings": {
     "kill_roas_threshold": "pause if ROAS < 1.0x after ₹500 spend on a sales-objective campaign",
     "reactivate_min_historic_roas": "surface for reactivation if a paused campaign's last active-period ROAS >= 3.0x",
@@ -18,7 +18,7 @@
     "competitor_last_scrape": {
       "gully_labs_active_ads": 126,
       "lotto_sport_india_active_ads": 148,
-      "scraped_at": "2026-08-29T22:47:31.000Z",
+      "scraped_at": "2026-08-30T00:00:00.000Z",
       "note": "Both page-matched this run (Gully Labs page_id 107479854297817, estimated_total_count 126, unchanged since last scrape; Lotto Sport India page_id 426015150606378, estimated_total_count 148, unchanged since last scrape, still reflecting the +32.1% spike recorded in AL-011 - no further move this pass)."
     },
     "note": "hard_spend_ceiling_inr is a placeholder — set to roughly 3x trailing-30-day avg daily spend (~₹663/day as of 29 Aug 2026). All fields here are editable directly in the Automation tab (Save button) or by telling Claude."
@@ -235,7 +235,8 @@
       "detail": "Refreshed same-day (2026-08-29, later re-check): Kage_TOF's single active ad CTR is 1.65% over the last 7d vs 2.31% the prior 7d (15-21 Aug) — a 28.6% week-over-week decline, just under the 30% creative-fatigue trigger this run (earlier same-day numbers read 2.35%→1.45%, a 38.3% decline, using a slightly different day-boundary window — both pulls agree directionally: real, sustained softening, not a one-off blip). Frequency stayed flat (1.078 → 1.039), so this remains not frequency/audience-saturation driven — more likely creative wear-out or an auction/algorithm shift. Refreshed again this pass (2026-08-29, real-clock ~18:49 UTC): CTR is now 1.36% over the last 7d vs 2.31% the prior 7d (15-21 Aug) — a 41.1% week-over-week decline, now formally over the module's 30% auto-trigger. Frequency is still flat and healthy (1.081 → 1.078), confirming this isn't audience saturation. Elevated to high severity to reflect the crossed threshold. Still not filed as an executable proposal: module 28's action needs either a ready replacement creative to rotate in (blocked — no Higgsfield MCP connection this session, Phase 3 auto-creative-generation pipeline not yet built) or a data-backed targeting narrow (this run didn't pull a segment breakdown for Kage_TOF specifically that would justify one) — filing a proposal with a placeholder metaAction would violate the routine's own 'real, concrete parameters only' standard. Recommend a manual creative refresh review for this ad in the meantime.",
       "severity": "high",
       "dismissed": false,
-      "createdAt": "2026-08-29T11:30:00.000Z"
+      "createdAt": "2026-08-29T11:30:00.000Z",
+      "note": "2026-08-30 daily run reconfirmed: last_7d CTR 1.36% vs the 2026-08-16/22 comparison week 2.35% = 42.1% week-over-week decline (up slightly from 41.1% the prior pass), frequency still flat/healthy (1.081 vs 1.071). Still no ready replacement creative or data-backed targeting narrow to act on. Unchanged conclusion."
     },
     {
       "id": "AL-007",
@@ -299,6 +300,15 @@
       "severity": "low",
       "dismissed": false,
       "createdAt": "2026-08-29T22:47:31.000Z"
+    },
+    {
+      "id": "AL-014",
+      "module": "routine-run-notes",
+      "title": "2026-08-30 daily run: steady state, no new proposals or alerts",
+      "detail": "Scheduled daily run (2026-08-30, real-clock ~00:00 UTC). Circuit breaker not tripped (today's spend ₹14.24 vs ₹2,000 ceiling, fresh day). Pixel quality gate passed (composite EMQ 6.1-8.0, core match keys - ip_address/user_agent/fbp - at 100% coverage), so ROAS-driven modules were not suppressed. All 7 pending proposals (A-001 through A-007) re-verified against fresh Meta Ads MCP pulls and still stand, numbers essentially unchanged (sub-1% drift or identical): Kage_sales_1908 30d ROAS 1.827x on ₹6,169.41 spend; Kage_Sales (paused) 4.297x on ₹6,195.22; live targeting re-confirmed no excluded_custom_audiences and whatsapp_marketing_messages still in effective_publisher_platforms on Kage_sales_1908's ad set (that placement: ₹290.17 spend, 212 impressions, 0 purchases, CPM ₹1,368.73); age/gender re-pull confirms 18-24 male still the weak cell (₹808.29, 0 purchases) while 25-34 male (2.10x) and 35-44 male (3.82x) remain healthy; 'Purchasers 30D' (120249907176770159) directly re-fetched and confirmed still ACTIVE (delivery_status ACTIVE, operation_status 200); purchase-pixel lookalike (120250736441810159) confirmed still the only one of its kind, now ~95 days old. A-002's pixel event numbers via direct dataset-stats pull: 54 AddToCart vs 12 Purchase over the trailing 7 days (Aug 22-29) - matches the prior reading. Catalog diagnostics unchanged (18 out-of-stock, 24 low-image, 1 unmatched content ID); Opportunity Score unchanged at 81 with the same top two recommendations (offsite-conversion optimization +5, Advantage+ catalog ads +4). No anomaly signal data available. Competitor rescrape: both Gully Labs (126) and Lotto Sport India (148) unchanged from the last recorded scrape - no new spike, settings.competitor_last_scrape timestamp refreshed only. Kage_TOF creative-fatigue alert (AL-006) remains high severity and unresolved - see its attached note for today's numbers. Frequency-capping re-checked: both active ads show healthy, flat frequency (Kage_sales_1908 1.71, Kage_TOF 1.08) - no rising-frequency/falling-ROAS pattern. Coverage gaps unchanged from prior passes (learning-phase-stuck field still unavailable via the connected Meta Ads MCP tools; Phase 3 modules hook-angle-tagging/auto-creative-generation-launch still blocked on no Higgsfield MCP connection this session). Read-only safety mode remains in effect for this scheduled run; A-004 and A-007 (tier:auto) remain unexecuted pending human approval. No new proposals or alerts were warranted this pass - this was a numbers-refresh confirming steady state.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-08-30T00:00:00.000Z"
     }
   ],
   "log": []
