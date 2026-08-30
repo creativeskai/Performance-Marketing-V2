@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-30T12:45:46.000Z",
+  "generatedAt": "2026-08-30T15:00:00.000Z",
   "settings": {
     "kill_roas_threshold": "pause if ROAS < 1.0x after ₹500 spend on a sales-objective campaign",
     "reactivate_min_historic_roas": "surface for reactivation if a paused campaign's last active-period ROAS >= 3.0x",
@@ -16,10 +16,10 @@
       "Kage_TOF": { "cpm": 14.36, "ctr": 1.92, "as_of": "2026-08-29" }
     },
     "competitor_last_scrape": {
-      "gully_labs_active_ads": 126,
-      "lotto_sport_india_active_ads": 143,
-      "scraped_at": "2026-08-30T12:45:46.000Z",
-      "note": "Rechecked this pass (page-matched, both pages): Gully Labs 126 (-0.8% from 127, below the 20% spike threshold), Lotto Sport India 143 (-3.4% from 148, below threshold). Both remain settled - no new competitor-spike alert."
+      "gully_labs_active_ads": 187,
+      "lotto_sport_india_active_ads": 136,
+      "scraped_at": "2026-08-30T15:00:00.000Z",
+      "note": "Rechecked this pass (page-matched, both pages): Gully Labs jumped to 187 (+48.4% from the settled 126) - crosses the 20% competitor-spike threshold, and unlike the prior oscillation pattern (AL-011/AL-015), this time only Gully Labs moved - Lotto Sport India held at 136 (-4.9% from 143, below threshold). See AL-015 for detail; flagged but not yet treated as a confirmed signal pending a second corroborating scrape or manual Ads Library check."
     },
     "note": "hard_spend_ceiling_inr is a placeholder — set to roughly 3x trailing-30-day avg daily spend (~₹663/day as of 29 Aug 2026). All fields here are editable directly in the Automation tab (Save button) or by telling Claude."
   },
@@ -314,7 +314,7 @@
       "id": "AL-015",
       "module": "competitor-spike",
       "title": "Gully Labs active-ad count dropped 31.7% since last scrape",
-      "detail": "Page-matched Ad Library recheck (page_id 107479854297817, 'Gully Labs' confirmed as the matched page name): estimated_total_count is now 86 active ads, down from the last recorded 126 (-31.7%) — crosses the module's 20% competitor-spike threshold for the first time for this page (the prior pass recorded Gully Labs moving 114→126, +10.5%, below threshold). This move happened in the same run where Lotto Sport India also dropped sharply (148→113, -23.6%, see the AL-011 update) — both competitor pages moving down together, right after the immediately preceding pass recorded both moving up together (AL-011's original +32.1%/+10.5% readings), reads more like Ad Library estimated_total_count sampling volatility than two independent competitors each pulling ~25-30% of their active ads within a single day. Flagging per the module's spec (informational only, never mutates the account), but recommend a manual spot-check in Ads Library before treating this as a confirmed competitive signal.\n\nUpdate (2026-08-30, next daily run): rechecked again - Gully Labs is back to 126, exactly matching the reading from two scrapes ago and reversing the -31.7% drop to 86. Lotto Sport India moved identically in the same run (see AL-011 update). Both pages have now round-tripped through the same two values three times within about a day - not plausible as real same-day competitor activity. Recommend requiring a move to persist across two consecutive scrapes before alerting on this module. No new alert filed; settings.competitor_last_scrape updated to 126/148.",
+      "detail": "Page-matched Ad Library recheck (page_id 107479854297817, 'Gully Labs' confirmed as the matched page name): estimated_total_count is now 86 active ads, down from the last recorded 126 (-31.7%) — crosses the module's 20% competitor-spike threshold for the first time for this page (the prior pass recorded Gully Labs moving 114→126, +10.5%, below threshold). This move happened in the same run where Lotto Sport India also dropped sharply (148→113, -23.6%, see the AL-011 update) — both competitor pages moving down together, right after the immediately preceding pass recorded both moving up together (AL-011's original +32.1%/+10.5% readings), reads more like Ad Library estimated_total_count sampling volatility than two independent competitors each pulling ~25-30% of their active ads within a single day. Flagging per the module's spec (informational only, never mutates the account), but recommend a manual spot-check in Ads Library before treating this as a confirmed competitive signal.\n\nUpdate (2026-08-30, next daily run): rechecked again - Gully Labs is back to 126, exactly matching the reading from two scrapes ago and reversing the -31.7% drop to 86. Lotto Sport India moved identically in the same run (see AL-011 update). Both pages have now round-tripped through the same two values three times within about a day - not plausible as real same-day competitor activity. Recommend requiring a move to persist across two consecutive scrapes before alerting on this module. No new alert filed; settings.competitor_last_scrape updated to 126/148.\n\nFourth pass (2026-08-30, real-clock ~15:00 UTC): Gully Labs jumped again, this time to 187 (+48.4% from the settled 126) - crosses threshold. Materially different from the prior oscillation pattern: Lotto Sport India did NOT move in tandem this time (136, -4.9% from 143, essentially flat, below threshold) - the two pages had previously always moved together on the same pass, which was the basis for calling it sampling noise. A single page moving alone is more consistent with a real ad-count change (e.g. a new collection launch or sale event) than with the shared-noise pattern seen earlier today, though still just one reading. Not filing a fresh competitor-spike alert since this is the same module+entity as this still-open alert - updating here instead per de-dup rules. Recommend re-checking next pass: if Gully Labs holds near 187 (rather than reverting to ~126 again) that would confirm a real increase in their active ad count, worth a manual Ads Library look. settings.competitor_last_scrape updated to 187/136.",
       "severity": "medium",
       "dismissed": false,
       "createdAt": "2026-08-30T02:48:35.000Z"
@@ -372,6 +372,15 @@
       "severity": "low",
       "dismissed": false,
       "createdAt": "2026-08-30T12:45:46.000Z"
+    },
+    {
+      "id": "AL-022",
+      "module": "routine-run-notes",
+      "title": "2026-08-30 sixth daily pass: steady state on all pending proposals, Gully Labs competitor jump noted",
+      "detail": "Circuit breaker not tripped (today's spend ₹33.61 vs ₹2,000 ceiling). Pixel quality gate passed (composite EMQ 6.1-8.0, core match keys — ip_address/user_agent/fbp — at 100% on web events, email/phone/fbp/external_id at 100% on Purchase/AddPaymentInfo), so ROAS-driven modules were not suppressed. All 7 pending proposals (A-001 through A-007) re-verified against fresh Meta Ads MCP pulls and still stand, no material change: Kage_sales_1908 and Kage_Sales both confirmed still PAUSED (effective_status) — no account activity since AL-018's 10:48 AM manual pause (activity log since 12:45 UTC is empty); Kage_sales_1908 30d ROAS 1.827x on ₹6,169.87 spend, Kage_Sales (paused) 4.297x on ₹6,195.22, both essentially frozen with no new delivery. Live targeting on Kage_sales_1908's ad set (120255351569140159) re-fetched directly: still no excluded_custom_audiences (A-004), age_min still 21 (A-006), whatsapp still in effective_publisher_platforms (A-005) — all three proposals remain valid and unexecuted. 'Purchasers 30D' (120249907176770159) confirmed still ACTIVE; the purchase-pixel lookalike (120250736441810159) confirmed still the only one of its kind, now ~95 days old (A-007). A-002's pixel event numbers refreshed via direct hourly dataset-stats pull: 49 AddToCart vs 14 Purchase over the trailing 7 days — within the same normal fluctuation range as every prior reading this week (43-55 AddToCart, 9-14 Purchase), not a material move, so A-002's reasoning text was left as-is. Catalog diagnostics unchanged (18 out-of-stock, 24 low-image, 2 unmatched content IDs). Opportunity Score still 100/100 with zero recommendations — still attributed to zero active delivery (see A-003), not a genuine resolution. No anomaly signal data available. Competitor rescrape produced a real, single-page move this pass: Gully Labs jumped to 187 active ads (+48.4% from the settled 126), while Lotto Sport India held flat at 136 (-4.9%, below threshold) — unlike every prior oscillation today, only one page moved, which is more consistent with a genuine ad-count change than the shared sampling noise seen earlier (see AL-015's updated detail). Not yet treated as confirmed; will re-check next pass. Coverage gaps unchanged from prior passes (learning-phase-stuck field still unavailable via the connected Meta Ads MCP tools; Phase 3 modules hook-angle-tagging/auto-creative-generation-launch still blocked on no Higgsfield MCP connection this session). Read-only safety mode remains in effect for this scheduled run per explicit task constraint; A-004 and A-007 (tier:auto) remain unexecuted pending human approval. No new proposals were warranted this pass.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-08-30T15:00:00.000Z"
     }
   ],
   "log": []
