@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-30T00:00:00.000Z",
+  "generatedAt": "2026-08-30T02:48:35.000Z",
   "settings": {
     "kill_roas_threshold": "pause if ROAS < 1.0x after ₹500 spend on a sales-objective campaign",
     "reactivate_min_historic_roas": "surface for reactivation if a paused campaign's last active-period ROAS >= 3.0x",
@@ -16,10 +16,10 @@
       "Kage_TOF": { "cpm": 14.36, "ctr": 1.92, "as_of": "2026-08-29" }
     },
     "competitor_last_scrape": {
-      "gully_labs_active_ads": 126,
-      "lotto_sport_india_active_ads": 148,
-      "scraped_at": "2026-08-30T00:00:00.000Z",
-      "note": "Both page-matched this run (Gully Labs page_id 107479854297817, estimated_total_count 126, unchanged since last scrape; Lotto Sport India page_id 426015150606378, estimated_total_count 148, unchanged since last scrape, still reflecting the +32.1% spike recorded in AL-011 - no further move this pass)."
+      "gully_labs_active_ads": 86,
+      "lotto_sport_india_active_ads": 113,
+      "scraped_at": "2026-08-30T02:48:35.000Z",
+      "note": "Both page-matched this run (Gully Labs page_id 107479854297817, estimated_total_count 86, down from 126 last scrape, -31.7%; Lotto Sport India page_id 426015150606378, estimated_total_count 113, down from 148 last scrape, -23.6%). Both crossed the 20% competitor-spike threshold in the same run, in the same direction, right after the immediately preceding scrape had recorded both moving sharply upward together (AL-011's original +32.1%/+10.5% readings) - see AL-011 and AL-015 for the caveat that this coincident swing may reflect Ad Library estimated_total_count sampling volatility rather than confirmed business signal."
     },
     "note": "hard_spend_ceiling_inr is a placeholder — set to roughly 3x trailing-30-day avg daily spend (~₹663/day as of 29 Aug 2026). All fields here are editable directly in the Automation tab (Save button) or by telling Claude."
   },
@@ -278,7 +278,7 @@
       "id": "AL-011",
       "module": "competitor-spike",
       "title": "Lotto Sport India active-ad count spiked 32.1% since last scrape",
-      "detail": "Page-matched Ad Library recheck (page_id 426015150606378, 'Lotto Sport India' confirmed as the matched page name): estimated_total_count is now 148 active ads, up from the last recorded 112 (+32.1%) — the first move to cross the module's 20% competitor-spike threshold across this account's several rescrapes today (prior moves were -1.7%, +6.7%, +1.9%, -11.2%, all below threshold). Gully Labs (page_id 107479854297817) also moved up this pass, 114 to 126 (+10.5%), still below threshold. Informational only — no proposal generated, this module never mutates the account. Worth a manual look at what Lotto Sport India is pushing (new collection launch, sale event, etc.) given the scale of the jump.",
+      "detail": "Page-matched Ad Library recheck (page_id 426015150606378, 'Lotto Sport India' confirmed as the matched page name): estimated_total_count is now 148 active ads, up from the last recorded 112 (+32.1%) — the first move to cross the module's 20% competitor-spike threshold across this account's several rescrapes today (prior moves were -1.7%, +6.7%, +1.9%, -11.2%, all below threshold). Gully Labs (page_id 107479854297817) also moved up this pass, 114 to 126 (+10.5%), still below threshold. Informational only — no proposal generated, this module never mutates the account. Worth a manual look at what Lotto Sport India is pushing (new collection launch, sale event, etc.) given the scale of the jump.\n\nUpdate (2026-08-30, second daily pass, real-clock ~02:48 UTC): rechecked Lotto Sport India again — estimated_total_count is now 113 active ads, down from the 148 recorded above (-23.6%), itself a threshold-crossing move, just now in the opposite direction of the original spike. Gully Labs moved the same way this pass (126→86, -31.7%, see AL-015). Both pages dropping together, immediately after both had spiked together on the preceding scrape, reads more like Ad Library estimated_total_count sampling volatility than a genuine same-day swing in either competitor's live ad count. Treat both this reading and the original spike as noisy until corroborated by a manual look in Ads Library. settings.competitor_last_scrape has been updated to the fresh counts (86/113) so the next scrape compares against these, not the disputed 148/126.",
       "severity": "medium",
       "dismissed": false,
       "createdAt": "2026-08-29T20:46:11.000Z"
@@ -309,6 +309,24 @@
       "severity": "low",
       "dismissed": false,
       "createdAt": "2026-08-30T00:00:00.000Z"
+    },
+    {
+      "id": "AL-015",
+      "module": "competitor-spike",
+      "title": "Gully Labs active-ad count dropped 31.7% since last scrape",
+      "detail": "Page-matched Ad Library recheck (page_id 107479854297817, 'Gully Labs' confirmed as the matched page name): estimated_total_count is now 86 active ads, down from the last recorded 126 (-31.7%) — crosses the module's 20% competitor-spike threshold for the first time for this page (the prior pass recorded Gully Labs moving 114→126, +10.5%, below threshold). This move happened in the same run where Lotto Sport India also dropped sharply (148→113, -23.6%, see the AL-011 update) — both competitor pages moving down together, right after the immediately preceding pass recorded both moving up together (AL-011's original +32.1%/+10.5% readings), reads more like Ad Library estimated_total_count sampling volatility than two independent competitors each pulling ~25-30% of their active ads within a single day. Flagging per the module's spec (informational only, never mutates the account), but recommend a manual spot-check in Ads Library before treating this as a confirmed competitive signal.",
+      "severity": "medium",
+      "dismissed": false,
+      "createdAt": "2026-08-30T02:48:35.000Z"
+    },
+    {
+      "id": "AL-016",
+      "module": "routine-run-notes",
+      "title": "2026-08-30 second daily pass: steady state on all pending proposals, competitor-count volatility noted",
+      "detail": "Second pass today (2026-08-30, real-clock ~02:48 UTC). Circuit breaker not tripped (today's spend ₹23.47 vs ₹2,000 ceiling). Pixel quality gate passed (composite EMQ 6.1-8.0, core match keys — ip_address/user_agent/fbp — at 100%), so ROAS-driven modules were not suppressed. All 7 pending proposals (A-001 through A-007) re-verified against fresh Meta Ads MCP pulls and still stand, numbers essentially unchanged: Kage_sales_1908 30d ROAS 1.827x on ₹6,169.68 spend; Kage_Sales (paused) 4.297x on ₹6,195.22; live targeting re-confirmed no excluded_custom_audiences and whatsapp still in effective_publisher_platforms on Kage_sales_1908's ad set (whatsapp placement ₹290.17 spend, 0 purchases — identical to prior pass); age/gender re-pull confirms 18-24 male still the weak cell (₹808.29, 0 purchases) while 25-34 male (2.10x) and 35-44 male (3.82x) remain healthy; 'Purchasers 30D' (120249907176770159) confirmed still ACTIVE; purchase-pixel lookalike (120250736441810159) confirmed still the only one of its kind, ~95 days old. A-002's pixel event numbers via direct dataset-stats pull: 54 AddToCart vs 12 Purchase over the trailing 7 days — identical to the prior reading. Catalog diagnostics unchanged (18 out-of-stock, 24 low-image, 1 unmatched content ID); Opportunity Score unchanged at 81 (top recommendations: offsite-conversion optimization +5, Advantage+ catalog ads +4). No anomaly signal data available. Kage_TOF creative-fatigue alert (AL-006) unchanged: CTR 1.36% (7d), frequency 1.081 — still no ready replacement creative or data-backed targeting narrow to act on. Competitor rescrape produced a real, above-threshold move on both watched pages this pass — see AL-015 (new) and the AL-011 update for why it's flagged as likely sampling volatility rather than a confirmed business signal, not filed as a scaling/suppression trigger. Coverage gaps unchanged from prior passes (learning-phase-stuck field still unavailable via the connected Meta Ads MCP tools; Phase 3 modules hook-angle-tagging/auto-creative-generation-launch still blocked on no Higgsfield MCP connection this session). Read-only safety mode remains in effect for this scheduled run; A-004 and A-007 (tier:auto) remain unexecuted pending human approval. No new proposals were warranted this pass.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-08-30T02:48:35.000Z"
     }
   ],
   "log": []
