@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-31T19:00:00.000Z",
+  "generatedAt": "2026-08-31T22:55:00.000Z",
   "settings": {
     "kill_roas_threshold": "pause if ROAS < 1.0x after ₹500 spend on a sales-objective campaign",
     "reactivate_min_historic_roas": "surface for reactivation if a paused campaign's last active-period ROAS >= 3.0x",
@@ -12,27 +12,53 @@
     "lookalike_refresh_days": 14,
     "pixel_quality_min_match_rate": 0.6,
     "metric_baselines": {
-      "Kage_sales_1908": { "cpm": 140.74, "ctr": 2.14, "as_of": "2026-08-29" },
-      "Kage_TOF": { "cpm": 14.36, "ctr": 1.92, "as_of": "2026-08-29" }
+      "Kage_sales_1908": {
+        "cpm": 140.74,
+        "ctr": 2.14,
+        "as_of": "2026-08-29"
+      },
+      "Kage_TOF": {
+        "cpm": 14.36,
+        "ctr": 1.92,
+        "as_of": "2026-08-29"
+      }
     },
     "competitor_last_scrape": {
       "gully_labs_active_ads": 122,
-      "lotto_sport_india_active_ads": 131,
-      "scraped_at": "2026-08-31T19:00:00.000Z",
-      "note": "Twenty-second pass (2026-08-31 scheduled run): both pages page-matched again and both held essentially flat - Gully Labs 122->122 (unchanged) and Lotto Sport India 130->131 (+0.8%) - well below the 20% competitor-spike threshold, the oscillation pattern documented across AL-011/AL-015/AL-029 through AL-037 appears to have settled this pass. No new competitor-spike alert."
+      "lotto_sport_india_active_ads": 132,
+      "scraped_at": "2026-08-31T22:55:00.000Z",
+      "note": "Twenty-third pass (2026-08-31, real-clock ~22:55 UTC): both pages page-matched again. Gully Labs held flat at 122 (unchanged); Lotto Sport India ticked up 131->132 (+0.8%) — both well below the 20% competitor-spike threshold, steady state continues."
     },
     "note": "hard_spend_ceiling_inr is a placeholder — set to roughly 3x trailing-30-day avg daily spend (~₹663/day as of 29 Aug 2026). All fields here are editable directly in the Automation tab (Save button) or by telling Claude."
   },
-  "circuitBreaker": { "tripped": false, "trippedAt": null, "reason": null },
+  "circuitBreaker": {
+    "tripped": false,
+    "trippedAt": null,
+    "reason": null
+  },
   "proposals": [
     {
       "id": "A-001",
       "module": "reactivate-winner",
       "tier": "approval",
       "title": "Reactivate Kage_Sales",
-      "reasoning": "Kage_Sales is currently paused but was the best-volume winner in the account: 4.30x ROAS on ₹6,195 spend and 10 purchases over its last active 30-day window (≈₹206/day average pace) — well above every other campaign, active or paused, and above the 3.0x reactivation threshold. Updated 2026-08-29: the follow-up budget step previously had no concrete value (would have failed on approval) — set to a real number below, editable in the parameter editor. Note (2026-08-30, real-clock ~18:48 UTC): Saif Naqvi resumed real ad delivery this evening, but via two brand-new campaigns ('Retargeting_31AUG' and 'New_Sales_Kage_31AUG', both created 10:42 PM local time, both OUTCOME_SALES) rather than by reactivating this campaign — Kage_Sales (id 120255012429830159) itself remains untouched and still PAUSED at its unchanged 4.297x/₹6,195.22. This proposal still stands on its own merits (a proven 4.3x-ROAS campaign sitting idle), it's just no longer the account's only lever back to active sales delivery.",
+      "reasoning": "Kage_Sales is currently paused but was the best-volume winner in the account: 4.30x ROAS on ₹6,195 spend and 10 purchases over its last active 30-day window (≈₹206/day average pace) — well above every other campaign, active or paused, and above the 3.0x reactivation threshold. Updated 2026-08-29: the follow-up budget step previously had no concrete value (would have failed on approval) — set to a real number below, editable in the parameter editor. Note (2026-08-30, real-clock ~18:48 UTC): Saif Naqvi resumed real ad delivery this evening, but via two brand-new campaigns ('Retargeting_31AUG' and 'New_Sales_Kage_31AUG', both created 10:42 PM local time, both OUTCOME_SALES) rather than by reactivating this campaign — Kage_Sales (id 120255012429830159) itself remains untouched and still PAUSED at its unchanged 4.297x/₹6,195.22. This proposal still stands on its own merits (a proven 4.3x-ROAS campaign sitting idle), it's just no longer the account's only lever back to active sales delivery. Refreshed again this pass (2026-08-31, real-clock ~22:55 UTC, direct campaign-level pull, last_30d): Kage_Sales remains PAUSED, still 4.296679x ROAS on ₹6,195.22 spend (10 purchases) — unchanged to the cent from every prior reading. The account now has three other active campaigns (Tsuchi_TOF, Retargeting_31AUG, New_Sales_Kage_31AUG, none of which is this campaign) so this proposal still stands on its own merits, unexecuted.",
       "actionSummary": "Reactivate campaign 'Kage_Sales' (id 120255012429830159), then set its daily budget to 25000 (Meta's minor-currency-unit field — this is ₹250/day, slightly above its historical ₹206/day average pace to compensate for reactivation ramp-up, still conservative). Monitor for 3 days before scaling further.",
-      "metaAction": { "tool": "ads_activate_entity", "params": { "entity_id": "120255012429830159", "entity_type": "campaign" }, "followUp": { "tool": "ads_update_entity", "params": { "entity_id": "120255012429830159", "field": "daily_budget", "value": 25000 } } },
+      "metaAction": {
+        "tool": "ads_activate_entity",
+        "params": {
+          "entity_id": "120255012429830159",
+          "entity_type": "campaign"
+        },
+        "followUp": {
+          "tool": "ads_update_entity",
+          "params": {
+            "entity_id": "120255012429830159",
+            "field": "daily_budget",
+            "value": 25000
+          }
+        }
+      },
       "status": "pending",
       "createdAt": "2026-08-27T00:00:00.000Z"
     },
@@ -41,7 +67,7 @@
       "module": "high-intent-retargeting",
       "tier": "approval",
       "title": "Launch a retargeting campaign against 30d add-to-cart non-purchasers",
-      "reasoning": "Account-level 30d data: 83 add-to-cart events vs 15 purchases — roughly 68 people added to cart in the last 30 days without completing a purchase. Refreshed pixel-level check on 2026-08-29 (trailing 7d window, later same-day re-check) shows the pattern continuing and building: ~60 AddToCart events vs 11 Purchases (up from ~50 AddToCart earlier the same day — Purchase count unchanged at 11). Re-checked again this run (2026-08-29, event-level pull direct from the dataset): 50 AddToCart events vs 11 Purchases over the trailing 7 days — consistent with the same-day earlier reading, Purchase count still unchanged at 11. Refreshed once more this pass (2026-08-29, real-clock ~18:49 UTC, direct dataset-stats pull Aug22-29): 54 AddToCart events vs 12 Purchases over the trailing 7 days — both ticked up slightly from the prior 50/11 reading, same pattern continuing. Re-checked again (2026-08-30 daily run, direct event-level dataset-stats pull for the trailing 7-day window ending same real-clock time): 48 AddToCart vs 9 Purchase — within normal day-to-day fluctuation of the prior readings (48-54 AddToCart, 9-12 Purchase), same persistent gap. Refreshed once more (2026-08-30, real-clock ~07:15 UTC, hourly event-level pull): 53 AddToCart vs 12 Purchase over the trailing 7 days — again within the same normal range, gap unchanged in kind. Refreshed again this pass (2026-08-30, real-clock ~12:45 UTC, direct dataset-stats pull): 43 AddToCart vs 14 Purchase over the trailing 7 days — AddToCart ticked down as the high-traffic Aug 23-24 days roll out of the 7d window with zero new delivery (both campaigns paused since 10:48 AM, see AL-018), Purchase count held steady. Gap persists in kind; underlying trigger unchanged. No retargeting campaign currently exists against this group. Rebuilt 2026-08-29 into a real, executable 4-step chain (previously only had 2 of 4 steps specced, with no real budget/creative/audience-rule values — approving it as originally written would have failed or produced an empty campaign shell). Uses the account's real active pixel ('Shopify Meta Pixel', dataset_id 833131719490535, last fired 2026-08-29) and the real Kage_Sales creative (id 1063318642863205, the account's best-ROAS creative at 4.30x, ad copy 'GRAB THE MOST CLICK-WORTHY SNEAKERS EVER'). Refreshed again this pass (2026-08-30, real-clock ~18:48 UTC, direct dataset-stats pull, trailing 7d): 43 AddToCart vs 11 Purchase — within the same normal fluctuation range as every reading this week (43-55 AddToCart, 9-14 Purchase), gap unchanged in kind. Important development this pass: Saif Naqvi built and activated a real retargeting campaign manually tonight ('Retargeting_31AUG', id 120255534778560159, created 10:42 PM local time, ₹150/day budget) — its ad set targets an OR of 'Purchasers 30D', 'IG_Visitors_365', and 'Initiate_Checkout' custom audiences, which overlaps meaningfully with the AddToCart/InitiateCheckout-non-purchaser segment this proposal targets, though the audience definitions aren't identical (this proposal explicitly excludes Purchase; the new campaign's audience OR-includes Purchasers 30D alongside the others). Approving this proposal now risks running two retargeting campaigns with substantially overlapping audiences and budgets bidding against each other. Recommend reviewing the live 'Retargeting_31AUG' campaign's early results before approving this proposal, or approving with a narrower/complementary audience definition instead of the one stored here. Refreshed 2026-08-31 (real-clock ~05:00 UTC, direct event-level dataset-stats pull, trailing ~7d Aug23-30): 46 AddToCart vs 11 Purchase - within the same normal fluctuation range as every reading this week (43-55 AddToCart, 9-14 Purchase), gap unchanged in kind. Retargeting_31AUG has spent only ₹4.66 so far (35 impressions, 0 clicks) - too early to read results. Refreshed again this pass (2026-08-30, real-clock ~22:46 UTC, direct hourly event-level dataset-stats pull, trailing 7d Aug23-30): 55 AddToCart vs 11 Purchase - AddToCart ticked up from the prior 46 reading (still within the week's normal range, now 43-55), Purchase unchanged at 11. Retargeting_31AUG and New_Sales_Kage_31AUG (KAGE_31AUG) remain the account's only active campaigns, combined spend ~₹77.49, still no purchases on either — too early to read results. Refreshed again this pass (2026-08-31, real-clock ~09:00 UTC, direct hourly event-level dataset-stats pull, trailing 7d Aug23-30): 58 AddToCart vs 11 Purchase — AddToCart at a new high for the week (prior range 43-55), Purchase steady within the 9-14 range, gap unchanged in kind. Retargeting_31AUG and New_Sales_Kage_31AUG have now spent a combined ₹255.28 since launch (₹36.54 + ₹218.74, 47 total clicks) with still zero purchases on either — both remain individually under the ₹500 kill-threshold spend floor, so no pause-kill trigger yet, but this is the count to watch next pass. The audience-overlap caution from the prior update still applies unchanged. Refreshed again this pass (2026-08-31, real-clock ~02:48 UTC, direct event-level dataset-stats pull, trailing 7d Aug24-31): 61 AddToCart vs 11 Purchase — another new weekly high for AddToCart (prior range 43-58), Purchase unchanged at 11, gap unchanged in kind. Lifetime spend on the two new campaigns (pulled via date_preset=maximum, since date_preset=last_30d under-reported due to an apparent reporting-window artifact on very-new entities): Retargeting_31AUG ₹48.51 (522 impressions, 13 clicks, frequency 1.05) and New_Sales_Kage_31AUG ₹288.78 (2,998 impressions, 78 clicks, frequency 1.21) — combined ₹337.29, still zero purchases on either (omni_purchase null both). New_Sales_Kage_31AUG in particular is now over half of the ₹500 kill-threshold spend floor with zero conversions — worth watching closely next pass, though not yet an actionable pause-kill trigger (that module requires an active sales campaign to have already crossed the ₹500 floor with sub-threshold ROAS). The audience-overlap caution from the prior update still applies unchanged. Refreshed again this pass (2026-08-31, real-clock ~04:47 UTC, direct campaign-level pull, date_preset=maximum): Retargeting_31AUG now ₹69.36 (706 impressions, 20 clicks) and New_Sales_Kage_31AUG now ₹437.75 (4,629 impressions, 107 clicks) — combined ₹507.11, purchase_roas still null on both (zero purchases). New_Sales_Kage_31AUG alone is now within ₹63 of the ₹500 kill-threshold spend floor with zero conversions on a sales-objective campaign — next pass may cross into an actual pause-kill trigger if it stays at 0 purchases. Trailing-7d pixel event numbers (direct dataset-stats event pull, Aug24-30): 58 AddToCart vs 11 Purchase — within the same normal weekly range as every reading this week (43-61 AddToCart, 9-14 Purchase), gap unchanged in kind. Refreshed again this pass (2026-08-31, real-clock ~09:35 UTC, direct hourly event-level dataset-stats pull, trailing 7d Aug24-30): 61 AddToCart vs 11 Purchase — a new weekly high for AddToCart (prior range 43-58), Purchase steady at 11, gap unchanged in kind. Retargeting_31AUG and New_Sales_Kage_31AUG lifetime spend (date_preset=maximum) has grown to ₹86.81 and ₹557.11 respectively, still zero purchases on either (omni_purchase null both) — New_Sales_Kage_31AUG has now crossed the ₹500 kill-threshold spend floor at 0x ROAS, triggering a new pause-kill proposal (see A-009) rather than just a watch note this time. Refreshed again this pass (2026-08-31, real-clock ~08:50 UTC, direct campaign-level pull, date_preset=maximum): Retargeting_31AUG now ₹104.94 (996 impressions, 33 clicks) and New_Sales_Kage_31AUG now ₹651.90 (7,221 impressions, 174 clicks) — combined ₹756.84, still zero purchases on either (purchase_roas null both), reinforcing A-009's pause-kill trigger further. Trailing-7d pixel event numbers (direct dataset-stats event-level pull, Aug24-31): 58 AddToCart vs 11 Purchase — within the same normal weekly range as every reading this week (43-61 AddToCart, 9-14 Purchase), gap unchanged in kind. Ad-level frequency on both new ads remains healthy (Retargeting 1.11, KAGE_31AUG 1.17) — no fatigue signal, both still too new for a week-over-week CTR comparison. Refreshed again this pass (2026-08-31, real-clock ~12:52 UTC, direct event-level dataset-stats pull, trailing 7d Aug24-31): 64 AddToCart vs 11 Purchase — a new weekly high for AddToCart (prior range 43-61), Purchase steady at 11, gap unchanged in kind. Retargeting_31AUG lifetime spend (date_preset=maximum) has grown to ₹132.32 (1,213 impressions, 37 clicks, frequency 1.0), still zero purchases — remains well under its own ₹500 kill-threshold floor. Ad-level frequency stays healthy on both new ads (Retargeting 1.0, KAGE_31AUG 1.10), no fatigue signal. Refreshed again this pass (2026-08-31, real-clock ~14:48 UTC, direct hourly event-level dataset-stats pull, trailing 7d Aug24-31): 55 AddToCart vs 8 Purchase — Purchase dipped slightly below the week's prior range (9-14) for the first time, AddToCart within the established range (43-64), same persistent gap. Retargeting_31AUG and New_Sales_Kage_31AUG lifetime spend (date_preset=maximum) now ₹145.93 and ₹907.76 respectively, still zero purchases on either — New_Sales_Kage_31AUG continues to grow past its own kill-threshold floor (see A-009's updated reasoning). Ad-level frequency on both new ads remains healthy (Retargeting 1.0, KAGE_31AUG 1.10), no fatigue signal. Refreshed again this pass (2026-08-31, real-clock ~16:48 UTC, direct event-level dataset-stats pull, trailing window Aug25-31): 52 AddToCart vs 5 Purchase — Purchase count is a new low for the week (prior range 8-14), though the window measured here runs Aug25 07:00 to Aug31 08:00 (Pacific-time buckets), one day narrower than some prior Aug24-31 pulls, which plausibly explains part of the drop as a high-purchase day ages out of the window rather than a genuine demand collapse; AddToCart within the established range. Retargeting_31AUG and New_Sales_Kage_31AUG lifetime spend (date_preset=maximum) now ₹163.37 (1,472 impressions, 43 clicks) and ₹1,135.34 (13,172 impressions, 315 clicks) respectively, still zero purchases on either — New_Sales_Kage_31AUG is now well over double its own ₹500 kill-threshold floor at 0x ROAS (see A-009's updated reasoning). Refreshed again this pass (2026-08-31, real-clock ~18:47 UTC, direct event-level dataset-stats pull, trailing 7d Aug24-31): 67 AddToCart vs 11 Purchase — a new weekly high for AddToCart (prior range 43-64), Purchase steady at 11, gap unchanged in kind. Retargeting_31AUG and New_Sales_Kage_31AUG lifetime spend (date_preset=maximum) now ₹180.43 (1,632 impressions, 45 clicks) and ₹1,292.50 (15,224 impressions, 372 clicks) respectively, still zero purchases on either — New_Sales_Kage_31AUG is now 158.5% past its own ₹500 kill-threshold floor at 0x ROAS (see A-009's updated reasoning). Ad-level frequency on both new ads remains healthy (Retargeting 1.16, KAGE_31AUG 1.24), no fatigue signal. Refreshed again this pass (2026-09-01 scheduled run, real-clock ~19:XX UTC on 2026-08-31, direct event-level dataset-stats pull, trailing 7d Aug24-31): 64 AddToCart vs 11 Purchase — within the same normal weekly range as every reading this week (43-67 AddToCart, 9-14 Purchase), gap unchanged in kind. Retargeting_31AUG (lifetime, date_preset=maximum) now ₹191.39 spend, frequency 1.15, CTR 2.77%, still zero purchases — still well under its own ₹500 kill floor. A brand-new third campaign, 'Tsuchi_TOF' (OUTCOME_TRAFFIC, id 120255554400490159), was launched by Saif Naqvi overnight — it's a traffic-objective campaign for a distinct product line, not a retargeting build, so it doesn't change this proposal's audience-overlap caution.",
+      "reasoning": "Account-level 30d data: 83 add-to-cart events vs 15 purchases — roughly 68 people added to cart in the last 30 days without completing a purchase. Refreshed pixel-level check on 2026-08-29 (trailing 7d window, later same-day re-check) shows the pattern continuing and building: ~60 AddToCart events vs 11 Purchases (up from ~50 AddToCart earlier the same day — Purchase count unchanged at 11). Re-checked again this run (2026-08-29, event-level pull direct from the dataset): 50 AddToCart events vs 11 Purchases over the trailing 7 days — consistent with the same-day earlier reading, Purchase count still unchanged at 11. Refreshed once more this pass (2026-08-29, real-clock ~18:49 UTC, direct dataset-stats pull Aug22-29): 54 AddToCart events vs 12 Purchases over the trailing 7 days — both ticked up slightly from the prior 50/11 reading, same pattern continuing. Re-checked again (2026-08-30 daily run, direct event-level dataset-stats pull for the trailing 7-day window ending same real-clock time): 48 AddToCart vs 9 Purchase — within normal day-to-day fluctuation of the prior readings (48-54 AddToCart, 9-12 Purchase), same persistent gap. Refreshed once more (2026-08-30, real-clock ~07:15 UTC, hourly event-level pull): 53 AddToCart vs 12 Purchase over the trailing 7 days — again within the same normal range, gap unchanged in kind. Refreshed again this pass (2026-08-30, real-clock ~12:45 UTC, direct dataset-stats pull): 43 AddToCart vs 14 Purchase over the trailing 7 days — AddToCart ticked down as the high-traffic Aug 23-24 days roll out of the 7d window with zero new delivery (both campaigns paused since 10:48 AM, see AL-018), Purchase count held steady. Gap persists in kind; underlying trigger unchanged. No retargeting campaign currently exists against this group. Rebuilt 2026-08-29 into a real, executable 4-step chain (previously only had 2 of 4 steps specced, with no real budget/creative/audience-rule values — approving it as originally written would have failed or produced an empty campaign shell). Uses the account's real active pixel ('Shopify Meta Pixel', dataset_id 833131719490535, last fired 2026-08-29) and the real Kage_Sales creative (id 1063318642863205, the account's best-ROAS creative at 4.30x, ad copy 'GRAB THE MOST CLICK-WORTHY SNEAKERS EVER'). Refreshed again this pass (2026-08-30, real-clock ~18:48 UTC, direct dataset-stats pull, trailing 7d): 43 AddToCart vs 11 Purchase — within the same normal fluctuation range as every reading this week (43-55 AddToCart, 9-14 Purchase), gap unchanged in kind. Important development this pass: Saif Naqvi built and activated a real retargeting campaign manually tonight ('Retargeting_31AUG', id 120255534778560159, created 10:42 PM local time, ₹150/day budget) — its ad set targets an OR of 'Purchasers 30D', 'IG_Visitors_365', and 'Initiate_Checkout' custom audiences, which overlaps meaningfully with the AddToCart/InitiateCheckout-non-purchaser segment this proposal targets, though the audience definitions aren't identical (this proposal explicitly excludes Purchase; the new campaign's audience OR-includes Purchasers 30D alongside the others). Approving this proposal now risks running two retargeting campaigns with substantially overlapping audiences and budgets bidding against each other. Recommend reviewing the live 'Retargeting_31AUG' campaign's early results before approving this proposal, or approving with a narrower/complementary audience definition instead of the one stored here. Refreshed 2026-08-31 (real-clock ~05:00 UTC, direct event-level dataset-stats pull, trailing ~7d Aug23-30): 46 AddToCart vs 11 Purchase - within the same normal fluctuation range as every reading this week (43-55 AddToCart, 9-14 Purchase), gap unchanged in kind. Retargeting_31AUG has spent only ₹4.66 so far (35 impressions, 0 clicks) - too early to read results. Refreshed again this pass (2026-08-30, real-clock ~22:46 UTC, direct hourly event-level dataset-stats pull, trailing 7d Aug23-30): 55 AddToCart vs 11 Purchase - AddToCart ticked up from the prior 46 reading (still within the week's normal range, now 43-55), Purchase unchanged at 11. Retargeting_31AUG and New_Sales_Kage_31AUG (KAGE_31AUG) remain the account's only active campaigns, combined spend ~₹77.49, still no purchases on either — too early to read results. Refreshed again this pass (2026-08-31, real-clock ~09:00 UTC, direct hourly event-level dataset-stats pull, trailing 7d Aug23-30): 58 AddToCart vs 11 Purchase — AddToCart at a new high for the week (prior range 43-55), Purchase steady within the 9-14 range, gap unchanged in kind. Retargeting_31AUG and New_Sales_Kage_31AUG have now spent a combined ₹255.28 since launch (₹36.54 + ₹218.74, 47 total clicks) with still zero purchases on either — both remain individually under the ₹500 kill-threshold spend floor, so no pause-kill trigger yet, but this is the count to watch next pass. The audience-overlap caution from the prior update still applies unchanged. Refreshed again this pass (2026-08-31, real-clock ~02:48 UTC, direct event-level dataset-stats pull, trailing 7d Aug24-31): 61 AddToCart vs 11 Purchase — another new weekly high for AddToCart (prior range 43-58), Purchase unchanged at 11, gap unchanged in kind. Lifetime spend on the two new campaigns (pulled via date_preset=maximum, since date_preset=last_30d under-reported due to an apparent reporting-window artifact on very-new entities): Retargeting_31AUG ₹48.51 (522 impressions, 13 clicks, frequency 1.05) and New_Sales_Kage_31AUG ₹288.78 (2,998 impressions, 78 clicks, frequency 1.21) — combined ₹337.29, still zero purchases on either (omni_purchase null both). New_Sales_Kage_31AUG in particular is now over half of the ₹500 kill-threshold spend floor with zero conversions — worth watching closely next pass, though not yet an actionable pause-kill trigger (that module requires an active sales campaign to have already crossed the ₹500 floor with sub-threshold ROAS). The audience-overlap caution from the prior update still applies unchanged. Refreshed again this pass (2026-08-31, real-clock ~04:47 UTC, direct campaign-level pull, date_preset=maximum): Retargeting_31AUG now ₹69.36 (706 impressions, 20 clicks) and New_Sales_Kage_31AUG now ₹437.75 (4,629 impressions, 107 clicks) — combined ₹507.11, purchase_roas still null on both (zero purchases). New_Sales_Kage_31AUG alone is now within ₹63 of the ₹500 kill-threshold spend floor with zero conversions on a sales-objective campaign — next pass may cross into an actual pause-kill trigger if it stays at 0 purchases. Trailing-7d pixel event numbers (direct dataset-stats event pull, Aug24-30): 58 AddToCart vs 11 Purchase — within the same normal weekly range as every reading this week (43-61 AddToCart, 9-14 Purchase), gap unchanged in kind. Refreshed again this pass (2026-08-31, real-clock ~09:35 UTC, direct hourly event-level dataset-stats pull, trailing 7d Aug24-30): 61 AddToCart vs 11 Purchase — a new weekly high for AddToCart (prior range 43-58), Purchase steady at 11, gap unchanged in kind. Retargeting_31AUG and New_Sales_Kage_31AUG lifetime spend (date_preset=maximum) has grown to ₹86.81 and ₹557.11 respectively, still zero purchases on either (omni_purchase null both) — New_Sales_Kage_31AUG has now crossed the ₹500 kill-threshold spend floor at 0x ROAS, triggering a new pause-kill proposal (see A-009) rather than just a watch note this time. Refreshed again this pass (2026-08-31, real-clock ~08:50 UTC, direct campaign-level pull, date_preset=maximum): Retargeting_31AUG now ₹104.94 (996 impressions, 33 clicks) and New_Sales_Kage_31AUG now ₹651.90 (7,221 impressions, 174 clicks) — combined ₹756.84, still zero purchases on either (purchase_roas null both), reinforcing A-009's pause-kill trigger further. Trailing-7d pixel event numbers (direct dataset-stats event-level pull, Aug24-31): 58 AddToCart vs 11 Purchase — within the same normal weekly range as every reading this week (43-61 AddToCart, 9-14 Purchase), gap unchanged in kind. Ad-level frequency on both new ads remains healthy (Retargeting 1.11, KAGE_31AUG 1.17) — no fatigue signal, both still too new for a week-over-week CTR comparison. Refreshed again this pass (2026-08-31, real-clock ~12:52 UTC, direct event-level dataset-stats pull, trailing 7d Aug24-31): 64 AddToCart vs 11 Purchase — a new weekly high for AddToCart (prior range 43-61), Purchase steady at 11, gap unchanged in kind. Retargeting_31AUG lifetime spend (date_preset=maximum) has grown to ₹132.32 (1,213 impressions, 37 clicks, frequency 1.0), still zero purchases — remains well under its own ₹500 kill-threshold floor. Ad-level frequency stays healthy on both new ads (Retargeting 1.0, KAGE_31AUG 1.10), no fatigue signal. Refreshed again this pass (2026-08-31, real-clock ~14:48 UTC, direct hourly event-level dataset-stats pull, trailing 7d Aug24-31): 55 AddToCart vs 8 Purchase — Purchase dipped slightly below the week's prior range (9-14) for the first time, AddToCart within the established range (43-64), same persistent gap. Retargeting_31AUG and New_Sales_Kage_31AUG lifetime spend (date_preset=maximum) now ₹145.93 and ₹907.76 respectively, still zero purchases on either — New_Sales_Kage_31AUG continues to grow past its own kill-threshold floor (see A-009's updated reasoning). Ad-level frequency on both new ads remains healthy (Retargeting 1.0, KAGE_31AUG 1.10), no fatigue signal. Refreshed again this pass (2026-08-31, real-clock ~16:48 UTC, direct event-level dataset-stats pull, trailing window Aug25-31): 52 AddToCart vs 5 Purchase — Purchase count is a new low for the week (prior range 8-14), though the window measured here runs Aug25 07:00 to Aug31 08:00 (Pacific-time buckets), one day narrower than some prior Aug24-31 pulls, which plausibly explains part of the drop as a high-purchase day ages out of the window rather than a genuine demand collapse; AddToCart within the established range. Retargeting_31AUG and New_Sales_Kage_31AUG lifetime spend (date_preset=maximum) now ₹163.37 (1,472 impressions, 43 clicks) and ₹1,135.34 (13,172 impressions, 315 clicks) respectively, still zero purchases on either — New_Sales_Kage_31AUG is now well over double its own ₹500 kill-threshold floor at 0x ROAS (see A-009's updated reasoning). Refreshed again this pass (2026-08-31, real-clock ~18:47 UTC, direct event-level dataset-stats pull, trailing 7d Aug24-31): 67 AddToCart vs 11 Purchase — a new weekly high for AddToCart (prior range 43-64), Purchase steady at 11, gap unchanged in kind. Retargeting_31AUG and New_Sales_Kage_31AUG lifetime spend (date_preset=maximum) now ₹180.43 (1,632 impressions, 45 clicks) and ₹1,292.50 (15,224 impressions, 372 clicks) respectively, still zero purchases on either — New_Sales_Kage_31AUG is now 158.5% past its own ₹500 kill-threshold floor at 0x ROAS (see A-009's updated reasoning). Ad-level frequency on both new ads remains healthy (Retargeting 1.16, KAGE_31AUG 1.24), no fatigue signal. Refreshed again this pass (2026-09-01 scheduled run, real-clock ~19:XX UTC on 2026-08-31, direct event-level dataset-stats pull, trailing 7d Aug24-31): 64 AddToCart vs 11 Purchase — within the same normal weekly range as every reading this week (43-67 AddToCart, 9-14 Purchase), gap unchanged in kind. Retargeting_31AUG (lifetime, date_preset=maximum) now ₹191.39 spend, frequency 1.15, CTR 2.77%, still zero purchases — still well under its own ₹500 kill floor. A brand-new third campaign, 'Tsuchi_TOF' (OUTCOME_TRAFFIC, id 120255554400490159), was launched by Saif Naqvi overnight — it's a traffic-objective campaign for a distinct product line, not a retargeting build, so it doesn't change this proposal's audience-overlap caution. Refreshed again this pass (2026-08-31, real-clock ~22:55 UTC, direct event-level dataset-stats pull, trailing 7d Aug24-31): 64 AddToCart vs 11 Purchase — within the same normal weekly range as every reading this week (43-67 AddToCart, 9-14 Purchase), gap unchanged in kind. Retargeting_31AUG lifetime spend (date_preset=maximum) now ₹193.25 (1,729 impressions, 48 clicks, frequency 1.15, CTR 2.78%), still zero purchases — remains under its own ₹500 kill-threshold floor. New_Sales_Kage_31AUG lifetime spend now ₹1,394.36 (16,506 impressions, 404 clicks, frequency 1.22), still zero purchases — now 179% past its own ₹500 kill-threshold floor at 0x ROAS (see A-009's updated reasoning). Operational development this pass: the auto-tier purchaser-exclusion module (A-008) was executed against KAGE_31AUG's ad set this run, and the Meta Ads MCP tool force-paused that ad set as a side effect (see this run's new alert and the A-008 log entry) — New_Sales_Kage_31AUG's live delivery has likely stopped as a result, independent of A-009's still-pending pause-kill approval. This doesn't change this proposal's own audience-overlap caution (still recommend reviewing Retargeting_31AUG's results, and now also the now-likely-paused New_Sales_Kage_31AUG, before approving this proposal or approving with a narrower/complementary audience definition instead).",
       "actionSummary": "4-step chain, each step feeding the next real Meta-assigned ID (not guessed): (1) create the WEBSITE pixel audience — AddToCart OR InitiateCheckout in the last 14 days, excluding Purchase; (2) create the campaign (OUTCOME_SALES); (3) create the ad set targeting that new audience, India, Facebook+Instagram, optimizing for purchases, daily_budget 25000 (Meta's minor-currency-unit field — this is ₹250/day, editable via the parameter editor below, same conservative range as A-001's reactivation budget); (4) create the ad reusing the Kage_Sales creative. Every step is created PAUSED — approving this does NOT start spending. You'd review it in Ads Manager and activate manually, or tell Claude to activate once you're satisfied.",
       "metaAction": {
         "tool": "ads_create_custom_audience",
@@ -49,13 +75,64 @@
           "name": "ATC-Checkout No Purchase 14d",
           "subtype": "WEBSITE",
           "rule": {
-            "inclusions": { "operator": "or", "rules": [ { "event_sources": [ { "id": "833131719490535", "type": "pixel" } ], "retention_seconds": 1209600, "filter": { "operator": "or", "filters": [ { "field": "event", "operator": "=", "value": "AddToCart" }, { "field": "event", "operator": "=", "value": "InitiateCheckout" } ] } } ] },
-            "exclusions": { "operator": "or", "rules": [ { "event_sources": [ { "id": "833131719490535", "type": "pixel" } ], "retention_seconds": 1209600, "filter": { "field": "event", "operator": "=", "value": "Purchase" } } ] }
+            "inclusions": {
+              "operator": "or",
+              "rules": [
+                {
+                  "event_sources": [
+                    {
+                      "id": "833131719490535",
+                      "type": "pixel"
+                    }
+                  ],
+                  "retention_seconds": 1209600,
+                  "filter": {
+                    "operator": "or",
+                    "filters": [
+                      {
+                        "field": "event",
+                        "operator": "=",
+                        "value": "AddToCart"
+                      },
+                      {
+                        "field": "event",
+                        "operator": "=",
+                        "value": "InitiateCheckout"
+                      }
+                    ]
+                  }
+                }
+              ]
+            },
+            "exclusions": {
+              "operator": "or",
+              "rules": [
+                {
+                  "event_sources": [
+                    {
+                      "id": "833131719490535",
+                      "type": "pixel"
+                    }
+                  ],
+                  "retention_seconds": 1209600,
+                  "filter": {
+                    "field": "event",
+                    "operator": "=",
+                    "value": "Purchase"
+                  }
+                }
+              ]
+            }
           }
         },
         "followUp": {
           "tool": "ads_create_campaign",
-          "params": { "name": "KAI Retargeting - ATC Non-Purchasers", "objective": "OUTCOME_SALES", "status": "PAUSED", "special_ad_categories": [] },
+          "params": {
+            "name": "KAI Retargeting - ATC Non-Purchasers",
+            "objective": "OUTCOME_SALES",
+            "status": "PAUSED",
+            "special_ad_categories": []
+          },
           "followUp": {
             "tool": "ads_create_ad_set",
             "params": {
@@ -65,13 +142,38 @@
               "billing_event": "IMPRESSIONS",
               "optimization_goal": "OFFSITE_CONVERSIONS",
               "bid_strategy": "LOWEST_COST_WITHOUT_CAP",
-              "promoted_object": { "pixel_id": "833131719490535", "custom_event_type": "PURCHASE" },
-              "targeting": { "geo_locations": { "countries": ["IN"] }, "custom_audiences": [ { "id": "{{step0.id}}" } ], "publisher_platforms": ["facebook", "instagram"] },
+              "promoted_object": {
+                "pixel_id": "833131719490535",
+                "custom_event_type": "PURCHASE"
+              },
+              "targeting": {
+                "geo_locations": {
+                  "countries": [
+                    "IN"
+                  ]
+                },
+                "custom_audiences": [
+                  {
+                    "id": "{{step0.id}}"
+                  }
+                ],
+                "publisher_platforms": [
+                  "facebook",
+                  "instagram"
+                ]
+              },
               "status": "PAUSED"
             },
             "followUp": {
               "tool": "ads_create_ad",
-              "params": { "name": "Retargeting - Kage_Sales creative", "adset_id": "{{step2.id}}", "creative": { "creative_id": "1063318642863205" }, "status": "PAUSED" }
+              "params": {
+                "name": "Retargeting - Kage_Sales creative",
+                "adset_id": "{{step2.id}}",
+                "creative": {
+                  "creative_id": "1063318642863205"
+                },
+                "status": "PAUSED"
+              }
             }
           }
         }
@@ -84,14 +186,27 @@
       "module": "catalog-dpa-launch",
       "tier": "approval",
       "title": "Launch a Dynamic Product Ads (DPA) campaign from the connected Shopify catalog",
-      "reasoning": "A Shopify product catalog is already connected to this ad account (catalog_id 1149969713295773), but zero DPA/catalog-based campaigns are currently running. Gully Labs (main competitor) runs DCO/catalog ads as part of their active mix; KAI runs none. This is a structural gap, not a performance one. Meta's own Opportunity Score tool has been sliding across the last three runs on 2026-08-29 — 88 → 85 → 81/100 — and re-checked again this run at 81, still flagging Advantage+ catalog ads as a top recommendation (+4 points, 'lower cost per action'); a new offsite-conversion optimization recommendation (+5 points) also surfaced this pass, unrelated to the catalog gap. Catalog health check re-run on 2026-08-29 found the same 3 diagnostic issues, unchanged from the last check: 18 items still marked out-of-stock (must_fix — these won't appear in dynamic ads), 24 items with fewer than 2 images (opportunity), and 1 unmatched content ID between the catalog and pixel (opportunity). Rebuilt 2026-08-29 into a real chain: pulled live catalog product data (81 products total) and found no 'best-seller' field available via the catalog API — that framing was aspirational, not backed by real data, so downgraded to a defensible, real filter instead: in-stock only (availability=in stock), which also structurally avoids advertising the 18 out-of-stock items flagged above. Note (2026-08-30, real-clock ~07:15 UTC): Opportunity Score re-check returned 100/100 with zero recommendations, a jump from the 81 tracked across every prior pass — this coincides with both of the account's active campaigns being manually paused by Saif Naqvi at 10:48 AM this morning (see AL-018), and most likely reflects Meta not surfacing account-optimization recommendations while there's no active delivery, not a genuine resolution of the underlying gaps. Catalog diagnostics (the real, independently-verified basis for this proposal) are unchanged: still 18 out-of-stock, 24 low-image, 1 unmatched content ID. Treating the score change as uninformative until campaigns resume and it can be re-read against real delivery. Re-checked again this pass (2026-08-30, real-clock ~12:45 UTC): Opportunity Score still 100/100 with zero recommendations — still zero active campaigns (both remain paused, see AL-018), continuing to support the artifact theory rather than a genuine resolution. Catalog diagnostics: 18 out-of-stock and 24 low-image unchanged; the unmatched-content-ID count moved from 1 to 2 affected items — still a minor opportunity-severity item, doesn't change the proposal's scope or validity. Update (2026-08-30, real-clock ~18:48 UTC): the artifact theory is now confirmed. Real ad delivery resumed this evening (two new campaigns launched by Saif Naqvi, see A-001/A-002 notes) and Opportunity Score immediately dropped from the artificial 100/100 to a real 13/100 with 7 live recommendations — including 'advantage_plus_catalog_ads' still present at +3 points ('Lower cost per action... Advantage+ catalog ads automatically show each person products from your catalog they're more likely to act on'), confirming this proposal's underlying gap is real and was never resolved, just briefly hidden by zero delivery. Catalog diagnostics re-checked directly: 18 out-of-stock unchanged (must_fix), but the low-image count moved from 24 to 30 affected items (opportunity-severity, doesn't change scope), unmatched content IDs holding at 2. Not filing a separate alert for this — folding into this proposal's own tracking since it's the same underlying finding. Refreshed 2026-08-31 (real-clock ~05:00 UTC): Opportunity Score now 82/100 with 7 live recommendations, still including advantage_plus_catalog_ads at +3 points ('Lower cost per action... Advantage+ catalog ads automatically show each person products from your catalog they're more likely to act on') - the underlying gap this proposal addresses remains real and unresolved. Catalog diagnostics unchanged (18 out-of-stock, 30 low-image, 2 unmatched content IDs). Refreshed again this pass (2026-08-31, real-clock ~02:48 UTC): Opportunity Score 84/100 (consistent with the prior day's 84 reading), advantage_plus_catalog_ads still present at +3 points, same underlying gap. Catalog diagnostics directly re-pulled and unchanged (18 out-of-stock/must_fix, 30 low-image/opportunity, 2 unmatched content IDs/opportunity). Refreshed again this pass (2026-08-31, real-clock ~08:50 UTC): Opportunity Score rose to 89/100 — the offsite-conversion-optimization recommendation has dropped off the list entirely this pass (a real change from every prior reading), but advantage_plus_catalog_ads is still present (now +2 points, down from +3, wording unchanged: 'Advantage+ catalog ads automatically show each person products from your catalog they're more likely to act on') — the underlying gap this proposal addresses remains real and unresolved; two reels-aspect-ratio (+1 each), two gen_ai_mvp (+1 each), and one music (+3) recommendation also still present, same as recent passes. Catalog diagnostics directly re-pulled and unchanged (18 out-of-stock/must_fix, 30 low-image/opportunity, 2 unmatched content IDs/opportunity). Refreshed again this pass (2026-08-31, real-clock ~12:52 UTC): Opportunity Score holds at 89/100, same five recommendations (advantage_plus_catalog_ads now +2, two reels-aspect-ratio +1 each on the two new ad sets, two gen_ai_mvp +1 each, music +3) — the underlying catalog/DPA gap this proposal addresses remains real and unresolved. Catalog diagnostics directly re-pulled: 18 out-of-stock/must_fix and 30 low-image/opportunity unchanged, but unmatched content IDs (opportunity) jumped from 2 to 7 affected items — a real move, doesn't change this proposal's scope but worth noting as the catalog/pixel mismatch is growing, not shrinking. Refreshed again this pass (2026-08-31, real-clock ~14:48 UTC): Opportunity Score holds at 89/100, same five recommendations (advantage_plus_catalog_ads +2, two reels-aspect-ratio +1 each, two gen_ai_mvp +1 each, music +3) — the underlying catalog/DPA gap this proposal addresses remains real and unresolved. Catalog diagnostics directly re-pulled and unchanged from the prior pass (18 out-of-stock/must_fix, 30 low-image/opportunity, 7 unmatched content IDs/opportunity). Refreshed again this pass (2026-08-31 scheduled run): Opportunity Score dropped to 79/100 — the offsite-conversion-optimization recommendation has now disappeared entirely (a real change from every prior reading), but advantage_plus_catalog_ads is still present (+2 points, same wording) — the underlying gap this proposal addresses remains real and unresolved. Reels-aspect-ratio, gen_ai_mvp, and music recommendations now cover a third ad set/ad each (the new 'Tsuchi_TOF' campaign's), with the music recommendation's lift rising to +7 (from +3) across all three ads. Catalog diagnostics directly re-pulled and unchanged (18 out-of-stock/must_fix, 30 low-image/opportunity, 7 unmatched content IDs/opportunity).",
+      "reasoning": "A Shopify product catalog is already connected to this ad account (catalog_id 1149969713295773), but zero DPA/catalog-based campaigns are currently running. Gully Labs (main competitor) runs DCO/catalog ads as part of their active mix; KAI runs none. This is a structural gap, not a performance one. Meta's own Opportunity Score tool has been sliding across the last three runs on 2026-08-29 — 88 → 85 → 81/100 — and re-checked again this run at 81, still flagging Advantage+ catalog ads as a top recommendation (+4 points, 'lower cost per action'); a new offsite-conversion optimization recommendation (+5 points) also surfaced this pass, unrelated to the catalog gap. Catalog health check re-run on 2026-08-29 found the same 3 diagnostic issues, unchanged from the last check: 18 items still marked out-of-stock (must_fix — these won't appear in dynamic ads), 24 items with fewer than 2 images (opportunity), and 1 unmatched content ID between the catalog and pixel (opportunity). Rebuilt 2026-08-29 into a real chain: pulled live catalog product data (81 products total) and found no 'best-seller' field available via the catalog API — that framing was aspirational, not backed by real data, so downgraded to a defensible, real filter instead: in-stock only (availability=in stock), which also structurally avoids advertising the 18 out-of-stock items flagged above. Note (2026-08-30, real-clock ~07:15 UTC): Opportunity Score re-check returned 100/100 with zero recommendations, a jump from the 81 tracked across every prior pass — this coincides with both of the account's active campaigns being manually paused by Saif Naqvi at 10:48 AM this morning (see AL-018), and most likely reflects Meta not surfacing account-optimization recommendations while there's no active delivery, not a genuine resolution of the underlying gaps. Catalog diagnostics (the real, independently-verified basis for this proposal) are unchanged: still 18 out-of-stock, 24 low-image, 1 unmatched content ID. Treating the score change as uninformative until campaigns resume and it can be re-read against real delivery. Re-checked again this pass (2026-08-30, real-clock ~12:45 UTC): Opportunity Score still 100/100 with zero recommendations — still zero active campaigns (both remain paused, see AL-018), continuing to support the artifact theory rather than a genuine resolution. Catalog diagnostics: 18 out-of-stock and 24 low-image unchanged; the unmatched-content-ID count moved from 1 to 2 affected items — still a minor opportunity-severity item, doesn't change the proposal's scope or validity. Update (2026-08-30, real-clock ~18:48 UTC): the artifact theory is now confirmed. Real ad delivery resumed this evening (two new campaigns launched by Saif Naqvi, see A-001/A-002 notes) and Opportunity Score immediately dropped from the artificial 100/100 to a real 13/100 with 7 live recommendations — including 'advantage_plus_catalog_ads' still present at +3 points ('Lower cost per action... Advantage+ catalog ads automatically show each person products from your catalog they're more likely to act on'), confirming this proposal's underlying gap is real and was never resolved, just briefly hidden by zero delivery. Catalog diagnostics re-checked directly: 18 out-of-stock unchanged (must_fix), but the low-image count moved from 24 to 30 affected items (opportunity-severity, doesn't change scope), unmatched content IDs holding at 2. Not filing a separate alert for this — folding into this proposal's own tracking since it's the same underlying finding. Refreshed 2026-08-31 (real-clock ~05:00 UTC): Opportunity Score now 82/100 with 7 live recommendations, still including advantage_plus_catalog_ads at +3 points ('Lower cost per action... Advantage+ catalog ads automatically show each person products from your catalog they're more likely to act on') - the underlying gap this proposal addresses remains real and unresolved. Catalog diagnostics unchanged (18 out-of-stock, 30 low-image, 2 unmatched content IDs). Refreshed again this pass (2026-08-31, real-clock ~02:48 UTC): Opportunity Score 84/100 (consistent with the prior day's 84 reading), advantage_plus_catalog_ads still present at +3 points, same underlying gap. Catalog diagnostics directly re-pulled and unchanged (18 out-of-stock/must_fix, 30 low-image/opportunity, 2 unmatched content IDs/opportunity). Refreshed again this pass (2026-08-31, real-clock ~08:50 UTC): Opportunity Score rose to 89/100 — the offsite-conversion-optimization recommendation has dropped off the list entirely this pass (a real change from every prior reading), but advantage_plus_catalog_ads is still present (now +2 points, down from +3, wording unchanged: 'Advantage+ catalog ads automatically show each person products from your catalog they're more likely to act on') — the underlying gap this proposal addresses remains real and unresolved; two reels-aspect-ratio (+1 each), two gen_ai_mvp (+1 each), and one music (+3) recommendation also still present, same as recent passes. Catalog diagnostics directly re-pulled and unchanged (18 out-of-stock/must_fix, 30 low-image/opportunity, 2 unmatched content IDs/opportunity). Refreshed again this pass (2026-08-31, real-clock ~12:52 UTC): Opportunity Score holds at 89/100, same five recommendations (advantage_plus_catalog_ads now +2, two reels-aspect-ratio +1 each on the two new ad sets, two gen_ai_mvp +1 each, music +3) — the underlying catalog/DPA gap this proposal addresses remains real and unresolved. Catalog diagnostics directly re-pulled: 18 out-of-stock/must_fix and 30 low-image/opportunity unchanged, but unmatched content IDs (opportunity) jumped from 2 to 7 affected items — a real move, doesn't change this proposal's scope but worth noting as the catalog/pixel mismatch is growing, not shrinking. Refreshed again this pass (2026-08-31, real-clock ~14:48 UTC): Opportunity Score holds at 89/100, same five recommendations (advantage_plus_catalog_ads +2, two reels-aspect-ratio +1 each, two gen_ai_mvp +1 each, music +3) — the underlying catalog/DPA gap this proposal addresses remains real and unresolved. Catalog diagnostics directly re-pulled and unchanged from the prior pass (18 out-of-stock/must_fix, 30 low-image/opportunity, 7 unmatched content IDs/opportunity). Refreshed again this pass (2026-08-31 scheduled run): Opportunity Score dropped to 79/100 — the offsite-conversion-optimization recommendation has now disappeared entirely (a real change from every prior reading), but advantage_plus_catalog_ads is still present (+2 points, same wording) — the underlying gap this proposal addresses remains real and unresolved. Reels-aspect-ratio, gen_ai_mvp, and music recommendations now cover a third ad set/ad each (the new 'Tsuchi_TOF' campaign's), with the music recommendation's lift rising to +7 (from +3) across all three ads. Catalog diagnostics directly re-pulled and unchanged (18 out-of-stock/must_fix, 30 low-image/opportunity, 7 unmatched content IDs/opportunity). Refreshed again this pass (2026-08-31, real-clock ~22:55 UTC): Opportunity Score rose to 81/100 (from the prior pass's 79/100) — advantage_plus_catalog_ads is still present, now at +6 points (up from +2, wording unchanged: 'Advantage+ catalog ads automatically show each person products from your catalog they're more likely to act on') — the underlying gap this proposal addresses remains real and unresolved. Also present this pass: two reels_pc_recommendation (+1 each, on the two newest ad sets), two gen_ai_mvp (+1 each), and one music recommendation (now +5, down from +7). The offsite-conversion-optimization recommendation remains absent (gone since the prior pass). Catalog diagnostics directly re-pulled and unchanged from every recent pass: 18 out-of-stock/must_fix, 30 low-image/opportunity, 7 unmatched content IDs/opportunity.",
       "actionSummary": "3-step chain, each real: (1) create a product set filtered to in-stock items only; (2) create the campaign (OUTCOME_SALES, PAUSED); (3) create the ad set targeting India broadly with Advantage+ audience (matching the account's existing targeting_automation pattern on Kage_sales_1908), promoted_object pointing at the new product set, daily_budget 25000 (that's ₹250/day), PAUSED. Honest scope limit: the 4th step — the actual dynamic template ad (Meta's product-template creative format, distinct from a static image/video ad) — isn't wired into this automation's creative editor yet, which only builds static ads. Approving this proposal completes steps 1-3; the ad set will sit ready with its promoted_object set, and the final template ad needs one more manual step in Ads Manager (or a follow-up once template-creative support is built).",
       "metaAction": {
         "tool": "ads_catalog_create_product_set",
-        "params": { "catalog_id": "1149969713295773", "name": "In-Stock Products - Auto DPA", "filter": { "availability": { "eq": "in stock" } } },
+        "params": {
+          "catalog_id": "1149969713295773",
+          "name": "In-Stock Products - Auto DPA",
+          "filter": {
+            "availability": {
+              "eq": "in stock"
+            }
+          }
+        },
         "followUp": {
           "tool": "ads_create_campaign",
-          "params": { "name": "KAI Catalog Sales (DPA)", "objective": "OUTCOME_SALES", "status": "PAUSED", "special_ad_categories": [] },
+          "params": {
+            "name": "KAI Catalog Sales (DPA)",
+            "objective": "OUTCOME_SALES",
+            "status": "PAUSED",
+            "special_ad_categories": []
+          },
           "followUp": {
             "tool": "ads_create_ad_set",
             "params": {
@@ -101,8 +216,20 @@
               "billing_event": "IMPRESSIONS",
               "optimization_goal": "OFFSITE_CONVERSIONS",
               "bid_strategy": "LOWEST_COST_WITHOUT_CAP",
-              "promoted_object": { "product_set_id": "{{step0.id}}", "custom_event_type": "PURCHASE" },
-              "targeting": { "geo_locations": { "countries": ["IN"] }, "targeting_automation": { "advantage_audience": 1 } },
+              "promoted_object": {
+                "product_set_id": "{{step0.id}}",
+                "custom_event_type": "PURCHASE"
+              },
+              "targeting": {
+                "geo_locations": {
+                  "countries": [
+                    "IN"
+                  ]
+                },
+                "targeting_automation": {
+                  "advantage_audience": 1
+                }
+              },
               "status": "PAUSED"
             }
           }
@@ -112,26 +239,26 @@
       "createdAt": "2026-08-27T00:00:00.000Z"
     },
     {
-      "id": "A-004",
-      "module": "purchaser-exclusion",
-      "tier": "auto",
-      "title": "Exclude existing purchasers from Kage_sales_1908 prospecting targeting",
-      "reasoning": "Kage_sales_1908 is the account's only active sales-objective prospecting campaign (₹5,089.63 spent in the last 30 days, ROAS 1.57x — down from 1.84x on 2026-08-28's smaller spend base). Its ad set (id 120255351569140159) targets broad interest/behavior segments (Footwear, Sneakers, Street fashion, Frequent Travelers, Engaged Shoppers) with Advantage+ audience expansion on, but the targeting spec still has no excluded_custom_audiences entry — re-checked directly against the live targeting spec on 2026-08-29. A re-check of the account's custom audiences on 2026-08-29 found an existing 'Purchasers 30D' audience (id 120249907176770159, subtype PLATFORM/website pixel-based, delivery_status ACTIVE) that was not previously known — no need to create a new audience, it can be applied directly. Some fraction of prospecting spend is likely re-reaching people who already bought, which understates true new-customer efficiency. Note (2026-08-30, real-clock ~07:15 UTC): activity-log check shows Saif Naqvi manually paused both Kage_sales_1908 and Kage_TOF via Power Editor at 10:48 AM local time this morning (see AL-018) — the campaign is not currently delivering, but the ad set's targeting spec is unchanged (still no excluded_custom_audiences) and 'Purchasers 30D' is still ACTIVE, so this proposal remains valid and ready to apply whenever the campaign resumes. Note (2026-08-30, real-clock ~18:48 UTC): the same underlying gap has now appeared on a brand-new active campaign — see A-008 (KAGE_31AUG ad set, id 120255534465570159), filed fresh this pass since it's a different entity, not a duplicate of this proposal. Re-confirmed again this pass (2026-08-31, real-clock ~08:50 UTC, direct live targeting pull): Kage_sales_1908's ad set still has no excluded_custom_audiences; the campaign remains PAUSED with no new delivery since it was manually paused (activity log since the last run is empty). Re-confirmed again this pass (2026-08-31, real-clock ~14:48 UTC, direct live targeting pull): still no excluded_custom_audiences, still no custom_audiences key at all in the targeting spec; campaign still PAUSED, activity log since the last run empty.",
-      "actionSummary": "Add the existing 'Purchasers 30D' custom audience (id 120249907176770159) as an excluded audience on Kage_sales_1908's ad set targeting, leaving all other targeting unchanged. No new audience needs to be created.",
-      "metaAction": { "tool": "ads_update_entity", "params": { "entity_id": "120255351569140159", "entity_type": "adset", "field": "targeting", "note": "add existing custom audience id 120249907176770159 ('Purchasers 30D') to excluded_custom_audiences in the existing targeting spec; do not otherwise modify targeting" } },
-      "targetingDelta": { "add_excluded_custom_audiences": [ { "id": "120249907176770159" } ] },
-      "status": "pending",
-      "createdAt": "2026-08-28T01:41:31.000Z"
-    },
-    {
       "id": "A-005",
       "module": "placement-optimization",
       "tier": "approval",
       "title": "Exclude WhatsApp placement from Kage_sales_1908",
-      "reasoning": "30d placement breakdown for Kage_sales_1908 (the account's only active sales campaign): the 'whatsapp_marketing_messages' placement spent ₹262.34 on 195 impressions with 0 attributed purchases, at a CPM of ₹1,345.33 — roughly 11x the campaign's android_smartphone CPM (₹117.96) and 8x its iPhone CPM (₹160.51). This same spend shows up identically in the device breakdown as the 'other' impression_device bucket (₹262.34, CPM ₹1,345.33, 0 purchases) — same underlying placement, two views of the same number, not a separate issue. ₹262.34 is ~5.2% of the campaign's ₹5,089.64 30d spend going to a placement with zero conversions at a wildly elevated CPM. By contrast, this campaign's two dominant placements — instagram_reels (₹2,217.98, 1 purchase, 1.13x ROAS) and instagram_stories (₹780.12, 2 purchases, 7.01x ROAS) — are both converting, so this isn't a whole-campaign problem, just this one placement. Refreshed 2026-08-29 (real-clock ~18:49 UTC, direct placement breakdown pull): whatsapp_marketing_messages has grown to ₹290.17 spend on 211 impressions, 11 clicks (5.21% CTR), still 0 attributed purchases — CPM now ₹1,375.21, still far above every other placement (facebook feed ₹384.42, instagram_reels ₹92.26, instagram_stories ₹289.00). Still ~4.7% of the campaign's now-₹6,169.07 30d spend. The trigger stands, unchanged in kind, just larger in dollars. Note (2026-08-30, real-clock ~07:15 UTC): Kage_sales_1908 was manually paused by Saif Naqvi at 10:48 AM local time this morning (see AL-018) — no new spend since, and the ad set's effective_whatsapp_positions still includes marketing_messages, so the proposal stands unchanged, just not currently delivering. Re-confirmed again this pass (2026-08-31, real-clock ~08:50 UTC, direct live targeting pull): whatsapp_marketing_messages still in effective_whatsapp_positions, campaign still PAUSED, no new spend. Re-confirmed again this pass (2026-08-31, real-clock ~14:48 UTC, direct live targeting pull): whatsapp_marketing_messages still in effective_whatsapp_positions, campaign still PAUSED, no new spend.",
+      "reasoning": "30d placement breakdown for Kage_sales_1908 (the account's only active sales campaign): the 'whatsapp_marketing_messages' placement spent ₹262.34 on 195 impressions with 0 attributed purchases, at a CPM of ₹1,345.33 — roughly 11x the campaign's android_smartphone CPM (₹117.96) and 8x its iPhone CPM (₹160.51). This same spend shows up identically in the device breakdown as the 'other' impression_device bucket (₹262.34, CPM ₹1,345.33, 0 purchases) — same underlying placement, two views of the same number, not a separate issue. ₹262.34 is ~5.2% of the campaign's ₹5,089.64 30d spend going to a placement with zero conversions at a wildly elevated CPM. By contrast, this campaign's two dominant placements — instagram_reels (₹2,217.98, 1 purchase, 1.13x ROAS) and instagram_stories (₹780.12, 2 purchases, 7.01x ROAS) — are both converting, so this isn't a whole-campaign problem, just this one placement. Refreshed 2026-08-29 (real-clock ~18:49 UTC, direct placement breakdown pull): whatsapp_marketing_messages has grown to ₹290.17 spend on 211 impressions, 11 clicks (5.21% CTR), still 0 attributed purchases — CPM now ₹1,375.21, still far above every other placement (facebook feed ₹384.42, instagram_reels ₹92.26, instagram_stories ₹289.00). Still ~4.7% of the campaign's now-₹6,169.07 30d spend. The trigger stands, unchanged in kind, just larger in dollars. Note (2026-08-30, real-clock ~07:15 UTC): Kage_sales_1908 was manually paused by Saif Naqvi at 10:48 AM local time this morning (see AL-018) — no new spend since, and the ad set's effective_whatsapp_positions still includes marketing_messages, so the proposal stands unchanged, just not currently delivering. Re-confirmed again this pass (2026-08-31, real-clock ~08:50 UTC, direct live targeting pull): whatsapp_marketing_messages still in effective_whatsapp_positions, campaign still PAUSED, no new spend. Re-confirmed again this pass (2026-08-31, real-clock ~14:48 UTC, direct live targeting pull): whatsapp_marketing_messages still in effective_whatsapp_positions, campaign still PAUSED, no new spend. Re-confirmed again this pass (2026-08-31, real-clock ~22:55 UTC, direct live targeting pull): whatsapp_marketing_messages still present (no publisher_platforms restriction is set on this ad set — it relies on automatic/Advantage+ placement expansion, so whatsapp remains reachable), campaign still PAUSED, no new spend. Operational note: A-004 (purchaser-exclusion, auto-tier) was executed against this same ad set's targeting this run — excluded_custom_audiences now includes 'Purchasers 30D', but no other targeting field was touched, so this proposal's whatsapp-placement action remains valid and independent of that change.",
       "actionSummary": "Remove 'whatsapp' from Kage_sales_1908's ad set targeting.publisher_platforms (keep facebook, instagram, audience_network, threads as-is). Note: Meta's targeting spec is inclusion-based (no separate excluded_publisher_platforms field), so this is applied by narrowing the publisher_platforms list rather than adding an exclusion.",
-      "metaAction": { "tool": "ads_update_entity", "params": { "entity_id": "120255351569140159", "entity_type": "adset", "field": "targeting", "note": "remove 'whatsapp' from the existing targeting.publisher_platforms list; leave every other targeting parameter (including the purchaser exclusion from A-004, if already applied) unchanged" } },
-      "targetingDelta": { "remove_publisher_platforms": ["whatsapp"] },
+      "metaAction": {
+        "tool": "ads_update_entity",
+        "params": {
+          "entity_id": "120255351569140159",
+          "entity_type": "adset",
+          "field": "targeting",
+          "note": "remove 'whatsapp' from the existing targeting.publisher_platforms list; leave every other targeting parameter (including the purchaser exclusion from A-004, if already applied) unchanged"
+        }
+      },
+      "targetingDelta": {
+        "remove_publisher_platforms": [
+          "whatsapp"
+        ]
+      },
       "status": "pending",
       "createdAt": "2026-08-29T10:15:00.000Z"
     },
@@ -140,10 +267,20 @@
       "module": "age-gender-auto-shift",
       "tier": "approval",
       "title": "Shift Kage_sales_1908 targeting away from the underperforming 18-24 male segment",
-      "reasoning": "Original trigger (2026-08-29): 30d age/gender breakdown showed 25-34 male spending ₹2,408.32 for 1 purchase, 1.11x ROAS — below the campaign's blended ROAS — versus 35-44 male at ₹1,118.80 / 2 purchases / 4.74x ROAS. Materially revised 2026-08-29 (real-clock ~18:49 UTC, fresh age/gender pull): the picture has shifted. 25-34 male has grown to ₹2,835.19 spend, 2 purchases, ₹5,962.94 revenue = 2.10x ROAS — now ABOVE the campaign's current 30d blended ROAS (1.827x on ₹6,169.07 spend), so it's no longer a weak cell and the original 'shift away from 25-34 male' framing no longer holds. 35-44 male remains the strongest meaningful-spend cell: ₹1,386.33 spend, 2 purchases, ₹5,307.35 revenue, 3.83x ROAS. The genuinely weak cell at meaningful spend (≥₹500) is now 18-24 male: ₹809.37 spend, 0 purchases, 0x ROAS — the only male age cell at meaningful spend converting at zero, clearly below account average. (45-54 male at ₹441.75 and 55-64 male at ₹174.05 both fall under the ₹500 meaningful-spend bar, so aren't actionable yet.) Note (2026-08-30, real-clock ~07:15 UTC): Kage_sales_1908 was manually paused by Saif Naqvi at 10:48 AM local time this morning (see AL-018) — the live targeting spec still shows age_min 21, so this proposal is unchanged, just not currently delivering. Re-confirmed again this pass (2026-08-31, real-clock ~08:50 UTC, direct live targeting pull): age_min still 21, campaign still PAUSED, no new spend. Re-confirmed again this pass (2026-08-31, real-clock ~14:48 UTC, direct live targeting pull): age_min still 21, campaign still PAUSED, no new spend.",
+      "reasoning": "Original trigger (2026-08-29): 30d age/gender breakdown showed 25-34 male spending ₹2,408.32 for 1 purchase, 1.11x ROAS — below the campaign's blended ROAS — versus 35-44 male at ₹1,118.80 / 2 purchases / 4.74x ROAS. Materially revised 2026-08-29 (real-clock ~18:49 UTC, fresh age/gender pull): the picture has shifted. 25-34 male has grown to ₹2,835.19 spend, 2 purchases, ₹5,962.94 revenue = 2.10x ROAS — now ABOVE the campaign's current 30d blended ROAS (1.827x on ₹6,169.07 spend), so it's no longer a weak cell and the original 'shift away from 25-34 male' framing no longer holds. 35-44 male remains the strongest meaningful-spend cell: ₹1,386.33 spend, 2 purchases, ₹5,307.35 revenue, 3.83x ROAS. The genuinely weak cell at meaningful spend (≥₹500) is now 18-24 male: ₹809.37 spend, 0 purchases, 0x ROAS — the only male age cell at meaningful spend converting at zero, clearly below account average. (45-54 male at ₹441.75 and 55-64 male at ₹174.05 both fall under the ₹500 meaningful-spend bar, so aren't actionable yet.) Note (2026-08-30, real-clock ~07:15 UTC): Kage_sales_1908 was manually paused by Saif Naqvi at 10:48 AM local time this morning (see AL-018) — the live targeting spec still shows age_min 21, so this proposal is unchanged, just not currently delivering. Re-confirmed again this pass (2026-08-31, real-clock ~08:50 UTC, direct live targeting pull): age_min still 21, campaign still PAUSED, no new spend. Re-confirmed again this pass (2026-08-31, real-clock ~14:48 UTC, direct live targeting pull): age_min still 21, campaign still PAUSED, no new spend. Re-confirmed again this pass (2026-08-31, real-clock ~22:55 UTC, direct live targeting pull): age_min still 21, campaign still PAUSED, no new spend. Operational note: A-004 (purchaser-exclusion, auto-tier) was executed against this same ad set's targeting this run — excluded_custom_audiences now includes 'Purchasers 30D', but age_min/age_max were not touched, so this proposal's age-shift action remains valid and independent of that change.",
       "actionSummary": "Revised 2026-08-29 to match the updated data: raise age_min from the current 21 to 25 (down from the earlier-proposed 28) — this cuts only the now-clearly-underperforming 18-24 male slice (0x ROAS) while fully retaining 25-34 male (now above-average at 2.10x) and 35-44 male (3.83x). This is a smaller, better-targeted cut than the original age_min=28 plan, which would have needlessly excluded the now-recovered 25-34 cohort. Fully editable in the age-range fields below if you want a different split.",
-      "metaAction": { "tool": "ads_update_entity", "params": { "entity_id": "120255351569140159", "entity_type": "adset", "field": "targeting", "note": "raise age_min from 21 to 25 to cut the underperforming 18-24 male slice (0x ROAS on ₹809.37 spend) while retaining 25-34 male (2.10x, now above campaign average) and 35-44 male (3.83x); sample is still thin so treat as a lean" } },
-      "targetingDelta": { "age_min": 25 },
+      "metaAction": {
+        "tool": "ads_update_entity",
+        "params": {
+          "entity_id": "120255351569140159",
+          "entity_type": "adset",
+          "field": "targeting",
+          "note": "raise age_min from 21 to 25 to cut the underperforming 18-24 male slice (0x ROAS on ₹809.37 spend) while retaining 25-34 male (2.10x, now above campaign average) and 35-44 male (3.83x); sample is still thin so treat as a lean"
+        }
+      },
+      "targetingDelta": {
+        "age_min": 25
+      },
       "status": "pending",
       "createdAt": "2026-08-29T11:30:00.000Z"
     },
@@ -152,28 +289,67 @@
       "module": "lookalike-refresh",
       "tier": "auto",
       "title": "Refresh the stale purchase-based lookalike audience",
-      "reasoning": "The account's only active purchase-based lookalike ('Lookalike (1%) - Shopify Meta Pixel - Website using Purchase', id 120250736441810159, subtype LOOKALIKE, delivery_status ACTIVE) was created 2026-05-27 — 94 days old as of 2026-08-29, well past the 14-day lookalike_refresh_days threshold (now ~96 days old as of this 2026-08-30 ~18:48 UTC pass, directly re-confirmed still the only one of its kind, delivery_status ACTIVE). No 2%/5% variants exist at all. Note: the 'Purchasers 30D' PLATFORM custom audience (id 120249907176770159, used in A-004) only shows an approximate matched size of ~20 users — too small to be a reliable independent LAL source on its own; the existing pixel-purchase-event LAL is the better-matched source and is the one that needs refreshing, not a new build from 'Purchasers 30D'. Re-confirmed again this pass (2026-08-31, real-clock ~08:50 UTC): the lookalike (120250736441810159) is now 96 days old, still ACTIVE, still the only one of its kind — 'Purchasers 30D' also directly re-confirmed still ACTIVE. Re-confirmed again this pass (2026-08-31, real-clock ~14:48 UTC, direct pull): lookalike still ACTIVE, still 96 days old, still the only one of its kind; 'Purchasers 30D' (~20 users) still ACTIVE.",
+      "reasoning": "The account's only active purchase-based lookalike ('Lookalike (1%) - Shopify Meta Pixel - Website using Purchase', id 120250736441810159, subtype LOOKALIKE, delivery_status ACTIVE) was created 2026-05-27 — 94 days old as of 2026-08-29, well past the 14-day lookalike_refresh_days threshold (now ~96 days old as of this 2026-08-30 ~18:48 UTC pass, directly re-confirmed still the only one of its kind, delivery_status ACTIVE). No 2%/5% variants exist at all. Note: the 'Purchasers 30D' PLATFORM custom audience (id 120249907176770159, used in A-004) only shows an approximate matched size of ~20 users — too small to be a reliable independent LAL source on its own; the existing pixel-purchase-event LAL is the better-matched source and is the one that needs refreshing, not a new build from 'Purchasers 30D'. Re-confirmed again this pass (2026-08-31, real-clock ~08:50 UTC): the lookalike (120250736441810159) is now 96 days old, still ACTIVE, still the only one of its kind — 'Purchasers 30D' also directly re-confirmed still ACTIVE. Re-confirmed again this pass (2026-08-31, real-clock ~14:48 UTC, direct pull): lookalike still ACTIVE, still 96 days old, still the only one of its kind; 'Purchasers 30D' (~20 users) still ACTIVE. Refreshed again this pass (2026-08-31, real-clock ~22:55 UTC): re-confirmed via a live pull that audience 120250736441810159 is still ACTIVE, still the only purchase-pixel-based lookalike, and its lookalike_spec confirms it was built directly from pixel origin_event_sources (multi_event_source / seed_provider fb_pixel, event Purchase, action_source website, creation_ui Power Editor) rather than from an existing non-lookalike custom audience. Attempted to execute this pass since the routine now permits auto-tier execution: however, the connected Meta Ads MCP's ads_create_custom_audience tool, as exposed to this session, only accepts origin_audience_id (an existing CUSTOM/WEBSITE/ENGAGEMENT/MOBILE_APP audience id) + lookalike_ratio for LOOKALIKE creation — it has no parameter for building directly from pixel event sources the way the stale audience and this proposal's stored metaAction both assume. The only real origin_audience_id candidate on the account is 'Purchasers 30D' (id 120249907176770159, ~20 users), which this proposal's own reasoning already flagged as too small to be a reliable independent LAL source. Rather than force a low-quality lookalike through a mismatched source, this execution is blocked this pass — same posture as hook-angle-tagging/auto-creative-generation-launch being blocked on no Higgsfield MCP connection. Needs either a tool/MCP update exposing the event-source-based LAL creation path, or a human decision to accept the small 'Purchasers 30D' audience as the origin instead.",
       "actionSummary": "3-step chain, all real: create matching 1%/2%/5% lookalikes off the exact same pixel purchase-event source the existing (94-day-stale) audience 120250736441810159 uses — confirmed via a live pull of its lookalike_spec (origin_event_sources pointing at pixel 833131719490535, event Purchase, action_source website). No fabricated origin_audience_id or guessed spec — this mirrors the real, currently-working definition, just refreshed and laddered.",
       "metaAction": {
         "tool": "ads_create_custom_audience",
         "params": {
           "name": "Lookalike (IN 1%) - Purchase Pixel - Refresh 2026-08-29",
           "subtype": "LOOKALIKE",
-          "lookalike_spec": { "country": "IN", "ratio": 0.01, "origin_event_sources": [ { "id": "833131719490535", "seed_provider": "fb_pixel", "event_names": ["Purchase"], "action_source": "website" } ] }
+          "lookalike_spec": {
+            "country": "IN",
+            "ratio": 0.01,
+            "origin_event_sources": [
+              {
+                "id": "833131719490535",
+                "seed_provider": "fb_pixel",
+                "event_names": [
+                  "Purchase"
+                ],
+                "action_source": "website"
+              }
+            ]
+          }
         },
         "followUp": {
           "tool": "ads_create_custom_audience",
           "params": {
             "name": "Lookalike (IN 2%) - Purchase Pixel - New 2026-08-29",
             "subtype": "LOOKALIKE",
-            "lookalike_spec": { "country": "IN", "ratio": 0.02, "origin_event_sources": [ { "id": "833131719490535", "seed_provider": "fb_pixel", "event_names": ["Purchase"], "action_source": "website" } ] }
+            "lookalike_spec": {
+              "country": "IN",
+              "ratio": 0.02,
+              "origin_event_sources": [
+                {
+                  "id": "833131719490535",
+                  "seed_provider": "fb_pixel",
+                  "event_names": [
+                    "Purchase"
+                  ],
+                  "action_source": "website"
+                }
+              ]
+            }
           },
           "followUp": {
             "tool": "ads_create_custom_audience",
             "params": {
               "name": "Lookalike (IN 5%) - Purchase Pixel - New 2026-08-29",
               "subtype": "LOOKALIKE",
-              "lookalike_spec": { "country": "IN", "ratio": 0.05, "origin_event_sources": [ { "id": "833131719490535", "seed_provider": "fb_pixel", "event_names": ["Purchase"], "action_source": "website" } ] }
+              "lookalike_spec": {
+                "country": "IN",
+                "ratio": 0.05,
+                "origin_event_sources": [
+                  {
+                    "id": "833131719490535",
+                    "seed_provider": "fb_pixel",
+                    "event_names": [
+                      "Purchase"
+                    ],
+                    "action_source": "website"
+                  }
+                ]
+              }
             }
           }
         }
@@ -182,25 +358,21 @@
       "createdAt": "2026-08-29T11:30:00.000Z"
     },
     {
-      "id": "A-008",
-      "module": "purchaser-exclusion",
-      "tier": "auto",
-      "title": "Exclude existing purchasers from the new KAGE_31AUG prospecting targeting",
-      "reasoning": "Saif Naqvi launched a brand-new active sales-objective campaign tonight (2026-08-30, real-clock ~18:48 UTC pass; campaign 'New_Sales_Kage_31AUG', id 120255534465560159, created 10:42 PM local time, daily_budget ₹1,100/day, objective OUTCOME_SALES). Its ad set ('KAGE_31AUG', id 120255534465570159) targets broad interest/behavior segments (Footwear, Streetwear, Online shopping, Sneakers + Frequent international travelers, Engaged Shoppers) across Delhi/Kerala/Maharashtra/Karnataka/Telangana, ages 21-45 — a live-pulled targeting spec confirms no custom_audiences key at all, i.e. no excluded_custom_audiences. The account's existing 'Purchasers 30D' custom audience (id 120249907176770159, subtype PLATFORM/website pixel-based, delivery_status ACTIVE, already used by A-004 and by the new Retargeting_31AUG campaign) can be applied directly — no new audience needs to be created. This is the same underlying gap as A-004, just on a different, newly-created entity — filed as a separate proposal per the routine's de-dup rules (different entity_id). Already spending real money (₹11.68 in its first partial day) while this gap is open. Refreshed 2026-08-31 (real-clock ~02:48 UTC): live targeting re-fetched directly on this ad set and still has no custom_audiences key at all — gap unchanged, still unexecuted (read-only mode). Lifetime spend has grown to ₹288.78 (2,998 impressions, 78 clicks, frequency 1.21, still zero purchases) — over half the account's ₹500 kill-threshold spend floor, still with no purchaser exclusion applied, meaning an increasing share of this prospecting spend risks re-reaching existing customers. Refreshed again this pass (2026-08-31, real-clock ~04:47 UTC): live targeting re-fetched directly and still has no custom_audiences key — gap unchanged, still unexecuted (read-only mode). Lifetime spend now ₹437.75 (4,629 impressions, 107 clicks), still zero purchases — within ₹63 of the campaign's own ₹500 kill-threshold spend floor (see A-002's updated note), meaning this purchaser-exclusion gap is about to matter more, not less, if delivery continues at zero conversions. Refreshed again this pass (2026-08-31, real-clock ~09:35 UTC): live targeting re-fetched directly and still has no custom_audiences key — gap unchanged, still unexecuted (read-only mode). Lifetime spend (date_preset=maximum) has now grown to ₹557.11 (5,997 impressions, 139 clicks), still zero purchases (omni_purchase null) — this campaign has now crossed the ₹500 kill-threshold spend floor at 0x ROAS, so a separate pause-kill proposal (A-009) has been filed against it; this purchaser-exclusion proposal stands independently regardless of how A-009 is resolved (if the campaign is reactivated later, or if a human prefers to fix targeting over pausing, the exclusion gap is still real). Refreshed again this pass (2026-08-31, real-clock ~08:50 UTC): live targeting re-fetched directly and still has no custom_audiences key — gap unchanged, still unexecuted (read-only mode). Lifetime spend (date_preset=maximum) has grown further to ₹651.90 (7,221 impressions, 174 clicks), still zero purchases — reinforcing A-009's pause-kill trigger without changing this proposal's own scope. Refreshed again this pass (2026-08-31, real-clock ~10:35 UTC): live targeting re-fetched directly and still has no custom_audiences key — gap unchanged, still unexecuted (read-only mode). Lifetime spend now ₹737.69 (8,348 impressions, 211 clicks), still zero purchases — further reinforcing A-009 without changing this proposal's own scope. Refreshed again this pass (2026-08-31, real-clock ~12:52 UTC): live targeting re-fetched directly (full targeting object pulled, not just a key check) — confirmed no custom_audiences or excluded_custom_audiences anywhere in the spec, gap unchanged, still unexecuted (read-only mode). Lifetime spend (date_preset=maximum) now ₹796.98 (9,197 impressions, 233 clicks), still zero purchases — further reinforcing A-009 without changing this proposal's own scope. Refreshed again this pass (2026-08-31, real-clock ~14:48 UTC): live targeting re-fetched directly (full targeting object) — still no custom_audiences key anywhere in the spec, gap unchanged, still unexecuted (read-only mode). Lifetime spend (date_preset=maximum) now ₹907.76 (10,511 impressions, 264 clicks), still zero purchases — further reinforcing A-009 without changing this proposal's own scope. Refreshed again this pass (2026-08-31, real-clock ~16:48 UTC): live targeting re-fetched directly — still no custom_audiences key anywhere in the spec, gap unchanged, still unexecuted (read-only mode). Lifetime spend (date_preset=maximum) now ₹1,135.34 (13,172 impressions, 315 clicks), still zero purchases — further reinforcing A-009 without changing this proposal's own scope. Refreshed again this pass (2026-08-31, real-clock ~18:47 UTC): live targeting re-fetched directly and still has no custom_audiences key anywhere in the spec — gap unchanged, still unexecuted (read-only mode). Lifetime spend (date_preset=maximum) now ₹1,292.50 (15,224 impressions, 372 clicks), still zero purchases — further reinforcing A-009 without changing this proposal's own scope.",
-      "actionSummary": "Add the existing 'Purchasers 30D' custom audience (id 120249907176770159) as an excluded audience on the new KAGE_31AUG ad set's targeting, leaving all other targeting (interests, behaviors, geo, age, placements) unchanged.",
-      "metaAction": { "tool": "ads_update_entity", "params": { "entity_id": "120255534465570159", "entity_type": "adset", "field": "targeting", "note": "add existing custom audience id 120249907176770159 ('Purchasers 30D') to excluded_custom_audiences in the existing targeting spec; do not otherwise modify targeting" } },
-      "targetingDelta": { "add_excluded_custom_audiences": [ { "id": "120249907176770159" } ] },
-      "status": "pending",
-      "createdAt": "2026-08-30T18:48:01.000Z"
-    },
-    {
       "id": "A-009",
       "module": "pause-kill",
       "tier": "approval",
       "title": "Pause New_Sales_Kage_31AUG — zero purchases past the ₹500 kill-threshold floor",
-      "reasoning": "New_Sales_Kage_31AUG (id 120255534465560159, ad set KAGE_31AUG, OUTCOME_SALES, ACTIVE) has now crossed settings.kill_roas_threshold's floor: lifetime spend (date_preset=maximum, since date_preset=last_30d under-reports very-new entities — see A-002's prior note on this reporting-window artifact) is ₹557.11 across 5,997 impressions and 139 clicks, with omni_purchase and purchase_roas both null — i.e. zero purchases, 0x ROAS. This is the first pass where the campaign's own spend has actually cleared the ₹500 floor at sub-1.0x ROAS (prior passes tracked it approaching the floor: ₹437.75 at the last check, ₹507.11 combined with its sibling Retargeting_31AUG the pass before that, see A-002/A-008's reasoning history) — this is a fresh trigger, not a restatement. Its sibling campaign Retargeting_31AUG (id 120255534778560159) remains under the floor at ₹86.81 lifetime spend, so it is not in scope for this proposal. Two known open issues on this same campaign compound the case for pausing rather than just waiting: KAGE_31AUG's ad set still has no purchaser-exclusion applied (A-008, unexecuted) and the campaign was launched manually outside this automation (see A-001/A-002/A-008's notes on the 2026-08-30 night launch), so its targeting has not been through any of this account's usual review. Recommend pausing and reviewing creative/targeting before any relaunch, rather than continuing to spend against a proven-zero conversion rate. Refreshed this pass (2026-08-31, real-clock ~08:50 UTC, direct campaign-level pull, date_preset=maximum): lifetime spend has grown further to ₹651.90 across 7,221 impressions and 174 clicks, purchase_roas still null (zero purchases) — the trigger stands and has strengthened; ad-level frequency remains healthy (1.17), so this is a pure conversion-rate problem, not fatigue or oversaturation. Still unexecuted, pending human approval. Refreshed again this pass (2026-08-31, real-clock ~10:35 UTC, direct campaign-level pull, date_preset=maximum): lifetime spend has grown further to ₹737.69 across 8,348 impressions and 211 clicks, purchase_roas still null (zero purchases) — the trigger keeps strengthening, now 47% past the ₹500 kill floor with zero conversions since launch. Sibling Retargeting_31AUG also grew (₹121.18 lifetime, still zero purchases) but remains under the floor. Still unexecuted, pending human approval — this remains the account's single largest source of unproductive spend right now. Refreshed again this pass (2026-08-31, real-clock ~14:48 UTC, direct campaign-level pull, date_preset=maximum): lifetime spend has grown further to ₹907.76 across 10,511 impressions and 264 clicks, purchase_roas still null (zero purchases) — now 81.6% past the ₹500 kill floor with zero conversions since launch, the trigger keeps strengthening. Sibling Retargeting_31AUG also grew (₹145.93 lifetime, still zero purchases) but remains under the floor. Ad-level frequency on both new ads remains healthy (Retargeting 1.0, KAGE_31AUG 1.10), so this stays a pure conversion-rate problem, not fatigue. Still unexecuted, pending human approval. Refreshed again this pass (2026-08-31, real-clock ~16:48 UTC, direct campaign-level pull, date_preset=maximum): lifetime spend has grown further to ₹1,135.34 across 13,172 impressions and 315 clicks, purchase_roas still null (zero purchases) — now 127% past the ₹500 kill floor with zero conversions since launch, more than double the trigger threshold. Sibling Retargeting_31AUG also grew (₹163.37 lifetime, still zero purchases) but remains under the floor. This is now the account's largest and longest-running source of unproductive spend by a wide margin. Still unexecuted, pending human approval. Refreshed again this pass (2026-08-31, real-clock ~18:47 UTC, direct campaign-level pull, date_preset=maximum): lifetime spend has grown further to ₹1,292.50 across 15,224 impressions and 372 clicks, purchase_roas still null (zero purchases) — now 158.5% past the ₹500 kill floor with zero conversions since launch, continuing to grow. Sibling Retargeting_31AUG also grew (₹180.43 lifetime, still zero purchases) but remains under the floor. Ad-level frequency on both new ads remains healthy (Retargeting 1.16, KAGE_31AUG 1.24), no fatigue signal — this stays a pure conversion-rate problem, not fatigue. Still unexecuted, pending human approval — now the account's single largest source of unproductive spend by a wide margin. Refreshed again this pass (2026-08-31 scheduled run, direct campaign-level pull, date_preset=maximum): lifetime spend has grown further to ₹1,369.93 (frequency 1.22), purchase_roas still null (zero purchases) — now 174% past the ₹500 kill floor with zero conversions since launch, continuing to grow with no sign of converting. Still unexecuted, pending human approval.",
+      "reasoning": "New_Sales_Kage_31AUG (id 120255534465560159, ad set KAGE_31AUG, OUTCOME_SALES, ACTIVE) has now crossed settings.kill_roas_threshold's floor: lifetime spend (date_preset=maximum, since date_preset=last_30d under-reports very-new entities — see A-002's prior note on this reporting-window artifact) is ₹557.11 across 5,997 impressions and 139 clicks, with omni_purchase and purchase_roas both null — i.e. zero purchases, 0x ROAS. This is the first pass where the campaign's own spend has actually cleared the ₹500 floor at sub-1.0x ROAS (prior passes tracked it approaching the floor: ₹437.75 at the last check, ₹507.11 combined with its sibling Retargeting_31AUG the pass before that, see A-002/A-008's reasoning history) — this is a fresh trigger, not a restatement. Its sibling campaign Retargeting_31AUG (id 120255534778560159) remains under the floor at ₹86.81 lifetime spend, so it is not in scope for this proposal. Two known open issues on this same campaign compound the case for pausing rather than just waiting: KAGE_31AUG's ad set still has no purchaser-exclusion applied (A-008, unexecuted) and the campaign was launched manually outside this automation (see A-001/A-002/A-008's notes on the 2026-08-30 night launch), so its targeting has not been through any of this account's usual review. Recommend pausing and reviewing creative/targeting before any relaunch, rather than continuing to spend against a proven-zero conversion rate. Refreshed this pass (2026-08-31, real-clock ~08:50 UTC, direct campaign-level pull, date_preset=maximum): lifetime spend has grown further to ₹651.90 across 7,221 impressions and 174 clicks, purchase_roas still null (zero purchases) — the trigger stands and has strengthened; ad-level frequency remains healthy (1.17), so this is a pure conversion-rate problem, not fatigue or oversaturation. Still unexecuted, pending human approval. Refreshed again this pass (2026-08-31, real-clock ~10:35 UTC, direct campaign-level pull, date_preset=maximum): lifetime spend has grown further to ₹737.69 across 8,348 impressions and 211 clicks, purchase_roas still null (zero purchases) — the trigger keeps strengthening, now 47% past the ₹500 kill floor with zero conversions since launch. Sibling Retargeting_31AUG also grew (₹121.18 lifetime, still zero purchases) but remains under the floor. Still unexecuted, pending human approval — this remains the account's single largest source of unproductive spend right now. Refreshed again this pass (2026-08-31, real-clock ~14:48 UTC, direct campaign-level pull, date_preset=maximum): lifetime spend has grown further to ₹907.76 across 10,511 impressions and 264 clicks, purchase_roas still null (zero purchases) — now 81.6% past the ₹500 kill floor with zero conversions since launch, the trigger keeps strengthening. Sibling Retargeting_31AUG also grew (₹145.93 lifetime, still zero purchases) but remains under the floor. Ad-level frequency on both new ads remains healthy (Retargeting 1.0, KAGE_31AUG 1.10), so this stays a pure conversion-rate problem, not fatigue. Still unexecuted, pending human approval. Refreshed again this pass (2026-08-31, real-clock ~16:48 UTC, direct campaign-level pull, date_preset=maximum): lifetime spend has grown further to ₹1,135.34 across 13,172 impressions and 315 clicks, purchase_roas still null (zero purchases) — now 127% past the ₹500 kill floor with zero conversions since launch, more than double the trigger threshold. Sibling Retargeting_31AUG also grew (₹163.37 lifetime, still zero purchases) but remains under the floor. This is now the account's largest and longest-running source of unproductive spend by a wide margin. Still unexecuted, pending human approval. Refreshed again this pass (2026-08-31, real-clock ~18:47 UTC, direct campaign-level pull, date_preset=maximum): lifetime spend has grown further to ₹1,292.50 across 15,224 impressions and 372 clicks, purchase_roas still null (zero purchases) — now 158.5% past the ₹500 kill floor with zero conversions since launch, continuing to grow. Sibling Retargeting_31AUG also grew (₹180.43 lifetime, still zero purchases) but remains under the floor. Ad-level frequency on both new ads remains healthy (Retargeting 1.16, KAGE_31AUG 1.24), no fatigue signal — this stays a pure conversion-rate problem, not fatigue. Still unexecuted, pending human approval — now the account's single largest source of unproductive spend by a wide margin. Refreshed again this pass (2026-08-31 scheduled run, direct campaign-level pull, date_preset=maximum): lifetime spend has grown further to ₹1,369.93 (frequency 1.22), purchase_roas still null (zero purchases) — now 174% past the ₹500 kill floor with zero conversions since launch, continuing to grow with no sign of converting. Still unexecuted, pending human approval. Refreshed again this pass (2026-08-31, real-clock ~22:55 UTC, direct campaign-level pull, date_preset=maximum): lifetime spend has grown further to ₹1,394.36 across 16,506 impressions and 404 clicks (frequency 1.22, healthy, no fatigue signal), purchase_roas still null (zero purchases) — now 179% past the ₹500 kill floor with zero conversions since launch. Important development this pass: the auto-tier purchaser-exclusion module (A-008) was executed against this campaign's ad set (KAGE_31AUG) this run, and the Meta Ads MCP tool force-paused that ad set as a side effect of the targeting edit (see this run's new alert and the A-008 log entry) — meaning live delivery on this campaign has likely already stopped as an incidental consequence of a different, legitimately-auto-tier action, not because this pause-kill proposal was approved or executed. This proposal (a deliberate, human-reviewable pause of the campaign itself, with the option to keep it paused/reviewed rather than just incidentally halted) remains unexecuted and pending human approval — worth approving explicitly regardless of the ad set's current de facto paused state, so the campaign's status accurately reflects a reviewed decision rather than a side effect.",
       "actionSummary": "Pause campaign 'New_Sales_Kage_31AUG' (id 120255534465560159) by setting its status to PAUSED. No other field changes. This stops further spend immediately; it can be reactivated manually (or via a future reactivate-winner proposal) once the underlying issue — creative, targeting, or audience — is diagnosed and fixed.",
-      "metaAction": { "tool": "ads_update_entity", "params": { "entity_id": "120255534465560159", "entity_type": "campaign", "field": "status", "value": "PAUSED" } },
+      "metaAction": {
+        "tool": "ads_update_entity",
+        "params": {
+          "entity_id": "120255534465560159",
+          "entity_type": "campaign",
+          "field": "status",
+          "value": "PAUSED"
+        }
+      },
       "status": "pending",
       "createdAt": "2026-08-31T09:35:00.000Z"
     }
@@ -544,11 +716,321 @@
       "id": "AL-038",
       "module": "underperformer-watch",
       "title": "New traffic campaign 'Tsuchi_TOF' launched overnight for a new product line",
-      "detail": "Activity log shows Saif Naqvi created and activated a new campaign, 'Tsuchi_TOF' (id 120255554400490159, ad set 'Tsuchi_TOF' id 120255554400480159, OUTCOME_TRAFFIC, optimization_goal Landing Page Views, daily_budget ₹200/day, Advantage+ audience on, broad India targeting) via Power Editor, with the first ad delivering ~12 minutes after ad set activation. Lifetime spend so far is only ₹19.51 (1 ad) — too early for any meaningful read. Same pattern as Kage_TOF: a traffic-objective campaign, so 0 purchases is expected and not a kill signal, and purchaser-exclusion (module 12) doesn't apply per this account's standing traffic-objective exclusion. Flagging for visibility; will track alongside Kage_TOF-style monitoring (CTR/frequency trend) once it has a few days of data.",
+      "detail": "Activity log shows Saif Naqvi created and activated a new campaign, 'Tsuchi_TOF' (id 120255554400490159, ad set 'Tsuchi_TOF' id 120255554400480159, OUTCOME_TRAFFIC, optimization_goal Landing Page Views, daily_budget ₹200/day, Advantage+ audience on, broad India targeting) via Power Editor, with the first ad delivering ~12 minutes after ad set activation. Lifetime spend so far is only ₹19.51 (1 ad) — too early for any meaningful read. Same pattern as Kage_TOF: a traffic-objective campaign, so 0 purchases is expected and not a kill signal, and purchaser-exclusion (module 12) doesn't apply per this account's standing traffic-objective exclusion. Flagging for visibility; will track alongside Kage_TOF-style monitoring (CTR/frequency trend) once it has a few days of data. Refreshed this pass (2026-08-31, real-clock ~22:55 UTC, date_preset=maximum): lifetime spend now ₹27.33 (1,679 impressions, 55 clicks, frequency 1.06, CTR 3.28%) — still too early for a meaningful read, still traffic-objective so 0 purchases remains expected, not a kill signal.",
       "severity": "low",
       "dismissed": false,
       "createdAt": "2026-08-31T19:00:00.000Z"
+    },
+    {
+      "id": "AL-039",
+      "module": "purchaser-exclusion",
+      "title": "Auto-executed purchaser-exclusion fix force-paused New_Sales_Kage_31AUG's ad set as a side effect",
+      "detail": "This scheduled run was, for the first time, permitted to execute pending tier:'auto' proposals directly via the Meta Ads MCP connection (all prior runs operated in an explicit read-only mode — see AL-010 and every routine-run-notes alert since). Executed A-004 (purchaser-exclusion on Kage_sales_1908's ad set) and A-008 (the same fix on the new KAGE_31AUG ad set, under campaign New_Sales_Kage_31AUG) — both succeeded, adding the existing 'Purchasers 30D' custom audience (id 120249907176770159) to excluded_custom_audiences with no other targeting field touched. A-004's target ad set was already inert (parent campaign Kage_sales_1908 has been manually PAUSED since 2026-08-30, see AL-018), so no real-world delivery changed there. A-008's target was different: KAGE_31AUG was genuinely ACTIVE and delivering at the moment of the edit (New_Sales_Kage_31AUG has spent ₹1,394.36 lifetime with zero purchases — see A-009). The Meta Ads MCP's ads_update_entity tool returned success on the targeting change but also carried status_forced_to_paused:true / status:PAUSED on the ad set — i.e. the tool itself paused this live, spending ad set as a side effect of the targeting edit, something this proposal's stored metaAction never asked for and this run never separately approved. Net effect: New_Sales_Kage_31AUG's live delivery has very likely stopped (assuming this is its only ad set), which happens to be the same real-world outcome A-009 (pause-kill, approval-tier, still pending) was proposing — but it arrived as an unplanned consequence of a correctly-scoped auto-tier action, not a human-approved decision. Flagging this transparently rather than silently treating it as A-009 being resolved: A-009 remains open and pending explicit human approval so the campaign's paused status reflects a reviewed decision. Worth checking Ads Manager to confirm the ad set's actual current delivery state next time a human reviews the account, and worth noting for future runs that this tool's targeting-update path may force-pause any ad set it touches as a built-in safety behavior, not just this one.",
+      "severity": "medium",
+      "dismissed": false,
+      "createdAt": "2026-08-31T22:55:00.000Z"
+    },
+    {
+      "id": "AL-040",
+      "module": "routine-run-notes",
+      "title": "2026-08-31 scheduled run: first auto-tier executions of this system (A-004, A-008), no new proposals",
+      "detail": "Scheduled run (2026-08-31, real-clock ~22:55 UTC). Circuit breaker check: today's account spend ₹152.41 vs the ₹2,000 ceiling — not tripped. Pixel/data-quality gate: dataset 833131719490535 composite EMQ scores 6.1-8.0 across events, core match keys (ip_address/user_agent/fbp) at 100% coverage on every event that carries them — gate passed, ROAS-driven modules not suppressed. Unlike every prior run this system has logged, this run was explicitly permitted to execute pending tier:'auto' proposals: A-004 (purchaser-exclusion, Kage_sales_1908 ad set) and A-008 (purchaser-exclusion, KAGE_31AUG ad set) were both executed successfully via the Meta Ads MCP connection and moved from proposals into log — see their log entries for previousState/detail, and see the new AL-039 alert for an important side effect of A-008 (it force-paused a live-delivering ad set). A-007 (lookalike-refresh) could not be executed this pass — the connected Meta Ads MCP's ads_create_custom_audience tool does not expose the origin_event_sources-based LAL creation path the stale audience and this proposal both depend on, only origin_audience_id from an existing non-lookalike audience, and the only real candidate ('Purchasers 30D', ~20 users) is too small per this proposal's own prior analysis — left pending, documented as a tool-capability gap rather than forced through. hook-angle-tagging and auto-creative-generation-launch remain skipped — no Higgsfield MCP connection is attached to this session, same as every prior run (Phase 3, per ROUTINE.md's build-phasing notes). All 7 remaining pending approval-tier proposals (A-001, A-002, A-003, A-005, A-006, A-009) were re-verified against fresh Meta Ads MCP pulls this pass and had their reasoning refreshed with current numbers — none needed a substantive rewrite, and no new approval-tier proposal was warranted: engagement-tier-segmentation was considered given Retargeting_31AUG's ad set targets an OR of three custom audiences at different intent depths (Purchasers 30D / IG_Visitors_365 / Initiate_Checkout, per A-002's notes), but no per-audience breakdown is available through the connected tools to back a real, concrete split proposal, so it was left as a documented gap rather than a guessed one — same standard applied to budget-reallocation (both active sales campaigns are at 0x/null ROAS, so no real gap to act on), placement/device/dayparting/bid-strategy (no purchase-level data on any campaign young enough to need one), ab-test (no clearly-deliberate manual creative variants), campaign-consolidation (no confirmed duplicate targeting beyond the existing long-tail note in AL-003), and frequency-capping (all active ads show healthy, flat frequency: Tsuchi_TOF 1.06, Retargeting_31AUG 1.15, KAGE_31AUG/New_Sales_Kage_31AUG 1.22). learning-phase-stuck remains unevaluable — no learning-stage field is exposed at ad set level through the connected Meta Ads MCP tools, same gap as every prior run. weekly-digest: today is Monday, but the prior weekly digest (AL-008) covered Aug 23-29 only 2 days ago and this week (Aug 30-31) has too little data yet for a meaningful new rollup — deferred rather than forced. monthly-digest not due (still August). Anomaly signal: no data available for the account, same as every prior pass. Competitor rescrape: Gully Labs flat at 122, Lotto Sport India 131->132 (+0.8%) — both well below the 20% spike threshold, settings.competitor_last_scrape updated. Opportunity Score and catalog diagnostics refreshed — see A-003's updated reasoning. Pixel event numbers (AddToCart vs Purchase, trailing 7d) refreshed — see A-002's updated reasoning, still within the week's established normal range. This was, on balance, a genuinely different run from the long steady-state streak preceding it: two real Meta account mutations executed for the first time, with one producing a real, if incidental, delivery change (see AL-039) — everything else remains a numbers-refresh of already-pending items.",
+      "severity": "medium",
+      "dismissed": false,
+      "createdAt": "2026-08-31T22:55:00.000Z"
     }
   ],
-  "log": []
+  "log": [
+    {
+      "proposalId": "A-004",
+      "action": "Added the existing 'Purchasers 30D' custom audience (id 120249907176770159) as an excluded audience on Kage_sales_1908's ad set (id 120255351569140159) targeting; no other targeting fields changed.",
+      "result": "success",
+      "previousState": {
+        "genders": [
+          0
+        ],
+        "age_min": 21,
+        "age_max": 65,
+        "age_range": [
+          21,
+          40
+        ],
+        "geo_locations": {
+          "cities": [
+            {
+              "key": 1015791,
+              "name": "Aizawl",
+              "region": "Mizoram",
+              "region_id": 1749,
+              "country": "IN",
+              "radius": 25,
+              "distance_unit": "mile"
+            },
+            {
+              "key": 1017930,
+              "name": "Bangalore",
+              "region": "Karnataka",
+              "region_id": 1738,
+              "country": "IN",
+              "radius": 25,
+              "distance_unit": "mile"
+            },
+            {
+              "key": 1021534,
+              "name": "Chennai",
+              "region": "Tamil Nadu",
+              "region_id": 1744,
+              "country": "IN",
+              "radius": 25,
+              "distance_unit": "mile"
+            },
+            {
+              "key": 1023040,
+              "name": "Delhi",
+              "region": "Delhi",
+              "region_id": 1728,
+              "country": "IN",
+              "radius": 25,
+              "distance_unit": "mile"
+            },
+            {
+              "key": 1026297,
+              "name": "Gurugram",
+              "region": "Haryana",
+              "region_id": 1730,
+              "country": "IN",
+              "radius": 25,
+              "distance_unit": "mile"
+            },
+            {
+              "key": 1027234,
+              "name": "Hyderabad",
+              "region": "Telangana",
+              "region_id": 4100,
+              "country": "IN",
+              "radius": 25,
+              "distance_unit": "mile"
+            },
+            {
+              "key": 1035921,
+              "name": "Mumbai",
+              "region": "Maharashtra",
+              "region_id": 1735,
+              "country": "IN",
+              "radius": 25,
+              "distance_unit": "mile"
+            },
+            {
+              "key": 1039952,
+              "name": "Pune",
+              "region": "Maharashtra",
+              "region_id": 1735,
+              "country": "IN",
+              "radius": 25,
+              "distance_unit": "mile"
+            },
+            {
+              "key": 1045272,
+              "name": "Thane",
+              "region": "Maharashtra",
+              "region_id": 1735,
+              "country": "IN",
+              "radius": 25,
+              "distance_unit": "mile"
+            },
+            {
+              "key": 1047061,
+              "name": "Visakhapatnam",
+              "region": "Andhra Pradesh",
+              "region_id": 1724,
+              "country": "IN",
+              "radius": 25,
+              "distance_unit": "mile"
+            },
+            {
+              "key": 2676477,
+              "name": "Amballur",
+              "region": "Kerala",
+              "region_id": 1733,
+              "country": "IN",
+              "radius": 25,
+              "distance_unit": "mile"
+            }
+          ],
+          "medium_geo_areas": [
+            {
+              "key": 2678250,
+              "name": "Gautam Budh Nagar",
+              "country": "IN",
+              "region": "Uttar Pradesh",
+              "region_id": 1754
+            }
+          ],
+          "subcities": [
+            {
+              "key": 2675638,
+              "name": "Ranga Reddy",
+              "country": "IN",
+              "region": "Telangana",
+              "region_id": 4100
+            }
+          ],
+          "location_types": [
+            "home",
+            "recent"
+          ]
+        },
+        "flexible_spec": [
+          {
+            "interests": [
+              {
+                "id": 6003256793569,
+                "name": "Footwear"
+              },
+              {
+                "id": 6003346592981,
+                "name": "Online shopping"
+              },
+              {
+                "id": 6003354726060,
+                "name": "Japanese art"
+              },
+              {
+                "id": 6003384587151,
+                "name": "Sneakers (footwear)"
+              },
+              {
+                "id": 6003446154680,
+                "name": "Street fashion"
+              }
+            ],
+            "behaviors": [
+              {
+                "id": 6002714895372,
+                "name": "Frequent Travelers"
+              },
+              {
+                "id": 6071631541183,
+                "name": "Engaged Shoppers"
+              }
+            ]
+          }
+        ],
+        "targeting_automation": {
+          "advantage_audience": 1,
+          "individual_setting": {
+            "geo": 1
+          }
+        },
+        "no_custom_audiences_key": true,
+        "status": "ACTIVE",
+        "effective_status": "CAMPAIGN_PAUSED"
+      },
+      "detail": {
+        "note": "Meta Ads MCP ads_update_entity returned success:true with the full updated targeting object echoing excluded_custom_audiences:[{id:120249907176770159}] alongside every pre-existing field unchanged. The response also included status_forced_to_paused:true / status:PAUSED on the ad set — this is a no-op in practice since the parent campaign (Kage_sales_1908) was already PAUSED (manually, since 2026-08-30, see AL-018) and the ad set's effective_status was already CAMPAIGN_PAUSED before this edit — no live delivery was running and none was stopped by this action.",
+        "ads_manager_url": "https://www.facebook.com/adsmanager/manage/adsets/edit?act=704523148804803&selected_adset_ids=120255351569140159"
+      },
+      "tier": "auto",
+      "executedAt": "2026-08-31T22:55:00.000Z"
+    },
+    {
+      "proposalId": "A-008",
+      "action": "Added the existing 'Purchasers 30D' custom audience (id 120249907176770159) as an excluded audience on the new KAGE_31AUG ad set (id 120255534465570159, under campaign New_Sales_Kage_31AUG) targeting; no other targeting fields changed.",
+      "result": "success",
+      "previousState": {
+        "age_min": 21,
+        "age_max": 65,
+        "age_range": [
+          21,
+          45
+        ],
+        "geo_locations": {
+          "regions": [
+            {
+              "key": 1728,
+              "name": "Delhi",
+              "country": "IN"
+            },
+            {
+              "key": 1733,
+              "name": "Kerala",
+              "country": "IN"
+            },
+            {
+              "key": 1735,
+              "name": "Maharashtra",
+              "country": "IN"
+            },
+            {
+              "key": 1738,
+              "name": "Karnataka",
+              "country": "IN"
+            },
+            {
+              "key": 4100,
+              "name": "Telangana",
+              "country": "IN"
+            }
+          ],
+          "location_types": [
+            "home",
+            "recent"
+          ]
+        },
+        "publisher_platforms": [
+          "instagram",
+          "whatsapp"
+        ],
+        "flexible_spec": [
+          {
+            "interests": [
+              {
+                "id": 6003256793569,
+                "name": "Footwear"
+              },
+              {
+                "id": 6003299417538,
+                "name": "Streetwear"
+              },
+              {
+                "id": 6003346592981,
+                "name": "Online shopping"
+              },
+              {
+                "id": 6003384587151,
+                "name": "Sneakers (footwear)"
+              }
+            ],
+            "behaviors": [
+              {
+                "id": 6022788483583,
+                "name": "Frequent international travelers"
+              },
+              {
+                "id": 6071631541183,
+                "name": "Engaged Shoppers"
+              }
+            ]
+          }
+        ],
+        "targeting_automation": {
+          "advantage_audience": 1,
+          "individual_setting": {
+            "age": 1,
+            "gender": 1,
+            "geo": 1
+          }
+        },
+        "no_custom_audiences_key": true,
+        "status": "ACTIVE",
+        "effective_status": "ACTIVE"
+      },
+      "detail": {
+        "note": "IMPORTANT SIDE EFFECT: unlike A-004, this ad set was genuinely ACTIVE and delivering at the moment of the edit (live pull immediately before showed status:ACTIVE, effective_status:ACTIVE). The Meta Ads MCP ads_update_entity call succeeded (excluded_custom_audiences:[{id:120249907176770159}] applied, every other targeting field preserved) but the response also carried status_forced_to_paused:true / status:PAUSED — the tool itself force-paused this ad set as a side effect of the targeting edit. Since this appears to be the campaign's only ad set, this likely halts New_Sales_Kage_31AUG's live delivery, even though the campaign object's own status field remains ACTIVE and no pause-kill action (A-009, approval-tier, still pending) was executed by this routine. Filed as its own alert (see new alert this run) rather than silently absorbed, since it changes what's currently live/delivering — exactly the kind of consequence the approval tier exists to gate, even though the edit that caused it was a legitimate, correctly-scoped auto-tier action.",
+        "ads_manager_url": "https://www.facebook.com/adsmanager/manage/adsets/edit?act=704523148804803&selected_adset_ids=120255534465570159"
+      },
+      "tier": "auto",
+      "executedAt": "2026-08-31T22:55:00.000Z"
+    }
+  ]
 }
