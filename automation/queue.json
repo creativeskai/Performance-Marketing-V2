@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-01T08:53:00.000Z",
+  "generatedAt": "2026-09-01T10:47:00.000Z",
   "settings": {
     "kill_roas_threshold": "pause if ROAS < 1.0x after ₹500 spend on a sales-objective campaign",
     "reactivate_min_historic_roas": "surface for reactivation if a paused campaign's last active-period ROAS >= 3.0x",
@@ -24,10 +24,10 @@
       }
     },
     "competitor_last_scrape": {
-      "gully_labs_active_ads": 109,
-      "lotto_sport_india_active_ads": 97,
-      "scraped_at": "2026-09-01T08:53:00.000Z",
-      "note": "Twenty-eighth pass (2026-09-01, read-only run): both counts reverted exactly to the prior-prior pass's values (Gully Labs 119->109, -8.4%; Lotto Sport India 131->97, -26.0%) - i.e. the account is now bouncing between the same two count pairs (109/97 and 119/131) across consecutive scrapes rather than trending in one direction. This further confirms the standing AL-011/AL-015 oscillation theory (Ad Library's count is noisy/non-deterministic on repeated identical queries) rather than a real competitor spend change - treated as continued noise, not filed as a fresh competitor-spike alert."
+      "gully_labs_active_ads": 108,
+      "lotto_sport_india_active_ads": 51,
+      "scraped_at": "2026-09-01T10:47:00.000Z",
+      "note": "Twenty-ninth pass (2026-09-01, read-only run): Gully Labs held roughly steady (109->108, -0.9%, within noise). Lotto Sport India dropped sharply (97->51, -47.4%) - a new low outside the established 97-131 oscillation band tracked across the last several passes. See AL-042 for the updated detail; treated as a flagged-but-unconfirmed move pending a repeat reading, not yet a confirmed competitor spend pullback."
     },
     "note": "hard_spend_ceiling_inr is a placeholder — set to roughly 3x trailing-30-day avg daily spend (~₹663/day as of 29 Aug 2026). All fields here are editable directly in the Automation tab (Save button) or by telling Claude."
   },
@@ -752,8 +752,8 @@
       "id": "AL-042",
       "module": "competitor-spike",
       "title": "Lotto Sport India active-ad count is oscillating, not trending",
-      "detail": "Re-checked again this pass (2026-09-01 read-only run): Lotto Sport India's active-ad count is back down to 97 (from 131 last pass, -26.0%), which is exactly the same figure recorded two passes ago. Gully Labs likewise reverted to 109 (from 119, -8.4%). Both brands' counts are bouncing between the same two value-pairs across consecutive scrapes rather than moving in one direction - this reads as Ad Library query noise, not a real change in competitor spend/creative volume. No action recommended; will keep tracking in case a sustained one-directional trend emerges.",
-      "severity": "low",
+      "detail": "Re-checked again this pass (2026-09-01 read-only run): Lotto Sport India's active-ad count is back down to 97 (from 131 last pass, -26.0%), which is exactly the same figure recorded two passes ago. Gully Labs likewise reverted to 109 (from 119, -8.4%). Both brands' counts are bouncing between the same two value-pairs across consecutive scrapes rather than moving in one direction - this reads as Ad Library query noise, not a real change in competitor spend/creative volume. No action recommended; will keep tracking in case a sustained one-directional trend emerges. Re-checked again this pass (2026-09-01 read-only run, ads_library_search estimated_total_count): Lotto Sport India dropped further to 51 (from 97, -47.4%) - a new low outside the established 97-131 oscillation band and the largest single-pass move recorded for this competitor. Gully Labs held roughly steady at 108 (from 109, -0.9%, within noise). Given estimated_total_count is Ad Library's own approximate/noisy figure (the basis for the standing oscillation theory), one pass isn't enough to call this a real spend pullback rather than a bigger-than-usual noise swing, but it's flagged here since it breaks the prior bounded range - worth confirming on the next pass before treating it as a genuine competitor signal.",
+      "severity": "medium",
       "dismissed": false,
       "createdAt": "2026-09-01T06:00:00.000Z"
     },
@@ -819,6 +819,15 @@
       "severity": "low",
       "dismissed": false,
       "createdAt": "2026-09-01T08:53:00.000Z"
+    },
+    {
+      "id": "AL-050",
+      "module": "routine-run-notes",
+      "title": "2026-09-01 scheduled run (read-only): steady state, Lotto Sport India competitor count broke its oscillation band",
+      "detail": "This run operated under an explicit read-only safety constraint: no Meta Ads MCP write/mutation tool calls were made, regardless of any module's tier - only read-oriented tools were used. Circuit breaker: not tripped (today's account spend ₹220.73 vs the ₹2,000 ceiling). Pixel quality gate: passed (composite EMQ 6.1-7.3 across web events, core match keys at 100% coverage on every event that carries them), so ROAS-driven modules were not suppressed. Activity log pulled since the last run (from 06:00 UTC forward): no manual account changes. All three active-delivery entities re-pulled at campaign level (date_preset=maximum): Retargeting_31AUG ₹247.14 spend/0 purchases (still under its ₹500 kill floor), Tsuchi_TOF ₹40.49 spend (traffic objective, not in pause-kill scope), New_Sales_Kage_31AUG flat at ₹1,395.30 spend/0 purchases (still 179.1% past its kill floor, A-009 stands unexecuted). Kage_Sales and Kage_sales_1908 (A-001, A-005, A-006) remain PAUSED, unchanged to the cent (₹6,195.22/4.30x and ₹6,179.11/1.82x respectively). Trailing-7d pixel events: 67 AddToCart vs 11 Purchase - within the week's established range, A-002's gap unchanged. Opportunity Score holds at 83/100 with the same recommendations as the last pass (advantage_plus_catalog_ads +8, one reels_pc_recommendation +1, one gen_ai_mvp +1, one music +1); catalog diagnostics unchanged (18 out-of-stock, 30 low-image, 7 unmatched content IDs) - A-003 stands. A-007 (lookalike-refresh) remains blocked on the same ads_create_custom_audience tool-capability gap documented in every prior pass, moot this run regardless since it's read-only. No anomaly signal fired. Notable finding: competitor rescrape shows Gully Labs holding roughly steady (109->108) but Lotto Sport India dropping sharply (97->51, -47.4%) - a new low outside the 97-131 band this pair had been oscillating in across the last several passes; updated AL-042 and settings.competitor_last_scrape, flagged as unconfirmed pending a repeat reading rather than treated as a certain competitor spend change. No new proposals were warranted this pass.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-09-01T10:47:00.000Z"
     }
   ],
   "log": [
