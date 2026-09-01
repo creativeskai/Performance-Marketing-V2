@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-01T06:50:03.000Z",
+  "generatedAt": "2026-09-01T08:53:00.000Z",
   "settings": {
     "kill_roas_threshold": "pause if ROAS < 1.0x after ₹500 spend on a sales-objective campaign",
     "reactivate_min_historic_roas": "surface for reactivation if a paused campaign's last active-period ROAS >= 3.0x",
@@ -24,10 +24,10 @@
       }
     },
     "competitor_last_scrape": {
-      "gully_labs_active_ads": 119,
-      "lotto_sport_india_active_ads": 131,
-      "scraped_at": "2026-09-01T06:50:03.000Z",
-      "note": "Twenty-seventh pass (2026-09-01, read-only run): Gully Labs moved 109->119 (+9.2%, below threshold). Lotto Sport India moved 97->131 (+35.1%, crosses the 20% competitor-spike threshold) - see AL-042's updated detail; treated as continued oscillation per the standing AL-011/AL-015 recommendation (require a move to persist across two consecutive scrapes before treating as a real signal), not filed as a fresh alert."
+      "gully_labs_active_ads": 109,
+      "lotto_sport_india_active_ads": 97,
+      "scraped_at": "2026-09-01T08:53:00.000Z",
+      "note": "Twenty-eighth pass (2026-09-01, read-only run): both counts reverted exactly to the prior-prior pass's values (Gully Labs 119->109, -8.4%; Lotto Sport India 131->97, -26.0%) - i.e. the account is now bouncing between the same two count pairs (109/97 and 119/131) across consecutive scrapes rather than trending in one direction. This further confirms the standing AL-011/AL-015 oscillation theory (Ad Library's count is noisy/non-deterministic on repeated identical queries) rather than a real competitor spend change - treated as continued noise, not filed as a fresh competitor-spike alert."
     },
     "note": "hard_spend_ceiling_inr is a placeholder — set to roughly 3x trailing-30-day avg daily spend (~₹663/day as of 29 Aug 2026). All fields here are editable directly in the Automation tab (Save button) or by telling Claude."
   },
@@ -400,7 +400,7 @@
       "id": "AL-003",
       "module": "campaign-consolidation",
       "title": "126 total campaigns on the account, 2 active",
-      "detail": "The account has a long tail of old paused/dead campaigns (Black Friday, Diwali, and other one-off pushes going back over a year). Not urgent, but worth an archive/cleanup pass — a fragmented account history makes some of Meta's own learning-phase and benchmark signals less reliable.",
+      "detail": "Re-checked 2026-09-01: 126 total campaigns on the account, 3 now show campaign-level effective_status=ACTIVE (Retargeting_31AUG, Tsuchi_TOF, New_Sales_Kage_31AUG) - up from 2 at last check. However 2 of the 3 (Tsuchi_TOF, New_Sales_Kage_31AUG) have their sole ad set force-paused as a purchaser-exclusion side effect (see AL-039/AL-041) and are not currently delivering; only Retargeting_31AUG has live spend. No confirmed same-product+same-audience duplication among the 3 - not escalating to campaign-consolidation.",
       "severity": "low",
       "dismissed": false,
       "createdAt": "2026-08-27T00:00:00.000Z"
@@ -751,9 +751,9 @@
     {
       "id": "AL-042",
       "module": "competitor-spike",
-      "title": "Lotto Sport India active-ad count dropped 26.5% since last scrape",
-      "detail": "Meta Ad Library re-scrape (2026-09-01): Lotto Sport India's active-ad count moved from 132 (last recorded 2026-08-31) to 97 - a 26.5% drop, past the 20% competitor-spike threshold. Gully Labs moved from 122 to 109 (-10.7%), within threshold, no alert. Both competitor counts have oscillated repeatedly in both directions over the past several passes (Gully Labs alone has both spiked and dropped >20% in prior alerts, AL-011/AL-015/AL-022/AL-034 area) without a clear sustained trend, consistent with normal Ad Library re-indexing noise rather than a deliberate pullback - noting per the module's trigger threshold regardless.\n\nUpdate (2026-09-01 scheduled run, read-only mode): rechecked again - Lotto Sport India moved from 97 to 131 active ads (+35.1%, crosses the 20% threshold again, this time in the opposite direction of the drop recorded above). Gully Labs moved from 109 to 119 (+9.2%, below threshold). This is another entry in the same oscillation pattern already documented and discounted across AL-011/AL-015/AL-022/AL-034 - not treated as a confirmed competitive signal without a persisted move across two consecutive scrapes, per the standing recommendation. settings.competitor_last_scrape updated to 119/131.",
-      "severity": "medium",
+      "title": "Lotto Sport India active-ad count is oscillating, not trending",
+      "detail": "Re-checked again this pass (2026-09-01 read-only run): Lotto Sport India's active-ad count is back down to 97 (from 131 last pass, -26.0%), which is exactly the same figure recorded two passes ago. Gully Labs likewise reverted to 109 (from 119, -8.4%). Both brands' counts are bouncing between the same two value-pairs across consecutive scrapes rather than moving in one direction - this reads as Ad Library query noise, not a real change in competitor spend/creative volume. No action recommended; will keep tracking in case a sustained one-directional trend emerges.",
+      "severity": "low",
       "dismissed": false,
       "createdAt": "2026-09-01T06:00:00.000Z"
     },
@@ -801,6 +801,24 @@
       "severity": "low",
       "dismissed": false,
       "createdAt": "2026-09-01T06:50:03.000Z"
+    },
+    {
+      "id": "AL-048",
+      "module": "self-audit-check",
+      "title": "Dashboard's static snapshot no longer reconciles with live account state",
+      "detail": "index.html's DATA/INSIGHTS_DATA blocks are a static build dated 2026-08-27 (last verified via Meta Ads MCP that day) and have not been refreshed since. Live account state has moved materially past what's shown: three campaigns now driving real spend/delivery (Retargeting_31AUG, Tsuchi_TOF, New_Sales_Kage_31AUG) don't appear anywhere in the dashboard's DATA object, and the two campaigns the dashboard still lists as status:'active' (Kage_sales_1908, Kage_TOF) have both actually been PAUSED at the campaign level since 2026-08-30 (see AL-018). This goes beyond AL-007's 2026-08-29 finding ('2 days stale but reconciles correctly') - it no longer reconciles. Recommend a manual dashboard rebuild pass (outside this routine's scope, which only maintains queue.json) next time someone is refreshing index.html.",
+      "severity": "medium",
+      "dismissed": false,
+      "createdAt": "2026-09-01T08:53:00.000Z"
+    },
+    {
+      "id": "AL-049",
+      "module": "routine-run-notes",
+      "title": "2026-09-01 scheduled run (read-only): steady state, one new self-audit finding, competitor counts confirmed oscillating",
+      "detail": "All 7 pending proposals (A-001, A-002, A-003, A-005, A-006, A-007, A-009) re-checked against fresh data; none moved materially this pass (New_Sales_Kage_31AUG flat at ₹1,395.30 lifetime spend/0 purchases, Retargeting_31AUG grew slightly to ₹238.03/0 purchases but remains under its ₹500 kill-floor, both force-paused ad sets from prior purchaser-exclusion side effects remain paused) - no reasoning updates needed for those. Today's account-level spend ₹211.31, well under the ₹2,000 circuit-breaker ceiling. No anomaly signal fired. Pixel/dataset health normal, all key funnel events firing. New finding this pass: dashboard's static index.html snapshot (dated 2026-08-27) no longer reconciles with live account state - see the new self-audit-check alert. Competitor Ad Library counts for both Gully Labs and Lotto Sport India reverted to their prior-prior values, reinforcing the standing read that this is scrape noise, not a real signal. This run operated under an explicit read-only constraint (no Meta Ads MCP write/mutation calls permitted) - no proposals were executed regardless of tier.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-09-01T08:53:00.000Z"
     }
   ],
   "log": [
