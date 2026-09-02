@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-02T00:47:00.000Z",
+  "generatedAt": "2026-09-02T02:15:00.000Z",
   "settings": {
     "kill_roas_threshold": "pause if ROAS < 1.0x after ₹500 spend on a sales-objective campaign",
     "reactivate_min_historic_roas": "surface for reactivation if a paused campaign's last active-period ROAS >= 3.0x",
@@ -25,9 +25,9 @@
     },
     "competitor_last_scrape": {
       "gully_labs_active_ads": 93,
-      "lotto_sport_india_active_ads": 53,
-      "scraped_at": "2026-09-02T00:47:00.000Z",
-      "note": "2026-09-02 scheduled run (read-only): both pages dropped >=20% since the last recorded scrape - Gully Labs 132->93 (-29.5%), Lotto Sport India 95->53 (-44.2%) - but both readings still sit inside each page's already-documented oscillation band (Gully Labs has ranged roughly 86-187 across recent passes; Lotto Sport India 46-148), consistent with the estimated_total_count sampling volatility flagged repeatedly in AL-011/AL-015 rather than a confirmed real-world ad-count change. Per that standing recommendation, not elevating to a fresh high-severity spike alert off a single reading - would need to persist across two consecutive scrapes to be treated as real."
+      "lotto_sport_india_active_ads": 54,
+      "scraped_at": "2026-09-02T02:15:00.000Z",
+      "note": "2026-09-02 scheduled run (read-only), second pass: both pages held essentially flat since the last scrape - Gully Labs 93->93 (0%), Lotto Sport India 53->54 (+1.9%) - both well below the 20% competitor-spike threshold and well inside each page's already-documented oscillation band. No new spike alert."
     },
     "note": "hard_spend_ceiling_inr is a placeholder — set to roughly 3x trailing-30-day avg daily spend (~₹663/day as of 29 Aug 2026). All fields here are editable directly in the Automation tab (Save button) or by telling Claude."
   },
@@ -891,6 +891,15 @@
       "severity": "low",
       "dismissed": false,
       "createdAt": "2026-09-02T00:47:00.000Z"
+    },
+    {
+      "id": "AL-058",
+      "module": "routine-run-notes",
+      "title": "2026-09-02 scheduled run (read-only): steady state confirmed, no new triggers",
+      "detail": "Circuit breaker: today's account spend ₹22.29 vs the ₹2,000 ceiling (fresh account-timezone day) - not tripped. Pixel quality gate: dataset 833131719490535 composite EMQ 6.1 (PageView) / 5.0 (ViewContent), core match keys (ip_address/user_agent) at 100% on both events, fbp at 100% on PageView (13.9% on ViewContent, expected for that event type), fbc 31.5%/8.3% - consistent with every prior healthy reading, gate passed, ROAS-driven modules were not suppressed. Activity log pulled since the last run's generatedAt (2026-09-02T00:47 UTC): one entry only, a Meta account-billing event (₹27,452 added to the account balance) - no manual campaign/ad-set/targeting changes. All 7 pending proposals (A-001, A-002, A-003, A-005, A-006, A-007, A-009) re-verified against fresh Meta Ads MCP pulls: Kage_Sales (A-001) frozen at ₹6,195.22/4.296679x, still PAUSED; Kage_sales_1908 (A-005/A-006's target ad set, campaign id 120255351569120159) frozen at ₹6,179.11/1.823934x, still PAUSED, live targeting directly re-fetched and confirmed unchanged (excluded_custom_audiences still has Purchasers 30D from the earlier purchaser-exclusion auto-execution, age_min still 21, whatsapp still in effective_whatsapp_positions - both A-005 and A-006 stand exactly as written). KAGE_31AUG and Tsuchi_TOF ad sets both directly re-confirmed still force-paused with the purchaser exclusion already applied (module 12 re-checked account-wide: every current prospecting campaign's ad set already carries the exclusion - no new trigger). New_Sales_Kage_31AUG (A-009) flat at ₹1,395.30/0 purchases, still 179% past its ₹500 kill floor, ad set still force-paused - A-009 stands unexecuted. Retargeting_31AUG grew slightly to ₹323.22 lifetime spend/0 purchases (64.6% of its own ₹500 kill floor, up from 63.75% last pass) - still below the pause-kill trigger; A-002's reasoning references this campaign's overlap and remains valid, not materially changed enough to rewrite. Trailing-7d pixel events (direct dataset-stats event-level pull, Aug26-Sep2 window): 64 AddToCart vs 5 Purchase - identical to the immediately prior reading, A-002's gap unchanged. 'Purchasers 30D' (120249907176770159) directly re-confirmed still ACTIVE (~20 users). The purchase-pixel lookalike (120250736441810159) directly re-confirmed still ACTIVE, still the only one of its kind, now exactly 98 days old (created 2026-05-27) - A-007 (auto-tier) remains blocked on the same ads_create_custom_audience tool-capability gap documented in every prior pass (only accepts origin_audience_id, not the event-source lookalike spec this stale audience actually uses), moot this run regardless since it is read-only. Opportunity Score ticked up to 94/100 (from 93) with the same three creative-level recommendations as last pass (reels_pc_recommendation, gen_ai_mvp, music, each now showing a smaller +1 lift) - the advantage_plus_catalog_ads recommendation is not surfacing this pass, consistent with the standing read that the score fluctuates with whichever recommendations Meta happens to surface and isn't A-003's real basis; catalog diagnostics (the real basis) unchanged: 18 out-of-stock/must_fix, 30 low-image/opportunity, 34 unmatched content IDs/opportunity - A-003 stands. No anomaly signal data available (same as every prior pass). Competitor rescrape: both Gully Labs (93->93, 0%) and Lotto Sport India (53->54, +1.9%) held essentially flat this pass, both well below the 20% spike threshold and inside each page's documented oscillation band - settings.competitor_last_scrape timestamp refreshed, no new spike alert. Coverage gaps unchanged from prior passes: learning-phase-stuck field still unavailable via the connected Meta Ads MCP tools; Phase 3 modules (hook-angle-tagging, auto-creative-generation-launch) remain blocked - no Higgsfield MCP connection attached to this session. Budget-reallocation, ab-test, frequency-capping, campaign-consolidation-watch, dayparting, bid-strategy-adjustment, and the geo/placement/device breakdown modules were all considered against the account's current state and still return no action - the account remains functionally down to one small, zero-purchase active ad set (Retargeting_31AUG) plus the long-paused historical campaigns and force-paused prospecting ad sets. This run operated under an explicit read-only safety constraint (no Meta Ads MCP write/mutation calls of any kind) - A-007 (tier:auto) remained unexecuted, and no other auto-tier trigger fired that would have required execution. No new proposals or alerts (beyond this note and the competitor_last_scrape update) were warranted this pass.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-09-02T02:15:00.000Z"
     }
   ],
   "log": [
