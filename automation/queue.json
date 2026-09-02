@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-01T22:52:00.000Z",
+  "generatedAt": "2026-09-02T00:47:00.000Z",
   "settings": {
     "kill_roas_threshold": "pause if ROAS < 1.0x after ₹500 spend on a sales-objective campaign",
     "reactivate_min_historic_roas": "surface for reactivation if a paused campaign's last active-period ROAS >= 3.0x",
@@ -24,10 +24,10 @@
       }
     },
     "competitor_last_scrape": {
-      "gully_labs_active_ads": 132,
-      "lotto_sport_india_active_ads": 95,
-      "scraped_at": "2026-09-01T22:52:00.000Z",
-      "note": "Twelfth pass today (2026-09-01, read-only run): Lotto Sport India jumped 49->95 (+93.9%), continuing its established all-day oscillation (46-148 range across today's passes) rather than a confirmed trend. Gully Labs moved 119->132 (+10.9%), below the 20%-single-pass spike threshold."
+      "gully_labs_active_ads": 93,
+      "lotto_sport_india_active_ads": 53,
+      "scraped_at": "2026-09-02T00:47:00.000Z",
+      "note": "2026-09-02 scheduled run (read-only): both pages dropped >=20% since the last recorded scrape - Gully Labs 132->93 (-29.5%), Lotto Sport India 95->53 (-44.2%) - but both readings still sit inside each page's already-documented oscillation band (Gully Labs has ranged roughly 86-187 across recent passes; Lotto Sport India 46-148), consistent with the estimated_total_count sampling volatility flagged repeatedly in AL-011/AL-015 rather than a confirmed real-world ad-count change. Per that standing recommendation, not elevating to a fresh high-severity spike alert off a single reading - would need to persist across two consecutive scrapes to be treated as real."
     },
     "note": "hard_spend_ceiling_inr is a placeholder — set to roughly 3x trailing-30-day avg daily spend (~₹663/day as of 29 Aug 2026). All fields here are editable directly in the Automation tab (Save button) or by telling Claude."
   },
@@ -289,7 +289,7 @@
       "module": "lookalike-refresh",
       "tier": "auto",
       "title": "Refresh the stale purchase-based lookalike audience",
-      "reasoning": "The account's only purchase-pixel lookalike (id 120250736441810159, subtype LOOKALIKE, still ACTIVE) is now ~97 days old, well past the 14-day lookalike_refresh_days threshold; no 2%/5% variants exist. Execution remains blocked on a real tool-capability gap independent of this run's read-only constraint: the connected Meta Ads MCP's ads_create_custom_audience tool only accepts origin_audience_id + lookalike_ratio for LOOKALIKE creation, with no path to build directly from pixel event sources the way this stale audience was originally built. The only real origin_audience_id candidate on the account, 'Purchasers 30D' (~20 users), is too small to be a reliable independent LAL source on its own. Needs either an MCP/tool update exposing the event-source LAL path, or a human decision to accept the small audience as origin. This run additionally operated under an explicit read-only constraint, so execution was not attempted regardless of tier.",
+      "reasoning": "The account's only purchase-pixel lookalike (id 120250736441810159, subtype LOOKALIKE, still ACTIVE) is now ~98 days old, well past the 14-day lookalike_refresh_days threshold; no 2%/5% variants exist. Execution remains blocked on a real tool-capability gap independent of this run's read-only constraint: the connected Meta Ads MCP's ads_create_custom_audience tool only accepts origin_audience_id + lookalike_ratio for LOOKALIKE creation, with no path to build directly from pixel event sources the way this stale audience was originally built. The only real origin_audience_id candidate on the account, 'Purchasers 30D' (~20 users), is too small to be a reliable independent LAL source on its own. Needs either an MCP/tool update exposing the event-source LAL path, or a human decision to accept the small audience as origin. This run additionally operated under an explicit read-only constraint, so execution was not attempted regardless of tier.",
       "actionSummary": "3-step chain, all real: create matching 1%/2%/5% lookalikes off the exact same pixel purchase-event source the existing (94-day-stale) audience 120250736441810159 uses — confirmed via a live pull of its lookalike_spec (origin_event_sources pointing at pixel 833131719490535, event Purchase, action_source website). No fabricated origin_audience_id or guessed spec — this mirrors the real, currently-working definition, just refreshed and laddered.",
       "metaAction": {
         "tool": "ads_create_custom_audience",
@@ -882,6 +882,15 @@
       "severity": "low",
       "dismissed": false,
       "createdAt": "2026-09-01T22:52:00.000Z"
+    },
+    {
+      "id": "AL-057",
+      "module": "routine-run-notes",
+      "title": "2026-09-02 scheduled run (read-only): steady state confirmed, no new triggers",
+      "detail": "Circuit breaker: today's account spend ₹17.84 vs the ₹2,000 ceiling (fresh account-timezone day) - not tripped. Pixel quality gate: dataset 833131719490535 composite EMQ 6.1 on PageView/ViewContent, core match keys (ip_address/user_agent/fbp) at 100%, fbc 86.1-91.7% - gate passed, ROAS-driven modules were not suppressed. Activity log pulled since the last run's generatedAt (2026-09-01T22:52 UTC): zero entries, no manual account changes. All real-delivery/paused entities re-pulled at campaign level (date_preset=maximum): Retargeting_31AUG ₹318.77/0 purchases (63.75% of its ₹500 kill floor, still below pause-kill trigger), Tsuchi_TOF flat at ₹40.49 (traffic objective, ad set still force-paused from the purchaser-exclusion fix, out of pause-kill scope), New_Sales_Kage_31AUG flat at ₹1,395.30/0 purchases (still 179% past its kill floor, A-009 stands unexecuted). Kage_Sales and Kage_sales_1908 (A-001, A-005, A-006) remain PAUSED, unchanged to the cent (₹6,195.22/4.30x and ₹6,179.11/1.82x respectively). purchaser-exclusion (module 12) re-checked: all 3 active campaigns' ad sets already carry the exclusion from prior runs - no new trigger. Trailing-7d pixel events (direct dataset-stats event pull, Aug25-Sep1): 64 AddToCart vs 5 Purchase - matches A-002's last-recorded reading exactly, gap unchanged in kind. 'Purchasers 30D' (120249907176770159) confirmed still ACTIVE. Purchase-pixel lookalike (120250736441810159) confirmed still the only one of its kind, now ~98 days old (A-007, auto-tier, unexecuted under this run's explicit read-only constraint). Opportunity Score holds at 93/100 with the same three recommendations (reels_pc +1, gen_ai_mvp +1, music +2); catalog diagnostics unchanged (18 out-of-stock, 30 low-image, 34 unmatched content IDs) - A-003 stands. No anomaly signal data available. Competitor rescrape: both Gully Labs and Lotto Sport India moved >=20% since the last reading but stayed within each page's already-documented oscillation band - see updated settings.competitor_last_scrape note, not elevated to a new spike alert. Coverage gaps unchanged: learning-phase-stuck field still unavailable via the connected Meta Ads MCP tools; Phase 3 modules (hook-angle-tagging, auto-creative-generation-launch) remain blocked - no Higgsfield MCP connection attached to this session. Budget-reallocation, ab-test, frequency-capping, campaign-consolidation-watch, dayparting, bid-strategy-adjustment, and the geo/placement/device breakdown modules were all considered against the account's current state and still return no action - the account remains functionally down to one small, zero-purchase active ad set (Retargeting_31AUG) plus the long-paused historical campaigns. This run operated under an explicit read-only safety constraint (no Meta Ads MCP write/mutation calls of any kind) - A-007 (tier:auto) remained unexecuted, and no other auto-tier trigger fired that would have required execution. All 7 pending proposals (A-001, A-002, A-003, A-005, A-006, A-007, A-009) were re-verified against fresh Meta Ads MCP pulls this pass; no material change in verdict on any of them, no new proposal or alert (beyond this note and the competitor_last_scrape update) was warranted.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-09-02T00:47:00.000Z"
     }
   ],
   "log": [
