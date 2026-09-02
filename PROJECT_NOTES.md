@@ -106,3 +106,38 @@ Added a "Management" section to the dashboard alongside the existing "Reporting"
 The Competitors tab had two disconnected data sources: a ~300-line hardcoded HTML block (claiming a "Jun 20 scrape," 251,578 followers, 90 active ads, with invented ad creative examples, hook-performance scores, and "5 KAI briefs") that was what actually rendered, sitting alongside a completely separate `renderCompTab()` JS function that populated real `COMPETITOR_DATA`/`COMP_VS`/`COMP_RECS` (170 active ads, 263,905 followers, "2 August 2026" scrape) into element IDs (`comp-kpis`, `comp-formats`, etc.) that **did not exist anywhere in the HTML** — `renderCompTab()` was dead code, never even called from `showView()`. So the tab had been showing fabricated/stale content this whole time, regardless of the real `COMPETITOR_DATA` refresh done earlier this session.
 
 Fixed: removed the hardcoded block, replaced it with containers matching `renderCompTab()`'s target IDs plus a new `comp-header` block (name/handle/followers/scrape-date/emerging-competitor, all pulled live from `COMPETITOR_DATA`), and wired `showView('comp')` to call `renderCompTab()`. Also corrected two stale campaign-name references inside `COMP_RECS` that assumed 3 active campaigns and named `Kage_12052026`/`Kabuto_Caps` as currently running — neither is accurate to the current account state. Verified visually via Playwright: the tab now shows the real, internally-consistent numbers with no leftover "Jun 20"/"251,578" content anywhere.
+
+## 10. Session update — 2026-09-02: full data refresh, all reporting tabs
+
+Refreshed every data-driven tab in `index.html` with real pulls via the Meta Ads MCP (account `704523148804803`), following the same disclosed-methodology pattern as the 17/27 Aug sessions. No fabricated numbers — every figure below traces to a live MCP call or a real Ad Library / web search made this session.
+
+**Active campaigns changed again since 27 Aug.** The account no longer runs `Kage_TOF` / `Kage_sales_1908` — those are now paused. Three new campaigns launched 31 Aug 2026 and are the only ones currently active:
+- `Retargeting_31AUG` — retargeting, reuses the Kage launch creative
+- `Tsuchi_TOF` — top-of-funnel launch for a **new product line, Tsuchi** ("Rooted in earth. Made to move."), separate from Kage
+- `New_Sales_Kage_31AUG` — sales campaign for Kage, same creative as the retargeting campaign
+
+**Today (2 Sep) real numbers:** ₹100.97 spend, 744 impressions, 2.66% CTR, ₹134.27 CPM, 0 purchases. Only `Retargeting_31AUG` has delivery so far today; the other two active campaigns haven't spent yet today.
+
+**Period totals refreshed (Dashboard tab), all verified via Meta Ads MCP:**
+- Last 7d (Aug 26–Sep 1): ₹5,105 spend, 1 purchase, ₹3,299 revenue, **0.65x ROAS** — a genuinely weak week since the big sales campaigns are paused and the new campaigns haven't converted yet.
+- Last 14d (Aug 19–Sep 1): ₹9,528 spend, 4 purchases, ₹11,270 revenue, 1.18x ROAS.
+- Last 30d (Aug 3–Sep 1): ₹20,416 spend, 15 purchases, ₹38,615 revenue, **1.89x ROAS** (down from 2.09x on 27 Aug — spend grew from new campaigns that haven't converted yet, purchase count held flat).
+- This month (Sep 1–2): ₹375 spend, 0 purchases so far.
+
+**Opportunity Score: 88/100** (down from 100/100 on 27 Aug). New pending recommendations, all tied to the freshly-launched campaigns: `Retargeting_31AUG` is budget-limited (+6 pts) and missing a fullscreen vertical Reels video (+1 pt); `New_Sales_Kage_31AUG`'s ad is missing AI creative variety (+1 pt) and Meta-added music (+1 pt).
+
+**Insights tab** — hourly, placement, device, age×gender, and daily-pacing (Aug 26–Sep 1) charts all rebuilt from real 30d/7d breakdowns pulled fresh this session. Frequency-decay chart still NOT refreshed (same Meta Ads MCP limitation as every prior session — no reach-by-frequency-bucket breakdown available).
+
+**Geography tab** — spend/impressions/CTR/CPM real for both 7d and 30d region breakdowns (pulled fresh); revenue/ROAS/purchases/ATC/checkouts/LPV are estimated using the same disclosed methodology as before (CTR-relative-to-account-average ROAS for revenue; spend-share proportional for ATC/checkouts/LPV — this session made the ATC/CO/LPV estimation method explicit in the `note` field, since prior sessions didn't spell out how those specific fields were derived).
+
+**Audience tab** — age/gender/device/platform_position purchases and ROAS are real Meta-attributed figures at that breakdown level (not estimated), confirming Meta still returns real purchase attribution at these grains but not at region grain.
+
+**Creatives tab** — rebuilt from real 30d campaign data. Added 3 new entries for the newly-active campaigns with real hook/angle text pulled from live ad-preview screenshots via `ads_get_ad_preview` (not fabricated) — this is the first time this session's refresh sourced creative copy from an actual rendered ad image rather than API text fields alone.
+
+**Competitors tab** — did a fresh Meta Ad Library search this session (not just a re-date of old numbers): Gully Labs active-ad count is now **101** (down from 170+ on 17 Aug, via a page_ids-scoped search which is more reliable than the earlier keyword search), Lotto Sport India is at **59** active ads (down from 68), currently pushing an "Ekiden" running-shoe launch. Follower counts, format/angle breakdowns, and creator-partnership data were **not** re-verified this session (a web search for Gully Labs' current follower count returned an unreliable third-party estimate that conflicts with the precise 2 Aug scrape figure, so the old, more trustworthy 263,905 figure was deliberately kept rather than overwritten with a worse source) — still needs a full Apify re-scrape to be current.
+
+**Not refreshed this session:** `WEEKLY_TRENDS` (per-product weekly breakdown) — still ends at the Aug 18–24 week; only account/campaign-level periods and breakdowns were pulled this session, not a per-product weekly series. The Automation tab (`automation/queue.json`) was out of scope for this refresh and untouched.
+
+**Gotcha confirmed again:** firing parallel `ads_get_ad_entities` calls with identical params except `date_preset` still risks duplicated/incorrect results — all period pulls this session were run sequentially, consistent with the 27 Aug session's finding.
+
+Committed locally (not pushed) — see git log for the commit hash.
