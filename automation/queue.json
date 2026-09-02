@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-02T10:49:37.000Z",
+  "generatedAt": "2026-09-02T12:49:48.000Z",
   "settings": {
     "kill_roas_threshold": "pause if ROAS < 1.0x after ₹500 spend on a sales-objective campaign",
     "reactivate_min_historic_roas": "surface for reactivation if a paused campaign's last active-period ROAS >= 3.0x",
@@ -24,10 +24,10 @@
       }
     },
     "competitor_last_scrape": {
-      "gully_labs_active_ads": 145,
-      "lotto_sport_india_active_ads": 101,
-      "scraped_at": "2026-09-02T10:49:37.000Z",
-      "note": "2026-09-02 scheduled run (read-only), sixth pass: both pages jumped sharply together - Gully Labs 93->145 (+55.9%), Lotto Sport India 55->101 (+83.6%) - both cross the 20% competitor-spike threshold individually, but moving up together in the same shared Ad-Library estimated_total_count oscillation pattern already extensively documented and discounted across AL-011/AL-015/AL-029/AL-030/AL-031/AL-034/AL-036/AL-037/AL-042. Not filed as a fresh competitor-spike alert; will re-check next pass to see if the move persists (real) or reverts (noise)."
+      "gully_labs_active_ads": 99,
+      "lotto_sport_india_active_ads": 59,
+      "scraped_at": "2026-09-02T12:49:48.000Z",
+      "note": "2026-09-02 scheduled run (read-only), seventh pass: the prior pass's shared spike reverted almost exactly as predicted - Gully Labs 145->99 (-31.7%), Lotto Sport India 101->59 (-41.6%) - both individually cross the 20% threshold again, but in the opposite direction, confirming (not a new real move) the same shared Ad-Library estimated_total_count sampling-oscillation pattern already extensively documented across AL-011/AL-015/AL-029/AL-030/AL-031/AL-034/AL-036/AL-037/AL-042. Not filed as a fresh competitor-spike alert."
     },
     "note": "hard_spend_ceiling_inr is a placeholder — set to roughly 3x trailing-30-day avg daily spend (~₹663/day as of 29 Aug 2026). All fields here are editable directly in the Automation tab (Save button) or by telling Claude."
   },
@@ -936,6 +936,15 @@
       "severity": "low",
       "dismissed": false,
       "createdAt": "2026-09-02T10:49:37.000Z"
+    },
+    {
+      "id": "AL-063",
+      "module": "routine-run-notes",
+      "title": "2026-09-02 scheduled run, seventh pass (read-only): steady state confirmed, competitor spike reverted",
+      "detail": "Real-clock ~12:49 UTC. Circuit breaker: today's account spend ₹100.85 vs the ₹2,000 ceiling - not tripped. Pixel quality gate: dataset 833131719490535 composite EMQ 4.4-6.1 across PageView/ViewContent/Search/AddToCart/InitiateCheckout; core match keys ip_address/user_agent/external_id at 100% on every event (well above the 0.6 gate floor) - ROAS-driven modules not suppressed. Activity log since the last run's generatedAt (10:49:37 UTC): zero entries, no manual account changes. All 7 pending proposals re-verified against fresh Meta Ads MCP pulls and stand unchanged (sub-1% drift or identical): Kage_Sales (A-001) ₹6,195.22/4.296679x/10 purchases, still PAUSED. Kage_sales_1908 (A-005/A-006) ₹6,179.11/1.823934x/4 purchases, still PAUSED - live targeting re-confirmed unchanged (excluded_custom_audiences still only 'Purchasers 30D', age_min still 21, whatsapp still in effective_publisher_platforms), so A-005/A-006 both stand exactly as written. New_Sales_Kage_31AUG (A-009) flat at ₹1,395.30/0 purchases, still 179% past its ₹500 kill floor, ad set still force-paused - stands unexecuted. Retargeting_31AUG grew to ₹300.94 (30d)/0 purchases, still building; its ad set includes rather than excludes 'Purchasers 30D' (ORed with IG/IG_Visitors_365/Initiate_Checkout for retargeting reach), consistent with A-002's reasoning - not a purchaser-exclusion trigger since this is a retargeting, not prospecting, campaign. Tsuchi_TOF flat at ₹40.49, ad set still force-paused with the purchaser exclusion already applied - module 12 re-checked account-wide, no new trigger. Trailing-7d pixel events (direct dataset-stats hourly pull, Aug26-Sep2): 54 AddToCart vs 5 Purchase - consistent with the prior 52/5 reading, A-002's underlying gap unchanged. The purchase-pixel lookalike (120250736441810159) re-confirmed still ACTIVE, still the only one of its kind, created 2026-05-27 (~98 days old) - A-007 (auto-tier) remains blocked on the same ads_create_custom_audience tool-capability gap documented in every prior pass, moot this run regardless since it is read-only. Catalog diagnostics unchanged (18 out-of-stock/must_fix, 30 low-image/opportunity, 34 unmatched content IDs/opportunity) - A-003's real basis stands. Opportunity Score unchanged at 88/100 with the same four recommendations (budget_limited +6 on Retargeting_31AUG's ad set, reels_pc_recommendation +1, gen_ai_mvp +1, music +1) - still not rising to a new proposal on its own, per the standing read documented in AL-062. No anomaly signal data available. Competitor rescrape: the prior pass's shared spike (Gully Labs 93->145, Lotto Sport India 55->101) reverted almost exactly as predicted - Gully Labs 145->99 (-31.7%), Lotto Sport India 101->59 (-41.6%) - confirming (not a new real move) the same sampling-oscillation pattern; settings.competitor_last_scrape updated, no new competitor-spike alert filed. Weekly-digest not due (next Monday is 2026-09-07); monthly-digest not due (mid-month). Coverage gaps unchanged from every prior pass: learning-phase-stuck field still unavailable via the connected Meta Ads MCP tools; Phase 3 modules (hook-angle-tagging, auto-creative-generation-launch) remain blocked - no Higgsfield MCP connection attached to this session. Budget-reallocation, ab-test, frequency-capping, campaign-consolidation-watch, dayparting, bid-strategy-adjustment, and the geo/placement/device breakdown modules were all considered against the account's current state and still return no action - the account remains functionally down to one small, zero-purchase active ad set (Retargeting_31AUG) plus the long-paused historical campaigns and force-paused prospecting ad sets. This run operated under an explicit read-only safety constraint (no Meta Ads MCP write/mutation calls of any kind) - A-007 (tier:auto) remained unexecuted, and no other auto-tier trigger fired that would have required execution. No new proposals or alerts (beyond this note and the competitor_last_scrape update) were warranted this pass.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-09-02T12:49:48.000Z"
     }
   ],
   "log": [
