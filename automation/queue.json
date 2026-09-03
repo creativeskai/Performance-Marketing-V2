@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-03T12:52:00.000Z",
+  "generatedAt": "2026-09-03T14:48:00.000Z",
   "settings": {
     "kill_roas_threshold": "pause if ROAS < 1.0x after ₹500 spend on a sales-objective campaign",
     "reactivate_min_historic_roas": "surface for reactivation if a paused campaign's last active-period ROAS >= 3.0x",
@@ -24,10 +24,10 @@
       }
     },
     "competitor_last_scrape": {
-      "gully_labs_active_ads": 155,
-      "lotto_sport_india_active_ads": 104,
-      "scraped_at": "2026-09-03T12:52:00.000Z",
-      "note": "2026-09-03 ~12:52 UTC scheduled run (read-only), page-ID-scoped recheck (page_ids 107479854297817 / 426015150606378): Gully Labs 149->155 (+4.0%), Lotto Sport India 101->104 (+3.0%) -- both essentially flat and well under the 20% move threshold, consistent with the standing read (AL-011/AL-015/AL-042/AL-069/AL-071/AL-072/AL-073/AL-074/AL-076) that this account's Ad Library sampling wanders in a noisy band rather than reflecting real competitor spend changes; no new competitor-spike alert filed."
+      "gully_labs_active_ads": 141,
+      "lotto_sport_india_active_ads": 101,
+      "scraped_at": "2026-09-03T14:48:00.000Z",
+      "note": "2026-09-03 ~14:48 UTC scheduled run (read-only), page-ID-scoped recheck (page_ids 107479854297817 / 426015150606378): Gully Labs 155->141 (-9.0%), Lotto Sport India 104->101 (-2.9%) -- both below the 20% move threshold, consistent with the standing read that this account's Ad Library sampling wanders in a noisy band rather than reflecting real competitor spend changes; no new competitor-spike alert filed."
     },
     "note": "hard_spend_ceiling_inr is a placeholder — set to roughly 3x trailing-30-day avg daily spend (~₹663/day as of 29 Aug 2026). All fields here are editable directly in the Automation tab (Save button) or by telling Claude."
   },
@@ -362,7 +362,7 @@
       "module": "pause-kill",
       "tier": "approval",
       "title": "Pause New_Sales_Kage_31AUG — zero purchases past the ₹500 kill-threshold floor",
-      "reasoning": "New_Sales_Kage_31AUG (id 120255534465560159) lifetime spend has grown to ₹2,226.01 (21,766 impressions, 565 clicks, frequency 1.306169) with zero purchases -- now 345.2% past its own ₹500 kill-threshold floor at 0x ROAS, up from ₹1,997.13 last pass (+₹228.88). Activity log since the last run (generatedAt 2026-09-03T10:46:00.000Z) came back empty -- no further manual edits on top of Avishek Neogi's cluster of changes covered in AL-075 (rename to 'TSUCHI', broadened placements, explicit age 21-40, Sep 7 stop_time, two new ads live, ₹1,00,000 balance top-up); the purchaser exclusion ('Purchasers 30D') remains intact, re-confirmed via a live targeting pull this pass. The rule-based kill trigger still holds (0x ROAS, far past the floor) and this remains the account's highest-priority standing item -- a human appears to be actively recommitting budget to this exact ad set while it burns at 0x ROAS. This run operated under an explicit read-only constraint -- not executed.",
+      "reasoning": "New_Sales_Kage_31AUG (id 120255534465560159) lifetime spend has grown to ₹2,471.44 (23,009 impressions, 610 clicks, frequency 1.342964) with zero purchases -- now 394.3% past its own ₹500 kill-threshold floor at 0x ROAS, up from ₹2,226.01 last pass (+₹245.43). Activity log since the last run (generatedAt 2026-09-03T12:52:00.000Z) came back empty -- no manual campaign/ad-set/targeting changes on the account this pass. The purchaser exclusion ('Purchasers 30D') remains applied (A-004/A-008) and doesn't conflict with this proposal. Still active and still spending with zero purchases; the case for pausing keeps strengthening the longer this stays unapproved.",
       "actionSummary": "Pause campaign 'New_Sales_Kage_31AUG' (id 120255534465560159) by setting its status to PAUSED. No other field changes. This stops further spend immediately; it can be reactivated manually (or via a future reactivate-winner proposal) once the underlying issue — creative, targeting, or audience — is diagnosed and fixed.",
       "metaAction": {
         "tool": "ads_update_entity",
@@ -381,7 +381,7 @@
       "module": "pause-kill",
       "tier": "approval",
       "title": "Pause Retargeting_31AUG — crossed the ₹500 kill-threshold floor at 0x ROAS",
-      "reasoning": "Retargeting_31AUG (campaign id 120255534778560159) lifetime spend has grown to ₹550.80 (4,670 impressions, 127 clicks, frequency 1.436039) with zero purchases -- now 110.2% of its own ₹500 kill-threshold floor at 0x ROAS, per settings.kill_roas_threshold (pause if ROAS < 1.0x after ₹500 spend on a sales-objective campaign), up from ₹536.04 last pass (+₹14.76). Its ad set still targets 'Purchasers 30D' OR 'IG_Visitors_365' OR 'Initiate_Checkout' for retargeting reach (intentionally includes rather than excludes recent purchasers, so module 12's purchaser-exclusion doesn't apply here, re-confirmed this pass via a live targeting pull) -- still zero conversions across its full run. A-002's proposed retargeting audience (ATC/checkout non-purchasers) has partial overlap with this campaign's audience definition; approving this pause doesn't preclude A-002. This run operated under an explicit read-only constraint -- not executed.",
+      "reasoning": "Retargeting_31AUG (campaign id 120255534778560159) lifetime spend has grown to ₹562.06 (4,767 impressions, 127 clicks, frequency 1.440617) with zero purchases -- now 112.4% of its own ₹500 kill-threshold floor at 0x ROAS, per settings.kill_roas_threshold (pause if ROAS < 1.0x after ₹500 spend on a sales-objective campaign), up from ₹550.80 last pass (+₹11.26). Its ad set still targets 'Purchasers 30D' OR 'IG_Visitors_365' OR 'Initiate_Checkout' for retargeting reach (intentionally includes rather than excludes recent purchasers, so module 12's purchaser-exclusion doesn't apply here, re-confirmed unchanged this pass). Activity log since the last run came back empty.",
       "actionSummary": "Pause campaign 'Retargeting_31AUG' (id 120255534778560159) by setting its status to PAUSED. No other field changes. This stops further spend immediately; it can be reactivated manually (or via a future reactivate-winner proposal) once the underlying issue — creative, targeting, or audience — is diagnosed and fixed.",
       "metaAction": {
         "tool": "ads_update_entity",
@@ -1090,6 +1090,15 @@
       "severity": "low",
       "dismissed": false,
       "createdAt": "2026-09-03T12:52:00.000Z"
+    },
+    {
+      "id": "AL-078",
+      "module": "routine-run-notes",
+      "title": "Routine run notes -- 2026-09-03 ~14:48 UTC pass: steady state, kill-floor proposals keep growing",
+      "detail": "Circuit breaker not tripped (today's account spend ₹1,263.43 vs the ₹2,000 ceiling, 63.2%). Pixel/data-quality gate passed (dataset 833131719490535 composite EMQ 4.8-8.0 across web events, core match keys ip_address/user_agent at 100% coverage throughout; fbp/fbc coverage is inherently partial on this pixel and has been for every prior pass -- not a regression), so ROAS-driven modules were not suppressed. No anomaly signal fired (ads_insights_anomaly_signal returned no data for the account). Activity log re-checked since the last pass (12:52:00 UTC forward): empty, no manual campaign/ad-set/targeting changes. Opportunity score 92/100 (reels aspect-ratio +1 x2, budget_limited +1, gen_ai_mvp +1 x2, music +2) -- no advantage_plus_catalog_ads recommendation surfaced, consistent with the established read that this fluctuates and isn't the basis for A-003. Catalog diagnostics unchanged (18 items out-of-stock must_fix, 30 items need a 2nd image, 36 items with unmatched content IDs -- all pre-existing, no new issues). Trailing-7d pixel read (dataset_stats, Aug27-Sep3): 57 AddToCart vs 4 Purchase, consistent with the established 50-70/4-5 range backing A-002. All 8 pending proposals (A-001, A-002, A-003, A-005, A-006, A-007, A-009, A-010) re-verified against fresh Meta Ads MCP pulls: Kage_Sales (A-001, paused) unchanged at 4.296679x ROAS on ₹6,195.22; Kage_sales_1908 (A-005/A-006, paused) unchanged at 1.823934x ROAS on ₹6,179.11; A-007 (lookalike-refresh, tier:auto) still blocked on the real ads_create_custom_audience tool-capability gap noted previously, independent of this run's read-only constraint, so left pending rather than executed. The two live pause-kill proposals both grew further with zero new purchases: New_Sales_Kage_31AUG (A-009) now ₹2,471.44 lifetime spend, 394.3% past its ₹500 kill floor (was 345.2% last pass); Retargeting_31AUG (A-010) now ₹562.06, 112.4% past floor (was 110.2%). Both remain active and delivering with zero purchases each. Competitor recheck: Gully Labs 155->141 (-9.0%), Lotto Sport India 104->101 (-2.9%), both below the 20% spike threshold. No new proposals or alerts this pass beyond this digest.",
+      "severity": "medium",
+      "dismissed": false,
+      "createdAt": "2026-09-03T14:48:00.000Z"
     }
   ],
   "log": [
