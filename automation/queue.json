@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-04T12:46:00.000Z",
+  "generatedAt": "2026-09-04T14:46:00.000Z",
   "settings": {
     "kill_roas_threshold": "pause if ROAS < 1.0x after ₹500 spend on a sales-objective campaign",
     "reactivate_min_historic_roas": "surface for reactivation if a paused campaign's last active-period ROAS >= 3.0x",
@@ -26,8 +26,8 @@
     "competitor_last_scrape": {
       "gully_labs_active_ads": 154,
       "lotto_sport_india_active_ads": 83,
-      "scraped_at": "2026-09-04T12:46:00.000Z",
-      "note": "2026-09-04 ~12:46 UTC scheduled daily run (read-only), page-ID-scoped recheck (page_ids 107479854297817 / 426015150606378): Gully Labs 154->154 (0%), Lotto Sport India 83->83 (0%) -- both flat since the last pass, no move at all this time. No alert, no material account action taken."
+      "scraped_at": "2026-09-04T14:46:00.000Z",
+      "note": "2026-09-04 ~14:46 UTC scheduled daily run (read-only), page-ID-scoped recheck (page_ids 107479854297817 / 426015150606378): Gully Labs 154->154 (0%), Lotto Sport India 83->83 (0%) -- both flat since the last pass, no move at all this time. No alert, no material account action taken."
     },
     "note": "hard_spend_ceiling_inr is a placeholder — set to roughly 3x trailing-30-day avg daily spend (~₹663/day as of 29 Aug 2026). All fields here are editable directly in the Automation tab (Save button) or by telling Claude."
   },
@@ -362,7 +362,7 @@
       "module": "pause-kill",
       "tier": "approval",
       "title": "Pause New_Sales_Kage_31AUG — ROAS 0.71x, still below the 1.0x kill threshold",
-      "reasoning": "New_Sales_Kage_31AUG (id 120255534465560159) lifetime spend has grown to ₹4,036.10 (maximum date range pull) -- now 807.2% of its own ₹500 kill-threshold floor, up from ₹3,976.38 last pass (+₹59.72). Still just 1 purchase since tracking began (₹2,804.15 in value, unchanged from last pass), holding ROAS at 0.69x -- still below settings.kill_roas_threshold (pause if ROAS < 1.0x after ₹500 spend on a sales-objective campaign), so the pause-kill trigger still holds and is strengthening as spend accrues with no second conversion. Account activity log since the last run (10:46 UTC) shows no new events at all -- the most recent logged event (an automated 'Started delivery' on TSUCHI_Group_1shadow) predates this pass's cutoff, and no manual campaign/ad-set/targeting changes or balance top-ups occurred in between. Re-confirmed this pass (2026-09-04 ~12:46 UTC, read-only mode); not executed regardless of tier.",
+      "reasoning": "New_Sales_Kage_31AUG (id 120255534465560159) lifetime spend has grown to ₹4,153.76 (maximum date range pull) -- now 831% of its own ₹500 kill-threshold floor, up from ₹4,153.76-₹59.72=₹4,036.10 in the prior pass (+₹117.66 this pass). Still just 1 purchase since tracking began (₹2,804.15 in value, unchanged), so ROAS has drifted down to 0.68x (from 0.69x last pass) as spend accrues against the same single conversion -- still well below settings.kill_roas_threshold (pause if ROAS < 1.0x after ₹500 spend on a sales-objective campaign), so the pause-kill trigger still holds and continues strengthening. Account activity log since the last run (12:46 UTC) shows one event: a ₹1,00,000 balance top-up at ~13:54 UTC (7:24 PM IST) -- no manual campaign/ad-set/targeting changes touching this campaign. Re-confirmed this pass (2026-09-04 ~14:46 UTC, read-only mode); not executed regardless of tier.",
       "actionSummary": "Pause campaign 'New_Sales_Kage_31AUG' (id 120255534465560159) by setting its status to PAUSED. No other field changes. This stops further spend immediately; it can be reactivated manually (or via a future reactivate-winner proposal) once the underlying issue — creative, targeting, or audience — is diagnosed and fixed.",
       "metaAction": {
         "tool": "ads_update_entity",
@@ -381,7 +381,7 @@
       "module": "pause-kill",
       "tier": "approval",
       "title": "Pause Retargeting_31AUG — kill-floor spend crossed, but ROAS now 1.05x (reconsider before approving)",
-      "reasoning": "Retargeting_31AUG (campaign id 120255534778560159) lifetime spend has grown to ₹704.13 (maximum date range pull), up from ₹692.66 last pass (+₹11.47) -- 140.8% of its own ₹500 kill-threshold floor. Still just 1 purchase since tracking began (₹725.94 in value, unchanged), putting ROAS at 1.03x -- down slightly from last pass's 1.05x as spend accrued against the same single conversion, but still just ABOVE settings.kill_roas_threshold (pause if ROAS < 1.0x after ₹500 spend on a sales-objective campaign). With n=1 purchase this reading remains thin and could flip below 1.0x on the next pass if spend keeps accruing with no second conversion -- this proposal's own trigger condition is still not met as of this pass, so a reject (or hold pending another pass) may be more appropriate than approving as-is. Activity log since the last run (10:46 UTC) shows no new events -- no manual changes to this campaign. Re-confirmed this pass (2026-09-04 ~12:46 UTC, read-only mode).",
+      "reasoning": "Retargeting_31AUG (campaign id 120255534778560159) lifetime spend has grown to ₹719.48 (maximum date range pull), up from ₹704.13 last pass (+₹15.35) -- 143.9% of its own ₹500 kill-threshold floor. Still just 1 purchase since tracking began (₹725.94 in value, unchanged), putting ROAS at 1.01x -- down slightly from last pass's 1.03x as spend accrues against the same single conversion, but still just ABOVE settings.kill_roas_threshold (pause if ROAS < 1.0x after ₹500 spend on a sales-objective campaign). With n=1 purchase this reading remains thin and could flip below 1.0x on the next pass if spend keeps accruing with no second conversion -- this proposal's own trigger condition is still not met as of this pass, so a reject (or hold pending another pass) may be more appropriate than approving as-is. Activity log since the last run (12:46 UTC) shows one event: a ₹1,00,000 balance top-up at ~13:54 UTC (7:24 PM IST) -- no manual changes to this campaign. Re-confirmed this pass (2026-09-04 ~14:46 UTC, read-only mode).",
       "actionSummary": "Pause campaign 'Retargeting_31AUG' (id 120255534778560159) by setting its status to PAUSED. No other field changes. This stops further spend immediately; it can be reactivated manually (or via a future reactivate-winner proposal) once the underlying issue — creative, targeting, or audience — is diagnosed and fixed.",
       "metaAction": {
         "tool": "ads_update_entity",
@@ -1216,6 +1216,15 @@
       "severity": "low",
       "dismissed": false,
       "createdAt": "2026-09-04T12:46:00.000Z"
+    },
+    {
+      "id": "AL-092",
+      "module": "routine-run-notes",
+      "title": "Scheduled run notes -- 2026-09-04 ~14:46 UTC pass: third ₹1,00,000 balance top-up, kill-floor proposals holding",
+      "detail": "Read-only scheduled pass (2026-09-04 ~14:46 UTC). Circuit breaker check: today's account spend ₹1,435.04 vs hard_spend_ceiling_inr ₹2,000 -- not breached, no trip. Pixel/dataset quality (dataset 833131719490535): Purchase and prepaid_purchase composite match-quality scores steady at 8/10 with 100% coverage on core identifiers (email/phone/ip/ua) -- healthy, ROAS-driven modules not suppressed this pass. Anomaly signal: none. Activity log since the last run (12:46 UTC) shows one event -- a third ₹1,00,000 balance top-up at ~13:54 UTC (7:24 PM IST), same as the two prior top-ups on 2026-09-03 -- informational only, no account action. Competitor recheck: Gully Labs 154->154 (0%), Lotto Sport India 83->83 (0%), both flat, no spike alert. Kill-floor proposals: A-009 (New_Sales_Kage_31AUG) spend grew to ₹4,153.76 (+₹117.66), ROAS drifted to 0.68x, still below the 1.0x floor -- trigger holds. A-010 (Retargeting_31AUG) spend grew to ₹719.48 (+₹15.35), ROAS now 1.01x (was 1.03x), still just above the 1.0x floor -- trigger still not met, reject-or-hold still the better call than approving as-is. No other proposal or alert numbers moved this pass (all paused-campaign proposals -- A-001, A-005, A-006 -- and the blocked A-007 lookalike-refresh are unchanged since their underlying entities are not delivering). No new proposals or alerts triggered beyond this run-notes entry.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-09-04T14:46:00.000Z"
     }
   ],
   "log": [
