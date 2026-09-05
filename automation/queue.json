@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-05T18:53:00.000Z",
+  "generatedAt": "2026-09-05T20:47:00.000Z",
   "settings": {
     "kill_roas_threshold": "pause if ROAS < 1.0x after ₹500 spend on a sales-objective campaign",
     "reactivate_min_historic_roas": "surface for reactivation if a paused campaign's last active-period ROAS >= 3.0x",
@@ -24,10 +24,10 @@
       }
     },
     "competitor_last_scrape": {
-      "gully_labs_active_ads": 149,
+      "gully_labs_active_ads": 155,
       "lotto_sport_india_active_ads": 83,
-      "scraped_at": "2026-09-05T18:53:00.000Z",
-      "note": "2026-09-05 ~18:5x UTC scheduled run (live-execution mode), page-ID-scoped recheck (page_ids 107479854297817 / 426015150606378): both counts jumped well past the 20% threshold again (Gully Labs 90->149, +65.6%; Lotto Sport India 51->83, +62.7%) -- continued sampling oscillation consistent with the standing AL-011/AL-015 read (Ad Library estimated_total_count appears to sample/fluctuate rather than track a stable population), new competitor-spike alert filed this pass since both prior counts moved >=20%."
+      "scraped_at": "2026-09-05T20:47:00.000Z",
+      "note": "2026-09-05 ~20:47 UTC scheduled run (live-execution mode), page-ID-scoped recheck (page_ids 107479854297817 / 426015150606378): Gully Labs 149->155 (+4.0%), Lotto Sport India 83->83 (0%) -- both well below the 20% spike threshold this pass, no new competitor-spike alert. Prior pass's spike (AL-114) has partially settled."
     },
     "note": "hard_spend_ceiling_inr is a placeholder — set to roughly 3x trailing-30-day avg daily spend (~₹663/day as of 29 Aug 2026). All fields here are editable directly in the Automation tab (Save button) or by telling Claude."
   },
@@ -289,7 +289,7 @@
       "module": "pause-kill",
       "tier": "approval",
       "title": "Pause New_Sales_Kage_31AUG — ROAS 0.55x, still below the 1.0x kill threshold",
-      "reasoning": "New_Sales_Kage_31AUG (id 120255534465560159) lifetime spend has grown to ₹5,100.37 (maximum date range pull) -- 1020.1% of its own ₹500 kill-threshold floor, up from ₹5,007.73 in the prior pass (+₹92.64 this pass). ROAS has drifted slightly further below the kill floor, now 0.549793x (from 0.559964x last pass) -- still well below settings.kill_roas_threshold (pause if ROAS < 1.0x after ₹500 spend on a sales-objective campaign). Account activity log since the last pass (2026-09-05T04:46:00.000Z) shows a brief status flap by Avishek Neogi at 10:56 AM IST (2026-09-05T05:26:00.000Z) -- run_status cycled Active -> Pending Process -> Active, with the daily budget re-confirmed unchanged at ₹1,500/day (150000 minor-currency-units) throughout; net effect on delivery is negligible and the campaign is confirmed ACTIVE again as of this pull. Re-confirmed this pass (2026-09-05 ~06:48 UTC, read-only mode); not executed regardless of tier. Re-confirmed this pass (2026-09-05 ~08:49 UTC, read-only mode): lifetime spend now ₹5,360.28 (maximum date range pull), up from ₹5,100.37 last pass (+₹259.91). ROAS has drifted further below the kill floor, now 0.523135x (from 0.549793x last pass). Account activity log since the last run (2026-09-05T06:48:00.000Z) shows no new manual changes to this campaign beyond the status/budget flap already captured in the prior pass's reasoning (run_status cycled Active -> Pending Process -> Active at 10:56 AM IST, daily budget re-confirmed unchanged at ₹1,500/day) -- campaign confirmed ACTIVE and delivering normally. Not executed regardless of tier. Re-confirmed this pass (2026-09-05 ~10:53 UTC, read-only mode): lifetime spend now ₹5,488.04 (maximum date range pull), up from ₹5,360.28 last pass (+₹127.76). ROAS has drifted further below the kill floor, now 0.510957x (from 0.523135x last pass). Account activity log since the last run (2026-09-05T08:49:00.000Z) is empty -- no manual changes, campaign confirmed ACTIVE and delivering normally. Not executed regardless of tier. Re-confirmed this pass (2026-09-05 ~12:52 UTC, read-only mode): lifetime spend now ₹5,682.50 (maximum date range pull), up from ₹5,488.04 last pass (+₹194.46). ROAS has drifted further below the kill floor, now 0.493471x (from 0.510957x last pass). Account activity log since the last run (2026-09-05T10:53:00.000Z) is empty -- no new manual changes beyond the status/budget flap already captured in an earlier pass's reasoning; campaign confirmed ACTIVE and delivering normally. A fresh age/gender breakdown (last_7d) also now shows a clear internal skew: 25-34 male is the only converting cell (₹2,222.79 spend, 1.26x ROAS) while 18-24 male (₹651.66, 0 purchases) and 35-44 male (₹1,017.45, 0 purchases) are both dead weight at meaningful spend -- see new proposal A-011 for a targeting-only alternative if this pause proposal is rejected. Not executed regardless of tier. Re-confirmed this pass (2026-09-05 ~14:47 UTC, read-only mode): lifetime spend now ₹5,816.75 (maximum date range pull), up from ₹5,488.04 last pass (+₹328.71). ROAS has drifted further below the kill floor, now 0.482082x (from 0.523135x last pass) -- a larger single-pass drop than recent passes, still well below settings.kill_roas_threshold. Account activity log since the last run (2026-09-05T12:52:00.000Z) is empty -- no new manual changes; campaign confirmed ACTIVE and still delivering. Not executed regardless of tier. Re-confirmed this pass (2026-09-05 ~16:50 UTC, read-only mode): lifetime spend now ₹5,902.62 (maximum date range pull, single-entity query), up from ₹5,816.75 last pass (+₹85.87). ROAS has drifted further below the kill floor, now 0.475069x (from 0.482082x last pass). Account activity log since the last run (2026-09-05T14:47:00.000Z) is empty -- no new manual changes; campaign confirmed ACTIVE and still delivering. Not executed regardless of tier. Re-confirmed this pass (2026-09-05 ~18:52 UTC): lifetime spend now ₹5,930.33 (maximum date range pull), up from ₹5,902.62 last pass (+₹27.71). ROAS has drifted further below the kill floor, now 0.472849x (from 0.475069x last pass). Account activity log since the last run is unchanged; campaign confirmed ACTIVE and still delivering (TSUCHI ad within it, last_14d, is now the account's only active ad with a purchase: 1.40x ROAS on ₹1,997.75 spend, but the campaign overall remains well below the 1.0x kill floor). This is an approval-tier proposal — per this run's execution policy, approval-tier proposals never auto-execute regardless of the now-live auto-tier execution authorization; still pending human approval in-app or via chat. Re-confirmed and updated this pass (2026-09-05 ~18:5x UTC, live-execution mode): New_Sales_Kage_31AUG lifetime spend now Rs.5,936.55 (up from Rs.5,100.37), ROAS now 0.472353x (down from 0.549793x) -- still well below the 1.0x kill floor, gap widening rather than closing. Not auto-executed: pause-kill is an approval-tier module per this run's execution policy (only purchaser-exclusion, lookalike-refresh, hook-angle-tagging, and the hard spend circuit breaker execute automatically) -- left pending for human approval.",
+      "reasoning": "New_Sales_Kage_31AUG (id 120255534465560159) lifetime spend has grown to ₹5,100.37 (maximum date range pull) -- 1020.1% of its own ₹500 kill-threshold floor, up from ₹5,007.73 in the prior pass (+₹92.64 this pass). ROAS has drifted slightly further below the kill floor, now 0.549793x (from 0.559964x last pass) -- still well below settings.kill_roas_threshold (pause if ROAS < 1.0x after ₹500 spend on a sales-objective campaign). Account activity log since the last pass (2026-09-05T04:46:00.000Z) shows a brief status flap by Avishek Neogi at 10:56 AM IST (2026-09-05T05:26:00.000Z) -- run_status cycled Active -> Pending Process -> Active, with the daily budget re-confirmed unchanged at ₹1,500/day (150000 minor-currency-units) throughout; net effect on delivery is negligible and the campaign is confirmed ACTIVE again as of this pull. Re-confirmed this pass (2026-09-05 ~06:48 UTC, read-only mode); not executed regardless of tier. Re-confirmed this pass (2026-09-05 ~08:49 UTC, read-only mode): lifetime spend now ₹5,360.28 (maximum date range pull), up from ₹5,100.37 last pass (+₹259.91). ROAS has drifted further below the kill floor, now 0.523135x (from 0.549793x last pass). Account activity log since the last run (2026-09-05T06:48:00.000Z) shows no new manual changes to this campaign beyond the status/budget flap already captured in the prior pass's reasoning (run_status cycled Active -> Pending Process -> Active at 10:56 AM IST, daily budget re-confirmed unchanged at ₹1,500/day) -- campaign confirmed ACTIVE and delivering normally. Not executed regardless of tier. Re-confirmed this pass (2026-09-05 ~10:53 UTC, read-only mode): lifetime spend now ₹5,488.04 (maximum date range pull), up from ₹5,360.28 last pass (+₹127.76). ROAS has drifted further below the kill floor, now 0.510957x (from 0.523135x last pass). Account activity log since the last run (2026-09-05T08:49:00.000Z) is empty -- no manual changes, campaign confirmed ACTIVE and delivering normally. Not executed regardless of tier. Re-confirmed this pass (2026-09-05 ~12:52 UTC, read-only mode): lifetime spend now ₹5,682.50 (maximum date range pull), up from ₹5,488.04 last pass (+₹194.46). ROAS has drifted further below the kill floor, now 0.493471x (from 0.510957x last pass). Account activity log since the last run (2026-09-05T10:53:00.000Z) is empty -- no new manual changes beyond the status/budget flap already captured in an earlier pass's reasoning; campaign confirmed ACTIVE and delivering normally. A fresh age/gender breakdown (last_7d) also now shows a clear internal skew: 25-34 male is the only converting cell (₹2,222.79 spend, 1.26x ROAS) while 18-24 male (₹651.66, 0 purchases) and 35-44 male (₹1,017.45, 0 purchases) are both dead weight at meaningful spend -- see new proposal A-011 for a targeting-only alternative if this pause proposal is rejected. Not executed regardless of tier. Re-confirmed this pass (2026-09-05 ~14:47 UTC, read-only mode): lifetime spend now ₹5,816.75 (maximum date range pull), up from ₹5,488.04 last pass (+₹328.71). ROAS has drifted further below the kill floor, now 0.482082x (from 0.523135x last pass) -- a larger single-pass drop than recent passes, still well below settings.kill_roas_threshold. Account activity log since the last run (2026-09-05T12:52:00.000Z) is empty -- no new manual changes; campaign confirmed ACTIVE and still delivering. Not executed regardless of tier. Re-confirmed this pass (2026-09-05 ~16:50 UTC, read-only mode): lifetime spend now ₹5,902.62 (maximum date range pull, single-entity query), up from ₹5,816.75 last pass (+₹85.87). ROAS has drifted further below the kill floor, now 0.475069x (from 0.482082x last pass). Account activity log since the last run (2026-09-05T14:47:00.000Z) is empty -- no new manual changes; campaign confirmed ACTIVE and still delivering. Not executed regardless of tier. Re-confirmed this pass (2026-09-05 ~18:52 UTC): lifetime spend now ₹5,930.33 (maximum date range pull), up from ₹5,902.62 last pass (+₹27.71). ROAS has drifted further below the kill floor, now 0.472849x (from 0.475069x last pass). Account activity log since the last run is unchanged; campaign confirmed ACTIVE and still delivering (TSUCHI ad within it, last_14d, is now the account's only active ad with a purchase: 1.40x ROAS on ₹1,997.75 spend, but the campaign overall remains well below the 1.0x kill floor). This is an approval-tier proposal — per this run's execution policy, approval-tier proposals never auto-execute regardless of the now-live auto-tier execution authorization; still pending human approval in-app or via chat. Re-confirmed and updated this pass (2026-09-05 ~18:5x UTC, live-execution mode): New_Sales_Kage_31AUG lifetime spend now Rs.5,936.55 (up from Rs.5,100.37), ROAS now 0.472353x (down from 0.549793x) -- still well below the 1.0x kill floor, gap widening rather than closing. Not auto-executed: pause-kill is an approval-tier module per this run's execution policy (only purchaser-exclusion, lookalike-refresh, hook-angle-tagging, and the hard spend circuit breaker execute automatically) -- left pending for human approval. Re-confirmed and updated this pass (2026-09-05 ~20:47 UTC, live-execution mode): the account activity log shows Saif Naqvi (Power Editor) manually paused New_Sales_Kage_31AUG itself at ~2026-09-05T18:55 UTC (run_status Active->Inactive), shortly after the prior pass -- the account now has zero active campaigns account-wide. Lifetime spend now Rs.5,962.79 (up from Rs.5,936.55), ROAS now 0.470275x (down from 0.472353x) -- still well below the 1.0x kill floor. This pause independently achieves what this proposal (A-009) already proposes, same as A-010's precedent with Retargeting_31AUG -- left pending rather than auto-closed by this routine (approving it now would be a no-op against the live account; a human can still explicitly approve or reject at their discretion). Not auto-executed -- approval tier.",
       "actionSummary": "Pause campaign 'New_Sales_Kage_31AUG' (id 120255534465560159) by setting its status to PAUSED. No other field changes. This stops further spend immediately; it can be reactivated manually (or via a future reactivate-winner proposal) once the underlying issue — creative, targeting, or audience — is diagnosed and fixed.",
       "metaAction": {
         "tool": "ads_update_entity",
@@ -327,7 +327,7 @@
       "module": "age-gender-auto-shift",
       "tier": "approval",
       "title": "Shift New_Sales_Kage_31AUG targeting to the winning 25-34 male segment",
-      "reasoning": "New_Sales_Kage_31AUG's ad set (TSUCHI, id 120255534465570159) is the account's only currently-active spend, but a last_7d age/gender breakdown shows a stark internal skew: 25-34 male is the only meaningfully-spent cell converting at all (₹2,222.79 spend, 1.26x ROAS), while 18-24 male (₹651.66 spend, 0 purchases, 0x ROAS) and 35-44 male (₹1,017.45 spend, 0 purchases, 0x ROAS) are both burning meaningful budget with zero return -- well below the campaign's already-poor blended ROAS (0.49x lifetime / 0.62x last_14d). This campaign also has a pending pause-kill proposal (A-009, ROAS below the 1.0x kill floor) -- if A-009 is approved this proposal becomes moot. This is offered as the targeting-only alternative in case the human prefers to keep the campaign running on its one working segment rather than pausing it outright. Note: the ad set has Advantage+ audience turned on (targeting_automation.advantage_audience=1) with age/gender/geo set to 'individual' -- narrowing age_min/age_max here sets the advertiser-supplied anchor Meta's Advantage+ system optimizes around, it does not hard-lock delivery to exactly 25-34. Re-confirmed this pass (2026-09-05 ~14:47 UTC, read-only mode): last_7d age/gender breakdown for the TSUCHI ad set still shows the same skew -- 25-34 male ₹2,222.79 spend at 1.261544x ROAS (the only meaningfully-spent converting cell), 18-24 male ₹651.66 spend / 0 purchases, 35-44 male ₹1,017.45 spend / 0 purchases. A-009 (pause-kill on this same campaign) remains pending and has moved further below the kill floor this pass -- if approved, this proposal becomes moot. Not executed. Re-confirmed this pass (2026-09-05 ~16:50 UTC, read-only mode): fresh last_7d age/gender breakdown for the TSUCHI ad set shows the same skew -- 25-34 male ₹2,222.79 spend at 1.261544x ROAS (the only meaningfully-spent converting cell), 18-24 male ₹651.66 spend / 0 purchases, 35-44 male ₹1,017.45 spend / 0 purchases -- all figures unchanged from last pass. A-009 (pause-kill on this same campaign) remains pending and has moved further below the kill floor this pass. Not executed. Re-confirmed and updated this pass (2026-09-05 ~18:5x UTC, live-execution mode): fresh last_7d age/gender breakdown on the TSUCHI ad set shows the previously 'winning' 25-34 male cell has itself slipped to 0.937278x ROAS (Rs.2,991.80 spend, down from 1.26x last reading) -- no longer clearing 1.0x either, while 18-24 male (Rs.865.02, 0 purchases) and 35-44 male (Rs.1,280.69, 0 purchases) remain at 0x. This weakens the original case for a targeting-only fix versus an outright pause (A-009) -- recommend reviewing A-009 first given all three meaningfully-spent male cohorts are now at or below breakeven. Not executed -- approval tier.",
+      "reasoning": "New_Sales_Kage_31AUG's ad set (TSUCHI, id 120255534465570159) is the account's only currently-active spend, but a last_7d age/gender breakdown shows a stark internal skew: 25-34 male is the only meaningfully-spent cell converting at all (₹2,222.79 spend, 1.26x ROAS), while 18-24 male (₹651.66 spend, 0 purchases, 0x ROAS) and 35-44 male (₹1,017.45 spend, 0 purchases, 0x ROAS) are both burning meaningful budget with zero return -- well below the campaign's already-poor blended ROAS (0.49x lifetime / 0.62x last_14d). This campaign also has a pending pause-kill proposal (A-009, ROAS below the 1.0x kill floor) -- if A-009 is approved this proposal becomes moot. This is offered as the targeting-only alternative in case the human prefers to keep the campaign running on its one working segment rather than pausing it outright. Note: the ad set has Advantage+ audience turned on (targeting_automation.advantage_audience=1) with age/gender/geo set to 'individual' -- narrowing age_min/age_max here sets the advertiser-supplied anchor Meta's Advantage+ system optimizes around, it does not hard-lock delivery to exactly 25-34. Re-confirmed this pass (2026-09-05 ~14:47 UTC, read-only mode): last_7d age/gender breakdown for the TSUCHI ad set still shows the same skew -- 25-34 male ₹2,222.79 spend at 1.261544x ROAS (the only meaningfully-spent converting cell), 18-24 male ₹651.66 spend / 0 purchases, 35-44 male ₹1,017.45 spend / 0 purchases. A-009 (pause-kill on this same campaign) remains pending and has moved further below the kill floor this pass -- if approved, this proposal becomes moot. Not executed. Re-confirmed this pass (2026-09-05 ~16:50 UTC, read-only mode): fresh last_7d age/gender breakdown for the TSUCHI ad set shows the same skew -- 25-34 male ₹2,222.79 spend at 1.261544x ROAS (the only meaningfully-spent converting cell), 18-24 male ₹651.66 spend / 0 purchases, 35-44 male ₹1,017.45 spend / 0 purchases -- all figures unchanged from last pass. A-009 (pause-kill on this same campaign) remains pending and has moved further below the kill floor this pass. Not executed. Re-confirmed and updated this pass (2026-09-05 ~18:5x UTC, live-execution mode): fresh last_7d age/gender breakdown on the TSUCHI ad set shows the previously 'winning' 25-34 male cell has itself slipped to 0.937278x ROAS (Rs.2,991.80 spend, down from 1.26x last reading) -- no longer clearing 1.0x either, while 18-24 male (Rs.865.02, 0 purchases) and 35-44 male (Rs.1,280.69, 0 purchases) remain at 0x. This weakens the original case for a targeting-only fix versus an outright pause (A-009) -- recommend reviewing A-009 first given all three meaningfully-spent male cohorts are now at or below breakeven. Not executed -- approval tier. Re-confirmed this pass (2026-09-05 ~20:47 UTC, live-execution mode): fresh last_7d age/gender breakdown on the TSUCHI ad set is essentially unchanged (25-34 male Rs.2,991.71 spend / 0.937307x ROAS, 18-24 male Rs.864.99 / 0 purchases, 35-44 male Rs.1,280.91 / 0 purchases). More materially: the account activity log shows the parent campaign New_Sales_Kage_31AUG was itself manually paused by Saif Naqvi at ~18:55 UTC (see A-009's updated reasoning) -- independent of any decision on this targeting-only proposal, the campaign is no longer delivering at all right now, which makes this targeting-only alternative moot until/unless the campaign is reactivated. Left pending per established convention. Not executed -- approval tier.",
       "actionSummary": "Narrow the TSUCHI ad set's (id 120255534465570159) age targeting from the current 21-65 range to 25-34, keeping the one converting cohort (25-34 male, 1.26x ROAS) while cutting the two zero-ROAS cells (18-24 and 35-44 male). No other targeting fields changed.",
       "metaAction": {
         "tool": "ads_update_entity",
@@ -1387,6 +1387,15 @@
       "severity": "medium",
       "dismissed": false,
       "createdAt": "2026-09-05T18:53:00.000Z"
+    },
+    {
+      "id": "AL-117",
+      "module": "routine-run-notes",
+      "title": "2026-09-05 ~20:47 UTC scheduled run: New_Sales_Kage_31AUG manually paused by a human -- account now has zero active campaigns; hook-angle-tagging executed for 9 more creatives",
+      "detail": "Circuit breaker check: today's account spend Rs.25.84 vs Rs.2,000 ceiling -- not tripped. Pixel quality gate: composite EMQ 4.6-8.0 across events (dataset 833131719490535), core Purchase/AddPaymentInfo match keys (email/phone/ip_address/user_agent/external_id/zip/country/fn/ln/ct/st) at 100% coverage -- gate passed, ROAS-driven modules not suppressed this pass. Account activity log since the last pass (2026-09-05T18:53:00.000Z): Saif Naqvi (Power Editor) manually paused New_Sales_Kage_31AUG at ~18:55 UTC (run_status Active->Inactive) -- the account's only remaining active campaign is now paused, so the account has zero active campaigns account-wide; also a Rs.1,50,000 balance top-up at ~18:56 UTC (Meta system event, no delivery impact). purchaser-exclusion: no active prospecting campaign exists this pass (all paused) -- nothing to evaluate, no gap to fix. lookalike-refresh: trigger still met (source purchaser audience unchanged) but rate-limited -- already executed earlier today (see AL-115, log entry for A-007) -- skipped this pass, no new alert needed (AL-115 already stands). hook-angle-tagging: executed for 9 additional creatives this pass, all with real historical spend but no prior creativeTags entry -- Retargeting (2119544158658714), Tsuchi_TOF ad (1327092559313701), Kage_sales_1908 (1044151735054382), Kage_TOF (2413130579211292), Kage_sales_1608 (1394254612153129, carousel), Kage_Sales (1063318642863205), Kage_Traffic Ad-Sales (2060157931249348), Kage_Traffic Ad (1609976420795179, video), Fudoshin_Sales (1416222373744056) -- all tagged directly from real primary text/headline via the Meta Ads MCP; the Higgsfield vision connection is not attached to this run so only ad-copy tagging was done, image/video content itself was not analyzed. queue.json.creativeTags now covers 11 of the account's known-spend creatives (up from 2). hard-spend-circuit-breaker: not tripped, no pause executed (breaker check ran before evaluating anything else, per Safety infrastructure). competitor-rescrape: Gully Labs 149->155 (+4.0%), Lotto Sport India 83->83 (0%) -- both well below the 20% spike threshold this pass, no new alert; settings.competitor_last_scrape updated. Approval-tier proposals: A-009 (New_Sales_Kage_31AUG pause-kill) and A-011 (age/gender shift on the same campaign) reasoning refreshed -- the campaign's own manual pause (above) independently achieves what A-009 proposes and makes A-011's targeting-only alternative moot for now, same precedent as A-010/Retargeting_31AUG; both left pending per established convention rather than auto-closed. A-002 (high-intent-retargeting) pixel counts re-checked: still 55 AddToCart vs 3 Purchase trailing 7d, unchanged, no reasoning update needed. A-003 (catalog-dpa-launch) diagnostics re-checked: still 18 out-of-stock / 30 with <2 images / 33 UNMATCHED_EVENTS, unchanged, no reasoning update needed. A-001, A-005, A-006, A-010 unchanged (all target long-paused, frozen entities with no new activity) -- not re-verified against fresh Meta pulls this pass since nothing in the account activity log could have moved their numbers. No anomaly signal data available. Weekly/monthly digest not due this pass (not Monday, not month-start). Net effect of this pass: the account has gone from one small active ad set to fully paused -- no campaigns are currently delivering.",
+      "severity": "medium",
+      "dismissed": false,
+      "createdAt": "2026-09-05T20:47:00.000Z"
     }
   ],
   "log": [
@@ -1810,6 +1819,154 @@
       },
       "tier": "auto",
       "executedAt": "2026-09-05T18:53:00.000Z"
+    },
+    {
+      "proposalId": null,
+      "action": "Tagged creative 2119544158658714 ('Retargeting' ad, Static image) with angle/hook derived from its real primary text/headline -- no Meta API mutation, wrote to queue.json.creativeTags only.",
+      "result": "success",
+      "previousState": {
+        "creativeTags_entry_existed": false
+      },
+      "detail": {
+        "creative_id": "2119544158658714",
+        "body": "KAI KAGE - YOUR EVERYDAY EVERY OUTFIT SNEAKERS\n\n15% OFF ON ALL SNEAKERS + 5% EXTRA PREPAID DISCOUNT\nFREE SHIPPING + NO QUESTIONS ASKED RETURN POLICY",
+        "title": "KAI KAGE  - MOST VERSATILE SNEAKERS ARE HERE",
+        "vision_pass_skipped": true
+      },
+      "tier": "auto",
+      "executedAt": "2026-09-05T20:47:00.000Z"
+    },
+    {
+      "proposalId": null,
+      "action": "Tagged creative 1327092559313701 ('Tsuchi_TOF' ad, Static image) with angle/hook derived from its real primary text/headline -- no Meta API mutation, wrote to queue.json.creativeTags only.",
+      "result": "success",
+      "previousState": {
+        "creativeTags_entry_existed": false
+      },
+      "detail": {
+        "creative_id": "1327092559313701",
+        "body": "Born from the earth. Built for everywhere.\nMeet TSUCHI - a new KAI sneaker grounded in earthy tones, bold detailing, and everyday movement.\nThe new drop has arrived.",
+        "title": "MEET TSUCHI",
+        "vision_pass_skipped": true
+      },
+      "tier": "auto",
+      "executedAt": "2026-09-05T20:47:00.000Z"
+    },
+    {
+      "proposalId": null,
+      "action": "Tagged creative 1044151735054382 ('Kage_sales_1908' ad, Static image) with angle/hook derived from its real primary text/headline -- no Meta API mutation, wrote to queue.json.creativeTags only.",
+      "result": "success",
+      "previousState": {
+        "creativeTags_entry_existed": false
+      },
+      "detail": {
+        "creative_id": "1044151735054382",
+        "body": "Meet KAI MORI - Inspired by Japan's tranquil forests, the KAI Mori combines rich textures with earthy tones in a clean, structured design. Understated, versatile, and crafted to endure.",
+        "title": "15% off + 5% Extra off on Prepaid Orders",
+        "vision_pass_skipped": true
+      },
+      "tier": "auto",
+      "executedAt": "2026-09-05T20:47:00.000Z"
+    },
+    {
+      "proposalId": null,
+      "action": "Tagged creative 2413130579211292 ('Kage_TOF' ad, Static image) with angle/hook derived from its real primary text/headline -- no Meta API mutation, wrote to queue.json.creativeTags only.",
+      "result": "success",
+      "previousState": {
+        "creativeTags_entry_existed": false
+      },
+      "detail": {
+        "creative_id": "2413130579211292",
+        "body": "Meet KAI.\n\nJapanese minimalism meets Mumbai street energy.\n\nSneakers, oversized tees, heavyweight hoodies and everyday essentials -- designed for those who move differently.\n\nMade in India. Built for the streets.",
+        "title": "KAI -- MOVE DIFFERENT.",
+        "vision_pass_skipped": true
+      },
+      "tier": "auto",
+      "executedAt": "2026-09-05T20:47:00.000Z"
+    },
+    {
+      "proposalId": null,
+      "action": "Tagged creative 1394254612153129 ('Kage_sales_1608' ad, Carousel (SHARE, 5 cards)) with angle/hook derived from its real primary text/headline -- no Meta API mutation, wrote to queue.json.creativeTags only.",
+      "result": "success",
+      "previousState": {
+        "creativeTags_entry_existed": false
+      },
+      "detail": {
+        "creative_id": "1394254612153129",
+        "body": "Meet KAI KAGE - a clean, versatile sneaker designed to bring comfort and style to your everyday rotation.",
+        "title": "KAI",
+        "vision_pass_skipped": true,
+        "child_attachments_sample": {
+          "name": "KAGE | Comfort Meets Style",
+          "description": "15% OFF + Extra 5% OFF on prepaid orders."
+        }
+      },
+      "tier": "auto",
+      "executedAt": "2026-09-05T20:47:00.000Z"
+    },
+    {
+      "proposalId": null,
+      "action": "Tagged creative 1063318642863205 ('Kage_Sales' ad, Static image) with angle/hook derived from its real primary text/headline -- no Meta API mutation, wrote to queue.json.creativeTags only.",
+      "result": "success",
+      "previousState": {
+        "creativeTags_entry_existed": false
+      },
+      "detail": {
+        "creative_id": "1063318642863205",
+        "body": "Meet KAGE-the sneaker built for everyday wear.\n\nPremium suede detailing. Minimal design. All-day comfort.\n\n15% OFF on all sneakers\nExtra 5% OFF on prepaid orders\n\nUse code: KAIFREEDOM\n\nSales Date - 09th Aug - 15th Aug",
+        "title": "GRAB THE MOST CLICK-WORTHY SNEAKERS EVER",
+        "vision_pass_skipped": true
+      },
+      "tier": "auto",
+      "executedAt": "2026-09-05T20:47:00.000Z"
+    },
+    {
+      "proposalId": null,
+      "action": "Tagged creative 2060157931249348 ('Kage_Traffic Ad-Sales' ad, Static image) with angle/hook derived from its real primary text/headline -- no Meta API mutation, wrote to queue.json.creativeTags only.",
+      "result": "success",
+      "previousState": {
+        "creativeTags_entry_existed": false
+      },
+      "detail": {
+        "creative_id": "2060157931249348",
+        "body": "SALES STARTS SOON...\n15% OFF ON ALL PRODUCTS + 5% PREPAID OFFERS.",
+        "title": "FREEDOM SALES - Dropping Soon",
+        "vision_pass_skipped": true
+      },
+      "tier": "auto",
+      "executedAt": "2026-09-05T20:47:00.000Z"
+    },
+    {
+      "proposalId": null,
+      "action": "Tagged creative 1609976420795179 ('Kage_Traffic Ad' ad, Video) with angle/hook derived from its real primary text/headline -- no Meta API mutation, wrote to queue.json.creativeTags only.",
+      "result": "success",
+      "previousState": {
+        "creativeTags_entry_existed": false
+      },
+      "detail": {
+        "creative_id": "1609976420795179",
+        "body": "HUSTLE WITH KAI",
+        "title": "KAI COLLECTIVE X AJAY DHONI 001",
+        "vision_pass_skipped": true
+      },
+      "tier": "auto",
+      "executedAt": "2026-09-05T20:47:00.000Z"
+    },
+    {
+      "proposalId": null,
+      "action": "Tagged creative 1416222373744056 ('Fudoshin_Sales' ad, Static image) with angle/hook derived from its real primary text/headline -- no Meta API mutation, wrote to queue.json.creativeTags only.",
+      "result": "success",
+      "previousState": {
+        "creativeTags_entry_existed": false
+      },
+      "detail": {
+        "creative_id": "1416222373744056",
+        "body": "Why wear a normal hoodie when you can upgrade?\n\nMeet the KAI Fudoshin Hoodie -- premium, heavyweight, soft and built for everyday wear.\n\n15% OFF on all orders\nExtra 5% OFF on prepaid orders\n\nUse code KAIFREEDOM and upgrade your everyday.\n\nShop now.",
+        "title": "UPGRADE YOUR HOODIE | 15% OFF",
+        "vision_pass_skipped": true
+      },
+      "tier": "auto",
+      "executedAt": "2026-09-05T20:47:00.000Z"
     }
   ],
   "creativeTags": {
@@ -1834,6 +1991,105 @@
       "visionPassSkipped": true,
       "note": "Higgsfield vision connection not attached to this run -- image content itself not analyzed, only real ad copy text used. No creative description invented.",
       "taggedAt": "2026-09-05T18:53:00.000Z"
+    },
+    "2119544158658714": {
+      "adName": "Retargeting",
+      "campaign": "Retargeting_31AUG",
+      "format": "Static image",
+      "angle": "Discount offer, reusing the Kage launch creative/messaging for a warm retargeting audience",
+      "hook": "\"KAI KAGE - YOUR EVERYDAY EVERY OUTFIT SNEAKERS - 15% OFF ON ALL SNEAKERS + 5% EXTRA PREPAID DISCOUNT. FREE SHIPPING + NO QUESTIONS ASKED RETURN POLICY\" (primary text) / \"KAI KAGE - MOST VERSATILE SNEAKERS ARE HERE\" (headline)",
+      "taggedFrom": "ad primary text (body) + headline (title), via Meta Ads MCP ads_get_creatives",
+      "visionPassSkipped": true,
+      "note": "Higgsfield vision connection not attached to this run -- image content itself not analyzed, only real ad copy text used. No creative description invented.",
+      "taggedAt": "2026-09-05T20:47:00.000Z"
+    },
+    "1327092559313701": {
+      "adName": "Tsuchi_TOF",
+      "campaign": "Tsuchi_TOF",
+      "format": "Static image",
+      "angle": "Brand/product story introduction (new Tsuchi line launch), not discount-led",
+      "hook": "\"Born from the earth. Built for everywhere. Meet TSUCHI - a new KAI sneaker grounded in earthy tones, bold detailing, and everyday movement. The new drop has arrived.\" (primary text) / \"MEET TSUCHI\" (headline)",
+      "taggedFrom": "ad primary text (body) + headline (title), via Meta Ads MCP ads_get_creatives",
+      "visionPassSkipped": true,
+      "note": "Higgsfield vision connection not attached to this run -- image content itself not analyzed, only real ad copy text used. No creative description invented.",
+      "taggedAt": "2026-09-05T20:47:00.000Z"
+    },
+    "1044151735054382": {
+      "adName": "Kage_sales_1908",
+      "campaign": "Kage_sales_1908",
+      "format": "Static image",
+      "angle": "Product story (KAI Mori collection, Japan-inspired) + prepaid discount",
+      "hook": "\"Meet KAI MORI - Inspired by Japan's tranquil forests, the KAI Mori combines rich textures with earthy tones in a clean, structured design. Understated, versatile, and crafted to endure.\" (primary text) / \"15% off + 5% Extra off on Prepaid Orders\" (headline)",
+      "taggedFrom": "ad primary text (body) + headline (title), via Meta Ads MCP ads_get_creatives",
+      "visionPassSkipped": true,
+      "note": "Higgsfield vision connection not attached to this run -- image content itself not analyzed, only real ad copy text used. No creative description invented.",
+      "taggedAt": "2026-09-05T20:47:00.000Z"
+    },
+    "2413130579211292": {
+      "adName": "Kage_TOF",
+      "campaign": "Kage_TOF",
+      "format": "Static image",
+      "angle": "Brand/lifestyle positioning (Japanese minimalism x Mumbai street energy), no discount",
+      "hook": "\"Meet KAI. Japanese minimalism meets Mumbai street energy. Sneakers, oversized tees, heavyweight hoodies and everyday essentials -- designed for those who move differently. Made in India. Built for the streets.\" (primary text) / \"KAI - MOVE DIFFERENT.\" (headline)",
+      "taggedFrom": "ad primary text (body) + headline (title), via Meta Ads MCP ads_get_creatives",
+      "visionPassSkipped": true,
+      "note": "Higgsfield vision connection not attached to this run -- image content itself not analyzed, only real ad copy text used. No creative description invented.",
+      "taggedAt": "2026-09-05T20:47:00.000Z"
+    },
+    "1394254612153129": {
+      "adName": "Kage_sales_1608",
+      "campaign": "Kage_sales_1608",
+      "format": "Carousel (SHARE, 5 cards)",
+      "angle": "Product intro (clean, versatile sneaker) + prepaid discount, carousel format",
+      "hook": "\"Meet KAI KAGE - a clean, versatile sneaker designed to bring comfort and style to your everyday rotation.\" (primary text) / \"KAI\" (headline) / carousel cards (all 5): \"KAGE | Comfort Meets Style\" - \"15% OFF + Extra 5% OFF on prepaid orders.\"",
+      "taggedFrom": "ad primary text (body) + headline (title) + carousel card name/description, via Meta Ads MCP ads_get_creatives",
+      "visionPassSkipped": true,
+      "note": "Higgsfield vision connection not attached to this run -- image content itself not analyzed, only real ad copy text used. No creative description invented.",
+      "taggedAt": "2026-09-05T20:47:00.000Z"
+    },
+    "1063318642863205": {
+      "adName": "Kage_Sales",
+      "campaign": "Kage_Sales",
+      "format": "Static image",
+      "angle": "Discount + urgency (limited sale window) + product quality claims",
+      "hook": "\"Meet KAGE - the sneaker built for everyday wear. Premium suede detailing. Minimal design. All-day comfort. 15% OFF on all sneakers, Extra 5% OFF on prepaid orders. Use code: KAIFREEDOM. Sales Date - 09th Aug - 15th Aug\" (primary text) / \"GRAB THE MOST CLICK-WORTHY SNEAKERS EVER\" (headline)",
+      "taggedFrom": "ad primary text (body) + headline (title), via Meta Ads MCP ads_get_creatives",
+      "visionPassSkipped": true,
+      "note": "Higgsfield vision connection not attached to this run -- image content itself not analyzed, only real ad copy text used. No creative description invented. This is the account's best-volume winner (4.30x ROAS, per index.html's separately-maintained CREATIVES snapshot) -- also the origin creative reused in A-002's stored high-intent-retargeting chain.",
+      "taggedAt": "2026-09-05T20:47:00.000Z"
+    },
+    "2060157931249348": {
+      "adName": "Kage_Traffic Ad-Sales",
+      "campaign": "Kage_Traffic Campaign",
+      "format": "Static image",
+      "angle": "Sale teaser / anticipation (pre-launch), no discount code active yet",
+      "hook": "\"SALES STARTS SOON... 15% OFF ON ALL PRODUCTS + 5% PREPAID OFFERS.\" (primary text) / \"FREEDOM SALES - Dropping Soon\" (headline)",
+      "taggedFrom": "ad primary text (body) + headline (title), via Meta Ads MCP ads_get_creatives",
+      "visionPassSkipped": true,
+      "note": "Higgsfield vision connection not attached to this run -- image content itself not analyzed, only real ad copy text used. No creative description invented.",
+      "taggedAt": "2026-09-05T20:47:00.000Z"
+    },
+    "1609976420795179": {
+      "adName": "Kage_Traffic Ad",
+      "campaign": "Kage_Traffic Campaign",
+      "format": "Video",
+      "angle": "Brand/collab awareness, no discount",
+      "hook": "\"HUSTLE WITH KAI\" (primary text) / \"KAI COLLECTIVE X AJAY DHONI 001\" (headline)",
+      "taggedFrom": "ad primary text (body) + headline (title), via Meta Ads MCP ads_get_creatives",
+      "visionPassSkipped": true,
+      "note": "Higgsfield vision connection not attached to this run -- video content itself not analyzed, only real ad copy text used. No creative description invented.",
+      "taggedAt": "2026-09-05T20:47:00.000Z"
+    },
+    "1416222373744056": {
+      "adName": "Fudoshin_Sales",
+      "campaign": "Fudoshin_Sales",
+      "format": "Static image",
+      "angle": "Upgrade / aspirational framing + discount",
+      "hook": "\"Why wear a normal hoodie when you can upgrade? Meet the KAI Fudoshin Hoodie - premium, heavyweight, soft and built for everyday wear. 15% OFF on all orders, Extra 5% OFF on prepaid orders. Use code KAIFREEDOM and upgrade your everyday. Shop now.\" (primary text) / \"UPGRADE YOUR HOODIE | 15% OFF\" (headline)",
+      "taggedFrom": "ad primary text (body) + headline (title), via Meta Ads MCP ads_get_creatives",
+      "visionPassSkipped": true,
+      "note": "Higgsfield vision connection not attached to this run -- image content itself not analyzed, only real ad copy text used. No creative description invented.",
+      "taggedAt": "2026-09-05T20:47:00.000Z"
     }
   }
 }
