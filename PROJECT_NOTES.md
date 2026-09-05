@@ -203,3 +203,20 @@ Replaced that block with an explicit execution policy (routine renamed "KAI Ads 
 - hook-angle-tagging tags from ad copy only; Higgsfield is not attached to the routine, so the vision pass is noted as skipped.
 
 Fired a manual run immediately after the update; the next scheduled run is 18:45 UTC. Check `automation/queue.json` `log` for `tier: "auto"` entries from this point on.
+
+## 14. Session update — 2026-09-05 (night): Vercel Meta token diagnosed
+
+The Automation tab banner ("Meta account token issue. Could not load: custom_audiences, creatives, images, videos") is the `lookups` endpoint of `api/meta.js` failing with Meta error #200 "Ad account owner has NOT grant ads_management or ads_read permission". Added a read-only `token_info` endpoint (`/api/meta?endpoint=token_info`) that reports the token's owner id, granted scopes, and visible ad accounts, never the token itself. Result on 2026-09-05 18:55 UTC:
+
+- token owner id `122137353741082155`
+- granted permissions: **only** `read_ads_dataset_quality`
+- `/me/adaccounts`: "(#200) Missing Permissions"
+
+So the token in Vercel is valid but was generated with none of the Marketing API scopes. It cannot be repaired by assigning assets; a new token must be generated. The MCP connection used by chat sessions and the cloud routine is a separate OAuth login and is unaffected.
+
+**Fix (must be done by a Business Manager admin, cannot be done from Claude Code — no Vercel CLI here and the Vercel connector has no env-var tool):**
+1. business.facebook.com → Business Settings → Users → System Users → pick or create an Admin system user.
+2. Add Assets → Ad Accounts → `Kai Ad Account` (704523148804803) → enable Manage campaigns. Also add the Page and the pixel/dataset `833131719490535` if the automation editor should list creatives cleanly.
+3. Generate New Token → select the app → scopes `ads_read`, `ads_management`, `business_management` (the last is needed for custom-audience listing/creation) → never-expire.
+4. Vercel → project `performance-marketing-v2` → Settings → Environment Variables → replace `META_ACCESS_TOKEN` (Production) → Redeploy.
+5. Verify with `/api/meta?endpoint=token_info` (permissions should list ads_read + ads_management) and `/api/meta?endpoint=lookups` (should return audiences, not an error).
