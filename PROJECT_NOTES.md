@@ -141,3 +141,39 @@ Refreshed every data-driven tab in `index.html` with real pulls via the Meta Ads
 **Gotcha confirmed again:** firing parallel `ads_get_ad_entities` calls with identical params except `date_preset` still risks duplicated/incorrect results — all period pulls this session were run sequentially, consistent with the 27 Aug session's finding.
 
 Committed locally (not pushed) — see git log for the commit hash.
+
+## 11. Session update — 2026-09-05: full data refresh, all reporting tabs
+
+Refreshed every data-driven tab in `index.html` with real pulls via the Meta Ads MCP (account `704523148804803`), following the same disclosed-methodology pattern as every prior session. No fabricated numbers — every figure traces to a live MCP call or a real Ad Library search made this session.
+
+**Account state changed again since 2 Sep.** `Tsuchi_TOF` and `Retargeting_31AUG` have both flipped from ACTIVE to PAUSED. `New_Sales_Kage_31AUG` is now the account's only active campaign.
+
+**A previously-undocumented new ad was discovered**: inside the still-active `New_Sales_Kage_31AUG` campaign, the original ad (`KAGE_31AUG`) is now paused and a new ad named `TSUCHI` is running in its place — ₹1,997.75 spent (30d), 1 purchase, 1.40x ROAS, currently the account's only active ad with a purchase. Its name references the separate Tsuchi product line even though it sits inside a Kage-branded sales campaign; worth a manual check that it's pointed at the correct product/landing page. Its `ads_get_ad_preview` call returned only a rendered iframe with no extractable body/headline text this session, so it's honestly tagged "Not tagged" in Creatives rather than guessed.
+
+**Today (5 Sep) real numbers:** ₹894.88 spend, 6,312 impressions, 2.19% CTR, ₹141.77 CPM, 0 purchases — only `New_Sales_Kage_31AUG` has any delivery today.
+
+**Period totals refreshed (Dashboard tab), all verified via Meta Ads MCP:**
+- Last 7d (Aug 29–Sep 4): ₹6,894 spend, 3 purchases, ₹6,829 revenue, 0.99x ROAS.
+- Last 14d (Aug 23–Sep 5): ₹11,351 spend, 6 purchases, ₹14,800 revenue, 1.30x ROAS.
+- Last 30d (Aug 6–Sep 4): ₹23,100 spend, 16 purchases, ₹41,419 revenue, 1.79x ROAS (down from 1.89x on 2 Sep).
+- This month (Sep 1–5): ₹4,974 spend, 2 purchases, ₹3,530 revenue, 0.71x ROAS.
+
+Dropped from the campaign tables this session (rolled fully outside their attribution windows, 0 real spend): `KAGE_0208`, `KAGE_0208 - New web`, `ESSENTIALS_31072026`.
+
+**Opportunity Score: 86/100** (down from 88/100 on 2 Sep). Recommendations: three `reels_pc_recommendation` items (fullscreen vertical video w/ audio, +2/+1/+1 pts) on the three ads currently running, plus a `budget_limited` flag (+10 pts) on `New_Sales_Kage_31AUG`'s ad set.
+
+**Insights tab** — hourly, placement, device, age×gender, and daily-pacing (Aug 29–Sep 4) charts all rebuilt from real 30d/7d breakdowns pulled fresh this session, using account-level `ads_get_ad_entities` breakdowns (not campaign-level, since campaign-level doesn't support `actions`/`action_values`). Frequency-decay chart still NOT refreshed — same Meta Ads MCP limitation as every prior session.
+
+**Geography tab** — spend/impressions/CTR/CPM real for both 7d and 30d region breakdowns; revenue/ROAS/purchases/ATC/CO/LPV estimated using the same disclosed CTR-relative-to-account-average methodology as before. Confirmed again this session: region-level impressions/spend sums reconcile exactly to the account-level and campaign-level totals (a good consistency check), but Meta returns zero purchase attribution at region grain across the whole account for both windows.
+
+**Audience tab** — age/gender/device/platform_position purchases and ROAS are real Meta-attributed figures at that breakdown level (not estimated), pulled from account-level breakdowns. Noted for the first time explicitly: the four placement-level purchase counts sum to 17 against an account total of 16 purchases — a known Meta multi-touch attribution quirk (breakdowns aren't strictly additive), not a data error; flagged in the tab's `note` field.
+
+**Creatives tab** — rebuilt from real 30d ad-level data (not just campaign-level, where possible) via `ads_get_ad_entities` at `level: ad`. Split the former single `New_Sales_Kage_31AUG` entry into its two real underlying ads (`KAGE_31AUG` and the newly-found `TSUCHI`) now that the campaign runs two distinct creatives. Dropped 3 entries whose campaigns have zero real spend in the current 30d window.
+
+**Competitors tab** — fresh page_ids-scoped Meta Ad Library searches for both competitors. Gully Labs: 155 active ads (up from 101 on 2 Sep). Lotto Sport India: 89 active ads (up from 59 on 2 Sep). Both swings are consistent with the sampling-oscillation pattern already extensively documented across ~10 prior scrapes in `automation/queue.json` (AL-011 through AL-063) rather than confirmed real strategy shifts — flagged as such in both the competitor note and `COMP_VS`. Follower counts, formats, angles, and creator data are unchanged from the 2 Aug scrape and were not re-verified (same scope limit as every prior session).
+
+**Not refreshed this session:** `WEEKLY_TRENDS` (per-product weekly breakdown) — still ends at the Aug 18–24 week. The Automation tab (`automation/queue.json`) was out of scope for this refresh and untouched — see the automation activity log for its own separate, more recent history (last real run logged 2 Sep).
+
+**Gotcha confirmed again:** all period/breakdown pulls this session were run sequentially rather than in parallel, consistent with every prior session's finding about `ads_get_ad_entities` and `date_preset`.
+
+Committed locally (not pushed) — see git log for the commit hash.
