@@ -1486,18 +1486,21 @@ const DATA={
   ]}
 };
 
-// NOT extended in the 2026-09-02 session — per-product weekly breakdowns weren't pulled
-// this session (only campaign-level periods + account-level breakdowns were). Still ends
-// at the Aug 18-24 week; treat anything after that date as not represented here.
+// Extended 2026-09-05: added the Aug 25–31 and Sep 1–5 (partial, 6 days incl. today) weeks from a
+// campaign-level Meta Ads MCP pull (time_increment=7). Product = campaign-to-product mapping used
+// everywhere else on this dashboard. Kage Tee = Kage_TOF + Kage_sales_1908 + New_Sales_Kage_31AUG +
+// Retargeting_31AUG, spend-weighted CPM / impression-weighted CTR / revenue-over-spend ROAS.
+// Tsuchi line added (Tsuchi_TOF, first spend Sep 1–5). Earlier weeks unchanged from prior sessions.
 const WEEKLY_TRENDS={
-  weeks:['Jul 18–24','Jul 25–31','Aug 1–7','Aug 8–14','Aug 15–17','Aug 18–24'],
+  weeks:['Jul 18–24','Jul 25–31','Aug 1–7','Aug 8–14','Aug 15–17','Aug 18–24','Aug 25–31','Sep 1–5'],
   products:{
-    'Kage Tee':{cpm:[0,0,126.38,95.16,291.05,47.61],ctr:[0,0,2.38,1.87,3.20,2.21],roas:[0,0,11.59,2.51,5.31,1.47]},
-    'Essentials v2':{cpm:[58.43,148.04,0,0,0,0],ctr:[1.33,1.53,0,0,0,0],roas:[1.19,0,0,0,0,0]},
-    'Essentials v3':{cpm:[0,0,95.71,0,0,0],ctr:[0,0,1.28,0,0,0],roas:[0,0,0.44,0,0,0]},
-    'Bundle':{cpm:[117.37,0,0,0,0,0],ctr:[2.18,0,0,0,0,0],roas:[0.50,0,0,0,0,0]},
-    'Fudoshin':{cpm:[0,0,0,173.06,195.45,0],ctr:[0,0,0,1.04,1.88,0],roas:[0,0,0,0,0,0]},
-    'Kage Refresh':{cpm:[82.01,0,0,0,0,0],ctr:[2.28,0,0,0,0,0],roas:[0,0,0,0,0,0]}
+    'Kage Tee':{cpm:[0,0,126.38,95.16,291.05,47.61,46.52,124.28],ctr:[0,0,2.38,1.87,3.20,2.21,1.51,2.37],roas:[0,0,11.59,2.51,5.31,1.47,1.09,0.68]},
+    'Tsuchi':{cpm:[0,0,0,0,0,0,0,7.58],ctr:[0,0,0,0,0,0,0,1.58],roas:[0,0,0,0,0,0,0,0]},
+    'Essentials v2':{cpm:[58.43,148.04,0,0,0,0,0,0],ctr:[1.33,1.53,0,0,0,0,0,0],roas:[1.19,0,0,0,0,0,0,0]},
+    'Essentials v3':{cpm:[0,0,95.71,0,0,0,0,0],ctr:[0,0,1.28,0,0,0,0,0],roas:[0,0,0.44,0,0,0,0,0]},
+    'Bundle':{cpm:[117.37,0,0,0,0,0,0,0],ctr:[2.18,0,0,0,0,0,0,0],roas:[0.50,0,0,0,0,0,0,0]},
+    'Fudoshin':{cpm:[0,0,0,173.06,195.45,0,0,0],ctr:[0,0,0,1.04,1.88,0,0,0],roas:[0,0,0,0,0,0,0,0]},
+    'Kage Refresh':{cpm:[82.01,0,0,0,0,0,0,0],ctr:[2.28,0,0,0,0,0,0,0],roas:[0,0,0,0,0,0,0,0]}
   }
 };
 
@@ -1772,7 +1775,23 @@ function renderCampTable(){
 }
 
 function renderHistory(){
+  // Jun 8 onward: pulled 2026-09-05 via Meta Ads MCP (account-level, time_increment=7, Mon\u2013Sun
+  // buckets). Revenue = spend \u00d7 purchase_roas as returned by Meta; purchases = omni_purchase.
+  // Top row is a partial week (Mon Aug 31 \u2013 Sat Sep 5, 6 days, includes today).
   const rows=[
+    {p:'Aug 31\u2013Sep 5 (6 days)',spend:6900,rev:3530,roas:0.51,pur:2,cpm:70.49,freq:1.41,note:'Partial week \u2014 only New_Sales_Kage_31AUG active from Sep 4'},
+    {p:'Aug 24\u201330',spend:5029,rev:6103,roas:1.21,pur:2,cpm:41.38,freq:1.18},
+    {p:'Aug 17\u201323',spend:3509,rev:5167,roas:1.47,pur:2,cpm:47.61,freq:1.21},
+    {p:'Aug 10\u201316',spend:5373,rev:7831,roas:1.46,pur:3,cpm:22.91,freq:5.05,note:'Kage_Traffic Campaign drove 5x frequency'},
+    {p:'Aug 3\u20139',spend:4846,rev:19514,roas:4.03,pur:8,cpm:30.23,freq:1.78},
+    {p:'Jul 27\u2013Aug 2',spend:2266,rev:809,roas:0.36,pur:1,cpm:107.65,freq:1.77},
+    {p:'Jul 20\u201326',spend:2549,rev:11489,roas:4.51,pur:6,cpm:78.71,freq:1.69},
+    {p:'Jul 13\u201319',spend:4167,rev:4324,roas:1.04,pur:3,cpm:78.61,freq:1.69},
+    {p:'Jul 6\u201312',spend:3884,rev:6817,roas:1.75,pur:5,cpm:30.49,freq:1.16},
+    {p:'Jun 29\u2013Jul 5',spend:4661,rev:26028,roas:5.58,pur:8,cpm:11.87,freq:1.14},
+    {p:'Jun 22\u201328',spend:3863,rev:9972,roas:2.58,pur:9,cpm:66.90,freq:1.74},
+    {p:'Jun 15\u201321',spend:4737,rev:22856,roas:4.82,pur:22,cpm:72.58,freq:1.63},
+    {p:'Jun 8\u201314',spend:7583,rev:27156,roas:3.58,pur:15,cpm:91.55,freq:1.71},
     {p:'Jun 1\u20137',spend:9788,rev:42813,roas:4.37,pur:27,cpm:42.6,freq:1.74,note:'Mori paused mid-week'},
     {p:'May 25\u201331',spend:11885,rev:48067,roas:4.04,pur:36,cpm:38.5,freq:1.7},
     {p:'May 18\u201324',spend:10115,rev:55700,roas:5.51,pur:42,cpm:40.6,freq:1.6},
@@ -1820,12 +1839,13 @@ document.getElementById('camp-modal').addEventListener('click',function(e){if(e.
 // ── Products ───────────────────────────────────────────────────────────────────
 function renderProducts(){
   const prods=Object.keys(WEEKLY_TRENDS.products);const wks=WEEKLY_TRENDS.weeks;
-  const colors={'Kage Tee':'#b85c00','Essentials v2':'#c0392b','Essentials v3':'#c2185b','Bundle':'#1e7a45','Fudoshin':'#0e7c86','Kage Refresh':'#1a6bb5'};
+  const colors={'Kage Tee':'#b85c00','Tsuchi':'#c97a18','Essentials v2':'#c0392b','Essentials v3':'#c2185b','Bundle':'#1e7a45','Fudoshin':'#0e7c86','Kage Refresh':'#1a6bb5'};
   mkChart('ch-prod-cpm','line',wks,prods.map(p=>({label:p,data:WEEKLY_TRENDS.products[p].cpm,borderColor:colors[p],backgroundColor:colors[p]+'20',fill:false,tension:.4,pointRadius:4,borderWidth:2})),{plugins:{legend:{display:true}},scales:{y:{ticks:{callback:function(v){return '\u20b9'+v},color:'#666',font:{family:'DM Mono',size:10}},grid:{color:'#f0f0f0'}},x:{grid:{color:'#f0f0f0'},ticks:{color:'#666',font:{family:'DM Mono',size:10}}}}});
   mkChart('ch-prod-ctr','line',wks,prods.map(p=>({label:p,data:WEEKLY_TRENDS.products[p].ctr,borderColor:colors[p],backgroundColor:colors[p]+'20',fill:false,tension:.4,pointRadius:4,borderWidth:2})),{plugins:{legend:{display:true}},scales:{y:{ticks:{callback:function(v){return v+'%'},color:'#666',font:{family:'DM Mono',size:10}},grid:{color:'#f0f0f0'}},x:{grid:{color:'#f0f0f0'},ticks:{color:'#666',font:{family:'DM Mono',size:10}}}}});
-  const lastRoas=prods.map(p=>{const d=WEEKLY_TRENDS.products[p].roas;return d.find(v=>v>0)||0;});
+  // "latest" = most recent week with ROAS > 0 (was previously picking the EARLIEST non-zero week).
+  const lastRoas=prods.map(p=>{const d=WEEKLY_TRENDS.products[p].roas;return [...d].reverse().find(v=>v>0)||0;});
   mkChart('ch-prod-roas','bar',prods,[{data:lastRoas,backgroundColor:lastRoas.map(r=>roasColor(r)),borderWidth:0}],{plugins:{legend:{display:false}},scales:{y:{ticks:{callback:function(v){return v+'x'},color:'#666',font:{family:'DM Mono',size:10}},grid:{color:'#f0f0f0'}},x:{grid:{color:'#f0f0f0'},ticks:{color:'#666',font:{family:'DM Mono',size:10}}}}});
-  var pfd={'Kage Tee':{lpv:3581,atc:55,co:112,pur:12},'Essentials v2':{lpv:59,atc:2,co:8,pur:0},'Essentials v3':{lpv:186,atc:13,co:8,pur:1},'Bundle':{lpv:0,atc:0,co:0,pur:0},'Fudoshin':{lpv:42,atc:6,co:15,pur:0},'Kage Refresh':{lpv:0,atc:0,co:0,pur:0}};
+  var pfd={'Kage Tee':{lpv:3581,atc:55,co:112,pur:12},'Tsuchi':{lpv:350,atc:0,co:1,pur:0},'Essentials v2':{lpv:59,atc:2,co:8,pur:0},'Essentials v3':{lpv:186,atc:13,co:8,pur:1},'Bundle':{lpv:0,atc:0,co:0,pur:0},'Fudoshin':{lpv:42,atc:6,co:15,pur:0},'Kage Refresh':{lpv:0,atc:0,co:0,pur:0}};
   var fb=document.getElementById('product-funnels');
   if(fb)fb.innerHTML=prods.map(p=>{
     var d=pfd[p];var atcR=d.lpv>0?PCT(d.atc/d.lpv*100):'N/A';var coR=d.atc>0?PCT(d.co/d.atc*100):'N/A';var purR=d.co>0?PCT(d.pur/d.co*100):'N/A';

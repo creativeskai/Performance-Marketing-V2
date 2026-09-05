@@ -177,3 +177,17 @@ Dropped from the campaign tables this session (rolled fully outside their attrib
 **Gotcha confirmed again:** all period/breakdown pulls this session were run sequentially rather than in parallel, consistent with every prior session's finding about `ads_get_ad_entities` and `date_preset`.
 
 Committed locally (not pushed) — see git log for the commit hash.
+
+## 12. Session update — 2026-09-05 (evening): weekly spend history + per-product weekly trends
+
+User flagged that the "week spends" were not updated in the morning refresh. Correct — two weekly datasets were skipped:
+
+**Weekly history table (Dashboard tab, `renderHistory`)** — was stuck at the Jun 1–7 week, three months stale. Added 13 real weeks (Jun 8–14 through Aug 31–Sep 5) from an account-level `ads_get_ad_entities` pull with `time_range` Jun 8–Sep 5 and `time_increment: "7"` (Mon–Sun buckets, matching the pre-existing rows). Revenue = spend × Meta's `purchase_roas`; purchases = `omni_purchase`. Top row (Aug 31–Sep 5) is a 6-day partial week and is labelled as such. Notable: Aug 10–16 shows 5.05x account frequency (Kage_Traffic Campaign), and the last four weeks have all been at or below 1.5x ROAS with the current partial week at 0.51x.
+
+**`WEEKLY_TRENDS` (Products tab)** — was stuck at Aug 18–24. Added Aug 25–31 and Sep 1–5 from a campaign-level pull with `time_increment: "7"`, aggregated to product (Kage Tee = Kage_TOF + Kage_sales_1908 + New_Sales_Kage_31AUG + Retargeting_31AUG; spend-weighted CPM, impression-weighted CTR, revenue/spend ROAS). Added a `Tsuchi` product line (Tsuchi_TOF, first spend Sep 1–5), with matching entries in the colour map and product funnel data.
+
+**Bug fixed while here:** the "ROAS by product (latest)" chart used `Array.find`, which returned the *earliest* non-zero week (Kage Tee showed 11.59x from Aug 1–7). Now takes the most recent non-zero week.
+
+**Automation status check (user asked why it "is not working"):** it is running — 2-hourly commits to `automation/queue.json` are landing on `origin/main` (10:48, 12:52, 14:48, 16:50 UTC today); the local clone had simply not pulled them. What it is *not* doing: every scheduled run since 2 Sep has been an explicitly read-only pass (see AL-095 onward: "no Meta Ads MCP write/mutation tool calls were made, regardless of any module's tier"), so `auto`-tier modules never execute and `log` has had only 3 entries since Sep 1. There are 9 pending approval-tier proposals (A-001 through A-011, oldest from Aug 27) that nobody has approved or rejected. The routine also never touches `index.html`, so dashboard tabs only refresh when a chat session does it.
+
+**Gotcha:** the two `time_increment` pulls this session were fired in parallel (different `level` and `time_range`) and came back correct — the earlier duplication issue seems specific to identical params differing only by `date_preset`.
