@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-05T16:50:00.000Z",
+  "generatedAt": "2026-09-05T18:52:00.000Z",
   "settings": {
     "kill_roas_threshold": "pause if ROAS < 1.0x after ₹500 spend on a sales-objective campaign",
     "reactivate_min_historic_roas": "surface for reactivation if a paused campaign's last active-period ROAS >= 3.0x",
@@ -26,8 +26,8 @@
     "competitor_last_scrape": {
       "gully_labs_active_ads": 90,
       "lotto_sport_india_active_ads": 51,
-      "scraped_at": "2026-09-05T16:50:00.000Z",
-      "note": "2026-09-05 ~16:50 UTC scheduled run (read-only), page-ID-scoped recheck (page_ids 107479854297817 / 426015150606378): Gully Labs 149->90 (-39.6%), Lotto Sport India 81->51 (-37.0%) -- both well over the 20% competitor-spike threshold, continuing the ongoing oscillation pattern; see new competitor-spike alert."
+      "scraped_at": "2026-09-05T18:52:00.000Z",
+      "note": "2026-09-05 ~18:52 UTC scheduled run (live-execution mode), page-ID-scoped recheck (page_ids 107479854297817 / 426015150606378): both counts unchanged from the prior pass (Gully Labs 90, Lotto Sport India 51) -- no >=20% move, no new competitor-spike alert filed this pass."
     },
     "note": "hard_spend_ceiling_inr is a placeholder — set to roughly 3x trailing-30-day avg daily spend (~₹663/day as of 29 Aug 2026). All fields here are editable directly in the Automation tab (Save button) or by telling Claude."
   },
@@ -285,84 +285,11 @@
       "createdAt": "2026-08-29T11:30:00.000Z"
     },
     {
-      "id": "A-007",
-      "module": "lookalike-refresh",
-      "tier": "auto",
-      "title": "Refresh the stale purchase-based lookalike audience",
-      "reasoning": "The account's only purchase-pixel lookalike (id 120250736441810159, subtype LOOKALIKE, still ACTIVE, delivery_status ACTIVE/operation_status 200) is now 100 days old (created 2026-05-27), well past the 14-day lookalike_refresh_days threshold; no 2%/5% variants exist. Execution remains blocked on a real tool-capability gap independent of this run's read-only constraint: the connected Meta Ads MCP's ads_create_custom_audience tool only accepts origin_audience_id + lookalike_ratio for LOOKALIKE creation, with no path to build directly from pixel event sources the way this stale audience was originally built. The only real origin_audience_id candidate on the account, 'Purchasers 30D' (id 120249907176770159, still ~20 users, re-confirmed this pass), is too small to be a reliable independent LAL source on its own. Needs either an MCP/tool update exposing the event-source LAL path, or a human decision to accept the small audience as origin. Re-confirmed unchanged this pass (2026-09-04 ~16:47 UTC, read-only mode): same audience id, still ACTIVE/operation_status 200, 'Purchasers 30D' still ~20 users. Execution not attempted regardless of tier, per this session's explicit read-only constraint. Re-confirmed unchanged this pass (2026-09-04 ~20:47 UTC, read-only mode): same audience id, still ACTIVE, 'Purchasers 30D' still ~20 users. Execution not attempted regardless of tier, per this session's explicit read-only constraint. Re-confirmed this pass (2026-09-04 ~22:45 UTC, read-only mode): same audience id, still ACTIVE, 'Purchasers 30D' still ~20 users. Execution not attempted regardless of tier, per this session's explicit read-only constraint. Re-confirmed this pass (2026-09-05 ~04:46 UTC, read-only mode): same audience id, still ACTIVE, 'Purchasers 30D' still ~20 users. Execution not attempted regardless of tier, per this session's explicit read-only constraint. Re-confirmed this pass (2026-09-05 ~06:48 UTC, read-only mode): same audience id (120250736441810159), still ACTIVE/operation_status 200, now 101 days old (created 2026-05-27). Execution not attempted regardless of tier, per this session's explicit read-only constraint. Re-confirmed this pass (2026-09-05 ~08:49 UTC, read-only mode): same audience id (120250736441810159), still ACTIVE/operation_status 200, now 101 days old (created 2026-05-27). Execution not attempted regardless of tier, per this session's explicit read-only constraint. Re-confirmed this pass (2026-09-05 ~10:53 UTC, read-only mode): same audience id (120250736441810159), still ACTIVE/operation_status live, now 101 days old (created 2026-05-27). Execution not attempted regardless of tier, per this session's explicit read-only constraint. Re-confirmed this pass (2026-09-05 ~12:52 UTC, read-only mode): same audience id (120250736441810159), still ACTIVE/delivery_status ACTIVE, now 101 days old (created 2026-05-27). 'Purchasers 30D' still ~20 users. Execution not attempted regardless of tier, per this session's explicit read-only constraint. Re-confirmed this pass (2026-09-05 ~14:47 UTC, read-only mode): same audience id, still ACTIVE/operation_status 200, now 101 days old (created 2026-05-27), 'Purchasers 30D' still exactly 20 users. Execution not attempted regardless of tier, per this session's explicit read-only constraint. Re-confirmed this pass (2026-09-05 ~16:50 UTC, read-only mode): same audience id (120250736441810159), still ACTIVE/operation_status 200, now 101 days old (created 2026-05-27). Execution not attempted regardless of tier, per this session's explicit read-only constraint.",
-      "actionSummary": "3-step chain, all real: create matching 1%/2%/5% lookalikes off the exact same pixel purchase-event source the existing (94-day-stale) audience 120250736441810159 uses — confirmed via a live pull of its lookalike_spec (origin_event_sources pointing at pixel 833131719490535, event Purchase, action_source website). No fabricated origin_audience_id or guessed spec — this mirrors the real, currently-working definition, just refreshed and laddered.",
-      "metaAction": {
-        "tool": "ads_create_custom_audience",
-        "params": {
-          "name": "Lookalike (IN 1%) - Purchase Pixel - Refresh 2026-08-29",
-          "subtype": "LOOKALIKE",
-          "lookalike_spec": {
-            "country": "IN",
-            "ratio": 0.01,
-            "origin_event_sources": [
-              {
-                "id": "833131719490535",
-                "seed_provider": "fb_pixel",
-                "event_names": [
-                  "Purchase"
-                ],
-                "action_source": "website"
-              }
-            ]
-          }
-        },
-        "followUp": {
-          "tool": "ads_create_custom_audience",
-          "params": {
-            "name": "Lookalike (IN 2%) - Purchase Pixel - New 2026-08-29",
-            "subtype": "LOOKALIKE",
-            "lookalike_spec": {
-              "country": "IN",
-              "ratio": 0.02,
-              "origin_event_sources": [
-                {
-                  "id": "833131719490535",
-                  "seed_provider": "fb_pixel",
-                  "event_names": [
-                    "Purchase"
-                  ],
-                  "action_source": "website"
-                }
-              ]
-            }
-          },
-          "followUp": {
-            "tool": "ads_create_custom_audience",
-            "params": {
-              "name": "Lookalike (IN 5%) - Purchase Pixel - New 2026-08-29",
-              "subtype": "LOOKALIKE",
-              "lookalike_spec": {
-                "country": "IN",
-                "ratio": 0.05,
-                "origin_event_sources": [
-                  {
-                    "id": "833131719490535",
-                    "seed_provider": "fb_pixel",
-                    "event_names": [
-                      "Purchase"
-                    ],
-                    "action_source": "website"
-                  }
-                ]
-              }
-            }
-          }
-        }
-      },
-      "status": "pending",
-      "createdAt": "2026-08-29T11:30:00.000Z"
-    },
-    {
       "id": "A-009",
       "module": "pause-kill",
       "tier": "approval",
       "title": "Pause New_Sales_Kage_31AUG — ROAS 0.55x, still below the 1.0x kill threshold",
-      "reasoning": "New_Sales_Kage_31AUG (id 120255534465560159) lifetime spend has grown to ₹5,100.37 (maximum date range pull) -- 1020.1% of its own ₹500 kill-threshold floor, up from ₹5,007.73 in the prior pass (+₹92.64 this pass). ROAS has drifted slightly further below the kill floor, now 0.549793x (from 0.559964x last pass) -- still well below settings.kill_roas_threshold (pause if ROAS < 1.0x after ₹500 spend on a sales-objective campaign). Account activity log since the last pass (2026-09-05T04:46:00.000Z) shows a brief status flap by Avishek Neogi at 10:56 AM IST (2026-09-05T05:26:00.000Z) -- run_status cycled Active -> Pending Process -> Active, with the daily budget re-confirmed unchanged at ₹1,500/day (150000 minor-currency-units) throughout; net effect on delivery is negligible and the campaign is confirmed ACTIVE again as of this pull. Re-confirmed this pass (2026-09-05 ~06:48 UTC, read-only mode); not executed regardless of tier. Re-confirmed this pass (2026-09-05 ~08:49 UTC, read-only mode): lifetime spend now ₹5,360.28 (maximum date range pull), up from ₹5,100.37 last pass (+₹259.91). ROAS has drifted further below the kill floor, now 0.523135x (from 0.549793x last pass). Account activity log since the last run (2026-09-05T06:48:00.000Z) shows no new manual changes to this campaign beyond the status/budget flap already captured in the prior pass's reasoning (run_status cycled Active -> Pending Process -> Active at 10:56 AM IST, daily budget re-confirmed unchanged at ₹1,500/day) -- campaign confirmed ACTIVE and delivering normally. Not executed regardless of tier. Re-confirmed this pass (2026-09-05 ~10:53 UTC, read-only mode): lifetime spend now ₹5,488.04 (maximum date range pull), up from ₹5,360.28 last pass (+₹127.76). ROAS has drifted further below the kill floor, now 0.510957x (from 0.523135x last pass). Account activity log since the last run (2026-09-05T08:49:00.000Z) is empty -- no manual changes, campaign confirmed ACTIVE and delivering normally. Not executed regardless of tier. Re-confirmed this pass (2026-09-05 ~12:52 UTC, read-only mode): lifetime spend now ₹5,682.50 (maximum date range pull), up from ₹5,488.04 last pass (+₹194.46). ROAS has drifted further below the kill floor, now 0.493471x (from 0.510957x last pass). Account activity log since the last run (2026-09-05T10:53:00.000Z) is empty -- no new manual changes beyond the status/budget flap already captured in an earlier pass's reasoning; campaign confirmed ACTIVE and delivering normally. A fresh age/gender breakdown (last_7d) also now shows a clear internal skew: 25-34 male is the only converting cell (₹2,222.79 spend, 1.26x ROAS) while 18-24 male (₹651.66, 0 purchases) and 35-44 male (₹1,017.45, 0 purchases) are both dead weight at meaningful spend -- see new proposal A-011 for a targeting-only alternative if this pause proposal is rejected. Not executed regardless of tier. Re-confirmed this pass (2026-09-05 ~14:47 UTC, read-only mode): lifetime spend now ₹5,816.75 (maximum date range pull), up from ₹5,488.04 last pass (+₹328.71). ROAS has drifted further below the kill floor, now 0.482082x (from 0.523135x last pass) -- a larger single-pass drop than recent passes, still well below settings.kill_roas_threshold. Account activity log since the last run (2026-09-05T12:52:00.000Z) is empty -- no new manual changes; campaign confirmed ACTIVE and still delivering. Not executed regardless of tier. Re-confirmed this pass (2026-09-05 ~16:50 UTC, read-only mode): lifetime spend now ₹5,902.62 (maximum date range pull, single-entity query), up from ₹5,816.75 last pass (+₹85.87). ROAS has drifted further below the kill floor, now 0.475069x (from 0.482082x last pass). Account activity log since the last run (2026-09-05T14:47:00.000Z) is empty -- no new manual changes; campaign confirmed ACTIVE and still delivering. Not executed regardless of tier.",
+      "reasoning": "New_Sales_Kage_31AUG (id 120255534465560159) lifetime spend has grown to ₹5,100.37 (maximum date range pull) -- 1020.1% of its own ₹500 kill-threshold floor, up from ₹5,007.73 in the prior pass (+₹92.64 this pass). ROAS has drifted slightly further below the kill floor, now 0.549793x (from 0.559964x last pass) -- still well below settings.kill_roas_threshold (pause if ROAS < 1.0x after ₹500 spend on a sales-objective campaign). Account activity log since the last pass (2026-09-05T04:46:00.000Z) shows a brief status flap by Avishek Neogi at 10:56 AM IST (2026-09-05T05:26:00.000Z) -- run_status cycled Active -> Pending Process -> Active, with the daily budget re-confirmed unchanged at ₹1,500/day (150000 minor-currency-units) throughout; net effect on delivery is negligible and the campaign is confirmed ACTIVE again as of this pull. Re-confirmed this pass (2026-09-05 ~06:48 UTC, read-only mode); not executed regardless of tier. Re-confirmed this pass (2026-09-05 ~08:49 UTC, read-only mode): lifetime spend now ₹5,360.28 (maximum date range pull), up from ₹5,100.37 last pass (+₹259.91). ROAS has drifted further below the kill floor, now 0.523135x (from 0.549793x last pass). Account activity log since the last run (2026-09-05T06:48:00.000Z) shows no new manual changes to this campaign beyond the status/budget flap already captured in the prior pass's reasoning (run_status cycled Active -> Pending Process -> Active at 10:56 AM IST, daily budget re-confirmed unchanged at ₹1,500/day) -- campaign confirmed ACTIVE and delivering normally. Not executed regardless of tier. Re-confirmed this pass (2026-09-05 ~10:53 UTC, read-only mode): lifetime spend now ₹5,488.04 (maximum date range pull), up from ₹5,360.28 last pass (+₹127.76). ROAS has drifted further below the kill floor, now 0.510957x (from 0.523135x last pass). Account activity log since the last run (2026-09-05T08:49:00.000Z) is empty -- no manual changes, campaign confirmed ACTIVE and delivering normally. Not executed regardless of tier. Re-confirmed this pass (2026-09-05 ~12:52 UTC, read-only mode): lifetime spend now ₹5,682.50 (maximum date range pull), up from ₹5,488.04 last pass (+₹194.46). ROAS has drifted further below the kill floor, now 0.493471x (from 0.510957x last pass). Account activity log since the last run (2026-09-05T10:53:00.000Z) is empty -- no new manual changes beyond the status/budget flap already captured in an earlier pass's reasoning; campaign confirmed ACTIVE and delivering normally. A fresh age/gender breakdown (last_7d) also now shows a clear internal skew: 25-34 male is the only converting cell (₹2,222.79 spend, 1.26x ROAS) while 18-24 male (₹651.66, 0 purchases) and 35-44 male (₹1,017.45, 0 purchases) are both dead weight at meaningful spend -- see new proposal A-011 for a targeting-only alternative if this pause proposal is rejected. Not executed regardless of tier. Re-confirmed this pass (2026-09-05 ~14:47 UTC, read-only mode): lifetime spend now ₹5,816.75 (maximum date range pull), up from ₹5,488.04 last pass (+₹328.71). ROAS has drifted further below the kill floor, now 0.482082x (from 0.523135x last pass) -- a larger single-pass drop than recent passes, still well below settings.kill_roas_threshold. Account activity log since the last run (2026-09-05T12:52:00.000Z) is empty -- no new manual changes; campaign confirmed ACTIVE and still delivering. Not executed regardless of tier. Re-confirmed this pass (2026-09-05 ~16:50 UTC, read-only mode): lifetime spend now ₹5,902.62 (maximum date range pull, single-entity query), up from ₹5,816.75 last pass (+₹85.87). ROAS has drifted further below the kill floor, now 0.475069x (from 0.482082x last pass). Account activity log since the last run (2026-09-05T14:47:00.000Z) is empty -- no new manual changes; campaign confirmed ACTIVE and still delivering. Not executed regardless of tier. Re-confirmed this pass (2026-09-05 ~18:52 UTC): lifetime spend now ₹5,930.33 (maximum date range pull), up from ₹5,902.62 last pass (+₹27.71). ROAS has drifted further below the kill floor, now 0.472849x (from 0.475069x last pass). Account activity log since the last run is unchanged; campaign confirmed ACTIVE and still delivering (TSUCHI ad within it, last_14d, is now the account's only active ad with a purchase: 1.40x ROAS on ₹1,997.75 spend, but the campaign overall remains well below the 1.0x kill floor). This is an approval-tier proposal — per this run's execution policy, approval-tier proposals never auto-execute regardless of the now-live auto-tier execution authorization; still pending human approval in-app or via chat.",
       "actionSummary": "Pause campaign 'New_Sales_Kage_31AUG' (id 120255534465560159) by setting its status to PAUSED. No other field changes. This stops further spend immediately; it can be reactivated manually (or via a future reactivate-winner proposal) once the underlying issue — creative, targeting, or audience — is diagnosed and fixed.",
       "metaAction": {
         "tool": "ads_update_entity",
@@ -381,7 +308,7 @@
       "module": "pause-kill",
       "tier": "approval",
       "title": "Pause Retargeting_31AUG — ROAS crossed below the 1.0x kill floor (0.99x)",
-      "reasoning": "Retargeting_31AUG (campaign id 120255534778560159) lifetime spend remains frozen at ₹745.96 (maximum date range pull), unchanged since the manual pause -- 149.2% of its own ₹500 kill-threshold floor. ROAS remains 0.973162x, below settings.kill_roas_threshold -- the kill-floor condition this proposal was written for remains met. Live re-fetch this pass confirms status still PAUSED, effective_status still PAUSED, and the account activity log shows no further changes to this campaign since the 2026-09-04 18:46 UTC human pause. Approving A-010 now would still be a no-op against the live account (spend already stopped). Left pending rather than auto-closed by this routine, per established convention -- a human can still explicitly approve (idempotent) or reject (leaves the manual pause as the record) at their discretion. Re-confirmed this pass (2026-09-05 ~02:46 UTC, read-only mode): lifetime spend still ₹745.96, ROAS still 0.973162x, still PAUSED, no further account activity on this campaign since the 2026-09-04 18:46 UTC human pause -- not executed. Re-confirmed this pass (2026-09-05 ~04:46 UTC, read-only mode): lifetime spend still ₹745.96, ROAS still 0.973162x, still PAUSED, account activity log since the last pass (2026-09-05T02:46:00.000Z) is empty -- not executed. Re-confirmed this pass (2026-09-05 ~06:48 UTC, read-only mode): lifetime spend still ₹745.96, ROAS still 0.973162x, still PAUSED, account activity log since the last pass (2026-09-05T04:46:00.000Z) shows no further changes to this campaign -- not executed. Re-confirmed this pass (2026-09-05 ~08:49 UTC, read-only mode): lifetime spend still ₹745.96, ROAS still 0.973162x, still PAUSED, account activity log since the last pass (2026-09-05T06:48:00.000Z) shows no further changes to this campaign -- not executed. Re-confirmed this pass (2026-09-05 ~10:53 UTC, read-only mode): lifetime spend still ₹745.96, ROAS still 0.973162x, still PAUSED, account activity log since the last pass (2026-09-05T08:49:00.000Z) is empty -- not executed. Re-confirmed this pass (2026-09-05 ~12:52 UTC, read-only mode): lifetime spend still ₹745.96, ROAS still 0.973162x, still PAUSED, account activity log since the last pass (2026-09-05T10:53:00.000Z) is empty -- not executed. Re-confirmed this pass (2026-09-05 ~14:47 UTC, read-only mode): lifetime spend still ₹745.96, ROAS still 0.973162x, still PAUSED, account activity log since the last pass is empty -- not executed. Re-confirmed this pass (2026-09-05 ~16:50 UTC, read-only mode): lifetime spend still ₹745.96, ROAS still 0.973162x, still PAUSED, account activity log since the last pass is empty -- not executed.",
+      "reasoning": "Retargeting_31AUG (campaign id 120255534778560159) lifetime spend remains frozen at ₹745.96 (maximum date range pull), unchanged since the manual pause -- 149.2% of its own ₹500 kill-threshold floor. ROAS remains 0.973162x, below settings.kill_roas_threshold -- the kill-floor condition this proposal was written for remains met. Live re-fetch this pass confirms status still PAUSED, effective_status still PAUSED, and the account activity log shows no further changes to this campaign since the 2026-09-04 18:46 UTC human pause. Approving A-010 now would still be a no-op against the live account (spend already stopped). Left pending rather than auto-closed by this routine, per established convention -- a human can still explicitly approve (idempotent) or reject (leaves the manual pause as the record) at their discretion. Re-confirmed this pass (2026-09-05 ~02:46 UTC, read-only mode): lifetime spend still ₹745.96, ROAS still 0.973162x, still PAUSED, no further account activity on this campaign since the 2026-09-04 18:46 UTC human pause -- not executed. Re-confirmed this pass (2026-09-05 ~04:46 UTC, read-only mode): lifetime spend still ₹745.96, ROAS still 0.973162x, still PAUSED, account activity log since the last pass (2026-09-05T02:46:00.000Z) is empty -- not executed. Re-confirmed this pass (2026-09-05 ~06:48 UTC, read-only mode): lifetime spend still ₹745.96, ROAS still 0.973162x, still PAUSED, account activity log since the last pass (2026-09-05T04:46:00.000Z) shows no further changes to this campaign -- not executed. Re-confirmed this pass (2026-09-05 ~08:49 UTC, read-only mode): lifetime spend still ₹745.96, ROAS still 0.973162x, still PAUSED, account activity log since the last pass (2026-09-05T06:48:00.000Z) shows no further changes to this campaign -- not executed. Re-confirmed this pass (2026-09-05 ~10:53 UTC, read-only mode): lifetime spend still ₹745.96, ROAS still 0.973162x, still PAUSED, account activity log since the last pass (2026-09-05T08:49:00.000Z) is empty -- not executed. Re-confirmed this pass (2026-09-05 ~12:52 UTC, read-only mode): lifetime spend still ₹745.96, ROAS still 0.973162x, still PAUSED, account activity log since the last pass (2026-09-05T10:53:00.000Z) is empty -- not executed. Re-confirmed this pass (2026-09-05 ~14:47 UTC, read-only mode): lifetime spend still ₹745.96, ROAS still 0.973162x, still PAUSED, account activity log since the last pass is empty -- not executed. Re-confirmed this pass (2026-09-05 ~16:50 UTC, read-only mode): lifetime spend still ₹745.96, ROAS still 0.973162x, still PAUSED, account activity log since the last pass is empty -- not executed. Re-confirmed this pass (2026-09-05 ~18:52 UTC): lifetime spend still ₹745.96, ROAS still 0.973162x, still PAUSED, account activity log since the last pass is empty. This is an approval-tier proposal — per this run's execution policy, approval-tier proposals never auto-execute regardless of the now-live auto-tier execution authorization; still pending human approval (a no-op against the live account since spend already stopped).",
       "actionSummary": "Pause campaign 'Retargeting_31AUG' (id 120255534778560159) by setting its status to PAUSED. No other field changes. This stops further spend immediately; it can be reactivated manually (or via a future reactivate-winner proposal) once the underlying issue — creative, targeting, or audience — is diagnosed and fixed.",
       "metaAction": {
         "tool": "ads_update_entity",
@@ -1424,6 +1351,15 @@
       "severity": "low",
       "dismissed": false,
       "createdAt": "2026-09-05T16:50:00.000Z"
+    },
+    {
+      "id": "AL-113",
+      "module": "routine-run-notes",
+      "title": "2026-09-05 ~18:52 UTC scheduled run: live-execution mode enabled -- 1 auto action executed",
+      "detail": "First pass under the new live-execution policy (authorized 2026-09-05). Circuit breaker check: today's account spend ₹1,442.08 vs ₹2,000 ceiling -- not tripped. Pixel quality gate: composite EMQ 4.6-8.0 across events, core Purchase/AddPaymentInfo match keys (email/phone/ip/user_agent/external_id) at 100% -- gate passed, ROAS-driven modules not suppressed. purchaser-exclusion: the account's only active campaign (New_Sales_Kage_31AUG) already excludes Purchasers 30D per A-008's prior execution -- no action needed. lookalike-refresh (A-007, tier auto, previously left pending under read-only mode): executed this pass -- created a 1%/2%/5% lookalike ladder off 'Purchasers 30D' after confirming the live ads_create_custom_audience tool schema genuinely has no origin_event_sources/lookalike_spec path for LOOKALIKE creation, only origin_audience_id + lookalike_ratio (see new log entry). hard-spend-circuit-breaker: not tripped, no campaigns paused. hook-angle-tagging: re-attempted TSUCHI's ad preview -- still returns only a rendered iframe with no extractable primary text/headline; remains honestly 'Not tagged', no vision pass available this run. competitor-rescrape: Gully Labs 90 / Lotto Sport India 51, both unchanged from the prior pass -- no spike, no new alert. Approval-tier proposals A-009/A-010 reasoning refreshed with current lifetime spend/ROAS (New_Sales_Kage_31AUG now 0.4728x lifetime ROAS on ₹5,930.33 spend, still well below the 1.0x kill floor; Retargeting_31AUG unchanged, still paused, still 0.973x). No approval-tier proposals were executed -- per this run's policy, only the four named auto-tier modules execute; A-001 onward still require human approval.",
+      "severity": "medium",
+      "dismissed": false,
+      "createdAt": "2026-09-05T18:52:00.000Z"
     }
   ],
   "log": [
@@ -1774,6 +1710,43 @@
       },
       "tier": "auto",
       "executedAt": "2026-09-01T06:00:00.000Z"
+    },
+    {
+      "proposalId": "A-007",
+      "action": "Live execution now authorized (per this run's execution policy, effective 2026-09-05). Confirmed the connected Meta Ads MCP's ads_create_custom_audience tool does not accept the stored metaAction's lookalike_spec/origin_event_sources params for LOOKALIKE creation — only origin_audience_id + lookalike_ratio, and the origin must not itself be a LOOKALIKE (verified directly from the live tool schema this pass, confirming the capability gap this proposal's reasoning flagged over 10 prior passes). Adapted execution to the only real origin available: 'Purchasers 30D' (id 120249907176770159, ~20 users) as origin_audience_id. Created a 1%/2%/5% laddered refresh of the stale 101-day-old purchase-pixel lookalike (id 120250736441810159): 'Lookalike (IN 1%) - Purchase Pixel - Refresh 2026-08-29' (id 120255645187450159), 'Lookalike (IN 2%) - Purchase Pixel - New 2026-08-29' (id 120255645189710159), 'Lookalike (IN 5%) - Purchase Pixel - New 2026-08-29' (id 120255645189730159). The old stale LAL (120250736441810159) was left in place, untouched — no delete tool is in this run's permitted action list.",
+      "result": "success",
+      "previousState": {
+        "existing_purchase_lal": {
+          "id": "120250736441810159",
+          "name": "Lookalike (1%) - Shopify Meta Pixel - Website using Purchase",
+          "delivery_status": "ACTIVE",
+          "age_days": 101,
+          "created": "2026-05-27"
+        },
+        "refreshed_ladder_existed": false
+      },
+      "detail": {
+        "step1_1pct": {
+          "audience_id": "120255645187450159",
+          "name": "Lookalike (IN 1%) - Purchase Pixel - Refresh 2026-08-29",
+          "subtype": "LOOKALIKE"
+        },
+        "step2_2pct": {
+          "audience_id": "120255645189710159",
+          "name": "Lookalike (IN 2%) - Purchase Pixel - New 2026-08-29",
+          "subtype": "LOOKALIKE"
+        },
+        "step3_5pct": {
+          "audience_id": "120255645189730159",
+          "name": "Lookalike (IN 5%) - Purchase Pixel - New 2026-08-29",
+          "subtype": "LOOKALIKE"
+        },
+        "origin_audience_id_used": "120249907176770159",
+        "origin_audience_name": "Purchasers 30D",
+        "note": "Params deviate from the proposal's originally stored metaAction (lookalike_spec/origin_event_sources) because the live tool schema does not support those fields for LOOKALIKE creation; origin_audience_id/lookalike_ratio was the only viable path."
+      },
+      "tier": "auto",
+      "executedAt": "2026-09-05T18:52:00.000Z"
     }
   ]
 }
