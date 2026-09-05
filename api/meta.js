@@ -120,6 +120,23 @@ export default async function handler(req, res) {
       const r = await fetch(url);
       data = await r.json();
 
+    } else if (endpoint === 'token_info') {
+      // Diagnostic only: who does META_ACCESS_TOKEN belong to, what scopes does it
+      // hold, and which ad accounts can it see? Never returns the token itself.
+      const [meRes, permRes, accRes] = await Promise.all([
+        fetch(`https://graph.facebook.com/v19.0/me?fields=id,name&access_token=${token}`),
+        fetch(`https://graph.facebook.com/v19.0/me/permissions?access_token=${token}`),
+        fetch(`https://graph.facebook.com/v19.0/me/adaccounts?fields=id,name,account_status&limit=50&access_token=${token}`)
+      ]);
+      const [me, perm, acc] = await Promise.all([meRes.json(), permRes.json(), accRes.json()]);
+      data = {
+        token_owner: me,
+        permissions: perm.data || perm,
+        ad_accounts: acc.data || acc,
+        expected_ad_account: AD_ACCOUNT,
+        token_length: token.length
+      };
+
     } else if (endpoint === 'lookups') {
       // Powers the Automation tab's parameter editor — real, pickable options
       // (not free text) for audience/creative/geo/image/video fields on a proposal.
