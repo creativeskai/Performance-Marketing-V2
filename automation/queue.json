@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-05T20:47:00.000Z",
+  "generatedAt": "2026-09-05T22:49:00.000Z",
   "settings": {
     "kill_roas_threshold": "pause if ROAS < 1.0x after ₹500 spend on a sales-objective campaign",
     "reactivate_min_historic_roas": "surface for reactivation if a paused campaign's last active-period ROAS >= 3.0x",
@@ -24,10 +24,10 @@
       }
     },
     "competitor_last_scrape": {
-      "gully_labs_active_ads": 155,
+      "gully_labs_active_ads": 156,
       "lotto_sport_india_active_ads": 83,
-      "scraped_at": "2026-09-05T20:47:00.000Z",
-      "note": "2026-09-05 ~20:47 UTC scheduled run (live-execution mode), page-ID-scoped recheck (page_ids 107479854297817 / 426015150606378): Gully Labs 149->155 (+4.0%), Lotto Sport India 83->83 (0%) -- both well below the 20% spike threshold this pass, no new competitor-spike alert. Prior pass's spike (AL-114) has partially settled."
+      "scraped_at": "2026-09-05T22:49:00.000Z",
+      "note": "2026-09-05 ~22:49 UTC scheduled run (live-execution mode), page-ID-scoped recheck (page_ids 107479854297817 / 426015150606378): Gully Labs 155->156 (+0.6%), Lotto Sport India 83->83 (0%) -- both well below the 20% spike threshold this pass, no new competitor-spike alert. AL-114's spike has fully settled (Gully Labs) / holds steady (Lotto)."
     },
     "note": "hard_spend_ceiling_inr is a placeholder — set to roughly 3x trailing-30-day avg daily spend (~₹663/day as of 29 Aug 2026). All fields here are editable directly in the Automation tab (Save button) or by telling Claude."
   },
@@ -771,7 +771,7 @@
       "id": "AL-048",
       "module": "self-audit-check",
       "title": "Dashboard's static snapshot no longer reconciles with live account state",
-      "detail": "index.html's DATA/INSIGHTS_DATA blocks are a static build dated 2026-08-27 (last verified via Meta Ads MCP that day) and have not been refreshed since. Live account state has moved materially past what's shown: three campaigns now driving real spend/delivery (Retargeting_31AUG, Tsuchi_TOF, New_Sales_Kage_31AUG) don't appear anywhere in the dashboard's DATA object, and the two campaigns the dashboard still lists as status:'active' (Kage_sales_1908, Kage_TOF) have both actually been PAUSED at the campaign level since 2026-08-30 (see AL-018). This goes beyond AL-007's 2026-08-29 finding ('2 days stale but reconciles correctly') - it no longer reconciles. Recommend a manual dashboard rebuild pass (outside this routine's scope, which only maintains queue.json) next time someone is refreshing index.html.",
+      "detail": "index.html's DATA/INSIGHTS_DATA blocks are a static build dated 2026-08-27 (last verified via Meta Ads MCP that day) and have not been refreshed since; the live/static gap has only widened. Original 2026-09-01 finding: three campaigns then driving real spend (Retargeting_31AUG, Tsuchi_TOF, New_Sales_Kage_31AUG) didn't appear in DATA, and the two campaigns the dashboard still lists as status:'active' (Kage_sales_1908, Kage_TOF) had already been PAUSED since 2026-08-30. Update as of this pass (2026-09-05 ~22:49 UTC): the account has since gone to zero active campaigns account-wide -- New_Sales_Kage_31AUG (the account's last active campaign/ad set) was manually paused by Saif Naqvi at ~18:55 UTC 2026-09-05, and nothing has run since. Fresh account-level 30d totals (Aug 6-Sep 5): spend Rs.24,446.46, 16 purchases, Rs.41,419.25 revenue, 1.694x website ROAS -- none of this appears in the dashboard's static snapshot either. Recommend a manual dashboard rebuild pass (outside this routine's scope, which only maintains queue.json) next time someone is refreshing index.html.",
       "severity": "medium",
       "dismissed": false,
       "createdAt": "2026-09-01T08:53:00.000Z"
@@ -1396,6 +1396,15 @@
       "severity": "medium",
       "dismissed": false,
       "createdAt": "2026-09-05T20:47:00.000Z"
+    },
+    {
+      "id": "AL-118",
+      "module": "routine-run-notes",
+      "title": "Steady-state pass: zero active campaigns, no new triggers, nothing executed",
+      "detail": "Circuit breaker check: today's account spend Rs.25.84 vs Rs.2,000 ceiling -- not tripped. Pixel quality gate: composite EMQ 4.6-8.0 across events (dataset 833131719490535), core Purchase/AddPaymentInfo match keys (email/phone/ip_address/user_agent/external_id/zip/country/fn/ln/ct/st) at 100% coverage -- gate passed, ROAS-driven modules not suppressed this pass. Account activity log re-checked back to the last pass's 2026-09-05T18:53:00.000Z checkpoint: no new events since the Rs.1,50,000 balance top-up and New_Sales_Kage_31AUG manual pause at ~18:55-18:56 UTC already captured in AL-117 -- confirmed via ads_account_get_activity_logs, most recent entry is still that same top-up. Campaign list re-pulled fresh (last_30d): all 9 recently-spending campaigns and every other campaign in the account are PAUSED/effective_status PAUSED -- account-wide zero active delivery. purchaser-exclusion: no active prospecting campaign exists this pass -- nothing to evaluate, same as last pass. lookalike-refresh: trigger still met (source purchaser audience unchanged, stale 1% child LAL still 101+ days old) but still rate-limited within 24h of the ~18:52 UTC execution -- AL-115 already covers this, no new alert written. hook-angle-tagging: all 11 creatives with real recent (last_30d) spend history already carry a creativeTags entry (confirmed against the fresh campaign/ad pull) -- nothing new to tag this pass; Higgsfield vision pass remains unattached to this run. hard-spend-circuit-breaker: not tripped, no pause executed. competitor-rescrape: Gully Labs 155->156 (+0.6%), Lotto Sport India 83->83 (0%) -- both well below the 20% spike threshold, no new alert; settings.competitor_last_scrape updated. anomaly: ads_insights_anomaly_signal returned no anomaly signal data available for the account this pass. self-audit-check: AL-048 updated with fresh account-level 30d totals (spend Rs.24,446.46, 16 purchases, Rs.41,419.25 revenue, 1.694x ROAS) and the now-fully-paused account state -- dashboard's static snapshot remains stale, gap has widened further, still a manual rebuild recommendation outside this routine's scope. spend-pacing: monthly_spend_goal_inr still null -- AL-001 stands, no change. Weekly/monthly digest not due this pass (not Monday, not month-start). Approval-tier proposals (A-001, A-002, A-003, A-005, A-006, A-009, A-010, A-011): re-checked against this pass's fresh campaign-level pull -- Kage_Sales still 4.297x ROAS (A-001 stands), Kage_sales_1908/New_Sales_Kage_31AUG/Retargeting_31AUG spend and ROAS effectively unchanged from the last pass (sub-1% drift, no new spend since everything is now paused with zero delivery since 18:56 UTC) -- no reasoning updates needed for any pending proposal this pass; none executed (no pending proposal is currently tier:auto). Net effect of this pass: no change from last pass's end state -- account remains fully paused, nothing new triggered, nothing executed, nothing approved.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-09-05T22:49:00.000Z"
     }
   ],
   "log": [
