@@ -191,3 +191,15 @@ User flagged that the "week spends" were not updated in the morning refresh. Cor
 **Automation status check (user asked why it "is not working"):** it is running — 2-hourly commits to `automation/queue.json` are landing on `origin/main` (10:48, 12:52, 14:48, 16:50 UTC today); the local clone had simply not pulled them. What it is *not* doing: every scheduled run since 2 Sep has been an explicitly read-only pass (see AL-095 onward: "no Meta Ads MCP write/mutation tool calls were made, regardless of any module's tier"), so `auto`-tier modules never execute and `log` has had only 3 entries since Sep 1. There are 9 pending approval-tier proposals (A-001 through A-011, oldest from Aug 27) that nobody has approved or rejected. The routine also never touches `index.html`, so dashboard tabs only refresh when a chat session does it.
 
 **Gotcha:** the two `time_increment` pulls this session were fired in parallel (different `level` and `time_range`) and came back correct — the earlier duplication issue seems specific to identical params differing only by `date_preset`.
+
+## 13. Session update — 2026-09-05 (late evening): automation taken live
+
+User: "I need the automation to go live now." The read-only behaviour came from the cloud routine's own prompt (routine `trig_018ZVeevZQ5KFxDNX7Go5khF`, "KAI Ads Automation", cron `45 */2 * * *` UTC, Meta-ads connector attached), not from `ROUTINE.md`. Its prompt carried a "CRITICAL SAFETY CONSTRAINT: this run is read-only analysis" block that overrode the tiering in `ROUTINE.md`, and told the agent to evaluate "all 21 rule modules" when the spec now has 35.
+
+Replaced that block with an explicit execution policy (routine renamed "KAI Ads Automation - Live (auto-tier executes)"):
+- `auto`-tier modules (purchaser-exclusion, lookalike-refresh, hook-angle-tagging, hard-spend-circuit-breaker) now execute, gated by the rate limit, `previousState` capture, and the pixel-quality gate exactly as `ROUTINE.md` specifies.
+- Permitted write tools are limited to `ads_update_entity` (targeting only), `ads_create_custom_audience` (LOOKALIKE only), and `ads_update_entity` status=PAUSED solely when the circuit breaker trips. Everything else (creates, activations, budget/bid changes, uploads, catalog writes, deletes) is forbidden.
+- `approval`-tier modules still only write pending proposals. Existing pending proposals A-001 through A-011 are NOT executed by the routine — they still need in-app or chat approval.
+- hook-angle-tagging tags from ad copy only; Higgsfield is not attached to the routine, so the vision pass is noted as skipped.
+
+Fired a manual run immediately after the update; the next scheduled run is 18:45 UTC. Check `automation/queue.json` `log` for `tier: "auto"` entries from this point on.
