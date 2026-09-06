@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-05T22:49:00.000Z",
+  "generatedAt": "2026-09-06T00:48:00.000Z",
   "settings": {
     "kill_roas_threshold": "pause if ROAS < 1.0x after ₹500 spend on a sales-objective campaign",
     "reactivate_min_historic_roas": "surface for reactivation if a paused campaign's last active-period ROAS >= 3.0x",
@@ -24,10 +24,10 @@
       }
     },
     "competitor_last_scrape": {
-      "gully_labs_active_ads": 156,
-      "lotto_sport_india_active_ads": 83,
-      "scraped_at": "2026-09-05T22:49:00.000Z",
-      "note": "2026-09-05 ~22:49 UTC scheduled run (live-execution mode), page-ID-scoped recheck (page_ids 107479854297817 / 426015150606378): Gully Labs 155->156 (+0.6%), Lotto Sport India 83->83 (0%) -- both well below the 20% spike threshold this pass, no new competitor-spike alert. AL-114's spike has fully settled (Gully Labs) / holds steady (Lotto)."
+      "gully_labs_active_ads": 97,
+      "lotto_sport_india_active_ads": 51,
+      "scraped_at": "2026-09-06T00:48:00.000Z",
+      "note": "2026-09-06 ~00:48 UTC scheduled run (live-execution mode), page-ID-scoped recheck (page_ids 107479854297817 / 426015150606378): Gully Labs 156->97 (-37.8%), Lotto Sport India 83->51 (-38.6%) -- both well past the 20% move threshold, a real drop in both tracked competitors' active-ad counts in the same pass. See AL-119."
     },
     "note": "hard_spend_ceiling_inr is a placeholder — set to roughly 3x trailing-30-day avg daily spend (~₹663/day as of 29 Aug 2026). All fields here are editable directly in the Automation tab (Save button) or by telling Claude."
   },
@@ -1405,6 +1405,24 @@
       "severity": "low",
       "dismissed": false,
       "createdAt": "2026-09-05T22:49:00.000Z"
+    },
+    {
+      "id": "AL-119",
+      "module": "competitor-spike",
+      "title": "Gully Labs and Lotto Sport India active-ad counts both dropped sharply (-38%, -39%)",
+      "detail": "Scheduled page-ID-scoped recheck (page_ids 107479854297817 / 426015150606378) via ads_library_search (ad_active_status=ACTIVE, countries=IN), each page queried separately this pass to avoid the combined-count artifact seen when both page_ids are passed in one call together. Gully Labs: estimated_total_count 156 -> 97 (-37.8%). Lotto Sport India: estimated_total_count 83 -> 51 (-38.6%). Both moves are well past the 20% threshold and, unusually, in the same direction and similar magnitude for both unrelated competitors in the same pass -- worth noting this could reflect a real pullback by both advertisers, or a broader Ad Library counting/visibility change (e.g. an active-ad definition or geographic-reach change on Meta's side) rather than two coincidental independent business decisions. No account-side action is implied by this module (informational only). settings.competitor_last_scrape updated with the new counts and timestamp.",
+      "severity": "medium",
+      "dismissed": false,
+      "createdAt": "2026-09-06T00:48:00.000Z"
+    },
+    {
+      "id": "AL-120",
+      "module": "routine-run-notes",
+      "title": "Steady-state pass: zero active campaigns, nothing new to execute; both tracked competitors' active-ad counts fell sharply",
+      "detail": "Circuit breaker check: today's account spend Rs.25.84 vs Rs.2,000 ceiling -- not tripped. Pixel quality gate: dataset 833131719490535 composite EMQ scores this pass -- Search 6.1, PageView 4.8, ViewContent 4.8, AddToCart 6.1, InitiateCheckout 6.9, SubscribedButtonClick 6.1 (all /10); external_id coverage 100% across every event, consistent with the established read in prior passes (AL-117/AL-118) that treats the account's core identity/match-key coverage as the gate basis rather than the lower fbp browser-cookie coverage on top-of-funnel events -- gate passed, ROAS-driven modules not suppressed this pass (moot in practice, since zero campaigns are currently active). Fresh campaign-level pull (last_30d, all ~140 campaigns in the account's history): every campaign is PAUSED/effective_status PAUSED, confirming the account remains fully dormant since the 2026-09-05 ~18:55 UTC manual pause of New_Sales_Kage_31AUG already captured in AL-117. Account activity log since the last pass (2026-09-05T22:49:00.000Z) shows only a Meta system billing event (Rs.1,45,286 payment), no new manual changes. purchaser-exclusion: no active prospecting campaign this pass -- nothing to evaluate. lookalike-refresh: the three purchase-based LALs (1%/2%/5%) created ~2026-09-05T18:16 UTC are under a day old, nowhere near the 14-day refresh threshold -- nothing due. hook-angle-tagging: all 11 creatives with real spend history already carry a creativeTags entry -- nothing new. hard-spend-circuit-breaker: not tripped, no pause executed. anomaly: ads_insights_anomaly_signal returned no anomaly signal data available. competitor-rescrape: see AL-119 -- both tracked competitors' active-ad counts fell ~38-39%, well past the 20% threshold, a new alert written. self-audit-check: spot-checked index.html's Kage_Sales tile (4.30x ROAS on Rs.6,195 spend, 10 purchases, paused) against this pass's fresh pull (4.296679x, Rs.6,195.22, 10 purchases) -- matches within rounding, no material drift. spend-pacing: monthly_spend_goal_inr still null -- AL-001 stands. Weekly/monthly digest not due this pass (not Monday, not month-start). Approval-tier proposals (A-001, A-002, A-003, A-005, A-006, A-009, A-010, A-011): re-checked against this pass's fresh campaign-level pull -- every underlying number (spend, ROAS, status) is unchanged from the last pass since nothing has delivered since the account went fully dormant; per the de-duplication rule (update reasoning only if the underlying numbers moved), none were touched this pass. Net effect of this pass: no change in account state from the last pass -- still fully paused, nothing new triggered or executed on the Meta Ads side; the one new finding is the competitor active-ad count drop (AL-119).",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-09-06T00:48:00.000Z"
     }
   ],
   "log": [
