@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-06T04:50:00.000Z",
+  "generatedAt": "2026-09-06T06:52:00.000Z",
   "settings": {
     "kill_roas_threshold": "pause if ROAS < 1.0x after ₹500 spend on a sales-objective campaign",
     "reactivate_min_historic_roas": "surface for reactivation if a paused campaign's last active-period ROAS >= 3.0x",
@@ -24,10 +24,10 @@
       }
     },
     "competitor_last_scrape": {
-      "gully_labs_active_ads": 97,
-      "lotto_sport_india_active_ads": 51,
-      "scraped_at": "2026-09-06T04:50:00.000Z",
-      "note": "2026-09-06 ~04:50 UTC scheduled run (live-execution mode), page-ID-scoped recheck (page_ids 107479854297817 / 426015150606378): Gully Labs 150->97 (-35.3%), Lotto Sport India 79->51 (-35.4%) -- both well past the 20% move threshold, continuing the oscillating pattern seen across recent passes (see AL-119/AL-121). Estimated_total_count from the Ads Library appears noisy/volatile between pulls rather than reflecting a real, sustained shift in either competitor's active-ad volume."
+      "gully_labs_active_ads": 149,
+      "lotto_sport_india_active_ads": 79,
+      "scraped_at": "2026-09-06T06:52:00.000Z",
+      "note": "2026-09-06 ~06:52 UTC scheduled run (live-execution mode), page-ID-scoped recheck (page_ids 107479854297817 / 426015150606378): Gully Labs 97->149 (+53.6%), Lotto Sport India 51->79 (+54.9%) -- both well past the 20% move threshold, reversing the immediately prior pass's drop (AL-125) and matching the same oscillation range seen in AL-121. Still read as noise in the Ads Library's estimated_total_count rather than a real sustained shift in either competitor's active-ad volume."
     },
     "note": "hard_spend_ceiling_inr is a placeholder — set to roughly 3x trailing-30-day avg daily spend (~₹663/day as of 29 Aug 2026). All fields here are editable directly in the Automation tab (Save button) or by telling Claude."
   },
@@ -1455,9 +1455,9 @@
       "id": "AL-124",
       "module": "purchaser-exclusion",
       "title": "Purchaser-exclusion edit force-paused the account's only active campaign (Mori_Sales_0609), launched by a human hours earlier",
-      "detail": "A new campaign Mori_Sales_0609 (id 120255648636980159, OUTCOME_SALES, daily_budget Rs.1,000) with ad set 'Kabuto_CAPS' (id 120255648636990159) and ad 'Mori_Sales' (id 120255648637000159) was created and set ACTIVE by a human at 2026-09-06T09:19:44+05:30 (per account activity log: Campaign created / Ad set created / Ad set status updated in the last ~100 events), with no excluded_custom_audiences on its targeting. This routine's purchaser-exclusion module (auto tier, no rate-limit hit -- brand-new entity) added the existing 'Purchasers 30D' audience (id 120249907176770159) as an excluded audience via ads_update_entity. The call succeeded (targeting updated exactly as intended, every other field preserved) but, same as the prior A-008 precedent (2026-08-31), the API response carried status_forced_to_paused:true / status:PAUSED as a side effect of editing targeting on a live-delivering ad set. Since this is the campaign's only ad set, Mori_Sales_0609 -- live for well under a day and the account's only active campaign -- is no longer delivering as a direct (if legitimate and correctly-scoped) consequence of this auto-tier safety fix. Flagged here per the same reasoning as A-008's log entry: this changes what's currently live, exactly the kind of consequence the approval tier exists to gate, even though the underlying edit was itself in-scope and correct. A human should decide whether to reactivate Mori_Sales_0609 now that it correctly excludes past purchasers (reactivation itself is out of this run's permitted action list -- only ads_activate_entity via an approval-tier reactivate-winner/resume proposal, or manual action in Ads Manager, can bring it back).",
+      "detail": "A new campaign Mori_Sales_0609 (id 120255648636980159, OUTCOME_SALES, daily_budget Rs.1,000) with ad set 'Kabuto_CAPS' (id 120255648636990159) and ad 'Mori_Sales' (id 120255648637000159) was created and set ACTIVE by a human at 2026-09-06T09:19:44+05:30 (per account activity log: Campaign created / Ad set created / Ad set status updated in the last ~100 events), with no excluded_custom_audiences on its targeting. This routine's purchaser-exclusion module (auto tier, no rate-limit hit -- brand-new entity) added the existing 'Purchasers 30D' audience (id 120249907176770159) as an excluded audience via ads_update_entity. The call succeeded (targeting updated exactly as intended, every other field preserved) but, same as the prior A-008 precedent (2026-08-31), the API response carried status_forced_to_paused:true / status:PAUSED as a side effect of editing targeting on a live-delivering ad set. Since this is the campaign's only ad set, Mori_Sales_0609 -- live for well under a day and the account's only active campaign -- is no longer delivering as a direct (if legitimate and correctly-scoped) consequence of this auto-tier safety fix. Flagged here per the same reasoning as A-008's log entry: this changes what's currently live, exactly the kind of consequence the approval tier exists to gate, even though the underlying edit was itself in-scope and correct. A human should decide whether to reactivate Mori_Sales_0609 now that it correctly excludes past purchasers (reactivation itself is out of this run's permitted action list -- only ads_activate_entity via an approval-tier reactivate-winner/resume proposal, or manual action in Ads Manager, can bring it back). UPDATE (2026-09-06 ~06:52 UTC pass): the account activity log shows Saif Naqvi manually reactivated the Kabuto_CAPS ad set (120255648636990159) at 2026-09-06T10:43 IST (~05:13 UTC), roughly 23 minutes after this routine's force-pause, via the Ads Manager App for iOS -- Mori_Sales_0609 is live again and delivering (3 'Started delivery' events logged 10:55-11:04 IST). Live re-fetch this pass confirms the excluded_custom_audiences targeting fix (Purchasers 30D, id 120249907176770159) this alert flagged is still correctly in place on the ad set -- the human's reactivation did not undo it. The human decision this alert asked for has been made; resolving.",
       "severity": "high",
-      "dismissed": false,
+      "dismissed": true,
       "createdAt": "2026-09-06T04:50:00.000Z"
     },
     {
@@ -1473,7 +1473,7 @@
       "id": "AL-126",
       "module": "self-audit-check",
       "title": "Dashboard snapshot (index.html) is out of sync with live account state",
-      "detail": "Two drifts found comparing index.html's baked-in DATA object against live Meta Ads MCP data this pass: (1) DATA.today/last7/last14/month all still show New_Sales_Kage_31AUG with status:'active', but the campaign was manually paused by a human on 2026-09-05 ~20:47 UTC (see AL-117) and remains PAUSED live. (2) The new campaign Mori_Sales_0609 (created and set ACTIVE by a human 2026-09-06 09:19 IST, then force-paused by this run's purchaser-exclusion action -- see the purchaser-exclusion alert this pass) does not appear anywhere in DATA or INSIGHTS_DATA. index.html itself is outside this routine's write scope (it only maintains automation/queue.json) -- flagging so a manual dashboard refresh picks up both changes.",
+      "detail": "Two drifts found comparing index.html's baked-in DATA object against live Meta Ads MCP data this pass: (1) DATA.today/last7/last14/month all still show New_Sales_Kage_31AUG with status:'active', but the campaign was manually paused by a human on 2026-09-05 ~20:47 UTC (see AL-117) and remains PAUSED live. (2) The new campaign Mori_Sales_0609 (created and set ACTIVE by a human 2026-09-06 09:19 IST, then force-paused by this run's purchaser-exclusion action -- see the purchaser-exclusion alert this pass) does not appear anywhere in DATA or INSIGHTS_DATA. index.html itself is outside this routine's write scope (it only maintains automation/queue.json) -- flagging so a manual dashboard refresh picks up both changes. UPDATE (2026-09-06 ~06:52 UTC pass): drift unchanged and now compounded -- index.html's DATA still shows New_Sales_Kage_31AUG as 'active' (paused live since 2026-09-05) and still omits Mori_Sales_0609 entirely, which is now live again (reactivated by a human at 10:43 IST after this routine's brief force-pause -- see AL-124) with real spend/purchase data (₹94.15 spend, 1 purchase, 28.29x ROAS today) not reflected anywhere in the dashboard snapshot. Still flagged for a manual index.html refresh -- out of this routine's write scope.",
       "severity": "low",
       "dismissed": false,
       "createdAt": "2026-09-06T04:50:00.000Z"
@@ -1486,6 +1486,24 @@
       "severity": "high",
       "dismissed": false,
       "createdAt": "2026-09-06T04:50:00.000Z"
+    },
+    {
+      "id": "AL-128",
+      "module": "competitor-spike",
+      "title": "Gully Labs and Lotto Sport India active-ad counts both jumped sharply again (+54%, +55%)",
+      "detail": "Ad Library recheck (page_ids 107479854297817 / 426015150606378) vs the last recorded scrape (2026-09-06T04:50 UTC): Gully Labs active ads 97->149 (+53.6%), Lotto Sport India active ads 51->79 (+54.9%). Both moves are well past the settings-implied 20% threshold and reverse the sharp drop recorded in the immediately prior pass (AL-125), continuing the same oscillation pattern seen across recent passes (AL-119/AL-121/AL-125) -- informational only, no account mutation. Likely noise in the Ads Library's estimated_total_count rather than a real sustained change in either competitor's active-ad volume.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-09-06T06:52:00.000Z"
+    },
+    {
+      "id": "AL-129",
+      "module": "routine-run-notes",
+      "title": "2026-09-06 ~06:52 UTC scheduled run: Mori_Sales_0609 manually reactivated by a human, steady state otherwise",
+      "detail": "Circuit breaker: not tripped (today's account spend ₹120.23 vs ₹2,000 ceiling). Pixel-quality gate: still tripped, same reading as AL-123 (PageView/ViewContent composite_score 4.8/10, others 6.1-6.9/10, average ~5.8/10 vs the 6.0/10 gate) -- ROAS-driven modules suppressed again this pass; existing pending proposals (A-001, A-002, A-003, A-005, A-006, A-009, A-010, A-011) left untouched, same policy as the prior pass. Key development: Mori_Sales_0609 (Kabuto_CAPS ad set, id 120255648636990159), force-paused by this routine's purchaser-exclusion action last pass, was manually reactivated by Saif Naqvi at 2026-09-06 10:43 IST (~05:13 UTC) via the Ads Manager iOS app -- the account's only active campaign again. Live re-fetch confirms the excluded_custom_audiences fix (Purchasers 30D) is still correctly in place; AL-124 updated and dismissed as resolved. Mori_Sales_0609 today: ₹94.15 spend, 1 purchase, 28.29x ROAS, 786 impressions, 15 clicks (1.91% CTR), ₹119.78 CPM -- under a day old and far too low-volume for any threshold-based action (pause-kill/reactivate-winner/age-gender-shift all need materially more spend/history than this), and gated by the pixel-quality suppression regardless. purchaser-exclusion: the account's only active campaign already carries the exclusion -- nothing to execute (also rate-limited on this entity within the last 24h regardless). lookalike-refresh: not due -- the three purchase-based LALs created 2026-09-05 are under a day old, and the source 'Purchasers 30D' audience is still steady at ~20 (no growth trigger). hook-angle-tagging: no new untagged creatives among actively-spending ads -- Mori_Sales' single ad/creative was already tagged last pass; the large batch of similarly-named auto-generated creative objects dated 2026-08-27 through 2026-09-05 (e.g. '{{product.name}}...', 'KAI MORI...', 'KAI KAGE...' variants) do not correspond to any currently-serving ad with real spend and remain out of this module's scope, same convention as prior passes. hard-spend-circuit-breaker: not tripped. competitor-spike: Gully Labs and Lotto Sport India active-ad counts both jumped sharply again (+53.6%, +54.9%), reversing the prior pass's drop -- see AL-128. self-audit-check: index.html dashboard drift reconfirmed and now compounded by Mori_Sales_0609's live reactivation -- see AL-126 (updated). anomaly: ads_insights_anomaly_signal returned no anomaly signal data available. No new proposals, no auto-executed actions this pass.",
+      "severity": "medium",
+      "dismissed": false,
+      "createdAt": "2026-09-06T06:52:00.000Z"
     }
   ],
   "log": [
