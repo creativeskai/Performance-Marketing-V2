@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-06T08:50:00.000Z",
+  "generatedAt": "2026-09-06T10:46:00.000Z",
   "settings": {
     "kill_roas_threshold": "pause if ROAS < 1.0x after ₹500 spend on a sales-objective campaign",
     "reactivate_min_historic_roas": "surface for reactivation if a paused campaign's last active-period ROAS >= 3.0x",
@@ -24,10 +24,10 @@
       }
     },
     "competitor_last_scrape": {
-      "gully_labs_active_ads": 149,
-      "lotto_sport_india_active_ads": 79,
-      "scraped_at": "2026-09-06T08:50:00.000Z",
-      "note": "2026-09-06 ~08:50 UTC scheduled run (live-execution mode), page-ID-scoped recheck (page_ids 107479854297817 / 426015150606378): both counts unchanged from the immediately prior pass (Gully Labs 149, Lotto Sport India 79) -- no >=20% move this pass, first stable reading after several passes of oscillation (AL-119/AL-121/AL-125/AL-128)."
+      "gully_labs_active_ads": 97,
+      "lotto_sport_india_active_ads": 51,
+      "scraped_at": "2026-09-06T10:46:00.000Z",
+      "note": "2026-09-06 ~10:46 UTC scheduled run (live-execution mode), page-ID-scoped recheck (page_ids 107479854297817 / 426015150606378): both counts dropped sharply again vs the immediately prior pass (Gully Labs 149->97, -34.9%; Lotto Sport India 79->51, -35.4%) -- continues the multi-pass oscillation pattern (AL-119/AL-121/AL-125/AL-128), the brief 08:50 'stable' reading was not sustained."
     },
     "note": "hard_spend_ceiling_inr is a placeholder — set to roughly 3x trailing-30-day avg daily spend (~₹663/day as of 29 Aug 2026). All fields here are editable directly in the Automation tab (Save button) or by telling Claude."
   },
@@ -1522,6 +1522,24 @@
       "severity": "low",
       "dismissed": false,
       "createdAt": "2026-09-06T08:50:00.000Z"
+    },
+    {
+      "id": "AL-132",
+      "module": "competitor-spike",
+      "title": "Gully Labs and Lotto Sport India active-ad counts both dropped sharply again",
+      "detail": "Gully Labs active ads fell from 149 to 97 (-34.9%) and Lotto Sport India fell from 79 to 51 (-35.4%) since the last scrape (~08:50 UTC), both well past the 20% move threshold. This is the same page-ID-scoped pair that has oscillated between ~150/80 and ~50-65/30-35 across the last several passes (AL-119 drop, AL-121 jump, AL-125 drop, AL-128 jump, 08:50 pass briefly read stable) -- treat as a noisy/sampling-driven Ad Library signal rather than a confirmed change in competitor activity unless it stabilizes at the new level over several more passes.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-09-06T10:46:00.000Z"
+    },
+    {
+      "id": "AL-133",
+      "module": "routine-run-notes",
+      "title": "2026-09-06 ~10:46 UTC scheduled run: steady state, no new proposals or auto actions",
+      "detail": "Circuit breaker not tripped (today's account spend ₹413.42 vs ₹2,000 ceiling). Pixel-quality gate still suppresses ROAS-driven decisions (top-of-funnel fbp match coverage 11-16.7% on PageView/ViewContent/AddToCart, unchanged from the 04:50 pass's AL-123). Account has exactly one active campaign, Mori_Sales_0609 (launched today ~03:49 UTC) -- its single ad set already excludes the Purchasers 30D audience (from the 04:50 pass) and its one ad's creative is already tagged (hook-angle-tagging), so both ran clean with nothing new to do. Lookalike audiences are 1 day old (well inside the 14-day refresh window), so lookalike-refresh has nothing to do either. Mori_Sales_0609 is spending well today (₹388.13, 2 purchases, 13.7x reported ROAS) but that ROAS figure is not being acted on this pass since it's suppressed by the pixel-quality gate. No anomaly signal fired. Competitor active-ad counts for Gully Labs/Lotto Sport India dropped sharply again (see AL-132), continuing a known oscillation pattern. Re-checked the two open pause-kill proposals (A-009, A-010): both target campaigns (New_Sales_Kage_31AUG, Retargeting_31AUG) remain already PAUSED by manual human action (as their reasoning already notes from a prior pass) -- approving either would still be a no-op confirmation rather than a live stop, no change made. No new proposals or alerts otherwise; no auto-tier mutations executed this pass.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-09-06T10:46:00.000Z"
     }
   ],
   "log": [
