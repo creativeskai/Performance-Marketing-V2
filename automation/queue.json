@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-07T16:47:00.000Z",
+  "generatedAt": "2026-09-07T18:46:00.000Z",
   "settings": {
     "kill_roas_threshold": "pause if ROAS < 1.0x after ₹500 spend on a sales-objective campaign",
     "reactivate_min_historic_roas": "surface for reactivation if a paused campaign's last active-period ROAS >= 3.0x",
@@ -24,10 +24,10 @@
       }
     },
     "competitor_last_scrape": {
-      "gully_labs_active_ads": 103,
-      "lotto_sport_india_active_ads": 60,
-      "scraped_at": "2026-09-07T16:47:00.000Z",
-      "note": "2026-09-07 ~16:47 UTC scheduled run (live-execution mode), page-ID-scoped recheck (page_ids 107479854297817 / 426015150606378): Gully Labs 103 -> 103 (unchanged), Lotto Sport India 58 -> 60 (+3.4%) -- both well under the 20% spike/drop threshold, continuing the stable reading first seen last pass (AL-155) after the prolonged oscillation; no competitor-spike alert this pass."
+      "gully_labs_active_ads": 161,
+      "lotto_sport_india_active_ads": 92,
+      "scraped_at": "2026-09-07T18:46:00.000Z",
+      "note": "2026-09-07 ~18:46 UTC scheduled run (live-execution mode), page-ID-scoped recheck (page_ids 107479854297817 / 426015150606378): Gully Labs 103 -> 161 (+56.3%), Lotto Sport India 60 -> 92 (+53.3%) -- both above the 20% spike/drop threshold, continuing the prolonged oscillation pattern; see AL-158."
     },
     "note": "hard_spend_ceiling_inr is a placeholder — set to roughly 3x trailing-30-day avg daily spend (~₹663/day as of 29 Aug 2026). All fields here are editable directly in the Automation tab (Save button) or by telling Claude."
   },
@@ -308,7 +308,7 @@
       "module": "pause-kill",
       "tier": "approval",
       "title": "Pause Retargeting_31AUG — ROAS crossed below the 1.0x kill floor (0.99x)",
-      "reasoning": "Retargeting_31AUG (campaign id 120255534778560159) lifetime spend remains frozen at ₹745.96 (maximum date range pull), unchanged since the manual pause -- 149.2% of its own ₹500 kill-threshold floor. ROAS remains 0.973162x (1 purchase, ₹725.94 revenue), still below settings.kill_roas_threshold. Live re-fetch this pass confirms the campaign is already status:PAUSED, effective_status:PAUSED -- a human (per AL-095, ~2026-09-04T18:46 UTC) manually paused it directly in Ads Manager well before this proposal was even created, so the underlying spend this proposal was written to stop was already stopped at creation time. The kill-floor condition itself is still met and the proposal still stands (its pause action is now a no-op confirmation rather than a live stop) -- left pending per this run's policy of never auto-executing or auto-resolving approval-tier proposals. Reconfirmed this pass (2026-09-06 ~20:52 UTC): campaign remains PAUSED (no-op confirmation, as before); activity log since the last run is empty. Pixel-quality gate remains tripped (see AL-123), so ROAS was not re-derived. Proposal stands unchanged, not executed. Retargeting_31AUG remains PAUSED (no-op confirmation, as before); lifetime spend/ROAS unchanged (₹745.96 / 0.973162x). Reconfirmed this pass (2026-09-07 ~00:50 UTC): account activity log since the last run (2026-09-06T22:46:00.000Z) shows only a Meta-generated 'Account billed' entry -- no manual changes touching this entity. Pixel-quality gate remains tripped (see AL-123; avg ~5.22/10 across the 6 scored top-of-funnel web events, still below the 0.6 threshold), so ROAS was not re-derived. Not executed -- approval tier. Reconfirmed this pass (2026-09-07 ~02:47 UTC): account activity log since the last run (2026-09-06T22:46:00.000Z) shows a human-made targeting edit on Mori_Sales_0609's ad set (Purchasers 30D exclusion removed, age range narrowed to 21-40) at ~02:13 UTC -- see new purchaser-exclusion alert; unrelated to this proposal's own numbers. Pixel-quality gate remains tripped (avg ~5.22/10 across the 6 scored top-of-funnel web events, still below the 0.6 threshold), so ROAS was not re-derived. Not executed -- approval tier. Reconfirmed this pass (2026-09-07 ~06:47 UTC): account activity log since the last run (2026-09-07T04:46:00.000Z) shows no changes touching this entity. Pixel-quality gate remains tripped (PageView/ViewContent/AddToCart/InitiateCheckout all below 6.0/10; see updated AL-123), so ROAS was not re-derived. Not executed -- approval tier.",
+      "reasoning": "Retargeting_31AUG (campaign id 120255534778560159) lifetime spend remains frozen at ₹745.96 (maximum date range pull), unchanged since the manual pause -- 149.2% of its own ₹500 kill-threshold floor. ROAS remains 0.973162x (1 purchase, ₹725.94 revenue), still below settings.kill_roas_threshold. Live re-fetch this pass confirms the campaign is already status:PAUSED, effective_status:PAUSED -- a human (per AL-095, ~2026-09-04T18:46 UTC) manually paused it directly in Ads Manager well before this proposal was even created, so the underlying spend this proposal was written to stop was already stopped at creation time. The kill-floor condition itself is still met and the proposal still stands (its pause action is now a no-op confirmation rather than a live stop) -- left pending per this run's policy of never auto-executing or auto-resolving approval-tier proposals. Reconfirmed this pass (2026-09-06 ~20:52 UTC): campaign remains PAUSED (no-op confirmation, as before); activity log since the last run is empty. Pixel-quality gate remains tripped (see AL-123), so ROAS was not re-derived. Proposal stands unchanged, not executed. Retargeting_31AUG remains PAUSED (no-op confirmation, as before); lifetime spend/ROAS unchanged (₹745.96 / 0.973162x). Reconfirmed this pass (2026-09-07 ~00:50 UTC): account activity log since the last run (2026-09-06T22:46:00.000Z) shows only a Meta-generated 'Account billed' entry -- no manual changes touching this entity. Pixel-quality gate remains tripped (see AL-123; avg ~5.22/10 across the 6 scored top-of-funnel web events, still below the 0.6 threshold), so ROAS was not re-derived. Not executed -- approval tier. Reconfirmed this pass (2026-09-07 ~02:47 UTC): account activity log since the last run (2026-09-06T22:46:00.000Z) shows a human-made targeting edit on Mori_Sales_0609's ad set (Purchasers 30D exclusion removed, age range narrowed to 21-40) at ~02:13 UTC -- see new purchaser-exclusion alert; unrelated to this proposal's own numbers. Pixel-quality gate remains tripped (avg ~5.22/10 across the 6 scored top-of-funnel web events, still below the 0.6 threshold), so ROAS was not re-derived. Not executed -- approval tier. Reconfirmed this pass (2026-09-07 ~06:47 UTC): account activity log since the last run (2026-09-07T04:46:00.000Z) shows no changes touching this entity. Pixel-quality gate remains tripped (PageView/ViewContent/AddToCart/InitiateCheckout all below 6.0/10; see updated AL-123), so ROAS was not re-derived. Not executed -- approval tier. Reconfirmed this pass (2026-09-07 ~18:46 UTC): Retargeting_31AUG was reactivated by the human (Saif Naqvi, Power Editor) at ~2026-09-07T18:21-18:23 UTC as part of a larger relaunch, with its daily budget reduced from ₹150/day to ₹100/day; it is ACTIVE and spending again as of this pass, so this proposal's pause action would now actually stop live spend rather than being a no-op confirmation as it was in every prior pass. Pixel-quality gate remains tripped (avg ~5.68/10 across the 6 scored top-of-funnel web events, still below the 0.6 threshold), so the underlying ROAS/spend figures were not re-derived from fresh numbers -- the reasoning's ₹745.96/0.973162x remain the last-confirmed figures pre-gate. Not executed -- approval tier.",
       "actionSummary": "Pause campaign 'Retargeting_31AUG' (id 120255534778560159) by setting its status to PAUSED. No other field changes. This stops further spend immediately; it can be reactivated manually (or via a future reactivate-winner proposal) once the underlying issue — creative, targeting, or audience — is diagnosed and fixed.",
       "metaAction": {
         "tool": "ads_update_entity",
@@ -1473,7 +1473,7 @@
       "id": "AL-126",
       "module": "self-audit-check",
       "title": "Dashboard snapshot (index.html) is out of sync with live account state",
-      "detail": "Two drifts found comparing index.html's baked-in DATA object against live Meta Ads MCP data this pass: (1) DATA.today/last7/last14/month all still show New_Sales_Kage_31AUG with status:'active', but the campaign was manually paused by a human on 2026-09-05 ~20:47 UTC (see AL-117) and remains PAUSED live. (2) The new campaign Mori_Sales_0609 (created and set ACTIVE by a human 2026-09-06 09:19 IST, then force-paused by this run's purchaser-exclusion action -- see the purchaser-exclusion alert this pass) does not appear anywhere in DATA or INSIGHTS_DATA. index.html itself is outside this routine's write scope (it only maintains automation/queue.json) -- flagging so a manual dashboard refresh picks up both changes. UPDATE (2026-09-06 ~06:52 UTC pass): drift unchanged and now compounded -- index.html's DATA still shows New_Sales_Kage_31AUG as 'active' (paused live since 2026-09-05) and still omits Mori_Sales_0609 entirely, which is now live again (reactivated by a human at 10:43 IST after this routine's brief force-pause -- see AL-124) with real spend/purchase data (₹94.15 spend, 1 purchase, 28.29x ROAS today) not reflected anywhere in the dashboard snapshot. Still flagged for a manual index.html refresh -- out of this routine's write scope. Reconfirmed this pass (2026-09-06T08:50:00.000Z): drift unchanged -- index.html's DATA still shows New_Sales_Kage_31AUG as 'active' (paused live since 2026-09-05) and still omits Mori_Sales_0609, which remains ACTIVE with real spend/purchase data (₹283.11 spend today, 18.82x ROAS, 1979 impressions, 43 clicks) not reflected anywhere in the dashboard snapshot. Still flagged for a manual index.html refresh -- out of this routine's write scope. Reconfirmed this pass (2026-09-06T12:46:00.000Z): drift unchanged -- index.html's DATA still shows New_Sales_Kage_31AUG as 'active' (paused live since 2026-09-05) and still omits Mori_Sales_0609, which remains the account's only ACTIVE campaign with real spend/performance data (₹467.46 spend today, 11.40x ROAS, 3,220 impressions, 66 clicks) not reflected anywhere in the dashboard snapshot. Still flagged for a manual index.html refresh -- out of this routine's write scope. Reconfirmed this pass (2026-09-06T14:47:00.000Z): drift unchanged -- index.html's DATA still shows New_Sales_Kage_31AUG as 'active' (paused live since 2026-09-05) and still omits Mori_Sales_0609, which remains the account's only ACTIVE campaign with real spend/performance data (₹590.35 spend today, 9.02x ROAS, 4,100 impressions, 78 clicks) not reflected anywhere in the dashboard snapshot. Still flagged for a manual index.html refresh -- out of this routine's write scope. Reconfirmed this pass (2026-09-06T16:52:00.000Z): index.html's DATA/GEO_DATA/WEEKLY_TRENDS snapshot is still dated 'September 5, 2026' / 'Aug 29-Sep 4' and still shows New_Sales_Kage_31AUG as the account's only 'active' campaign. Live account state has since moved on twice (New_Sales_Kage_31AUG paused, Mori_Sales_0609 launched and is now the sole active campaign with ₹692.59 spend / 7.69x purchase_roas today) -- the static dashboard snapshot has not been regenerated to reflect either change. This is a dashboard-content (index.html) drift, outside what this routine's queue.json-only writes can fix directly; flagging again for a manual/dev refresh of the DATA snapshot. Reconfirmed this pass (2026-09-06T18:46:00.000Z): drift unchanged -- index.html's DATA/GEO_DATA/WEEKLY_TRENDS snapshot is still dated 'September 5, 2026' / 'Aug 29-Sep 4' and still shows New_Sales_Kage_31AUG as the account's only 'active' campaign. Live account state remains Mori_Sales_0609 as the sole active campaign (ad set Kabuto_CAPS), not reflected anywhere in the static dashboard snapshot. Still flagged for a manual/dev refresh of the DATA snapshot -- outside this routine's queue.json-only write scope. Reconfirmed this pass (2026-09-06 ~20:52 UTC): index.html's static DATA/INSIGHTS_DATA snapshot (May 9-Jun 7 2026 window, ₹40,164 spend / 163 purchases / 5.04x avg ROAS) remains unrefreshed against live account state (today's live spend ₹76.44, this-month ₹6,434.79, only Mori_Sales_0609 active) -- same structural drift as previously flagged, no dashboard rebuild has landed yet. Reconfirmed this pass (2026-09-06 ~22:46 UTC): drift unchanged in nature -- index.html's static snapshot remains unrefreshed; live state is account this-month spend ₹6,460.97, today ₹102.14, only Mori_Sales_0609 active (lifetime spend ₹908.24, 5.87x purchase_roas). Still flagged for a manual/dev refresh -- outside this routine's queue.json-only write scope. Reconfirmed this pass (2026-09-07 ~00:50 UTC): drift unchanged -- index.html's DATA still shows New_Sales_Kage_31AUG as 'active' (paused live since 2026-09-05) and still omits Mori_Sales_0609, which remains the account's only ACTIVE campaign (lifetime ₹926.67 spend, 5.75x ROAS, 2 purchases; today's account-wide spend ₹119.54) not reflected anywhere in the dashboard snapshot. Still flagged for a manual index.html refresh -- out of this routine's write scope. Reconfirmed this pass (2026-09-07 ~04:46 UTC): drift unchanged -- index.html's DATA still shows New_Sales_Kage_31AUG as 'active' (paused live since 2026-09-05) and still omits Mori_Sales_0609, which remains the account's only ACTIVE campaign (today's account-wide spend ₹258.50, campaign lifetime spend ₹1,073.61) not reflected anywhere in the dashboard snapshot. Still flagged for a manual index.html refresh -- out of this routine's write scope. Reconfirmed this pass (2026-09-07 ~10:47 UTC): drift persists and has widened further -- index.html's DATA still shows New_Sales_Kage_31AUG as 'active' (paused live since 2026-09-05) and still omits Mori_Sales_0609 entirely. Mori_Sales_0609 is no longer even delivering live right now (its only ad set was force-paused by this run's purchaser-exclusion action at 2026-09-07T06:47 UTC and has not been reactivated since -- see AL-150), so the dashboard's omission and the live state have diverged in a new way: there is currently no live counterpart for the dashboard to be inconsistent with, since the account has zero actually-delivering campaigns. Today's account-wide spend is ₹423.52. Still flagged for a manual index.html refresh -- out of this routine's write scope.",
+      "detail": "Two drifts found comparing index.html's baked-in DATA object against live Meta Ads MCP data this pass: (1) DATA.today/last7/last14/month all still show New_Sales_Kage_31AUG with status:'active', but the campaign was manually paused by a human on 2026-09-05 ~20:47 UTC (see AL-117) and remains PAUSED live. (2) The new campaign Mori_Sales_0609 (created and set ACTIVE by a human 2026-09-06 09:19 IST, then force-paused by this run's purchaser-exclusion action -- see the purchaser-exclusion alert this pass) does not appear anywhere in DATA or INSIGHTS_DATA. index.html itself is outside this routine's write scope (it only maintains automation/queue.json) -- flagging so a manual dashboard refresh picks up both changes. UPDATE (2026-09-06 ~06:52 UTC pass): drift unchanged and now compounded -- index.html's DATA still shows New_Sales_Kage_31AUG as 'active' (paused live since 2026-09-05) and still omits Mori_Sales_0609 entirely, which is now live again (reactivated by a human at 10:43 IST after this routine's brief force-pause -- see AL-124) with real spend/purchase data (₹94.15 spend, 1 purchase, 28.29x ROAS today) not reflected anywhere in the dashboard snapshot. Still flagged for a manual index.html refresh -- out of this routine's write scope. Reconfirmed this pass (2026-09-06T08:50:00.000Z): drift unchanged -- index.html's DATA still shows New_Sales_Kage_31AUG as 'active' (paused live since 2026-09-05) and still omits Mori_Sales_0609, which remains ACTIVE with real spend/purchase data (₹283.11 spend today, 18.82x ROAS, 1979 impressions, 43 clicks) not reflected anywhere in the dashboard snapshot. Still flagged for a manual index.html refresh -- out of this routine's write scope. Reconfirmed this pass (2026-09-06T12:46:00.000Z): drift unchanged -- index.html's DATA still shows New_Sales_Kage_31AUG as 'active' (paused live since 2026-09-05) and still omits Mori_Sales_0609, which remains the account's only ACTIVE campaign with real spend/performance data (₹467.46 spend today, 11.40x ROAS, 3,220 impressions, 66 clicks) not reflected anywhere in the dashboard snapshot. Still flagged for a manual index.html refresh -- out of this routine's write scope. Reconfirmed this pass (2026-09-06T14:47:00.000Z): drift unchanged -- index.html's DATA still shows New_Sales_Kage_31AUG as 'active' (paused live since 2026-09-05) and still omits Mori_Sales_0609, which remains the account's only ACTIVE campaign with real spend/performance data (₹590.35 spend today, 9.02x ROAS, 4,100 impressions, 78 clicks) not reflected anywhere in the dashboard snapshot. Still flagged for a manual index.html refresh -- out of this routine's write scope. Reconfirmed this pass (2026-09-06T16:52:00.000Z): index.html's DATA/GEO_DATA/WEEKLY_TRENDS snapshot is still dated 'September 5, 2026' / 'Aug 29-Sep 4' and still shows New_Sales_Kage_31AUG as the account's only 'active' campaign. Live account state has since moved on twice (New_Sales_Kage_31AUG paused, Mori_Sales_0609 launched and is now the sole active campaign with ₹692.59 spend / 7.69x purchase_roas today) -- the static dashboard snapshot has not been regenerated to reflect either change. This is a dashboard-content (index.html) drift, outside what this routine's queue.json-only writes can fix directly; flagging again for a manual/dev refresh of the DATA snapshot. Reconfirmed this pass (2026-09-06T18:46:00.000Z): drift unchanged -- index.html's DATA/GEO_DATA/WEEKLY_TRENDS snapshot is still dated 'September 5, 2026' / 'Aug 29-Sep 4' and still shows New_Sales_Kage_31AUG as the account's only 'active' campaign. Live account state remains Mori_Sales_0609 as the sole active campaign (ad set Kabuto_CAPS), not reflected anywhere in the static dashboard snapshot. Still flagged for a manual/dev refresh of the DATA snapshot -- outside this routine's queue.json-only write scope. Reconfirmed this pass (2026-09-06 ~20:52 UTC): index.html's static DATA/INSIGHTS_DATA snapshot (May 9-Jun 7 2026 window, ₹40,164 spend / 163 purchases / 5.04x avg ROAS) remains unrefreshed against live account state (today's live spend ₹76.44, this-month ₹6,434.79, only Mori_Sales_0609 active) -- same structural drift as previously flagged, no dashboard rebuild has landed yet. Reconfirmed this pass (2026-09-06 ~22:46 UTC): drift unchanged in nature -- index.html's static snapshot remains unrefreshed; live state is account this-month spend ₹6,460.97, today ₹102.14, only Mori_Sales_0609 active (lifetime spend ₹908.24, 5.87x purchase_roas). Still flagged for a manual/dev refresh -- outside this routine's queue.json-only write scope. Reconfirmed this pass (2026-09-07 ~00:50 UTC): drift unchanged -- index.html's DATA still shows New_Sales_Kage_31AUG as 'active' (paused live since 2026-09-05) and still omits Mori_Sales_0609, which remains the account's only ACTIVE campaign (lifetime ₹926.67 spend, 5.75x ROAS, 2 purchases; today's account-wide spend ₹119.54) not reflected anywhere in the dashboard snapshot. Still flagged for a manual index.html refresh -- out of this routine's write scope. Reconfirmed this pass (2026-09-07 ~04:46 UTC): drift unchanged -- index.html's DATA still shows New_Sales_Kage_31AUG as 'active' (paused live since 2026-09-05) and still omits Mori_Sales_0609, which remains the account's only ACTIVE campaign (today's account-wide spend ₹258.50, campaign lifetime spend ₹1,073.61) not reflected anywhere in the dashboard snapshot. Still flagged for a manual index.html refresh -- out of this routine's write scope. Reconfirmed this pass (2026-09-07 ~10:47 UTC): drift persists and has widened further -- index.html's DATA still shows New_Sales_Kage_31AUG as 'active' (paused live since 2026-09-05) and still omits Mori_Sales_0609 entirely. Mori_Sales_0609 is no longer even delivering live right now (its only ad set was force-paused by this run's purchaser-exclusion action at 2026-09-07T06:47 UTC and has not been reactivated since -- see AL-150), so the dashboard's omission and the live state have diverged in a new way: there is currently no live counterpart for the dashboard to be inconsistent with, since the account has zero actually-delivering campaigns. Today's account-wide spend is ₹423.52. Still flagged for a manual index.html refresh -- out of this routine's write scope. Update (2026-09-07 ~18:46 UTC): live state diverged further tonight -- 3 campaigns are now ACTIVE (Mori_TOF_0709, Mori + Tee_Sales_0609, Retargeting_31AUG, combined ~₹1,160/day committed budget) versus whatever the dashboard's static snapshot last reflected; a full line-by-line index.html vs live diff was not re-run this pass given the volume of other changes tonight -- flagging the gap rather than re-confirming stale numbers.",
       "severity": "low",
       "dismissed": false,
       "createdAt": "2026-09-06T04:50:00.000Z"
@@ -1747,6 +1747,33 @@
       "severity": "low",
       "dismissed": false,
       "createdAt": "2026-09-07T16:47:00.000Z"
+    },
+    {
+      "id": "AL-157",
+      "module": "purchaser-exclusion",
+      "title": "Purchaser-exclusion force-paused a campaign the human activated 10 minutes earlier (4th occurrence)",
+      "detail": "Mori_TOF_0709 (campaign id 120255676388950159, ad set 'Mori_TOF' id 120255676388960159) was created and set ACTIVE by Saif Naqvi at ~2026-09-07T18:36 UTC, part of a larger relaunch tonight that also reactivated Retargeting_31AUG, renamed/rebudgeted Mori_Sales_0609 into 'Mori + Tee_Sales_0609' with two new Tee_Sales ads, and added ₹50,000 to the account balance. This routine's purchaser-exclusion module (auto tier) correctly detected that the brand-new Mori_TOF ad set had no purchaser exclusion, was not rate-limited (new entity, no prior action in 24h), and applied the existing 'Purchasers 30D' exclusion per module 12's spec. The Meta API accepted the targeting change but also returned status_forced_to_paused:true, immediately pausing the ad set the human had activated roughly 10 minutes before this run -- undoing the live-delivery part of tonight's relaunch for this campaign specifically. This is the 4th time this exact side effect has occurred on this account (A-008 on 2026-08-31, Mori_Sales on 2026-09-06, and Mori_Sales again on 2026-09-07T06:47), always on ad sets using targeting_automation.advantage_audience=1 -- Meta appears to force a re-review pause whenever excluded_custom_audiences is added to an already-serving Advantage+ ad set. The exclusion itself is correctly applied and intentional; the pause is a Meta-side consequence, not a bug in this routine's logic, but it means every brand-new active prospecting/TOF ad set on this account will be auto-paused by this module shortly after it starts serving, until a human either reactivates it (accepting it will get re-paused by the same trigger, since it's now excluded and won't re-trigger the module) or the routine's settings/tiering are revisited. Recommend the account owner simply reactivate Mori_TOF's ad set now (it will not re-trigger this module again, since the exclusion is already applied) -- no further automatic action will be taken on it by this module.",
+      "severity": "high",
+      "dismissed": false,
+      "createdAt": "2026-09-07T18:46:00.000Z"
+    },
+    {
+      "id": "AL-158",
+      "module": "competitor-spike",
+      "title": "Gully Labs and Lotto Sport India active-ad counts both jumped sharply again (+56.3%, +53.3%)",
+      "detail": "Page-ID-scoped ads_library_search recheck (page_ids 107479854297817 / 426015150606378), ad_active_status=ACTIVE: Gully Labs 103 -> 161 (+56.3%), Lotto Sport India 60 -> 92 (+53.3%) since the last recorded scrape (2026-09-07 ~16:47 UTC). Both moves are well above the 20% spike/drop threshold, continuing the same prolonged oscillation pattern seen across recent passes (AL-148 -36%/-35%, AL-151 +56%/+43%, AL-153 -38%/-25%, AL-155 stable) -- most likely reflects the Ad Library's own count volatility/caching rather than a real, sustained shift in either competitor's active creative volume, per established precedent. No action taken beyond recording the new counts.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-09-07T18:46:00.000Z"
+    },
+    {
+      "id": "AL-159",
+      "module": "routine-run-notes",
+      "title": "2026-09-07 ~18:46 UTC scheduled run: human relaunched 3 campaigns tonight, purchaser-exclusion re-paused the newest one, 3 creatives tagged",
+      "detail": "Circuit breaker: not tripped (today's spend ₹42.71 vs ₹2,000 ceiling). Pixel-quality gate: still tripped, average ~5.68/10 across the 6 scored top-of-funnel web events (Search 6.1, PageView 6.1, AddToCart 4.4, InitiateCheckout 6.4, SubscribedButtonClick 6.1, ViewContent 5.0), below the 0.6 (6.0/10) threshold -- ROAS-driven modules suppressed again this pass; Purchase/AddPaymentInfo/prepaid_purchase remain strong (9.3/10) but excluded from the gate average per established precedent. Account state changed materially since the last run: Saif Naqvi relaunched the account tonight (~18:21-18:36 UTC) -- reactivated Retargeting_31AUG (₹150/day -> ₹100/day), renamed and rebudgeted Mori_Sales_0609 into 'Mori + Tee_Sales_0609' (₹1,300/day -> ₹730/day) adding two new Tee_Sales ads, created a brand-new campaign Mori_TOF_0709 with ad set 'Mori_TOF', and added ₹50,000 to the account balance -- 3 campaigns now ACTIVE where there was 1 before. Auto actions this pass: purchaser-exclusion correctly applied Purchasers 30D exclusion to the new Mori_TOF ad set (not rate-limited, new entity) but this force-paused it via the same recurring Meta API side effect seen 3 times before -- see new high-severity alert (AL-157), the top item this pass. hook-angle-tagging tagged 3 new creatives (Tee_Sales, Tee_Sales_Group_1, Mori_TOF) from real ad copy; vision pass skipped as usual. Competitor counts jumped sharply again (Gully Labs +56.3%, Lotto Sport India +53.3%; AL-158), consistent with ongoing oscillation. No new approval-tier proposals created this pass (ROAS-driven modules suppressed by the pixel gate); A-010 (pause-kill, Retargeting_31AUG) reasoning updated with tonight's reactivation as a non-ROAS fact -- the campaign is live and spending again, so approving A-010 would now actually stop live spend rather than being a no-op. No changes to A-001/A-002/A-003/A-005/A-006/A-009/A-011 -- nothing moved for those this pass.",
+      "severity": "medium",
+      "dismissed": false,
+      "createdAt": "2026-09-07T18:46:00.000Z"
     }
   ],
   "log": [
@@ -4323,6 +4350,72 @@
       },
       "tier": "auto",
       "executedAt": "2026-09-07T06:47:00.000Z"
+    },
+    {
+      "proposalId": null,
+      "action": "Added the existing 'Purchasers 30D' custom audience (id 120249907176770159) as an excluded audience on Mori_TOF_0709's ad set 'Mori_TOF' (id 120255676388960159) targeting; no other targeting fields changed.",
+      "result": "success",
+      "previousState": {
+        "targeting_excluded_custom_audiences": null,
+        "adset_status": "ACTIVE",
+        "adset_effective_status": "ACTIVE",
+        "campaign_status": "ACTIVE",
+        "note": "Campaign 'Mori_TOF_0709' and ad set 'Mori_TOF' were created and set ACTIVE by a human (Saif Naqvi, Power Editor) at 2026-09-07 ~18:36 UTC (12:06 AM IST 9/8), first seen by this routine this pass, ~10 minutes before this run; no prior log entry for this entity. Same evening, the human also reactivated Retargeting_31AUG, renamed/rebudgeted Mori_Sales_0609 to 'Mori + Tee_Sales_0609' with two new Tee_Sales ads, and added ₹50,000 to the account balance -- a deliberate, larger relaunch."
+      },
+      "detail": {
+        "success": true,
+        "entity_id": "120255676388960159",
+        "entity_type": "ad_set",
+        "excluded_custom_audiences_added": [
+          {
+            "id": "120249907176770159"
+          }
+        ],
+        "status_forced_to_paused": true,
+        "ads_manager_url": "https://www.facebook.com/adsmanager/manage/adsets/edit?act=704523148804803&selected_adset_ids=120255676388960159",
+        "note": "IMPORTANT SIDE EFFECT (4th occurrence of this exact pattern, after A-008 2026-08-31, Mori_Sales 2026-09-06, and Mori_Sales again 2026-09-07T06:47): this ad set was created and set ACTIVE by the human roughly 10 minutes before this run, with no purchaser exclusion yet (a legitimate purchaser-exclusion trigger). The targeting update succeeded exactly as intended (Purchasers 30D now excluded, every other targeting field preserved) but the API response again carried status_forced_to_paused:true / status:PAUSED, halting Mori_TOF_0709's only ad set minutes after the human activated it. Filed as a high-severity alert this pass -- this is now a clear recurring pattern (4 occurrences) where this auto-tier module immediately re-pauses whatever prospecting/TOF ad set a human just activated on this account, specifically because Advantage+ targeting automation (targeting_automation.advantage_audience=1) forces a re-review pause whenever excluded_custom_audiences is added to an already-serving ad set."
+      },
+      "tier": "auto",
+      "executedAt": "2026-09-07T18:46:00.000Z"
+    },
+    {
+      "proposalId": null,
+      "action": "Tagged creative 1106526341901680 ('Tee_Sales' ad, under campaign Mori + Tee_Sales_0609) with angle/hook derived from its real primary text and headline -- no Meta API mutation, wrote to queue.json.creativeTags only.",
+      "result": "success",
+      "previousState": {
+        "creativeTags_entry_existed": false
+      },
+      "detail": {
+        "note": "No Meta write. Vision pass skipped (Higgsfield MCP not attached this run) -- tagged from ads_get_creatives body/title only."
+      },
+      "tier": "auto",
+      "executedAt": "2026-09-07T18:46:00.000Z"
+    },
+    {
+      "proposalId": null,
+      "action": "Tagged creative 1524246702720238 ('Tee_Sales_Group_1' ad, under campaign Mori + Tee_Sales_0609) with angle/hook derived from its real primary text and headline -- no Meta API mutation, wrote to queue.json.creativeTags only.",
+      "result": "success",
+      "previousState": {
+        "creativeTags_entry_existed": false
+      },
+      "detail": {
+        "note": "No Meta write. Vision pass skipped (Higgsfield MCP not attached this run) -- tagged from ads_get_creatives body/title only."
+      },
+      "tier": "auto",
+      "executedAt": "2026-09-07T18:46:00.000Z"
+    },
+    {
+      "proposalId": null,
+      "action": "Tagged creative 4325196164458926 ('Mori_TOF' ad, under campaign Mori_TOF_0709) with angle/hook derived from its real primary text and headline -- no Meta API mutation, wrote to queue.json.creativeTags only.",
+      "result": "success",
+      "previousState": {
+        "creativeTags_entry_existed": false
+      },
+      "detail": {
+        "note": "No Meta write. Vision pass skipped (Higgsfield MCP not attached this run) -- tagged from ads_get_creatives body/title only."
+      },
+      "tier": "auto",
+      "executedAt": "2026-09-07T18:46:00.000Z"
     }
   ],
   "creativeTags": {
@@ -5934,6 +6027,39 @@
       "visionPassSkipped": true,
       "note": "Higgsfield vision connection not attached to this run -- image/video content itself not analyzed, only real ad copy text used. No creative description invented.",
       "taggedAt": "2026-09-07T06:47:00.000Z"
+    },
+    "1106526341901680": {
+      "adName": "Tee_Sales",
+      "campaign": "Mori + Tee_Sales_0609",
+      "format": "Static image",
+      "angle": "Bundle discount offer (buy-3 apparel bundle) with a promo code, volume-driven not story-led",
+      "hook": "\"BUY 3 TEES. SAVE UP TO 40%\" (headline) / \"One tee isn't enough. Stock up on KAI's oversized tees and save more when you buy more. Buy 3 tees, Get up to 40% OFF, Use code THREETEE at checkout. Your everyday rotation just got better.\" (primary text)",
+      "taggedFrom": "ad primary text (body) + headline (title), via Meta Ads MCP ads_get_creatives",
+      "visionPassSkipped": true,
+      "note": "Higgsfield vision connection not attached to this run -- image content itself not analyzed, only real ad copy text used. No creative description invented.",
+      "taggedAt": "2026-09-07T18:46:00.000Z"
+    },
+    "1524246702720238": {
+      "adName": "Tee_Sales_Group_1",
+      "campaign": "Mori + Tee_Sales_0609",
+      "format": "Static image",
+      "angle": "Bundle discount offer (buy-3 apparel bundle) with a promo code, volume-driven not story-led -- same copy as Tee_Sales, different creative asset (image_hash d7fad7d27cb5cf19814b2d07c2f09d01 vs c385220cba340e70549ee76cf2f781d3), likely an image variant test within the same ad set",
+      "hook": "\"BUY 3 TEES. SAVE UP TO 40%\" (headline) / \"One tee isn't enough. Stock up on KAI's oversized tees and save more when you buy more. Buy 3 tees, Get up to 40% OFF, Use code THREETEE at checkout. Your everyday rotation just got better.\" (primary text)",
+      "taggedFrom": "ad primary text (body) + headline (title), via Meta Ads MCP ads_get_creatives",
+      "visionPassSkipped": true,
+      "note": "Higgsfield vision connection not attached to this run -- image content itself not analyzed, only real ad copy text used. No creative description invented.",
+      "taggedAt": "2026-09-07T18:46:00.000Z"
+    },
+    "4325196164458926": {
+      "adName": "Mori_TOF",
+      "campaign": "Mori_TOF_0709",
+      "format": "Static image",
+      "angle": "Brand/product story introduction for a new sneaker silhouette (Mori), traffic/landing-page-view framing, not discount-led",
+      "hook": "\"MEET KAI MORI.\" (headline) / \"Meet KAI MORI. A clean everyday sneaker designed for effortless style. Minimal from a distance. Detailed up close. Made to move with whatever you're wearing. KAI MORI - your everyday, elevated.\" (primary text)",
+      "taggedFrom": "ad primary text (body) + headline (title), via Meta Ads MCP ads_get_creatives",
+      "visionPassSkipped": true,
+      "note": "Higgsfield vision connection not attached to this run -- image content itself not analyzed, only real ad copy text used. No creative description invented.",
+      "taggedAt": "2026-09-07T18:46:00.000Z"
     }
   }
 }
