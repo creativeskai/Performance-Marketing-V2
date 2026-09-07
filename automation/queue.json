@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-07T20:47:00.000Z",
+  "generatedAt": "2026-09-07T22:49:00.000Z",
   "settings": {
     "kill_roas_threshold": "pause if ROAS < 1.0x after ₹500 spend on a sales-objective campaign",
     "reactivate_min_historic_roas": "surface for reactivation if a paused campaign's last active-period ROAS >= 3.0x",
@@ -24,10 +24,10 @@
       }
     },
     "competitor_last_scrape": {
-      "gully_labs_active_ads": 162,
+      "gully_labs_active_ads": 172,
       "lotto_sport_india_active_ads": 92,
-      "scraped_at": "2026-09-07T20:47:00.000Z",
-      "note": "2026-09-07 ~20:47 UTC scheduled run (live-execution mode), page-ID-scoped recheck (page_ids 107479854297817 / 426015150606378): Gully Labs 161 -> 162 (+0.6%), Lotto Sport India 92 -> 92 (0%) -- both well under the 20% spike/drop threshold this pass, first quiet reading after the prolonged oscillation pattern noted in AL-148/AL-151/AL-153/AL-158."
+      "scraped_at": "2026-09-07T22:49:00.000Z",
+      "note": "2026-09-07 ~22:49 UTC scheduled run (live-execution mode), page-ID-scoped recheck (page_ids 107479854297817 / 426015150606378): Gully Labs 162 -> 172 (+6.2%), Lotto Sport India 92 -> 92 (0%) -- both well under the 20% spike/drop threshold, continuing the quiet reading from the prior pass."
     },
     "note": "hard_spend_ceiling_inr is a placeholder — set to roughly 3x trailing-30-day avg daily spend (~₹663/day as of 29 Aug 2026). All fields here are editable directly in the Automation tab (Save button) or by telling Claude."
   },
@@ -1783,6 +1783,15 @@
       "severity": "low",
       "dismissed": false,
       "createdAt": "2026-09-07T20:47:00.000Z"
+    },
+    {
+      "id": "AL-161",
+      "module": "routine-run-notes",
+      "title": "2026-09-07 ~22:49 UTC scheduled run: steady state, no auto actions, no new proposals",
+      "detail": "Circuit breaker: not tripped (today's account spend ₹189.54 vs ₹2,000 hard_spend_ceiling_inr). Pixel-quality gate: still failing -- average composite score across the 6 scored top-of-funnel web events (PageView 5.8, ViewContent 5.0, AddToCart 5.8, InitiateCheckout 6.6, SubscribedButtonClick 6.1, Search 6.1) is ~5.90/10 (0.590), just under settings.pixel_quality_min_match_rate (0.6); Purchase/AddPaymentInfo/prepaid_purchase remain strong (9.3/10) but stay excluded from the gate average per established precedent -- ROAS-driven modules (pause-kill, reactivate-winner, age/gender/geo/placement/device optimization, budget-reallocation, bid-strategy, creative-fatigue, dayparting, ab-test) remain suppressed again this pass. Purchaser-exclusion: re-checked all 3 active/recently-active ad sets (Mori_Sales under Mori + Tee_Sales_0609, Mori_TOF, Retargeting_31AUG) -- all already carry the 'Purchasers 30D' exclusion from prior passes (Retargeting_31AUG isn't a prospecting campaign anyway and is out of this module's scope regardless) -- no new targeting mutation needed, so no new force-pause side effect this pass. Mori_TOF's ad set (id 120255676388960159) remains PAUSED/effective_status PAUSED -- the force-pause from AL-157/AL-159 has still not been reversed by a human; campaign-level object still shows ACTIVE but today's spend on Mori_TOF_0709 stayed at ₹0.01. Lookalike-refresh: the three laddered 1%/2%/5% purchase-pixel lookalikes are 2 days old, well inside the 14-day refresh window; source 'Purchasers 30D' audience unchanged at 20 (no 20%+ growth) -- not triggered. Hook-angle-tagging: all 4 creatives currently on active/recently-active ads (Tee_Sales, Mori_Sales, Retargeting, Mori_TOF) already have creativeTags entries from prior passes -- no new untagged creative found, nothing to tag. Anomaly signal: none returned. Competitor active-ad counts: Gully Labs 162 -> 172 (+6.2%), Lotto Sport India 92 -> 92 (0%) -- both well under the 20% spike/drop threshold, no competitor-spike alert this pass. Account activity since the last pass (20:47 UTC): no new manual changes detected beyond what AL-159/AL-160 already covered. All 8 pending approval-tier proposals (A-001, A-002, A-003, A-005, A-006, A-009, A-010, A-011) reconfirmed against fresh live data and left unchanged except A-010, whose reasoning was updated to note Retargeting_31AUG is active again (reactivated by the human ~18:21-18:36 UTC) with spend/ROAS numbers otherwise unmoved. No proposal was executed -- approval-tier items are never auto-executed by this routine. Standing item for the account owner: Mori_TOF_0709's ad set has been sitting PAUSED since ~18:46 UTC as a side effect of the purchaser-exclusion auto-fix (4th occurrence of this Meta-side force-pause pattern on this account) -- it will not re-trigger the module again since the exclusion is already applied, so a simple manual reactivation in Ads Manager is all that's needed to resume its delivery.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-09-07T22:49:00.000Z"
     }
   ],
   "log": [
