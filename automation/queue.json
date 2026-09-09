@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-09T18:49:00.000Z",
+  "generatedAt": "2026-09-09T20:49:00.000Z",
   "settings": {
     "kill_roas_threshold": "pause if ROAS < 1.0x after ₹500 spend on a sales-objective campaign",
     "reactivate_min_historic_roas": "surface for reactivation if a paused campaign's last active-period ROAS >= 3.0x",
@@ -24,10 +24,10 @@
       }
     },
     "competitor_last_scrape": {
-      "gully_labs_active_ads": 177,
-      "lotto_sport_india_active_ads": 91,
-      "scraped_at": "2026-09-09T18:49:00.000Z",
-      "note": "2026-09-09 ~18:49 UTC scheduled run (live-execution mode), page-ID-scoped recheck (page_ids 107479854297817 / 426015150606378): Gully Labs 176 -> 177 (+0.57%), Lotto Sport India 91 -> 91 (+0%) -- both under the 20% spike threshold this pass, continuing the run-to-run oscillation noted previously (see AL-199) rather than a real ad-volume move."
+      "gully_labs_active_ads": 183,
+      "lotto_sport_india_active_ads": 97,
+      "scraped_at": "2026-09-09T20:49:00.000Z",
+      "note": "2026-09-09 ~20:49 UTC scheduled run (live-execution mode), page-ID-scoped recheck (page_ids 107479854297817 / 426015150606378): Gully Labs 177 -> 183 (+3.4%), Lotto Sport India 91 -> 97 (+6.6%) -- both well under the 20% spike threshold this pass, a much smaller run-to-run move than the wide swings seen in several recent passes (AL-190/193/195/197/199)."
     },
     "note": "hard_spend_ceiling_inr is a placeholder — set to roughly 3x trailing-30-day avg daily spend (~₹663/day as of 29 Aug 2026). All fields here are editable directly in the Automation tab (Save button) or by telling Claude."
   },
@@ -2268,7 +2268,7 @@
       "id": "AL-200",
       "module": "purchaser-exclusion",
       "title": "KAGE ad set (KAGE_TOF_Sept 2026) was force-paused as a side effect of adding the purchaser exclusion",
-      "detail": "Auto-executed the purchaser-exclusion module on the 'KAGE' ad set (id 120255704517640159, under campaign KAGE_TOF_Sept 2026, id 120255704517630159) -- it had no excluded_custom_audiences before this run. The ads_update_entity targeting call succeeded, but the Meta Ads MCP response carried status_forced_to_paused:true and the ad set's effective_status is now PAUSED (it was ACTIVE going into this run). The campaign object itself still reads ACTIVE at the campaign level, but with its only ad set paused it is not currently delivering -- it also had zero ads running and $0 recorded spend, so the practical impact looks low, but pausing an active ad set is outside what this module is meant to do. Flagging for human review -- reactivating it requires a human decision (ads_activate_entity is approval-tier, never auto); that was not done.",
+      "detail": "Auto-executed the purchaser-exclusion module on the 'KAGE' ad set (id 120255704517640159, under campaign KAGE_TOF_Sept 2026, id 120255704517630159) -- it had no excluded_custom_audiences before this run. The ads_update_entity targeting call succeeded, but the Meta Ads MCP response carried status_forced_to_paused:true and the ad set's effective_status is now PAUSED (it was ACTIVE going into this run). The campaign object itself still reads ACTIVE at the campaign level, but with its only ad set paused it is not currently delivering -- it also had zero ads running and $0 recorded spend, so the practical impact looks low, but pausing an active ad set is outside what this module is meant to do. Flagging for human review -- reactivating it requires a human decision (ads_activate_entity is approval-tier, never auto); that was not done. Reconfirmed this pass (2026-09-09 ~20:49 UTC): the KAGE ad set (120255704517640159) is still PAUSED with the campaign (KAGE_TOF_Sept 2026) still reading ACTIVE at the campaign level -- still not delivering, still zero recorded spend. No ads_activate_entity call was made (forbidden this run outside resume-after-circuit-breaker/manual-builder); still needs a human reactivation decision.",
       "severity": "high",
       "dismissed": false,
       "createdAt": "2026-09-09T14:46:00.000Z"
@@ -2277,7 +2277,7 @@
       "id": "AL-201",
       "module": "self-audit-check",
       "title": "Dashboard snapshot (index.html) no longer reflects the live account -- missing both currently-active campaigns",
-      "detail": "index.html's DATA object is still dated 'verified via Meta Ads MCP' as of 2026-09-05 and lists New_Sales_Kage_31AUG as the active campaign for 'today'/'month'. Live account state has since moved on: New_Sales_Kage_31AUG is now PAUSED, and the two campaigns actually driving spend today -- Mori + Tee_Sales_0609 (ROAS 4.28x, ₹2,046.93 spend over last_14d) and Retargeting_31AUG (ROAS 0.83x, ₹877.02) -- don't appear anywhere in DATA. A third campaign, KAGE_TOF_Sept 2026, launched since the snapshot and also isn't reflected. KPI-to-trigger completeness: threshold-alerts (module 1) has metric_baselines recorded only for two now-paused campaigns (Kage_sales_1908, Kage_TOF) -- neither currently-active campaign (Mori + Tee_Sales_0609, Retargeting_31AUG, KAGE_TOF_Sept 2026) has a CPM/CTR baseline yet, so that module can't fire for them. This is the same underlying drift flagged in AL-048/AL-126, now materially worse -- whole campaigns missing, not just stale numbers. Reconfirmed this pass (2026-09-09 ~16:48 UTC): index.html unchanged since the 2026-09-05 commit (no new commit touching it), so the drift persists and has grown slightly worse -- Mori + Tee_Sales_0609's ad set now also has 3 new 'Mori_Sales_Group_1' ads delivering (started this pass) that the static snapshot has no way of reflecting. Still unaddressed.",
+      "detail": "index.html's DATA object is still dated 'verified via Meta Ads MCP' as of 2026-09-05 and lists New_Sales_Kage_31AUG as the active campaign for 'today'/'month'. Live account state has since moved on: New_Sales_Kage_31AUG is now PAUSED, and the two campaigns actually driving spend today -- Mori + Tee_Sales_0609 (ROAS 4.28x, ₹2,046.93 spend over last_14d) and Retargeting_31AUG (ROAS 0.83x, ₹877.02) -- don't appear anywhere in DATA. A third campaign, KAGE_TOF_Sept 2026, launched since the snapshot and also isn't reflected. KPI-to-trigger completeness: threshold-alerts (module 1) has metric_baselines recorded only for two now-paused campaigns (Kage_sales_1908, Kage_TOF) -- neither currently-active campaign (Mori + Tee_Sales_0609, Retargeting_31AUG, KAGE_TOF_Sept 2026) has a CPM/CTR baseline yet, so that module can't fire for them. This is the same underlying drift flagged in AL-048/AL-126, now materially worse -- whole campaigns missing, not just stale numbers. Reconfirmed this pass (2026-09-09 ~16:48 UTC): index.html unchanged since the 2026-09-05 commit (no new commit touching it), so the drift persists and has grown slightly worse -- Mori + Tee_Sales_0609's ad set now also has 3 new 'Mori_Sales_Group_1' ads delivering (started this pass) that the static snapshot has no way of reflecting. Still unaddressed. Reconfirmed this pass (2026-09-09 ~20:49 UTC): index.html is unchanged since the 2026-09-05 commit -- still shows New_Sales_Kage_31AUG (now PAUSED) as the active campaign and still has no entries for Mori + Tee_Sales_0609, Retargeting_31AUG, or KAGE_TOF_Sept 2026 (the three real currently-active-or-recently-active campaigns). Drift persists, unaddressed.",
       "severity": "medium",
       "dismissed": false,
       "createdAt": "2026-09-09T14:46:00.000Z"
@@ -2308,6 +2308,15 @@
       "severity": "low",
       "dismissed": false,
       "createdAt": "2026-09-09T18:49:00.000Z"
+    },
+    {
+      "id": "AL-205",
+      "module": "routine-run-notes",
+      "title": "Run summary -- 2026-09-09 ~20:49 UTC",
+      "detail": "Scheduled live-execution run, 2026-09-09 ~20:49 UTC. Circuit breaker: NOT tripped (today's account spend ₹83.01 vs ₹2,000 ceiling). Pixel gate: Purchase 9.3/10, AddPaymentInfo 9.0/10, prepaid_purchase 8.0/10 all healthy, well above the 0.6 match-rate floor -- ROAS-driven modules evaluated normally; PageView (5.1), ViewContent (4.8) and a new Search event (4.4) remain below the gate, consistent with the established top-of-funnel-only read. Auto-tier: no new actions this pass -- purchaser-exclusion already covers both currently-active prospecting ad sets (Mori_Sales, KAGE) plus the now-paused KAGE ad set from the last run (Retargeting_31AUG is deliberately excluded from this module, it's a retargeting campaign that intentionally includes Purchasers 30D as a win-back signal, not a prospecting exclusion target); lookalike-refresh not due (the 1%/2%/5% purchase-pixel LALs rebuilt 2026-09-05 are 4 days old, well under the 14-day threshold); hook-angle-tagging found no untagged creatives on any active or recently-active ad (KAGE, Tee_Sales, Mori_Sales, Retargeting all already tagged). hard-spend-circuit-breaker: not triggered. Anomaly signal: clean (no auction overlap/fatigue/narrow-audience flags). Dataset stats: Purchase events flowing normally through 2026-09-09 ~18:00 UTC, no dead events. Competitor recheck: Gully Labs 177->183 (+3.4%), Lotto Sport India 91->97 (+6.6%), both under the 20% spike threshold -- settings.competitor_last_scrape updated, no new competitor-spike alert. Approval-tier: re-pulled campaign/ad-set-level last_14d numbers for all three active campaigns -- spend and ROAS came back identical to the 2026-09-09 ~18:49 UTC pass for every figure backing a pending proposal (Retargeting_31AUG ₹1,007.56 / 0.720493x; Mori + Tee_Sales_0609 ₹2,745.32 / 4.535515x; New_Sales_Kage_31AUG still PAUSED at ₹5,963.63 / 0.470209x) -- no material drift to re-derive, so A-001, A-002, A-003, A-005, A-006, A-009 through A-015 (12 pending proposals) were left as-is rather than rewritten with unchanged numbers. No new approval-tier proposals created -- no new entities crossed a trigger threshold this pass. Two open items carried over unresolved and reconfirmed this pass: AL-200 (KAGE ad set still force-paused, needs human reactivation decision) and AL-201 (dashboard index.html still stale vs. the live account). No auto-creative generation attempted (Higgsfield MCP not attached this run). Weekly digest not due (Wednesday, not Monday); monthly digest not due (not the first run of the month).",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-09-09T20:49:00.000Z"
     }
   ],
   "log": [
