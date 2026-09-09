@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-09T08:49:00.000Z",
+  "generatedAt": "2026-09-09T10:45:00.000Z",
   "settings": {
     "kill_roas_threshold": "pause if ROAS < 1.0x after ₹500 spend on a sales-objective campaign",
     "reactivate_min_historic_roas": "surface for reactivation if a paused campaign's last active-period ROAS >= 3.0x",
@@ -24,10 +24,10 @@
       }
     },
     "competitor_last_scrape": {
-      "gully_labs_active_ads": 113,
-      "lotto_sport_india_active_ads": 51,
-      "scraped_at": "2026-09-09T08:49:00.000Z",
-      "note": "2026-09-09 ~08:49 UTC scheduled run (live-execution mode), page-ID-scoped recheck (page_ids 107479854297817 / 426015150606378): Gully Labs 165 -> 113 (-31.5%), Lotto Sport India 86 -> 51 (-40.7%) -- both moved well past the 20% spike threshold (down this time). See AL-193."
+      "gully_labs_active_ads": 169,
+      "lotto_sport_india_active_ads": 85,
+      "scraped_at": "2026-09-09T10:45:00.000Z",
+      "note": "2026-09-09 ~10:45 UTC scheduled run (live-execution mode), page-ID-scoped recheck (page_ids 107479854297817 / 426015150606378): Gully Labs 113 -> 169 (+49.6%), Lotto Sport India 51 -> 85 (+66.7%) -- both moved well past the 20% spike threshold (up this time, reversing the prior pass's drop). See AL-195."
     },
     "note": "hard_spend_ceiling_inr is a placeholder — set to roughly 3x trailing-30-day avg daily spend (~₹663/day as of 29 Aug 2026). All fields here are editable directly in the Automation tab (Save button) or by telling Claude."
   },
@@ -308,7 +308,7 @@
       "module": "pause-kill",
       "tier": "approval",
       "title": "Pause Retargeting_31AUG -- ACTIVE and spending below the 1.0x kill floor (0.85x)",
-      "reasoning": "Retargeting_31AUG (campaign id 120255534778560159) is ACTIVE (a human reactivated it 2026-09-07, see AL-168) and continues spending -- lifetime spend rose from ₹833.81 to ₹888.68 this pass (178% of its own ₹500 kill-threshold floor), while ROAS continues to drift below the 1.0x floor: 0.87063x -> 0.816874x lifetime this pass (1 purchase; last_14d ROAS 0.827735x on ₹877.02, live re-fetch via ads_get_ad_entities, date_preset=maximum and last_14d, 2026-09-08T20:52:00.000Z). Pixel gate check this pass: Purchase-event match quality remains healthy (9.3/10), so this ROAS read is trustworthy and not suppressed. Still below settings.kill_roas_threshold (pause if ROAS < 1.0x after ₹500 spend on a sales-objective campaign) -- proposal remains pending human approval, not auto-executed (pause-kill is approval-tier). Reconfirmed and updated this pass (2026-09-08 ~22:46 UTC): Retargeting_31AUG remains ACTIVE and continues spending -- lifetime spend rose from ₹888.68 to ₹893.81, lifetime ROAS drifted from 0.816874x to 0.812186x (live re-fetch via ads_get_ad_entities, date_preset=maximum, 2026-09-08T22:46:00.000Z); last_14d ROAS 0.827735x on ₹877.02 (unchanged from the last pull). Purchase-event pixel match quality remains healthy (9.3/10) so this read is trustworthy. Still below settings.kill_roas_threshold (pause if ROAS < 1.0x after ₹500 spend on a sales-objective campaign) -- proposal remains pending human approval, not auto-executed (pause-kill is approval-tier). Reconfirmed this pass (2026-09-09 ~00:56 UTC): Retargeting_31AUG remains ACTIVE and continues spending -- lifetime spend rose slightly from ₹893.81 to ₹894.59, lifetime ROAS essentially flat at 0.811478x (live re-fetch via ads_get_ad_entities, date_preset=maximum); last_14d ROAS unchanged at 0.827735x on ₹877.02. A separate last_7d adset-level pull this pass showed a stronger recent-days read (1.260137x on the trailing week alone), but the module's defined trigger window (last_14d) still confirms below-floor performance, so the proposal stands. Purchase-event pixel match quality remains healthy (9.3/10). Not executed -- approval tier. Reconfirmed this pass (2026-09-09 ~04:48 UTC): Retargeting_31AUG remains ACTIVE and continues spending -- lifetime spend rose from ₹888.68 to ₹913.93 this pass, while lifetime ROAS drifted further below the 1.0x floor (0.816874x -> 0.794306x). last_14d ROAS unchanged at 0.827735x on ₹877.02 spend (live re-fetch via ads_get_ad_entities). Purchase-event pixel match quality remains healthy (9.3/10) so this read is trustworthy. Account activity log since the last run is empty -- no human intervention. Not executed -- approval tier. Reconfirmed this pass (2026-09-09 ~06:51 UTC): Retargeting_31AUG still ACTIVE and spending -- lifetime spend rose from Rs913.93 to Rs926.21, lifetime ROAS drifted further below the 1.0x floor (0.794306x -> 0.783775x). last_14d ROAS unchanged at 0.827735x on Rs877.02 spend (live re-fetch). Purchase-event pixel match quality remains healthy (9.3/10). Not executed -- approval tier. Reconfirmed this pass (2026-09-09 ~08:49 UTC): Retargeting_31AUG still ACTIVE and spending -- lifetime spend rose from Rs926.21 to Rs940.73, lifetime ROAS drifted further below the 1.0x floor (0.783775x -> 0.771677x). last_14d ROAS unchanged at 0.827735x on Rs877.02 spend (live re-fetch). Purchase-event pixel match quality remains healthy (9.3/10). Account activity log since the last run is empty. Not executed -- approval tier.",
+      "reasoning": "Retargeting_31AUG (campaign id 120255534778560159) is ACTIVE (a human reactivated it 2026-09-07, see AL-168) and continues spending -- lifetime spend rose from ₹940.73 to ₹950.76 this pass (190% of its own ₹500 kill-threshold floor), while ROAS continues to drift below the 1.0x floor: 0.771677x -> 0.763537x. last_14d figures this pass: ₹877.02 spend, 0.827735x ROAS, 1 purchase. Purchase-event pixel match quality remains healthy (9.3/10) so this ROAS figure is trusted despite the ongoing PageView/ViewContent/Search match-quality gate (see AL-184). Still below settings.kill_roas_threshold (pause if ROAS < 1.0x after ₹500 spend on a sales-objective campaign).",
       "actionSummary": "Pause campaign 'Retargeting_31AUG' (id 120255534778560159) by setting its status to PAUSED. No other field changes. This stops further spend immediately; it can be reactivated manually (or via a future reactivate-winner proposal) once the underlying issue — creative, targeting, or audience — is diagnosed and fixed.",
       "metaAction": {
         "tool": "ads_update_entity",
@@ -2159,6 +2159,24 @@
       "severity": "low",
       "dismissed": false,
       "createdAt": "2026-09-09T08:49:00.000Z"
+    },
+    {
+      "id": "AL-195",
+      "module": "competitor-spike",
+      "title": "Gully Labs and Lotto Sport India active-ad counts both jumped sharply again (+49.6% / +66.7%)",
+      "detail": "ads_library_search (page_ids 107479854297817 / 426015150606378), ACTIVE-status estimated_total_count this pass: Gully Labs 169 (up from 113 last pass, +49.6%), Lotto Sport India 85 (up from 51 last pass, +66.7%). Both moved >=20% since the last recorded scrape, per this module's trigger. Note: this counter has swung sharply in both directions across recent passes (AL-190 +53.7%/+47.5%, AL-193 -31.5%/-40.7%) -- likely Ad Library API sampling/estimation variance rather than a real, sustained shift in competitor activity. Flagging per the module's mechanical trigger; no action taken.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-09-09T10:45:00.000Z"
+    },
+    {
+      "id": "AL-196",
+      "module": "routine-run-notes",
+      "title": "Run summary -- 2026-09-09 ~10:45 UTC",
+      "detail": "Safety checks: circuit breaker not tripped (today's account spend ₹862.54 vs ₹2,000 ceiling); pixel-quality gate unchanged from AL-184 -- PageView (0.51), ViewContent (0.47) and Search (0.44) composite match-quality remain below the 0.6 gate (identical to the prior pass), Purchase/AddPaymentInfo/prepaid_purchase remain healthy (9.3/9.3/8.0 out of 10) so ROAS-based decisions were not suppressed this pass. Auto-tier modules: purchaser-exclusion (all 3 active ad sets -- Mori_TOF, Mori_Sales already exclude Purchasers 30D; Retargeting_31AUG is a retargeting/inclusion-only ad set so exclusion does not apply -- no action), lookalike-refresh (3 active LALs are ~4 days old, well inside the 14-day window; Purchasers 30D source audience unchanged at 20 -- no action), hook-angle-tagging (all 4 creative ids on active ads already present in creativeTags -- no action), hard-spend-circuit-breaker (not triggered). learning-phase-stuck: no learning_stage_info returned for any of the 3 active ad sets (none currently in learning phase) -- no action. Competitor rescrape: Gully Labs 113 -> 169 (+49.6%), Lotto Sport India 51 -> 85 (+66.7%), both moved >=20% -- see AL-195. No anomaly signal (ads_insights_anomaly_signal returned none). Account activity log since the last run (2026-09-09T08:49:00.000Z) is empty -- no human changes to reconcile. All 11 currently pending approval-tier proposals re-checked against fresh live spend/status/ROAS figures: only A-010's lifetime figures moved materially (₹940.73 -> ₹950.76 spend, 0.771677x -> 0.763537x ROAS, drifting further below the 1.0x kill floor); A-001, A-003, A-005, A-006, A-009, A-011, A-012, A-013, A-014 unchanged since their last update. A-009 (pause-kill on New_Sales_Kage_31AUG) and A-011 (its age-gender shift) remain pending even though the campaign is already PAUSED -- per established precedent (see prior runs) these are left open for human review rather than auto-resolved, since the routine only executes approval-tier actions via explicit approval. budget-reallocation: Mori + Tee_Sales_0609 (3.45x lifetime ROAS) vs Retargeting_31AUG (0.76x lifetime ROAS) shows a >1.5x gap, but Retargeting_31AUG is already covered by the pending A-010 pause-kill proposal, so no separate reallocation proposal was created (pausing the underperformer is the more direct fix). No new proposals this pass.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-09-09T10:45:00.000Z"
     }
   ],
   "log": [
