@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-10T12:53:50.000Z",
+  "generatedAt": "2026-09-10T14:47:00.000Z",
   "settings": {
     "kill_roas_threshold": "pause if ROAS < 1.0x after ₹500 spend on a sales-objective campaign",
     "reactivate_min_historic_roas": "surface for reactivation if a paused campaign's last active-period ROAS >= 3.0x",
@@ -24,10 +24,10 @@
       }
     },
     "competitor_last_scrape": {
-      "gully_labs_active_ads": 146,
-      "lotto_sport_india_active_ads": 55,
-      "scraped_at": "2026-09-10T12:53:50.000Z",
-      "note": "2026-09-10 ~12:53 UTC scheduled run, page-ID-scoped recheck (page_ids 107479854297817 / 426015150606378): Gully Labs 213 -> 146 (-31.5%), Lotto Sport India 92 -> 55 (-40.2%) -- both crossed the 20% spike threshold this pass, consistent with the established read that this metric is inherently noisy at the Ad Library's estimated_total_count granularity rather than reflecting real day-to-day ad-count changes."
+      "gully_labs_active_ads": 213,
+      "lotto_sport_india_active_ads": 102,
+      "scraped_at": "2026-09-10T14:47:00.000Z",
+      "note": "2026-09-10 ~14:47 UTC scheduled run, page-ID-scoped recheck (page_ids 107479854297817 / 426015150606378): Gully Labs 146 -> 213 (+45.9%), Lotto Sport India 55 -> 102 (+85.5%) -- both crossed the 20% spike threshold again, consistent with the established read that this metric is inherently noisy at the Ad Library's estimated_total_count granularity rather than reflecting real day-to-day ad-count changes."
     },
     "note": "hard_spend_ceiling_inr is a placeholder — set to roughly 3x trailing-30-day avg daily spend (~₹663/day as of 29 Aug 2026). All fields here are editable directly in the Automation tab (Save button) or by telling Claude."
   },
@@ -2452,6 +2452,24 @@
       "severity": "low",
       "dismissed": false,
       "createdAt": "2026-09-10T12:53:50.000Z"
+    },
+    {
+      "id": "AL-221",
+      "module": "competitor-spike",
+      "title": "Gully Labs and Lotto Sport India active-ad counts both jumped sharply again (+45.9% / +85.5%)",
+      "detail": "Page-ID-scoped Ad Library recheck this pass: Gully Labs (page 107479854297817) 146 -> 213 active ads (+45.9%), Lotto Sport India (page 426015150606378) 55 -> 102 active ads (+85.5%) since the last recorded scrape (2026-09-10 ~12:53 UTC, ~114 minutes ago). Both cross the 20% spike threshold, continuing the established pattern (see AL-206/AL-208/AL-212/AL-216/AL-219) that this signal is noisy at the Ad Library's estimated_total_count granularity and does not reflect real day-to-day ad-count swings for either competitor. No action taken.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-09-10T14:47:00.000Z"
+    },
+    {
+      "id": "AL-222",
+      "module": "routine-run-notes",
+      "title": "Run summary -- 2026-09-10 ~14:47 UTC",
+      "detail": "Circuit breaker: today's account spend Rs.962.11 vs Rs.2,000 hard_spend_ceiling_inr -- not tripped. Pixel quality gate: Purchase/AddPaymentInfo/prepaid_purchase 8.0/10, AddToCart/Search/SubscribedButtonClick 6.1/10, InitiateCheckout 6.0/10 all at/above the 0.6 gate; PageView 4.7 and ViewContent 4.6 remain below gate (unchanged) -- ROAS-driven modules not suppressed. Purchaser-exclusion: all 3 active ad sets (KAGE, Mori_Sales, Retargeting) confirmed still excluding ATC_180D (id 120249907176770159) -- no new mutation needed. Lookalike-refresh: the 1%/2%/5% Purchase-Pixel ladder (12 days old) and IG Engagers 3% LAL (1 day old) both remain under the 14-day threshold -- not due. Hook-angle-tagging: a new ad, 'KAGE_Group_1' (id 120255724193810159, creative 1768238184382004), started delivering under the KAGE ad set at ~19:09 IST today -- tagged this pass from its real primary text/headline/carousel card copy via the Meta Ads MCP (see log entry); all other active ads' creatives remain already tagged. Anomaly: KAGE ad set (id 120255704517640159) still flagged active_delivery_narrow_audience (est. audience 1,000-1,000, driven by its sole inclusion audience being the human-created 'Lookalike (3%) - ATC_180D') -- same underlying issue as AL-218, unchanged, not re-logged. Pause-kill: New_Sales_Kage_31AUG (human-paused, 0.470209x lifetime ROAS) and Retargeting_31AUG (ACTIVE, 0.720493x last_14d ROAS on Rs.1,007.56 spend) both unchanged vs the last pass -- pending proposals A-009/A-010 stand as-is. Competitor rescrape: both pages swung >20% again vs the 12:53 UTC scrape (see AL-221), read as Ad Library estimate noise per established pattern. No other pending proposals (A-001, A-002, A-003, A-005, A-006, A-011 through A-015) showed materially moved numbers this pass, so left untouched to avoid reasoning-field bloat. No auto-tier Meta API mutations executed this pass (only the creativeTags-only hook-angle-tagging write above); hard spend circuit breaker not tripped.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-09-10T14:47:00.000Z"
     }
   ],
   "log": [
@@ -5488,6 +5506,23 @@
       },
       "tier": "auto",
       "executedAt": "2026-09-09T18:49:00.000Z"
+    },
+    {
+      "proposalId": null,
+      "action": "Tagged creative 1768238184382004 ('KAGE_Group_1' ad, id 120255724193810159, under ad set KAGE / campaign KAGE_TOF_Sept 2026) with angle/hook/format derived from its real primary text and headline via the Meta Ads MCP -- new ad, started delivering 2026-09-10 ~19:09 IST (7:09 PM), a brand/mood carousel reusing the 'Unleash the darkness' KAGE video creative. Vision pass skipped (Higgsfield not attached this run); no creative description invented.",
+      "result": "success",
+      "previousState": {
+        "creativeTags[1768238184382004]": null
+      },
+      "detail": {
+        "adId": "120255724193810159",
+        "adName": "KAGE_Group_1",
+        "adsetId": "120255704517640159",
+        "campaign": "KAGE_TOF_Sept 2026",
+        "note": "No Meta API mutation -- writes to queue.json.creativeTags only."
+      },
+      "tier": "auto",
+      "executedAt": "2026-09-10T14:47:00.000Z"
     }
   ],
   "creativeTags": {
@@ -7363,6 +7398,17 @@
       "visionPassSkipped": true,
       "note": "Higgsfield vision connection not attached to this run -- image content itself not analyzed, only real ad copy text used. No creative description invented.",
       "taggedAt": "2026-09-09T18:49:00.000Z"
+    },
+    "1768238184382004": {
+      "adName": "KAGE_Group_1",
+      "campaign": "KAGE_TOF_Sept 2026",
+      "format": "Carousel/collection (SHARE, video cards)",
+      "angle": "Brand/mood awareness -- product reveal, not discount-led",
+      "hook": "\"KAI | KAGE | Unleash the darkness\" (primary text) / \"KAI\" (headline) / carousel cards: \"Explore Now\" -- \"KAI KAGE | INR 2,699\" (video content)",
+      "taggedFrom": "ad primary text (body) + headline (title) + carousel card name/description, via Meta Ads MCP ads_get_creatives",
+      "visionPassSkipped": true,
+      "note": "Higgsfield vision connection not attached to this run -- video content itself not analyzed, only real ad copy text used. No creative description invented.",
+      "taggedAt": "2026-09-10T14:47:00.000Z"
     }
   }
 }
