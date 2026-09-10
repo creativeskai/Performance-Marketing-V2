@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-10T06:46:00.000Z",
+  "generatedAt": "2026-09-10T08:46:00.000Z",
   "settings": {
     "kill_roas_threshold": "pause if ROAS < 1.0x after ₹500 spend on a sales-objective campaign",
     "reactivate_min_historic_roas": "surface for reactivation if a paused campaign's last active-period ROAS >= 3.0x",
@@ -25,9 +25,9 @@
     },
     "competitor_last_scrape": {
       "gully_labs_active_ads": 146,
-      "lotto_sport_india_active_ads": 63,
-      "scraped_at": "2026-09-10T06:46:00.000Z",
-      "note": "2026-09-10 ~06:46 UTC scheduled run, page-ID-scoped recheck (page_ids 107479854297817 / 426015150606378): Gully Labs 146 -> 146 (0%), Lotto Sport India 64 -> 63 (-1.6%) -- both well under the 20% spike threshold this pass, a rare quiet reading in the otherwise noisy pattern seen across most passes (this metric appears inherently noisy at the Ad Library's estimated_total_count granularity rather than reflecting real day-to-day ad-count changes)."
+      "lotto_sport_india_active_ads": 67,
+      "scraped_at": "2026-09-10T08:46:00.000Z",
+      "note": "2026-09-10 ~08:46 UTC scheduled run, page-ID-scoped recheck (page_ids 107479854297817 / 426015150606378): Gully Labs 146 -> 146 (0%), Lotto Sport India 63 -> 67 (+6.3%) -- both well under the 20% spike threshold this pass."
     },
     "note": "hard_spend_ceiling_inr is a placeholder — set to roughly 3x trailing-30-day avg daily spend (~₹663/day as of 29 Aug 2026). All fields here are editable directly in the Automation tab (Save button) or by telling Claude."
   },
@@ -2398,6 +2398,15 @@
       "severity": "low",
       "dismissed": false,
       "createdAt": "2026-09-10T06:46:00.000Z"
+    },
+    {
+      "id": "AL-215",
+      "module": "routine-run-notes",
+      "title": "Run summary -- 2026-09-10 ~08:46 UTC",
+      "detail": "Steady-state pass, no material change since the 06:46 UTC run. Circuit breaker check: today's account spend Rs542.35 vs Rs2,000 hard_spend_ceiling_inr -- not tripped. Pixel quality gate: Purchase 8.0/10, AddPaymentInfo 8.0/10, prepaid_purchase 8.0/10 (all healthy, unchanged) so ROAS-driven modules were not suppressed this pass; PageView (4.7) and ViewContent (4.6) remain below the 0.6 gate, unchanged from AL-210 -- no new pixel-health alert filed (numbers identical, still within the 3-day dedup window). Purchaser-exclusion: all 3 active ad sets (KAGE, Mori_Sales, and the Retargeting_31AUG ad set, which is treated as retargeting rather than prospecting per this routine's established practice) checked -- Purchasers 30D exclusion already present where applicable, no new mutation needed. Lookalike-refresh: newest LAL ladder (1%/2%/5% Purchase Pixel, built 2026-09-05) and the IG Engagers 3% LAL (built 2026-09-09) are both well under the 14-day lookalike_refresh_days threshold -- not due. Hook-angle-tagging: all 4 currently-active ads' creatives (1429449329070323, 1357664753185397, 1944981949506184, 2119544158658714) already present in creativeTags -- nothing new to tag. Anomaly signal: none found (auction overlap, creative fatigue, narrow audience all clear). Competitor rescrape: Gully Labs 146->146 (0%), Lotto Sport India 63->67 (+6.3%), both under the 20% spike threshold. Pending proposals A-001/A-002/A-003/A-005/A-006/A-009 through A-015 re-checked against fresh data -- all numbers (Retargeting_31AUG spend Rs1,007.56/ROAS 0.720x, Mori+Tee_Sales_0609's 25-34 male cell Rs1,269.15/ROAS 1.862x, WhatsApp placement spend on both Mori_Sales and Retargeting_31AUG) came back identical to the last pass -- left as-is, no reasoning update needed. No auto-tier mutations executed this pass (nothing newly triggered); no new proposals; no execution of any pending A-### proposal (approval tier, human-gated, none approved this pass).",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-09-10T08:46:00.000Z"
     }
   ],
   "log": [
