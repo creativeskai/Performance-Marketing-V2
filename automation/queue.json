@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-09T22:46:00.000Z",
+  "generatedAt": "2026-09-10T00:47:00.000Z",
   "settings": {
     "kill_roas_threshold": "pause if ROAS < 1.0x after ₹500 spend on a sales-objective campaign",
     "reactivate_min_historic_roas": "surface for reactivation if a paused campaign's last active-period ROAS >= 3.0x",
@@ -24,10 +24,10 @@
       }
     },
     "competitor_last_scrape": {
-      "gully_labs_active_ads": 139,
-      "lotto_sport_india_active_ads": 66,
-      "scraped_at": "2026-09-09T22:46:00.000Z",
-      "note": "2026-09-09 ~22:46 UTC scheduled run (live-execution mode), page-ID-scoped recheck (page_ids 107479854297817 / 426015150606378): Gully Labs 183 -> 139 (-24.0%), Lotto Sport India 97 -> 66 (-32.0%) -- both past the 20% spike threshold, reverting to the wide swing pattern seen in most recent passes after last pass's unusually small move."
+      "gully_labs_active_ads": 203,
+      "lotto_sport_india_active_ads": 97,
+      "scraped_at": "2026-09-10T00:47:00.000Z",
+      "note": "2026-09-10 ~00:47 UTC scheduled run (live-execution mode), page-ID-scoped recheck (page_ids 107479854297817 / 426015150606378): Gully Labs 139 -> 203 (+46.0%), Lotto Sport India 66 -> 97 (+47.0%) -- both past the 20% spike threshold, continuing the wide-swing pattern seen across recent passes."
     },
     "note": "hard_spend_ceiling_inr is a placeholder — set to roughly 3x trailing-30-day avg daily spend (~₹663/day as of 29 Aug 2026). All fields here are editable directly in the Automation tab (Save button) or by telling Claude."
   },
@@ -2335,6 +2335,24 @@
       "severity": "low",
       "dismissed": false,
       "createdAt": "2026-09-09T22:46:00.000Z"
+    },
+    {
+      "id": "AL-208",
+      "module": "competitor-spike",
+      "title": "Gully Labs and Lotto Sport India active-ad counts both jumped sharply again (+46.0% / +47.0%)",
+      "detail": "ads_library_search (page-ID-scoped, ad_active_status=ACTIVE) this pass: Gully Labs (page 107479854297817) 139 -> 203 active ads (+46.0%); Lotto Sport India (page 426015150606378) 66 -> 97 active ads (+47.0%). Both past the 20% competitor_last_scrape.* spike threshold. This continues the wide swing pattern seen across most recent passes (active-ad counts for both pages have oscillated by 20-70% pass-to-pass for several days) -- likely reflects Meta Ad Library's own count volatility/caching rather than a real, sustained change in either competitor's ad volume. Informational only, no account action taken.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-09-10T00:47:00.000Z"
+    },
+    {
+      "id": "AL-209",
+      "module": "routine-run-notes",
+      "title": "Run summary -- 2026-09-10 ~00:47 UTC",
+      "detail": "Circuit breaker: not tripped (today's account spend ₹119.96 vs ₹2,000 ceiling). Pixel gate: Purchase/prepaid_purchase/AddPaymentInfo/AddToCart/InitiateCheckout all healthy (composite scores 6.3-9.0/10) so ROAS-driven modules were NOT suppressed this pass; PageView (5.0/10), ViewContent (4.8/10) and Search (4.4/10) remain below the 0.6 gate, unchanged from the 2026-09-08 ~20:52 UTC alert (within the 3-day dedup window, no new pixel-health alert written). purchaser-exclusion: both eligible active ad sets (Mori_Sales, KAGE) already exclude 'Purchasers 30D'; Retargeting_31AUG intentionally includes purchasers as a win-back segment, so it's out of scope for this module -- no action. lookalike-refresh: all purchaser-based LAL audiences are 5 days old (created 2026-09-05), well under the 14-day refresh window -- no action. hook-angle-tagging: all 148 last-30d ads already have creativeTags entries -- nothing new to tag. hard-spend-circuit-breaker: not triggered. anomaly: none found (checked auction overlap, creative fatigue, narrow audience). learning-phase-stuck: no learning-phase issues surfaced on the three active-campaign ad sets. competitor-spike: see AL-208. campaign-consolidation-watch: only one active sales-objective ad set is actually delivering (Mori_Sales); no overlapping duplicates. frequency-capping/creative-fatigue: both active sales ad sets are well under the 3.0x fatigue_frequency_threshold (Mori_Sales ~1.63, Retargeting_31AUG ~1.59 over last_14d) -- no trigger. Re-verified pending proposals against fresh data: A-009 (New_Sales_Kage_31AUG pause-kill, PAUSED already so numbers static -- unchanged, ₹5,963.63 / 0.470209x), A-010 (Retargeting_31AUG pause-kill -- unchanged, ₹1,007.56 / 0.720493x), A-012 (Mori_Sales age-gender shift -- unchanged, 18-24 male ₹437.87/0 purchases, 25-34 male ₹1,269.15/1.861997x, 35-44 male ₹705.80/14.293387x), A-013 (Mori_Sales WhatsApp placement exclusion -- unchanged, ₹49.56 spend / ₹1,077.39 CPM), A-014 (Retargeting_31AUG WhatsApp placement exclusion -- essentially unchanged, ₹92.96 spend / ₹1,475.56 CPM, within rounding of prior ₹1,499.35). None needed a reasoning update. Geo breakdown pulled for both active ad sets but purchase_roas returned null at region granularity for every row -- no usable data to evaluate geo-scaling/geo-suppression/new-geo-testing this pass, so none were triggered (not fabricated). No new proposals, no new auto-executed actions, no circuit breaker trip. Weekly/monthly digest not due (next weekly due around Mon 2026-09-14; next monthly due 2026-10-01).",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-09-10T00:47:00.000Z"
     }
   ],
   "log": [
