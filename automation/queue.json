@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-10T00:47:00.000Z",
+  "generatedAt": "2026-09-10T02:49:00.000Z",
   "settings": {
     "kill_roas_threshold": "pause if ROAS < 1.0x after ₹500 spend on a sales-objective campaign",
     "reactivate_min_historic_roas": "surface for reactivation if a paused campaign's last active-period ROAS >= 3.0x",
@@ -24,10 +24,10 @@
       }
     },
     "competitor_last_scrape": {
-      "gully_labs_active_ads": 203,
+      "gully_labs_active_ads": 206,
       "lotto_sport_india_active_ads": 97,
-      "scraped_at": "2026-09-10T00:47:00.000Z",
-      "note": "2026-09-10 ~00:47 UTC scheduled run (live-execution mode), page-ID-scoped recheck (page_ids 107479854297817 / 426015150606378): Gully Labs 139 -> 203 (+46.0%), Lotto Sport India 66 -> 97 (+47.0%) -- both past the 20% spike threshold, continuing the wide-swing pattern seen across recent passes."
+      "scraped_at": "2026-09-10T02:49:00.000Z",
+      "note": "2026-09-10 ~02:49 UTC scheduled run (live-execution mode), page-ID-scoped recheck (page_ids 107479854297817 / 426015150606378): Gully Labs 203 -> 206 (+1.5%), Lotto Sport India 97 -> 97 (0%) -- both well under the 20% spike threshold this pass, a rare calm reading after the wide-swing pattern seen across recent passes."
     },
     "note": "hard_spend_ceiling_inr is a placeholder — set to roughly 3x trailing-30-day avg daily spend (~₹663/day as of 29 Aug 2026). All fields here are editable directly in the Automation tab (Save button) or by telling Claude."
   },
@@ -346,7 +346,7 @@
       "module": "age-gender-auto-shift",
       "tier": "approval",
       "title": "Shift Mori + Tee_Sales_0609 targeting away from the underperforming 25-34 male segment",
-      "reasoning": "Updated last_14d age/gender breakdown on the Mori_Sales ad set (id 120255648636990159, current targeting age_min=19/age_max=65), re-pulled 2026-09-09 ~18:49 UTC: 25-34 male is still the campaign's single largest age/gender cell at ₹1,269.12 spend, but it is NOT non-converting as the original pass found -- it now shows purchase_roas 0.602109x, i.e. it has picked up conversions since the last pull but still sits well below the campaign's blended 3.953818x ROAS and below its own spend-weighted breakeven. By contrast, 35-44 male is the standout performer at ₹706.08 spend / 14.287819x ROAS, and 18-24 male remains non-converting at ₹438.04 spend / 0 purchases. The proposed fix is unchanged in direction (shift weight toward the 35-44 male cohort, away from the weaker 18-24 and underperforming-but-not-dead 25-34 cells) but the reasoning is now 'underperforming relative to account average', not 'zero conversions' -- title and framing updated accordingly this pass. Reconfirmed this pass (2026-09-09 ~22:46 UTC): last_14d age/gender breakdown on the Mori_Sales ad set (id 120255648636990159) shows 25-34 male spend essentially flat (₹1,269.15, was ₹1,269.12) but purchase_roas has moved further, now 1.861997x (up from 0.602109x last pass) -- a delayed/attributed conversion landed against the same spend window. Still well below the campaign's blended 4.535515x last_14d ROAS, so the underperformance direction is unchanged, just less severe than the last two passes. 35-44 male remains the standout (₹705.80 spend, 14.293387x ROAS, essentially unchanged); 18-24 male remains non-converting (₹437.87 spend, 0 purchases). Proposed fix (shift weight toward 35-44 male, away from 18-24 and the still-below-blended 25-34 cell) is unchanged. Not executed -- approval tier.",
+      "reasoning": "Updated last_14d age/gender breakdown on the Mori_Sales ad set (id 120255648636990159, current targeting age_min=19/age_max=65), re-pulled 2026-09-09 ~18:49 UTC: 25-34 male is still the campaign's single largest age/gender cell at ₹1,269.12 spend, but it is NOT non-converting as the original pass found -- it now shows purchase_roas 0.602109x, i.e. it has picked up conversions since the last pull but still sits well below the campaign's blended 3.953818x ROAS and below its own spend-weighted breakeven. By contrast, 35-44 male is the standout performer at ₹706.08 spend / 14.287819x ROAS, and 18-24 male remains non-converting at ₹438.04 spend / 0 purchases. The proposed fix is unchanged in direction (shift weight toward the 35-44 male cohort, away from the weaker 18-24 and underperforming-but-not-dead 25-34 cells) but the reasoning is now 'underperforming relative to account average', not 'zero conversions' -- title and framing updated accordingly this pass. Reconfirmed this pass (2026-09-09 ~22:46 UTC): last_14d age/gender breakdown on the Mori_Sales ad set (id 120255648636990159) shows 25-34 male spend essentially flat (₹1,269.15, was ₹1,269.12) but purchase_roas has moved further, now 1.861997x (up from 0.602109x last pass) -- a delayed/attributed conversion landed against the same spend window. Still well below the campaign's blended 4.535515x last_14d ROAS, so the underperformance direction is unchanged, just less severe than the last two passes. 35-44 male remains the standout (₹705.80 spend, 14.293387x ROAS, essentially unchanged); 18-24 male remains non-converting (₹437.87 spend, 0 purchases). Proposed fix (shift weight toward 35-44 male, away from 18-24 and the still-below-blended 25-34 cell) is unchanged. Not executed -- approval tier. UPDATE (2026-09-10 ~02:49 UTC): re-pulled the Mori_Sales ad set's last_14d age/gender breakdown -- the targeted 25-34 male cell now shows ₹1,269.15 spend (essentially unchanged) but purchase_roas has moved from 0.602109x to 1.861997x, i.e. it has picked up further conversions since the last pass and is no longer clearly non-converting, though it still sits well below the campaign's blended 4.535515x ROAS and below the 35-44 male cell's 14.29x. Leaving this proposal pending as-is for human review with the updated numbers rather than re-deriving a new targeting cut -- the underperformance gap has narrowed materially since this proposal was written.",
       "actionSummary": "Raise the Mori_Sales ad set's (id 120255648636990159) age_min from 19 to 35, keeping age_max at 65. This cuts the two non-converting cells (18-24 male: 0 purchases on ₹307.91; 25-34 male: 0 purchases on ₹893.02, the campaign's largest age/gender cell) while retaining the standout 35-44 male cohort (15.4x ROAS on ₹568.66) and the smaller, so-far-untested 45-65 cells. No other targeting fields changed. Fully editable in the age-range fields below if you want a different split.",
       "metaAction": {
         "tool": "ads_update_entity",
@@ -392,7 +392,7 @@
       "module": "placement-optimization",
       "tier": "approval",
       "title": "Exclude WhatsApp placement from Retargeting_31AUG",
-      "reasoning": "Last_14d placement breakdown on the Retargeting_31AUG ad set (id 120255534778570159), re-pulled 2026-09-09 ~18:49 UTC: whatsapp_marketing_messages spent ₹92.96 (up from ₹88.27) at a CPM of ₹1,499.35 -- roughly 12.2x the campaign's blended CPM of ₹123.22 -- with zero purchases attributed. This compounds an already-underperforming campaign (last_14d ROAS 0.720493x, both below the 1.0x kill floor -- see pending pause-kill proposal A-010, whose numbers also moved this pass) with wasted spend on its single worst placement. This ad set's targeting does not show an existing publisher_platform restriction excluding WhatsApp.",
+      "reasoning": "Last_14d placement breakdown on the Retargeting_31AUG ad set (id 120255534778570159), re-pulled 2026-09-09 ~18:49 UTC: whatsapp_marketing_messages spent ₹92.96 (up from ₹88.27) at a CPM of ₹1,499.35 -- roughly 12.2x the campaign's blended CPM of ₹123.22 -- with zero purchases attributed. This compounds an already-underperforming campaign (last_14d ROAS 0.720493x, both below the 1.0x kill floor -- see pending pause-kill proposal A-010, whose numbers also moved this pass) with wasted spend on its single worst placement. This ad set's targeting does not show an existing publisher_platform restriction excluding WhatsApp. Reconfirmed this pass (2026-09-10 ~02:49 UTC): whatsapp_marketing_messages on the Retargeting_31AUG ad set spent ₹92.96 (unchanged) at a CPM of ₹1,452.50 (down from ₹1,499.35), still roughly 11.8x the campaign's blended CPM (₹123.19) with zero purchases attributed -- the underlying issue is unchanged, just a slightly lower CPM reading this pass.",
       "actionSummary": "Set Retargeting_31AUG's ad set targeting.publisher_platforms to an explicit list of its currently-effective platforms (facebook, instagram, audience_network, messenger, threads) minus whatsapp. No other targeting fields changed.",
       "metaAction": {
         "tool": "ads_update_entity",
@@ -2353,6 +2353,24 @@
       "severity": "low",
       "dismissed": false,
       "createdAt": "2026-09-10T00:47:00.000Z"
+    },
+    {
+      "id": "AL-210",
+      "module": "pixel-health",
+      "title": "Search pixel match quality recovered above the 0.6 gate -- PageView and ViewContent still below",
+      "detail": "ads_get_dataset_quality (dataset 833131719490535) this pass: Purchase 8.0/10, AddPaymentInfo 8.0/10, prepaid_purchase 8.0/10 (all healthy, down slightly from 9.0/8.9/8.0 last pass but still well above the 6.0/10 (0.6) pixel_quality_min_match_rate gate). AddToCart 6.3/10 and InitiateCheckout 6.8/10 unchanged, remain at/above gate. SubscribedButtonClick 6.1/10 unchanged, at/above gate. Search jumped to 6.1/10 (up from 4.4/10 last pass) -- newly crossing above the gate for the first time in several passes. PageView 4.7/10 (down from 5.0) and ViewContent 4.6/10 (down from 4.8) remain below the gate. Net effect unchanged: ROAS-based modules (pause-kill, reactivate-winner, age-gender-auto-shift, placement-optimization, high-intent-retargeting's purchase-family counts) remain NOT suppressed since Purchase-event match quality stays strong and stable; only PageView/ViewContent-derived signals stay suppressed now that Search has recovered.",
+      "severity": "medium",
+      "dismissed": false,
+      "createdAt": "2026-09-10T02:49:00.000Z"
+    },
+    {
+      "id": "AL-211",
+      "module": "routine-run-notes",
+      "title": "Run summary -- 2026-09-10 ~02:49 UTC",
+      "detail": "Circuit breaker: not tripped (today's account spend ₹138.95 vs ₹2,000 hard_spend_ceiling_inr; account rolled over to a new day since the last pass). Pixel gate: Purchase-event quality strong (8.0/10), ROAS-driven modules NOT suppressed; see AL-210 for the Search recovery. Competitor rescrape: no spike this pass (Gully Labs +1.5%, Lotto Sport India 0%), both under the 20% threshold. Purchaser-exclusion: Mori_Sales ad set already excludes 'Purchasers 30D'; Retargeting_31AUG intentionally includes it as a win-back signal, not a prospecting exclusion target -- no action needed. Lookalike-refresh: newest purchase-based LALs are ~5 days old, well under the 14-day lookalike_refresh_days threshold -- no refresh needed. Hook-angle-tagging: all 3 ads currently running under active campaigns (Tee_Sales, Mori_Sales, Retargeting) already have creativeTags entries -- no new creatives to tag this pass. Anomaly signal: none found (checked auction overlap, creative fatigue, narrow audience). No auto-tier Meta API mutations executed this pass. Approval-tier: A-012's target segment (Mori_Sales 25-34 male) recovered from 0.60x to 1.86x ROAS since the last pull -- reasoning updated, proposal left pending for human review with the fresh numbers. A-014's WhatsApp CPM on Retargeting_31AUG eased slightly (₹1,499.35 -> ₹1,452.50), still ~12.6x the campaign's blended CPM with zero purchases -- reasoning updated. All other pending proposals (A-001, A-002, A-003, A-005, A-006, A-009, A-010, A-011, A-013, A-015) re-verified against fresh live pulls this pass with no material change to their underlying numbers, left as-is. No new triggers found for the remaining alert/approval modules (learning-phase-stuck, spend-pacing [no monthly goal configured], campaign-consolidation-watch, self-audit-check [existing AL-209-era drift alert still holds], weekly/monthly-digest [not due], catalog-dpa-launch, reactivate-winner, resume-after-circuit-breaker [breaker not tripped]).",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-09-10T02:49:00.000Z"
     }
   ],
   "log": [
