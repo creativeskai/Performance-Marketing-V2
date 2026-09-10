@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-10T16:47:00.000Z",
+  "generatedAt": "2026-09-10T18:52:00.000Z",
   "settings": {
     "kill_roas_threshold": "pause if ROAS < 1.0x after ₹500 spend on a sales-objective campaign",
     "reactivate_min_historic_roas": "surface for reactivation if a paused campaign's last active-period ROAS >= 3.0x",
@@ -24,10 +24,10 @@
       }
     },
     "competitor_last_scrape": {
-      "gully_labs_active_ads": 140,
-      "lotto_sport_india_active_ads": 80,
-      "scraped_at": "2026-09-10T16:47:00.000Z",
-      "note": "2026-09-10 ~16:47 UTC scheduled run, page-ID-scoped recheck (page_ids 107479854297817 / 426015150606378): Gully Labs 213 -> 140 (-34.3%), Lotto Sport India 102 -> 80 (-21.6%) -- both crossed the 20% spike threshold again (this time downward), consistent with the established read that this metric is inherently noisy at the Ad Library's estimated_total_count granularity rather than reflecting real day-to-day ad-count changes."
+      "gully_labs_active_ads": 207,
+      "lotto_sport_india_active_ads": 113,
+      "scraped_at": "2026-09-10T18:52:00.000Z",
+      "note": "2026-09-10 ~18:52 UTC scheduled run, page-ID-scoped recheck (page_ids 107479854297817 / 426015150606378): Gully Labs 140 -> 207 (+47.9%), Lotto Sport India 80 -> 113 (+41.25%) -- both crossed the 20% spike threshold again (this time upward), consistent with the established read that this metric is inherently noisy at the Ad Library's estimated_total_count granularity rather than reflecting real day-to-day ad-count changes."
     },
     "note": "hard_spend_ceiling_inr is a placeholder — set to roughly 3x trailing-30-day avg daily spend (~₹663/day as of 29 Aug 2026). All fields here are editable directly in the Automation tab (Save button) or by telling Claude."
   },
@@ -308,7 +308,7 @@
       "module": "pause-kill",
       "tier": "approval",
       "title": "Pause Retargeting_31AUG -- ACTIVE and spending below the 1.0x kill floor (0.72x)",
-      "reasoning": "Retargeting_31AUG (campaign id 120255534778560159) remains ACTIVE and continues spending -- last_14d spend rose from ₹877.02 to ₹1,007.56 this pass (201.5% of its own ₹500 kill-threshold floor), while ROAS continues to drift further below the 1.0x floor: 0.827735x -> 0.720493x. Purchase-event pixel match quality remains healthy (composite score 9.3/10, well above the 0.6 pixel_quality_min_match_rate gate) so this ROAS figure is trusted. Placement breakdown this pass also shows whatsapp_marketing_messages burning ₹92.96 at 12.2x the campaign's blended CPM with zero purchases (see A-014) -- part of why blended ROAS keeps sliding. Re-confirmed 2026-09-09 ~18:49 UTC.",
+      "reasoning": "Retargeting_31AUG (campaign id 120255534778560159) remains ACTIVE and continues spending -- last_14d spend rose from ₹877.02 to ₹1,007.56 this pass (201.5% of its own ₹500 kill-threshold floor), while ROAS continues to drift further below the 1.0x floor: 0.827735x -> 0.720493x. Purchase-event pixel match quality remains healthy (composite score 9.3/10, well above the 0.6 pixel_quality_min_match_rate gate) so this ROAS figure is trusted. Placement breakdown this pass also shows whatsapp_marketing_messages burning ₹92.96 at 12.2x the campaign's blended CPM with zero purchases (see A-014) -- part of why blended ROAS keeps sliding. Re-confirmed 2026-09-09 ~18:49 UTC. Reconfirmed 2026-09-10 ~18:52 UTC: last_14d spend continued rising to ₹1,124.66 (from ₹1,007.56), while ROAS drifted further below the floor: 0.720493x -> 0.645475x. WhatsApp placement waste also grew this pass (see A-014). Still ACTIVE and spending; pending human decision.",
       "actionSummary": "Pause campaign 'Retargeting_31AUG' (id 120255534778560159) by setting its status to PAUSED. No other field changes. This stops further spend immediately; it can be reactivated manually (or via a future reactivate-winner proposal) once the underlying issue — creative, targeting, or audience — is diagnosed and fixed.",
       "metaAction": {
         "tool": "ads_update_entity",
@@ -346,7 +346,7 @@
       "module": "age-gender-auto-shift",
       "tier": "approval",
       "title": "Shift Mori + Tee_Sales_0609 targeting away from the underperforming 25-34 male segment",
-      "reasoning": "Updated last_14d age/gender breakdown on the Mori_Sales ad set (id 120255648636990159, current targeting age_min=19/age_max=65), re-pulled 2026-09-10 ~16:47 UTC: 25-34 male remains the campaign's single largest age/gender cell at Rs.1,269.15 spend, and its ROAS has continued climbing since the last two passes -- 0x (original trigger) -> 0.602109x (2026-09-09 pass) -> 1.861997x (this pass), now comfortably above the account's blended ROAS. 35-44 male, the next-largest male cell, is now extremely strong at 14.293387x on Rs.705.80 spend. The original 'underperforming 25-34 male segment' premise this proposal was built on no longer holds -- both meaningfully-spent male cells are now converting well. This proposal is left pending for a human decision but the case for executing it as written has weakened further since the last pass; consider rejecting or re-scoping instead of approving as-is.",
+      "reasoning": "Updated last_14d age/gender breakdown on the Mori_Sales ad set (id 120255648636990159, current targeting age_min=19/age_max=65), re-pulled 2026-09-10 ~16:47 UTC: 25-34 male remains the campaign's single largest age/gender cell at Rs.1,269.15 spend, and its ROAS has continued climbing since the last two passes -- 0x (original trigger) -> 0.602109x (2026-09-09 pass) -> 1.861997x (this pass), now comfortably above the account's blended ROAS. 35-44 male, the next-largest male cell, is now extremely strong at 14.293387x on Rs.705.80 spend. The original 'underperforming 25-34 male segment' premise this proposal was built on no longer holds -- both meaningfully-spent male cells are now converting well. This proposal is left pending for a human decision but the case for executing it as written has weakened further since the last pass; consider rejecting or re-scoping instead of approving as-is. Reconfirmed 2026-09-10 ~18:52 UTC: 25-34 male's ROAS climbed even further, 1.861997x -> 3.684476x (spend ₹1,269.15 -> ₹1,818.42), and the previously-strong 35-44 male cell cooled somewhat but remains very healthy (14.293387x -> 11.847091x, spend ₹705.80 -> ₹912.82). The case for this proposal as originally written continues to weaken; still recommend rejecting or re-scoping rather than approving as-is.",
       "actionSummary": "Raise the Mori_Sales ad set's (id 120255648636990159) age_min from 19 to 35, keeping age_max at 65. This cuts the two non-converting cells (18-24 male: 0 purchases on ₹307.91; 25-34 male: 0 purchases on ₹893.02, the campaign's largest age/gender cell) while retaining the standout 35-44 male cohort (15.4x ROAS on ₹568.66) and the smaller, so-far-untested 45-65 cells. No other targeting fields changed. Fully editable in the age-range fields below if you want a different split.",
       "metaAction": {
         "tool": "ads_update_entity",
@@ -392,7 +392,7 @@
       "module": "placement-optimization",
       "tier": "approval",
       "title": "Exclude WhatsApp placement from Retargeting_31AUG",
-      "reasoning": "Last_14d placement breakdown on the Retargeting_31AUG ad set (id 120255534778570159), re-pulled 2026-09-09 ~18:49 UTC: whatsapp_marketing_messages spent ₹92.96 (up from ₹88.27) at a CPM of ₹1,499.35 -- roughly 12.2x the campaign's blended CPM of ₹123.22 -- with zero purchases attributed. This compounds an already-underperforming campaign (last_14d ROAS 0.720493x, both below the 1.0x kill floor -- see pending pause-kill proposal A-010, whose numbers also moved this pass) with wasted spend on its single worst placement. This ad set's targeting does not show an existing publisher_platform restriction excluding WhatsApp. Reconfirmed this pass (2026-09-10 ~02:49 UTC): whatsapp_marketing_messages on the Retargeting_31AUG ad set spent ₹92.96 (unchanged) at a CPM of ₹1,452.50 (down from ₹1,499.35), still roughly 11.8x the campaign's blended CPM (₹123.19) with zero purchases attributed -- the underlying issue is unchanged, just a slightly lower CPM reading this pass.",
+      "reasoning": "Last_14d placement breakdown on the Retargeting_31AUG ad set (id 120255534778570159), re-pulled 2026-09-09 ~18:49 UTC: whatsapp_marketing_messages spent ₹92.96 (up from ₹88.27) at a CPM of ₹1,499.35 -- roughly 12.2x the campaign's blended CPM of ₹123.22 -- with zero purchases attributed. This compounds an already-underperforming campaign (last_14d ROAS 0.720493x, both below the 1.0x kill floor -- see pending pause-kill proposal A-010, whose numbers also moved this pass) with wasted spend on its single worst placement. This ad set's targeting does not show an existing publisher_platform restriction excluding WhatsApp. Reconfirmed this pass (2026-09-10 ~02:49 UTC): whatsapp_marketing_messages on the Retargeting_31AUG ad set spent ₹92.96 (unchanged) at a CPM of ₹1,452.50 (down from ₹1,499.35), still roughly 11.8x the campaign's blended CPM (₹123.19) with zero purchases attributed -- the underlying issue is unchanged, just a slightly lower CPM reading this pass. Reconfirmed 2026-09-10 ~18:52 UTC: whatsapp_marketing_messages spend rose to ₹104.33 (from ₹92.96) at a CPM of ₹1,490.43 (from ₹1,452.50), still roughly 12.2x the campaign's blended CPM (₹122.58), zero purchases attributed. Underlying issue unchanged.",
       "actionSummary": "Set Retargeting_31AUG's ad set targeting.publisher_platforms to an explicit list of its currently-effective platforms (facebook, instagram, audience_network, messenger, threads) minus whatsapp. No other targeting fields changed.",
       "metaAction": {
         "tool": "ads_update_entity",
@@ -416,7 +416,7 @@
       "module": "engagement-tier-segmentation",
       "tier": "approval",
       "title": "Split Retargeting_31AUG's mixed-intent audience -- give checkout abandoners their own ad set",
-      "reasoning": "Retargeting_31AUG's single ad set (id 120255534778570159) ORs together four very different intent depths in one custom_audiences list -- 'IG' (any IG profile engager, 365d), 'IG_Visitors_365' (IG visitors, 365d), 'Purchasers 30D' (past buyers, a win-back signal, not a warm lead), and 'Initiate_Checkout' (pixel-based checkout abandoners, by far the highest-intent group in that list) -- all sharing one budget and one bid. The campaign is running at 0.72x ROAS over the last 14 days (₹1,007.56 spend, up from 0.83x ROAS on ₹877.02 spend last pass, see A-010's pause-kill proposal on the same campaign), which is consistent with a low-intent IG-engager audience diluting delivery away from the checkout abandoners who are actually close to converting. This matches module 20 (engagement-tier-segmentation): a retargeting audience mixing multiple intent depths under a single bid/budget, with no way for Meta's delivery to treat them differently. Reconfirmed this pass (2026-09-09 ~16:48 UTC): Retargeting_31AUG's single ad set still ORs together the same four intent-depth audiences under one budget/bid; campaign still running below the 1.0x kill floor (see A-010, updated this pass). Structural gap persists unchanged. Not executed -- approval tier.",
+      "reasoning": "Retargeting_31AUG's single ad set (id 120255534778570159) ORs together four very different intent depths in one custom_audiences list -- 'IG' (any IG profile engager, 365d), 'IG_Visitors_365' (IG visitors, 365d), 'Purchasers 30D' (past buyers, a win-back signal, not a warm lead), and 'Initiate_Checkout' (pixel-based checkout abandoners, by far the highest-intent group in that list) -- all sharing one budget and one bid. The campaign is running at 0.72x ROAS over the last 14 days (₹1,007.56 spend, up from 0.83x ROAS on ₹877.02 spend last pass, see A-010's pause-kill proposal on the same campaign), which is consistent with a low-intent IG-engager audience diluting delivery away from the checkout abandoners who are actually close to converting. This matches module 20 (engagement-tier-segmentation): a retargeting audience mixing multiple intent depths under a single bid/budget, with no way for Meta's delivery to treat them differently. Reconfirmed this pass (2026-09-09 ~16:48 UTC): Retargeting_31AUG's single ad set still ORs together the same four intent-depth audiences under one budget/bid; campaign still running below the 1.0x kill floor (see A-010, updated this pass). Structural gap persists unchanged. Not executed -- approval tier. Reconfirmed 2026-09-10 ~18:52 UTC: Retargeting_31AUG's single ad set still ORs together the same four intent-depth audiences under one budget/bid; campaign ROAS continues to drift further below the 1.0x kill floor (0.720493x -> 0.645475x, see A-010, updated this pass). Structural gap persists unchanged.",
       "actionSummary": "Creates a new PAUSED ad set under the existing Retargeting_31AUG campaign, targeting only the 'Initiate_Checkout' custom audience with its own ₹150/day test budget, plus a new PAUSED ad reusing the existing Retargeting creative (id 2119544158658714). Approving does not start spending -- both the ad set and the ad need a manual activate after review. Deliberately leaves the original ad set's targeting untouched (no removal of Initiate_Checkout from it yet) to avoid conflicting with A-014, which is also pending against the same ad set's targeting (WhatsApp placement exclusion) -- narrowing the original ad set once this new one is proven out is a natural follow-up, not bundled into this proposal.",
       "metaAction": {
         "tool": "ads_create_ad_set",
@@ -2506,6 +2506,24 @@
       "severity": "low",
       "dismissed": false,
       "createdAt": "2026-09-10T16:47:00.000Z"
+    },
+    {
+      "id": "AL-227",
+      "module": "competitor-spike",
+      "title": "Gully Labs and Lotto Sport India active-ad counts both jumped sharply again (+47.9% / +41.25%)",
+      "detail": "Page-ID-scoped Ad Library recheck (page_ids 107479854297817 / 426015150606378): Gully Labs active-ad estimated_total_count moved 140 -> 207 (+47.9%), Lotto Sport India moved 80 -> 113 (+41.25%), both crossing the 20% spike threshold since the last scrape (2026-09-10 ~16:47 UTC). Consistent with the established pattern across dozens of prior passes: this metric swings sharply in both directions every 1-2 hours at the Ad Library's estimated_total_count granularity, which is noisy rather than a real signal of day-to-day ad-count changes. No action taken.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-09-10T18:52:00.000Z"
+    },
+    {
+      "id": "AL-228",
+      "module": "routine-run-notes",
+      "title": "Run summary -- 2026-09-10 ~18:52 UTC",
+      "detail": "Circuit breaker: not tripped (today's IST-day account spend Rs.39.33 vs Rs.2,000 ceiling -- IST day rolled over since the last pass's Rs.1,110.80 reading). Pixel gate: Purchase/AddPaymentInfo/prepaid/cod all still 8.0/10, well above the 0.6 gate, so ROAS modules ran normally; InitiateCheckout/AddToCart/Search/PageView/ViewContent match-quality readings are unchanged from this pass's still-open pixel-health alert (AL-225). Auto-tier modules: purchaser-exclusion took no action -- live re-check confirms the account still has no valid purchaser-based custom audience (id 120249907176770159 remains 'ATC_180D', an AddToCart audience) and both Mori_Sales and KAGE ad sets still exclude that same, now-wrong, audience id; unchanged from AL-223, no new alert written. lookalike-refresh found no purchaser-based LAL older than 14 days (the 2026-08-29 ladder is ~5.5 days old) and no purchaser-audience growth signal -- no action. hook-angle-tagging found one new untagged creative: 1350099378178207 (the 'Retargeting' ad's carousel, under Retargeting_31AUG) -- tagged from its real primary text/headline via the Meta Ads MCP, vision pass skipped (Higgsfield not attached). hard-spend-circuit-breaker did not trip. Approval-tier: refreshed numbers on Mori + Tee_Sales_0609 and Retargeting_31AUG -- A-012's 25-34 male cell continued climbing further (1.86x -> 3.68x ROAS, reasoning updated); A-014's WhatsApp waste on Retargeting_31AUG grew (Rs.92.96 -> Rs.104.33 spend, reasoning updated); A-010's pause-kill case strengthened further as Retargeting_31AUG's ROAS kept sliding (0.72x -> 0.645x, reasoning updated); A-015 (engagement-tier-segmentation, same campaign) reasoning updated to match. A-013 (Mori WhatsApp) numbers unchanged since last pass. No new approval-tier triggers found; A-009/A-011 (both on the paused New_Sales_Kage_31AUG) not re-verified this pass, no material change expected on a paused campaign. Anomaly: KAGE ad set (120255704517640159) remains flagged as narrow-audience while actively delivering -- unchanged from AL-218, no new alert. Self-audit: index.html's static snapshot remains stale and still omits all three currently-active campaigns -- unchanged drift from AL-201, no new alert. Competitor rescrape: both tracked pages moved >=20% again, this time sharply upward (Gully Labs +47.9%, Lotto Sport India +41.25%) -- same established Ad Library estimated_total_count noise pattern, new alert written with updated numbers. campaign-consolidation-watch and threshold-alerts: no overlap or baseline-band breach found among the 3 active campaigns (all launched within the last 30 days, so 14d and 30d readings are effectively identical -- nothing to compare against yet). spend-pacing skipped (monthly_spend_goal_inr is null). Not a Monday and not the first run of a new month -- weekly-digest and monthly-digest skipped.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-09-10T18:52:00.000Z"
     }
   ],
   "log": [
@@ -5559,6 +5577,24 @@
       },
       "tier": "auto",
       "executedAt": "2026-09-10T14:47:00.000Z"
+    },
+    {
+      "proposalId": null,
+      "action": "Tagged creative 1350099378178207 ('Retargeting' ad, id 120255534778550159, under campaign Retargeting_31AUG) with angle/hook/format derived from its real primary text/headline via the Meta Ads MCP -- this ad's creative had no creativeTags entry yet (new find this pass; it was not present under any active ad in the last few passes). Vision pass skipped (Higgsfield not attached to this run).",
+      "result": "success",
+      "previousState": {
+        "creativeTags_entry_existed": false
+      },
+      "detail": {
+        "creative_id": "1350099378178207",
+        "ad_id": "120255534778550159",
+        "body": "15% OFF ON ALL SNEAKERS + 5% EXTRA PREPAID DISCOUNT\nFREE SHIPPING + NO QUESTIONS ASKED RETURN POLICY",
+        "title": "KAI",
+        "object_type": "SHARE",
+        "child_attachments_count": 6
+      },
+      "tier": "auto",
+      "executedAt": "2026-09-10T18:52:00.000Z"
     }
   ],
   "creativeTags": {
@@ -7445,6 +7481,17 @@
       "visionPassSkipped": true,
       "note": "Higgsfield vision connection not attached to this run -- video content itself not analyzed, only real ad copy text used. No creative description invented.",
       "taggedAt": "2026-09-10T14:47:00.000Z"
+    },
+    "1350099378178207": {
+      "adName": "Retargeting",
+      "campaign": "Retargeting_31AUG",
+      "format": "Carousel (SHARE, 6 cards)",
+      "angle": "Discount offer, sneakers-focused product carousel (reuses the Kage launch discount messaging for a warm retargeting audience)",
+      "hook": "\"15% OFF ON ALL SNEAKERS + 5% EXTRA PREPAID DISCOUNT\\nFREE SHIPPING + NO QUESTIONS ASKED RETURN POLICY\" (primary text) / \"KAI\" (headline) -- 6 carousel cards, each linking to the Kage sneakers product page, cards carry no distinct name/description text",
+      "taggedFrom": "ad primary text (body) + headline (title) + carousel card structure, via Meta Ads MCP ads_get_creatives",
+      "visionPassSkipped": true,
+      "note": "Higgsfield vision connection not attached to this run -- image content itself not analyzed, only real ad copy text used. No creative description invented.",
+      "taggedAt": "2026-09-10T18:52:00.000Z"
     }
   }
 }
