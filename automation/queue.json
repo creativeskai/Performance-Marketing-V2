@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-11T00:49:51.000Z",
+  "generatedAt": "2026-09-11T02:50:00.000Z",
   "settings": {
     "kill_roas_threshold": "pause if ROAS < 1.0x after ₹500 spend on a sales-objective campaign",
     "reactivate_min_historic_roas": "surface for reactivation if a paused campaign's last active-period ROAS >= 3.0x",
@@ -26,8 +26,8 @@
     "competitor_last_scrape": {
       "gully_labs_active_ads": 210,
       "lotto_sport_india_active_ads": 114,
-      "scraped_at": "2026-09-11T00:49:51.000Z",
-      "note": "2026-09-11 ~00:49 UTC scheduled run: ads_library_search combined page_ids query (107479854297817 / 426015150606378, ad_active_status=ACTIVE) returned estimated_total_count=324, exactly matching the last recorded combined total (210 + 114 = 324) -- no change, well under the 20% spike threshold. Did not re-run the per-page-scoped queries separately this pass since the combined total already confirms no material movement; individual counts carried forward unchanged from the 2026-09-10 ~22:49 UTC pass. No new competitor-spike alert."
+      "scraped_at": "2026-09-11T02:50:00.000Z",
+      "note": "2026-09-11 ~02:50 UTC scheduled run: ads_library_search combined page_ids query (107479854297817 / 426015150606378, ad_active_status=ACTIVE) returned estimated_total_count=320 vs the last recorded combined total of 324 (-1.2%), well under the 20% spike threshold. Did not re-run the per-page-scoped queries separately this pass since the combined total already confirms no material movement; individual counts carried forward unchanged from the 2026-09-11 ~00:49 UTC pass. No new competitor-spike alert."
     },
     "note": "hard_spend_ceiling_inr is a placeholder — set to roughly 3x trailing-30-day avg daily spend (~₹663/day as of 29 Aug 2026). All fields here are editable directly in the Automation tab (Save button) or by telling Claude."
   },
@@ -2551,6 +2551,15 @@
       "severity": "low",
       "dismissed": false,
       "createdAt": "2026-09-11T00:49:51.000Z"
+    },
+    {
+      "id": "AL-232",
+      "module": "routine-run-notes",
+      "title": "Run summary -- 2026-09-11 ~02:50 UTC",
+      "detail": "Circuit breaker: NOT tripped -- today's account spend is ₹336.48 vs the ₹2,000 hard_spend_ceiling_inr (ads_get_ad_entities, level=ad_account, date_preset=today). Pixel/data-quality gate: PageView (0.46), ViewContent (0.47), AddToCart (0.44) and InitiateCheckout (0.52) composite match-quality scores remain below the 0.6 pixel_quality_min_match_rate gate -- unchanged from the last pass (see AL-225). ROAS-driven modules suppressed this pass, same as recent passes. purchaser-exclusion (auto): still blocked -- the exclusion audience (id 120249907176770159) is still repurposed to 'ATC_180D' (an AddToCart audience), not a valid purchaser list; both active prospecting ad sets that reference it (KAGE, Mori_Sales) are excluding the wrong audience. No action taken to avoid excluding the wrong people off a broken audience; see AL-223 (still open, unchanged, not duplicated). lookalike-refresh (auto): not due -- the 'Purchase Pixel' LAL audiences (1%/2%/5%) are 6 days old, under the 14-day lookalike_refresh_days threshold. hook-angle-tagging (auto): no untagged creatives found among the 4 currently active ads (Retargeting, KAGE, Tee_Sales, Mori_Sales) -- all already have creativeTags entries. hard-spend-circuit-breaker (auto): condition not met, no campaigns paused. anomaly: KAGE ad set (id 120255704517640159) still flagged active_delivery_narrow_audience (audience size ~1,000) -- unchanged, see AL-218, not duplicated. competitor-rescrape: Gully Labs + Lotto Sport India combined active-ad count 320 vs last recorded 324 (-1.2%), well under the 20% spike threshold -- no new alert. Active campaigns reconfirmed unchanged since the 00:49 UTC pass: Mori + Tee_Sales_0609 healthy at ₹3,772.43/14d spend, 5.066538x ROAS; Retargeting_31AUG still below the kill floor at ₹1,124.66/14d spend, 0.645475x ROAS (pending A-009/A-010/A-014/A-015 all reconfirmed unchanged, not re-executed -- approval tier, human decision pending); KAGE_TOF_Sept 2026 (awareness) at ₹143.66/14d spend, no ROAS applicable. No auto actions executed, no new proposals, no proposals executed (A-001 onward remain pending for human review).",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-09-11T02:50:00.000Z"
     }
   ],
   "log": [
