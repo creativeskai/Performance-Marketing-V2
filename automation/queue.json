@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-12T08:52:00.000Z",
+  "generatedAt": "2026-09-12T10:49:00.000Z",
   "settings": {
     "kill_roas_threshold": "pause if ROAS < 1.0x after ₹500 spend on a sales-objective campaign",
     "reactivate_min_historic_roas": "surface for reactivation if a paused campaign's last active-period ROAS >= 3.0x",
@@ -26,8 +26,8 @@
     "competitor_last_scrape": {
       "gully_labs_active_ads": 210,
       "lotto_sport_india_active_ads": 106,
-      "scraped_at": "2026-09-12T08:52:00.000Z",
-      "note": "2026-09-12 ~08:52 UTC scheduled run: ads_library_search combined page_ids query (107479854297817 / 426015150606378, ad_active_status=ACTIVE) returned estimated_total_count=308, down from the last recorded combined query result of 315 (-2.22%), well under the 20% spike threshold. Combined-query-only pass again (individual per-page counts not independently re-verified this pass, carried forward unchanged from the last per-page split of 210 / 106). No new competitor-spike alert."
+      "scraped_at": "2026-09-12T10:49:00.000Z",
+      "note": "2026-09-12 ~10:49 UTC scheduled run: ads_library_search combined page_ids query (107479854297817 / 426015150606378, ad_active_status=ACTIVE) returned estimated_total_count=309, up from the last recorded combined query result of 308 (+0.32%), well under the 20% spike threshold. Combined-query-only pass again (individual per-page counts not independently re-verified this pass, carried forward unchanged from the last per-page split of 210 / 106). No new competitor-spike alert."
     },
     "note": "hard_spend_ceiling_inr is a placeholder — set to roughly 3x trailing-30-day avg daily spend (~₹663/day as of 29 Aug 2026). All fields here are editable directly in the Automation tab (Save button) or by telling Claude."
   },
@@ -347,7 +347,7 @@
       "module": "age-gender-auto-shift",
       "tier": "approval",
       "title": "Shift Mori + Tee_Sales_0609 targeting away from the underperforming 25-34 male segment",
-      "reasoning": "Updated last_14d age/gender breakdown on the Mori_Sales ad set (id 120255648636990159, current targeting age_min=19/age_max=65), re-pulled 2026-09-10 ~16:47 UTC: 25-34 male remains the campaign's single largest age/gender cell at Rs.1,269.15 spend, and its ROAS has continued climbing since the last two passes -- 0x (original trigger) -> 0.602109x (2026-09-09 pass) -> 1.861997x (this pass), now comfortably above the account's blended ROAS. 35-44 male, the next-largest male cell, is now extremely strong at 14.293387x on Rs.705.80 spend. The original 'underperforming 25-34 male segment' premise this proposal was built on no longer holds -- both meaningfully-spent male cells are now converting well. This proposal is left pending for a human decision but the case for executing it as written has weakened further since the last pass; consider rejecting or re-scoping instead of approving as-is. Reconfirmed 2026-09-10 ~18:52 UTC: 25-34 male's ROAS climbed even further, 1.861997x -> 3.684476x (spend ₹1,269.15 -> ₹1,818.42), and the previously-strong 35-44 male cell cooled somewhat but remains very healthy (14.293387x -> 11.847091x, spend ₹705.80 -> ₹912.82). The case for this proposal as originally written continues to weaken; still recommend rejecting or re-scoping rather than approving as-is. Reconfirmed 2026-09-10 ~20:46 UTC: 25-34 male ROAS holds at 3.683332x (spend ₹1,818.99, essentially flat vs the 18:52 pass's ₹1,818.42/3.684476x), 35-44 male holds very strong at 11.84559x (spend ₹912.93, flat vs ₹912.82/11.847091x). No new spend since the last pass. The case for this proposal as originally written continues to weaken; still recommend rejecting or re-scoping rather than approving as-is. Reconfirmed 2026-09-11 ~06:49 UTC: 25-34 male ROAS holds at 3.684476x (spend ₹1,818.99, essentially flat), 35-44 male holds very strong at 11.845x (spend ₹913.06, essentially flat). 18-24 male remains the true zero-ROAS cell this pass (₹642.24 spend, zero purchases). No material change since the last pass -- the case for this proposal as originally written (targeting 25-34 male as underperforming) continues to look weak given its current 3.68x ROAS; still recommend rejecting or re-scoping toward excluding 18-24 instead of raising age_min to 35, rather than approving as-is. Reconfirmed 2026-09-11 ~12:46 UTC: 25-34 male ROAS holds at 3.683332x (spend Rs1,818.99, essentially flat), 35-44 male holds at 11.843903x (spend Rs913.06, essentially flat). 18-24 male remains the true zero-ROAS cell (Rs642.24 spend, zero purchases). No material change -- case for this proposal as originally written continues to look weak. Reconfirmed 2026-09-11 ~16:49 UTC: 25-34 male ROAS on Mori + Tee_Sales_0609 holds at 3.683332x (spend Rs1,818.99, flat vs last pass), 35-44 male holds very strong at 11.843903x (spend Rs913.06, flat). 18-24 male remains the true zero-ROAS cell (Rs642.24 spend, zero purchases). No material change -- the case for shifting away from 25-34 male specifically continues to look weak given its now-healthy ROAS; still recommend rejecting or re-scoping toward 18-24 male instead of approving as originally written. Reconfirmed 2026-09-11 ~18:50 UTC: 25-34 male ROAS on Mori + Tee_Sales_0609 sits at 3.610535x (spend Rs2,703.02, up from Rs1,818.99), 35-44 male holds strong at 8.558275x (spend Rs1,263.60, up from Rs913.06). 18-24 male remains the true zero-ROAS cell (Rs841.10 spend, zero purchases, up from Rs642.24). No material change in direction -- the case for shifting away from 25-34 male specifically continues to look weak given its now-healthy ROAS at meaningfully higher spend; still recommend rejecting or re-scoping toward 18-24 male instead of approving as originally written. Reconfirmed 2026-09-11 ~20:49 UTC: 25-34 male ROAS on Mori + Tee_Sales_0609 holds at 3.60956x (spend Rs2,703.75, essentially flat vs Rs2,703.02 last pass), 35-44 male holds strong at 8.559795x (spend Rs1,263.37, essentially flat). 18-24 male remains the true zero-ROAS cell (Rs840.96 spend, zero purchases, essentially flat). No material change -- the case for shifting away from 25-34 male specifically continues to look weak given its now-healthy ROAS at meaningfully higher spend; still recommend rejecting or re-scoping toward 18-24 male instead of approving as originally written. Reconfirmed 2026-09-12 ~00:50 UTC: 25-34 male ROAS on Mori + Tee_Sales_0609 holds at 3.609476x (spend ₹2,703.81, essentially flat), 35-44 male holds strong at 8.560008x (spend ₹1,263.34, essentially flat). 18-24 male remains the true zero-ROAS cell (₹840.94 spend, zero purchases, essentially flat). No material change -- the case for shifting away from 25-34 male specifically continues to look weak given its healthy ROAS at meaningful spend; still recommend rejecting or re-scoping toward 18-24 male instead of approving as originally written. Reconfirmed 2026-09-12 ~02:51 UTC: last_14d age/gender breakdown on the Mori_Sales ad set (id 120255648636990159) re-pulled this pass: 25-34 male spend has grown further to ₹2,703.81 (from ₹1,269.15) at ROAS 3.609476x -- up from the 1.861997x recorded last pass and still comfortably above the campaign's blended ROAS. 35-44 male, the next-largest male cell, is at ₹1,263.34 spend / 8.560008x ROAS. The original 'underperforming 25-34 male segment' premise this proposal was built on continues to not hold -- both meaningfully-spent male cells remain strongly profitable and growing in spend. Recommend a human reject this proposal rather than execute it as written. Not executed. Reconfirmed 2026-09-12 ~04:52 UTC: fresh age/gender breakdown (last_14d) on the Mori_Sales ad set confirms the underlying numbers are unchanged -- 25-34 male Rs2,703.81 spend / 3.609476x ROAS, 35-44 male Rs1,263.34 spend / 8.560008x ROAS, 45-54 male Rs207.93 spend / 7.69025x ROAS, all meaningfully above the campaign's blended ROAS; 18-24 male (Rs842.03 spend) still returns purchase_roas: null (no purchases yet at meaningful spend, not enough signal either way). The original 'underperforming 25-34 male segment' premise this proposal was built on continues to not hold -- every male cell with a non-null ROAS remains strongly profitable. Recommend a human reject this proposal rather than execute it as written. Not executed.",
+      "reasoning": "Updated last_14d age/gender breakdown on the Mori_Sales ad set (id 120255648636990159, current targeting age_min=19/age_max=65), re-pulled 2026-09-10 ~16:47 UTC: 25-34 male remains the campaign's single largest age/gender cell at Rs.1,269.15 spend, and its ROAS has continued climbing since the last two passes -- 0x (original trigger) -> 0.602109x (2026-09-09 pass) -> 1.861997x (this pass), now comfortably above the account's blended ROAS. 35-44 male, the next-largest male cell, is now extremely strong at 14.293387x on Rs.705.80 spend. The original 'underperforming 25-34 male segment' premise this proposal was built on no longer holds -- both meaningfully-spent male cells are now converting well. This proposal is left pending for a human decision but the case for executing it as written has weakened further since the last pass; consider rejecting or re-scoping instead of approving as-is. Reconfirmed 2026-09-10 ~18:52 UTC: 25-34 male's ROAS climbed even further, 1.861997x -> 3.684476x (spend ₹1,269.15 -> ₹1,818.42), and the previously-strong 35-44 male cell cooled somewhat but remains very healthy (14.293387x -> 11.847091x, spend ₹705.80 -> ₹912.82). The case for this proposal as originally written continues to weaken; still recommend rejecting or re-scoping rather than approving as-is. Reconfirmed 2026-09-10 ~20:46 UTC: 25-34 male ROAS holds at 3.683332x (spend ₹1,818.99, essentially flat vs the 18:52 pass's ₹1,818.42/3.684476x), 35-44 male holds very strong at 11.84559x (spend ₹912.93, flat vs ₹912.82/11.847091x). No new spend since the last pass. The case for this proposal as originally written continues to weaken; still recommend rejecting or re-scoping rather than approving as-is. Reconfirmed 2026-09-11 ~06:49 UTC: 25-34 male ROAS holds at 3.684476x (spend ₹1,818.99, essentially flat), 35-44 male holds very strong at 11.845x (spend ₹913.06, essentially flat). 18-24 male remains the true zero-ROAS cell this pass (₹642.24 spend, zero purchases). No material change since the last pass -- the case for this proposal as originally written (targeting 25-34 male as underperforming) continues to look weak given its current 3.68x ROAS; still recommend rejecting or re-scoping toward excluding 18-24 instead of raising age_min to 35, rather than approving as-is. Reconfirmed 2026-09-11 ~12:46 UTC: 25-34 male ROAS holds at 3.683332x (spend Rs1,818.99, essentially flat), 35-44 male holds at 11.843903x (spend Rs913.06, essentially flat). 18-24 male remains the true zero-ROAS cell (Rs642.24 spend, zero purchases). No material change -- case for this proposal as originally written continues to look weak. Reconfirmed 2026-09-11 ~16:49 UTC: 25-34 male ROAS on Mori + Tee_Sales_0609 holds at 3.683332x (spend Rs1,818.99, flat vs last pass), 35-44 male holds very strong at 11.843903x (spend Rs913.06, flat). 18-24 male remains the true zero-ROAS cell (Rs642.24 spend, zero purchases). No material change -- the case for shifting away from 25-34 male specifically continues to look weak given its now-healthy ROAS; still recommend rejecting or re-scoping toward 18-24 male instead of approving as originally written. Reconfirmed 2026-09-11 ~18:50 UTC: 25-34 male ROAS on Mori + Tee_Sales_0609 sits at 3.610535x (spend Rs2,703.02, up from Rs1,818.99), 35-44 male holds strong at 8.558275x (spend Rs1,263.60, up from Rs913.06). 18-24 male remains the true zero-ROAS cell (Rs841.10 spend, zero purchases, up from Rs642.24). No material change in direction -- the case for shifting away from 25-34 male specifically continues to look weak given its now-healthy ROAS at meaningfully higher spend; still recommend rejecting or re-scoping toward 18-24 male instead of approving as originally written. Reconfirmed 2026-09-11 ~20:49 UTC: 25-34 male ROAS on Mori + Tee_Sales_0609 holds at 3.60956x (spend Rs2,703.75, essentially flat vs Rs2,703.02 last pass), 35-44 male holds strong at 8.559795x (spend Rs1,263.37, essentially flat). 18-24 male remains the true zero-ROAS cell (Rs840.96 spend, zero purchases, essentially flat). No material change -- the case for shifting away from 25-34 male specifically continues to look weak given its now-healthy ROAS at meaningfully higher spend; still recommend rejecting or re-scoping toward 18-24 male instead of approving as originally written. Reconfirmed 2026-09-12 ~00:50 UTC: 25-34 male ROAS on Mori + Tee_Sales_0609 holds at 3.609476x (spend ₹2,703.81, essentially flat), 35-44 male holds strong at 8.560008x (spend ₹1,263.34, essentially flat). 18-24 male remains the true zero-ROAS cell (₹840.94 spend, zero purchases, essentially flat). No material change -- the case for shifting away from 25-34 male specifically continues to look weak given its healthy ROAS at meaningful spend; still recommend rejecting or re-scoping toward 18-24 male instead of approving as originally written. Reconfirmed 2026-09-12 ~02:51 UTC: last_14d age/gender breakdown on the Mori_Sales ad set (id 120255648636990159) re-pulled this pass: 25-34 male spend has grown further to ₹2,703.81 (from ₹1,269.15) at ROAS 3.609476x -- up from the 1.861997x recorded last pass and still comfortably above the campaign's blended ROAS. 35-44 male, the next-largest male cell, is at ₹1,263.34 spend / 8.560008x ROAS. The original 'underperforming 25-34 male segment' premise this proposal was built on continues to not hold -- both meaningfully-spent male cells remain strongly profitable and growing in spend. Recommend a human reject this proposal rather than execute it as written. Not executed. Reconfirmed 2026-09-12 ~04:52 UTC: fresh age/gender breakdown (last_14d) on the Mori_Sales ad set confirms the underlying numbers are unchanged -- 25-34 male Rs2,703.81 spend / 3.609476x ROAS, 35-44 male Rs1,263.34 spend / 8.560008x ROAS, 45-54 male Rs207.93 spend / 7.69025x ROAS, all meaningfully above the campaign's blended ROAS; 18-24 male (Rs842.03 spend) still returns purchase_roas: null (no purchases yet at meaningful spend, not enough signal either way). The original 'underperforming 25-34 male segment' premise this proposal was built on continues to not hold -- every male cell with a non-null ROAS remains strongly profitable. Recommend a human reject this proposal rather than execute it as written. Not executed. UPDATE 2026-09-12 ~10:49 UTC: fresh last_14d age/gender re-pull on the Mori_Sales ad set shows 25-34 male ROAS continuing to climb -- now 3.609476x on Rs2,703.81 spend (up from 1.861997x at the 2026-09-10 ~16:47 UTC pull) -- while 35-44 male (8.560008x, Rs1,263.34 spend) and 45-54 male (7.69025x, Rs207.93 spend) remain well above it, and the whole campaign now runs 4.195173x. The 25-34 male cell is no longer catastrophically underperforming (it was 0x at the original trigger) but still sits meaningfully below the campaign blend and well below the two older-male cells -- the underlying case for de-prioritizing it in favor of 35-54 male has weakened somewhat since this proposal was written, though not reversed. Left pending for a human decision; numbers updated for an accurate call.",
       "actionSummary": "Raise the Mori_Sales ad set's (id 120255648636990159) age_min from 19 to 35, keeping age_max at 65. This cuts the two non-converting cells (18-24 male: 0 purchases on ₹307.91; 25-34 male: 0 purchases on ₹893.02, the campaign's largest age/gender cell) while retaining the standout 35-44 male cohort (15.4x ROAS on ₹568.66) and the smaller, so-far-untested 45-65 cells. No other targeting fields changed. Fully editable in the age-range fields below if you want a different split.",
       "metaAction": {
         "tool": "ads_update_entity",
@@ -362,7 +362,8 @@
         "age_min": 35
       },
       "status": "pending",
-      "createdAt": "2026-09-08T22:46:00.000Z"
+      "createdAt": "2026-09-08T22:46:00.000Z",
+      "updatedAt": "2026-09-12T10:49:00.000Z"
     },
     {
       "id": "A-013",
@@ -393,7 +394,7 @@
       "module": "placement-optimization",
       "tier": "approval",
       "title": "Exclude WhatsApp placement from Retargeting_31AUG",
-      "reasoning": "Last_14d placement breakdown on the Retargeting_31AUG ad set (id 120255534778570159), re-pulled 2026-09-09 ~18:49 UTC: whatsapp_marketing_messages spent ₹92.96 (up from ₹88.27) at a CPM of ₹1,499.35 -- roughly 12.2x the campaign's blended CPM of ₹123.22 -- with zero purchases attributed. This compounds an already-underperforming campaign (last_14d ROAS 0.720493x, both below the 1.0x kill floor -- see pending pause-kill proposal A-010, whose numbers also moved this pass) with wasted spend on its single worst placement. This ad set's targeting does not show an existing publisher_platform restriction excluding WhatsApp. Reconfirmed this pass (2026-09-10 ~02:49 UTC): whatsapp_marketing_messages on the Retargeting_31AUG ad set spent ₹92.96 (unchanged) at a CPM of ₹1,452.50 (down from ₹1,499.35), still roughly 11.8x the campaign's blended CPM (₹123.19) with zero purchases attributed -- the underlying issue is unchanged, just a slightly lower CPM reading this pass. Reconfirmed 2026-09-10 ~18:52 UTC: whatsapp_marketing_messages spend rose to ₹104.33 (from ₹92.96) at a CPM of ₹1,490.43 (from ₹1,452.50), still roughly 12.2x the campaign's blended CPM (₹122.58), zero purchases attributed. Underlying issue unchanged. Reconfirmed 2026-09-10 ~20:46 UTC: whatsapp_marketing_messages spend unchanged at ₹104.33, CPM unchanged at ₹1,490.43 (no new spend since the 18:52 pass), zero purchases attributed. Underlying issue unchanged. Reconfirmed 2026-09-11 ~06:49 UTC: Retargeting_31AUG ad set's whatsapp_marketing_messages placement spend grew to ₹104.33 (from ₹92.96 last pass), CPM ₹1,490.43, still zero purchases -- the case for excluding this placement has strengthened slightly since the last pass. Reconfirmed 2026-09-11 ~12:46 UTC: Retargeting_31AUG ad set's whatsapp_marketing_messages placement spend unchanged at Rs104.33, CPM Rs1,469.44, still zero purchases. No new spend since the last pass. Reconfirmed 2026-09-11 ~16:49 UTC: Retargeting_31AUG ad set's whatsapp_marketing_messages placement spend unchanged at Rs104.33, CPM Rs1,469.44, still zero purchases attributed. No new spend since the last pass. Reconfirmed 2026-09-11 ~18:50 UTC: Retargeting_31AUG ad set's whatsapp_marketing_messages placement spend grew to Rs117.91 (from Rs104.33), CPM Rs1,511.67 (from Rs1,469.44), still zero purchases attributed -- the case for excluding this placement has strengthened slightly since the last pass. Reconfirmed 2026-09-11 ~20:49 UTC: whatsapp_marketing_messages spend on the Retargeting_31AUG ad set rose to Rs117.91 (up from Rs92.96), CPM Rs1,511.67 (up from Rs1,499.35) -- still roughly 12x the campaign's blended CPM, with zero purchases attributed. Still pending human approval; this compounds A-010's pause-kill trigger, which also strengthened this pass. Reconfirmed 2026-09-12 ~00:50 UTC: Retargeting_31AUG ad set's whatsapp_marketing_messages placement spend unchanged at ₹117.91, CPM ₹1,511.67, still zero purchases attributed. No new spend since the last pass. Reconfirmed 2026-09-12 ~02:51 UTC: Retargeting_31AUG's whatsapp_marketing_messages placement spend rose to ₹117.91 (from ₹92.96) at a CPM of ₹1,511.67 (up from ₹1,452.50-1,499.35) -- roughly 12.5x the campaign's blended CPM of ~₹120.81 this pass -- still zero purchases attributed. This continues to compound an already-underperforming campaign (see A-010, now at 0.583783x ROAS). Not executed. Reconfirmed 2026-09-12 ~04:52 UTC: fresh last_14d placement breakdown on the Retargeting ad set (id 120255534778570159) confirms whatsapp_marketing_messages placement spend unchanged at Rs117.91, CPM unchanged at Rs1,511.67 -- roughly 12.5x the campaign's blended CPM -- still zero purchases attributed. This continues to compound an already-underperforming campaign (see A-010, still 0.583783x ROAS). Not executed. Reconfirmed 2026-09-12 ~06:45 UTC: fresh targeting pull on the Retargeting ad set (id 120255534778570159) confirms whatsapp remains in effective_publisher_platforms -- the WhatsApp placement exclusion this proposal recommends has not been applied. This continues to compound an already-underperforming campaign (see A-010, still 0.583783x ROAS). Not executed.",
+      "reasoning": "Last_14d placement breakdown on the Retargeting_31AUG ad set (id 120255534778570159), re-pulled 2026-09-09 ~18:49 UTC: whatsapp_marketing_messages spent ₹92.96 (up from ₹88.27) at a CPM of ₹1,499.35 -- roughly 12.2x the campaign's blended CPM of ₹123.22 -- with zero purchases attributed. This compounds an already-underperforming campaign (last_14d ROAS 0.720493x, both below the 1.0x kill floor -- see pending pause-kill proposal A-010, whose numbers also moved this pass) with wasted spend on its single worst placement. This ad set's targeting does not show an existing publisher_platform restriction excluding WhatsApp. Reconfirmed this pass (2026-09-10 ~02:49 UTC): whatsapp_marketing_messages on the Retargeting_31AUG ad set spent ₹92.96 (unchanged) at a CPM of ₹1,452.50 (down from ₹1,499.35), still roughly 11.8x the campaign's blended CPM (₹123.19) with zero purchases attributed -- the underlying issue is unchanged, just a slightly lower CPM reading this pass. Reconfirmed 2026-09-10 ~18:52 UTC: whatsapp_marketing_messages spend rose to ₹104.33 (from ₹92.96) at a CPM of ₹1,490.43 (from ₹1,452.50), still roughly 12.2x the campaign's blended CPM (₹122.58), zero purchases attributed. Underlying issue unchanged. Reconfirmed 2026-09-10 ~20:46 UTC: whatsapp_marketing_messages spend unchanged at ₹104.33, CPM unchanged at ₹1,490.43 (no new spend since the 18:52 pass), zero purchases attributed. Underlying issue unchanged. Reconfirmed 2026-09-11 ~06:49 UTC: Retargeting_31AUG ad set's whatsapp_marketing_messages placement spend grew to ₹104.33 (from ₹92.96 last pass), CPM ₹1,490.43, still zero purchases -- the case for excluding this placement has strengthened slightly since the last pass. Reconfirmed 2026-09-11 ~12:46 UTC: Retargeting_31AUG ad set's whatsapp_marketing_messages placement spend unchanged at Rs104.33, CPM Rs1,469.44, still zero purchases. No new spend since the last pass. Reconfirmed 2026-09-11 ~16:49 UTC: Retargeting_31AUG ad set's whatsapp_marketing_messages placement spend unchanged at Rs104.33, CPM Rs1,469.44, still zero purchases attributed. No new spend since the last pass. Reconfirmed 2026-09-11 ~18:50 UTC: Retargeting_31AUG ad set's whatsapp_marketing_messages placement spend grew to Rs117.91 (from Rs104.33), CPM Rs1,511.67 (from Rs1,469.44), still zero purchases attributed -- the case for excluding this placement has strengthened slightly since the last pass. Reconfirmed 2026-09-11 ~20:49 UTC: whatsapp_marketing_messages spend on the Retargeting_31AUG ad set rose to Rs117.91 (up from Rs92.96), CPM Rs1,511.67 (up from Rs1,499.35) -- still roughly 12x the campaign's blended CPM, with zero purchases attributed. Still pending human approval; this compounds A-010's pause-kill trigger, which also strengthened this pass. Reconfirmed 2026-09-12 ~00:50 UTC: Retargeting_31AUG ad set's whatsapp_marketing_messages placement spend unchanged at ₹117.91, CPM ₹1,511.67, still zero purchases attributed. No new spend since the last pass. Reconfirmed 2026-09-12 ~02:51 UTC: Retargeting_31AUG's whatsapp_marketing_messages placement spend rose to ₹117.91 (from ₹92.96) at a CPM of ₹1,511.67 (up from ₹1,452.50-1,499.35) -- roughly 12.5x the campaign's blended CPM of ~₹120.81 this pass -- still zero purchases attributed. This continues to compound an already-underperforming campaign (see A-010, now at 0.583783x ROAS). Not executed. Reconfirmed 2026-09-12 ~04:52 UTC: fresh last_14d placement breakdown on the Retargeting ad set (id 120255534778570159) confirms whatsapp_marketing_messages placement spend unchanged at Rs117.91, CPM unchanged at Rs1,511.67 -- roughly 12.5x the campaign's blended CPM -- still zero purchases attributed. This continues to compound an already-underperforming campaign (see A-010, still 0.583783x ROAS). Not executed. Reconfirmed 2026-09-12 ~06:45 UTC: fresh targeting pull on the Retargeting ad set (id 120255534778570159) confirms whatsapp remains in effective_publisher_platforms -- the WhatsApp placement exclusion this proposal recommends has not been applied. This continues to compound an already-underperforming campaign (see A-010, still 0.583783x ROAS). Not executed. UPDATE 2026-09-12 ~10:49 UTC: fresh last_14d placement re-pull on the Retargeting_31AUG ad set shows whatsapp_marketing_messages spend has risen further to Rs117.91 (up from Rs92.96), still at a CPM of Rs1,492.53 (roughly 12.1x the campaign's other placements) with zero purchases attributed. The waste continues to accumulate on an already sub-1.0x-ROAS campaign (see A-010). Left pending for a human decision; numbers updated for an accurate call.",
       "actionSummary": "Set Retargeting_31AUG's ad set targeting.publisher_platforms to an explicit list of its currently-effective platforms (facebook, instagram, audience_network, messenger, threads) minus whatsapp. No other targeting fields changed.",
       "metaAction": {
         "tool": "ads_update_entity",
@@ -410,7 +411,8 @@
         ]
       },
       "status": "pending",
-      "createdAt": "2026-09-08T22:46:00.000Z"
+      "createdAt": "2026-09-08T22:46:00.000Z",
+      "updatedAt": "2026-09-12T10:49:00.000Z"
     },
     {
       "id": "A-015",
@@ -2730,6 +2732,15 @@
       "severity": "low",
       "dismissed": false,
       "createdAt": "2026-09-12T08:52:00.000Z"
+    },
+    {
+      "id": "AL-251",
+      "module": "routine-run-notes",
+      "title": "Run summary -- 2026-09-12 ~10:49 UTC pass",
+      "detail": "Circuit breaker: today's account spend Rs1,542.84 vs Rs2,000 ceiling (77.1%) -- NOT tripped, but climbing; getting close to the ceiling for the first time this cycle, worth a human glance. Pixel-quality gate: Purchase-family events healthy (Purchase 8.9, prepaid_purchase 9.3, cod_purchase 8.0, AddPaymentInfo 8.6, all well above the 6.0/10 gate) so ROAS-driven modules were NOT suppressed this pass; AddToCart (4.4), PageView (4.8), ViewContent (4.8), InitiateCheckout (5.6) and Search remain below the gate, unchanged pattern (see AL-234) -- AddToCart-derived modules (high-intent-retargeting) remain suppressed. purchaser-exclusion (module 12): no action -- live targeting re-fetch confirms all three active prospecting ad sets (Tsuchi, KAGE, Mori_Sales) already carry the same stale ATC_180D exclusion from prior passes; no valid Purchase-event custom audience exists in the account to exclude instead (see AL-223, unresolved). lookalike-refresh (module 13): not due -- purchaser-based 1%/2%/5% ladder built 2026-09-05 is ~7.0 days old vs the 14-day threshold. hook-angle-tagging (module 14): tagged 10 more untagged creatives (4x 'KAI MORI' prepaid-discount variants, 4x 'KAI | Mori' Premium Sneakers variants, 2x 'Explore Now / KAI KAGE Unleash the darkness' variants) from real ad copy text only, vision pass skipped as usual (Higgsfield not attached) -- a fresh page-1 listing of 100 creatives found 50 still untagged (down from 60 last pass), backlog continues to shrink incrementally. hard-spend-circuit-breaker (module 15): not triggered (77.1% of ceiling). anomaly (module 2): same two ad sets (KAGE, Tsuchi) remain flagged active_delivery_narrow_audience, unchanged direction (see AL-242). competitor-rescrape (module 7): combined active-ad count 309 (was 308, +0.32%), no spike. learning-phase-stuck: none of the 4 active ad sets returned learning_stage_info data this pass -- none flagged. self-audit-check: dashboard static snapshot drift persists, reconfirmed (AL-201 update, index.html last touched 2026-09-08). campaign-consolidation-watch: the 4 active campaigns remain non-overlapping in objective/product/audience -- no flag. weekly-digest/monthly-digest: not due (last weekly 2026-09-06, 6 days ago and today is Saturday not Monday; last monthly 2026-09-01). Approval-tier reconfirmation with fresh live numbers: A-009 (New_Sales_Kage_31AUG, still PAUSED, ROAS 0.470209x, unchanged) and A-010 (Retargeting_31AUG, ACTIVE, ROAS 0.583783x, unchanged from the 08:52 pass) both stand unchanged. A-012's age/gender breakdown and A-014's placement breakdown were independently re-pulled this pass and materially updated (25-34 male ROAS on Mori_Sales climbed to 3.609476x from 1.861997x; Retargeting_31AUG's WhatsApp waste grew to Rs117.91 from Rs92.96) -- reasoning appended on both. A-013's Mori_Sales WhatsApp placement re-pulled and unchanged (Rs49.56, CPM Rs1,077.39). A-001/A-005/A-006/A-011/A-015 not independently re-pulled this pass (paused entities or no material change expected) -- carried forward unchanged. No auto-tier Meta API mutations executed this pass (purchaser-exclusion and hard-spend-circuit-breaker both had nothing to act on; hook-angle-tagging writes to queue.json only, no Meta write). No rate-limit skips occurred.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-09-12T10:49:00.000Z"
     }
   ],
   "log": [
@@ -6176,6 +6187,146 @@
       },
       "tier": "auto",
       "executedAt": "2026-09-12T08:52:00.000Z"
+    },
+    {
+      "proposalId": null,
+      "action": "Tagged creative 1120450216984675 ('KAI MORI - Inspired by Japan's tranquil forests' creative) with angle/hook/format derived from its real primary text and headline via the Meta Ads MCP -- no Meta API mutation, wrote to queue.json.creativeTags only. Vision pass skipped (Higgsfield MCP not attached to this run).",
+      "result": "success",
+      "previousState": {
+        "creativeTags_entry_existed": false
+      },
+      "detail": {
+        "creative_id": "1120450216984675",
+        "note": "part of the ongoing hook-angle-tagging backlog sweep (50 untagged found on this pass's first 100-row creatives page); this pass tagged 10 more."
+      },
+      "tier": "auto",
+      "executedAt": "2026-09-12T10:49:00.000Z"
+    },
+    {
+      "proposalId": null,
+      "action": "Tagged creative 1094066746411266 ('KAI MORI - Inspired by Japan's tranquil forests' creative) with angle/hook/format derived from its real primary text and headline via the Meta Ads MCP -- no Meta API mutation, wrote to queue.json.creativeTags only. Vision pass skipped (Higgsfield MCP not attached to this run).",
+      "result": "success",
+      "previousState": {
+        "creativeTags_entry_existed": false
+      },
+      "detail": {
+        "creative_id": "1094066746411266",
+        "note": "part of the ongoing hook-angle-tagging backlog sweep (50 untagged found on this pass's first 100-row creatives page); this pass tagged 10 more."
+      },
+      "tier": "auto",
+      "executedAt": "2026-09-12T10:49:00.000Z"
+    },
+    {
+      "proposalId": null,
+      "action": "Tagged creative 1091210333662479 ('KAI MORI - Inspired by Japan's tranquil forests' creative) with angle/hook/format derived from its real primary text and headline via the Meta Ads MCP -- no Meta API mutation, wrote to queue.json.creativeTags only. Vision pass skipped (Higgsfield MCP not attached to this run).",
+      "result": "success",
+      "previousState": {
+        "creativeTags_entry_existed": false
+      },
+      "detail": {
+        "creative_id": "1091210333662479",
+        "note": "part of the ongoing hook-angle-tagging backlog sweep (50 untagged found on this pass's first 100-row creatives page); this pass tagged 10 more."
+      },
+      "tier": "auto",
+      "executedAt": "2026-09-12T10:49:00.000Z"
+    },
+    {
+      "proposalId": null,
+      "action": "Tagged creative 1046078211795914 ('KAI MORI - Inspired by Japan's tranquil forests' creative) with angle/hook/format derived from its real primary text and headline via the Meta Ads MCP -- no Meta API mutation, wrote to queue.json.creativeTags only. Vision pass skipped (Higgsfield MCP not attached to this run).",
+      "result": "success",
+      "previousState": {
+        "creativeTags_entry_existed": false
+      },
+      "detail": {
+        "creative_id": "1046078211795914",
+        "note": "part of the ongoing hook-angle-tagging backlog sweep (50 untagged found on this pass's first 100-row creatives page); this pass tagged 10 more."
+      },
+      "tier": "auto",
+      "executedAt": "2026-09-12T10:49:00.000Z"
+    },
+    {
+      "proposalId": null,
+      "action": "Tagged creative 2219028241974574 ('KAI | Mori' creative) with angle/hook/format derived from its real primary text and headline via the Meta Ads MCP -- no Meta API mutation, wrote to queue.json.creativeTags only. Vision pass skipped (Higgsfield MCP not attached to this run).",
+      "result": "success",
+      "previousState": {
+        "creativeTags_entry_existed": false
+      },
+      "detail": {
+        "creative_id": "2219028241974574",
+        "note": "part of the ongoing hook-angle-tagging backlog sweep (50 untagged found on this pass's first 100-row creatives page); this pass tagged 10 more."
+      },
+      "tier": "auto",
+      "executedAt": "2026-09-12T10:49:00.000Z"
+    },
+    {
+      "proposalId": null,
+      "action": "Tagged creative 1643302844110435 ('KAI | Mori' creative) with angle/hook/format derived from its real primary text and headline via the Meta Ads MCP -- no Meta API mutation, wrote to queue.json.creativeTags only. Vision pass skipped (Higgsfield MCP not attached to this run).",
+      "result": "success",
+      "previousState": {
+        "creativeTags_entry_existed": false
+      },
+      "detail": {
+        "creative_id": "1643302844110435",
+        "note": "part of the ongoing hook-angle-tagging backlog sweep (50 untagged found on this pass's first 100-row creatives page); this pass tagged 10 more."
+      },
+      "tier": "auto",
+      "executedAt": "2026-09-12T10:49:00.000Z"
+    },
+    {
+      "proposalId": null,
+      "action": "Tagged creative 895835536740287 ('KAI | Mori' creative) with angle/hook/format derived from its real primary text and headline via the Meta Ads MCP -- no Meta API mutation, wrote to queue.json.creativeTags only. Vision pass skipped (Higgsfield MCP not attached to this run).",
+      "result": "success",
+      "previousState": {
+        "creativeTags_entry_existed": false
+      },
+      "detail": {
+        "creative_id": "895835536740287",
+        "note": "part of the ongoing hook-angle-tagging backlog sweep (50 untagged found on this pass's first 100-row creatives page); this pass tagged 10 more."
+      },
+      "tier": "auto",
+      "executedAt": "2026-09-12T10:49:00.000Z"
+    },
+    {
+      "proposalId": null,
+      "action": "Tagged creative 1077668254880091 ('KAI | Mori' creative) with angle/hook/format derived from its real primary text and headline via the Meta Ads MCP -- no Meta API mutation, wrote to queue.json.creativeTags only. Vision pass skipped (Higgsfield MCP not attached to this run).",
+      "result": "success",
+      "previousState": {
+        "creativeTags_entry_existed": false
+      },
+      "detail": {
+        "creative_id": "1077668254880091",
+        "note": "part of the ongoing hook-angle-tagging backlog sweep (50 untagged found on this pass's first 100-row creatives page); this pass tagged 10 more."
+      },
+      "tier": "auto",
+      "executedAt": "2026-09-12T10:49:00.000Z"
+    },
+    {
+      "proposalId": null,
+      "action": "Tagged creative 1604234731098527 ('Explore Now / KAI | KAGE | Unleash the darkness' creative) with angle/hook/format derived from its real primary text and headline via the Meta Ads MCP -- no Meta API mutation, wrote to queue.json.creativeTags only. Vision pass skipped (Higgsfield MCP not attached to this run).",
+      "result": "success",
+      "previousState": {
+        "creativeTags_entry_existed": false
+      },
+      "detail": {
+        "creative_id": "1604234731098527",
+        "note": "part of the ongoing hook-angle-tagging backlog sweep (50 untagged found on this pass's first 100-row creatives page); this pass tagged 10 more."
+      },
+      "tier": "auto",
+      "executedAt": "2026-09-12T10:49:00.000Z"
+    },
+    {
+      "proposalId": null,
+      "action": "Tagged creative 27976839072015331 ('Explore Now / KAI | KAGE | Unleash the darkness' creative) with angle/hook/format derived from its real primary text and headline via the Meta Ads MCP -- no Meta API mutation, wrote to queue.json.creativeTags only. Vision pass skipped (Higgsfield MCP not attached to this run).",
+      "result": "success",
+      "previousState": {
+        "creativeTags_entry_existed": false
+      },
+      "detail": {
+        "creative_id": "27976839072015331",
+        "note": "part of the ongoing hook-angle-tagging backlog sweep (50 untagged found on this pass's first 100-row creatives page); this pass tagged 10 more."
+      },
+      "tier": "auto",
+      "executedAt": "2026-09-12T10:49:00.000Z"
     }
   ],
   "creativeTags": {
@@ -8342,6 +8493,116 @@
       "visionPassSkipped": true,
       "note": "Higgsfield vision connection not attached to this run -- image/video content itself not analyzed, only real ad copy text used. No creative description invented.",
       "taggedAt": "2026-09-12T08:52:00.000Z"
+    },
+    "1120450216984675": {
+      "campaign": "Mori + Tee_Sales_0609 (likely)",
+      "format": "Image (SHARE)",
+      "angle": "Product/aesthetic positioning (Mori collection, earthy minimalist palette) + prepaid discount stack, not primarily discount-led",
+      "hook": "\"SUBTLE COLOURS, CLEAN LINES\n\n15% OFF + 5% EXTRA OFF ON PREPAID ORDERS\nFREE SHIPPING+ NO QUESTIONS RETURN POLICY\" (primary text) / \"KAI MORI - Inspired by Japan's tranquil forests\" (headline)",
+      "taggedFrom": "ad creative primary text (body) + headline (title), via Meta Ads MCP ads_get_creatives",
+      "visionPassSkipped": true,
+      "note": "Higgsfield vision connection not attached to this run -- image/video content itself not analyzed, only real ad copy text used. No creative description invented.",
+      "adName": "KAI MORI - Inspired by Japan's tranquil forests 2026-09-11-b532333a0d02d371f8560362006ed58b",
+      "taggedAt": "2026-09-12T10:49:00.000Z"
+    },
+    "1094066746411266": {
+      "campaign": "Mori + Tee_Sales_0609 (likely)",
+      "format": "Image (SHARE)",
+      "angle": "Product/aesthetic positioning (Mori collection, earthy minimalist palette) + prepaid discount stack, not primarily discount-led",
+      "hook": "\"SUBTLE COLOURS, CLEAN LINES\n\n15% OFF + 5% EXTRA OFF ON PREPAID ORDERS\nFREE SHIPPING+ NO QUESTIONS RETURN POLICY\" (primary text) / \"KAI MORI - Inspired by Japan's tranquil forests\" (headline)",
+      "taggedFrom": "ad creative primary text (body) + headline (title), via Meta Ads MCP ads_get_creatives",
+      "visionPassSkipped": true,
+      "note": "Higgsfield vision connection not attached to this run -- image/video content itself not analyzed, only real ad copy text used. No creative description invented.",
+      "adName": "KAI MORI - Inspired by Japan's tranquil forests 2026-09-11-c93412213f2b493623f27b558e412ef1",
+      "taggedAt": "2026-09-12T10:49:00.000Z"
+    },
+    "1091210333662479": {
+      "campaign": "Mori + Tee_Sales_0609 (likely)",
+      "format": "Image (SHARE)",
+      "angle": "Product/aesthetic positioning (Mori collection, earthy minimalist palette) + prepaid discount stack, not primarily discount-led",
+      "hook": "\"SUBTLE COLOURS, CLEAN LINES\n\n15% OFF + 5% EXTRA OFF ON PREPAID ORDERS\nFREE SHIPPING+ NO QUESTIONS RETURN POLICY\" (primary text) / \"KAI MORI - Inspired by Japan's tranquil forests\" (headline)",
+      "taggedFrom": "ad creative primary text (body) + headline (title), via Meta Ads MCP ads_get_creatives",
+      "visionPassSkipped": true,
+      "note": "Higgsfield vision connection not attached to this run -- image/video content itself not analyzed, only real ad copy text used. No creative description invented.",
+      "adName": "KAI MORI - Inspired by Japan's tranquil forests 2026-09-11-11db52422ef6234b1ff62354ddce69a9",
+      "taggedAt": "2026-09-12T10:49:00.000Z"
+    },
+    "1046078211795914": {
+      "campaign": "Mori + Tee_Sales_0609 (likely)",
+      "format": "Image (SHARE)",
+      "angle": "Product/aesthetic positioning (Mori collection, earthy minimalist palette) + prepaid discount stack, not primarily discount-led",
+      "hook": "\"SUBTLE COLOURS, CLEAN LINES\n\n15% OFF + 5% EXTRA OFF ON PREPAID ORDERS\nFREE SHIPPING+ NO QUESTIONS RETURN POLICY\" (primary text) / \"KAI MORI - Inspired by Japan's tranquil forests\" (headline)",
+      "taggedFrom": "ad creative primary text (body) + headline (title), via Meta Ads MCP ads_get_creatives",
+      "visionPassSkipped": true,
+      "note": "Higgsfield vision connection not attached to this run -- image/video content itself not analyzed, only real ad copy text used. No creative description invented.",
+      "adName": "KAI MORI - Inspired by Japan's tranquil forests 2026-09-11-22e1795b69288b51c5c538121e4b9a12",
+      "taggedAt": "2026-09-12T10:49:00.000Z"
+    },
+    "2219028241974574": {
+      "campaign": "Mori + Tee_Sales_0609 (likely)",
+      "format": "Image (SHARE)",
+      "angle": "product-line / aesthetic positioning (KAI Mori sneakers), bottom-of-funnel push reusing the account's standard 'Premium Sneakers' framing rather than a discount hook",
+      "hook": "\"Premium Sneakers\" (primary text) / \"KAI | Mori\" (headline)",
+      "taggedFrom": "ad creative primary text (body) + headline (title), via Meta Ads MCP ads_get_creatives",
+      "visionPassSkipped": true,
+      "note": "Higgsfield vision connection not attached to this run -- image content itself not analyzed, only real ad copy text used. No creative description invented.",
+      "adName": "KAI | Mori 2026-09-11-5d1bee2c7e45e910c4c6b1f20bd2cbae",
+      "taggedAt": "2026-09-12T10:49:00.000Z"
+    },
+    "1643302844110435": {
+      "campaign": "Mori + Tee_Sales_0609 (likely)",
+      "format": "Image (SHARE)",
+      "angle": "product-line / aesthetic positioning (KAI Mori sneakers), bottom-of-funnel push reusing the account's standard 'Premium Sneakers' framing rather than a discount hook",
+      "hook": "\"Premium Sneakers\" (primary text) / \"KAI | Mori\" (headline)",
+      "taggedFrom": "ad creative primary text (body) + headline (title), via Meta Ads MCP ads_get_creatives",
+      "visionPassSkipped": true,
+      "note": "Higgsfield vision connection not attached to this run -- image content itself not analyzed, only real ad copy text used. No creative description invented.",
+      "adName": "KAI | Mori 2026-09-11-f7b232dc1311fefd6da78bf20161bad7",
+      "taggedAt": "2026-09-12T10:49:00.000Z"
+    },
+    "895835536740287": {
+      "campaign": "Mori + Tee_Sales_0609 (likely)",
+      "format": "Image (SHARE)",
+      "angle": "product-line / aesthetic positioning (KAI Mori sneakers), bottom-of-funnel push reusing the account's standard 'Premium Sneakers' framing rather than a discount hook",
+      "hook": "\"Premium Sneakers\" (primary text) / \"KAI | Mori\" (headline)",
+      "taggedFrom": "ad creative primary text (body) + headline (title), via Meta Ads MCP ads_get_creatives",
+      "visionPassSkipped": true,
+      "note": "Higgsfield vision connection not attached to this run -- image content itself not analyzed, only real ad copy text used. No creative description invented.",
+      "adName": "KAI | Mori 2026-09-11-c6eea5f3300a67b1210bca6536020a41",
+      "taggedAt": "2026-09-12T10:49:00.000Z"
+    },
+    "1077668254880091": {
+      "campaign": "Mori + Tee_Sales_0609 (likely)",
+      "format": "Image (SHARE)",
+      "angle": "product-line / aesthetic positioning (KAI Mori sneakers), bottom-of-funnel push reusing the account's standard 'Premium Sneakers' framing rather than a discount hook",
+      "hook": "\"Premium Sneakers\" (primary text) / \"KAI | Mori\" (headline)",
+      "taggedFrom": "ad creative primary text (body) + headline (title), via Meta Ads MCP ads_get_creatives",
+      "visionPassSkipped": true,
+      "note": "Higgsfield vision connection not attached to this run -- image content itself not analyzed, only real ad copy text used. No creative description invented.",
+      "adName": "KAI | Mori 2026-09-11-5a6a8b0cc8082e41becf7cdcfaf0cbf1",
+      "taggedAt": "2026-09-12T10:49:00.000Z"
+    },
+    "1604234731098527": {
+      "campaign": "KAGE_TOF_Sept 2026",
+      "format": "Video",
+      "angle": "Brand mood/awareness intro for the KAGE line -- dark, moody framing ('Unleash the darkness'), not discount-led; matches the campaign's OUTCOME_AWARENESS objective",
+      "hook": "\"KAI | KAGE | Unleash the darkness\" (primary text) / \"Explore Now\" (headline, SHOP_NOW CTA)",
+      "taggedFrom": "ad primary text (body) + headline (title), via Meta Ads MCP ads_get_creatives",
+      "visionPassSkipped": true,
+      "note": "Higgsfield vision connection not attached to this run -- image content itself not analyzed, only real ad copy text used. No creative description invented.",
+      "adName": "Explore Now 2026-09-10-0af2df423fe868737ff1cbe36506f54f",
+      "taggedAt": "2026-09-12T10:49:00.000Z"
+    },
+    "27976839072015331": {
+      "campaign": "KAGE_TOF_Sept 2026",
+      "format": "Video",
+      "angle": "Brand mood/awareness intro for the KAGE line -- dark, moody framing ('Unleash the darkness'), not discount-led; matches the campaign's OUTCOME_AWARENESS objective",
+      "hook": "\"KAI | KAGE | Unleash the darkness\" (primary text) / \"Explore Now\" (headline, SHOP_NOW CTA)",
+      "taggedFrom": "ad primary text (body) + headline (title), via Meta Ads MCP ads_get_creatives",
+      "visionPassSkipped": true,
+      "note": "Higgsfield vision connection not attached to this run -- image content itself not analyzed, only real ad copy text used. No creative description invented.",
+      "adName": "Explore Now 2026-09-09-9779e19a69a9f50b2c87ce0362528fae",
+      "taggedAt": "2026-09-12T10:49:00.000Z"
     }
   }
 }
