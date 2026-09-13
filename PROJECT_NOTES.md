@@ -220,3 +220,41 @@ So the token in Vercel is valid but was generated with none of the Marketing API
 3. Generate New Token → select the app → scopes `ads_read`, `ads_management`, `business_management` (the last is needed for custom-audience listing/creation) → never-expire.
 4. Vercel → project `performance-marketing-v2` → Settings → Environment Variables → replace `META_ACCESS_TOKEN` (Production) → Redeploy.
 5. Verify with `/api/meta?endpoint=token_info` (permissions should list ads_read + ads_management) and `/api/meta?endpoint=lookups` (should return audiences, not an error).
+
+## 15. Session update — 2026-09-13: full data refresh, every dataset in `index.html`
+
+Refreshed **every** static data block in `index.html` from live Meta Ads MCP pulls (account `704523148804803`). Nothing was skipped this session — including the two weekly datasets that were missed in earlier refreshes. Every campaign table reconciles exactly to the account-level pull for the same window (verified programmatically after editing).
+
+**The account has been substantially rebuilt since 5 Sep.** On 5 Sep there was one active campaign (`New_Sales_Kage_31AUG`) doing 0.71x MTD. There are now three active campaigns, and the account has had its best week since early August:
+
+- `Mori + Tee_Sales_0609` (OUTCOME_SALES, ₹1,400/day, launched 6 Sep) — **the engine**. ₹6,157 in 7d → 18 purchases, ₹27,335 revenue, **4.44x ROAS**. Runs two ads: `Tee_Sales` (15 purchases, 4.17x) and `Tsuchi_Sales` (3 purchases, **5.25x** — the best ROAS in the account, but throttled to ₹29.70 yesterday and ₹8.74 today while `Tee_Sales` takes the budget; flagged in the Creatives tab as worth reviewing).
+- `KAGE_TOF_Sept 2026` (**OUTCOME_AWARENESS**, reach-optimised) — new campaign type for this account. ₹472 bought 170,574 impressions at a ₹2.76 CPM, but 0.04% CTR. It is a reach buy and it drags blended account CTR from ~2.4% down to 0.80%. This is called out explicitly in the Creatives note, the `AMOD` modal, the Audience note, and the `WEEKLY_TRENDS` comment, because otherwise several charts look like a performance collapse when they are really a mix shift.
+- `Retargeting_31AUG` — reactivated, and weak: ₹669 in 7d for zero purchases.
+- Paused since 5 Sep: `New_Sales_Kage_31AUG` (₹5,964 / 1 purchase / 0.47x over 14d — correctly killed), `Mori_TOF_0709`, `Tsuchi BOF` (paused part-way through today), `Tsuchi_TOF`.
+
+**Period totals (all verified account-level):**
+
+| Window | Spend | Purchases | Revenue | ROAS |
+|---|---|---|---|---|
+| Today (Sep 13) | ₹971.99 | 1 | ₹725.94 | 0.75x |
+| Yesterday (Sep 12) | ₹2,021.99 | 4 | ₹5,162.15 | 2.55x |
+| Last 7d (Sep 6–12) | ₹8,792.98 | 18 | ₹27,334.73 | **3.11x** |
+| Last 14d (Aug 30–Sep 12) | ₹15,814.96 | 20 | ₹30,864.82 | 1.95x |
+| Last 30d (Aug 14–Sep 12) | ₹27,260.96 | 27 | ₹49,966.19 | 1.83x |
+| This month (Sep 1–13) | ₹15,298.12 | 21 | ₹31,590.76 | 2.07x |
+
+**What was refreshed (all of it):**
+- `DATA` — all five period tables rebuilt, new campaign IDs (`moritee0609`, `tsuchibof`, `moritof0709`, `kagetofsept`) with distinct colours.
+- **Weekly history table (`renderHistory`)** — the 5 Sep top row was a 6-day partial (`Aug 31–Sep 5`); it is now the complete `Aug 31–Sep 6` week (₹7,743 / 4 / 1.14x) plus the current `Sep 7–13` week (₹8,939 / 17 / **2.54x**, best since Aug 3–9).
+- **`WEEKLY_TRENDS`** — extended from 8 to 10 buckets (`Sep 6–12`, `Sep 13`). Two new product lines added, `Mori` and `Mori + Tee`, with matching entries in the `colors` map and in `pfd` (the product funnel data), which was also fully recomputed from real 30d campaign figures instead of carrying stale values.
+- `GEO_DATA` (7d + 30d) — real region spend/impressions/CTR/CPM; revenue/ROAS/purchases/ATC/CO/LPV still estimated under the same disclosed methodology. Confirmed again: Meta returns **zero** purchase attribution at region grain for this account, both windows.
+- `AUD_DATA` + `INSIGHTS_DATA` (hourly, placements, devices, age×gender, daily pacing) — all rebuilt from account-level breakdowns. New this period: WhatsApp Status shows up as a real placement (81,935 impressions at ₹4.60 CPM), and Audience Network is delivering ₹963. Unlike the 5 Sep pull, placement purchases now sum **exactly** to the account total (27), so the additivity caveat was rewritten rather than repeated.
+- `CREATIVES` — rebuilt from real ad-level (`level: ad`) 30d data; 13 ads. `status` now reflects *effective* delivery (an ad reads "paused" when its campaign is paused even though the ad object is ACTIVE).
+- Opportunity Score: **98/100** (was 86 on 5 Sep). Only two recommendations left: a fullscreen vertical Reels video on `Retargeting_31AUG`'s ad set (est. 31% lower cost per purchase) and AI creative variety on the `Tee_Sales` ad (est. +10% CTR).
+- Competitors — fresh page_ids + IN-scoped Ad Library searches. Gully Labs 132 active (155 on 5 Sep), Lotto Sport India 82 (89 on 5 Sep); both swings sit inside the documented sampling-oscillation band. **One real change worth acting on:** Lotto has dropped the "Ekiden" running-shoe push for "The Night Shoe" and "Tokyo Ginza Chunky Sneakers" — a move out of performance running and into lifestyle/chunky silhouettes, i.e. directly into KAI's positioning.
+
+**Not refreshed, and why:** the frequency-decay chart (Meta Ads MCP still has no reach-by-frequency-bucket breakdown — same limitation as every prior session), and Gully Labs' follower count / format / angle / creator breakdowns (still the 2 Aug Apify scrape; a real refresh needs a full re-scrape, out of scope). `automation/queue.json` is owned by the cloud routine and was not touched.
+
+**Creative-copy honesty note:** the five ads first seen this session (`Tee_Sales`, `Tsuchi_Sales`, `Tsuchi`, `Mori_TOF`, `KAGE`) are tagged `Not tagged` for hook/angle/format. `ads_get_creatives` returns only generic strings for this account's current creative objects ("Premium Sneakers", "KAI | KAGE | Unleash the darkness", "KAI | Tsuchi", all `SHOP_NOW` / `object_type: SHARE`) with no reliable creative→ad mapping, and `ads_get_ad_preview` still returns only a rendered iframe. Tagging them would have meant guessing.
+
+**Gotcha:** the parallel-`date_preset` duplication bug did not appear this session, but every period pull was still run sequentially as a precaution, consistent with prior sessions.

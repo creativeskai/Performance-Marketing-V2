@@ -1072,69 +1072,76 @@ body.locked #shell{display:none}
 // All data is LIVE from Meta API (May 16-22, 2026)
 
 const INSIGHTS_DATA = {
-  // Hourly breakdown - verified via Meta Ads MCP, 30d (Aug 6-Sep 4, 2026)
+  // Hourly breakdown - verified via Meta Ads MCP, 30d (Aug 14-Sep 12, 2026)
   hourly: [
-    {h:'00',label:'12am',cpm:49.37,ctr:1.66,purchases:1,spend:911.41, impressions:18460},
-    {h:'01',label:'1am', cpm:33.67,ctr:1.50,purchases:0,spend:761.28, impressions:22609},
-    {h:'02',label:'2am', cpm:57.70,ctr:1.63,purchases:1,spend:403.51, impressions:6993},
-    {h:'03',label:'3am', cpm:53.33,ctr:1.69,purchases:0,spend:262.25, impressions:4917},
-    {h:'04',label:'4am', cpm:49.54,ctr:1.78,purchases:0,spend:191.81, impressions:3872},
-    {h:'05',label:'5am', cpm:37.61,ctr:1.75,purchases:0,spend:160.93, impressions:4279},
-    {h:'06',label:'6am', cpm:39.32,ctr:2.05,purchases:0,spend:239.83, impressions:6099},
-    {h:'07',label:'7am', cpm:45.08,ctr:1.86,purchases:0,spend:489.02, impressions:10848},
-    {h:'08',label:'8am', cpm:49.71,ctr:1.71,purchases:1,spend:806.29, impressions:16220},
-    {h:'09',label:'9am', cpm:28.88,ctr:1.40,purchases:1,spend:1165.54,impressions:40360},
-    {h:'10',label:'10am',cpm:30.36,ctr:1.35,purchases:1,spend:1355.49,impressions:44640},
-    {h:'11',label:'11am',cpm:36.83,ctr:1.57,purchases:2,spend:1337.54,impressions:36319},
-    {h:'12',label:'12pm',cpm:63.62,ctr:2.28,purchases:1,spend:1198.56,impressions:18840},
-    {h:'13',label:'1pm', cpm:28.79,ctr:1.63,purchases:3,spend:1360.27,impressions:47244},
-    {h:'14',label:'2pm', cpm:48.39,ctr:1.98,purchases:1,spend:1102.18,impressions:22776},
-    {h:'15',label:'3pm', cpm:43.80,ctr:2.13,purchases:0,spend:1114.72,impressions:25451},
-    {h:'16',label:'4pm', cpm:32.26,ctr:1.80,purchases:0,spend:1089.32,impressions:33763},
-    {h:'17',label:'5pm', cpm:35.97,ctr:1.47,purchases:1,spend:1191.28,impressions:33118},
-    {h:'18',label:'6pm', cpm:34.74,ctr:1.28,purchases:0,spend:1136.11,impressions:32702},
-    {h:'19',label:'7pm', cpm:23.92,ctr:1.34,purchases:0,spend:1418.85,impressions:59311},
-    {h:'20',label:'8pm', cpm:14.30,ctr:1.17,purchases:2,spend:1509.42,impressions:105576},
-    {h:'21',label:'9pm', cpm:48.67,ctr:1.76,purchases:1,spend:1428.28,impressions:29345},
-    {h:'22',label:'10pm',cpm:53.24,ctr:2.27,purchases:1,spend:1233.59,impressions:23170},
-    {h:'23',label:'11pm',cpm:57.92,ctr:1.95,purchases:0,spend:1232.92,impressions:21288}
+    {h:'00',label:'12am',cpm:40.49,ctr:1.06,purchases:1,spend:1276.13,impressions:31516},
+    {h:'01',label:'1am', cpm:50.31,ctr:1.54,purchases:0,spend:883.52, impressions:17561},
+    {h:'02',label:'2am', cpm:56.42,ctr:1.13,purchases:1,spend:540.93, impressions:9588},
+    {h:'03',label:'3am', cpm:48.86,ctr:1.28,purchases:0,spend:340.56, impressions:6970},
+    {h:'04',label:'4am', cpm:41.81,ctr:1.61,purchases:0,spend:241.55, impressions:5778},
+    {h:'05',label:'5am', cpm:28.99,ctr:1.23,purchases:0,spend:244.73, impressions:8441},
+    {h:'06',label:'6am', cpm:35.31,ctr:1.52,purchases:0,spend:356.55, impressions:10098},
+    {h:'07',label:'7am', cpm:39.02,ctr:1.36,purchases:0,spend:653.99, impressions:16759},
+    {h:'08',label:'8am', cpm:43.02,ctr:1.35,purchases:0,spend:1088.51,impressions:25304},
+    {h:'09',label:'9am', cpm:42.48,ctr:1.42,purchases:0,spend:1460.81,impressions:34388},
+    {h:'10',label:'10am',cpm:57.02,ctr:1.49,purchases:2,spend:1655.46,impressions:29035},
+    {h:'11',label:'11am',cpm:53.36,ctr:1.47,purchases:3,spend:1686.66,impressions:31610},
+    {h:'12',label:'12pm',cpm:64.51,ctr:1.47,purchases:2,spend:1711.67,impressions:26535},
+    {h:'13',label:'1pm', cpm:54.32,ctr:1.54,purchases:4,spend:1429.21,impressions:26310},
+    {h:'14',label:'2pm', cpm:48.70,ctr:1.62,purchases:2,spend:1295.25,impressions:26595},
+    {h:'15',label:'3pm', cpm:49.19,ctr:1.50,purchases:1,spend:1204.40,impressions:24485},
+    {h:'16',label:'4pm', cpm:48.27,ctr:1.58,purchases:0,spend:1171.89,impressions:24279},
+    {h:'17',label:'5pm', cpm:54.57,ctr:1.53,purchases:2,spend:1381.64,impressions:25317},
+    {h:'18',label:'6pm', cpm:47.10,ctr:1.32,purchases:0,spend:1306.07,impressions:27727},
+    {h:'19',label:'7pm', cpm:42.28,ctr:1.31,purchases:0,spend:1524.91,impressions:36064},
+    {h:'20',label:'8pm', cpm:40.21,ctr:1.30,purchases:2,spend:1477.14,impressions:36740},
+    {h:'21',label:'9pm', cpm:45.60,ctr:1.29,purchases:1,spend:1633.82,impressions:35830},
+    {h:'22',label:'10pm',cpm:34.75,ctr:1.11,purchases:3,spend:1398.74,impressions:40252},
+    {h:'23',label:'11pm',cpm:43.50,ctr:1.16,purchases:3,spend:1296.81,impressions:29815}
   ],
 
-  // Placement breakdown - verified via Meta Ads MCP, 30d (Aug 6-Sep 4, 2026)
+  // Placement breakdown - verified via Meta Ads MCP, 30d (Aug 14-Sep 12, 2026)
   placements: [
-    {name:'IG Reels',     platform:'instagram', position:'instagram_reels',     impressions:270153,spend:9277.10,purchases:6,roas:1.53,cpm:34.34, ctr:1.44},
-    {name:'IG Stories',   platform:'instagram', position:'instagram_stories',   impressions:15470, spend:3556.14,purchases:4,roas:3.04,cpm:229.87,ctr:3.48},
-    {name:'IG Feed',      platform:'instagram', position:'feed',                impressions:34357, spend:5621.04,purchases:3,roas:1.08,cpm:163.61,ctr:2.61},
-    {name:'FB Reels',     platform:'facebook',  position:'facebook_reels',      impressions:15070, spend:699.25, purchases:0,roas:0,   cpm:46.40, ctr:2.73},
-    {name:'Threads Feed', platform:'threads',   position:'threads_feed',        impressions:183,   spend:26.50,  purchases:0,roas:0,   cpm:144.83,ctr:3.83},
-    {name:'FB Feed',      platform:'facebook',  position:'feed',                impressions:37599, spend:1936.13,purchases:4,roas:5.75,cpm:51.49, ctr:4.08},
-    {name:'FB Stories',   platform:'facebook',  position:'facebook_stories',    impressions:289,   spend:40.24,  purchases:0,roas:0,   cpm:139.24,ctr:5.88},
-    {name:'IG Explore',   platform:'instagram', position:'instagram_explore_grid_home',impressions:86,spend:1.29,purchases:0,roas:0,cpm:15.00,ctr:1.16}
+    {name:'IG Reels',     platform:'instagram', position:'instagram_reels',     impressions:368132,spend:12443.91,purchases:15,roas:1.78,cpm:33.80, ctr:1.09},
+    {name:'IG Feed',      platform:'instagram', position:'feed',                impressions:74482, spend:6787.18, purchases:6, roas:1.94,cpm:91.13, ctr:1.29},
+    {name:'IG Stories',   platform:'instagram', position:'instagram_stories',   impressions:21859, spend:4158.97, purchases:4, roas:2.14,cpm:190.26,ctr:2.78},
+    {name:'FB Feed',      platform:'facebook',  position:'feed',                impressions:7674,  spend:1047.41, purchases:2, roas:5.54,cpm:136.49,ctr:4.27},
+    {name:'Audience Net', platform:'audience_network',position:'an_classic',    impressions:18718, spend:962.68,  purchases:0, roas:0,   cpm:51.43, ctr:6.68},
+    {name:'WA Messages',  platform:'whatsapp',  position:'whatsapp_marketing_messages',impressions:498,spend:693.54,purchases:0,roas:0,  cpm:1392.65,ctr:5.62},
+    {name:'FB Reels',     platform:'facebook',  position:'facebook_reels',      impressions:9556,  spend:605.28,  purchases:0, roas:0,   cpm:63.34, ctr:3.12},
+    {name:'WA Status',    platform:'whatsapp',  position:'status',              impressions:81935, spend:376.87,  purchases:0, roas:0,   cpm:4.60,  ctr:0.58},
+    {name:'FB Reels Ovl', platform:'facebook',  position:'facebook_reels_overlay',impressions:1678,spend:77.54,   purchases:0, roas:0,   cpm:46.21, ctr:1.61},
+    {name:'FB Stories',   platform:'facebook',  position:'facebook_stories',    impressions:207,   spend:39.13,   purchases:0, roas:0,   cpm:189.04,ctr:5.80},
+    {name:'Threads Feed', platform:'threads',   position:'threads_feed',        impressions:460,   spend:30.04,   purchases:0, roas:0,   cpm:65.31, ctr:1.30},
+    {name:'Marketplace',  platform:'facebook',  position:'marketplace',         impressions:274,   spend:14.09,   purchases:0, roas:0,   cpm:51.42, ctr:1.46},
+    {name:'IG Search',    platform:'instagram', position:'instagram_search',    impressions:124,   spend:6.48,    purchases:0, roas:0,   cpm:52.26, ctr:0},
+    {name:'IG Explore',   platform:'instagram', position:'instagram_explore_grid_home',impressions:1195,spend:5.59,purchases:0,roas:0,   cpm:4.68,  ctr:0.17}
   ],
 
-  // Device breakdown - verified via Meta Ads MCP, 30d (Aug 6-Sep 4, 2026)
+  // Device breakdown - verified via Meta Ads MCP, 30d (Aug 14-Sep 12, 2026)
   devices: [
-    {name:'iPhone',        device:'iphone',           impressions:191853,spend:9723.04, purchases:10,roas:2.62,cpm:50.68,ctr:1.37},
-    {name:'Android Phone', device:'android_smartphone',impressions:473875,spend:12521.89,purchases:7, roas:1.33,cpm:26.42,ctr:1.65},
-    {name:'Android Tablet',device:'android_tablet',   impressions:991,   spend:36.52,  purchases:0, roas:0,   cpm:36.85, ctr:2.72},
-    {name:'iPad',          device:'ipad',             impressions:546,   spend:78.34,  purchases:0, roas:0,   cpm:143.49,ctr:1.47},
-    {name:'Desktop',       device:'desktop',          impressions:435,   spend:89.14,  purchases:0, roas:0,   cpm:204.92,ctr:3.22}
+    {name:'Android Phone', device:'android_smartphone',impressions:378364,spend:14227.92,purchases:14,roas:1.72,cpm:37.60, ctr:1.36},
+    {name:'iPhone',        device:'iphone',           impressions:204561,spend:12091.90,purchases:13,roas:2.11,cpm:59.11, ctr:1.37},
+    {name:'Other',         device:'other',            impressions:513,   spend:693.62,  purchases:0, roas:0,   cpm:1352.09,ctr:5.65},
+    {name:'Desktop',       device:'desktop',          impressions:558,   spend:110.46,  purchases:0, roas:0,   cpm:197.96,ctr:2.51},
+    {name:'iPad',          device:'ipad',             impressions:1421,  spend:99.78,   purchases:0, roas:0,   cpm:70.22, ctr:0.91},
+    {name:'Android Tablet',device:'android_tablet',   impressions:1580,  spend:37.28,   purchases:0, roas:0,   cpm:23.60, ctr:1.65}
   ],
 
-  // Age/gender cross-tab - verified via Meta Ads MCP, 30d (Aug 6-Sep 4, 2026)
+  // Age/gender cross-tab - verified via Meta Ads MCP, 30d (Aug 14-Sep 12, 2026)
   ageGender: [
-    {age:'18-24',gender:'male',   impressions:154909,spend:3610.74,purchases:2, roas:1.48, cpm:23.31, ctr:1.34},
-    {age:'18-24',gender:'female', impressions:16605, spend:233.62, purchases:0, roas:0,    cpm:14.07, ctr:1.13},
-    {age:'25-34',gender:'male',   impressions:155156,spend:10109.23,purchases:9,roas:2.25, cpm:65.16, ctr:2.00},
-    {age:'25-34',gender:'female', impressions:14466, spend:476.67, purchases:0, roas:0,    cpm:32.95, ctr:1.88},
-    {age:'35-44',gender:'male',   impressions:46767, spend:4691.37,purchases:6, roas:2.99, cpm:100.31,ctr:2.86},
-    {age:'35-44',gender:'female', impressions:5917,  spend:185.60, purchases:0, roas:0,    cpm:31.37, ctr:2.18},
-    {age:'45-54',gender:'male',   impressions:16868, spend:1569.81,purchases:0, roas:0,    cpm:93.06, ctr:3.11},
-    {age:'45-54',gender:'female', impressions:3671,  spend:124.56, purchases:0, roas:0,    cpm:33.93, ctr:3.27},
-    {age:'55-64',gender:'male',   impressions:10028, spend:572.34, purchases:0, roas:0,    cpm:57.07, ctr:3.70},
-    {age:'55-64',gender:'female', impressions:3412,  spend:106.84, purchases:0, roas:0,    cpm:31.31, ctr:4.51},
-    {age:'65+',  gender:'male',   impressions:7935,  spend:319.64, purchases:0, roas:0,    cpm:40.28, ctr:3.99},
-    {age:'65+',  gender:'female', impressions:2654,  spend:99.93,  purchases:0, roas:0,    cpm:37.65, ctr:3.96}
+    {age:'18-24',gender:'male',   impressions:275920,spend:4732.53, purchases:1, roas:0.34, cpm:17.15, ctr:0.84},
+    {age:'18-24',gender:'female', impressions:23647, spend:319.34,  purchases:0, roas:0,    cpm:13.50, ctr:0.91},
+    {age:'25-34',gender:'male',   impressions:190301,spend:12620.79,purchases:16,roas:2.22, cpm:66.32, ctr:1.62},
+    {age:'25-34',gender:'female', impressions:13254, spend:535.22,  purchases:0, roas:0,    cpm:40.38, ctr:1.85},
+    {age:'35-44',gender:'male',   impressions:46715, spend:5728.75, purchases:9, roas:3.28, cpm:122.63,ctr:2.58},
+    {age:'35-44',gender:'female', impressions:4630,  spend:160.74,  purchases:0, roas:0,    cpm:34.72, ctr:1.86},
+    {age:'45-54',gender:'male',   impressions:15494, spend:1604.75, purchases:1, roas:1.00, cpm:103.57,ctr:2.49},
+    {age:'45-54',gender:'female', impressions:2369,  spend:85.10,   purchases:0, roas:0,    cpm:35.92, ctr:2.53},
+    {age:'55-64',gender:'male',   impressions:5930,  spend:473.79,  purchases:0, roas:0,    cpm:79.90, ctr:2.98},
+    {age:'55-64',gender:'female', impressions:1327,  spend:44.46,   purchases:0, roas:0,    cpm:33.50, ctr:4.52},
+    {age:'65+',  gender:'male',   impressions:4308,  spend:152.22,  purchases:0, roas:0,    cpm:35.33, ctr:2.65},
+    {age:'65+',  gender:'female', impressions:979,   spend:31.02,   purchases:0, roas:0,    cpm:31.69, ctr:2.45}
   ],
 
   // Frequency distribution (reach by frequency bucket) - not refreshed this session; Meta Ads MCP has no direct
@@ -1153,22 +1160,24 @@ const INSIGHTS_DATA = {
     {freq:'31x+', reach:63,   pct:0.1}
   ],
 
-  // Daily pacing - verified via Meta Ads MCP, time_increment=1, Aug 29-Sep 4 2026
+  // Daily pacing - verified via Meta Ads MCP, time_increment=1, Sep 6-12 2026
   dailyPacing: [
-    {date:'Aug 29',day:'Sat',spend:1322.40,purchases:1,roas:2.49,cpm:35.66},
-    {date:'Aug 30',day:'Sun',spend:111.21, purchases:0,roas:0,   cpm:24.27},
-    {date:'Aug 31',day:'Mon',spend:1384.60,purchases:0,roas:0,   cpm:87.92},
-    {date:'Sep 1', day:'Tue',spend:274.53, purchases:0,roas:0,   cpm:53.35},
-    {date:'Sep 2', day:'Wed',spend:163.38, purchases:0,roas:0,   cpm:124.24},
-    {date:'Sep 3', day:'Thu',spend:1722.00,purchases:0,roas:0,   cpm:82.92},
-    {date:'Sep 4', day:'Fri',spend:1916.07,purchases:2,roas:1.84,cpm:44.42}
+    {date:'Sep 6', day:'Sun',spend:832.64, purchases:2,roas:6.40,cpm:134.06},
+    {date:'Sep 7', day:'Mon',spend:427.39, purchases:1,roas:6.23,cpm:107.65},
+    {date:'Sep 8', day:'Tue',spend:1141.41,purchases:1,roas:0.67,cpm:69.42},
+    {date:'Sep 9', day:'Wed',spend:1168.64,purchases:3,roas:3.16,cpm:25.27},
+    {date:'Sep 10',day:'Thu',spend:1287.88,purchases:4,roas:5.17,cpm:26.28},
+    {date:'Sep 11',day:'Fri',spend:1913.03,purchases:3,roas:1.60,cpm:22.40},
+    {date:'Sep 12',day:'Sat',spend:2021.99,purchases:4,roas:2.55,cpm:27.74}
   ],
 
-  // Opportunity score - verified via Meta Ads MCP, 5 Sep 2026
-  opportunityScore: 86,
+  // Opportunity score - verified via Meta Ads MCP, 13 Sep 2026 (was 86 on 5 Sep)
+  opportunityScore: 98,
 
-  // WhatsApp - verified via Meta Ads MCP platform_position breakdown, 30d (Aug 6-Sep 4, 2026)
-  whatsappData: {impressions:484, cpm:1345.85, ctr:6.82, spend:651.39, purchases:0}
+  // WhatsApp - verified via Meta Ads MCP platform_position breakdown, 30d (Aug 14-Sep 12, 2026).
+  // This is the whatsapp_marketing_messages placement only; the separate WhatsApp Status placement
+  // (81,935 impressions, Rs.376.87, Rs.4.60 CPM, 0.58% CTR, 0 purchases) is listed under placements.
+  whatsappData: {impressions:498, cpm:1392.65, ctr:5.62, spend:693.54, purchases:0}
 };
 
 // ── Insights render ──────────────────────────────────────────────────────────
@@ -1339,7 +1348,7 @@ function renderOpportunityScore() {
     (score>=100?'Account is fully optimised \u2014 Meta currently has zero pending recommendations for this account.':
      score>=90?'Account is close to fully optimised. Check Meta Ads Manager recommendations tab for specific pending actions.':
                'Some optimisations available. Check Meta Ads Manager recommendations tab for specific actions.')+
-    '</div><div style="margin-top:8px;font-family:var(--mono);font-size:.68rem;color:var(--green);font-weight:600">\u2713 Verified via Meta Ads MCP, 5 Sep 2026</div></div></div>';
+    '</div><div style="margin-top:8px;font-family:var(--mono);font-size:.68rem;color:var(--green);font-weight:600">\u2713 Verified via Meta Ads MCP, 13 Sep 2026</div></div></div>';
 }
 
 function renderWhatsApp() {
@@ -1451,139 +1460,174 @@ function lC(){try{return JSON.parse(localStorage.getItem(CFG)||'{}')}catch{retur
 function sC(c){localStorage.setItem(CFG,JSON.stringify(c));cfg=c}
 
 const DATA={
-  today:{label:'Today — September 5, 2026 (verified via Meta Ads MCP · Saturday)',campaigns:[
-    {id:'newsaleskage31aug',sn:'New_Sales_Kage_31AUG',product:'Kage Tee',spend:894.88,revenue:0,purchases:0,atc:0,checkouts:0,reach:5173,impressions:6312,cpm:141.77,freq:1.22,ctr:2.19,lpv:35,cpp:0,status:'active',color:'#1e7a45'}
+  today:{label:'Today — September 13, 2026 (verified via Meta Ads MCP · Sunday)',campaigns:[
+    {id:'moritee0609',sn:'Mori + Tee_Sales_0609',product:'Mori + Tee',spend:521.84,revenue:725.94,purchases:1,atc:0,checkouts:2,reach:2987,impressions:3563,cpm:146.46,freq:1.19,ctr:2.75,lpv:19,cpp:521.84,status:'active',color:'#c2185b'},
+    {id:'tsuchibof',sn:'Tsuchi BOF',product:'Tsuchi',spend:212.53,revenue:0,purchases:0,atc:0,checkouts:3,reach:1212,impressions:1429,cpm:148.73,freq:1.18,ctr:2.10,lpv:11,cpp:0,status:'paused',color:'#8a6d1f'},
+    {id:'retargeting31aug',sn:'Retargeting_31AUG',product:'Kage Tee',spend:201.96,revenue:0,purchases:0,atc:0,checkouts:0,reach:717,impressions:900,cpm:224.40,freq:1.26,ctr:2.89,lpv:10,cpp:0,status:'active',color:'#5c4a9e'},
+    {id:'kagetofsept',sn:'KAGE_TOF_Sept 2026',product:'Kage Tee',spend:35.66,revenue:0,purchases:0,atc:0,checkouts:0,reach:13319,impressions:14193,cpm:2.51,freq:1.07,ctr:0.06,lpv:0,cpp:0,status:'active',color:'#4a6fa5'}
   ]},
-  last7:{label:'Last 7 days (Aug 29–Sep 4, 2026, verified via Meta Ads MCP)',campaigns:[
-    {id:'newsaleskage31aug',sn:'New_Sales_Kage_31AUG',product:'Kage Tee',spend:4487.53,revenue:2804.15,purchases:1,atc:19,checkouts:39,reach:27521,impressions:40889,cpm:109.75,freq:1.49,ctr:2.40,lpv:465,cpp:4487.53,status:'active',color:'#1e7a45'},
-    {id:'kagesales1908',sn:'Kage_sales_1908',product:'Kage Tee',spend:1089.39,revenue:3299.00,purchases:1,atc:4,checkouts:7,reach:4743,impressions:6321,cpm:172.34,freq:1.33,ctr:1.57,lpv:65,cpp:1089.39,status:'paused',color:'#7a3b96'},
-    {id:'retargeting31aug',sn:'Retargeting_31AUG',product:'Kage Tee',spend:745.96,revenue:725.94,purchases:1,atc:3,checkouts:9,reach:4037,impressions:5999,cpm:124.35,freq:1.49,ctr:2.73,lpv:72,cpp:745.96,status:'paused',color:'#5c4a9e'},
-    {id:'kagetof',sn:'Kage_TOF',product:'Kage Tee',spend:266.62,revenue:0,purchases:0,atc:1,checkouts:2,reach:31725,impressions:34361,cpm:7.76,freq:1.08,ctr:0.88,lpv:247,cpp:0,status:'paused',color:'#1a6bb5'},
-    {id:'tsuchitof',sn:'Tsuchi_TOF',product:'Tsuchi',spend:304.69,revenue:0,purchases:0,atc:0,checkouts:1,reach:37031,impressions:40204,cpm:7.58,freq:1.09,ctr:1.58,lpv:350,cpp:0,status:'paused',color:'#c97a18'}
+  last7:{label:'Last 7 days (Sep 6–12, 2026, verified via Meta Ads MCP)',campaigns:[
+    {id:'moritee0609',sn:'Mori + Tee_Sales_0609',product:'Mori + Tee',spend:6156.68,revenue:27334.73,purchases:18,atc:50,checkouts:77,reach:24301,impressions:43531,cpm:141.43,freq:1.79,ctr:2.41,lpv:354,cpp:342.04,status:'active',color:'#c2185b'},
+    {id:'tsuchibof',sn:'Tsuchi BOF',product:'Tsuchi',spend:932.65,revenue:0,purchases:0,atc:4,checkouts:17,reach:8010,impressions:10055,cpm:92.75,freq:1.26,ctr:2.50,lpv:73,cpp:0,status:'paused',color:'#8a6d1f'},
+    {id:'retargeting31aug',sn:'Retargeting_31AUG',product:'Kage Tee',spend:668.88,revenue:0,purchases:0,atc:5,checkouts:3,reach:3598,impressions:5417,cpm:123.48,freq:1.51,ctr:2.42,lpv:46,cpp:0,status:'active',color:'#5c4a9e'},
+    {id:'moritof0709',sn:'Mori_TOF_0709',product:'Mori',spend:537.08,revenue:0,purchases:0,atc:0,checkouts:0,reach:49276,impressions:50367,cpm:10.66,freq:1.02,ctr:1.48,lpv:67,cpp:0,status:'paused',color:'#5a7d2a'},
+    {id:'kagetofsept',sn:'KAGE_TOF_Sept 2026',product:'Kage Tee',spend:471.61,revenue:0,purchases:0,atc:0,checkouts:0,reach:169110,impressions:170574,cpm:2.76,freq:1.01,ctr:0.04,lpv:0,cpp:0,status:'active',color:'#4a6fa5'},
+    {id:'newsaleskage31aug',sn:'New_Sales_Kage_31AUG',product:'Kage Tee',spend:26.08,revenue:0,purchases:0,atc:0,checkouts:0,reach:250,impressions:254,cpm:102.68,freq:1.02,ctr:2.76,lpv:3,cpp:0,status:'paused',color:'#1e7a45'}
   ]},
-  last14:{label:'Last 14 days (Aug 23–Sep 5, 2026, verified via Meta Ads MCP)',campaigns:[
-    {id:'kagesales1908',sn:'Kage_sales_1908',product:'Kage Tee',spend:4674.86,revenue:11270.29,purchases:4,atc:12,checkouts:29,reach:17322,impressions:29820,cpm:156.77,freq:1.72,ctr:2.06,lpv:442,cpp:1168.72,status:'paused',color:'#7a3b96'},
-    {id:'newsaleskage31aug',sn:'New_Sales_Kage_31AUG',product:'Kage Tee',spend:4487.53,revenue:2804.15,purchases:1,atc:19,checkouts:39,reach:27521,impressions:40889,cpm:109.75,freq:1.49,ctr:2.40,lpv:465,cpp:4487.53,status:'active',color:'#1e7a45'},
-    {id:'kagetof',sn:'Kage_TOF',product:'Kage Tee',spend:1138.04,revenue:0,purchases:0,atc:4,checkouts:8,reach:94819,impressions:102946,cpm:11.05,freq:1.09,ctr:1.40,lpv:1078,cpp:0,status:'paused',color:'#1a6bb5'},
-    {id:'retargeting31aug',sn:'Retargeting_31AUG',product:'Kage Tee',spend:745.96,revenue:725.94,purchases:1,atc:3,checkouts:9,reach:4037,impressions:5999,cpm:124.35,freq:1.49,ctr:2.73,lpv:72,cpp:745.96,status:'paused',color:'#5c4a9e'},
-    {id:'tsuchitof',sn:'Tsuchi_TOF',product:'Tsuchi',spend:304.69,revenue:0,purchases:0,atc:0,checkouts:1,reach:37031,impressions:40204,cpm:7.58,freq:1.09,ctr:1.58,lpv:350,cpp:0,status:'paused',color:'#c97a18'}
+  last14:{label:'Last 14 days (Aug 30–Sep 12, 2026, verified via Meta Ads MCP)',campaigns:[
+    {id:'moritee0609',sn:'Mori + Tee_Sales_0609',product:'Mori + Tee',spend:6156.68,revenue:27334.73,purchases:18,atc:50,checkouts:77,reach:24301,impressions:43531,cpm:141.43,freq:1.79,ctr:2.41,lpv:354,cpp:342.04,status:'active',color:'#c2185b'},
+    {id:'newsaleskage31aug',sn:'New_Sales_Kage_31AUG',product:'Kage Tee',spend:5963.63,revenue:2804.15,purchases:1,atc:20,checkouts:44,reach:34460,impressions:53094,cpm:112.32,freq:1.54,ctr:2.36,lpv:550,cpp:5963.63,status:'paused',color:'#1e7a45'},
+    {id:'retargeting31aug',sn:'Retargeting_31AUG',product:'Kage Tee',spend:1414.84,revenue:725.94,purchases:1,atc:8,checkouts:12,reach:6784,impressions:11416,cpm:123.93,freq:1.68,ctr:2.58,lpv:118,cpp:1414.84,status:'active',color:'#5c4a9e'},
+    {id:'tsuchibof',sn:'Tsuchi BOF',product:'Tsuchi',spend:932.65,revenue:0,purchases:0,atc:4,checkouts:17,reach:8010,impressions:10055,cpm:92.75,freq:1.26,ctr:2.50,lpv:73,cpp:0,status:'paused',color:'#8a6d1f'},
+    {id:'moritof0709',sn:'Mori_TOF_0709',product:'Mori',spend:537.08,revenue:0,purchases:0,atc:0,checkouts:0,reach:49276,impressions:50367,cpm:10.66,freq:1.02,ctr:1.48,lpv:67,cpp:0,status:'paused',color:'#5a7d2a'},
+    {id:'kagetofsept',sn:'KAGE_TOF_Sept 2026',product:'Kage Tee',spend:471.61,revenue:0,purchases:0,atc:0,checkouts:0,reach:169110,impressions:170574,cpm:2.76,freq:1.01,ctr:0.04,lpv:0,cpp:0,status:'active',color:'#4a6fa5'},
+    {id:'tsuchitof',sn:'Tsuchi_TOF',product:'Tsuchi',spend:304.86,revenue:0,purchases:0,atc:0,checkouts:1,reach:37031,impressions:40207,cpm:7.58,freq:1.09,ctr:1.58,lpv:350,cpp:0,status:'paused',color:'#c97a18'},
+    {id:'kagetof',sn:'Kage_TOF',product:'Kage Tee',spend:24.37,revenue:0,purchases:0,atc:1,checkouts:2,reach:3476,impressions:3518,cpm:6.93,freq:1.01,ctr:1.02,lpv:33,cpp:0,status:'paused',color:'#1a6bb5'},
+    {id:'kagesales1908',sn:'Kage_sales_1908',product:'Kage Tee',spend:9.24,revenue:0,purchases:0,atc:1,checkouts:6,reach:78,impressions:81,cpm:114.07,freq:1.04,ctr:0.00,lpv:0,cpp:0,status:'paused',color:'#7a3b96'}
   ]},
-  last30:{label:'Last 30 days (Aug 6–Sep 4, 2026, verified via Meta Ads MCP)',campaigns:[
-    {id:'kagesales',sn:'Kage_Sales',product:'Kage Tee',spend:6195.22,revenue:26618.87,purchases:10,atc:39,checkouts:81,reach:38222,impressions:55838,cpm:110.95,freq:1.46,ctr:2.01,lpv:870,cpp:619.52,status:'paused',color:'#b85c00'},
+  last30:{label:'Last 30 days (Aug 14–Sep 12, 2026, verified via Meta Ads MCP)',campaigns:[
     {id:'kagesales1908',sn:'Kage_sales_1908',product:'Kage Tee',spend:6179.11,revenue:11270.29,purchases:4,atc:23,checkouts:48,reach:22241,impressions:42484,cpm:145.45,freq:1.91,ctr:2.05,lpv:635,cpp:1544.78,status:'paused',color:'#7a3b96'},
-    {id:'newsaleskage31aug',sn:'New_Sales_Kage_31AUG',product:'Kage Tee',spend:4487.53,revenue:2804.15,purchases:1,atc:19,checkouts:39,reach:27521,impressions:40889,cpm:109.75,freq:1.49,ctr:2.40,lpv:465,cpp:4487.53,status:'active',color:'#1e7a45'},
-    {id:'kagetraffic',sn:'Kage_Traffic Campaign',product:'Kage Tee',spend:2038.24,revenue:0,purchases:0,atc:1,checkouts:3,reach:87971,impressions:326317,cpm:6.25,freq:3.71,ctr:1.27,lpv:1371,cpp:0,status:'paused',color:'#2e8b57'},
+    {id:'moritee0609',sn:'Mori + Tee_Sales_0609',product:'Mori + Tee',spend:6156.68,revenue:27334.73,purchases:18,atc:50,checkouts:77,reach:24301,impressions:43531,cpm:141.43,freq:1.79,ctr:2.41,lpv:354,cpp:342.04,status:'active',color:'#c2185b'},
+    {id:'newsaleskage31aug',sn:'New_Sales_Kage_31AUG',product:'Kage Tee',spend:5963.63,revenue:2804.15,purchases:1,atc:20,checkouts:44,reach:34460,impressions:53094,cpm:112.32,freq:1.54,ctr:2.36,lpv:550,cpp:5963.63,status:'paused',color:'#1e7a45'},
+    {id:'kagesales',sn:'Kage_Sales',product:'Kage Tee',spend:2150.84,revenue:7831.08,purchases:3,atc:16,checkouts:19,reach:6516,impressions:8800,cpm:244.41,freq:1.35,ctr:2.91,lpv:200,cpp:716.95,status:'paused',color:'#b85c00'},
     {id:'kagetof',sn:'Kage_TOF',product:'Kage Tee',spend:1911.28,revenue:0,purchases:0,atc:5,checkouts:10,reach:137442,impressions:148892,cpm:12.84,freq:1.08,ctr:1.68,lpv:1774,cpp:0,status:'paused',color:'#1a6bb5'},
+    {id:'retargeting31aug',sn:'Retargeting_31AUG',product:'Kage Tee',spend:1414.84,revenue:725.94,purchases:1,atc:8,checkouts:12,reach:6784,impressions:11416,cpm:123.93,freq:1.68,ctr:2.58,lpv:118,cpp:1414.84,status:'active',color:'#5c4a9e'},
+    {id:'tsuchibof',sn:'Tsuchi BOF',product:'Tsuchi',spend:932.65,revenue:0,purchases:0,atc:4,checkouts:17,reach:8010,impressions:10055,cpm:92.75,freq:1.26,ctr:2.50,lpv:73,cpp:0,status:'paused',color:'#8a6d1f'},
     {id:'fudoshin',sn:'Fudoshin_Sales',product:'Fudoshin',spend:868.24,revenue:0,purchases:0,atc:6,checkouts:15,reach:2875,impressions:4707,cpm:184.46,freq:1.64,ctr:1.47,lpv:42,cpp:0,status:'paused',color:'#0e7c86'},
-    {id:'retargeting31aug',sn:'Retargeting_31AUG',product:'Kage Tee',spend:745.96,revenue:725.94,purchases:1,atc:3,checkouts:9,reach:4037,impressions:5999,cpm:124.35,freq:1.49,ctr:2.73,lpv:72,cpp:745.96,status:'paused',color:'#5c4a9e'},
+    {id:'moritof0709',sn:'Mori_TOF_0709',product:'Mori',spend:537.08,revenue:0,purchases:0,atc:0,checkouts:0,reach:49276,impressions:50367,cpm:10.66,freq:1.02,ctr:1.48,lpv:67,cpp:0,status:'paused',color:'#5a7d2a'},
+    {id:'kagetofsept',sn:'KAGE_TOF_Sept 2026',product:'Kage Tee',spend:471.61,revenue:0,purchases:0,atc:0,checkouts:0,reach:169110,impressions:170574,cpm:2.76,freq:1.01,ctr:0.04,lpv:0,cpp:0,status:'active',color:'#4a6fa5'},
     {id:'kagesales1608',sn:'Kage_sales_1608',product:'Kage Tee',spend:370.14,revenue:0,purchases:0,atc:0,checkouts:0,reach:1843,impressions:2870,cpm:128.97,freq:1.56,ctr:1.32,lpv:26,cpp:0,status:'paused',color:'#b85c00'},
-    {id:'tsuchitof',sn:'Tsuchi_TOF',product:'Tsuchi',spend:304.69,revenue:0,purchases:0,atc:0,checkouts:1,reach:37031,impressions:40204,cpm:7.58,freq:1.09,ctr:1.58,lpv:350,cpp:0,status:'paused',color:'#c97a18'}
+    {id:'tsuchitof',sn:'Tsuchi_TOF',product:'Tsuchi',spend:304.86,revenue:0,purchases:0,atc:0,checkouts:1,reach:37031,impressions:40207,cpm:7.58,freq:1.09,ctr:1.58,lpv:350,cpp:0,status:'paused',color:'#c97a18'}
   ]},
-  month:{label:'This month (Sep 1–5, 2026, verified via Meta Ads MCP)',campaigns:[
-    {id:'newsaleskage31aug',sn:'New_Sales_Kage_31AUG',product:'Kage Tee',spend:4102.06,revenue:2804.15,purchases:1,atc:8,checkouts:31,reach:22859,impressions:32126,cpm:127.69,freq:1.41,ctr:2.34,lpv:209,cpp:4102.06,status:'active',color:'#1e7a45'},
-    {id:'retargeting31aug',sn:'Retargeting_31AUG',product:'Kage Tee',spend:567.40,revenue:725.94,purchases:1,atc:3,checkouts:9,reach:2972,impressions:4374,cpm:129.72,freq:1.47,ctr:2.72,lpv:38,cpp:567.40,status:'paused',color:'#5c4a9e'},
-    {id:'tsuchitof',sn:'Tsuchi_TOF',product:'Tsuchi',spend:304.69,revenue:0,purchases:0,atc:0,checkouts:1,reach:37031,impressions:40204,cpm:7.58,freq:1.09,ctr:1.58,lpv:350,cpp:0,status:'paused',color:'#c97a18'}
+  month:{label:'This month (Sep 1–13, 2026, verified via Meta Ads MCP)',campaigns:[
+    {id:'moritee0609',sn:'Mori + Tee_Sales_0609',product:'Mori + Tee',spend:6684.88,revenue:28060.67,purchases:19,atc:50,checkouts:79,reach:26433,impressions:47139,cpm:141.81,freq:1.78,ctr:2.44,lpv:373,cpp:351.84,status:'active',color:'#c2185b'},
+    {id:'newsaleskage31aug',sn:'New_Sales_Kage_31AUG',product:'Kage Tee',spend:4679.99,revenue:2804.15,purchases:1,atc:9,checkouts:36,reach:26450,impressions:37987,cpm:123.20,freq:1.44,ctr:2.33,lpv:259,cpp:4679.99,status:'paused',color:'#1e7a45'},
+    {id:'retargeting31aug',sn:'Retargeting_31AUG',product:'Kage Tee',spend:1438.64,revenue:725.94,purchases:1,atc:8,checkouts:12,reach:6467,impressions:10699,cpm:134.46,freq:1.65,ctr:2.58,lpv:94,cpp:1438.64,status:'active',color:'#5c4a9e'},
+    {id:'tsuchibof',sn:'Tsuchi BOF',product:'Tsuchi',spend:1145.21,revenue:0,purchases:0,atc:4,checkouts:20,reach:8669,impressions:11485,cpm:99.71,freq:1.32,ctr:2.46,lpv:84,cpp:0,status:'paused',color:'#8a6d1f'},
+    {id:'moritof0709',sn:'Mori_TOF_0709',product:'Mori',spend:537.08,revenue:0,purchases:0,atc:0,checkouts:0,reach:49276,impressions:50367,cpm:10.66,freq:1.02,ctr:1.48,lpv:67,cpp:0,status:'paused',color:'#5a7d2a'},
+    {id:'kagetofsept',sn:'KAGE_TOF_Sept 2026',product:'Kage Tee',spend:507.46,revenue:0,purchases:0,atc:0,checkouts:0,reach:182828,impressions:184847,cpm:2.75,freq:1.01,ctr:0.04,lpv:0,cpp:0,status:'active',color:'#4a6fa5'},
+    {id:'tsuchitof',sn:'Tsuchi_TOF',product:'Tsuchi',spend:304.86,revenue:0,purchases:0,atc:0,checkouts:1,reach:37031,impressions:40207,cpm:7.58,freq:1.09,ctr:1.58,lpv:350,cpp:0,status:'paused',color:'#c97a18'}
   ]}
 };
 
-// Extended 2026-09-05: added the Aug 25–31 and Sep 1–5 (partial, 6 days incl. today) weeks from a
-// campaign-level Meta Ads MCP pull (time_increment=7). Product = campaign-to-product mapping used
-// everywhere else on this dashboard. Kage Tee = Kage_TOF + Kage_sales_1908 + New_Sales_Kage_31AUG +
-// Retargeting_31AUG, spend-weighted CPM / impression-weighted CTR / revenue-over-spend ROAS.
-// Tsuchi line added (Tsuchi_TOF, first spend Sep 1–5). Earlier weeks unchanged from prior sessions.
+// Extended 2026-09-13: added the Sep 6–12 and Sep 13 buckets from a campaign-level Meta Ads MCP
+// pull (time_range 2026-09-06→2026-09-13, time_increment=7). Product = campaign-to-product mapping
+// used everywhere else on this dashboard. Kage Tee = Kage_TOF + Kage_sales_1908 + Kage_sales_1608 +
+// Kage_Sales + New_Sales_Kage_31AUG + Retargeting_31AUG + KAGE_TOF_Sept 2026; Tsuchi = Tsuchi_TOF +
+// Tsuchi BOF; Mori = Mori_TOF_0709; Mori + Tee = Mori + Tee_Sales_0609 (a single campaign that runs
+// two ads, Tee_Sales and Tsuchi_Sales, so it is kept as its own line rather than split). CPM is
+// spend-weighted, CTR impression-weighted, ROAS = revenue/spend. Earlier weeks unchanged.
+// Note: the Kage Tee CTR collapse from Sep 6 onward is real — KAGE_TOF_Sept 2026 is an AWARENESS
+// (reach-optimised) campaign delivering ~170k impressions at 0.04% CTR, which dominates the blend.
 const WEEKLY_TRENDS={
-  weeks:['Jul 18–24','Jul 25–31','Aug 1–7','Aug 8–14','Aug 15–17','Aug 18–24','Aug 25–31','Sep 1–5'],
+  weeks:['Jul 18–24','Jul 25–31','Aug 1–7','Aug 8–14','Aug 15–17','Aug 18–24','Aug 25–31','Sep 1–5','Sep 6–12','Sep 13'],
   products:{
-    'Kage Tee':{cpm:[0,0,126.38,95.16,291.05,47.61,46.52,124.28],ctr:[0,0,2.38,1.87,3.20,2.21,1.51,2.37],roas:[0,0,11.59,2.51,5.31,1.47,1.09,0.68]},
-    'Tsuchi':{cpm:[0,0,0,0,0,0,0,7.58],ctr:[0,0,0,0,0,0,0,1.58],roas:[0,0,0,0,0,0,0,0]},
-    'Essentials v2':{cpm:[58.43,148.04,0,0,0,0,0,0],ctr:[1.33,1.53,0,0,0,0,0,0],roas:[1.19,0,0,0,0,0,0,0]},
-    'Essentials v3':{cpm:[0,0,95.71,0,0,0,0,0],ctr:[0,0,1.28,0,0,0,0,0],roas:[0,0,0.44,0,0,0,0,0]},
-    'Bundle':{cpm:[117.37,0,0,0,0,0,0,0],ctr:[2.18,0,0,0,0,0,0,0],roas:[0.50,0,0,0,0,0,0,0]},
-    'Fudoshin':{cpm:[0,0,0,173.06,195.45,0,0,0],ctr:[0,0,0,1.04,1.88,0,0,0],roas:[0,0,0,0,0,0,0,0]},
-    'Kage Refresh':{cpm:[82.01,0,0,0,0,0,0,0],ctr:[2.28,0,0,0,0,0,0,0],roas:[0,0,0,0,0,0,0,0]}
+    'Kage Tee':{cpm:[0,0,126.38,95.16,291.05,47.61,46.52,124.28,6.62,15.69],ctr:[0,0,2.38,1.87,3.20,2.21,1.51,2.37,0.12,0.23],roas:[0,0,11.59,2.51,5.31,1.47,1.09,0.68,0,0]},
+    'Tsuchi':{cpm:[0,0,0,0,0,0,0,7.58,92.75,148.64],ctr:[0,0,0,0,0,0,0,1.58,2.50,2.17],roas:[0,0,0,0,0,0,0,0,0,0]},
+    'Mori':{cpm:[0,0,0,0,0,0,0,0,10.66,0],ctr:[0,0,0,0,0,0,0,0,1.48,0],roas:[0,0,0,0,0,0,0,0,0,0]},
+    'Mori + Tee':{cpm:[0,0,0,0,0,0,0,0,141.43,146.40],ctr:[0,0,0,0,0,0,0,0,2.41,2.72],roas:[0,0,0,0,0,0,0,0,4.44,1.37]},
+    'Essentials v2':{cpm:[58.43,148.04,0,0,0,0,0,0,0,0],ctr:[1.33,1.53,0,0,0,0,0,0,0,0],roas:[1.19,0,0,0,0,0,0,0,0,0]},
+    'Essentials v3':{cpm:[0,0,95.71,0,0,0,0,0,0,0],ctr:[0,0,1.28,0,0,0,0,0,0,0],roas:[0,0,0.44,0,0,0,0,0,0,0]},
+    'Bundle':{cpm:[117.37,0,0,0,0,0,0,0,0,0],ctr:[2.18,0,0,0,0,0,0,0,0,0],roas:[0.50,0,0,0,0,0,0,0,0,0]},
+    'Fudoshin':{cpm:[0,0,0,173.06,195.45,0,0,0,0,0],ctr:[0,0,0,1.04,1.88,0,0,0,0,0],roas:[0,0,0,0,0,0,0,0,0,0]},
+    'Kage Refresh':{cpm:[82.01,0,0,0,0,0,0,0,0,0],ctr:[2.28,0,0,0,0,0,0,0,0,0],roas:[0,0,0,0,0,0,0,0,0,0]}
   }
 };
 
 const GEO_DATA={
   last7:{
-    label:'Last 7 days (Aug 29\u2013Sep 4, 2026, verified via Meta Ads MCP)',
-    note:'Spend/impressions/CTR/CPM are real region-breakdown data. Meta does not return purchase attribution at region-level breakdown, so revenue/ROAS/purchases/ATC/CO/LPV are estimated (CTR \u00d7 account avg ROAS for revenue; spend-share for ATC/CO/LPV) \u2014 same disclosed methodology as prior sessions. Account-level last 7d: \u20b96,894 spend, 3 purchases, 0.99x ROAS.',
-    states:[{name:'Maharashtra',tier:'T1',spend:2516.19,revenue:2431.00,roas:0.97,purchases:0,cpm:58.86,ctr:1.67,atc:10,co:21,lpv:438},{name:'Karnataka',tier:'T1',spend:1548.62,revenue:1792.30,roas:1.16,purchases:0,cpm:100.92,ctr:2.00,atc:6,co:13,lpv:269},{name:'Telangana',tier:'T1',spend:847.32,revenue:897.20,roas:1.06,purchases:0,cpm:75.58,ctr:1.83,atc:3,co:7,lpv:147},{name:'Delhi',tier:'T1',spend:758.86,revenue:996.90,roas:1.31,purchases:0,cpm:69.35,ctr:2.27,atc:3,co:6,lpv:132},{name:'Kerala',tier:'T2',spend:297.58,revenue:328.90,roas:1.11,purchases:0,cpm:59.78,ctr:1.91,atc:1,co:3,lpv:52},{name:'Unknown',tier:'T2',spend:166.39,revenue:103.00,roas:0.62,purchases:0,cpm:444.89,ctr:1.07,atc:1,co:1,lpv:29},{name:'Tamil Nadu',tier:'T1',spend:143.94,revenue:117.40,roas:0.82,purchases:0,cpm:32.17,ctr:1.41,atc:1,co:1,lpv:25},{name:'Haryana',tier:'T2',spend:141.80,revenue:137.00,roas:0.97,purchases:0,cpm:44.58,ctr:1.67,atc:1,co:1,lpv:25},{name:'Uttar Pradesh',tier:'T2',spend:83.60,revenue:73.50,roas:0.88,purchases:0,cpm:11.38,ctr:1.52,atc:0,co:1,lpv:15},{name:'Gujarat',tier:'T2',spend:82.39,revenue:61.50,roas:0.75,purchases:0,cpm:13.13,ctr:1.29,atc:0,co:1,lpv:14},{name:'Punjab',tier:'T2',spend:40.28,revenue:33.30,roas:0.83,purchases:0,cpm:13.69,ctr:1.43,atc:0,co:0,lpv:7},{name:'Madhya Pradesh',tier:'T2',spend:36.07,revenue:34.00,roas:0.94,purchases:0,cpm:15.46,ctr:1.63,atc:0,co:0,lpv:6},{name:'Rajasthan',tier:'T2',spend:46.89,revenue:30.70,roas:0.65,purchases:0,cpm:8.82,ctr:1.13,atc:0,co:0,lpv:8},{name:'West Bengal',tier:'T1',spend:32.52,revenue:57.60,roas:1.77,purchases:0,cpm:26.88,ctr:3.06,atc:0,co:0,lpv:6}]
+    label:'Last 7 days (Sep 6\u201312, 2026, verified via Meta Ads MCP)',
+    note:'Spend/impressions/CTR/CPM are real region-breakdown data. Meta does not return purchase attribution at region-level breakdown, so revenue/ROAS/purchases/ATC/CO/LPV are estimated (CTR \u00d7 account avg ROAS for revenue; spend-share for ATC/CO/LPV) \u2014 same disclosed methodology as prior sessions. Account-level last 7d: \u20b98,793 spend, 18 purchases, 3.11x ROAS. Confirmed again this session: zero Meta-attributed purchases at region grain across the whole account.',
+    states:[{name:'Maharashtra',tier:'T1',spend:3227.49,revenue:11094.00,roas:3.44,purchases:0,cpm:52.17,ctr:1.07,atc:22,co:36,lpv:199},{name:'Karnataka',tier:'T1',spend:1858.80,revenue:5912.00,roas:3.18,purchases:0,cpm:64.29,ctr:0.99,atc:12,co:21,lpv:115},{name:'Telangana',tier:'T1',spend:863.44,revenue:3467.00,roas:4.02,purchases:0,cpm:51.65,ctr:1.25,atc:6,co:10,lpv:53},{name:'Gujarat',tier:'T2',spend:584.33,revenue:1596.00,roas:2.73,purchases:0,cpm:32.34,ctr:0.85,atc:4,co:6,lpv:36},{name:'Tamil Nadu',tier:'T1',spend:533.48,revenue:1251.00,roas:2.35,purchases:0,cpm:28.50,ctr:0.73,atc:4,co:6,lpv:33},{name:'Kerala',tier:'T2',spend:410.43,revenue:1042.00,roas:2.54,purchases:0,cpm:31.35,ctr:0.79,atc:3,co:5,lpv:25},{name:'Uttar Pradesh',tier:'T2',spend:183.19,revenue:518.00,roas:2.83,purchases:0,cpm:11.37,ctr:0.88,atc:1,co:2,lpv:11},{name:'Delhi',tier:'T1',spend:155.89,revenue:666.00,roas:4.27,purchases:0,cpm:34.50,ctr:1.33,atc:1,co:2,lpv:10},{name:'Rajasthan',tier:'T2',spend:105.22,revenue:189.00,roas:1.80,purchases:0,cpm:8.60,ctr:0.56,atc:1,co:1,lpv:6},{name:'Haryana',tier:'T2',spend:97.72,revenue:364.00,roas:3.73,purchases:0,cpm:19.59,ctr:1.16,atc:1,co:1,lpv:6},{name:'Unknown',tier:'T2',spend:96.80,revenue:656.00,roas:6.78,purchases:0,cpm:204.22,ctr:2.11,atc:1,co:1,lpv:6},{name:'Madhya Pradesh',tier:'T2',spend:83.23,revenue:112.00,roas:1.35,purchases:0,cpm:7.47,ctr:0.42,atc:1,co:1,lpv:5},{name:'Chhattisgarh',tier:'T2',spend:67.36,revenue:143.00,roas:2.12,purchases:0,cpm:17.02,ctr:0.66,atc:0,co:1,lpv:4},{name:'Punjab region',tier:'T2',spend:64.55,revenue:170.00,roas:2.63,purchases:0,cpm:10.57,ctr:0.82,atc:0,co:1,lpv:4},{name:'West Bengal',tier:'T1',spend:64.42,revenue:83.00,roas:1.28,purchases:0,cpm:7.76,ctr:0.40,atc:0,co:1,lpv:4},{name:'Andhra Pradesh',tier:'T2',spend:64.08,revenue:72.00,roas:1.12,purchases:0,cpm:6.81,ctr:0.35,atc:0,co:1,lpv:4}]
   },
   last30:{
-    label:'Last 30 days (Aug 6\u2013Sep 4, 2026, verified via Meta Ads MCP)',
-    note:'Spend/impressions/CTR/CPM are real region-breakdown data. Meta does not return purchase attribution at region-level breakdown, so revenue/ROAS/purchases/ATC/CO/LPV are estimated (CTR \u00d7 account avg ROAS for revenue; spend-share for ATC/CO/LPV) \u2014 same disclosed methodology as prior sessions. Account-level 30d: \u20b923,100 spend, 16 purchases, 1.79x ROAS.',
-    states:[{name:'Maharashtra',tier:'T1',spend:8434.47,revenue:15850.00,roas:1.88,purchases:0,cpm:45.08,ctr:1.65,atc:35,co:75,lpv:2046},{name:'Karnataka',tier:'T1',spend:3910.56,revenue:7530.80,roas:1.93,purchases:0,cpm:72.11,ctr:1.69,atc:16,co:35,lpv:949},{name:'Telangana',tier:'T1',spend:2400.13,revenue:4182.00,roas:1.74,purchases:0,cpm:55.29,ctr:1.53,atc:10,co:21,lpv:582},{name:'Delhi',tier:'T1',spend:2290.23,revenue:5790.80,roas:2.53,purchases:0,cpm:65.72,ctr:2.22,atc:10,co:20,lpv:556},{name:'Haryana',tier:'T2',spend:1109.94,revenue:1895.80,roas:1.71,purchases:0,cpm:46.89,ctr:1.50,atc:5,co:10,lpv:269},{name:'Tamil Nadu',tier:'T1',spend:1005.54,revenue:1694.90,roas:1.69,purchases:0,cpm:34.64,ctr:1.48,atc:4,co:9,lpv:244},{name:'Kerala',tier:'T2',spend:694.56,revenue:1693.20,roas:2.44,purchases:0,cpm:43.01,ctr:2.14,atc:3,co:6,lpv:169},{name:'Unknown',tier:'T2',spend:662.01,revenue:964.90,roas:1.46,purchases:0,cpm:104.35,ctr:1.28,atc:3,co:6,lpv:161},{name:'Uttar Pradesh',tier:'T2',spend:631.71,revenue:1029.00,roas:1.63,purchases:0,cpm:10.47,ctr:1.43,atc:3,co:6,lpv:153},{name:'Gujarat',tier:'T2',spend:316.84,revenue:443.90,roas:1.40,purchases:0,cpm:8.97,ctr:1.23,atc:1,co:3,lpv:77},{name:'West Bengal',tier:'T1',spend:263.21,revenue:755.30,roas:2.87,purchases:0,cpm:16.51,ctr:2.52,atc:1,co:2,lpv:64},{name:'Rajasthan',tier:'T2',spend:229.63,revenue:334.70,roas:1.46,purchases:0,cpm:6.97,ctr:1.28,atc:1,co:2,lpv:56},{name:'Punjab',tier:'T2',spend:185.67,revenue:308.70,roas:1.66,purchases:0,cpm:9.79,ctr:1.46,atc:1,co:2,lpv:45},{name:'Andhra Pradesh',tier:'T2',spend:172.82,revenue:238.20,roas:1.38,purchases:0,cpm:15.13,ctr:1.21,atc:1,co:2,lpv:42}]
+    label:'Last 30 days (Aug 14\u2013Sep 12, 2026, verified via Meta Ads MCP)',
+    note:'Spend/impressions/CTR/CPM are real region-breakdown data. Meta does not return purchase attribution at region-level breakdown, so revenue/ROAS/purchases/ATC/CO/LPV are estimated (CTR \u00d7 account avg ROAS for revenue; spend-share for ATC/CO/LPV) \u2014 same disclosed methodology as prior sessions. Account-level 30d: \u20b927,261 spend, 27 purchases, 1.83x ROAS.',
+    states:[{name:'Maharashtra',tier:'T1',spend:10464.94,revenue:19637.00,roas:1.88,purchases:0,cpm:56.07,ctr:1.62,atc:51,co:93,lpv:1608},{name:'Karnataka',tier:'T1',spend:5349.00,revenue:9852.00,roas:1.84,purchases:0,cpm:87.80,ctr:1.59,atc:26,co:48,lpv:822},{name:'Telangana',tier:'T1',spend:2929.00,revenue:5462.00,roas:1.86,purchases:0,cpm:67.29,ctr:1.61,atc:14,co:26,lpv:450},{name:'Delhi',tier:'T1',spend:2111.97,revenue:5529.00,roas:2.62,purchases:0,cpm:68.96,ctr:2.26,atc:10,co:19,lpv:325},{name:'Tamil Nadu',tier:'T1',spend:1265.02,revenue:1714.00,roas:1.36,purchases:0,cpm:38.92,ctr:1.17,atc:6,co:11,lpv:194},{name:'Kerala',tier:'T2',spend:968.86,revenue:1347.00,roas:1.39,purchases:0,cpm:42.48,ctr:1.20,atc:5,co:9,lpv:149},{name:'Haryana',tier:'T2',spend:812.07,revenue:1373.00,roas:1.69,purchases:0,cpm:55.35,ctr:1.46,atc:4,co:7,lpv:125},{name:'Gujarat',tier:'T2',spend:784.32,revenue:1036.00,roas:1.32,purchases:0,cpm:24.16,ctr:1.14,atc:4,co:7,lpv:121},{name:'Unknown',tier:'T2',spend:697.85,revenue:2498.00,roas:3.58,purchases:0,cpm:599.53,ctr:3.09,atc:3,co:6,lpv:107},{name:'Uttar Pradesh',tier:'T2',spend:482.01,revenue:676.00,roas:1.40,purchases:0,cpm:15.21,ctr:1.21,atc:2,co:4,lpv:74},{name:'Rajasthan',tier:'T2',spend:228.73,revenue:289.00,roas:1.26,purchases:0,cpm:10.22,ctr:1.09,atc:1,co:2,lpv:35},{name:'Andhra Pradesh',tier:'T2',spend:189.69,revenue:141.00,roas:0.74,purchases:0,cpm:15.99,ctr:0.64,atc:1,co:2,lpv:29},{name:'Punjab region',tier:'T2',spend:165.18,revenue:243.00,roas:1.47,purchases:0,cpm:11.88,ctr:1.27,atc:1,co:1,lpv:25},{name:'Madhya Pradesh',tier:'T2',spend:119.32,revenue:87.00,roas:0.73,purchases:0,cpm:8.85,ctr:0.63,atc:1,co:1,lpv:18},{name:'West Bengal',tier:'T1',spend:96.96,revenue:83.00,roas:0.86,purchases:0,cpm:10.20,ctr:0.74,atc:0,co:1,lpv:15}]
   }
 };
 
 const CREATIVES=[
-  {id:'c1',name:'Kage_Sales',product:'Kage Tee',format:'Static image',angle:'Discount offer + product quality claims',hook:'"Grab the most click-worthy sneakers ever" (15% off + 5% prepaid)',spend:6195.22,revenue:26618.87,roas:4.30,cpm:110.95,ctr:2.01,freq:1.46,purchases:10,status:'paused',rankQ:null,rankE:null,rankC:null,weeks:[],weekCPM:[],weekCTR:[],fatigueRisk:'low',age:'paused',note:'30d numbers unchanged since 2 Sep (campaign still paused, no new activity): 4.30x ROAS on \u20b96,195 spend, 10 purchases \u2014 still the account\'s best-volume winner.'},
-  {id:'c11',name:'Kage_sales_1908',product:'Kage Tee',format:'Static image',angle:'Product story (KAI Mori collection) + prepaid discount',hook:'"15% off + 5% Extra off on Prepaid Orders"',spend:6179.11,revenue:11270.29,roas:1.82,cpm:145.45,ctr:2.05,freq:1.91,purchases:4,status:'paused',rankQ:null,rankE:null,rankC:null,weeks:[],weekCPM:[],weekCTR:[],fatigueRisk:'medium',age:'paused',note:'Still paused, unchanged since 2 Sep. \u20b96,179 spent (30d), 4 purchases, 1.82x ROAS.'},
-  {id:'c3',name:'Kage_Traffic Campaign',product:'Kage Tee',format:'Static image',angle:'Sale teaser / anticipation',hook:'"SALES STARTS SOON... 15% OFF ON ALL PRODUCTS + 5% PREPAID OFFERS"',spend:2038.24,revenue:0,roas:0,cpm:6.25,ctr:1.27,freq:3.71,purchases:0,status:'paused',rankQ:null,rankE:null,rankC:null,weeks:[],weekCPM:[],weekCTR:[],fatigueRisk:'medium',age:'paused',note:'\u20b92,038 spent (30d) on a traffic objective, 0 purchases (not sales-optimized). Unchanged since 2 Sep.'},
-  {id:'c12',name:'Kage_TOF',product:'Kage Tee',format:'Static image',angle:'Brand story / lifestyle positioning, no discount',hook:'"Meet KAI." \u2014 "Japanese minimalism meets Mumbai street energy"',spend:1911.28,revenue:0,roas:0,cpm:12.84,ctr:1.68,freq:1.08,purchases:0,status:'paused',rankQ:null,rankE:null,rankC:null,weeks:[],weekCPM:[],weekCTR:[],fatigueRisk:'low',age:'paused',note:'Still paused. \u20b91,911 spent (30d), 0 purchases \u2014 traffic objective, not sales-optimized. Unchanged since 2 Sep.'},
-  {id:'c6',name:'Fudoshin_Sales',product:'Fudoshin',format:'Static image',angle:'Upgrade / aspirational + discount',hook:'"Why wear a normal hoodie when you can upgrade?"',spend:868.24,revenue:0,roas:0,cpm:184.46,ctr:1.47,freq:1.64,purchases:0,status:'paused',rankQ:null,rankE:null,rankC:null,weeks:[],weekCPM:[],weekCTR:[],fatigueRisk:'medium',age:'paused',note:'\u20b9868 spent (30d), 0 purchases. Unchanged since 2 Sep.'},
-  {id:'c8',name:'Kage_sales_1608',product:'Kage Tee',format:'Static image',angle:'Brand/product intro, no discount',hook:'"Meet KAI KAGE \u2014 a clean, versatile sneaker"',spend:370.14,revenue:0,roas:0,cpm:128.97,ctr:1.32,freq:1.56,purchases:0,status:'paused',rankQ:null,rankE:null,rankC:null,weeks:[],weekCPM:[],weekCTR:[],fatigueRisk:'low',age:'paused',note:'\u20b9370 spent (30d), 0 purchases. Unchanged since 2 Sep.'},
-  {id:'c13',name:'KAGE_31AUG',product:'Kage Tee',format:'Static image',angle:'Product launch \u2014 comfort + style claim, prepaid discount',hook:'"WHERE COMFORT MEETS STYLE \u2014 15% off + 5% Extra on Prepaid Orders" / "INTRODUCING KAI KAGE"',spend:2489.78,revenue:0,roas:0,cpm:107.78,ctr:2.65,freq:1.30,purchases:0,status:'active',rankQ:null,rankE:null,rankC:null,weeks:[],weekCPM:[],weekCTR:[],fatigueRisk:'low',age:'active',note:'This is the original ad inside the New_Sales_Kage_31AUG campaign \u2014 now paused at the ad level (the campaign itself is still active, running a second ad instead \u2014 see TSUCHI below). \u20b92,490 spent (30d), 0 purchases.'},
-  {id:'c16',name:'TSUCHI',product:'Kage Tee / Tsuchi crossover',format:'Not tagged',angle:'Not tagged',hook:'Not tagged \u2014 ads_get_ad_preview returned only a rendered iframe this session, no extractable body/headline text',spend:1997.75,revenue:2804.15,roas:1.40,cpm:112.30,ctr:2.07,freq:1.21,purchases:1,status:'active',rankQ:null,rankE:null,rankC:null,weeks:[],weekCPM:[],weekCTR:[],fatigueRisk:'low',age:'active',note:'New ad discovered this session, live inside the New_Sales_Kage_31AUG campaign despite its name referencing Tsuchi (the separate new product line) \u2014 worth a manual check that this ad is pointed at the right product/landing page. \u20b91,998 spent (30d), 1 purchase, 1.40x ROAS \u2014 currently the account\'s only active ad with a purchase.'},
-  {id:'c14',name:'Retargeting_31AUG',product:'Kage Tee',format:'Static image',angle:'Same Kage launch creative, retargeted to warm audience',hook:'"WHERE COMFORT MEETS STYLE \u2014 15% off + 5% Extra on Prepaid Orders" / "INTRODUCING KAI KAGE"',spend:745.96,revenue:725.94,roas:0.97,cpm:124.35,ctr:2.73,freq:1.49,purchases:1,status:'paused',rankQ:null,rankE:null,rankC:null,weeks:[],weekCPM:[],weekCTR:[],fatigueRisk:'low',age:'paused',note:'Campaign flipped from active to paused since 2 Sep. \u20b9746 spent (30d), 1 purchase, 0.97x ROAS. Opportunity Score still flags its ad set as budget-limited.'},
-  {id:'c15',name:'Tsuchi_TOF',product:'Tsuchi',format:'Static image',angle:'New product line launch \u2014 brand/lifestyle positioning, no discount',hook:'"INTRODUCING TSUCHI" \u2014 "Rooted in earth. Made to move."',spend:304.69,revenue:0,roas:0,cpm:7.58,ctr:1.58,freq:1.09,purchases:0,status:'paused',rankQ:null,rankE:null,rankC:null,weeks:[],weekCPM:[],weekCTR:[],fatigueRisk:'low',age:'paused',note:'Campaign flipped from active to paused since 2 Sep. \u20b9305 spent (30d, all of it accrued before the pause), no purchases yet.'}
+  {id:'c11',name:'Kage_sales_1908',product:'Kage Tee',format:'Static image',angle:'Product story (KAI Mori collection) + prepaid discount',hook:'"15% off + 5% Extra off on Prepaid Orders"',spend:6179.11,revenue:11270.29,roas:1.82,cpm:145.45,ctr:2.05,freq:1.91,purchases:4,status:'paused',rankQ:null,rankE:null,rankC:null,weeks:[],weekCPM:[],weekCTR:[],fatigueRisk:'medium',age:'paused',note:'Campaign still paused; its 30d numbers are now almost entirely historical (only \u20b99 of the \u20b96,179 fell inside the last 14 days). 4 purchases, 1.82x ROAS.'},
+  {id:'c17',name:'Tee_Sales',product:'Mori + Tee',format:'Not tagged',angle:'Not tagged',hook:'Not tagged \u2014 see note',spend:4633.41,revenue:19342.91,roas:4.17,cpm:145.51,ctr:2.69,freq:1.82,purchases:15,status:'active',rankQ:null,rankE:null,rankC:null,weeks:[],weekCPM:[],weekCTR:[],fatigueRisk:'low',age:'active',note:'\u2605 The account\'s current winner. Lives inside the Mori + Tee_Sales_0609 campaign (launched 6 Sep). \u20b94,633 spent (30d), 15 purchases, \u20b919,343 revenue, 4.17x ROAS \u2014 4 of those purchases landed yesterday alone at 6.13x. Frequency 1.82 is the highest of any live ad; watch for fatigue. Meta\'s Opportunity Score flags this exact ad for AI creative variety (+10% CTR estimate).'},
+  {id:'c16',name:'TSUCHI',product:'Kage Tee',format:'Not tagged',angle:'Not tagged',hook:'Not tagged \u2014 ads_get_ad_preview returns only a rendered iframe, no extractable body/headline text',spend:3473.85,revenue:2804.15,roas:0.81,cpm:115.82,ctr:2.14,freq:1.36,purchases:1,status:'paused',rankQ:null,rankE:null,rankC:null,weeks:[],weekCPM:[],weekCTR:[],fatigueRisk:'low',age:'paused',note:'Sits inside New_Sales_Kage_31AUG, which is now paused (it was the account\'s only active ad with a purchase on 5 Sep). \u20b93,474 spent (30d) for 1 purchase \u2014 0.81x ROAS, the reason the campaign was stopped. Name still references the Tsuchi line while sitting in a Kage campaign; worth a manual check of its landing page.'},
+  {id:'c13',name:'KAGE_31AUG',product:'Kage Tee',format:'Static image',angle:'Product launch \u2014 comfort + style claim, prepaid discount',hook:'"WHERE COMFORT MEETS STYLE \u2014 15% off + 5% Extra on Prepaid Orders" / "INTRODUCING KAI KAGE"',spend:2489.78,revenue:0,roas:0,cpm:107.78,ctr:2.65,freq:1.30,purchases:0,status:'paused',rankQ:null,rankE:null,rankC:null,weeks:[],weekCPM:[],weekCTR:[],fatigueRisk:'low',age:'paused',note:'Original ad inside New_Sales_Kage_31AUG; paused at both ad and campaign level now. \u20b92,490 spent (30d), 0 purchases at a healthy 2.65% CTR \u2014 the drop-off is post-click, not creative.'},
+  {id:'c1',name:'Kage_Sales',product:'Kage Tee',format:'Static image',angle:'Discount offer + product quality claims',hook:'"Grab the most click-worthy sneakers ever" (15% off + 5% prepaid)',spend:2150.84,revenue:7831.08,roas:3.64,cpm:244.41,ctr:2.91,freq:1.35,purchases:3,status:'paused',rankQ:null,rankE:null,rankC:null,weeks:[],weekCPM:[],weekCTR:[],fatigueRisk:'low',age:'paused',note:'Still paused. Its 30d window has rolled: \u20b92,151 / 3 purchases / 3.64x (was \u20b96,195 / 10 / 4.30x on 5 Sep) as older spend fell out. Best CTR in the account at 2.91% and still the strongest paused performer.'},
+  {id:'c12',name:'Kage_TOF',product:'Kage Tee',format:'Static image',angle:'Brand story / lifestyle positioning, no discount',hook:'"Meet KAI." \u2014 "Japanese minimalism meets Mumbai street energy"',spend:1911.28,revenue:0,roas:0,cpm:12.84,ctr:1.68,freq:1.08,purchases:0,status:'paused',rankQ:null,rankE:null,rankC:null,weeks:[],weekCPM:[],weekCTR:[],fatigueRisk:'low',age:'paused',note:'Paused. \u20b91,911 spent (30d), 0 purchases \u2014 traffic objective, not sales-optimized.'},
+  {id:'c18',name:'Tsuchi_Sales',product:'Mori + Tee',format:'Not tagged',angle:'Not tagged',hook:'Not tagged \u2014 see note',spend:1523.27,revenue:7991.82,roas:5.25,cpm:130.33,ctr:1.65,freq:1.48,purchases:3,status:'active',rankQ:null,rankE:null,rankC:null,weeks:[],weekCPM:[],weekCTR:[],fatigueRisk:'low',age:'active',note:'\u2605 Highest ROAS in the account: 5.25x on \u20b91,523 (30d), 3 purchases. The second ad inside Mori + Tee_Sales_0609. It has been throttled almost to nothing in the last two days (\u20b929.70 yesterday, \u20b98.74 today) while Tee_Sales takes the budget \u2014 that is worth reviewing, since this is the better ROAS ad on a small sample.'},
+  {id:'c14',name:'Retargeting',product:'Kage Tee',format:'Static image',angle:'Same Kage launch creative, retargeted to warm audience',hook:'"WHERE COMFORT MEETS STYLE \u2014 15% off + 5% Extra on Prepaid Orders" / "INTRODUCING KAI KAGE"',spend:1414.84,revenue:725.94,roas:0.51,cpm:123.93,ctr:2.58,freq:1.68,purchases:1,status:'active',rankQ:null,rankE:null,rankC:null,weeks:[],weekCPM:[],weekCTR:[],fatigueRisk:'medium',age:'active',note:'\u26a0 Live and underperforming: \u20b91,415 spent (30d) for 1 purchase, 0.51x ROAS, and zero purchases in the last 7 days on \u20b9669 spend. Meta\'s Opportunity Score flags its ad set for a fullscreen vertical Reels video (31% lower cost-per-purchase estimate).'},
+  {id:'c19',name:'Tsuchi',product:'Tsuchi',format:'Not tagged',angle:'Not tagged',hook:'Not tagged \u2014 see note',spend:932.65,revenue:0,roas:0,cpm:92.75,ctr:2.50,freq:1.26,purchases:0,status:'paused',rankQ:null,rankE:null,rankC:null,weeks:[],weekCPM:[],weekCTR:[],fatigueRisk:'low',age:'paused',note:'The single ad in the new Tsuchi BOF campaign (launched ~11 Sep, paused during today). \u20b9933 spent (30d) at a strong 2.50% CTR and 17 checkouts initiated, but 0 purchases \u2014 the leak is at checkout, not at the ad.'},
+  {id:'c6',name:'Fudoshin_Sales',product:'Fudoshin',format:'Static image',angle:'Upgrade / aspirational + discount',hook:'"Why wear a normal hoodie when you can upgrade?"',spend:868.24,revenue:0,roas:0,cpm:184.46,ctr:1.47,freq:1.64,purchases:0,status:'paused',rankQ:null,rankE:null,rankC:null,weeks:[],weekCPM:[],weekCTR:[],fatigueRisk:'medium',age:'paused',note:'\u20b9868 spent (30d), 0 purchases. Unchanged \u2014 no new delivery.'},
+  {id:'c20',name:'Mori_TOF',product:'Mori',format:'Not tagged',angle:'Not tagged',hook:'Not tagged \u2014 see note',spend:537.08,revenue:0,roas:0,cpm:10.66,ctr:1.48,freq:1.02,purchases:0,status:'paused',rankQ:null,rankE:null,rankC:null,weeks:[],weekCPM:[],weekCTR:[],fatigueRisk:'low',age:'paused',note:'Top-of-funnel ad for the Mori line (campaign Mori_TOF_0709, launched 7 Sep, now paused). \u20b9537 bought 50,367 impressions at \u20b910.66 CPM and 67 landing-page views \u2014 cheap reach, no conversions expected on a traffic objective.'},
+  {id:'c21',name:'KAGE',product:'Kage Tee',format:'Not tagged',angle:'Awareness / reach buy',hook:'Not tagged \u2014 see note',spend:471.61,revenue:0,roas:0,cpm:2.76,ctr:0.04,freq:1.01,purchases:0,status:'active',rankQ:null,rankE:null,rankC:null,weeks:[],weekCPM:[],weekCTR:[],fatigueRisk:'low',age:'active',note:'The only ad in KAGE_TOF_Sept 2026, an OUTCOME_AWARENESS (reach-optimised) campaign. \u20b9472 bought 170,574 impressions at a \u20b92.76 CPM \u2014 but CTR is 0.04% and it has produced 14 link clicks in 7 days. It is buying reach, not traffic; it also drags the account-level CTR down from ~2.4% to 0.80%, so read blended CTR with that in mind.'},
+  {id:'c8',name:'Kage_sales_1608',product:'Kage Tee',format:'Static image',angle:'Brand/product intro, no discount',hook:'"Meet KAI KAGE \u2014 a clean, versatile sneaker"',spend:370.14,revenue:0,roas:0,cpm:128.97,ctr:1.32,freq:1.56,purchases:0,status:'paused',rankQ:null,rankE:null,rankC:null,weeks:[],weekCPM:[],weekCTR:[],fatigueRisk:'low',age:'paused',note:'\u20b9370 spent (30d), 0 purchases. Unchanged \u2014 no new delivery.'},
+  {id:'c15',name:'Tsuchi_TOF',product:'Tsuchi',format:'Static image',angle:'New product line launch \u2014 brand/lifestyle positioning, no discount',hook:'"INTRODUCING TSUCHI" \u2014 "Rooted in earth. Made to move."',spend:304.86,revenue:0,roas:0,cpm:7.58,ctr:1.58,freq:1.09,purchases:0,status:'paused',rankQ:null,rankE:null,rankC:null,weeks:[],weekCPM:[],weekCTR:[],fatigueRisk:'low',age:'paused',note:'Paused since early September. \u20b9305 spent (30d, all accrued before the pause), no purchases.'}
 ];
-// Tags above are pulled directly from each ad's real primary-text/headline via the
-// Meta Ads MCP \u2014 c1-c10 verified 2026-08-29, c14/c15 verified 2026-09-02 (ad preview
-// screenshots pulled live via ads_get_ad_preview). c13/c16 verified 2026-09-05: c13 is
-// the same known creative as before; c16 (TSUCHI) is a newly discovered ad whose preview
-// call returned only a rendered iframe with no extractable text this session, so its
-// hook/angle/format are honestly "Not tagged" rather than guessed. Format is inferred
-// from creative object_type (all SHARE/static image currently, except c16 unknown) \u2014 no
-// visual/vision inspection beyond the preview screenshot was performed.
+// All spend/revenue/ROAS/CPM/CTR/frequency/purchase figures above are real ad-level
+// (level: ad) Meta Ads MCP pulls for the last 30 days, verified 2026-09-13. `status`
+// reflects EFFECTIVE delivery (an ad reads "paused" when its campaign is paused, even
+// though the ad object itself is ACTIVE).
+// Hook/angle honesty: c1/c6/c8/c11/c12/c13/c14/c15 keep the real primary-text and
+// headline strings pulled in earlier sessions (2026-08-29 / 09-02). The five ads first
+// seen this session \u2014 Tee_Sales, Tsuchi_Sales, Tsuchi, Mori_TOF, KAGE \u2014 are tagged
+// "Not tagged" on purpose: ads_get_creatives only returns generic strings for this
+// account's current creative objects ("Premium Sneakers", "KAI | KAGE | Unleash the
+// darkness", "KAI | Tsuchi", all CTA SHOP_NOW, object_type SHARE) with no reliable
+// creative\u2192ad mapping, and ads_get_ad_preview still returns only a rendered iframe with
+// no extractable text. Tagging them would mean guessing, so they are left untagged.
 
 const AUD_DATA={
   prospecting:{
-    note:'Real Meta breakdown data \u2014 30d (Aug 6\u2013Sep 4, 2026), verified via Meta Ads MCP. Age/gender/device/placement purchases and ROAS below are real Meta-reported attribution at that breakdown level (not estimated). Account total: \u20b923,100 spend, \u20b941,419 revenue, 16 purchases, 1.79x blended ROAS. Note: individual placement rows sum to 17 attributed purchases against an account total of 16 \u2014 a known Meta multi-touch attribution quirk (a purchase can be credited to more than one breakdown row), not a data error.',
+    note:'Real Meta breakdown data \u2014 30d (Aug 14\u2013Sep 12, 2026), verified via Meta Ads MCP. Age/gender/device/placement purchases and ROAS below are real Meta-reported attribution at that breakdown level (not estimated). Account total: \u20b927,261 spend, \u20b949,966 revenue, 27 purchases, 1.83x blended ROAS. Read the 18-24 row carefully: it now carries ~46% of all impressions on 1 purchase, because the new KAGE_TOF_Sept 2026 awareness campaign buys very cheap reach into that bracket \u2014 it is a reach buy showing up in the mix, not a paying segment that collapsed. Unlike the 5 Sep pull, placement purchases sum exactly to the account total (27) this period.',
     age:[
-      {g:'18-24',spend:3854.84,purchases:2,roas:1.38,cpm:22.41,ctr:1.32,share:16.7},
-      {g:'25-34',spend:10616.99,purchases:9,roas:2.15,cpm:62.38,ctr:1.99,share:46.0},
-      {g:'35-44',spend:4886.95,purchases:6,roas:2.87,cpm:92.46,ctr:2.79,share:21.2},
-      {g:'45-54',spend:1700.92,purchases:0,roas:0,cpm:82.51,ctr:3.13,share:7.4},
-      {g:'55+',spend:1099.99,purchases:0,roas:0,cpm:46.32,ctr:3.94,share:4.8},
-      {g:'Unknown',spend:940.55,purchases:0,roas:0,cpm:4.12,ctr:0.79,share:4.1}
+      {g:'18-24',spend:5068.74,purchases:1,roas:0.32,cpm:16.88,ctr:0.85,share:18.6},
+      {g:'25-34',spend:13197.02,purchases:16,roas:2.12,cpm:64.65,ctr:1.63,share:48.4},
+      {g:'35-44',spend:5901.83,purchases:9,roas:3.18,cpm:114.62,ctr:2.51,share:21.6},
+      {g:'45-54',spend:1695.99,purchases:1,roas:0.94,cpm:94.55,ctr:2.49,share:6.2},
+      {g:'55+',spend:703.74,purchases:0,roas:0,cpm:55.89,ctr:2.99,share:2.6},
+      {g:'Unknown',spend:693.62,purchases:0,roas:0,cpm:1373.51,ctr:5.74,share:2.5}
     ],
     gender:[
-      {g:'Male',spend:20873.39,purchases:17,roas:2.02,cpm:53.29,ctr:1.97,share:90.4},
-      {g:'Female',spend:1227.22,purchases:0,roas:0,cpm:26.27,ctr:2.07,share:5.3},
-      {g:'Unknown',spend:999.80,purchases:0,roas:0,cpm:4.35,ctr:0.80,share:4.3}
+      {g:'Male',spend:25312.91,purchases:27,roas:1.97,cpm:46.99,ctr:1.35,share:92.9},
+      {g:'Female',spend:1175.88,purchases:0,roas:0,cpm:25.45,ctr:1.49,share:4.3},
+      {g:'Unknown',spend:772.15,purchases:0,roas:0,cpm:364.91,ctr:2.69,share:2.8}
     ],
     devices:[
-      {d:'Android phone',spend:12521.89,purchases:7,roas:1.33,cpm:26.42,ctr:1.65,share:54.2},
-      {d:'iPhone',spend:9723.04,purchases:10,roas:2.62,cpm:50.68,ctr:1.37,share:42.1},
-      {d:'Other',spend:651.47,purchases:0,roas:0,cpm:1302.94,ctr:6.80,share:2.8},
-      {d:'Desktop',spend:89.14,purchases:0,roas:0,cpm:204.92,ctr:3.22,share:0.4},
-      {d:'iPad',spend:78.34,purchases:0,roas:0,cpm:143.49,ctr:1.47,share:0.3},
-      {d:'Android tablet',spend:36.52,purchases:0,roas:0,cpm:36.85,ctr:2.72,share:0.2}
+      {d:'Android phone',spend:14227.92,purchases:14,roas:1.72,cpm:37.60,ctr:1.36,share:52.2},
+      {d:'iPhone',spend:12091.90,purchases:13,roas:2.11,cpm:59.11,ctr:1.37,share:44.4},
+      {d:'Other',spend:693.62,purchases:0,roas:0,cpm:1352.09,ctr:5.65,share:2.5},
+      {d:'Desktop',spend:110.46,purchases:0,roas:0,cpm:197.96,ctr:2.51,share:0.4},
+      {d:'iPad',spend:99.78,purchases:0,roas:0,cpm:70.22,ctr:0.91,share:0.4},
+      {d:'Android tablet',spend:37.28,purchases:0,roas:0,cpm:23.60,ctr:1.65,share:0.1}
     ],
     placements:[
-      {p:'Instagram Reels',spend:9277.10,purchases:6,roas:1.53,cpm:34.34,ctr:1.44,share:40.2},
-      {p:'Feed (FB+IG)',spend:7557.17,purchases:7,roas:2.27,cpm:105.03,ctr:3.38,share:32.7},
-      {p:'Instagram Stories',spend:3556.14,purchases:4,roas:3.04,cpm:229.87,ctr:3.48,share:15.4},
-      {p:'Facebook Reels',spend:699.25,purchases:0,roas:0,cpm:46.40,ctr:2.73,share:3.0},
-      {p:'Threads Feed',spend:26.50,purchases:0,roas:0,cpm:144.83,ctr:3.83,share:0.1},
-      {p:'Other',spend:1984.25,purchases:0,roas:0,cpm:6.72,ctr:1.10,share:8.6}
+      {p:'Instagram Reels',spend:12443.91,purchases:15,roas:1.78,cpm:33.80,ctr:1.09,share:45.6},
+      {p:'Instagram Feed',spend:6787.18,purchases:6,roas:1.94,cpm:91.13,ctr:1.29,share:24.9},
+      {p:'Instagram Stories',spend:4158.97,purchases:4,roas:2.14,cpm:190.26,ctr:2.78,share:15.3},
+      {p:'Facebook Feed',spend:1047.41,purchases:2,roas:5.54,cpm:136.49,ctr:4.27,share:3.8},
+      {p:'Audience Network',spend:962.68,purchases:0,roas:0,cpm:51.43,ctr:6.68,share:3.5},
+      {p:'WhatsApp (msgs + status)',spend:1070.41,purchases:0,roas:0,cpm:12.99,ctr:0.61,share:3.9},
+      {p:'Facebook Reels',spend:682.82,purchases:0,roas:0,cpm:60.78,ctr:2.89,share:2.5},
+      {p:'Other (Threads, Marketplace, FB Stories, IG Explore/Search)',spend:107.57,purchases:0,roas:0,cpm:43.64,ctr:1.14,share:0.4}
     ]
   }
 };
 
+// Refreshed 2026-09-13. Daily budgets are real (campaign-level daily_budget from the MCP);
+// ad set / targeting / placement / audience-size details were not pulled this session.
 const AMOD={
-  kagesales1908:{adset:'Not pulled this session',type:'Cold',targeting:'Not pulled this session',placement:'Not pulled this session',budget:'Active',audienceSize:'Not pulled this session',notes:'\u2605 ACTIVE. \u20b93,742 spent (30d), 3 purchases, 2.13x ROAS so far.'},
-  kagetof:{adset:'Not pulled this session',type:'Cold (LINK_CLICKS objective)',targeting:'Not pulled this session',placement:'Not pulled this session',budget:'Active',audienceSize:'Not pulled this session',notes:'\u2605 ACTIVE. \u20b91,312 spent (30d), 0 purchases (traffic objective \u2014 not sales-optimized).'},
-  kagesales1608:{adset:'Not pulled this session',type:'Cold',targeting:'Not pulled this session',placement:'Not pulled this session',budget:'Paused',audienceSize:'Not pulled this session',notes:'\u26a0 PAUSED. \u20b9370 spent (30d), 0 purchases.'},
-  fudoshin:{adset:'Not pulled this session',type:'Cold',targeting:'Not pulled this session',placement:'Not pulled this session',budget:'Paused',audienceSize:'Not pulled this session',notes:'\u26a0 PAUSED. \u20b9868 spent (30d), 0 purchases. No conversions recorded.'},
-  kagesales:{adset:'Not pulled this session',type:'Cold',targeting:'Not pulled this session',placement:'Not pulled this session',budget:'Paused',audienceSize:'Not pulled this session',notes:'\u2605 PAUSED. Best-volume winner: 4.30x ROAS on \u20b96,195 spend (30d), 10 purchases. Worth reactivating.'},
-  kagetraffic:{adset:'Not pulled this session',type:'Cold (traffic objective)',targeting:'Not pulled this session',placement:'Not pulled this session',budget:'Paused',audienceSize:'Not pulled this session',notes:'PAUSED. \u20b92,038 spent (30d), 0 purchases (not sales-optimized).'},
-  kage0208new:{adset:'Not pulled this session',type:'Cold',targeting:'Not pulled this session',placement:'Not pulled this session',budget:'Paused',audienceSize:'Not pulled this session',notes:'\u26a0 PAUSED. \u20b979 spent (30d), 0 purchases.'},
-  kage0208:{adset:'Not pulled this session',type:'Cold',targeting:'Not pulled this session',placement:'Not pulled this session',budget:'Paused',audienceSize:'Not pulled this session',notes:'PAUSED. 1.18x ROAS on \u20b9617 spend (30d), 1 purchase.'},
-  ess31:{adset:'Not pulled this session',type:'Cold',targeting:'Not pulled this session',placement:'Not pulled this session',budget:'Paused',audienceSize:'Not pulled this session',notes:'\u26a0 PAUSED. 0.44x ROAS on \u20b91,846 spend (30d), 1 purchase \u2014 worst ROAS in account. Already correctly killed.'},
-  ess21:{adset:'Not pulled this session',type:'Cold',targeting:'Not pulled this session',placement:'Not pulled this session',budget:'Paused',audienceSize:'Not pulled this session',notes:'\u26a0 PAUSED. \u20b9190 spent (30d), 0 purchases \u2014 most of its earlier spend has rolled outside the 30d attribution window.'}
+  moritee0609:{adset:'Not pulled this session',type:'Cold (OUTCOME_SALES)',targeting:'Not pulled this session',placement:'Not pulled this session',budget:'Active \u2014 \u20b91,400/day',audienceSize:'Not pulled this session',notes:'\u2605 ACTIVE and the account\'s engine. Launched 6 Sep. \u20b96,157 (30d), 18 purchases, \u20b927,335 revenue, 4.44x ROAS. Runs two ads: Tee_Sales (15 purchases, 4.17x) and Tsuchi_Sales (3 purchases, 5.25x). Frequency 1.79 \u2014 the highest in the account; watch for fatigue as spend scales.'},
+  tsuchibof:{adset:'Not pulled this session',type:'Bottom-of-funnel (OUTCOME_SALES)',targeting:'Not pulled this session',placement:'Not pulled this session',budget:'Paused \u2014 \u20b9750/day',audienceSize:'Not pulled this session',notes:'\u26a0 PAUSED during today after spending \u20b9212.53. \u20b9933 (30d) at a strong 2.50% CTR and 17 initiated checkouts, but 0 purchases \u2014 the loss is at checkout, not at the ad.'},
+  retargeting31aug:{adset:'Not pulled this session',type:'Warm / retargeting (OUTCOME_SALES)',targeting:'Not pulled this session',placement:'Not pulled this session',budget:'Active \u2014 \u20b9250/day',audienceSize:'Not pulled this session',notes:'\u26a0 ACTIVE but weak: \u20b91,415 (30d) for 1 purchase, 0.51x ROAS, and zero purchases in the last 7 days on \u20b9669. Meta flags its ad set for a fullscreen vertical Reels video (est. 31% lower cost per purchase).'},
+  moritof0709:{adset:'Not pulled this session',type:'Cold (OUTCOME_TRAFFIC)',targeting:'Not pulled this session',placement:'Not pulled this session',budget:'Paused \u2014 \u20b9465/day',audienceSize:'Not pulled this session',notes:'PAUSED. Launched 7 Sep. \u20b9537 (30d) bought 50,367 impressions at \u20b910.66 CPM and 67 landing-page views. Traffic objective \u2014 no purchases expected or recorded.'},
+  kagetofsept:{adset:'Not pulled this session',type:'Cold (OUTCOME_AWARENESS \u2014 reach-optimised)',targeting:'Not pulled this session',placement:'Not pulled this session',budget:'Active \u2014 no campaign daily budget set',audienceSize:'Not pulled this session',notes:'\u2605 ACTIVE. \u20b9472 (30d) bought 170,574 impressions at a \u20b92.76 CPM \u2014 169,110 people reached. But CTR is 0.04% (14 link clicks in 7 days), because it is optimised for reach, not clicks. It single-handedly pulls the blended account CTR down from ~2.4% to 0.80%.'},
+  newsaleskage31aug:{adset:'Not pulled this session',type:'Cold (OUTCOME_SALES)',targeting:'Not pulled this session',placement:'Not pulled this session',budget:'Paused \u2014 \u20b91,500/day',audienceSize:'Not pulled this session',notes:'\u26a0 PAUSED (was the only active campaign on 5 Sep). \u20b95,964 (30d) for 1 purchase, 0.47x ROAS. Ran two ads, KAGE_31AUG and TSUCHI, neither of which converted at a viable rate.'},
+  kagesales1908:{adset:'Not pulled this session',type:'Cold',targeting:'Not pulled this session',placement:'Not pulled this session',budget:'Paused \u2014 \u20b9700/day',audienceSize:'Not pulled this session',notes:'PAUSED. \u20b96,179 (30d), 4 purchases, 1.82x ROAS \u2014 but only \u20b99 of that spend falls inside the last 14 days, so the figure is now almost entirely historical.'},
+  kagesales:{adset:'Not pulled this session',type:'Cold',targeting:'Not pulled this session',placement:'Not pulled this session',budget:'Paused \u2014 \u20b9750/day',audienceSize:'Not pulled this session',notes:'\u2605 PAUSED. Its 30d window has rolled: \u20b92,151 / 3 purchases / 3.64x (it read \u20b96,195 / 10 / 4.30x on 5 Sep). Still the account\'s best CTR at 2.91% and the strongest paused sales campaign.'},
+  kagetof:{adset:'Not pulled this session',type:'Cold (OUTCOME_TRAFFIC)',targeting:'Not pulled this session',placement:'Not pulled this session',budget:'Paused \u2014 \u20b9165/day',audienceSize:'Not pulled this session',notes:'PAUSED. \u20b91,911 (30d), 0 purchases (traffic objective \u2014 not sales-optimized).'},
+  tsuchitof:{adset:'Not pulled this session',type:'Cold (OUTCOME_TRAFFIC)',targeting:'Not pulled this session',placement:'Not pulled this session',budget:'Paused \u2014 \u20b9200/day',audienceSize:'Not pulled this session',notes:'PAUSED. \u20b9305 (30d), 350 landing-page views, 0 purchases. Superseded by Tsuchi BOF.'},
+  fudoshin:{adset:'Not pulled this session',type:'Cold',targeting:'Not pulled this session',placement:'Not pulled this session',budget:'Paused \u2014 \u20b9450/day',audienceSize:'Not pulled this session',notes:'\u26a0 PAUSED. \u20b9868 (30d), 0 purchases. No conversions recorded.'},
+  kagesales1608:{adset:'Not pulled this session',type:'Cold',targeting:'Not pulled this session',placement:'Not pulled this session',budget:'Paused \u2014 \u20b9500/day',audienceSize:'Not pulled this session',notes:'\u26a0 PAUSED. \u20b9370 (30d), 0 purchases.'}
 };
 
 let period='last7',activeCamp='ALL',advMode='daily',isStr=false,sc=null,fo='',aHist=[],charts={};
@@ -1775,11 +1819,13 @@ function renderCampTable(){
 }
 
 function renderHistory(){
-  // Jun 8 onward: pulled 2026-09-05 via Meta Ads MCP (account-level, time_increment=7, Mon\u2013Sun
-  // buckets). Revenue = spend \u00d7 purchase_roas as returned by Meta; purchases = omni_purchase.
-  // Top row is a partial week (Mon Aug 31 \u2013 Sat Sep 5, 6 days, includes today).
+  // Jun 8 onward: pulled via Meta Ads MCP (account-level, time_increment=7, Mon\u2013Sun buckets).
+  // Revenue = spend \u00d7 purchase_roas as returned by Meta; purchases = omni_purchase.
+  // Top two rows re-pulled 2026-09-13: Aug 31\u2013Sep 6 is now a complete week (it replaces the
+  // 6-day partial row shown on 5 Sep), and Sep 7\u201313 is the current week, complete through today.
   const rows=[
-    {p:'Aug 31\u2013Sep 5 (6 days)',spend:6900,rev:3530,roas:0.51,pur:2,cpm:70.49,freq:1.41,note:'Partial week \u2014 only New_Sales_Kage_31AUG active from Sep 4'},
+    {p:'Sep 7\u201313',spend:8939,rev:22733,roas:2.54,pur:17,cpm:30.38,freq:1.09,note:'Best week since Aug 3\u20139 \u2014 Mori + Tee_Sales_0609 drove 18 of the account\'s purchases'},
+    {p:'Aug 31\u2013Sep 6',spend:7743,rev:8858,roas:1.14,pur:4,cpm:74.26,freq:1.45},
     {p:'Aug 24\u201330',spend:5029,rev:6103,roas:1.21,pur:2,cpm:41.38,freq:1.18},
     {p:'Aug 17\u201323',spend:3509,rev:5167,roas:1.47,pur:2,cpm:47.61,freq:1.21},
     {p:'Aug 10\u201316',spend:5373,rev:7831,roas:1.46,pur:3,cpm:22.91,freq:5.05,note:'Kage_Traffic Campaign drove 5x frequency'},
@@ -1839,13 +1885,16 @@ document.getElementById('camp-modal').addEventListener('click',function(e){if(e.
 // ── Products ───────────────────────────────────────────────────────────────────
 function renderProducts(){
   const prods=Object.keys(WEEKLY_TRENDS.products);const wks=WEEKLY_TRENDS.weeks;
-  const colors={'Kage Tee':'#b85c00','Tsuchi':'#c97a18','Essentials v2':'#c0392b','Essentials v3':'#c2185b','Bundle':'#1e7a45','Fudoshin':'#0e7c86','Kage Refresh':'#1a6bb5'};
+  const colors={'Kage Tee':'#b85c00','Tsuchi':'#c97a18','Mori':'#5a7d2a','Mori + Tee':'#c2185b','Essentials v2':'#c0392b','Essentials v3':'#7a3b96','Bundle':'#1e7a45','Fudoshin':'#0e7c86','Kage Refresh':'#1a6bb5'};
   mkChart('ch-prod-cpm','line',wks,prods.map(p=>({label:p,data:WEEKLY_TRENDS.products[p].cpm,borderColor:colors[p],backgroundColor:colors[p]+'20',fill:false,tension:.4,pointRadius:4,borderWidth:2})),{plugins:{legend:{display:true}},scales:{y:{ticks:{callback:function(v){return '\u20b9'+v},color:'#666',font:{family:'DM Mono',size:10}},grid:{color:'#f0f0f0'}},x:{grid:{color:'#f0f0f0'},ticks:{color:'#666',font:{family:'DM Mono',size:10}}}}});
   mkChart('ch-prod-ctr','line',wks,prods.map(p=>({label:p,data:WEEKLY_TRENDS.products[p].ctr,borderColor:colors[p],backgroundColor:colors[p]+'20',fill:false,tension:.4,pointRadius:4,borderWidth:2})),{plugins:{legend:{display:true}},scales:{y:{ticks:{callback:function(v){return v+'%'},color:'#666',font:{family:'DM Mono',size:10}},grid:{color:'#f0f0f0'}},x:{grid:{color:'#f0f0f0'},ticks:{color:'#666',font:{family:'DM Mono',size:10}}}}});
   // "latest" = most recent week with ROAS > 0 (was previously picking the EARLIEST non-zero week).
   const lastRoas=prods.map(p=>{const d=WEEKLY_TRENDS.products[p].roas;return [...d].reverse().find(v=>v>0)||0;});
   mkChart('ch-prod-roas','bar',prods,[{data:lastRoas,backgroundColor:lastRoas.map(r=>roasColor(r)),borderWidth:0}],{plugins:{legend:{display:false}},scales:{y:{ticks:{callback:function(v){return v+'x'},color:'#666',font:{family:'DM Mono',size:10}},grid:{color:'#f0f0f0'}},x:{grid:{color:'#f0f0f0'},ticks:{color:'#666',font:{family:'DM Mono',size:10}}}}});
-  var pfd={'Kage Tee':{lpv:3581,atc:55,co:112,pur:12},'Tsuchi':{lpv:350,atc:0,co:1,pur:0},'Essentials v2':{lpv:59,atc:2,co:8,pur:0},'Essentials v3':{lpv:186,atc:13,co:8,pur:1},'Bundle':{lpv:0,atc:0,co:0,pur:0},'Fudoshin':{lpv:42,atc:6,co:15,pur:0},'Kage Refresh':{lpv:0,atc:0,co:0,pur:0}};
+  // Funnel counts below are real Meta 30d (Aug 14–Sep 12, 2026) campaign-level figures, summed per
+  // product using the same campaign→product mapping as DATA/WEEKLY_TRENDS. Refreshed 2026-09-13.
+  // Products with no spend inside the current 30d window are shown as zeros rather than stale carry-overs.
+  var pfd={'Kage Tee':{lpv:3303,atc:72,co:133,pur:9},'Tsuchi':{lpv:423,atc:4,co:18,pur:0},'Mori':{lpv:67,atc:0,co:0,pur:0},'Mori + Tee':{lpv:354,atc:50,co:77,pur:18},'Essentials v2':{lpv:0,atc:0,co:0,pur:0},'Essentials v3':{lpv:0,atc:0,co:0,pur:0},'Bundle':{lpv:0,atc:0,co:0,pur:0},'Fudoshin':{lpv:42,atc:6,co:15,pur:0},'Kage Refresh':{lpv:0,atc:0,co:0,pur:0}};
   var fb=document.getElementById('product-funnels');
   if(fb)fb.innerHTML=prods.map(p=>{
     var d=pfd[p];var atcR=d.lpv>0?PCT(d.atc/d.lpv*100):'N/A';var coR=d.atc>0?PCT(d.co/d.atc*100):'N/A';var purR=d.co>0?PCT(d.pur/d.co*100):'N/A';
@@ -2460,16 +2509,16 @@ const COMPETITOR_DATA = {
   name: "Gully Labs",
   ig: "gullylabs",
   igFollowers: 263905,
-  totalActiveAds: 155,
+  totalActiveAds: 132,
   scrapedAds: 100,
-  scrapeDate: "2 August 2026 (active-ad count refreshed 5 September 2026 via Meta Ad Library search, page_ids-scoped for accuracy — follower count, formats, angles, and creator data below are still from the 2 Aug scrape and have NOT been re-verified)",
+  scrapeDate: "2 August 2026 (active-ad count refreshed 13 September 2026 via Meta Ad Library search, page_ids-scoped and IN-scoped for accuracy — follower count, formats, angles, and creator data below are still from the 2 Aug scrape and have NOT been re-verified)",
   avgPrice: 6540,
   priceMin: 3990,
   priceMax: 8990,
   vsPrior: {
     followerDelta: "+19,412 (+7.9%) vs 26 May (not re-verified since 2 Aug)",
-    adDelta: "+54 (+53%) vs 2 Sep's 101 active ads",
-    strategic: "Active ad count jumped back up (101 on 2 Sep \u2192 155 on 5 Sep), continuing the swings documented across nine prior scrapes in automation/queue.json (99, 145, 170+, etc.). Consistent with the already-established Ad Library estimated_total_count sampling-oscillation pattern, not confirmed as a real strategy shift \u2014 treat any single reading with caution."
+    adDelta: "\u221223 (\u221215%) vs 5 Sep's 155 active ads",
+    strategic: "Active ad count swung back down (155 on 5 Sep \u2192 132 on 13 Sep), the eleventh reading in a series that has bounced between 99 and 170+ across this account's scrape history in automation/queue.json. Consistent with the already-established Ad Library estimated_total_count sampling-oscillation pattern, not confirmed as a real strategy shift \u2014 treat any single reading with caution. Live creative sampled today still leads with discount framing (\"Our Best Prices Yet\") plus DCO-style multi-product link titles (Chhatai Yellow Socks / Gully Bags / gift cards / Dvaita Kohl Black for Women in one ad), so the DCO catalogue programme is clearly still running."
   },
   formats: [
     { label: "Static Image (Baaz variants)", pct: 45, count: 30, note: "Colorway variants: Kopal Green, Parni White, Noor Yellow. Same body copy across variants. Comfort claims (memory foam, bamboo lining)." },
@@ -2492,20 +2541,20 @@ const COMPETITOR_DATA = {
     name: "Lotto Sport India",
     ig: "lottosportindia",
     igFollowers: 47622,
-    totalActiveAds: 89,
-    note: "\u26a0 Still an active threat. Active-ad count rose again (59 \u2192 89, verified via a page_ids-scoped Meta Ad Library search 5 Sep 2026), part of the same broad up-swing seen on Gully Labs this session and consistent with documented Ad Library sampling oscillation rather than a confirmed real ramp-up. Current live creative still pushes the 'Ekiden' running-shoe launch. Follower count not re-verified this session."
+    totalActiveAds: 82,
+    note: "\u26a0 Still an active threat, and the only competitor here with a visible creative refresh. Active-ad count 82 (down slightly from 89 on 5 Sep, verified via a page_ids/IN-scoped Meta Ad Library search 13 Sep 2026) \u2014 within the documented sampling-oscillation band, so the \u22128% is not meaningful on its own. What IS new: the 'Ekiden' running-shoe push has been replaced. Today's live creative leads with 'The Night Shoe' (multiple variants) and 'Tokyo Ginza Chunky Sneakers' \u2014 a shift from performance-running into lifestyle/chunky silhouettes, which is much closer to KAI's own positioning. Follower count not re-verified this session."
   }
 };
 
 const COMP_VS = [
-  { metric: "Active ads",          kai: "1 active",         comp: "155",     winner: "comp", note: "Refreshed 5 Sep via Ad Library (page_ids-scoped): Gully swung back up from 101 on 2 Sep to 155 — one of several large swings seen across this account's ~10 scrapes, treated as sampling noise rather than a confirmed strategy shift, but still 100x+ KAI's active count either way." },
+  { metric: "Active ads",          kai: "3 active",         comp: "132",     winner: "comp", note: "Refreshed 13 Sep via Ad Library (page_ids + IN scoped): Gully swung back down from 155 on 5 Sep to 132 — sampling noise, not a confirmed strategy shift. KAI is up from 1 to 3 active campaigns (Mori + Tee_Sales_0609, Retargeting_31AUG, KAGE_TOF_Sept 2026), so the gap narrowed slightly but is still ~44x." },
   { metric: "IG followers",        kai: "~15K",             comp: "263.9K",   winner: "comp", note: "Not re-verified this session — still the 2 Aug figure. Content velocity gap wide regardless." },
   { metric: "UGC / creator ads",   kai: "0%",               comp: "~20%",     winner: "comp", note: "Wishlink branded partnership active." },
   { metric: "DCO catalogue ads",   kai: "No",               comp: "~25%",     winner: "comp", note: "Barfi Burgundy DCO still running Aug 2. KAI still zero." },
   { metric: "Price in headline",   kai: "Rare",             comp: "Yes",      winner: "comp", note: "Every Gully ad shows \u20b9price. Pre-qualifies buyer." },
   { metric: "Platforms",           kai: "IG + FB",          comp: "All 5",    winner: "comp", note: "FB+IG+Messenger+Threads+Audience Network." },
-  { metric: "Emerging threat",     kai: "\u2014",            comp: "Lotto 89",  winner: "comp", note: "Lotto Sport India: 89 active ads (up from 59 on 2 Sep), still pushing the 'Ekiden' running-shoe launch." },
-  { metric: "ROAS (last 30d)",     kai: "1.79x",            comp: "Unknown",  winner: "comp", note: "Account-level blended ROAS, 30d (Aug 6\u2013Sep 4) \u2014 no visibility into Gully's ROAS." },
+  { metric: "Emerging threat",     kai: "\u2014",            comp: "Lotto 82",  winner: "comp", note: "Lotto Sport India: 82 active ads (89 on 5 Sep). Has dropped the 'Ekiden' running push for 'The Night Shoe' and 'Tokyo Ginza Chunky Sneakers' \u2014 a move into lifestyle/chunky silhouettes, i.e. straight into KAI's lane." },
+  { metric: "ROAS (last 30d)",     kai: "1.83x",            comp: "Unknown",  winner: "comp", note: "Account-level blended ROAS, 30d (Aug 14\u2013Sep 12) \u2014 up from 1.79x on 5 Sep. Last 7 days alone is 3.11x. No visibility into Gully's ROAS." },
   { metric: "Cultural story",      kai: "Weak",             comp: "Very high",winner: "comp", note: "India dance/heritage/nostalgia." },
   { metric: "Ad longevity",        kai: "Pause/kill",       comp: "Multi-week",winner: "comp", note: "Aandhi and Baaz ads active since Jul 16 (17 days+)." }
 ];
