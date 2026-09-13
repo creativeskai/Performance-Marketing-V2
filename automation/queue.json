@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-13T02:51:00.000Z",
+  "generatedAt": "2026-09-13T04:51:00.000Z",
   "settings": {
     "kill_roas_threshold": "pause if ROAS < 1.0x after ₹500 spend on a sales-objective campaign",
     "reactivate_min_historic_roas": "surface for reactivation if a paused campaign's last active-period ROAS >= 3.0x",
@@ -26,8 +26,8 @@
     "competitor_last_scrape": {
       "gully_labs_active_ads": 210,
       "lotto_sport_india_active_ads": 106,
-      "scraped_at": "2026-09-13T02:51:00.000Z",
-      "note": "2026-09-13 ~02:51 UTC scheduled run: ads_library_search combined page_ids query (107479854297817 / 426015150606378, ad_active_status=ACTIVE) returned estimated_total_count=304, unchanged from the last recorded combined query result of 304 (0% change), well under the 20% spike threshold. Combined-query-only pass again (individual per-page counts not independently re-verified this pass, carried forward unchanged from the last per-page split of 210 / 106). No new competitor-spike alert."
+      "scraped_at": "2026-09-13T04:51:00.000Z",
+      "note": "2026-09-13 ~04:51 UTC scheduled run: ads_library_search combined page_ids query (107479854297817 / 426015150606378, ad_active_status=ACTIVE) returned estimated_total_count=301, down from the last recorded combined query result of 304 (-1% change), well under the 20% spike threshold. Combined-query-only pass again (individual per-page counts not independently re-verified this pass, carried forward unchanged from the last per-page split of 210 / 106). No new competitor-spike alert."
     },
     "note": "hard_spend_ceiling_inr is a placeholder — set to roughly 3x trailing-30-day avg daily spend (~₹663/day as of 29 Aug 2026). All fields here are editable directly in the Automation tab (Save button) or by telling Claude."
   },
@@ -499,7 +499,7 @@
       "module": "resume-after-circuit-breaker",
       "tier": "approval",
       "title": "Formally resume from the 2026-09-12 circuit breaker trip -- all 4 campaigns already reactivated outside this routine",
-      "reasoning": "The circuit breaker tripped 2026-09-12T16:47:00.000Z after today's account spend hit ₹2,017.87 against the ₹2,000 ceiling (AL-255); this routine paused all 4 then-active campaigns (Tsuchi BOF, KAGE_TOF_Sept 2026, Mori + Tee_Sales_0609, Retargeting_31AUG) and set circuitBreaker.tripped=true, which by design this routine never auto-clears. This pass (2026-09-12 ~20:47 UTC) finds all 4 of those campaigns already back to effective_status=ACTIVE in live Meta data -- see alert AL-259 for the full finding that this was not this routine's doing (no resume-after-circuit-breaker action appears anywhere in queue.json's log or proposal history). The ad account's own day boundary (Asia/Kolkata) has since rolled over: the new day's account-level spend is only ₹2.76, nowhere near the ₹2,000 ceiling, so the specific condition that caused the trip is no longer present, and today's data gives no indication of an imminent re-trip. This proposal exists purely so a human can formally close out the 2026-09-12 trip -- clearing circuitBreaker.tripped -- rather than leaving the record permanently out of sync with a reality where the campaigns are already delivering again.",
+      "reasoning": "The circuit breaker tripped 2026-09-12T16:47:00.000Z after today's account spend hit ₹2,017.87 against the ₹2,000 ceiling (AL-255); this routine paused all 4 then-active campaigns (Tsuchi BOF, KAGE_TOF_Sept 2026, Mori + Tee_Sales_0609, Retargeting_31AUG) and set circuitBreaker.tripped=true, which by design this routine never auto-clears. This pass (2026-09-12 ~20:47 UTC) finds all 4 of those campaigns already back to effective_status=ACTIVE in live Meta data -- see alert AL-259 for the full finding that this was not this routine's doing (no resume-after-circuit-breaker action appears anywhere in queue.json's log or proposal history). The ad account's own day boundary (Asia/Kolkata) has since rolled over: the new day's account-level spend is only ₹2.76, nowhere near the ₹2,000 ceiling, so the specific condition that caused the trip is no longer present, and today's data gives no indication of an imminent re-trip. This proposal exists purely so a human can formally close out the 2026-09-12 trip -- clearing circuitBreaker.tripped -- rather than leaving the record permanently out of sync with a reality where the campaigns are already delivering again. Reconfirmed 2026-09-13 ~04:51 UTC: all 4 campaigns remain ACTIVE and delivering (still not this routine's doing -- no resume-after-circuit-breaker action appears in log). The new day's (2026-09-13, Asia/Kolkata) account-level spend has grown to ₹624.59 (Tsuchi BOF ₹143.13, KAGE_TOF_Sept 2026 ₹25.06, Mori + Tee_Sales_0609 ₹312.96, Retargeting_31AUG ₹143.44) -- still well under the ₹2,000 ceiling (31.2% of it), so no re-trip condition is present. This proposal still stands pending a human decision to formally close out the 2026-09-12 incident.",
       "actionSummary": "Confirms (re-issues ads_activate_entity on) all 4 campaigns paused by the 2026-09-12 trip -- a no-op on delivery since all 4 are already ACTIVE. Approving this also clears queue.json's top-level circuitBreaker.tripped flag to false via the normal approval-execution path, formally closing out the 2026-09-12 incident.",
       "metaAction": {
         "tool": "ads_activate_entity",
@@ -3006,6 +3006,15 @@
       "severity": "low",
       "dismissed": false,
       "createdAt": "2026-09-13T02:51:00.000Z"
+    },
+    {
+      "id": "AL-266",
+      "module": "routine-run-notes",
+      "title": "Run summary -- 2026-09-13 ~04:51 UTC pass",
+      "detail": "Steady state pass, no new proposals or auto actions. Circuit breaker check: today's (2026-09-13, new day) account spend is ₹624.59 across the 4 still-ACTIVE campaigns (Tsuchi BOF ₹143.13, KAGE_TOF_Sept 2026 ₹25.06, Mori + Tee_Sales_0609 ₹312.96, Retargeting_31AUG ₹143.44) -- well under the ₹2,000 hard_spend_ceiling_inr, no new trip. circuitBreaker.tripped remains true from the 2026-09-12 trip pending a human's resume-after-circuit-breaker decision on A-017 (reasoning refreshed with today's spend, otherwise unchanged). Pixel quality gate: Purchase EMQ 7.7/10, well above the 0.6 gate -- ROAS reads trusted this pass. Purchaser-exclusion: all 3 active prospecting/awareness ad sets (KAGE, Tsuchi, Mori_Sales) already carry the account's long-standing exclusion audience (id 120249907176770159); no valid purchaser-only audience exists since a human repurposed it into ATC_180D (tracked by AL-223) -- no new action taken. Lookalike-refresh: the 2026-09-05 refreshed ladder is 8 days old, not yet due (lookalike_refresh_days=14). Hook-angle-tagging: all 5 currently-active ads (KAGE, Tsuchi, Retargeting, Tsuchi_Sales, Tee_Sales) already have creativeTags entries for their creatives -- nothing new to tag. Anomaly: KAGE's narrow-audience warning re-fired (already tracked by AL-218), no new alert. Learning phase: none of the 4 active ad sets report an active learning_stage_info -- no learning-phase-stuck finding. Competitor rescrape: combined Gully Labs/Lotto Sport India active-ad count 301, down from 304 (-1%), no spike. Fresh age/gender, placement, and device breakdowns on the 4 active campaigns match the numbers already recorded in A-010, A-012, A-013, A-014, A-018 almost exactly -- no material drift, no updates needed to those proposals' reasoning. Highest-priority open item remains A-017 (formal circuit-breaker resume) awaiting human approval.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-09-13T04:51:00.000Z"
     }
   ],
   "log": [
