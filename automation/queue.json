@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-14T12:49:00.000Z",
+  "generatedAt": "2026-09-14T14:48:00.000Z",
   "settings": {
     "kill_roas_threshold": "pause if ROAS < 1.0x after ₹500 spend on a sales-objective campaign",
     "reactivate_min_historic_roas": "surface for reactivation if a paused campaign's last active-period ROAS >= 3.0x",
@@ -26,8 +26,8 @@
     "competitor_last_scrape": {
       "gully_labs_active_ads": 210,
       "lotto_sport_india_active_ads": 106,
-      "scraped_at": "2026-09-14T12:49:00.000Z",
-      "note": "2026-09-14 ~12:49 UTC scheduled run: ads_library_search combined page_ids query (107479854297817 / 426015150606378, ad_active_status=ACTIVE) returned estimated_total_count=294, up from 292 at the last recorded combined query result (~06:48 UTC same day) -- a delta of +2 (0.7%), well under the 20% spike threshold. Combined-query-only pass again (individual per-page counts not independently re-verified this pass, carried forward unchanged from the last per-page split of 210 / 106). No new competitor-spike alert."
+      "scraped_at": "2026-09-14T14:48:00.000Z",
+      "note": "2026-09-14 ~14:48 UTC scheduled run: ads_library_search combined page_ids query (107479854297817 / 426015150606378, ad_active_status=ACTIVE) returned estimated_total_count=294, unchanged from 294 at the last recorded combined query result (~12:49 UTC same day) -- 0% move, well under the 20% spike threshold. Combined-query-only pass again (individual per-page counts not independently re-verified this pass, carried forward unchanged from the last per-page split of 210 / 106). No new competitor-spike alert."
     },
     "audience_label_corrections": {
       "120249907176770159": "ATC_180D — NOT 'Purchasers 30D'. Verified via ads_get_custom_audience on 2026-09-14: name is 'ATC_180D', rule is event=AddToCart with retention_seconds 15552000 (180 days), approximate size 20. Prior runs of this routine have repeatedly described this id as the 'Purchasers 30D' audience (see A-004 purchaser-exclusion and multiple log entries). That is wrong: it is a cart-adder audience, not a purchaser audience. Excluding it does NOT exclude past buyers. This account currently has NO purchaser-based custom audience, so any purchaser-exclusion module must first create one rather than reusing this id. Do not propagate the 'Purchasers 30D' label.",
@@ -3231,6 +3231,24 @@
       "severity": "medium",
       "dismissed": false,
       "createdAt": "2026-09-14T12:49:00.000Z"
+    },
+    {
+      "id": "AL-290",
+      "module": "purchaser-exclusion",
+      "title": "Retargeting_31AUG purchaser-exclusion re-applied successfully -- did NOT force-pause this time",
+      "detail": "This pass's purchaser-exclusion auto-module re-added the ATC_180D exclusion to Retargeting_31AUG's ad set (120255534778570159) after the 24h rate limit cleared (last execution 2026-09-13T14:47:00.000Z, ~24h prior). Unlike the 2026-09-13T14:47 attempt, which came back status_forced_to_paused:true and knocked the ad set into PAUSED as a side effect (AL-275), this write came back status_forced_to_paused:false -- the ad set was not force-paused. A follow-up fetch immediately after showed effective_status=IN_PROCESS / delivery.status=pending, the normal transient state Meta uses while processing a targeting edit, not a stuck state. This does not fully resolve the open question from AL-275/AL-278 about why the same edit force-paused this exact ad set once before (suspected audience-overlap / minimum-audience-size issue between the exclusion and this ad set's several narrow inclusion audiences) -- it may simply mean today's inclusion audience composition or size cleared whatever threshold tripped it last time. Recommend a human spot-check this ad set's effective_status on the next pass (or in Ads Manager) to confirm it settles into ACTIVE and keeps delivering; if it force-pauses again on a future 24h-later retry, that would confirm the force-pause is a real recurring hazard of this specific entity/exclusion combination rather than a one-off, and the targeting-review flag from AL-278 should be acted on rather than retried again.",
+      "severity": "medium",
+      "dismissed": false,
+      "createdAt": "2026-09-14T14:48:00.000Z"
+    },
+    {
+      "id": "AL-291",
+      "module": "routine-run-notes",
+      "title": "Run summary -- 2026-09-14 ~14:48 UTC pass",
+      "detail": "Circuit breaker: not tripped this pass -- today's (2026-09-14) account-level spend is ₹936.50 against the ₹2,750 ceiling (34.1%), well under (TSUCHI BOF based on CAPS ₹215.94, KAGE_TOF_Sept 2026 ₹128.48, Mori + Tee_Sales_0609 ₹534.52, Retargeting_31AUG ₹57.56, summing to the account total). circuitBreaker.tripped remains true from the 2026-09-12T16:47 UTC trip -- A-017 (resume-after-circuit-breaker) is still pending human approval (now ~46h pending), so per policy this routine does not auto-clear it. Pixel quality gate: fully healthy, unchanged -- every tracked event at or above the 0.6 gate (Purchase 9.3/10, prepaid_purchase 9.3/10, AddPaymentInfo 9.2/10, InitiateCheckout 6.6/10, PageView/ViewContent/AddToCart/SubscribedButtonClick/Search all 6.1/10) -- ROAS-driven modules NOT suppressed this pass. Dataset event-volume check (ads_get_dataset_stats): Purchase/prepaid_purchase/AddToCart/InitiateCheckout/AddPaymentInfo all firing regularly through the latest available hour (2026-09-14 ~13:00 UTC) -- no zero-volume event gap for any event used by an active campaign.\n\nActivity log since the last pass (12:49 UTC) shows two things, both outside this routine: (1) Saif Naqvi, via the Meta Ads MCP server (chat, not this scheduled routine), made three changes to the KAGE ad set (120255704517640159, under KAGE_TOF_Sept 2026) at ~2026-09-14T14:35 UTC -- paused it, cut its daily budget from ₹150.00 to ₹100.00, then reactivated it; net effect is the ad set is ACTIVE with a lower ₹100/day budget, confirmed by this pass's fresh adset fetch (effective_status=ACTIVE, delivery.status=active, frequency 1.028132, unchanged from the prior pass). This routine does not touch budgets (outside the permitted write-tool list) -- noted for visibility only. (2) ₹100,000 added to the account's available balance via UPI at ~14:28 UTC -- no action needed, just context for why there's no funding risk.\n\nAuto modules this pass: purchaser-exclusion -- KAGE's and Mori_Sales's ad sets both still correctly exclude ATC_180D (120249907176770159); TSUCHI's ad set correctly skipped again (ATC_180D remains a direct inclusion audience there, unchanged finding, AL-274); Retargeting_31AUG's ad set was missing the exclusion and was rate-limited every pass since 2026-09-13T18:51 UTC -- the 24h window cleared as of ~14:47 UTC this pass, so this pass executed the fix (see log entry and AL-290). lookalike-refresh -- both active purchaser/ATC-based LAL audiences remain well under the 14-day threshold (Lookalike (3%) - ATC_180D created 2026-09-10, ~4.5 days old; Lookalike (IN 5%) - Purchase Pixel created 2026-09-05, ~9.5 days old); origin audience ATC_180D size unchanged at approximately 20 users (no ≥20% growth) -- no refresh due. hook-angle-tagging -- no new ads or creatives appeared since the last pass (activity log confirms only ad-set-level status/budget events, no ad/creative creation) -- all previously-tagged creatives behind the 4 active campaigns remain tagged; nothing new to tag; vision pass skipped as usual (Higgsfield not attached to this run). hard-spend-circuit-breaker -- no new trip.\n\nanomaly -- native signal still flags only the KAGE ad set (120255704517640159) as active_delivery_narrow_audience (estimated audience size 1,000), same persistent finding as AL-218/AL-242/AL-289, not duplicated. threshold-alerts -- KAGE_TOF_Sept 2026's CTR collapse persists at 0.0425% (last_14d), unchanged from the last several passes (AL-260), not separately re-annotated since identical; Mori + Tee_Sales_0609 (CTR 2.39%, CPM ₹139.18), Retargeting_31AUG (CTR 2.60%, CPM ₹131.95) and TSUCHI BOF based on CAPS (CTR 2.29%, CPM ₹126.00) all remain in normal healthy ranges. learning-phase-stuck -- none of the 4 active ad sets show a learning-limited delivery substatus (all report delivery.status=active). creative-fatigue/frequency-capping -- all 4 active ad sets show frequency between 1.03 and 1.84 (last_7d), unchanged from the last pass -- well under the 3.0 fatigue threshold -- no trigger. campaign-consolidation-watch -- TSUCHI BOF based on CAPS remains active while the older Tsuchi BOF remains paused, unchanged, AL-270 not re-annotated. competitor-rescrape -- fresh combined Ad Library query for Gully Labs / Lotto Sport India returned estimated_total_count=294, unchanged from ~12:49 UTC -- settings.competitor_last_scrape updated, no new alert. self-audit-check -- lightweight this-month spend comparison for the 4 active campaigns against the 12:49 UTC pass's own live figures shows only the expected ~2h of normal accumulation (Mori + Tee_Sales_0609 ₹8,055.73→₹8,094.84, Retargeting_31AUG ₹1,551.71→₹1,555.86, KAGE_TOF_Sept 2026 ₹735.36→₹736.60, TSUCHI BOF based on CAPS ₹405.56→₹419.54) -- no anomalous drift. spend-pacing -- skipped, monthly_spend_goal_inr is still null. weekly-digest/monthly-digest -- neither due this pass.\n\nPending approval-tier proposals (A-001 through A-019, excluding A-002/A-003/A-005/A-006/A-007/A-008 already resolved or n/a): fresh last_14d numbers for the 4 active campaigns plus Tsuchi BOF and New_Sales_Kage_31AUG came back identical or within expected rolling-window drift of the 12:49 UTC pass (Mori + Tee_Sales_0609 4.152481x ROAS / ₹7,527.71 spend; Retargeting_31AUG 1.61513x ROAS / ₹1,672.15 spend -- unchanged, see A-010; Tsuchi BOF spend ₹1,145.27, purchase_roas still null; New_Sales_Kage_31AUG still PAUSED, 0.476027x ROAS on ₹5,890.74 lifetime spend; TSUCHI BOF based on CAPS ₹203.23 spend (14d), still under the ₹500 pause-kill spend floor) -- A-009 through A-019 all reconfirmed unchanged, not individually re-annotated this pass since nothing moved (A-010's reasoning already carries an extensive up-to-date narrative recommending rejection as superseded; not re-appended again this pass since the underlying ROAS/spend figures are byte-for-byte unchanged from the last several passes). No new approval-tier proposals this pass -- nothing crossed a new trigger threshold. This pass's one notable event: purchaser-exclusion finally executed successfully on Retargeting_31AUG's ad set without the force-pause side effect seen last time (see AL-290). Highest-priority open items remain unchanged: A-017 (formal circuit-breaker resume, now entering its second day pending, whose stored metaAction would needlessly reactivate the separately-merited Tsuchi BOF pause) and A-016 (Tsuchi BOF pause-kill, already matching live state), both still awaiting human decisions.",
+      "severity": "medium",
+      "dismissed": false,
+      "createdAt": "2026-09-14T14:48:00.000Z"
     }
   ],
   "log": [
@@ -7097,6 +7115,62 @@
       },
       "tier": "auto",
       "executedAt": "2026-09-13T20:47:00.000Z"
+    },
+    {
+      "proposalId": null,
+      "action": "purchaser-exclusion auto-module: executed on Retargeting_31AUG's ad set (id 120255534778570159, campaign 120255534778560159 'Retargeting_31AUG') -- added the account's purchaser-exclusion audience ATC_180D (id 120249907176770159, per settings.audience_label_corrections: an AddToCart-based 180-day audience used as the account's best available purchaser-exclusion proxy, since no true purchaser custom audience exists yet) to excluded_custom_audiences. The ad set previously had no excluded_custom_audiences at all -- this same gap was flagged repeatedly since 2026-09-13T18:51:00.000Z (AL-278) as rate-limited (last actual execution on this entity was 2026-09-13T14:47:00.000Z, which force-paused the ad set as a side effect, see AL-275/AL-200). The 24h rate limit (max_auto_actions_per_entity_per_day=1) cleared as of ~2026-09-14T14:47 UTC, so this pass re-attempted the fix. Unlike the 2026-09-13T14:47 attempt, this write came back with status_forced_to_paused:false -- the ad set was NOT force-paused this time. A follow-up fetch immediately after the write showed effective_status=IN_PROCESS/delivery.status=pending (Meta processing the edit), which is the normal transient state right after a targeting update, not a stuck or paused state.",
+      "result": "success",
+      "previousState": {
+        "entity_id": "120255534778570159",
+        "entity_type": "ad_set",
+        "field": "targeting.excluded_custom_audiences",
+        "value": null,
+        "note": "Fresh targeting pull immediately before this mutation confirmed no excluded_custom_audiences key was present at all. Full previous targeting: genders=[1], age 21-65 (age_range 21-45), geo=IN (frequently_in/home/recent), inclusion custom_audiences=[IG 90 (120245688604920159), Website Visitors 30D (120249907065340159), IG_Visitors_365 (120251687706600159), Initiate_Checkout (120254260398310159), Video (120255729752960159)], effective_status=ACTIVE."
+      },
+      "detail": {
+        "success": true,
+        "entity_id": "120255534778570159",
+        "entity_type": "ad_set",
+        "updated_fields": {
+          "targeting": {
+            "excluded_custom_audiences": [
+              {
+                "id": "120249907176770159"
+              }
+            ],
+            "custom_audiences": [
+              {
+                "id": "120245688604920159"
+              },
+              {
+                "id": "120249907065340159"
+              },
+              {
+                "id": "120251687706600159"
+              },
+              {
+                "id": "120254260398310159"
+              },
+              {
+                "id": "120255729752960159"
+              }
+            ]
+          }
+        },
+        "status_forced_to_paused": false,
+        "ads_manager_url": "https://www.facebook.com/adsmanager/manage/adsets/edit?act=704523148804803&selected_adset_ids=120255534778570159",
+        "post_write_verification": {
+          "effective_status": "IN_PROCESS",
+          "delivery": {
+            "status": "pending",
+            "substatuses": [
+              "pending_process"
+            ]
+          }
+        }
+      },
+      "tier": "auto",
+      "executedAt": "2026-09-14T14:48:00.000Z"
     }
   ],
   "creativeTags": {
