@@ -7,7 +7,7 @@
     "fatigue_frequency_threshold": 3.0,
     "budget_reallocation_min_roas_gap": "shift budget when one active campaign's ROAS is 1.5x+ another's",
     "monthly_spend_goal_inr": null,
-    "hard_spend_ceiling_inr": 2000,
+    "hard_spend_ceiling_inr": 2750,
     "max_auto_actions_per_entity_per_day": 1,
     "lookalike_refresh_days": 14,
     "pixel_quality_min_match_rate": 0.6,
@@ -29,7 +29,11 @@
       "scraped_at": "2026-09-14T12:49:00.000Z",
       "note": "2026-09-14 ~12:49 UTC scheduled run: ads_library_search combined page_ids query (107479854297817 / 426015150606378, ad_active_status=ACTIVE) returned estimated_total_count=294, up from 292 at the last recorded combined query result (~06:48 UTC same day) -- a delta of +2 (0.7%), well under the 20% spike threshold. Combined-query-only pass again (individual per-page counts not independently re-verified this pass, carried forward unchanged from the last per-page split of 210 / 106). No new competitor-spike alert."
     },
-    "note": "hard_spend_ceiling_inr is a placeholder — set to roughly 3x trailing-30-day avg daily spend (~₹663/day as of 29 Aug 2026). All fields here are editable directly in the Automation tab (Save button) or by telling Claude."
+    "audience_label_corrections": {
+      "120249907176770159": "ATC_180D — NOT 'Purchasers 30D'. Verified via ads_get_custom_audience on 2026-09-14: name is 'ATC_180D', rule is event=AddToCart with retention_seconds 15552000 (180 days), approximate size 20. Prior runs of this routine have repeatedly described this id as the 'Purchasers 30D' audience (see A-004 purchaser-exclusion and multiple log entries). That is wrong: it is a cart-adder audience, not a purchaser audience. Excluding it does NOT exclude past buyers. This account currently has NO purchaser-based custom audience, so any purchaser-exclusion module must first create one rather than reusing this id. Do not propagate the 'Purchasers 30D' label.",
+      "_note": "Map of custom_audience_id -> authoritative name/meaning. Trust these over any label written in earlier log or proposal prose."
+    },
+    "note": "hard_spend_ceiling_inr raised 2000 -> 2750 on 2026-09-14: active campaign budgets total ~₹2,020/day (Mori+Tee ₹1,120, TSUCHI BOF based on CAPS ₹450, Retargeting_31AUG ₹300, KAGE_TOF_Sept ad set ₹100), which sat level with the old ceiling and left the account permanently at the trip line. ₹2,750 gives roughly 35% headroom. All fields here are editable directly in the Automation tab (Save button) or by telling Claude. See also settings.audience_label_corrections."
   },
   "circuitBreaker": {
     "tripped": true,
