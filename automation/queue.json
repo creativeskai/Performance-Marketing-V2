@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-15T12:47:00.000Z",
+  "generatedAt": "2026-09-15T14:52:00.000Z",
   "settings": {
     "kill_roas_threshold": "pause if ROAS < 1.0x after ₹500 spend on a sales-objective campaign",
     "reactivate_min_historic_roas": "surface for reactivation if a paused campaign's last active-period ROAS >= 3.0x",
@@ -26,8 +26,8 @@
     "competitor_last_scrape": {
       "gully_labs_active_ads": 210,
       "lotto_sport_india_active_ads": 106,
-      "scraped_at": "2026-09-15T12:47:00.000Z",
-      "note": "2026-09-15 ~12:47 UTC scheduled run: ads_library_search combined page_ids query (107479854297817 / 426015150606378, ad_active_status=ACTIVE, no country filter -- matching prior passes' exact query shape) returned estimated_total_count=281, down from 284 at the ~08:49 UTC pass -- a ~1.1% move, well under the 20% spike threshold. Combined-query-only pass again (individual per-page counts not independently re-verified this pass, carried forward unchanged from the last per-page split of 210 / 106). No new competitor-spike alert."
+      "scraped_at": "2026-09-15T14:52:00.000Z",
+      "note": "2026-09-15 ~14:51 UTC scheduled run: ads_library_search combined page_ids query (107479854297817 / 426015150606378, ad_active_status=ACTIVE, no country filter -- matching prior passes' exact query shape) returned estimated_total_count=278, down from 281 at the ~12:47 UTC pass -- a ~1.1% move, well under the 20% spike threshold. Combined-query-only pass again (individual per-page counts not independently re-verified this pass, carried forward unchanged from the last per-page split of 210 / 106). No new competitor-spike alert."
     },
     "audience_label_corrections": {
       "120249907176770159": "ATC_180D — NOT 'Purchasers 30D'. Verified via ads_get_custom_audience on 2026-09-14: name is 'ATC_180D', rule is event=AddToCart with retention_seconds 15552000 (180 days), approximate size 20. Prior runs of this routine have repeatedly described this id as the 'Purchasers 30D' audience (see A-004 purchaser-exclusion and multiple log entries). That is wrong: it is a cart-adder audience, not a purchaser audience. Excluding it does NOT exclude past buyers. This account currently has NO purchaser-based custom audience, so any purchaser-exclusion module must first create one rather than reusing this id. Do not propagate the 'Purchasers 30D' label.",
@@ -506,7 +506,7 @@
       "module": "resume-after-circuit-breaker",
       "tier": "approval",
       "title": "Formally resolve the 2026-09-12 circuit breaker trip -- record is stale: a different set of campaigns is now active than what this proposal describes",
-      "reasoning": "UPDATE 2026-09-15 ~08:49 UTC: circuitBreaker.tripped is still true from 2026-09-12T16:47:00.000Z (₹2,017.87 spend vs the then-₹2,000 ceiling) and this routine has never auto-cleared it, per design. This proposal was originally written when Tsuchi BOF, KAGE_TOF_Sept 2026 and 'Website_View_Population'/Retargeting_31AUG were the campaigns reactivated outside the routine; as of this pass, none of those three are active -- Tsuchi BOF and KAGE_TOF_Sept 2026 are both PAUSED, and Website_View_Population is PAUSED. Instead, three DIFFERENT campaigns are now live-ACTIVE and accumulating spend without ever going through this or any resume-after-circuit-breaker approval: 'TSUCHI BOF based on CAPS' (₹450/day, new campaign not part of the original 4 paused on 9-12), 'Mori + Tee_Sales_0609' (₹1,120/day), and 'Tsuchi_TOF' (₹500/day, OUTCOME_TRAFFIC). Today's account-level spend is ₹1,572.32 against the (now-raised) ₹2,750 ceiling -- not breached, so no new trip this pass -- but the fact that real delivery has continued for days under a circuit-breaker record that says 'tripped, no auto-resume' means the queue.json state no longer reflects account reality. This proposal's original metaAction (activating Tsuchi BOF / KAGE_TOF_Sept / the old Retargeting_31AUG) is now moot since none of those are what's actually delivering. Recommend a human either (a) reject this stale proposal and have a fresh resume-after-circuit-breaker proposal written once the situation is untangled, or (b) explicitly decide whether circuitBreaker.tripped should be cleared given spend has continued under human control since. See also new alert AL- (below) filed this pass for the same discrepancy. UPDATE 2026-09-15 ~12:47 UTC: circuitBreaker.tripped is still true, unchanged. Today's account-level spend is now ₹1,787.81 against the ₹2,750 ceiling (up from ₹1,572.32 at the 08:49 UTC pass) -- still not breached. The same three campaigns identified in the last update remain the only ones ACTIVE: 'TSUCHI BOF based on CAPS' (₹450/day), 'Mori + Tee_Sales_0609' (₹1,120/day), 'Tsuchi_TOF' (₹500/day). No change to the underlying recommendation -- still pending human resolution (reject and have a fresh resume-after-circuit-breaker proposal written once untangled, or explicitly decide whether circuitBreaker.tripped should be cleared given real delivery has continued under human control for days).",
+      "reasoning": "UPDATE 2026-09-15 ~08:49 UTC: circuitBreaker.tripped is still true from 2026-09-12T16:47:00.000Z (₹2,017.87 spend vs the then-₹2,000 ceiling) and this routine has never auto-cleared it, per design. This proposal was originally written when Tsuchi BOF, KAGE_TOF_Sept 2026 and 'Website_View_Population'/Retargeting_31AUG were the campaigns reactivated outside the routine; as of this pass, none of those three are active -- Tsuchi BOF and KAGE_TOF_Sept 2026 are both PAUSED, and Website_View_Population is PAUSED. Instead, three DIFFERENT campaigns are now live-ACTIVE and accumulating spend without ever going through this or any resume-after-circuit-breaker approval: 'TSUCHI BOF based on CAPS' (₹450/day, new campaign not part of the original 4 paused on 9-12), 'Mori + Tee_Sales_0609' (₹1,120/day), and 'Tsuchi_TOF' (₹500/day, OUTCOME_TRAFFIC). Today's account-level spend is ₹1,572.32 against the (now-raised) ₹2,750 ceiling -- not breached, so no new trip this pass -- but the fact that real delivery has continued for days under a circuit-breaker record that says 'tripped, no auto-resume' means the queue.json state no longer reflects account reality. This proposal's original metaAction (activating Tsuchi BOF / KAGE_TOF_Sept / the old Retargeting_31AUG) is now moot since none of those are what's actually delivering. Recommend a human either (a) reject this stale proposal and have a fresh resume-after-circuit-breaker proposal written once the situation is untangled, or (b) explicitly decide whether circuitBreaker.tripped should be cleared given spend has continued under human control since. See also new alert AL- (below) filed this pass for the same discrepancy. UPDATE 2026-09-15 ~12:47 UTC: circuitBreaker.tripped is still true, unchanged. Today's account-level spend is now ₹1,787.81 against the ₹2,750 ceiling (up from ₹1,572.32 at the 08:49 UTC pass) -- still not breached. The same three campaigns identified in the last update remain the only ones ACTIVE: 'TSUCHI BOF based on CAPS' (₹450/day), 'Mori + Tee_Sales_0609' (₹1,120/day), 'Tsuchi_TOF' (₹500/day). No change to the underlying recommendation -- still pending human resolution (reject and have a fresh resume-after-circuit-breaker proposal written once untangled, or explicitly decide whether circuitBreaker.tripped should be cleared given real delivery has continued under human control for days). UPDATE 2026-09-15 ~14:52 UTC: circuitBreaker.tripped is still true, unchanged. Today's account-level spend is now ₹1,876.05 against the ₹2,750 ceiling -- still not breached. The set of ACTIVE campaigns has changed again, this time via this pass's purchaser-exclusion auto-module: adding the newly-created 'Purchasers 180D' audience to targeting force-paused 'TSUCHI BOF based on CAPS' and 'Mori + Tee_Sales_0609' as a side effect (see this pass's alerts/log). Only 'Tsuchi_TOF' (₹500/day, OUTCOME_TRAFFIC) remains ACTIVE now -- none of the campaigns this proposal's metaAction would reactivate. Recommendation unchanged: a human should either reject this stale proposal and have a fresh resume-after-circuit-breaker proposal written once the situation is untangled, or explicitly decide whether circuitBreaker.tripped should be cleared given real delivery has continued under mixed human/routine control since 2026-09-12.",
       "actionSummary": "Confirms (re-issues ads_activate_entity on) all 4 campaigns paused by the 2026-09-12 trip -- a no-op on delivery since all 4 are already ACTIVE. Approving this also clears queue.json's top-level circuitBreaker.tripped flag to false via the normal approval-execution path, formally closing out the 2026-09-12 incident. CAUTION (2026-09-13 update): approving this AS WRITTEN would re-activate all 4 original campaigns including Tsuchi BOF and Retargeting_31AUG, which are currently paused for separate, still-valid reasons (see A-016, A-010). Review before approving.",
       "metaAction": {
         "tool": "ads_activate_entity",
@@ -538,14 +538,14 @@
       },
       "status": "pending",
       "createdAt": "2026-09-12T20:47:00.000Z",
-      "updatedAt": "2026-09-15T12:47:00.000Z"
+      "updatedAt": "2026-09-15T14:52:00.000Z"
     },
     {
       "id": "A-018",
       "module": "budget-reallocation",
       "tier": "approval",
       "title": "Shift daily budget from underperforming Retargeting_31AUG toward Mori + Tee_Sales_0609 -- ROAS gap narrowed to ~2.3x, still above the 1.5x trigger",
-      "reasoning": "UPDATE 2026-09-15 ~08:49 UTC: Mori + Tee_Sales_0609's last_14d ROAS is confirmed unchanged at 3.783706x (₹8,453.25 spend). However, 'Website_View_Population' (id 120255534778560159, the campaign this proposal calls Retargeting_31AUG) is now status=PAUSED, not ACTIVE -- it is not currently spending, so there is no live budget to shift away from it right now. The 1.5x+ ROAS-gap premise still held the last time both campaigns were simultaneously active (~2.28x gap at last check), but this proposal's daily_budget changes should not be approved while one side of the reallocation isn't delivering -- re-verify both campaigns are ACTIVE before approving. UPDATE 2026-09-15 ~12:47 UTC: Mori + Tee_Sales_0609 last_14d purchase_roas reconfirmed unchanged at 3.783706x (₹8,453.25 spend). 'Website_View_Population' (the campaign this proposal calls Retargeting_31AUG) remains PAUSED -- still no live budget to shift away from it. No change to the recommendation; still pending, still not actionable until both sides are simultaneously active.",
+      "reasoning": "UPDATE 2026-09-15 ~08:49 UTC: Mori + Tee_Sales_0609's last_14d ROAS is confirmed unchanged at 3.783706x (₹8,453.25 spend). However, 'Website_View_Population' (id 120255534778560159, the campaign this proposal calls Retargeting_31AUG) is now status=PAUSED, not ACTIVE -- it is not currently spending, so there is no live budget to shift away from it right now. The 1.5x+ ROAS-gap premise still held the last time both campaigns were simultaneously active (~2.28x gap at last check), but this proposal's daily_budget changes should not be approved while one side of the reallocation isn't delivering -- re-verify both campaigns are ACTIVE before approving. UPDATE 2026-09-15 ~12:47 UTC: Mori + Tee_Sales_0609 last_14d purchase_roas reconfirmed unchanged at 3.783706x (₹8,453.25 spend). 'Website_View_Population' (the campaign this proposal calls Retargeting_31AUG) remains PAUSED -- still no live budget to shift away from it. No change to the recommendation; still pending, still not actionable until both sides are simultaneously active. UPDATE 2026-09-15 ~14:52 UTC: the other side of this reallocation is now also paused -- 'Mori + Tee_Sales_0609' (still last_14d ROAS 3.783706x on ₹8,453.25 spend, unchanged) was force-paused this pass as a side effect of the purchaser-exclusion auto-module adding the account's newly-created 'Purchasers 180D' audience to its ad set's excluded_custom_audiences (see this pass's high-severity alert). Both sides of this proposed reallocation are now inactive -- 'Website_View_Population' (Retargeting_31AUG) remains PAUSED as before, and Mori + Tee_Sales_0609 just joined it. This proposal should not be approved while neither campaign is delivering; recommend holding until a human decides whether to reactivate Mori + Tee_Sales_0609 (ads_activate_entity is outside this run's permitted tools).",
       "actionSummary": "Step 1: set Retargeting_31AUG's (id 120255534778560159) daily_budget to 12500 (₹125/day, down from ₹250/day). Step 2: set Mori + Tee_Sales_0609's (id 120255648636980159) daily_budget to 132500 (₹1,325/day, up from ₹1,200/day). No other fields changed.",
       "metaAction": {
         "tool": "ads_update_entity",
@@ -569,14 +569,14 @@
       },
       "status": "pending",
       "createdAt": "2026-09-12T20:47:00.000Z",
-      "updatedAt": "2026-09-15T12:47:00.000Z"
+      "updatedAt": "2026-09-15T14:52:00.000Z"
     },
     {
       "id": "A-019",
       "module": "dayparting",
       "tier": "approval",
-      "title": "Schedule Mori + Tee_Sales_0609 to skip its dead window -- campaign is ACTIVE again",
-      "reasoning": "Fresh last_30d hourly breakdown (hourly_stats_aggregated_by_advertiser_time_zone) on Mori + Tee_Sales_0609 shows a clear, consecutive dead window: 03:00-09:59 (7 hourly buckets) spent ₹63.02+₹39.20+₹51.56+₹75.77+₹140.04+₹195.44+₹337.04 = ₹902.07 combined with zero attributed purchases in every one of those 7 hours (purchase_roas null throughout), while every other daytime and evening hour (10:00-02:00) shows a mix of very strong ROAS reads (e.g. 17:00 14.29x, 20:00 13.15x, 02:00 12.71x, 22:00 10.33x, 23:00 9.06x, 11:00 8.32x, 13:00 7.70x). This is a materially larger, cleaner sample than the only prior dayparting alert (AL-005, which found the pattern too thin on a different, now-long-paused campaign). Caveat: purchase counts (not just ROAS) weren't pulled at hourly granularity, so this reads spend-vs-null-ROAS rather than an exact purchase count per hour; recommend the approver spot-check before applying if precision matters. Reconfirmed 2026-09-13 ~10:49 UTC: fresh last_14d hourly breakdown on this campaign still shows the 01:00-09:00 window running mostly null/absent purchase_roas at modest spend (e.g. 03:00 ₹63.02, 04:00 ₹39.20, 05:00 ₹51.56, 06:00 ₹75.77, 07:00 ₹140.04, 08:00 ₹195.44, 09:00 ₹337.04, all purchase_roas=null), while afternoon/evening hours continue showing strong reads (17:00 14.29x, 20:00 13.15x, 22:00 10.33x, 23:00 9.06x, 02:00 12.71x). Consistent with the originally identified dead window. No change to the proposed action. UPDATE (2026-09-13 ~22:52 UTC pass): Mori + Tee_Sales_0609 was manually paused by the account owner at ~2026-09-13T20:58 UTC (see A-010/A-018) -- the proposed schedule change would have no live effect until the campaign is reactivated. No change to the underlying recommendation. Reconfirmed 2026-09-14 ~00:52 UTC: no fresh hourly breakdown pulled this pass (Mori + Tee_Sales_0609 remains PAUSED, manually, since ~2026-09-13T20:58 UTC per AL-281) -- no material change to report; proposal stands as last written. UPDATE 2026-09-15 ~12:47 UTC: Mori + Tee_Sales_0609 is ACTIVE again (reactivated since the last update, when it was noted PAUSED) -- this proposal is live/actionable again. A fresh last_14d hourly breakdown reconfirms a dead window, though its exact edges shifted slightly: 01:00, and 03:00-07:00 and 09:00 all still show null purchase_roas at modest-to-moderate spend (e.g. 04:00 ₹52.74, 06:00 ₹91.23, 07:00 ₹174.55, 09:00 ₹446.31), while 00:00 (3.81x), 02:00 (10.35x), and every hour from 10:00 onward show strong, consistently non-null ROAS (11:00 8.83x, 17:00 10.26x, 22:00 11.96x). One change from the original finding: 08:00 now shows a positive read (₹277.30 spend, 2.62x ROAS) rather than null -- weaker than the surrounding profitable hours but no longer a clean zero, so the dead window is now better described as ~01:00 and 03:00-07:00+09:00 than the original flat 03:00-09:59 block. Recommend the approver treat the 08:00 hour as optional/lower-confidence if narrowing the schedule further. The underlying recommendation to skip the core dead hours stands.",
+      "title": "Schedule Mori + Tee_Sales_0609 to skip its dead window -- campaign force-paused this pass, action moot until reactivated",
+      "reasoning": "Fresh last_30d hourly breakdown (hourly_stats_aggregated_by_advertiser_time_zone) on Mori + Tee_Sales_0609 shows a clear, consecutive dead window: 03:00-09:59 (7 hourly buckets) spent ₹63.02+₹39.20+₹51.56+₹75.77+₹140.04+₹195.44+₹337.04 = ₹902.07 combined with zero attributed purchases in every one of those 7 hours (purchase_roas null throughout), while every other daytime and evening hour (10:00-02:00) shows a mix of very strong ROAS reads (e.g. 17:00 14.29x, 20:00 13.15x, 02:00 12.71x, 22:00 10.33x, 23:00 9.06x, 11:00 8.32x, 13:00 7.70x). This is a materially larger, cleaner sample than the only prior dayparting alert (AL-005, which found the pattern too thin on a different, now-long-paused campaign). Caveat: purchase counts (not just ROAS) weren't pulled at hourly granularity, so this reads spend-vs-null-ROAS rather than an exact purchase count per hour; recommend the approver spot-check before applying if precision matters. Reconfirmed 2026-09-13 ~10:49 UTC: fresh last_14d hourly breakdown on this campaign still shows the 01:00-09:00 window running mostly null/absent purchase_roas at modest spend (e.g. 03:00 ₹63.02, 04:00 ₹39.20, 05:00 ₹51.56, 06:00 ₹75.77, 07:00 ₹140.04, 08:00 ₹195.44, 09:00 ₹337.04, all purchase_roas=null), while afternoon/evening hours continue showing strong reads (17:00 14.29x, 20:00 13.15x, 22:00 10.33x, 23:00 9.06x, 02:00 12.71x). Consistent with the originally identified dead window. No change to the proposed action. UPDATE (2026-09-13 ~22:52 UTC pass): Mori + Tee_Sales_0609 was manually paused by the account owner at ~2026-09-13T20:58 UTC (see A-010/A-018) -- the proposed schedule change would have no live effect until the campaign is reactivated. No change to the underlying recommendation. Reconfirmed 2026-09-14 ~00:52 UTC: no fresh hourly breakdown pulled this pass (Mori + Tee_Sales_0609 remains PAUSED, manually, since ~2026-09-13T20:58 UTC per AL-281) -- no material change to report; proposal stands as last written. UPDATE 2026-09-15 ~12:47 UTC: Mori + Tee_Sales_0609 is ACTIVE again (reactivated since the last update, when it was noted PAUSED) -- this proposal is live/actionable again. A fresh last_14d hourly breakdown reconfirms a dead window, though its exact edges shifted slightly: 01:00, and 03:00-07:00 and 09:00 all still show null purchase_roas at modest-to-moderate spend (e.g. 04:00 ₹52.74, 06:00 ₹91.23, 07:00 ₹174.55, 09:00 ₹446.31), while 00:00 (3.81x), 02:00 (10.35x), and every hour from 10:00 onward show strong, consistently non-null ROAS (11:00 8.83x, 17:00 10.26x, 22:00 11.96x). One change from the original finding: 08:00 now shows a positive read (₹277.30 spend, 2.62x ROAS) rather than null -- weaker than the surrounding profitable hours but no longer a clean zero, so the dead window is now better described as ~01:00 and 03:00-07:00+09:00 than the original flat 03:00-09:59 block. Recommend the approver treat the 08:00 hour as optional/lower-confidence if narrowing the schedule further. The underlying recommendation to skip the core dead hours stands. UPDATE 2026-09-15 ~14:52 UTC: 'Mori + Tee_Sales_0609' was force-paused this pass as a side effect of the purchaser-exclusion auto-module adding the account's newly-created 'Purchasers 180D' audience to its ad set's excluded_custom_audiences (see this pass's high-severity alert) -- not a delivery or ROAS problem, and not related to the dead-window finding below, which still stands as historical analysis. This dayparting schedule change cannot meaningfully apply while the campaign isn't delivering; recommend holding until a human decides whether to reactivate it (ads_activate_entity is outside this run's permitted tools), then revisiting this proposal.",
       "actionSummary": "Set the Mori_Sales ad set's (id 120255648636990159) adset_schedule to run only 00:00-03:00 and 10:00-24:00 every day (skipping the 03:00-09:59 IST dead window identified above). No budget or targeting fields changed. Note: Meta's ad-scheduling feature has historically required a lifetime budget rather than a CBO daily budget on some API versions -- if this campaign's current CBO daily budget rejects the schedule at execution time, the ad set's budget model would need adjusting first; flagging this now rather than assuming success.",
       "metaAction": {
         "tool": "ads_update_entity",
@@ -617,14 +617,14 @@
       },
       "status": "pending",
       "createdAt": "2026-09-12T20:47:00.000Z",
-      "updatedAt": "2026-09-15T12:47:00.000Z"
+      "updatedAt": "2026-09-15T14:52:00.000Z"
     },
     {
       "id": "A-020",
       "module": "pause-kill",
       "tier": "approval",
-      "title": "Pause 'TSUCHI BOF based on CAPS' -- ACTIVE OUTCOME_SALES campaign with zero purchases on ₹522.37 spent (14d)",
-      "reasoning": "UPDATE 2026-09-15 ~08:49 UTC: TSUCHI BOF based on CAPS (campaign id 120255774257000159, ad set 'TSUCHI' id 120255774257020159) remains ACTIVE. last_14d spend is now ₹523.09 (up slightly from ₹522.37 last pass), still just past the ₹500 kill-threshold floor, with purchase_roas still returning null (zero attributed purchases). Traffic quality still looks fine -- CTR 2.05%, CPM ₹127.46, 4,104 impressions / 84 clicks -- so this remains a genuine zero-purchase-at-spend situation, not a delivery problem. Distinct from the older, already-PAUSED 'Tsuchi BOF' (id 120255744872600159, covered by A-016). Trigger still holds; proposal unchanged in substance.",
+      "title": "Pause 'TSUCHI BOF based on CAPS' -- now already PAUSED, converged via this pass's purchaser-exclusion side effect",
+      "reasoning": "UPDATE 2026-09-15 ~08:49 UTC: TSUCHI BOF based on CAPS (campaign id 120255774257000159, ad set 'TSUCHI' id 120255774257020159) remains ACTIVE. last_14d spend is now ₹523.09 (up slightly from ₹522.37 last pass), still just past the ₹500 kill-threshold floor, with purchase_roas still returning null (zero attributed purchases). Traffic quality still looks fine -- CTR 2.05%, CPM ₹127.46, 4,104 impressions / 84 clicks -- so this remains a genuine zero-purchase-at-spend situation, not a delivery problem. Distinct from the older, already-PAUSED 'Tsuchi BOF' (id 120255744872600159, covered by A-016). Trigger still holds; proposal unchanged in substance. UPDATE 2026-09-15 ~14:52 UTC: this campaign's ad set ('TSUCHI', id 120255774257020159) was force-paused this pass as a side effect of the purchaser-exclusion auto-module adding the account's newly-created 'Purchasers 180D' audience to its excluded_custom_audiences (see this pass's medium-severity alert) -- not an execution of this proposal, which was never approved. The underlying zero-purchase finding (₹523.09 spent, last_14d, purchase_roas null) stands unchanged. Approving this proposal now would be a no-op on delivery (already PAUSED); a human can approve it anyway to formally record the decision, or reject it and decide separately whether to reactivate.",
       "actionSummary": "Pause campaign 'TSUCHI BOF based on CAPS' (id 120255774257000159) by setting its status to PAUSED. No other field changes. Stops further spend immediately; can be reactivated manually once the underlying issue (likely creative/offer/landing-page, since traffic and CTR are both healthy) is diagnosed, or once more runway is given given its short lifetime so far.",
       "metaAction": {
         "tool": "ads_update_entity",
@@ -637,7 +637,7 @@
       },
       "status": "pending",
       "createdAt": "2026-09-14T18:47:00.000Z",
-      "updatedAt": "2026-09-15T08:49:00.000Z"
+      "updatedAt": "2026-09-15T14:52:00.000Z"
     }
   ],
   "alerts": [
@@ -3374,11 +3374,11 @@
       "id": "AL-303",
       "module": "self-audit-check",
       "title": "circuitBreaker record (tripped since 2026-09-12) no longer matches the live account -- 3 different campaigns are actively spending",
-      "detail": "circuitBreaker.tripped has been true since 2026-09-12T16:47:00.000Z with no formal resume approval (A-017 is still pending). This pass's live pull found 3 campaigns with effective_status=ACTIVE: 'TSUCHI BOF based on CAPS' (₹450/day), 'Mori + Tee_Sales_0609' (₹1,120/day) and 'Tsuchi_TOF' (₹500/day) -- none of which are the same campaigns A-017's reasoning was written against (Tsuchi BOF, KAGE_TOF_Sept 2026, Website_View_Population/Retargeting_31AUG -- all three of those are currently PAUSED instead). Today's account spend is ₹1,572.32 against the ₹2,750 ceiling, so no new breach this pass, but real ad delivery has clearly continued under human control for days without ever going through the resume-after-circuit-breaker approval flow this routine's safety design requires. A-017 has been updated this pass to flag it as stale/needing human resolution rather than silently left as-is. This routine took no corrective action beyond flagging -- pausing these 3 campaigns unilaterally is not authorized (today's spend has not breached the ceiling), and clearing circuitBreaker.tripped automatically is explicitly forbidden by this routine's design. UPDATE 2026-09-15 ~12:47 UTC: circuitBreaker.tripped is still true, unchanged, still no formal resume approval. Today's account-level spend is now ₹1,787.81 against the ₹2,750 ceiling (up from ₹1,572.32 at the 08:49 UTC pass) -- still not breached. The same three campaigns remain the only ones ACTIVE: 'TSUCHI BOF based on CAPS' (₹450/day), 'Mori + Tee_Sales_0609' (₹1,120/day), 'Tsuchi_TOF' (₹500/day). No corrective action taken this pass either, for the same reasons as before (no new breach to justify pausing; auto-clearing circuitBreaker.tripped is forbidden). A-017 updated again this pass with the same fresh numbers.",
+      "detail": "circuitBreaker.tripped has been true since 2026-09-12T16:47:00.000Z with no formal resume approval (A-017 is still pending). This pass's live pull found 3 campaigns with effective_status=ACTIVE: 'TSUCHI BOF based on CAPS' (₹450/day), 'Mori + Tee_Sales_0609' (₹1,120/day) and 'Tsuchi_TOF' (₹500/day) -- none of which are the same campaigns A-017's reasoning was written against (Tsuchi BOF, KAGE_TOF_Sept 2026, Website_View_Population/Retargeting_31AUG -- all three of those are currently PAUSED instead). Today's account spend is ₹1,572.32 against the ₹2,750 ceiling, so no new breach this pass, but real ad delivery has clearly continued under human control for days without ever going through the resume-after-circuit-breaker approval flow this routine's safety design requires. A-017 has been updated this pass to flag it as stale/needing human resolution rather than silently left as-is. This routine took no corrective action beyond flagging -- pausing these 3 campaigns unilaterally is not authorized (today's spend has not breached the ceiling), and clearing circuitBreaker.tripped automatically is explicitly forbidden by this routine's design. UPDATE 2026-09-15 ~12:47 UTC: circuitBreaker.tripped is still true, unchanged, still no formal resume approval. Today's account-level spend is now ₹1,787.81 against the ₹2,750 ceiling (up from ₹1,572.32 at the 08:49 UTC pass) -- still not breached. The same three campaigns remain the only ones ACTIVE: 'TSUCHI BOF based on CAPS' (₹450/day), 'Mori + Tee_Sales_0609' (₹1,120/day), 'Tsuchi_TOF' (₹500/day). No corrective action taken this pass either, for the same reasons as before (no new breach to justify pausing; auto-clearing circuitBreaker.tripped is forbidden). A-017 updated again this pass with the same fresh numbers. UPDATE 2026-09-15 ~14:52 UTC: circuitBreaker.tripped is still true, unchanged, still no formal resume approval (A-017 still pending). Today's account-level spend is now ₹1,876.05 against the ₹2,750 ceiling -- still not breached. The account state changed materially THIS pass, though not via a new trip: this run's purchaser-exclusion auto-module added the newly-created 'Purchasers 180D' audience to all 3 then-active ad sets' excluded_custom_audiences, and the Meta API's status_forced_to_paused side effect paused 2 of the 3 ('TSUCHI BOF based on CAPS' and 'Mori + Tee_Sales_0609') as a consequence. Only 'Tsuchi_TOF' (₹500/day, OUTCOME_TRAFFIC) remains ACTIVE now. This is a different reason for campaign-state churn than the original 2026-09-12 trip, but it means the circuitBreaker record is further out of sync with why campaigns have started/stopped since -- underscoring the same underlying need for a human to formally resolve A-017. See this pass's high-severity purchaser-exclusion alerts for the pause details.",
       "severity": "high",
       "dismissed": false,
       "createdAt": "2026-09-15T08:49:00.000Z",
-      "updatedAt": "2026-09-15T12:47:00.000Z"
+      "updatedAt": "2026-09-15T14:52:00.000Z"
     },
     {
       "id": "AL-304",
@@ -3406,6 +3406,42 @@
       "severity": "low",
       "dismissed": false,
       "createdAt": "2026-09-15T12:47:00.000Z"
+    },
+    {
+      "id": "AL-307",
+      "module": "purchaser-exclusion",
+      "title": "Top-performing campaign Mori + Tee_Sales_0609 involuntarily paused as a side effect of this pass's purchaser-exclusion action -- needs human review/reactivation",
+      "detail": "A genuine purchaser custom audience ('Purchasers 180D', id 120255823280550159, event=Purchase/180d) was created today (2026-09-15 ~08:55 UTC) for the first time in this account's history -- previously settings.audience_label_corrections confirmed no true purchaser audience existed. This pass's purchaser-exclusion auto-module correctly added it to excluded_custom_audiences on all 3 currently-active prospecting ad sets, per module 12's design. On Mori_Sales (the sole ad set under 'Mori + Tee_Sales_0609', the account's best performer at 3.783706x ROAS on ₹8,453.25 last_14d spend), the Meta API responded to that targeting edit with status_forced_to_paused=true -- an automatic side effect of the write itself, not a status change this run requested or intended. The campaign is now PAUSED and not delivering. This routine's execution policy forbids ads_activate_entity, so it cannot be reactivated here. All other targeting (12 IN cities, interests, behaviors, the inclusion lookalike audience) was preserved unchanged -- only excluded_custom_audiences gained the new Purchasers 180D entry alongside the pre-existing ATC_180D exclusion. Recommend a human verify the new targeting in Ads Manager and manually reactivate the ad set if they want this campaign delivering again. See this pass's log entries for full before/after detail, and A-019 (the pending dayparting proposal for this same campaign), which is now also moot until reactivation.",
+      "severity": "high",
+      "dismissed": false,
+      "createdAt": "2026-09-15T14:52:00.000Z"
+    },
+    {
+      "id": "AL-308",
+      "module": "purchaser-exclusion",
+      "title": "TSUCHI BOF based on CAPS ad set also force-paused by this pass's purchaser-exclusion write -- converges with pending pause-kill proposal A-020",
+      "detail": "Same purchaser-exclusion action (adding the new 'Purchasers 180D' audience, id 120255823280550159, to excluded_custom_audiences) triggered status_forced_to_paused=true on the TSUCHI ad set (id 120255774257020159, campaign 'TSUCHI BOF based on CAPS'). This campaign had zero purchases on ₹523.09 spent (last_14d) and was already flagged by pending proposal A-020 for a pause-kill approval on exactly that basis. The involuntary pause here has now achieved the same delivery outcome A-020 proposed, without A-020 itself being approved or executed. A-020 has been annotated this pass to reflect the convergence -- a human can approve it (a no-op on delivery, formally closing the record) or reject it and decide separately whether to reactivate this ad set. The underlying zero-purchase finding stands either way.",
+      "severity": "medium",
+      "dismissed": false,
+      "createdAt": "2026-09-15T14:52:00.000Z"
+    },
+    {
+      "id": "AL-309",
+      "module": "competitor-rescrape",
+      "title": "Gully Labs / Lotto Sport India combined active-ad count steady at 278 (was 281)",
+      "detail": "ads_library_search combined page_ids query (ad_active_status=ACTIVE) returned estimated_total_count=278 this pass, down from 281 at the ~12:47 UTC pass -- a ~1.1% move, well under the 20% spike threshold. No competitor-spike alert warranted.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-09-15T14:52:00.000Z"
+    },
+    {
+      "id": "AL-310",
+      "module": "routine-run-notes",
+      "title": "Run summary -- 2026-09-15 ~14:52 UTC pass",
+      "detail": "Circuit breaker: today's account spend ₹1,876.05 vs ₹2,750 ceiling -- not breached, no new trip. circuitBreaker.tripped remains true (unchanged since 2026-09-12), still awaiting a formal resume-after-circuit-breaker decision on A-017 -- see A-017's update this pass. Pixel/data-quality gate: passed -- every tracked event's composite match-quality score is at or above 6.1/10 (>=0.6 equivalent), lowest being Search/PageView/ViewContent/AddToCart/SubscribedButtonClick at 6.1; ROAS-driven modules were NOT suppressed this pass. Anomaly signal: none found (auction overlap, creative fatigue, narrow audience all clear). Hook-angle-tagging: all 5 creatives currently running on active/recently-active ads (2159488444970710, 1636223541237301, 1083221097686901, 3540403499461242, 1327092559313701) already have creativeTags entries from prior passes -- nothing new to tag. Lookalike-refresh: no refresh due (freshest actively-used purchaser-proxy LALs are 5 and 10 days old, under the 14-day threshold); the 111-day-stale legacy pixel-sourced LAL remains flagged as un-refreshable by this tool per AL-306, unchanged. Competitor-rescrape: steady at 278 active ads (was 281), no spike. BIGGEST DEVELOPMENT: a genuine purchaser custom audience ('Purchasers 180D', event=Purchase/180d) was created in this account for the first time today (~08:55 UTC) -- previously none existed. This pass's purchaser-exclusion auto-module correctly added it to all 3 currently-active prospecting ad sets' excluded_custom_audiences (Tsuchi_TOF, TSUCHI, Mori_Sales), alongside the pre-existing ATC_180D exclusion. Two of the three writes triggered the Meta API's known status_forced_to_paused side effect: TSUCHI BOF based on CAPS (converges with already-pending pause-kill proposal A-020 -- low-impact, that campaign had zero purchases anyway) and, more significantly, Mori + Tee_Sales_0609 -- the account's single best-performing campaign (3.78x ROAS) -- which is now NOT delivering as an unintended consequence. ads_activate_entity is forbidden this run, so a human needs to review and manually reactivate if desired (see high-severity alert this pass). Only Tsuchi_TOF (OUTCOME_TRAFFIC, no ROAS objective) remains ACTIVE and delivering after this pass. Proposals A-017, A-018, A-019 and A-020 were updated this pass to reflect the new post-purchaser-exclusion account state. No new approval-tier proposals were warranted beyond these updates -- with only one traffic-objective campaign now active and no other qualifying triggers found this pass.",
+      "severity": "high",
+      "dismissed": false,
+      "createdAt": "2026-09-15T14:52:00.000Z"
     }
   ],
   "log": [
@@ -7382,6 +7418,163 @@
       },
       "tier": "auto",
       "executedAt": "2026-09-15T12:47:00.000Z"
+    },
+    {
+      "proposalId": null,
+      "action": "purchaser-exclusion auto-module: executed on Tsuchi_TOF's ad set 'Tsuchi_TOF' (id 120255554400480159, campaign 120255554400490159, ACTIVE OUTCOME_TRAFFIC prospecting ad set). A genuine purchaser custom audience now exists for the first time -- 'Purchasers 180D' (id 120255823280550159), created today 2026-09-15 ~08:55 UTC. Verified via ads_get_custom_audience: rule is event=Purchase with retention_seconds 15552000 (180 days), a real Purchase-event audience, unlike the long-mislabeled ATC_180D (id 120249907176770159, an AddToCart-based proxy per settings.audience_label_corrections). Added Purchasers 180D to excluded_custom_audiences alongside the existing ATC_180D exclusion (left in place, not removed). First write attempt with only excluded_custom_audiences failed validation (error 100/2446385, 'A location is missing: Add at least one location or choose a custom audience'); retried once with geo_locations resent unchanged, per this run's one-retry-max policy, which succeeded. No status_forced_to_paused side effect on this ad set -- it remains ACTIVE.",
+      "result": "success",
+      "previousState": {
+        "entity_id": "120255554400480159",
+        "entity_type": "ad_set",
+        "field": "targeting.excluded_custom_audiences",
+        "value": [
+          {
+            "id": "120249907176770159",
+            "name": "ATC_180D"
+          }
+        ],
+        "note": "Full prior targeting: age 21-65, geo IN (home/recent), no inclusion custom_audiences (broad/interest-based prospecting), effective_status ACTIVE, last_14d spend ₹359.84, purchase_roas null."
+      },
+      "detail": {
+        "success": true,
+        "entity_id": "120255554400480159",
+        "entity_type": "ad_set",
+        "updated_fields": {
+          "targeting": {
+            "geo_locations": {
+              "countries": [
+                "IN"
+              ],
+              "location_types": [
+                "home",
+                "recent"
+              ]
+            },
+            "excluded_custom_audiences": [
+              {
+                "id": "120249907176770159"
+              },
+              {
+                "id": "120255823280550159"
+              }
+            ]
+          }
+        },
+        "status_forced_to_paused": false,
+        "ads_manager_url": "https://www.facebook.com/adsmanager/manage/adsets/edit?act=704523148804803&selected_adset_ids=120255554400480159",
+        "first_attempt_error": {
+          "success": false,
+          "error_category": "VALIDATION",
+          "error_message": "A location is missing: Add at least one location or choose a custom audience.",
+          "error_code": "100",
+          "error_subcode": "2446385"
+        }
+      },
+      "tier": "auto",
+      "executedAt": "2026-09-15T14:52:00.000Z"
+    },
+    {
+      "proposalId": null,
+      "action": "purchaser-exclusion auto-module: executed on TSUCHI ad set (id 120255774257020159, campaign 120255774257000159 'TSUCHI BOF based on CAPS', ACTIVE OUTCOME_SALES prospecting ad set). Added the newly-created genuine 'Purchasers 180D' audience (id 120255823280550159, verified Purchase-event, 180d) to excluded_custom_audiences alongside the existing ATC_180D exclusion. The Meta API forced the ad set to PAUSED as a side effect of this targeting edit (status_forced_to_paused=true) -- the same pattern seen on 2026-09-11 (Tsuchi BOF ad set) and 2026-09-13 (Retargeting_31AUG ad set). This campaign was already the subject of pending pause-kill proposal A-020 (zero purchases on ₹523.09 spent, 14d) -- the involuntary pause here converges with what that proposal would have done, so A-020 is being annotated as moot/converged this pass rather than executed (it was never approved -- approval-tier proposals are never auto-executed). ads_activate_entity is forbidden by this run's execution policy, so this ad set cannot be reactivated here if a human wants it running again.",
+      "result": "success",
+      "previousState": {
+        "entity_id": "120255774257020159",
+        "entity_type": "ad_set",
+        "field": "targeting.excluded_custom_audiences",
+        "value": [
+          {
+            "id": "120249907176770159",
+            "name": "ATC_180D"
+          }
+        ],
+        "note": "Full prior targeting: age 18-65 (age_range 22-35), geo IN (frequently_in/home/recent), interests Online shopping + Sneakers (footwear), effective_status ACTIVE, last_14d spend ₹523.09, purchase_roas null (zero purchases)."
+      },
+      "detail": {
+        "success": true,
+        "entity_id": "120255774257020159",
+        "entity_type": "ad_set",
+        "updated_fields": {
+          "targeting": {
+            "geo_locations": {
+              "countries": [
+                "IN"
+              ],
+              "location_types": [
+                "frequently_in",
+                "home",
+                "recent"
+              ]
+            },
+            "excluded_custom_audiences": [
+              {
+                "id": "120249907176770159"
+              },
+              {
+                "id": "120255823280550159"
+              }
+            ]
+          },
+          "status": "PAUSED"
+        },
+        "status_forced_to_paused": true,
+        "ads_manager_url": "https://www.facebook.com/adsmanager/manage/adsets/edit?act=704523148804803&selected_adset_ids=120255774257020159"
+      },
+      "tier": "auto",
+      "executedAt": "2026-09-15T14:52:00.000Z"
+    },
+    {
+      "proposalId": null,
+      "action": "purchaser-exclusion auto-module: executed on Mori_Sales ad set (id 120255648636990159, campaign 120255648636980159 'Mori + Tee_Sales_0609', ACTIVE OUTCOME_SALES prospecting ad set and the account's best-performing campaign this period -- last_14d ROAS 3.783706x on ₹8,453.25 spend). Added the newly-created genuine 'Purchasers 180D' audience (id 120255823280550159) to excluded_custom_audiences alongside the existing ATC_180D exclusion, preserving the inclusion lookalike audience (id 120255645189730159, 'Lookalike (IN 5%) - Purchase Pixel - New 2026-08-29') and all 12 targeted cities unchanged. IMPORTANT SIDE EFFECT: the Meta API forced this ad set to PAUSED (status_forced_to_paused=true) as a consequence of the targeting edit -- the same pattern seen previously on other ad sets in this account (2026-09-11, 2026-09-13). This is the account's only ad set under its top-performing campaign, so Mori + Tee_Sales_0609 is now NOT delivering -- an unintended, real-world-impacting consequence of an otherwise-correct, policy-authorized safety action. ads_activate_entity is forbidden by this run's execution policy, so this routine cannot reactivate it. Flagged at high severity (see alerts, this pass) for prompt human review -- likely warrants manual reactivation in Ads Manager once the new exclusion is confirmed in place.",
+      "result": "success",
+      "previousState": {
+        "entity_id": "120255648636990159",
+        "entity_type": "ad_set",
+        "field": "targeting.excluded_custom_audiences",
+        "value": [
+          {
+            "id": "120249907176770159",
+            "name": "ATC_180D"
+          }
+        ],
+        "note": "Full prior targeting: age 19-65 (age_range 19-40), 12 targeted IN cities (Ahmedabad/Bangalore/Calicut/Chennai/Hyderabad/Kochi/Mangalore/Mumbai/Mysore/Pune/Rajkot/Surat), interests Streetwear + Fashion accessories, behaviors (mid/high-value goods in India, Engaged Shoppers), inclusion custom_audiences=[Lookalike (IN 5%) - Purchase Pixel - New 2026-08-29 (120255645189730159)], effective_status ACTIVE, last_14d spend ₹8,453.25, purchase_roas 3.783706."
+      },
+      "detail": {
+        "success": true,
+        "entity_id": "120255648636990159",
+        "entity_type": "ad_set",
+        "updated_fields": {
+          "targeting": {
+            "geo_locations": {
+              "cities": [
+                "12 IN cities, unchanged from previousState"
+              ],
+              "location_types": [
+                "frequently_in",
+                "home",
+                "recent"
+              ]
+            },
+            "custom_audiences": [
+              {
+                "id": "120255645189730159"
+              }
+            ],
+            "excluded_custom_audiences": [
+              {
+                "id": "120249907176770159"
+              },
+              {
+                "id": "120255823280550159"
+              }
+            ]
+          },
+          "status": "PAUSED"
+        },
+        "status_forced_to_paused": true,
+        "ads_manager_url": "https://www.facebook.com/adsmanager/manage/adsets/edit?act=704523148804803&selected_adset_ids=120255648636990159"
+      },
+      "tier": "auto",
+      "executedAt": "2026-09-15T14:52:00.000Z"
     }
   ],
   "creativeTags": {
