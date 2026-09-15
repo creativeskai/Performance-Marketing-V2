@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-14T22:47:00.000Z",
+  "generatedAt": "2026-09-15T00:48:00.000Z",
   "settings": {
     "kill_roas_threshold": "pause if ROAS < 1.0x after ₹500 spend on a sales-objective campaign",
     "reactivate_min_historic_roas": "surface for reactivation if a paused campaign's last active-period ROAS >= 3.0x",
@@ -26,8 +26,8 @@
     "competitor_last_scrape": {
       "gully_labs_active_ads": 210,
       "lotto_sport_india_active_ads": 106,
-      "scraped_at": "2026-09-14T22:47:00.000Z",
-      "note": "2026-09-14 ~22:47 UTC scheduled run: ads_library_search combined page_ids query (107479854297817 / 426015150606378, ad_active_status=ACTIVE) returned estimated_total_count=295, unchanged from 295 at the prior ~20:47 UTC pass -- 0% move, well under the 20% spike threshold. Combined-query-only pass again (individual per-page counts not independently re-verified this pass, carried forward unchanged from the last per-page split of 210 / 106). No new competitor-spike alert."
+      "scraped_at": "2026-09-15T00:48:00.000Z",
+      "note": "2026-09-15 ~00:48 UTC scheduled run: ads_library_search combined page_ids query (107479854297817 / 426015150606378, ad_active_status=ACTIVE) returned estimated_total_count=295, unchanged from 295 at the prior ~22:47 UTC pass -- 0% move, well under the 20% spike threshold. Combined-query-only pass again (individual per-page counts not independently re-verified this pass, carried forward unchanged from the last per-page split of 210 / 106). No new competitor-spike alert."
     },
     "audience_label_corrections": {
       "120249907176770159": "ATC_180D — NOT 'Purchasers 30D'. Verified via ads_get_custom_audience on 2026-09-14: name is 'ATC_180D', rule is event=AddToCart with retention_seconds 15552000 (180 days), approximate size 20. Prior runs of this routine have repeatedly described this id as the 'Purchasers 30D' audience (see A-004 purchaser-exclusion and multiple log entries). That is wrong: it is a cart-adder audience, not a purchaser audience. Excluding it does NOT exclude past buyers. This account currently has NO purchaser-based custom audience, so any purchaser-exclusion module must first create one rather than reusing this id. Do not propagate the 'Purchasers 30D' label.",
@@ -3332,6 +3332,15 @@
       "severity": "medium",
       "dismissed": false,
       "createdAt": "2026-09-14T22:47:00.000Z"
+    },
+    {
+      "id": "AL-299",
+      "module": "routine-run-notes",
+      "title": "Run summary -- 2026-09-15 ~00:48 UTC pass",
+      "detail": "Circuit breaker: still tripped (from 2026-09-12T16:47 UTC, AL-255), unresolved -- A-017 remains pending, no change. Today's account spend this pass is ₹195.77 against the ₹2,750 ceiling (settings.hard_spend_ceiling_inr), no new trip. 5 campaigns currently ACTIVE (TSUCHI BOF based on CAPS ₹522.93, KAGE_TOF_Sept 2026 ₹762.73, Mori + Tee_Sales_0609 ₹8,453.25 lifetime-14d, Tsuchi_TOF ₹359.67, Retargeting_31AUG ₹1,624.15 -- 14d spend figures). Pixel/data-quality gate: still fully recovered, every tracked event (Purchase, AddPaymentInfo, prepaid_purchase composite score 9.3; AddToCart/PageView/ViewContent/SubscribedButtonClick/Search 6.1; InitiateCheckout 6.8) clears the 0.6 (6.0/10) gate -- ROAS-driven modules NOT suppressed. Auto-tier modules (12-15): purchaser-exclusion -- fresh targeting pull on all 5 active ad sets (KAGE, Tsuchi_TOF, TSUCHI, Mori_Sales, Retargeting_31AUG) confirms each still carries the ATC_180D exclusion (id 120249907176770159) applied by prior passes; per settings.audience_label_corrections this id is not a true purchaser audience and this run's execution policy does not permit creating a new non-lookalike custom audience, so no new entity could be brought into compliance even if one lacked the exclusion -- none did. lookalike-refresh -- all active LAL audiences remain under the 14-day threshold (oldest active purchase-pixel-based LAL is 10 days, created 2026-09-05); nothing to execute. hook-angle-tagging -- all 7 currently-active ads (TSUCHI, Retargeting, Tsuchi_Sales - New, KAGE, Tsuchi_Sales, Tee_Sales, Tsuchi_TOF) confirmed already present in queue.json.creativeTags; nothing to execute. hard-spend-circuit-breaker -- no new trip. No auto-tier Meta write calls were made this pass. Approval-tier: no new proposals created, no new triggers found beyond the 16 already pending (A-001-A-020 minus A-004/A-007/A-008); campaign-level 14d numbers for Mori + Tee_Sales_0609 (ROAS 3.783706x) and Retargeting_31AUG (ROAS 1.662864x) are byte-identical to the prior ~22:47 UTC pass's fresh pulls (A-012/A-010's STALE corrections), consistent with only ~2h of elapsed time and no new spend/purchase activity moving 14-day rolling aggregates. Anomaly signal: unchanged, KAGE ad set (id 120255704517640159) still flagged active_delivery_narrow_audience (AL-297, not re-alerted, same finding). Competitor-rescrape: Gully Labs + Lotto Sport India combined active-ad count still 295, 0% move since the last pass -- no spike alert. self-audit-check: index.html dashboard staleness flagged at AL-293 (missing TSUCHI BOF based on CAPS and Tsuchi_TOF, still references long-paused New_Sales_Kage_31AUG) remains unresolved -- dashboard regeneration is outside this routine's write scope, not re-alerted this pass (same finding, <3 days old). campaign-consolidation-watch: AL-270's flag on the Tsuchi BOF / TSUCHI BOF based on CAPS / Tsuchi_TOF overlap stands, unchanged. Highest priority item: none new -- the account is quiet this pass, all pending items are already tracked.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-09-15T00:48:00.000Z"
     }
   ],
   "log": [
