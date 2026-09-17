@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-17T16:54:00.000Z",
+  "generatedAt": "2026-09-17T18:46:00.000Z",
   "settings": {
     "kill_roas_threshold": "pause if ROAS < 1.0x after ₹500 spend on a sales-objective campaign",
     "reactivate_min_historic_roas": "surface for reactivation if a paused campaign's last active-period ROAS >= 3.0x",
@@ -26,8 +26,8 @@
     "competitor_last_scrape": {
       "gully_labs_active_ads": 210,
       "lotto_sport_india_active_ads": 106,
-      "scraped_at": "2026-09-17T16:54:00.000Z",
-      "note": "2026-09-17T16:54:00.000Z scheduled run: ads_library_search combined page_ids query (107479854297817 / 426015150606378, ad_active_status=ACTIVE, no country filter -- same query shape as prior passes) returned estimated_total_count=273, up from the prior 14:49 UTC pass (260) -- a ~5.0% increase, well under the 20% spike threshold in either direction. No new competitor-spike alert. Combined-query-only pass again (individual per-page counts not independently re-verified this pass, carried forward unchanged from the last per-page split of 210 / 106)."
+      "scraped_at": "2026-09-17T18:46:00.000Z",
+      "note": "2026-09-17T18:46:00.000Z scheduled run: ads_library_search combined page_ids query (107479854297817 / 426015150606378, ad_active_status=ACTIVE, no country filter -- same query shape as prior passes) returned estimated_total_count=274, up from the prior 16:54 UTC pass (273) -- a ~0.4% increase, well under the 20% spike threshold in either direction. No new competitor-spike alert. Combined-query-only pass again (individual per-page counts not independently re-verified this pass, carried forward unchanged from the last per-page split of 210 / 106)."
     },
     "audience_label_corrections": {
       "120249907176770159": "ATC_180D — NOT 'Purchasers 30D'. Verified via ads_get_custom_audience on 2026-09-14: name is 'ATC_180D', rule is event=AddToCart with retention_seconds 15552000 (180 days), approximate size 20. Prior runs of this routine have repeatedly described this id as the 'Purchasers 30D' audience (see A-004 purchaser-exclusion and multiple log entries). That is wrong: it is a cart-adder audience, not a purchaser audience. Excluding it does NOT exclude past buyers. This account currently has NO purchaser-based custom audience, so any purchaser-exclusion module must first create one rather than reusing this id. Do not propagate the 'Purchasers 30D' label.",
@@ -3840,6 +3840,42 @@
       "severity": "low",
       "dismissed": false,
       "createdAt": "2026-09-17T16:54:00.000Z"
+    },
+    {
+      "id": "AL-344",
+      "module": "self-audit-check",
+      "title": "Delivery restored on all 4 active campaigns -- account_spend_limit_reached block from AL-341 has cleared",
+      "detail": "Re-checked adset-level 'delivery' field this pass (2026-09-17 ~18:46 UTC, fresh IST day, today's account spend ₹0 so far): Retargeting_Overall, TSUCHI (under 'TSUCHI BOF based on CAPS'), and Mori_Sales (under 'Mori + Tee_Sales_0609') all now report delivery.status='active', up from 'off'/'account_spend_limit_reached' at the prior 16:54 UTC pass (AL-341). A 5th ad set, MMA TOF's new 'UGC_MMA', is also delivery-active as of this pass (before this routine's own purchaser-exclusion action force-paused it -- see the separate alert this pass). The Billing-level account spending limit that was blocking delivery appears to have been raised or removed by a human between the 16:54 and this pass. circuitBreaker.tripped still remains true from 2026-09-12 (never auto-resumed per policy) even though delivery is now fully live account-wide -- the live/recorded mismatch persists and A-017 (resume-after-circuit-breaker) still awaits a human decision.",
+      "severity": "high",
+      "dismissed": false,
+      "createdAt": "2026-09-17T18:46:00.000Z"
+    },
+    {
+      "id": "AL-345",
+      "module": "purchaser-exclusion",
+      "title": "MMA TOF's only ad set force-paused as a side effect of this pass's purchaser-exclusion write",
+      "detail": "purchaser-exclusion auto-module added the 'Purchasers 180D' custom audience to UGC_MMA's (id 120255873268940159) excluded_custom_audiences, a required safety action on this brand-new prospecting ad set. The Meta API forced status_forced_to_paused=true as a side effect (same pattern as 2026-09-11/13/15 on other ad sets). UGC_MMA is the only ad set under campaign 'MMA TOF', so this campaign -- new today, an Ajay Dhoni x KAI athlete-collab creative -- is now NOT delivering. ads_activate_entity is forbidden by this run's execution policy, so this routine cannot reactivate it. Recommend a human reactivate MMA TOF's ad set in Ads Manager once the new exclusion is confirmed in place.",
+      "severity": "high",
+      "dismissed": false,
+      "createdAt": "2026-09-17T18:46:00.000Z"
+    },
+    {
+      "id": "AL-346",
+      "module": "competitor-rescrape",
+      "title": "Gully Labs / Lotto Sport India combined active-ad count steady at 274 (was 273)",
+      "detail": "ads_library_search combined page_ids query (107479854297817 / 426015150606378, ad_active_status=ACTIVE, no country filter -- same query shape as prior passes) returned estimated_total_count=274, up from the prior 16:54 UTC pass (273) -- a ~0.4% increase, well under the 20% spike threshold in either direction. No new competitor-spike alert. Combined-query-only pass again (individual per-page counts not independently re-verified this pass, carried forward unchanged from the last per-page split of 210 / 106).",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-09-17T18:46:00.000Z"
+    },
+    {
+      "id": "AL-347",
+      "module": "routine-run-notes",
+      "title": "Run summary -- 2026-09-17 ~18:46 UTC pass",
+      "detail": "Circuit breaker check first, per routine: today's account-level spend is ₹0 (fresh IST day just rolled over -- ad account timezone is IST/UTC+5:30, so 'today' restarted minutes before this pass) vs ₹2,750 hard_spend_ceiling_inr -- not breached, no fresh trip. circuitBreaker.tripped remains true from 2026-09-12 (never auto-resumed per policy; A-017 still pending human review). Pixel quality gate: Purchase 8.8/10, AddPaymentInfo 9.1/10, prepaid_purchase 8.8/10, cod_purchase 8.8/10 (all well above the 6.0/10 = 0.6 gate) -- ROAS-driven modules NOT suppressed this run, though no ROAS-driven approval-tier proposal data changed materially since 16:54 UTC given the zero-spend fresh day. Auto-tier: purchaser-exclusion executed once (new campaign MMA TOF's ad set UGC_MMA -- see alert, force-paused as a side effect); hook-angle-tagging executed once (MMA TOF's new creative, vision pass skipped per this run's policy); lookalike-refresh not due (Purchasers 180D unchanged in size at 20, refreshed 2026-09-15, next due ~2026-09-29); hard-spend-circuit-breaker not triggered. Anomaly signal: none found. Major finding this pass: delivery restored account-wide (AL-344) -- the account_spend_limit_reached block from AL-341 has cleared, most likely a human raised/removed the Billing-level spending limit between passes. No approval-tier proposals created or materially updated this pass (existing pending proposals unchanged; A-017 remains the single most important open item given delivery is now fully live under a still-tripped circuit breaker).",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-09-17T18:46:00.000Z"
     }
   ],
   "log": [
@@ -8026,6 +8062,69 @@
       },
       "tier": "auto",
       "executedAt": "2026-09-16T16:50:00.000Z"
+    },
+    {
+      "proposalId": null,
+      "action": "purchaser-exclusion auto-module: executed on MMA TOF's ad set 'UGC_MMA' (id 120255873268940159, campaign 120255873268930159 'MMA TOF', OUTCOME_TRAFFIC prospecting ad set). This campaign is brand-new -- not seen by this routine in any prior pass -- and had no custom_audiences or excluded_custom_audiences at all (broad interest/behavior targeting: Engaged Shoppers, Physical exercise, Frequent international travelers, Shoes + People who prefer high-value goods in India). Added the genuine 'Purchasers 180D' audience (id 120255823280550159, verified Purchase-event, 180d retention) to excluded_custom_audiences. No rate-limit conflict (no prior purchaser-exclusion log entry for this entity). IMPORTANT SIDE EFFECT: the Meta API forced this ad set to PAUSED (status_forced_to_paused=true) as a consequence of the targeting edit, the same pattern seen repeatedly on other ad sets in this account (2026-09-11, 2026-09-13, 2026-09-15). UGC_MMA is the only ad set under MMA TOF, so this campaign is now NOT delivering -- flagged at high severity (see alerts, this pass). ads_activate_entity is forbidden by this run's execution policy, so this routine cannot reactivate it.",
+      "result": "success",
+      "previousState": {
+        "entity_id": "120255873268940159",
+        "entity_type": "ad_set",
+        "field": "targeting.excluded_custom_audiences",
+        "value": null,
+        "note": "Full prior targeting: age 18-65, geo IN (home/recent), no inclusion/exclusion custom_audiences at all -- broad interest/behavior-based prospecting (flexible_spec: Engaged Shoppers, Physical exercise, Frequent international travelers, Shoes + high-value-goods India)."
+      },
+      "detail": {
+        "tool": "ads_update_entity",
+        "params": {
+          "ad_account_id": "704523148804803",
+          "entity_id": "120255873268940159",
+          "entity_type": "ad_set",
+          "fields": {
+            "targeting": {
+              "geo_locations": {
+                "countries": [
+                  "IN"
+                ],
+                "location_types": [
+                  "home",
+                  "recent"
+                ]
+              },
+              "excluded_custom_audiences": [
+                {
+                  "id": "120255823280550159"
+                }
+              ]
+            }
+          }
+        },
+        "response": {
+          "success": true,
+          "entity_id": "120255873268940159",
+          "entity_type": "ad_set",
+          "is_draft": false,
+          "status_forced_to_paused": true
+        }
+      },
+      "tier": "auto",
+      "executedAt": "2026-09-17T18:46:00.000Z"
+    },
+    {
+      "proposalId": null,
+      "action": "hook-angle-tagging auto-module: tagged creative 3675864592566409 ('MMA' ad, video, campaign MMA TOF) with angle/hook derived from its real primary text and headline -- no Meta API mutation, wrote to queue.json.creativeTags only. This ad/campaign is new since the prior pass (16:54 UTC) -- first seen by this routine this pass.",
+      "result": "success",
+      "previousState": {
+        "creativeTags_entry_existed": false
+      },
+      "detail": {
+        "creative_id": "3675864592566409",
+        "body": "The fight doesn’t start in the cage.\nIt starts in the mind.\n\nAjay Dhoni × KAI\nBuilt for those who choose the harder path",
+        "title": "KAI x Ajay Dhoni",
+        "vision_pass_skipped": true
+      },
+      "tier": "auto",
+      "executedAt": "2026-09-17T18:46:00.000Z"
     }
   ],
   "creativeTags": {
@@ -10434,6 +10533,17 @@
       "visionPassSkipped": true,
       "note": "Higgsfield vision connection not attached to this run -- image content itself not analyzed, only real ad copy text used. No creative description invented.",
       "taggedAt": "2026-09-16T16:50:00.000Z"
+    },
+    "3675864592566409": {
+      "adName": "KAI x Ajay Dhoni 2026-09-17-b716cfa9e9447a2c2531f0665bfdc12c",
+      "campaign": "MMA TOF",
+      "format": "Video",
+      "angle": "Athlete-collab mental-toughness positioning (Ajay Dhoni x KAI) -- brand/awareness-adjacent traffic push, not discount-led",
+      "hook": "\"The fight doesn’t start in the cage.\\nIt starts in the mind.\\n\\nAjay Dhoni × KAI\\nBuilt for those who choose the harder path\" (primary text) / \"KAI x Ajay Dhoni\" (headline, SHOP_NOW CTA)",
+      "taggedFrom": "ad primary text (body) + headline (title), via Meta Ads MCP ads_get_creatives",
+      "visionPassSkipped": true,
+      "note": "Higgsfield vision connection not attached to this run -- image/video content itself not analyzed, only real ad copy text used. No creative description invented.",
+      "taggedAt": "2026-09-17T18:46:00.000Z"
     }
   }
 }
