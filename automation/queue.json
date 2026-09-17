@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-17T18:46:00.000Z",
+  "generatedAt": "2026-09-17T20:46:00.000Z",
   "settings": {
     "kill_roas_threshold": "pause if ROAS < 1.0x after ₹500 spend on a sales-objective campaign",
     "reactivate_min_historic_roas": "surface for reactivation if a paused campaign's last active-period ROAS >= 3.0x",
@@ -26,8 +26,8 @@
     "competitor_last_scrape": {
       "gully_labs_active_ads": 210,
       "lotto_sport_india_active_ads": 106,
-      "scraped_at": "2026-09-17T18:46:00.000Z",
-      "note": "2026-09-17T18:46:00.000Z scheduled run: ads_library_search combined page_ids query (107479854297817 / 426015150606378, ad_active_status=ACTIVE, no country filter -- same query shape as prior passes) returned estimated_total_count=274, up from the prior 16:54 UTC pass (273) -- a ~0.4% increase, well under the 20% spike threshold in either direction. No new competitor-spike alert. Combined-query-only pass again (individual per-page counts not independently re-verified this pass, carried forward unchanged from the last per-page split of 210 / 106)."
+      "scraped_at": "2026-09-17T20:46:00.000Z",
+      "note": "2026-09-17T20:46:00.000Z scheduled run: ads_library_search combined page_ids query (107479854297817 / 426015150606378, ad_active_status=ACTIVE, no country filter -- same query shape as prior passes) returned estimated_total_count=273, down from the prior 18:46 UTC pass (274) -- a ~0.4% decrease, well under the 20% spike threshold in either direction. No new competitor-spike alert. Combined-query-only pass again (individual per-page counts not independently re-verified this pass, carried forward unchanged from the last per-page split of 210 / 106)."
     },
     "audience_label_corrections": {
       "120249907176770159": "ATC_180D — NOT 'Purchasers 30D'. Verified via ads_get_custom_audience on 2026-09-14: name is 'ATC_180D', rule is event=AddToCart with retention_seconds 15552000 (180 days), approximate size 20. Prior runs of this routine have repeatedly described this id as the 'Purchasers 30D' audience (see A-004 purchaser-exclusion and multiple log entries). That is wrong: it is a cart-adder audience, not a purchaser audience. Excluding it does NOT exclude past buyers. This account currently has NO purchaser-based custom audience, so any purchaser-exclusion module must first create one rather than reusing this id. Do not propagate the 'Purchasers 30D' label.",
@@ -3876,6 +3876,24 @@
       "severity": "low",
       "dismissed": false,
       "createdAt": "2026-09-17T18:46:00.000Z"
+    },
+    {
+      "id": "AL-348",
+      "module": "self-audit-check",
+      "title": "Dashboard static snapshot (index.html) still 4 days stale -- 'today' labeled Sep 13, missing Retargeting_Overall and MMA TOF entirely",
+      "detail": "index.html's DATA.today snapshot is still labeled 'Today — September 13, 2026' (last seen flagged AL-293 on 2026-09-14T18:47 UTC, outside the 3-day dedup window so re-flagging here). Live account state as of this pass (2026-09-17 ~20:46 UTC): 4 campaigns ACTIVE (Retargeting_Overall, TSUCHI BOF based on CAPS, Mori + Tee_Sales_0609, MMA TOF) vs. the snapshot's stale today-block which only lists Mori + Tee_Sales_0609, Tsuchi BOF (paused live), Retargeting_31AUG (paused live), and KAGE_TOF_Sept 2026 (paused live) -- none of which match current effective_status. Retargeting_Overall and MMA TOF (both launched after the snapshot was written) are absent entirely. This is a static-file staleness issue, not a live-account problem -- the routine does not regenerate index.html's DATA block, so this remains open until a human or a separate process refreshes it. No action taken by this routine beyond flagging.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-09-17T20:46:00.000Z"
+    },
+    {
+      "id": "AL-349",
+      "module": "routine-run-notes",
+      "title": "Run summary -- 2026-09-17 ~20:46 UTC pass",
+      "detail": "Circuit breaker check first, per routine: today's account-level spend is ₹45.04 (ads_get_ad_entities, level=ad_account, date_preset=today) vs ₹2,750 hard_spend_ceiling_inr -- not breached, no fresh trip. circuitBreaker.tripped remains true from 2026-09-12 (never auto-resumed per policy; A-017 still pending human review, 6th+ day of mismatch vs. live account, see AL-338/AL-334/AL-317). Pixel quality gate: ads_get_dataset_quality on dataset 833131719490535 -- all tracked events at/above the 0.6 match-rate gate (Purchase 8.8/10, AddPaymentInfo 9.1/10, prepaid_purchase 8.8/10, cod_purchase 8.8/10, InitiateCheckout 6.7/10, AddToCart/Search/SubscribedButtonClick/PageView/ViewContent 6.1/10) -- ROAS-driven modules not suppressed this pass. Anomaly signal: ads_insights_anomaly_signal returned no issues (auction overlap, creative fatigue, narrow audience all checked). Auto-tier modules, in order: purchaser-exclusion -- all 3 active prospecting/retargeting ad sets already carry the correct exclusions (TSUCHI's 'TSUCHI' ad set and Mori_Sales both exclude ATC_180D + Purchasers 180D; Retargeting_Overall intentionally includes Purchasers 180D as part of its broad multi-funnel-stage retargeting inclusion list, not a prospecting ad set, so the module does not apply; MMA TOF's UGC_MMA ad set already excludes Purchasers 180D and is currently PAUSED/off) -- no action. lookalike-refresh -- the 'Purchasers 180D' source audience (id 120255823280550159, size ~20) is unchanged since 2026-09-15 and its 1%/2%/5% LAL ladder (newest checked: id 120255832535210159) is only 2 days old vs. the 14-day lookalike_refresh_days threshold -- no action. hook-angle-tagging -- checked all 6 ads currently running under the 4 active campaigns (creative ids 1674349610717444, 3540403499461242, 1083221097686901, 1636223541237301, 2159488444970710, 3675864592566409); all already present in queue.json.creativeTags from prior passes -- no new tagging needed this pass. hard-spend-circuit-breaker -- not breached (see above); no auto-resume performed on the standing 2026-09-12 trip, per policy. Approval-tier modules: no new proposals this pass -- last_14d campaign economics for the 4 active campaigns (Retargeting_Overall ₹160.72 spend/no purchases yet, too new/low-spend for pause-kill; TSUCHI BOF based on CAPS ₹1,824.55 spend/5.71x ROAS; Mori + Tee_Sales_0609 ₹11,173.40 spend/3.29x ROAS; MMA TOF ₹0 spend, ad set still force-paused) are materially unchanged from the 16:54/18:46 UTC passes that produced A-022/A-023/A-024 and the other currently-pending age-gender/placement/budget/dayparting proposals (A-001-A-024 excluding executed/rejected ids) -- reasoning left as-is, no drift worth updating. Geo scaling/suppression remain blocked (Meta doesn't return purchase attribution at region level, per AL-004). No duplicate campaigns targeting the same product+audience combo observed (campaign-consolidation-watch) -- MMA TOF is a distinct Ajay Dhoni collab audience/product, not overlapping the other 3. Digests: not due (today is Thursday 2026-09-17, not Monday; not first-of-month; last weekly digest AL-282 was 2026-09-14, within the ~7-day cadence). Competitor rescrape: combined Gully Labs / Lotto Sport India active-ad count 273, down from 274 at the prior pass -- ~0.4% move, no spike alert. Self-audit: flagged dashboard (index.html) static-snapshot staleness in a fresh alert (AL-347) since the last such flag (AL-293) fell outside the 3-day dedup window; otherwise no drift beyond the already-tracked circuitBreaker/live-account mismatch. No auto actions executed, no proposals created or updated, 2 new alerts written (self-audit staleness + this summary).",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-09-17T20:46:00.000Z"
     }
   ],
   "log": [
