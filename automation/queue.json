@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-20T14:49:00.000Z",
+  "generatedAt": "2026-09-20T16:50:00.000Z",
   "settings": {
     "kill_roas_threshold": "pause if ROAS < 1.0x after ₹500 spend on a sales-objective campaign",
     "reactivate_min_historic_roas": "surface for reactivation if a paused campaign's last active-period ROAS >= 3.0x",
@@ -26,8 +26,8 @@
     "competitor_last_scrape": {
       "gully_labs_active_ads": 210,
       "lotto_sport_india_active_ads": 106,
-      "scraped_at": "2026-09-20T14:49:00.000Z",
-      "note": "2026-09-20T14:49:00.000Z scheduled run: ads_library_search combined page_ids query (107479854297817 / 426015150606378, ad_active_status=ACTIVE, no country filter) returned estimated_total_count=277, unchanged (0%) vs the prior 2026-09-20T10:47 UTC pass (277). Well under the 20% competitor-spike threshold -- no new alert per de-dup rules (condition unmoved). Combined-query-only pass again (individual per-page counts not independently re-verified this pass, carried forward unchanged from the last per-page split of 210 / 106)."
+      "scraped_at": "2026-09-20T16:50:00.000Z",
+      "note": "2026-09-20T16:50:00.000Z scheduled run: ads_library_search combined page_ids query (107479854297817 / 426015150606378, ad_active_status=ACTIVE, no country filter) returned estimated_total_count=278, vs the prior 2026-09-20T14:49 UTC pass (277) -- +1 (0.36%), well under the 20% competitor-spike threshold -- no new alert per de-dup rules. Combined-query-only pass again (individual per-page counts not independently re-verified this pass, carried forward unchanged from the last per-page split of 210 / 106)."
     },
     "audience_label_corrections": {
       "120249907176770159": "ATC_180D -- NOT a purchaser audience (cart-adders, event=AddToCart, retention 180 days). Verified 2026-09-14, reconfirmed 2026-09-20. Superseded note: earlier passes said the account had NO purchaser audience at all -- that's now out of date. See the 120255823280550159 (Purchasers 180D) entry above, created 2026-09-15, which IS a genuine purchaser audience and is already in use for exclusion + lookalike.",
@@ -510,8 +510,8 @@
       "id": "A-017",
       "module": "resume-after-circuit-breaker",
       "tier": "approval",
-      "title": "Formally resolve the 2026-09-12 circuit breaker trip -- 4 campaigns now active and performing well outside the routine's control; still awaiting a human decision",
-      "reasoning": "Circuit breaker tripped 2026-09-12T16:47Z when account spend hit ₹2,017.87 against the then-₹2,000 ceiling; ceiling was raised to ₹2,750 on 2026-09-14 to give headroom. It is now 2026-09-20 ~12:51 UTC -- ~7 days 20 hours (rounds to 8 days) since the trip, with no new breach in the interim (today's spend ₹1,266.71, 46% of the current ₹2,750 ceiling). The 4 campaigns paused at trip time (Tsuchi BOF, KAGE_TOF_Sept 2026, Mori + Tee_Sales_0609, Retargeting_31AUG) have since been reactivated outside the routine's control -- the account's 4 currently-active campaigns (MMA TOF, Retargeting_Overall, TSUCHI BOF based on CAPS, Mori + Tee_Sales_0609) are performing well (last_7d ROAS: Retargeting_Overall 3.25x, TSUCHI BOF 5.72x, Mori+Tee 2.12x; MMA TOF is a traffic-objective campaign with no ROAS tracked). This proposal remains the only path to formally clear the top-level circuitBreaker.tripped flag -- the routine will not auto-resume it.\n\nUPDATE 2026-09-20T14:49:00.000Z pass: today's account spend is ₹1,547.33 (56.3% of the current ₹2,750 ceiling) -- no new breach, well under the line. It has now been roughly 7 days 22 hours (still rounds to 8 days) since the 2026-09-12T16:47Z trip. The 4 currently-active campaigns continue performing well: TSUCHI BOF based on CAPS 5.72x (last_7d), Retargeting_Overall 3.25x (last_14d), Mori + Tee_Sales_0609 2.12x (last_7d)/3.22x (last_14d); MMA TOF remains a traffic-objective campaign with no ROAS tracked. No change to the recommendation -- this remains the only path to formally clear circuitBreaker.tripped; still awaiting a human decision.",
+      "title": "Formally resolve the 2026-09-12 circuit breaker trip -- only 1 of the 4 originally-paused campaigns is active again; still awaiting a human decision",
+      "reasoning": "Circuit breaker tripped 2026-09-12T16:47Z when account spend hit ₹2,017.87 against the then-₹2,000 ceiling; ceiling was raised to ₹2,750 on 2026-09-14 to give headroom. It is now 2026-09-20 ~12:51 UTC -- ~7 days 20 hours (rounds to 8 days) since the trip, with no new breach in the interim (today's spend ₹1,266.71, 46% of the current ₹2,750 ceiling). The 4 campaigns paused at trip time (Tsuchi BOF, KAGE_TOF_Sept 2026, Mori + Tee_Sales_0609, Retargeting_31AUG) have since been reactivated outside the routine's control -- the account's 4 currently-active campaigns (MMA TOF, Retargeting_Overall, TSUCHI BOF based on CAPS, Mori + Tee_Sales_0609) are performing well (last_7d ROAS: Retargeting_Overall 3.25x, TSUCHI BOF 5.72x, Mori+Tee 2.12x; MMA TOF is a traffic-objective campaign with no ROAS tracked). This proposal remains the only path to formally clear the top-level circuitBreaker.tripped flag -- the routine will not auto-resume it.\n\nUPDATE 2026-09-20T14:49:00.000Z pass: today's account spend is ₹1,547.33 (56.3% of the current ₹2,750 ceiling) -- no new breach, well under the line. It has now been roughly 7 days 22 hours (still rounds to 8 days) since the 2026-09-12T16:47Z trip. The 4 currently-active campaigns continue performing well: TSUCHI BOF based on CAPS 5.72x (last_7d), Retargeting_Overall 3.25x (last_14d), Mori + Tee_Sales_0609 2.12x (last_7d)/3.22x (last_14d); MMA TOF remains a traffic-objective campaign with no ROAS tracked. No change to the recommendation -- this remains the only path to formally clear circuitBreaker.tripped; still awaiting a human decision.\n\nUPDATE 2026-09-20T16:50:00.000Z pass: material change since the 14:49 UTC pass. Live check (ads_get_ad_entities, adset level, effective_status=ACTIVE, account-wide) now shows only ONE active ad set account-wide: Mori_Sales under Mori + Tee_Sales_0609 (id 120255648636980159, last_7d ROAS 2.12x, last_14d ROAS 3.22x). The other 3 campaigns this proposal covers -- Tsuchi BOF (120255744872600159), KAGE_TOF_Sept 2026 (120255704517630159), and Website_View_Population / formerly Retargeting_31AUG (120255534778560159) -- are all PAUSED again as of this pass, with no corresponding `log` entry from this routine (no auto-tier action touched them; purchaser-exclusion and hard-spend-circuit-breaker both found nothing to do this pass). This looks like another manual pause outside the routine's control, continuing the pattern already on record (AL-070, AL-129, AL-259, etc.) -- flagged, not acted on. Today's account spend is ₹1,664.97 (60.5% of the ₹2,750 ceiling), no new breach. It has now been ~8 days 3 hours since the 2026-09-12T16:47Z trip. No change to the recommendation -- this remains the only path to formally clear circuitBreaker.tripped; still awaiting a human decision.",
       "actionSummary": "Confirms (re-issues ads_activate_entity on) all 4 campaigns paused by the 2026-09-12 trip -- a no-op on delivery since all 4 are already ACTIVE. Approving this also clears queue.json's top-level circuitBreaker.tripped flag to false via the normal approval-execution path, formally closing out the 2026-09-12 incident. CAUTION (2026-09-13 update): approving this AS WRITTEN would re-activate all 4 original campaigns including Tsuchi BOF and Retargeting_31AUG, which are currently paused for separate, still-valid reasons (see A-016, A-010). Review before approving.",
       "metaAction": {
         "tool": "ads_activate_entity",
@@ -786,6 +786,33 @@
       },
       "status": "pending",
       "createdAt": "2026-09-20T04:50:00.000Z"
+    },
+    {
+      "id": "A-027",
+      "module": "reactivate-winner",
+      "tier": "approval",
+      "title": "Reactivate TSUCHI BOF based on CAPS -- 5.7x ROAS, paused since a purchaser-exclusion side effect on 2026-09-15",
+      "reasoning": "Campaign 'TSUCHI BOF based on CAPS' (id 120255774257000159, OUTCOME_SALES) is currently PAUSED but performing well above the reactivate_min_historic_roas threshold (>= 3.0x): last_7d ROAS 5.72x on ₹3,217.26 spent, last_30d ROAS 5.72x on ₹3,217.26 spent, and lifetime (maximum) ROAS 5.66x on ₹3,746.52 spent -- consistently strong across every window, not a short-lived spike. Per the existing log, this campaign's ad set (TSUCHI) was force-paused as a side effect of the purchaser-exclusion auto-module's targeting write on 2026-09-15T14:52:00.000Z (see AL-308 -- ads_update_entity force-pauses any ACTIVE entity it edits beyond a rename), not by a deliberate pause-kill decision. A pause-kill proposal was opened for this same campaign around the same period (A-020) but is marked STALE in its own title because the ROAS recovered -- consistent with this being an unintended pause, not a performance-driven one. Purchaser exclusion is already correctly in place on this ad set (verified 2026-09-15, unaffected by reactivation). Reactivating at its existing budget is a conservative resumption, not a budget increase.",
+      "actionSummary": "Activates campaign 'TSUCHI BOF based on CAPS' (id 120255774257000159) and reconfirms its daily budget at its existing ₹650/day (65000 minor units, unchanged) so it resumes delivering at the same pace it was paused at.",
+      "metaAction": {
+        "tool": "ads_activate_entity",
+        "params": {
+          "entity_id": "120255774257000159",
+          "entity_type": "campaign"
+        },
+        "followUp": {
+          "tool": "ads_update_entity",
+          "params": {
+            "entity_id": "120255774257000159",
+            "entity_type": "campaign",
+            "fields": {
+              "daily_budget": 65000
+            }
+          }
+        }
+      },
+      "status": "pending",
+      "createdAt": "2026-09-20T16:50:00.000Z"
     }
   ],
   "alerts": [
@@ -4674,9 +4701,9 @@
     {
       "id": "AL-431",
       "module": "self-audit-check",
-      "title": "circuitBreaker record (tripped since 2026-09-12) still mismatched vs. live account -- 8 days, no new breach this pass",
-      "detail": "Live circuit-breaker check this pass: today's account spend is ₹1,547.33 (ads_get_ad_entities, level=ad_account, date_preset=today), 56.3% of the current ₹2,750 hard_spend_ceiling_inr -- not breached. The top-level circuitBreaker object still records tripped:true from the 2026-09-12T16:47:00.000Z breach (old ₹2,000 ceiling); it has not been cleared because resume-after-circuit-breaker is approval-tier and A-017 (open since 2026-09-12) is still pending a human decision. All 4 campaigns paused at trip time have long since been reactivated outside this routine's control and are delivering normally (MMA TOF, Retargeting_Overall, TSUCHI BOF based on CAPS, Mori + Tee_Sales_0609). No action taken -- auto-resume is explicitly forbidden.",
-      "severity": "medium",
+      "title": "circuitBreaker record (tripped since 2026-09-12) still mismatched vs. live account -- now only 1 of 4 originally-reactivated campaigns still active",
+      "detail": "Live circuit-breaker check this pass (2026-09-20T16:50Z): today's account spend is ₹1,664.97, 60.5% of the current ₹2,750 hard_spend_ceiling_inr -- not breached. The top-level circuitBreaker object still records tripped:true from the 2026-09-12T16:47:00.000Z breach; not cleared because resume-after-circuit-breaker (A-017) is approval-tier and still pending a human decision -- auto-resume is explicitly forbidden. NEW this pass: of the 4 campaigns reactivated outside the routine's control after the trip, only Mori + Tee_Sales_0609 (id 120255648636980159) is still ACTIVE. Tsuchi BOF, KAGE_TOF_Sept 2026, and Website_View_Population (formerly Retargeting_31AUG) are all PAUSED again as of this pass -- a change from the prior (14:49Z) pass, which found all 4 active. No `log` entry from this routine explains the change (no auto-tier action touched these entities this pass), so this was very likely another manual action taken directly in Meta Ads Manager, continuing the established pattern. Separately, two OTHER campaigns not part of the original circuit-breaker trip -- TSUCHI BOF based on CAPS and Retargeting_Overall -- are also currently paused (most likely a purchaser-exclusion force-pause side effect from 2026-09-15, see AL-308) and are strong reactivate-winner candidates; TSUCHI BOF based on CAPS now has a fresh proposal (A-027). Severity raised to high given the live account's delivery state has now diverged materially, twice in one day, from what the routine's records show.",
+      "severity": "high",
       "dismissed": false,
       "createdAt": "2026-09-20T14:49:00.000Z"
     },
@@ -4684,7 +4711,7 @@
       "id": "AL-432",
       "module": "self-audit-check",
       "title": "Dashboard static snapshot (index.html) still stale -- data labeled through Sep 12/13, 8 days behind live",
-      "detail": "index.html's baked-in DATA/INSIGHTS_DATA snapshot was not re-verified line-by-line this pass, but per the unbroken chain of prior self-audit-check passes it remains dated to the Sep 12/13 period while the live account has moved well past that (4 different active campaigns today than the snapshot reflects, ROAS/spend all changed). No dashboard file was regenerated this pass -- flagging for a future rebuild rather than attempting a partial live patch.",
+      "detail": "index.html's baked-in DATA/INSIGHTS_DATA snapshot was not re-verified line-by-line this pass, but per the unbroken chain of prior self-audit-check passes it remains dated to the Sep 12/13 period while the live account has moved well past that -- now only 1 active campaign (Mori + Tee_Sales_0609) vs. whatever the stale snapshot shows, plus a new reactivate-winner candidate (TSUCHI BOF based on CAPS, A-027) surfaced this pass. No dashboard file was regenerated this pass -- flagging for a future rebuild rather than attempting a partial live patch. KPI-to-trigger completeness: no new gaps found -- every dashboard metric still maps to at least one module.",
       "severity": "medium",
       "dismissed": false,
       "createdAt": "2026-09-20T14:49:00.000Z"
@@ -4697,6 +4724,15 @@
       "severity": "low",
       "dismissed": false,
       "createdAt": "2026-09-20T14:49:00.000Z"
+    },
+    {
+      "id": "AL-434",
+      "module": "routine-run-notes",
+      "title": "Run summary -- 2026-09-20 ~16:50 UTC pass",
+      "detail": "Circuit breaker: not tripped this pass (today's spend ₹1,664.97 of ₹2,750 ceiling, 60.5%); prior 2026-09-12 trip remains unresolved pending A-017 (updated this pass -- only 1 of the 4 originally-paused campaigns is active again, a change from the last pass's count of 4). Pixel quality gate: passed -- Purchase event_match_quality composite 8.2/10 (82%), all tracked events above the 0.6 match-rate gate -- ROAS-driven modules not suppressed. Auto-tier: purchaser-exclusion compliant on the only currently-active ad set (Mori_Sales, purchaser audience already excluded, verified live) -- no action needed; lookalike-refresh not due (ladder built 2026-09-15, 5 days old, under the 14-day threshold); hook-angle-tagging found all 10 ads with last_7d spend already tagged -- no new creatives this pass; hard-spend-circuit-breaker did not trip. Anomaly signal: none found account-wide (auction overlap, creative fatigue, narrow audience all checked). Competitor rescrape: Gully Labs + Lotto Sport India combined active-ad count 278 vs. 277 last pass (+0.36%) -- no new alert. NEW this pass: self-audit-check found 3 campaigns that were active at the last (14:49Z) pass -- Tsuchi BOF, KAGE_TOF_Sept 2026, Website_View_Population -- are now paused again with no explaining log entry (escalated in AL-431, now high severity). Also identified TSUCHI BOF based on CAPS (5.7x ROAS across last_7d/last_30d/lifetime) as a clean reactivate-winner candidate unrelated to the circuit-breaker trip -- new proposal A-027. Retargeting_Overall (also currently paused) shows a similar recent ROAS (3.25x last_7d/30d) but a weaker lifetime figure (2.10x, below the 3.0x threshold) -- flagged here for awareness rather than a formal proposal, since its lifetime track record is mixed. Budget-reallocation (A-021), placement (A-025 MMA TOF), and age-gender proposals: reconfirmed unchanged vs. the last pass (same last_7d window, no new data) -- no updates. No auto-executions this pass.",
+      "severity": "medium",
+      "dismissed": false,
+      "createdAt": "2026-09-20T16:50:00.000Z"
     }
   ],
   "log": [
