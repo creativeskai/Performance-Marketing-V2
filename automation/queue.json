@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-20T16:50:00.000Z",
+  "generatedAt": "2026-09-20T19:15:00.000Z",
   "settings": {
     "kill_roas_threshold": "pause if ROAS < 1.0x after ₹500 spend on a sales-objective campaign",
     "reactivate_min_historic_roas": "surface for reactivation if a paused campaign's last active-period ROAS >= 3.0x",
@@ -26,8 +26,8 @@
     "competitor_last_scrape": {
       "gully_labs_active_ads": 210,
       "lotto_sport_india_active_ads": 106,
-      "scraped_at": "2026-09-20T16:50:00.000Z",
-      "note": "2026-09-20T16:50:00.000Z scheduled run: ads_library_search combined page_ids query (107479854297817 / 426015150606378, ad_active_status=ACTIVE, no country filter) returned estimated_total_count=278, vs the prior 2026-09-20T14:49 UTC pass (277) -- +1 (0.36%), well under the 20% competitor-spike threshold -- no new alert per de-dup rules. Combined-query-only pass again (individual per-page counts not independently re-verified this pass, carried forward unchanged from the last per-page split of 210 / 106)."
+      "scraped_at": "2026-09-20T19:15:00.000Z",
+      "note": "2026-09-20T19:15:00.000Z scheduled run: ads_library_search combined page_ids query (107479854297817 / 426015150606378, ad_active_status=ACTIVE, no country filter) returned estimated_total_count=278, unchanged (0%) vs the prior 2026-09-20T16:50 UTC pass (278) -- no new alert per de-dup rules. Combined-query-only pass again (individual per-page counts not independently re-verified this pass, carried forward unchanged from the last per-page split of 210 / 106)."
     },
     "audience_label_corrections": {
       "120249907176770159": "ATC_180D -- NOT a purchaser audience (cart-adders, event=AddToCart, retention 180 days). Verified 2026-09-14, reconfirmed 2026-09-20. Superseded note: earlier passes said the account had NO purchaser audience at all -- that's now out of date. See the 120255823280550159 (Purchasers 180D) entry above, created 2026-09-15, which IS a genuine purchaser audience and is already in use for exclusion + lookalike.",
@@ -510,8 +510,8 @@
       "id": "A-017",
       "module": "resume-after-circuit-breaker",
       "tier": "approval",
-      "title": "Formally resolve the 2026-09-12 circuit breaker trip -- only 1 of the 4 originally-paused campaigns is active again; still awaiting a human decision",
-      "reasoning": "Circuit breaker tripped 2026-09-12T16:47Z when account spend hit ₹2,017.87 against the then-₹2,000 ceiling; ceiling was raised to ₹2,750 on 2026-09-14 to give headroom. It is now 2026-09-20 ~12:51 UTC -- ~7 days 20 hours (rounds to 8 days) since the trip, with no new breach in the interim (today's spend ₹1,266.71, 46% of the current ₹2,750 ceiling). The 4 campaigns paused at trip time (Tsuchi BOF, KAGE_TOF_Sept 2026, Mori + Tee_Sales_0609, Retargeting_31AUG) have since been reactivated outside the routine's control -- the account's 4 currently-active campaigns (MMA TOF, Retargeting_Overall, TSUCHI BOF based on CAPS, Mori + Tee_Sales_0609) are performing well (last_7d ROAS: Retargeting_Overall 3.25x, TSUCHI BOF 5.72x, Mori+Tee 2.12x; MMA TOF is a traffic-objective campaign with no ROAS tracked). This proposal remains the only path to formally clear the top-level circuitBreaker.tripped flag -- the routine will not auto-resume it.\n\nUPDATE 2026-09-20T14:49:00.000Z pass: today's account spend is ₹1,547.33 (56.3% of the current ₹2,750 ceiling) -- no new breach, well under the line. It has now been roughly 7 days 22 hours (still rounds to 8 days) since the 2026-09-12T16:47Z trip. The 4 currently-active campaigns continue performing well: TSUCHI BOF based on CAPS 5.72x (last_7d), Retargeting_Overall 3.25x (last_14d), Mori + Tee_Sales_0609 2.12x (last_7d)/3.22x (last_14d); MMA TOF remains a traffic-objective campaign with no ROAS tracked. No change to the recommendation -- this remains the only path to formally clear circuitBreaker.tripped; still awaiting a human decision.\n\nUPDATE 2026-09-20T16:50:00.000Z pass: material change since the 14:49 UTC pass. Live check (ads_get_ad_entities, adset level, effective_status=ACTIVE, account-wide) now shows only ONE active ad set account-wide: Mori_Sales under Mori + Tee_Sales_0609 (id 120255648636980159, last_7d ROAS 2.12x, last_14d ROAS 3.22x). The other 3 campaigns this proposal covers -- Tsuchi BOF (120255744872600159), KAGE_TOF_Sept 2026 (120255704517630159), and Website_View_Population / formerly Retargeting_31AUG (120255534778560159) -- are all PAUSED again as of this pass, with no corresponding `log` entry from this routine (no auto-tier action touched them; purchaser-exclusion and hard-spend-circuit-breaker both found nothing to do this pass). This looks like another manual pause outside the routine's control, continuing the pattern already on record (AL-070, AL-129, AL-259, etc.) -- flagged, not acted on. Today's account spend is ₹1,664.97 (60.5% of the ₹2,750 ceiling), no new breach. It has now been ~8 days 3 hours since the 2026-09-12T16:47Z trip. No change to the recommendation -- this remains the only path to formally clear circuitBreaker.tripped; still awaiting a human decision.",
+      "title": "Formally resolve the 2026-09-12 circuit breaker trip -- 0 of the 4 originally-paused campaigns are active now; still awaiting a human decision",
+      "reasoning": "Circuit breaker tripped 2026-09-12T16:47Z when account spend hit ₹2,017.87 against the then-₹2,000 ceiling; ceiling was raised to ₹2,750 on 2026-09-14 to give headroom. It is now 2026-09-20 ~12:51 UTC -- ~7 days 20 hours (rounds to 8 days) since the trip, with no new breach in the interim (today's spend ₹1,266.71, 46% of the current ₹2,750 ceiling). The 4 campaigns paused at trip time (Tsuchi BOF, KAGE_TOF_Sept 2026, Mori + Tee_Sales_0609, Retargeting_31AUG) have since been reactivated outside the routine's control -- the account's 4 currently-active campaigns (MMA TOF, Retargeting_Overall, TSUCHI BOF based on CAPS, Mori + Tee_Sales_0609) are performing well (last_7d ROAS: Retargeting_Overall 3.25x, TSUCHI BOF 5.72x, Mori+Tee 2.12x; MMA TOF is a traffic-objective campaign with no ROAS tracked). This proposal remains the only path to formally clear the top-level circuitBreaker.tripped flag -- the routine will not auto-resume it.\n\nUPDATE 2026-09-20T14:49:00.000Z pass: today's account spend is ₹1,547.33 (56.3% of the current ₹2,750 ceiling) -- no new breach, well under the line. It has now been roughly 7 days 22 hours (still rounds to 8 days) since the 2026-09-12T16:47Z trip. The 4 currently-active campaigns continue performing well: TSUCHI BOF based on CAPS 5.72x (last_7d), Retargeting_Overall 3.25x (last_14d), Mori + Tee_Sales_0609 2.12x (last_7d)/3.22x (last_14d); MMA TOF remains a traffic-objective campaign with no ROAS tracked. No change to the recommendation -- this remains the only path to formally clear circuitBreaker.tripped; still awaiting a human decision.\n\nUPDATE 2026-09-20T16:50:00.000Z pass: material change since the 14:49 UTC pass. Live check (ads_get_ad_entities, adset level, effective_status=ACTIVE, account-wide) now shows only ONE active ad set account-wide: Mori_Sales under Mori + Tee_Sales_0609 (id 120255648636980159, last_7d ROAS 2.12x, last_14d ROAS 3.22x). The other 3 campaigns this proposal covers -- Tsuchi BOF (120255744872600159), KAGE_TOF_Sept 2026 (120255704517630159), and Website_View_Population / formerly Retargeting_31AUG (120255534778560159) -- are all PAUSED again as of this pass, with no corresponding `log` entry from this routine (no auto-tier action touched them; purchaser-exclusion and hard-spend-circuit-breaker both found nothing to do this pass). This looks like another manual pause outside the routine's control, continuing the pattern already on record (AL-070, AL-129, AL-259, etc.) -- flagged, not acted on. Today's account spend is ₹1,664.97 (60.5% of the ₹2,750 ceiling), no new breach. It has now been ~8 days 3 hours since the 2026-09-12T16:47Z trip. No change to the recommendation -- this remains the only path to formally clear circuitBreaker.tripped; still awaiting a human decision.\n\nUPDATE 2026-09-20T19:15:00.000Z pass: TSUCHI BOF based on CAPS (the '1 of 4' referenced above -- note: not actually one of the 4 originally paused at trip time, see prior updates) is now confirmed PAUSED again. Of the 4 campaigns paused at trip time (Tsuchi BOF, KAGE_TOF_Sept 2026, Mori + Tee_Sales_0609, Retargeting_31AUG), 0 are currently active. Today's account-level spend remains negligible (well under the ₹2,750 ceiling). Two brand-new, unrelated campaigns (SORA_TOF, Sora_BOF_Based on Mori_Tee) appeared this pass and were both immediately force-paused by the purchaser-exclusion auto-module before accruing meaningful spend -- see AL-435. The account is now fully paused at the ad-set level. Still awaiting a human resume-after-circuit-breaker decision; not auto-resumed per policy.",
       "actionSummary": "Confirms (re-issues ads_activate_entity on) all 4 campaigns paused by the 2026-09-12 trip -- a no-op on delivery since all 4 are already ACTIVE. Approving this also clears queue.json's top-level circuitBreaker.tripped flag to false via the normal approval-execution path, formally closing out the 2026-09-12 incident. CAUTION (2026-09-13 update): approving this AS WRITTEN would re-activate all 4 original campaigns including Tsuchi BOF and Retargeting_31AUG, which are currently paused for separate, still-valid reasons (see A-016, A-010). Review before approving.",
       "metaAction": {
         "tool": "ads_activate_entity",
@@ -4733,6 +4733,60 @@
       "severity": "medium",
       "dismissed": false,
       "createdAt": "2026-09-20T16:50:00.000Z"
+    },
+    {
+      "id": "AL-435",
+      "module": "self-audit-check",
+      "title": "Two brand-new campaigns appeared and were both auto-paused by purchaser-exclusion before accruing spend -- circuitBreaker record now further mismatched vs. live account",
+      "detail": "This pass found two campaigns never seen before by this routine: SORA_TOF (id 120255786838750159, OUTCOME_TRAFFIC, broad prospecting, yesterday's spend ₹0.01) and Sora_BOF_Based on Mori_Tee (id 120255928784210159, OUTCOME_SALES, 12-city interest/behavior targeting, no spend recorded yet). Both were missing the genuine 'Purchasers 180D' exclusion and were fixed by this run's purchaser-exclusion auto-module -- both ad sets were force-paused by the Meta API as a side effect (status_forced_to_paused=true), the same pattern seen on every purchaser-exclusion write since 2026-09-11. Net effect: every campaign in the account is now PAUSED at the ad-set level, including the two that were 'currently ACTIVE' at campaign-object level moments ago. Separately, the circuitBreaker record (tripped since 2026-09-12T16:47Z) is now even further out of sync with the live account: of the 4 campaigns paused at trip time (Tsuchi BOF, KAGE_TOF_Sept 2026, Mori + Tee_Sales_0609, Retargeting_31AUG), 0 are currently active (down from 1 at the prior 14:49 UTC pass, since TSUCHI BOF based on CAPS -- itself not one of the original 4 -- is also confirmed PAUSED this pass). Today's account-level spend is negligible (well under settings.hard_spend_ceiling_inr ₹2,750) so no new breach occurred; the existing trip still requires a human resume decision (see pending A-017, updated this pass).",
+      "severity": "high",
+      "dismissed": false,
+      "createdAt": "2026-09-20T19:15:00.000Z"
+    },
+    {
+      "id": "AL-436",
+      "module": "self-audit-check",
+      "title": "Dashboard static snapshot (index.html) still stale -- data labeled through Sep 12/13, now 8+ days behind live",
+      "detail": "Live account state has moved substantially since the dashboard's baked-in DATA/INSIGHTS_DATA snapshot (still labeled Sep 12/13): every campaign live at snapshot time is now PAUSED, two entirely new campaigns (SORA_TOF, Sora_BOF_Based on Mori_Tee) exist that the snapshot has no knowledge of, and the circuitBreaker/proposal state has diverged further (see AL-435). No drift-tolerance figure is configured to auto-suppress this repeat finding; flagging again per self-audit-check's mandate to re-pull live numbers against the static snapshot every pass.",
+      "severity": "medium",
+      "dismissed": false,
+      "createdAt": "2026-09-20T19:15:00.000Z"
+    },
+    {
+      "id": "AL-437",
+      "module": "campaign-consolidation-watch",
+      "title": "No consolidation flag -- the only two nominally-active campaigns target distinct funnel stages/audiences, and both are now non-delivering",
+      "detail": "SORA_TOF (OUTCOME_TRAFFIC, broad advantage_audience prospecting, no interests) and Sora_BOF_Based on Mori_Tee (OUTCOME_SALES, 12-city interest/behavior targeting: Streetwear, Fashion accessories, high-value-goods behaviors) are the only two campaigns showing effective_status=ACTIVE at the campaign object level, but both had their sole ad set force-paused this pass by the purchaser-exclusion auto-module (see log), so neither is currently delivering. Different objectives, different targeting -- no product+audience overlap to flag.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-09-20T19:15:00.000Z"
+    },
+    {
+      "id": "AL-438",
+      "module": "pixel-health",
+      "title": "Pixel match quality remains fully recovered -- every tracked event still above the 0.6 gate",
+      "detail": "ads_get_dataset_quality on dataset 833131719490535 (Shopify Meta Pixel): composite EMQ scores range 6.1-8.9 across all 9 tracked web events (PageView, ViewContent, AddToCart, Search, InitiateCheckout, AddPaymentInfo, Purchase, cod_purchase, prepaid_purchase, SubscribedButtonClick) -- all above the 0.6 gate (interpreted as composite_score/10). ads_get_dataset_stats confirms continuous hourly event volume through the most recent hour with no dead events, including Purchase events as recently as 2026-09-20T05:00-07:00. ROAS-based modules were NOT suppressed this pass.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-09-20T19:15:00.000Z"
+    },
+    {
+      "id": "AL-439",
+      "module": "competitor-rescrape",
+      "title": "Gully Labs / Lotto Sport India combined active-ad count unchanged at 278 (0% vs prior pass)",
+      "detail": "ads_library_search combined page_ids query (107479854297817 / 426015150606378, ad_active_status=ACTIVE, no country filter) returned estimated_total_count=278, identical to the prior 2026-09-20T16:50 UTC pass -- well under the 20% competitor-spike threshold, no new alert warranted beyond this routine confirmation.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-09-20T19:15:00.000Z"
+    },
+    {
+      "id": "AL-440",
+      "module": "routine-run-notes",
+      "title": "Run summary -- 2026-09-20 ~19:15 UTC pass",
+      "detail": "Auto-executed: 2 purchaser-exclusion targeting fixes (SORA_TOF, Sora_Sales/Sora_BOF_Based on Mori_Tee -- both new campaigns, both force-paused as a side effect), 2 hook-angle-tagging entries (creatives 1410368037712890, 1632325644922413). No lookalike-refresh action (Purchasers 180D audience unchanged at ~20 people, 5 days old, well under the 14-day refresh threshold). Hard spend circuit breaker: today's spend negligible, no new breach; circuitBreaker record left tripped (unchanged, no auto-resume) -- see AL-435 and updated A-017. Pixel quality gate: passed, ROAS modules not suppressed. Net account state: every campaign is now PAUSED at the ad-set level. No new approval-tier proposals written this pass (no active, meaningfully-spending campaigns to evaluate placement/age-gender/budget/dayparting/bid-strategy triggers against); existing 24 pending proposals reviewed, A-017 updated to reflect 0-of-4 original campaigns now active.",
+      "severity": "medium",
+      "dismissed": false,
+      "createdAt": "2026-09-20T19:15:00.000Z"
     }
   ],
   "log": [
@@ -9014,6 +9068,132 @@
       },
       "tier": "auto",
       "executedAt": "2026-09-20T10:47:00.000Z"
+    },
+    {
+      "proposalId": null,
+      "action": "purchaser-exclusion auto-module: executed on SORA_TOF's ad set 'SORA_TOF' (id 120255786838760159, campaign 120255786838750159 'SORA_TOF', ACTIVE OUTCOME_TRAFFIC prospecting ad set). This campaign is brand-new -- first seen by this routine this pass, not present in the prior 2026-09-20T16:50 UTC pull -- and had no custom_audiences or excluded_custom_audiences at all (broad advantage_audience targeting, IN, ages 18-65). Added the genuine 'Purchasers 180D' audience (id 120255823280550159, verified Purchase-event, 180d retention) to excluded_custom_audiences. No rate-limit conflict (no prior purchaser-exclusion log entry for this entity). IMPORTANT SIDE EFFECT: the Meta API forced this ad set to PAUSED (status_forced_to_paused=true) as a consequence of the targeting edit -- the same pattern seen repeatedly since 2026-09-11/13/15/17. Write succeeded on the first attempt (geo_locations resent unchanged alongside excluded_custom_audiences).",
+      "result": "success",
+      "previousState": {
+        "entity_id": "120255786838760159",
+        "entity_type": "ad_set",
+        "field": "targeting.excluded_custom_audiences",
+        "value": [],
+        "note": "Full prior targeting: age 18-65, geo IN (frequently_in/home/recent), advantage_audience expansion, no inclusion custom_audiences (broad prospecting), effective_status ACTIVE, yesterday's spend ₹0.01 (campaign just launched)."
+      },
+      "detail": {
+        "tool": "ads_update_entity",
+        "entity_id": "120255786838760159",
+        "entity_type": "ad_set",
+        "updated_fields": {
+          "targeting": {
+            "geo_locations": {
+              "countries": [
+                "IN"
+              ],
+              "location_types": [
+                "frequently_in",
+                "home",
+                "recent"
+              ]
+            },
+            "excluded_custom_audiences": [
+              {
+                "id": "120255823280550159"
+              }
+            ]
+          },
+          "status": "PAUSED"
+        },
+        "status_forced_to_paused": true,
+        "ads_manager_url": "https://www.facebook.com/adsmanager/manage/adsets/edit?act=704523148804803&selected_adset_ids=120255786838760159"
+      },
+      "tier": "auto",
+      "executedAt": "2026-09-20T19:15:00.000Z"
+    },
+    {
+      "proposalId": null,
+      "action": "purchaser-exclusion auto-module: executed on Sora_BOF_Based on Mori_Tee's ad set 'Sora_Sales' (id 120255928784230159, campaign 120255928784210159, ACTIVE OUTCOME_SALES prospecting ad set). Brand-new campaign, first seen by this routine this pass. Existing targeting already excluded ATC_180D (id 120249907176770159) but was still missing the genuine 'Purchasers 180D' audience (id 120255823280550159, verified Purchase-event, 180d retention) -- same gap pattern fixed on Mori_Sales/TSUCHI/Tsuchi_TOF/UGC_MMA on 2026-09-15/17. Added Purchasers 180D alongside the existing ATC_180D exclusion; all 12 targeted cities and interest/behavior flexible_spec left unchanged. No rate-limit conflict (no prior purchaser-exclusion log entry for this entity). IMPORTANT SIDE EFFECT: the Meta API forced this ad set to PAUSED (status_forced_to_paused=true) as a consequence of the targeting edit. Write succeeded on the first attempt.",
+      "result": "success",
+      "previousState": {
+        "entity_id": "120255928784230159",
+        "entity_type": "ad_set",
+        "field": "targeting.excluded_custom_audiences",
+        "value": [
+          {
+            "id": "120249907176770159",
+            "name": "ATC_180D"
+          }
+        ],
+        "note": "Full prior targeting: age 19-65, geo 12 IN cities (Ahmedabad/Bangalore/Calicut/Chennai/Hyderabad/Kochi/Mangalore/Mumbai/Mysore/Pune/Rajkot/Surat, home/recent/frequently_in), interests Streetwear + Fashion accessories, behaviors mid/high-value goods + Engaged Shoppers, effective_status ACTIVE, no spend recorded yet (campaign launched after the 2026-09-20T16:50 UTC pass)."
+      },
+      "detail": {
+        "tool": "ads_update_entity",
+        "entity_id": "120255928784230159",
+        "entity_type": "ad_set",
+        "updated_fields": {
+          "targeting": {
+            "geo_locations": {
+              "cities": "unchanged (12 cities)",
+              "location_types": [
+                "frequently_in",
+                "home",
+                "recent"
+              ]
+            },
+            "excluded_custom_audiences": [
+              {
+                "id": "120249907176770159"
+              },
+              {
+                "id": "120255823280550159"
+              }
+            ]
+          },
+          "status": "PAUSED"
+        },
+        "status_forced_to_paused": true,
+        "ads_manager_url": "https://www.facebook.com/adsmanager/manage/adsets/edit?act=704523148804803&selected_adset_ids=120255928784230159"
+      },
+      "tier": "auto",
+      "executedAt": "2026-09-20T19:15:00.000Z"
+    },
+    {
+      "proposalId": null,
+      "action": "hook-angle-tagging auto-module: tagged creative 1410368037712890 ('SORA at ₹2,663 + FREE SHIPPING' static image, ad 'sora_TOF' under new campaign SORA_TOF) -- primary text/headline pulled via ads_get_creatives, no vision pass (Higgsfield not attached this run). No Meta API mutation, wrote to queue.json.creativeTags only.",
+      "result": "success",
+      "previousState": {
+        "creativeTags[1410368037712890]": null
+      },
+      "detail": {
+        "tool": "ads_get_creatives",
+        "creative_id": "1410368037712890",
+        "body": "SORA is here. Your next everyday sneaker just got an upgrade.\n\nGet SORA at the introductory price of ₹2,663 on prepaid orders + FREE SHIPPING.\n\nClean. Versatile. Made to be worn on repeat.\nGet yours before the introductory offer ends.",
+        "title": "SORA at ₹2,663 + FREE SHIPPING",
+        "call_to_action_type": "SEE_DETAILS",
+        "object_type": "SHARE",
+        "vision_pass_skipped": true
+      },
+      "tier": "auto",
+      "executedAt": "2026-09-20T19:15:00.000Z"
+    },
+    {
+      "proposalId": null,
+      "action": "hook-angle-tagging auto-module: tagged creative 1632325644922413 ('KAI TSUCHI' static image, ad 'Tsuchi_Sales - New' under new campaign Sora_BOF_Based on Mori_Tee) -- primary text/headline pulled via ads_get_creatives, no vision pass (Higgsfield not attached this run). No Meta API mutation, wrote to queue.json.creativeTags only.",
+      "result": "success",
+      "previousState": {
+        "creativeTags[1632325644922413]": null
+      },
+      "detail": {
+        "tool": "ads_get_creatives",
+        "creative_id": "1632325644922413",
+        "body": "SUBTLE COLOURS, CLEAN LINES\n\n15% OFF + 5% EXTRA OFF ON PREPAID ORDERS\nFREE SHIPPING+ NO QUESTIONS RETURN POLICY",
+        "title": "KAI TSUCHI",
+        "call_to_action_type": "SHOP_NOW",
+        "object_type": "SHARE",
+        "vision_pass_skipped": true
+      },
+      "tier": "auto",
+      "executedAt": "2026-09-20T19:15:00.000Z"
     }
   ],
   "creativeTags": {
@@ -11451,6 +11631,28 @@
       "visionPassSkipped": true,
       "note": "Higgsfield vision connection not attached to this run -- image content itself not analyzed, only real ad copy text used. No creative description invented.",
       "taggedAt": "2026-09-20T10:47:00.000Z"
+    },
+    "1410368037712890": {
+      "adName": "sora_TOF",
+      "campaign": "SORA_TOF",
+      "format": "Static image (SHARE)",
+      "angle": "New-product / intro-price launch (not a discount-code offer) -- SORA sneaker introductory price + free shipping on prepaid",
+      "hook": "\"SORA at ₹2,663 + FREE SHIPPING\" (headline) / \"SORA is here. Your next everyday sneaker just got an upgrade. Get SORA at the introductory price of ₹2,663 on prepaid orders + FREE SHIPPING. Clean. Versatile. Made to be worn on repeat.\" (primary text)",
+      "taggedFrom": "ad primary text (body) + headline (title), via Meta Ads MCP ads_get_creatives",
+      "visionPassSkipped": true,
+      "note": "Higgsfield vision connection not attached to this run -- image content itself not analyzed, only real ad copy text used. No creative description invented.",
+      "taggedAt": "2026-09-20T19:15:00.000Z"
+    },
+    "1632325644922413": {
+      "adName": "Tsuchi_Sales - New",
+      "campaign": "Sora_BOF_Based on Mori_Tee",
+      "format": "Static image (SHARE)",
+      "angle": "Discount-led offer, reusing the existing KAI TSUCHI creative/messaging under a new campaign",
+      "hook": "\"KAI TSUCHI\" (headline) / \"SUBTLE COLOURS, CLEAN LINES. 15% OFF + 5% EXTRA OFF ON PREPAID ORDERS. FREE SHIPPING+ NO QUESTIONS RETURN POLICY\" (primary text)",
+      "taggedFrom": "ad primary text (body) + headline (title), via Meta Ads MCP ads_get_creatives",
+      "visionPassSkipped": true,
+      "note": "Higgsfield vision connection not attached to this run -- image content itself not analyzed, only real ad copy text used. No creative description invented. Same creative body/title previously tagged multiple times under other campaigns (e.g. TSUCHI BOF, Mori_Sales) reusing this asset.",
+      "taggedAt": "2026-09-20T19:15:00.000Z"
     }
   }
 }
