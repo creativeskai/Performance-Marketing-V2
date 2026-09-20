@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-20T02:53:00.000Z",
+  "generatedAt": "2026-09-20T04:50:00.000Z",
   "settings": {
     "kill_roas_threshold": "pause if ROAS < 1.0x after ₹500 spend on a sales-objective campaign",
     "reactivate_min_historic_roas": "surface for reactivation if a paused campaign's last active-period ROAS >= 3.0x",
@@ -26,8 +26,8 @@
     "competitor_last_scrape": {
       "gully_labs_active_ads": 210,
       "lotto_sport_india_active_ads": 106,
-      "scraped_at": "2026-09-20T02:53:00.000Z",
-      "note": "2026-09-20T02:53:00.000Z scheduled run: ads_library_search combined page_ids query (107479854297817 / 426015150606378, ad_active_status=ACTIVE, no country filter -- same query shape as prior passes) returned estimated_total_count=273, unchanged from the prior 2026-09-20T00:47 UTC pass (273, 0.00%). Well under the 20% competitor-spike threshold -- no new alert. Combined-query-only pass again (individual per-page counts not independently re-verified this pass, carried forward unchanged from the last per-page split of 210 / 106)."
+      "scraped_at": "2026-09-20T04:50:00.000Z",
+      "note": "2026-09-20T04:50:00.000Z scheduled run: ads_library_search combined page_ids query (107479854297817 / 426015150606378, ad_active_status=ACTIVE, no country filter -- same query shape as prior passes) returned estimated_total_count=273, unchanged from the prior 2026-09-20T02:53 UTC pass (273, 0.00%). Well under the 20% competitor-spike threshold -- no new alert. Combined-query-only pass again (individual per-page counts not independently re-verified this pass, carried forward unchanged from the last per-page split of 210 / 106)."
     },
     "audience_label_corrections": {
       "120249907176770159": "ATC_180D — NOT 'Purchasers 30D'. Verified via ads_get_custom_audience on 2026-09-14: name is 'ATC_180D', rule is event=AddToCart with retention_seconds 15552000 (180 days), approximate size 20. Prior runs of this routine have repeatedly described this id as the 'Purchasers 30D' audience (see A-004 purchaser-exclusion and multiple log entries). That is wrong: it is a cart-adder audience, not a purchaser audience. Excluding it does NOT exclude past buyers. This account currently has NO purchaser-based custom audience, so any purchaser-exclusion module must first create one rather than reusing this id. Do not propagate the 'Purchasers 30D' label.",
@@ -765,6 +765,26 @@
       },
       "status": "pending",
       "createdAt": "2026-09-20T02:53:00.000Z"
+    },
+    {
+      "id": "A-026",
+      "module": "placement-optimization",
+      "tier": "approval",
+      "title": "Exclude WhatsApp placement from Retargeting_Overall",
+      "reasoning": "Retargeting_Overall (campaign id 120255851467340159, ad set 'Retargeting_Overall' id 120255851467360159) is a new active campaign first seen in recent passes -- no placement-optimization proposal has been written for it yet. Last_14d publisher_platform/platform_position breakdown: whatsapp_marketing_messages spent ₹47.25 at a CPM of ₹1,350.00 -- roughly 9.9x the CPM of instagram_feed (₹136.37), the placement actually converting at 8.198155x ROAS -- with zero attributed purchases (purchase_roas null) on the WhatsApp placement. Facebook/Instagram feed, reels and stories placements all carry real spend and, where measurable, real ROAS; WhatsApp does not. Ad set targeting currently has no publisher_platforms restriction (relies on automatic placement expansion), so whatsapp stays reachable.",
+      "actionSummary": "Add an explicit targeting.publisher_platforms list on the 'Retargeting_Overall' ad set covering every currently-effective platform except 'whatsapp' (facebook, instagram, audience_network, threads); leave every other targeting parameter (age/gender, geo, included custom audiences) unchanged.",
+      "metaAction": {
+        "tool": "ads_update_entity",
+        "params": {
+          "ad_account_id": "704523148804803",
+          "entity_id": "120255851467360159",
+          "entity_type": "ad_set",
+          "field": "targeting",
+          "note": "remove 'whatsapp' from effective_publisher_platforms by setting an explicit targeting.publisher_platforms list (facebook, instagram, audience_network, threads); leave every other targeting parameter unchanged"
+        }
+      },
+      "status": "pending",
+      "createdAt": "2026-09-20T04:50:00.000Z"
     }
   ],
   "alerts": [
@@ -4388,6 +4408,69 @@
       "severity": "low",
       "dismissed": false,
       "createdAt": "2026-09-20T02:53:00.000Z"
+    },
+    {
+      "id": "AL-402",
+      "module": "self-audit-check",
+      "title": "circuitBreaker record (tripped since 2026-09-12) still mismatched vs. live account -- 8 days, no new breach this pass",
+      "detail": "Today's account-level spend (ads_get_ad_entities, level=ad_account, date_preset=today) is ₹313.93 against settings.hard_spend_ceiling_inr of ₹2,750 -- no new breach. The top-level circuitBreaker object still records tripped:true from 2026-09-12, but all 4 currently-active campaigns (MMA TOF, Retargeting_Overall, TSUCHI BOF based on CAPS, Mori + Tee_Sales_0609) are live and delivering, resumed outside this routine's control. This mismatch persists pending a human decision on the standing A-017 resume-after-circuit-breaker proposal.",
+      "severity": "medium",
+      "dismissed": false,
+      "createdAt": "2026-09-20T04:50:00.000Z"
+    },
+    {
+      "id": "AL-403",
+      "module": "self-audit-check",
+      "title": "Dashboard static snapshot (index.html) still stale -- data labeled through Sep 12, 8 days behind live account",
+      "detail": "index.html's baked-in DATA/INSIGHTS_DATA still shows 'Sep 12, 2026' as its as-of date. It has no entries for Retargeting_Overall or MMA TOF, both of which are currently active and delivering. This is a static file that only a manual edit updates -- the routine cannot fix it, only flag it.",
+      "severity": "medium",
+      "dismissed": false,
+      "createdAt": "2026-09-20T04:50:00.000Z"
+    },
+    {
+      "id": "AL-404",
+      "module": "pixel-health",
+      "title": "Pixel match quality remains fully recovered -- every tracked event still above the 0.6 gate",
+      "detail": "ads_get_dataset_quality on dataset 833131719490535: composite scores range 6.1 (PageView/ViewContent/AddToCart/Search/SubscribedButtonClick) to 8.8 (cod_purchase). All events remain at or above the settings.pixel_quality_min_match_rate 0.6 gate (as composite_score/10), so ROAS-driven modules were NOT suppressed this pass. Margin on the 6.1-scored events remains thin (0.61 vs 0.60 floor) -- worth continued monitoring.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-09-20T04:50:00.000Z"
+    },
+    {
+      "id": "AL-405",
+      "module": "campaign-consolidation-watch",
+      "title": "No consolidation flag -- 4 active campaigns still target distinct products/audiences",
+      "detail": "MMA TOF (MMA product, traffic objective), Retargeting_Overall (cross-product retargeting, sales), TSUCHI BOF based on CAPS (Tsuchi caps, sales), and Mori + Tee_Sales_0609 (Mori + Tee apparel, sales) target distinct product/audience combinations. No duplicate-campaign pause candidate for campaign-consolidation this pass.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-09-20T04:50:00.000Z"
+    },
+    {
+      "id": "AL-406",
+      "module": "threshold-alerts",
+      "title": "MMA TOF's CTR remains collapsed at 0.0594% -- unchanged from last pass, still ~35-40x below the other 3 active campaigns",
+      "detail": "Last_7d re-pull: MMA TOF ctr=0.0594%, cpm=₹2.02, ₹791.39 spent, 392,453 impressions / 233 clicks. Unchanged from the prior pass's finding (AL-396/AL-397, root-caused to the Instagram Reels placement carrying 89% of impressions). A-025 (placement-optimization proposal to remove 'reels' from this ad set's instagram_positions) remains pending -- no new alert needed beyond this confirmation, numbers have not moved materially.",
+      "severity": "medium",
+      "dismissed": false,
+      "createdAt": "2026-09-20T04:50:00.000Z"
+    },
+    {
+      "id": "AL-407",
+      "module": "competitor-rescrape",
+      "title": "Gully Labs / Lotto Sport India combined active-ad count holds steady at 273",
+      "detail": "ads_library_search combined page_ids query (107479854297817 / 426015150606378, ad_active_status=ACTIVE) returned estimated_total_count=273, unchanged from the prior 2026-09-20T02:53 UTC pass (273, 0.00%). Well under the 20% competitor-spike threshold -- no new alert.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-09-20T04:50:00.000Z"
+    },
+    {
+      "id": "AL-408",
+      "module": "routine-run-notes",
+      "title": "Run summary -- 2026-09-20 ~04:50 UTC pass",
+      "detail": "Circuit breaker: no new breach (today's spend ₹313.93 vs ₹2,750 ceiling); prior 2026-09-12 trip remains open pending human review of A-017. Pixel quality gate: passed, ROAS modules not suppressed. Auto-tier modules (purchaser-exclusion, lookalike-refresh, hook-angle-tagging, hard-spend-circuit-breaker): all 4 currently-active campaigns' ad sets already have purchaser exclusion applied and all 6 currently-active ads' creatives already tagged from prior passes -- nothing new to execute or log this pass. New: 1 proposal (A-026, exclude WhatsApp placement from the newly-tracked 'Retargeting_Overall' campaign, which had no prior placement-optimization coverage). No new alerts beyond the standing self-audit/pixel-health/competitor/consolidation/threshold restatements.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-09-20T04:50:00.000Z"
     }
   ],
   "log": [
