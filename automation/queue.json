@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-20T06:48:00.000Z",
+  "generatedAt": "2026-09-20T08:48:00.000Z",
   "settings": {
     "kill_roas_threshold": "pause if ROAS < 1.0x after ₹500 spend on a sales-objective campaign",
     "reactivate_min_historic_roas": "surface for reactivation if a paused campaign's last active-period ROAS >= 3.0x",
@@ -26,8 +26,8 @@
     "competitor_last_scrape": {
       "gully_labs_active_ads": 210,
       "lotto_sport_india_active_ads": 106,
-      "scraped_at": "2026-09-20T06:48:00.000Z",
-      "note": "2026-09-20T06:48:00.000Z scheduled run: ads_library_search combined page_ids query (107479854297817 / 426015150606378, ad_active_status=ACTIVE, no country filter -- same query shape as prior passes) returned estimated_total_count=273, unchanged from the prior 2026-09-20T04:50 UTC pass (273, 0.00%). Well under the 20% competitor-spike threshold -- no new alert. Combined-query-only pass again (individual per-page counts not independently re-verified this pass, carried forward unchanged from the last per-page split of 210 / 106)."
+      "scraped_at": "2026-09-20T08:48:00.000Z",
+      "note": "2026-09-20T08:48:00.000Z scheduled run: ads_library_search combined page_ids query (107479854297817 / 426015150606378, ad_active_status=ACTIVE, no country filter -- same query shape as prior passes) returned estimated_total_count=272, down slightly from the prior 2026-09-20T06:48 UTC pass (273, -0.37%). Well under the 20% competitor-spike threshold -- no new alert. Combined-query-only pass again (individual per-page counts not independently re-verified this pass, carried forward unchanged from the last per-page split of 210 / 106)."
     },
     "audience_label_corrections": {
       "120249907176770159": "ATC_180D — NOT 'Purchasers 30D'. Verified via ads_get_custom_audience on 2026-09-14: name is 'ATC_180D', rule is event=AddToCart with retention_seconds 15552000 (180 days), approximate size 20. Prior runs of this routine have repeatedly described this id as the 'Purchasers 30D' audience (see A-004 purchaser-exclusion and multiple log entries). That is wrong: it is a cart-adder audience, not a purchaser audience. Excluding it does NOT exclude past buyers. This account currently has NO purchaser-based custom audience, so any purchaser-exclusion module must first create one rather than reusing this id. Do not propagate the 'Purchasers 30D' label.",
@@ -4534,6 +4534,69 @@
       "severity": "low",
       "dismissed": false,
       "createdAt": "2026-09-20T06:48:00.000Z"
+    },
+    {
+      "id": "AL-416",
+      "module": "self-audit-check",
+      "title": "circuitBreaker record (tripped since 2026-09-12) still mismatched vs. live account -- 8 days, no new breach this pass",
+      "detail": "Today's account-level spend re-pulled via ads_get_ad_entities (level=ad_account, date_preset=today) at this pass: ₹826.69 INR, well under settings.hard_spend_ceiling_inr (₹2,750). No new breach. The stored circuitBreaker.tripped=true (from the 2026-09-12 trip) remains stale against the live account -- 4 campaigns (MMA TOF, Retargeting_Overall, TSUCHI BOF based on CAPS, Mori + Tee_Sales_0609) are ACTIVE and delivering, outside the routine's control since ads_activate_entity is forbidden this run and a human reactivated them directly in Ads Manager. Pending proposal A-017 (resume-after-circuit-breaker) remains the correct path to formally resolve this record; still awaiting a human decision.",
+      "severity": "medium",
+      "dismissed": false,
+      "createdAt": "2026-09-20T08:48:00.000Z"
+    },
+    {
+      "id": "AL-417",
+      "module": "self-audit-check",
+      "title": "Dashboard static snapshot (index.html) still stale -- data labeled through Sep 12, 8 days behind live account",
+      "detail": "index.html's baked-in DATA/INSIGHTS_DATA snapshot is still dated to 2026-09-12 as of this pass (2026-09-20 ~08:48 UTC); live account numbers (4 active campaigns, last_14d spend/ROAS pulled this pass) have moved well past it. No automated fix in this run's scope -- flagging for a manual dashboard refresh.",
+      "severity": "medium",
+      "dismissed": false,
+      "createdAt": "2026-09-20T08:48:00.000Z"
+    },
+    {
+      "id": "AL-418",
+      "module": "pixel-health",
+      "title": "Pixel match quality remains fully recovered -- every tracked event still above the 0.6 gate",
+      "detail": "ads_get_dataset_quality on dataset 833131719490535 this pass: Purchase composite_score 8.5, AddPaymentInfo 8.7, cod_purchase 8.8, prepaid_purchase 6.9, InitiateCheckout 6.5, PageView/ViewContent/AddToCart/Search/SubscribedButtonClick all 6.1. All comfortably above settings.pixel_quality_min_match_rate (0.6 on the normalized 0-10 scale). ROAS-based modules were NOT suppressed this pass.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-09-20T08:48:00.000Z"
+    },
+    {
+      "id": "AL-419",
+      "module": "campaign-consolidation-watch",
+      "title": "No consolidation flag -- 4 active campaigns still target distinct products/audiences",
+      "detail": "Live campaign pull this pass: MMA TOF (OUTCOME_TRAFFIC, MMA UGC prospecting), Retargeting_Overall (OUTCOME_SALES, mixed pixel-event retargeting), TSUCHI BOF based on CAPS (OUTCOME_SALES, Tsuchi prospecting), Mori + Tee_Sales_0609 (OUTCOME_SALES, Mori/Tee prospecting). No two active campaigns overlap on product+audience -- no campaign-consolidation proposal warranted this pass.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-09-20T08:48:00.000Z"
+    },
+    {
+      "id": "AL-420",
+      "module": "threshold-alerts",
+      "title": "MMA TOF's CTR remains collapsed at 0.0594% -- unchanged from prior passes, still ~35-40x below the other 3 active campaigns",
+      "detail": "last_14d re-pull this pass: MMA TOF CTR 0.0594% (CPM ₹2.02, CPC ₹3.40, spend ₹791.39) vs. Retargeting_Overall 2.15%, TSUCHI BOF based on CAPS 2.29%, Mori + Tee_Sales_0609 2.22%. Numbers unchanged from the prior ~06:48 UTC pass -- already tracked by pending proposal A-025 (placement-optimization, Instagram Reels 89% of impressions). No new alert/proposal needed, numbers reconfirmed only.",
+      "severity": "medium",
+      "dismissed": false,
+      "createdAt": "2026-09-20T08:48:00.000Z"
+    },
+    {
+      "id": "AL-421",
+      "module": "competitor-rescrape",
+      "title": "Gully Labs / Lotto Sport India combined active-ad count moved slightly to 272 (-0.37% vs prior 273)",
+      "detail": "ads_library_search combined page_ids query (107479854297817 / 426015150606378, ad_active_status=ACTIVE, no country filter) returned estimated_total_count=272 this pass, down from 273 at the prior 2026-09-20T06:48 UTC pass (-0.37%). Well under the 20% competitor-spike threshold -- no new alert. Combined-query-only pass again (individual per-page counts not independently re-verified this pass, carried forward unchanged from the last per-page split of 210 / 106).",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-09-20T08:48:00.000Z"
+    },
+    {
+      "id": "AL-422",
+      "module": "weekly-digest",
+      "title": "Run summary -- 2026-09-20 ~08:48 UTC pass",
+      "detail": "Circuit breaker: not breached today (₹826.69 spend vs ₹2,750 ceiling); stored tripped=true record from 2026-09-12 still stands, unresolved (A-017 pending). Pixel quality gate: passed, all tracked events above 0.6 -- ROAS modules not suppressed. Auto-tier modules checked: purchaser-exclusion (all 4 active ad sets already exclude Purchasers 180D -- no action), lookalike-refresh (last build 2026-09-15, refresh_days=14, not due until ~09-29 -- no action; source audience size unchanged at 20, no 20%+ growth trigger), hook-angle-tagging (all 6 active ads' creatives already tagged -- no new creatives found), hard-spend-circuit-breaker (not breached -- no action). No anomaly signal fired. No learning-phase-stuck data available this pass. Approval-tier proposals: no new proposals; existing 23 pending proposals reviewed against fresh data, no material changes found beyond what's already recorded in their reasoning (A-014/A-015/A-018's referenced campaign remains paused/renamed, unchanged). 0 auto-executions, 0 new proposals, 0 new alerts requiring action (6 status-confirmation alerts written).",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-09-20T08:48:00.000Z"
     }
   ],
   "log": [
