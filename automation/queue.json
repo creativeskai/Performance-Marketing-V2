@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-21T04:47:00.000Z",
+  "generatedAt": "2026-09-21T06:51:00.000Z",
   "settings": {
     "kill_roas_threshold": "pause if ROAS < 1.0x after ₹500 spend on a sales-objective campaign",
     "reactivate_min_historic_roas": "surface for reactivation if a paused campaign's last active-period ROAS >= 3.0x",
@@ -26,8 +26,8 @@
     "competitor_last_scrape": {
       "gully_labs_active_ads": 210,
       "lotto_sport_india_active_ads": 106,
-      "scraped_at": "2026-09-21T04:47:00.000Z",
-      "note": "2026-09-21T04:47:00.000Z scheduled run: ads_library_search combined page_ids query (107479854297817 / 426015150606378, ad_active_status=ACTIVE, no country filter) returned estimated_total_count=277, down 1 (-0.36%) vs the prior 2026-09-21T00:49 UTC pass (278) -- no new alert per de-dup rules. Combined-query-only pass again (individual per-page counts not independently re-verified this pass, carried forward unchanged from the last per-page split of 210 / 106)."
+      "scraped_at": "2026-09-21T06:51:00.000Z",
+      "note": "2026-09-21T06:51:00.000Z scheduled run: ads_library_search combined page_ids query (107479854297817 / 426015150606378, ad_active_status=ACTIVE, no country filter) returned estimated_total_count=278, up 1 (+0.36%) vs the prior 2026-09-21T04:47 UTC pass (277) -- no new alert-worthy movement per de-dup rules (well under the 20% trigger). Combined-query-only pass again (individual per-page counts not independently re-verified this pass, carried forward unchanged from the last per-page split of 210 / 106)."
     },
     "audience_label_corrections": {
       "120249907176770159": "ATC_180D -- NOT a purchaser audience (cart-adders, event=AddToCart, retention 180 days). Verified 2026-09-14, reconfirmed 2026-09-20. Superseded note: earlier passes said the account had NO purchaser audience at all -- that's now out of date. See the 120255823280550159 (Purchasers 180D) entry above, created 2026-09-15, which IS a genuine purchaser audience and is already in use for exclusion + lookalike.",
@@ -813,6 +813,33 @@
       },
       "status": "pending",
       "createdAt": "2026-09-20T16:50:00.000Z"
+    },
+    {
+      "id": "A-028",
+      "module": "reactivate-winner",
+      "tier": "approval",
+      "title": "Reactivate Mori + Tee_Sales_0609 -- 3.1x-3.3x ROAS, well above the reactivate threshold",
+      "reasoning": "Campaign 'Mori + Tee_Sales_0609' (id 120255648636980159, OUTCOME_SALES) is currently PAUSED but performing consistently above reactivate_min_historic_roas (>= 3.0x): last_14d ROAS 3.08x on ₹12,750.11 spent (28 purchases, ₹39,253.88 in purchase value), and last_30d ROAS 3.29x on ₹13,556.67 spent (30 purchases, ₹44,581.76 in purchase value) -- both windows clear the 3.0x bar, and the 30d number (the fuller history) is the stronger of the two, so this isn't a narrowing trend. Purchaser exclusion is already verified compliant account-wide (settings.audience_label_corrections). Reactivating at its existing budget is a conservative resumption, not a budget increase.",
+      "actionSummary": "Activates campaign 'Mori + Tee_Sales_0609' (id 120255648636980159) and reconfirms its daily budget at its existing ₹900/day (90000 minor units, unchanged) so it resumes delivering at the same pace it was paused at.",
+      "metaAction": {
+        "tool": "ads_activate_entity",
+        "params": {
+          "entity_id": "120255648636980159",
+          "entity_type": "campaign"
+        },
+        "followUp": {
+          "tool": "ads_update_entity",
+          "params": {
+            "entity_id": "120255648636980159",
+            "entity_type": "campaign",
+            "fields": {
+              "daily_budget": 90000
+            }
+          }
+        }
+      },
+      "status": "pending",
+      "createdAt": "2026-09-21T06:51:00.000Z"
     }
   ],
   "alerts": [
@@ -4895,6 +4922,60 @@
       "severity": "medium",
       "dismissed": false,
       "createdAt": "2026-09-21T04:47:00.000Z"
+    },
+    {
+      "id": "AL-453",
+      "module": "pixel-health",
+      "title": "Pixel match quality remains fully recovered -- every tracked event still above the 0.6 gate",
+      "detail": "ads_get_dataset_quality on dataset 833131719490535 (this pass): Purchase EMQ composite 7.5/10 (0.75), cod_purchase 7.5/10, AddPaymentInfo 9.1/10, InitiateCheckout 6.7/10, AddToCart/Search/PageView/ViewContent/SubscribedButtonClick all 6.1/10 -- every event stays above the settings.pixel_quality_min_match_rate=0.6 gate (score/10 >= 0.6), so ROAS-driven modules were NOT suppressed this pass.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-09-21T06:51:00.000Z"
+    },
+    {
+      "id": "AL-454",
+      "module": "campaign-consolidation-watch",
+      "title": "No consolidation flag -- the only two active campaigns target distinct funnel stages/audiences",
+      "detail": "Live account check (ads_get_ad_entities, level=campaign, effective_status=ACTIVE): only 'Sora_BOF_Based on Mori_Tee' (id 120255928784210159, OUTCOME_SALES, BOF -- excludes Purchasers 180D) and 'SORA_TOF' (id 120255786838750159, OUTCOME_TRAFFIC, TOF -- excludes Purchasers 180D) are ACTIVE. Distinct funnel stages/objectives on the same product line, not duplicates -- no campaign-consolidation trigger.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-09-21T06:51:00.000Z"
+    },
+    {
+      "id": "AL-455",
+      "module": "competitor-rescrape",
+      "title": "Gully Labs / Lotto Sport India combined active-ad count moved to 278 (+0.36% vs prior 277)",
+      "detail": "ads_library_search (page_ids 107479854297817 / 426015150606378, ad_active_status=ACTIVE, no country filter) returned estimated_total_count=278 this pass vs 277 at the prior 2026-09-21T04:47 UTC pass -- a +0.36% move, well under the 20% competitor-spike trigger. settings.competitor_last_scrape updated.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-09-21T06:51:00.000Z"
+    },
+    {
+      "id": "AL-456",
+      "module": "self-audit-check",
+      "title": "circuitBreaker record (tripped since 2026-09-12) still mismatched vs. live account -- day 9, no new resume decision",
+      "detail": "circuitBreaker.tripped remains true from the 2026-09-12T16:47 UTC trip (9 days). Today's account spend this pass was ₹285.01 INR (ads_get_ad_entities, level=ad_account, date_preset=today) vs. the ₹2,750 hard_spend_ceiling_inr -- no new breach, so no re-trip. Live account currently has 2 ACTIVE campaigns (Sora_BOF_Based on Mori_Tee, SORA_TOF), both reactivated outside the routine (manual Meta Ads Manager action, not an approved resume-after-circuit-breaker proposal) -- consistent with prior passes' notes. A-017 (resume-after-circuit-breaker) is still pending a human decision; the routine does not auto-resume per its own safety rule.",
+      "severity": "high",
+      "dismissed": false,
+      "createdAt": "2026-09-21T06:51:00.000Z"
+    },
+    {
+      "id": "AL-457",
+      "module": "self-audit-check",
+      "title": "Dashboard static snapshot (index.html) still stale -- data labeled through Sep 12/13, now day 9 behind live account state",
+      "detail": "index.html's baked-in DATA/INSIGHTS_DATA snapshot has not been regenerated since Sep 12/13 while the live account (spend, campaign statuses, custom audiences, creativeTags) has moved substantially since (2 new SORA campaigns launched and active, TSUCHI BOF/Mori+Tee ROAS updated, 223 creatives tagged). This is a known, previously-flagged gap (see prior self-audit-check alerts) -- flagged again for visibility, not a new finding.",
+      "severity": "medium",
+      "dismissed": false,
+      "createdAt": "2026-09-21T06:51:00.000Z"
+    },
+    {
+      "id": "AL-458",
+      "module": "routine-run-notes",
+      "title": "Run summary -- 2026-09-21 ~06:51 UTC pass",
+      "detail": "Circuit breaker: not re-tripped (today's spend ₹285.01 vs ₹2,750 ceiling; record stays tripped from 2026-09-12, no auto-resume). Pixel gate: healthy, ROAS modules not suppressed. purchaser-exclusion: compliant on both currently-ACTIVE ad sets (Sora_Sales, SORA_TOF -- both already exclude Purchasers 180D, verified live). lookalike-refresh: not due (laddered LAL built 2026-09-15, 6 days old vs 14-day threshold). hook-angle-tagging: no untagged active/recently-active creatives found -- both live ads (Sora_Sales creative 1059775456834345, sora_TOF creative 1410368037712890) were already tagged in a prior pass; verified against the full live-ACTIVE-ad list (ads_get_ad_entities, level=ad, effective_status=ACTIVE), not just the 2 campaigns' static creative listing. New: A-028 (reactivate-winner) opened for Mori + Tee_Sales_0609 -- ROAS 3.08x/last_14d and 3.29x/last_30d, both above the 3.0x reactivate_min_historic_roas threshold. No other new proposals opened; existing 24 pending approval proposals left unchanged pending fresh trigger data in a future pass.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-09-21T06:51:00.000Z"
     }
   ],
   "log": [
