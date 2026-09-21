@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-21T14:49:00.000Z",
+  "generatedAt": "2026-09-21T16:50:00.000Z",
   "settings": {
     "kill_roas_threshold": "pause if ROAS < 1.0x after ₹500 spend on a sales-objective campaign",
     "reactivate_min_historic_roas": "surface for reactivation if a paused campaign's last active-period ROAS >= 3.0x",
@@ -26,8 +26,8 @@
     "competitor_last_scrape": {
       "gully_labs_active_ads": 210,
       "lotto_sport_india_active_ads": 106,
-      "scraped_at": "2026-09-21T12:46:00.000Z",
-      "note": "2026-09-21T12:46:00.000Z scheduled run: ads_library_search combined page_ids query (107479854297817 / 426015150606378, ad_active_status=ACTIVE, no country filter) returned estimated_total_count=269, down 1 (-0.4%) vs the prior 2026-09-21T10:47 UTC pass (270) -- no new alert-worthy movement per de-dup rules (well under the 20% trigger, either direction). Combined-query-only pass again (individual per-page counts not independently re-verified this pass, carried forward unchanged from the last per-page split of 210 / 106)."
+      "scraped_at": "2026-09-21T16:50:00.000Z",
+      "note": "2026-09-21T16:50:00.000Z scheduled run: ads_library_search combined page_ids query (107479854297817 / 426015150606378, ad_active_status=ACTIVE, no country filter) returned estimated_total_count=264, down 3 (-1.1%) vs the prior 2026-09-21T14:49 UTC pass (267) -- no new alert-worthy movement per de-dup rules (well under the 20% trigger, either direction). Combined-query-only pass again (individual per-page counts not independently re-verified this pass, carried forward unchanged from the last per-page split of 210 / 106)."
     },
     "audience_label_corrections": {
       "120249907176770159": "ATC_180D -- NOT a purchaser audience (cart-adders, event=AddToCart, retention 180 days). Verified 2026-09-14, reconfirmed 2026-09-20. Superseded note: earlier passes said the account had NO purchaser audience at all -- that's now out of date. See the 120255823280550159 (Purchasers 180D) entry above, created 2026-09-15, which IS a genuine purchaser audience and is already in use for exclusion + lookalike.",
@@ -5124,6 +5124,42 @@
       "severity": "medium",
       "dismissed": false,
       "createdAt": "2026-09-21T14:49:00.000Z"
+    },
+    {
+      "id": "AL-473",
+      "module": "pixel-health",
+      "title": "Pixel match quality remains fully recovered -- every tracked event still above threshold",
+      "detail": "ads_get_dataset_quality on dataset 833131719490535 (the account's active pixel): Purchase/cod_purchase composite EMQ 8.6, AddPaymentInfo 8.9, InitiateCheckout 6.8, and PageView/ViewContent/AddToCart/Search/SubscribedButtonClick all 6.1, with ip_address/user_agent/fbp coverage at or near 100% across events. This comfortably clears settings.pixel_quality_min_match_rate (0.6) -- ROAS-driven modules are NOT suppressed this pass. No change since the 2026-09-21T14:49 pass.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-09-21T16:50:00.000Z"
+    },
+    {
+      "id": "AL-474",
+      "module": "competitor-rescrape",
+      "title": "Gully Labs / Lotto Sport India combined active-ad count moved to 264 (-1.1% vs prior 267)",
+      "detail": "ads_library_search combined page_ids query (107479854297817 / 426015150606378, ad_active_status=ACTIVE, no country filter) returned estimated_total_count=264, down 3 (-1.1%) vs the prior 2026-09-21T14:49 UTC pass (267) -- well under the 20% de-dup/alert trigger, either direction. Combined-query-only pass again (individual per-page counts not independently re-verified this pass).",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-09-21T16:50:00.000Z"
+    },
+    {
+      "id": "AL-475",
+      "module": "campaign-consolidation-watch",
+      "title": "No consolidation flag -- the only two active campaigns target distinct funnel stages",
+      "detail": "Account-wide campaign scan: only 2 campaigns are ACTIVE (Sora_BOF_Based on Mori_Tee -- OUTCOME_SALES, BOF; SORA_TOF -- OUTCOME_TRAFFIC, TOF). Different objectives and funnel stages, not duplicate targeting of the same product+audience -- no campaign-consolidation trigger.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-09-21T16:50:00.000Z"
+    },
+    {
+      "id": "AL-476",
+      "module": "routine-run-notes",
+      "title": "Run summary -- 2026-09-21 ~16:50 UTC pass",
+      "detail": "Circuit breaker: today's account spend ₹1,281.97 (Sora_BOF ₹1,043.15 + SORA_TOF ₹238.82) vs settings.hard_spend_ceiling_inr ₹2,750 -- not breached (47% of ceiling), no new trip. Top-level circuitBreaker record remains tripped:true from 2026-09-12 (day 9 unresolved) -- unchanged, per safety rules only a human-approved resume-after-circuit-breaker proposal (A-017, still pending) can clear it; this pass took no action on it. Pixel quality gate: passed, ROAS modules not suppressed (see pixel-health alert). Auto-tier modules evaluated: purchaser-exclusion -- both active ad sets (SORA_TOF's 'SORA_TOF', Sora_BOF's 'Sora_Sales') already exclude 'Purchasers 180D' (120255823280550159), compliant, no action needed. lookalike-refresh -- the 1%/2%/5% laddered lookalike off Purchasers 180D is 6 days old (built 2026-09-15), under the 14-day lookalike_refresh_days threshold, and the source audience size is unchanged (~20) -- no refresh triggered. hook-angle-tagging -- checked all ads with real last-7d spend account-wide (11 ads); every one already has a creativeTags entry, including the 3 ads under the two active campaigns -- no new tags needed. hard-spend-circuit-breaker -- not tripped (see above). Anomaly signal: clean, no auction overlap / creative fatigue / narrow-audience flags this pass. Learning-phase-stuck: both active ad sets were created 2026-09-20 (~17h old), nowhere near the 7-day threshold -- no flag. Catalog diagnostics: 0 must_fix issues on catalog 1149969713295773, A-003 (catalog-dpa-launch) remains valid as-is. Reviewed the 26 pending approval-tier proposals for staleness against this pass's live pulls -- all entities they reference (TSUCHI BOF based on CAPS, Mori + Tee_Sales_0609, Kage_Sales, Retargeting_31AUG/Overall, New_Sales_Kage_31AUG, MMA TOF, Sora_BOF) are unchanged in status since the last pass; none needed a reasoning/number refresh or new de-dup entry. No auto-executed actions, no new proposals, no new proposal resolutions this pass. Net: quiet, steady-state run -- account spend well under ceiling, both active campaigns compliant and too new to trigger any segmentation module.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-09-21T16:50:00.000Z"
     }
   ],
   "log": [
