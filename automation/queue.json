@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-21T12:46:00.000Z",
+  "generatedAt": "2026-09-21T14:49:00.000Z",
   "settings": {
     "kill_roas_threshold": "pause if ROAS < 1.0x after ₹500 spend on a sales-objective campaign",
     "reactivate_min_historic_roas": "surface for reactivation if a paused campaign's last active-period ROAS >= 3.0x",
@@ -845,8 +845,8 @@
       "id": "A-029",
       "module": "pause-kill",
       "tier": "approval",
-      "title": "Pause Sora_BOF_Based on Mori_Tee -- ₹566 spent, zero attributed purchases",
-      "reasoning": "Sora_BOF_Based on Mori_Tee (id 120255928784210159, OUTCOME_SALES) has spent ₹650.11 since launching 2026-09-20T23:24 IST (ads_get_ad_entities, time_range 2026-09-20 to 2026-09-21) against 6,486 impressions, 2.81% CTR, and zero attributed purchases (purchase_roas/omni_purchase both null) -- unchanged conclusion from the prior ~10:47 UTC pass (spend moved ₹566.16 -> ₹650.11, still 0 purchases). This breaches settings.kill_roas_threshold (pause if ROAS < 1.0x after ₹500 spend on a sales-objective campaign). Caveat unchanged: the campaign is now ~1.5 days old (still early delivery / possibly still in learning), and this campaign was reactivated manually outside the routine while the account's circuit breaker is still formally tripped (see AL-459) -- a human should weigh recency against the mechanical trigger before approving.",
+      "title": "Pause Sora_BOF_Based on Mori_Tee -- STALE: campaign now has real purchases at 6.2x ROAS, kill trigger no longer applies",
+      "reasoning": "Sora_BOF_Based on Mori_Tee (id 120255928784210159, OUTCOME_SALES) has spent ₹650.11 since launching 2026-09-20T23:24 IST (ads_get_ad_entities, time_range 2026-09-20 to 2026-09-21) against 6,486 impressions, 2.81% CTR, and zero attributed purchases (purchase_roas/omni_purchase both null) -- unchanged conclusion from the prior ~10:47 UTC pass (spend moved ₹566.16 -> ₹650.11, still 0 purchases). This breaches settings.kill_roas_threshold (pause if ROAS < 1.0x after ₹500 spend on a sales-objective campaign). Caveat unchanged: the campaign is now ~1.5 days old (still early delivery / possibly still in learning), and this campaign was reactivated manually outside the routine while the account's circuit breaker is still formally tripped (see AL-459) -- a human should weigh recency against the mechanical trigger before approving. UPDATE (this pass, ~14:49 UTC, ads_get_ad_entities date_preset=maximum): the picture has reversed -- Sora_BOF_Based on Mori_Tee now shows lifetime spend ₹902.86, purchase_roas 6.211705, cost_per_purchase ₹451.43 (implying 2 attributed purchases), 9,707 impressions, 257 clicks. ROAS is now well above the 1.0x kill_roas_threshold floor -- the original zero-purchase kill trigger no longer holds. Leaving this proposal pending for a human decision (per policy, not auto-rejecting it), but it should be rejected or left to expire rather than approved now that the campaign is profitable.",
       "actionSummary": "Pauses the Sora_BOF_Based on Mori_Tee campaign (id 120255928784210159).",
       "metaAction": {
         "tool": "ads_update_entity",
@@ -859,7 +859,7 @@
       },
       "status": "pending",
       "createdAt": "2026-09-21T10:47:00.000Z",
-      "lastCheckedAt": "2026-09-21T12:46:00.000Z"
+      "lastCheckedAt": "2026-09-21T14:49:00.000Z"
     }
   ],
   "alerts": [
@@ -5088,6 +5088,42 @@
       "severity": "medium",
       "dismissed": false,
       "createdAt": "2026-09-21T12:46:00.000Z"
+    },
+    {
+      "id": "AL-469",
+      "module": "pixel-health",
+      "title": "Pixel match quality remains fully recovered -- every tracked event still above the 0.6 gate",
+      "detail": "ads_get_dataset_quality (dataset 833131719490535) this pass: composite scores by event -- Purchase 8.6/10, cod_purchase 8.6/10, AddPaymentInfo 8.8/10, InitiateCheckout 6.8/10, AddToCart 6.1/10, PageView 6.1/10, ViewContent 6.1/10, SubscribedButtonClick 6.1/10, Search 6.1/10 -- all at or above the pixel_quality_min_match_rate 0.6 gate (as composite_score/10), unchanged from the 12:46 UTC pass. ROAS-driven modules were NOT suppressed this pass.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-09-21T14:49:00.000Z"
+    },
+    {
+      "id": "AL-470",
+      "module": "competitor-rescrape",
+      "title": "Gully Labs / Lotto Sport India combined active-ad count moved to 267 (-0.74% vs prior 269)",
+      "detail": "ads_library_search combined page_ids query (107479854297817 / 426015150606378, ad_active_status=ACTIVE, no country filter) returned estimated_total_count=267, down 2 (-0.74%) vs the prior 2026-09-21T12:46 UTC pass (269) -- well under the 20% trigger, either direction. Combined-query-only pass again (individual per-page counts not independently re-verified this pass, carried forward unchanged from the last per-page split of 210 / 106).",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-09-21T14:49:00.000Z"
+    },
+    {
+      "id": "AL-471",
+      "module": "campaign-consolidation-watch",
+      "title": "No consolidation flag -- the only two active campaigns target distinct funnel stages/audiences",
+      "detail": "Sora_BOF_Based on Mori_Tee (OUTCOME_SALES, BOF) and SORA_TOF (OUTCOME_TRAFFIC, TOF) remain the only two campaigns with effective_status ACTIVE this pass -- distinct objectives/funnel stages, no overlap flagged.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-09-21T14:49:00.000Z"
+    },
+    {
+      "id": "AL-472",
+      "module": "routine-run-notes",
+      "title": "Run summary -- 2026-09-21 ~14:49 UTC pass",
+      "detail": "Circuit breaker check: NOT breached this run (today's spend ₹1,108.07 vs ₹2,750 ceiling); circuitBreaker.tripped remains true (sticky since 2026-09-12, unresolved -- day 9, A-017 still pending). Pixel-quality gate: passed, ROAS modules not suppressed. purchaser-exclusion: compliant -- both currently-active ad sets (SORA_TOF, Sora_Sales) still exclude 'Purchasers 180D' (120255823280550159), confirmed via live targeting fetch. lookalike-refresh: no action -- source audience still ~20 people (no 20% growth), lookalikes still only 6 days old vs 14-day threshold. hook-angle-tagging: no untagged creatives found among ads under the 11 campaigns with last-14d activity, including both live ads -- all already tagged; vision pass skipped per policy (Higgsfield not attached). hard-spend-circuit-breaker: not triggered. anomaly signal: none found. learning-phase-stuck: neither live ad set (both ~1 day old) is stuck. Approval-tier: updated A-029 (pause-kill, Sora_BOF_Based on Mori_Tee) -- its zero-purchase kill trigger has reversed: the campaign now shows ₹902.86 lifetime spend at 6.21x ROAS (2 purchases), so the proposal is now marked STALE pending human rejection rather than approval. A-027/A-028 (reactivate-winner) unchanged and still consistent with live PAUSED-campaign lifetime numbers. No other approval-tier module triggered -- still only 2 active campaigns, both too new/low-spend for most breakdown-driven modules to fire meaningfully. weekly-digest already produced earlier today (2026-09-21T00:49 UTC, 'Week of Sep 15-21'); monthly-digest not due until Oct 1. self-audit-check skipped this pass -- underlying facts (breaker still tripped day 9, dashboard still stale) are unchanged since the last self-audit alert at 10:47 UTC.",
+      "severity": "medium",
+      "dismissed": false,
+      "createdAt": "2026-09-21T14:49:00.000Z"
     }
   ],
   "log": [
