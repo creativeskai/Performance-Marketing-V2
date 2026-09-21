@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-21T00:49:00.000Z",
+  "generatedAt": "2026-09-21T02:47:00.000Z",
   "settings": {
     "kill_roas_threshold": "pause if ROAS < 1.0x after ₹500 spend on a sales-objective campaign",
     "reactivate_min_historic_roas": "surface for reactivation if a paused campaign's last active-period ROAS >= 3.0x",
@@ -4832,6 +4832,15 @@
       "severity": "medium",
       "dismissed": false,
       "createdAt": "2026-09-21T00:49:00.000Z"
+    },
+    {
+      "id": "AL-446",
+      "module": "routine-run-notes",
+      "title": "Run summary -- 2026-09-21 ~02:47 UTC pass",
+      "detail": "Full pass: hard-spend circuit breaker checked first -- today's account spend is ₹55.25 (ads_get_ad_entities, level=ad_account, date_preset=today), nowhere near settings.hard_spend_ceiling_inr (₹2,750); no new trip. The 2026-09-12 circuit breaker trip remains unresolved (day 9), still awaiting a human resume-after-circuit-breaker decision (A-017) -- this is by design (no auto-resume) and unrelated to the two newer campaigns below, which were created after the trip and were never part of it. Pixel quality gate: ads_get_dataset_quality on dataset 833131719490535 unchanged from the last check (AL-438) -- AddPaymentInfo 9.1/10, Purchase 7.5/10, cod_purchase 7.5/10, InitiateCheckout 6.7/10, PageView/ViewContent/AddToCart/Search/SubscribedButtonClick all 6.1/10 -- everything at or above the 6.0/10 (0.6) gate, ROAS-driven modules NOT suppressed. Live account check: exactly 2 campaigns are ACTIVE account-wide -- SORA_TOF (₹0.01 spent today, 17 impressions, 0% CTR) and Sora_BOF_Based on Mori_Tee (its only ad set, Sora_Sales, is itself PAUSED, so zero real delivery). purchaser-exclusion: both active ad sets already have the Purchasers 180D audience (120255823280550159) excluded -- compliant, no action. lookalike-refresh: the 1%/2%/5% laddered lookalike off Purchasers 180D is 6 days old, well under the 14-day lookalike_refresh_days threshold -- no refresh. hook-angle-tagging: all 3 ads under the 2 active campaigns (creatives 1410368037712890, 1059775456834345, 1632325644922413) already have creativeTags entries -- nothing new to tag. ads_insights_anomaly_signal: no anomaly signal issues found account-wide. competitor-rescrape: Gully Labs / Lotto Sport India combined active-ad count unchanged at 278 (0% vs last pass) -- no new alert per de-dup. campaign-consolidation-watch: still no consolidation flag, the 2 active campaigns target distinct funnel stages. No auto-tier actions executed this pass (everything already compliant), no new proposals created, no proposals resolved -- the 24 existing pending approval-tier proposals (A-001-A-027 minus gaps) are unchanged from the prior pass; none of their underlying numbers moved since spend has stayed at effectively zero.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-09-21T02:47:00.000Z"
     }
   ],
   "log": [
