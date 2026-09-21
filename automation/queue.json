@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-21T16:50:00.000Z",
+  "generatedAt": "2026-09-21T18:49:00.000Z",
   "settings": {
     "kill_roas_threshold": "pause if ROAS < 1.0x after ₹500 spend on a sales-objective campaign",
     "reactivate_min_historic_roas": "surface for reactivation if a paused campaign's last active-period ROAS >= 3.0x",
@@ -26,8 +26,8 @@
     "competitor_last_scrape": {
       "gully_labs_active_ads": 210,
       "lotto_sport_india_active_ads": 106,
-      "scraped_at": "2026-09-21T16:50:00.000Z",
-      "note": "2026-09-21T16:50:00.000Z scheduled run: ads_library_search combined page_ids query (107479854297817 / 426015150606378, ad_active_status=ACTIVE, no country filter) returned estimated_total_count=264, down 3 (-1.1%) vs the prior 2026-09-21T14:49 UTC pass (267) -- no new alert-worthy movement per de-dup rules (well under the 20% trigger, either direction). Combined-query-only pass again (individual per-page counts not independently re-verified this pass, carried forward unchanged from the last per-page split of 210 / 106)."
+      "scraped_at": "2026-09-21T18:49:00.000Z",
+      "note": "2026-09-21T18:49:00.000Z scheduled run: ads_library_search combined page_ids query (107479854297817 / 426015150606378, ad_active_status=ACTIVE, no country filter) returned estimated_total_count=269, up 5 (+1.9%) vs the prior 2026-09-21T16:50 UTC pass (264) -- no new alert-worthy movement per de-dup rules (well under the 20% trigger, either direction). Combined-query-only pass again (individual per-page counts not independently re-verified this pass, carried forward unchanged from the last per-page split of 210 / 106)."
     },
     "audience_label_corrections": {
       "120249907176770159": "ATC_180D -- NOT a purchaser audience (cart-adders, event=AddToCart, retention 180 days). Verified 2026-09-14, reconfirmed 2026-09-20. Superseded note: earlier passes said the account had NO purchaser audience at all -- that's now out of date. See the 120255823280550159 (Purchasers 180D) entry above, created 2026-09-15, which IS a genuine purchaser audience and is already in use for exclusion + lookalike.",
@@ -5001,21 +5001,21 @@
       "id": "AL-459",
       "module": "self-audit-check",
       "title": "circuitBreaker record (tripped since 2026-09-12) still mismatched vs. live account -- day 9, no new resume decision",
-      "detail": "circuitBreaker record (tripped since 2026-09-12) still mismatched vs. live account -- day 9, no new breach this pass either: today's account spend is ₹825.28 (ads_get_ad_entities, level=ad_account, date_preset=today), well under settings.hard_spend_ceiling_inr ₹2,750, so the hard-spend circuit breaker did not (re-)trip this run. The top-level circuitBreaker.tripped flag remains true from the 2026-09-12 trip and stays true -- it is sticky by design until a human approves a resume-after-circuit-breaker proposal (A-017 remains pending). Meanwhile individual campaigns (Sora_BOF_Based on Mori_Tee, SORA_TOF) have been reactivated outside that formal path and are currently ACTIVE with real (small) spend today. No new alert created this pass -- updated in place per ROUTINE.md's de-dup rule since the underlying issue (stale circuitBreaker record) is unchanged from the prior ~10:47 UTC pass.",
+      "detail": "circuitBreaker record (tripped since 2026-09-12) still mismatched vs. live account -- day 9, no new resume decision. Live check this pass (2026-09-21 ~18:49 UTC): today's account spend (Meta account/IST timezone) is ₹13.23 -- this is a fresh-day figure, the local-time 'today' window just reset after crossing IST midnight (~18:30 UTC) -- well under settings.hard_spend_ceiling_inr (₹2,750), no new breach. circuitBreaker.tripped remains true from the 2026-09-12T16:47 UTC trip (9 days) -- sticky by design until a human approves resume-after-circuit-breaker (A-017, still pending). Live account currently has 2 ACTIVE campaigns (Sora_BOF_Based on Mori_Tee, SORA_TOF), both reactivated/created outside the routine (manual Meta Ads Manager action), consistent with prior passes' notes. No new alert created this pass -- updated in place per ROUTINE.md's de-dup rule since the underlying issue (stale circuitBreaker record) is unchanged.",
       "severity": "high",
       "dismissed": false,
       "createdAt": "2026-09-21T10:47:00.000Z",
-      "lastCheckedAt": "2026-09-21T12:46:00.000Z"
+      "lastCheckedAt": "2026-09-21T18:49:00.000Z"
     },
     {
       "id": "AL-460",
       "module": "self-audit-check",
       "title": "Dashboard static snapshot (index.html) still stale -- data labeled through Sep 12/13, now day 9 behind",
-      "detail": "Dashboard static snapshot (index.html) still stale -- data labeled through Sep 12/13, now day 9 behind live account state (2 campaigns ACTIVE today -- Sora_BOF_Based on Mori_Tee ₹650.11 spent, SORA_TOF ₹0.01 spent -- neither reflected in the static snapshot). No new alert created this pass -- updated in place per ROUTINE.md's de-dup rule since the underlying issue is unchanged from the prior ~10:47 UTC pass.",
+      "detail": "Dashboard static snapshot (index.html) still stale -- data labeled through Sep 12/13, now day 9 behind live account state. Live account currently has 2 campaigns ACTIVE (Sora_BOF_Based on Mori_Tee, SORA_TOF), neither reflected in the static snapshot; TSUCHI BOF/Mori+Tee ROAS have moved further since (5.66x / 3.52x on last_30d); 223 creatives now tagged in creativeTags. No new alert created this pass -- updated in place per ROUTINE.md's de-dup rule since the underlying issue is unchanged from the prior pass.",
       "severity": "medium",
       "dismissed": false,
       "createdAt": "2026-09-21T10:47:00.000Z",
-      "lastCheckedAt": "2026-09-21T12:46:00.000Z"
+      "lastCheckedAt": "2026-09-21T18:49:00.000Z"
     },
     {
       "id": "AL-461",
@@ -5160,6 +5160,42 @@
       "severity": "low",
       "dismissed": false,
       "createdAt": "2026-09-21T16:50:00.000Z"
+    },
+    {
+      "id": "AL-477",
+      "module": "pixel-health",
+      "title": "Pixel match quality remains fully recovered -- every tracked event still above threshold",
+      "detail": "ads_get_dataset_quality on dataset 833131719490535 (the account's active pixel): Purchase/cod_purchase composite EMQ 8.6, AddPaymentInfo 8.9, InitiateCheckout 6.8, and PageView/ViewContent/AddToCart/Search/SubscribedButtonClick all 6.1, with ip_address/user_agent/fbp coverage at or near 100% across events. This comfortably clears settings.pixel_quality_min_match_rate (0.6) -- ROAS-driven modules are NOT suppressed this pass. No change since the 2026-09-21T16:50 pass.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-09-21T18:49:00.000Z"
+    },
+    {
+      "id": "AL-478",
+      "module": "competitor-rescrape",
+      "title": "Gully Labs / Lotto Sport India combined active-ad count moved to 269 (+1.9% vs prior 264)",
+      "detail": "ads_library_search combined page_ids query (107479854297817 / 426015150606378, ad_active_status=ACTIVE) returned estimated_total_count=269 this pass, up 5 (+1.9%) from the prior 2026-09-21T16:50 UTC pass (264). Well under the 20% competitor-spike trigger in either direction -- no spike alert warranted.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-09-21T18:49:00.000Z"
+    },
+    {
+      "id": "AL-479",
+      "module": "campaign-consolidation-watch",
+      "title": "No consolidation flag -- the only two active campaigns target distinct funnel stages/audiences",
+      "detail": "Live campaign-level check this pass: only 2 campaigns are ACTIVE (Sora_BOF_Based on Mori_Tee -- OUTCOME_SALES/BOF retargeting-style, and SORA_TOF -- OUTCOME_TRAFFIC/TOF prospecting), both under 1 day old (created 2026-09-20T23:0x IST). They target different funnel stages and are not duplicates of the same product+audience -- no campaign-consolidation proposal warranted.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-09-21T18:49:00.000Z"
+    },
+    {
+      "id": "AL-480",
+      "module": "routine-run-notes",
+      "title": "Run summary -- 2026-09-21 ~18:49 UTC pass",
+      "detail": "Circuit breaker: not (re-)tripped this pass -- account-level 'today' spend (Meta account timezone, IST) reset to ₹13.23 after crossing local midnight (18:30 UTC); circuitBreaker.tripped remains true (sticky since the 2026-09-12 trip), A-017 (resume-after-circuit-breaker) still pending human decision -- 9 days, no new breach today. Pixel gate: healthy, ROAS modules not suppressed (see pixel-health alert). Auto modules: purchaser-exclusion compliant on both currently-active ad sets (SORA_TOF, Sora_Sales both exclude 'Purchasers 180D' id 120255823280550159) -- no write; lookalike-refresh not due (laddered 1/2/5% LALs off Purchasers 180D are 6 days old, under the 14-day threshold) -- no write; hook-angle-tagging -- all 7 creatives on active/campaign-paused-but-ad-active ads (1059775456834345, 1410368037712890, 1709981743394537, 1458706742801462, 2159488444970710, 3675864592566409, 1632325644922413) already tagged -- no write; hard-spend-circuit-breaker did not trip (₹13.23 vs ₹2,750 ceiling) -- no pause. Zero auto-executed actions this pass. Approval-tier: no new triggers found -- both active campaigns (Sora_BOF_Based on Mori_Tee 4.92x ROAS on ₹1,140.56/14d, SORA_TOF traffic-objective no ROAS applicable) are well above kill floor and neither qualifies for pause-kill; anomaly signal clean; no baseline exists yet for either Sora campaign so threshold-alerts skipped; both ad sets are 1 day old, nowhere near the 7-day learning-phase-stuck window. Existing pending reactivate-winner proposals A-027 (TSUCHI BOF, still ~5.66x ROAS) and A-028 (Mori + Tee_Sales_0609, now ~3.52x ROAS, up slightly from 3.1-3.3x) remain valid and pending -- no re-creation per de-dup rules. No existing proposal/alert was executed (per policy, only new-this-run auto actions execute; A-001 onward remain for human approval). Weekly digest already written today (AL-444, 00:49 UTC) -- not re-run. Zero new proposals, zero new alerts beyond this run's routine housekeeping (pixel-health/competitor-rescrape/campaign-consolidation-watch/self-audit-check), zero auto-executed actions.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-09-21T18:49:00.000Z"
     }
   ],
   "log": [
