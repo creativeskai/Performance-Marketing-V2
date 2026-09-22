@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-21T22:47:00.000Z",
+  "generatedAt": "2026-09-22T09:00:00.000Z",
   "settings": {
     "kill_roas_threshold": "pause if ROAS < 1.0x after ₹500 spend on a sales-objective campaign",
     "reactivate_min_historic_roas": "surface for reactivation if a paused campaign's last active-period ROAS >= 3.0x",
@@ -26,8 +26,8 @@
     "competitor_last_scrape": {
       "gully_labs_active_ads": 210,
       "lotto_sport_india_active_ads": 106,
-      "scraped_at": "2026-09-21T22:47:00.000Z",
-      "note": "2026-09-21T22:47:00.000Z scheduled run: ads_library_search combined page_ids query (107479854297817 / 426015150606378, ad_active_status=ACTIVE, no country filter) returned estimated_total_count=269, unchanged (0%) vs the prior 2026-09-21T20:47 UTC pass (269) -- no alert-worthy movement per de-dup rules. Combined-query-only pass again (individual per-page counts not independently re-verified this pass, carried forward unchanged from the last per-page split of 210 / 106)."
+      "scraped_at": "2026-09-22T09:00:00.000Z",
+      "note": "2026-09-22T09:00:00.000Z scheduled run: ads_library_search combined page_ids query (107479854297817 / 426015150606378, ad_active_status=ACTIVE, no country filter) returned estimated_total_count=269, unchanged (0%) vs the prior 2026-09-21T22:47 UTC pass (269) -- no alert-worthy movement per de-dup rules. Combined-query-only pass again (individual per-page counts not independently re-verified this pass, carried forward unchanged from the last per-page split of 210 / 106)."
     },
     "audience_label_corrections": {
       "120249907176770159": "ATC_180D -- NOT a purchaser audience (cart-adders, event=AddToCart, retention 180 days). Verified 2026-09-14, reconfirmed 2026-09-20. Superseded note: earlier passes said the account had NO purchaser audience at all -- that's now out of date. See the 120255823280550159 (Purchasers 180D) entry above, created 2026-09-15, which IS a genuine purchaser audience and is already in use for exclusion + lookalike.",
@@ -848,7 +848,7 @@
       "module": "pause-kill",
       "tier": "approval",
       "title": "Pause Sora_BOF_Based on Mori_Tee -- STALE: campaign has real purchases at 4.51x lifetime ROAS, kill trigger does not apply",
-      "reasoning": "Sora_BOF_Based on Mori_Tee (id 120255928784210159, OUTCOME_SALES) launched 2026-09-20T23:24 IST. UPDATE 2026-09-21T20:47:00.000Z pass -- lifetime (ads_get_ad_entities, date_preset=maximum): Rs1,244.85 spent, 13,792 impressions, 2.54% CTR, 2 attributed purchases worth Rs5,608.30 (purchase_roas 4.51x). This corrects an internal inconsistency in this proposal's earlier text (title said 6.2x ROAS while an older reasoning update said zero purchases/null ROAS -- the zero-purchase reading was from an early, thin-data pass shortly after launch and is now stale). Spend is well above the kill_roas_threshold's Rs500 floor and ROAS (4.51x lifetime, 4.92x on last_14d) is comfortably above the 1.0x pause bar -- the pause-kill trigger does not apply. Recommend reject/close this proposal.",
+      "reasoning": "Sora_BOF_Based on Mori_Tee (id 120255928784210159, OUTCOME_SALES) launched 2026-09-20T23:24 IST. UPDATE 2026-09-22T09:00:00.000Z pass -- reconfirmed via fresh ads_get_ad_entities pull (last_14d/last_30d, identical since the campaign is only 2 days old): Rs1,140.85 spent, 12,498 impressions, 2.54% CTR, purchase_roas 4.915896 (~4.92x) over that window, matching the 4.92x last_14d figure already on file. Lifetime (date_preset=maximum, from the 2026-09-21T20:47:00.000Z pass) remains Rs1,244.85 spent / Rs5,608.30 revenue (2 purchases) = 4.51x -- not re-pulled this pass since nothing here suggested it moved. Spend is well above the kill_roas_threshold's Rs500 floor and ROAS (4.51x lifetime, 4.92x on last_14d) is comfortably above the 1.0x pause bar -- the pause-kill trigger does not apply. Recommend reject/close this proposal.",
       "actionSummary": "Pauses the Sora_BOF_Based on Mori_Tee campaign (id 120255928784210159).",
       "metaAction": {
         "tool": "ads_update_entity",
