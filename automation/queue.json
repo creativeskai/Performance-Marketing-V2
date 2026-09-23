@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-23T20:46:00.000Z",
+  "generatedAt": "2026-09-23T22:48:00.000Z",
   "settings": {
     "kill_roas_threshold": "pause if ROAS < 1.0x after ₹500 spend on a sales-objective campaign",
     "reactivate_min_historic_roas": "surface for reactivation if a paused campaign's last active-period ROAS >= 3.0x",
@@ -851,7 +851,7 @@
       "module": "pause-kill",
       "tier": "approval",
       "title": "Pause Sora_BOF_Based on Mori_Tee -- STALE: campaign has real purchases at 4.51x lifetime ROAS, kill trigger does not apply",
-      "reasoning": "STALE (unchanged verdict): Sora_BOF_Based on Mori_Tee remains ACTIVE and healthy -- last_14d spend ₹2,260.84, purchase_roas 4.961253x, well above the ₹500 kill_roas_threshold spend floor and comfortably above the 1.0x pause bar. The pause-kill trigger does not apply. Recommend reject/close. Reasoning history condensed for file-size reasons.",
+      "reasoning": "STALE (unchanged verdict): Sora_BOF_Based on Mori_Tee remains ACTIVE and healthy -- last_14d spend ₹3,405.96, purchase_roas 8.809378x (up from ₹2,260.84 / 4.96x at the prior 2026-09-21 check -- spend and ROAS have both climbed as more orders land), well above the ₹500 kill_roas_threshold spend floor and comfortably above the 1.0x pause bar. The pause-kill trigger does not apply. Recommend reject/close.",
       "actionSummary": "Pauses the Sora_BOF_Based on Mori_Tee campaign (id 120255928784210159).",
       "metaAction": {
         "tool": "ads_update_entity",
@@ -864,29 +864,32 @@
       },
       "status": "pending",
       "createdAt": "2026-09-21T10:47:00.000Z",
-      "lastCheckedAt": "2026-09-22T14:47:00.000Z",
-      "updatedAt": "2026-09-23T06:50:00.000Z"
+      "lastCheckedAt": "2026-09-23T22:48:00.000Z",
+      "updatedAt": "2026-09-23T22:48:00.000Z"
     },
     {
       "id": "A-030",
       "module": "age-gender-auto-shift",
       "tier": "approval",
-      "title": "Review Sora_Sales (Sora_BOF_Based on Mori_Tee) age/gender mix -- both 25-34 and 35-44 male now converting, only 18-24 still shows zero purchases",
-      "reasoning": "Refreshed 2026-09-23T18:50 UTC (last_14d age/gender breakdown on ad set 120255928784230159, Sora_Sales / campaign Sora_BOF_Based on Mori_Tee): the picture has changed again since the prior pass (2026-09-23T16:49 UTC, which showed only 35-44 male converting at 22.87x on ₹490.43). This pass shows BOTH 25-34 male (4 purchases, 7.03x ROAS, ₹1,515.37 spend) and 35-44 male (7 purchases, 28.35x ROAS, ₹682.40 spend) converting well. 18-24 (male+female+unknown combined, ₹698.10 spend) still shows ZERO purchases across every pass so far. Total purchases on this ad set over the 14d window are small (~11), so per-cell attribution keeps reshuffling between 25-34 and 35-44 as new orders land -- but the 18-24 zero-purchase result has now been stable across three consecutive passes on rising spend (₹398.73 -> ₹584.31 male alone -> now ₹698.10 combined), which is a firmer signal than the 25-34-vs-35-44 flip-flop.",
-      "actionSummary": "REVISED: given 18-24 is now the only consistently zero-purchase segment across three consecutive passes, recommend narrowing the ask to excluding just 18-24 (targeting.age_min: 18 -> 25) rather than the broader original 18-35 exclusion -- 25-34 and 35-44 are both actively converting and should stay in. Leave age_max (65), geo, placements, and excluded_custom_audiences unchanged.",
+      "title": "Exclude 18-24 from Sora_Sales (Sora_BOF_Based on Mori_Tee) -- zero purchases on ₹698 spend across 4 passes, 25-34/35-44 both converting well",
+      "reasoning": "Refreshed 2026-09-23T22:48 UTC (last_14d age/gender breakdown on ad set 120255928784230159, Sora_Sales / campaign Sora_BOF_Based on Mori_Tee): 25-34 male continues converting well (₹1,515.78 spend, 7.03x ROAS) and 35-44 male even more so (₹683.22 spend, 28.32x ROAS) -- both essentially unchanged from the prior pass (₹1,515.37/7.03x and ₹682.40/28.35x). 18-24 (male+female+unknown combined, ₹698.22 spend) still shows ZERO purchases across every pass so far -- now stable across four consecutive passes on rising spend. 25-34 and 35-44 should stay in; only 18-24 is a consistently zero-purchase segment.",
+      "actionSummary": "Narrow targeting by excluding just the 18-24 age band (targeting.age_min: 18 -> 25) -- 25-34 and 35-44 are both actively converting and should stay in. Leave age_max (65), geo, placements, and excluded_custom_audiences unchanged.",
       "metaAction": {
         "tool": "ads_update_entity",
         "params": {
           "ad_account_id": "704523148804803",
           "entity_id": "120255928784230159",
           "entity_type": "ad_set",
-          "field": "targeting",
-          "note": "raise targeting.age_min from 18 to 35, excluding the 18-24 and 25-34 bands entirely; leave every other targeting parameter (age_max, geo, placements, excluded_custom_audiences) unchanged"
+          "field": "targeting"
+        },
+        "targetingDelta": {
+          "age_min": 25
         }
       },
       "status": "pending",
       "createdAt": "2026-09-22T20:49:00.000Z",
-      "updatedAt": "2026-09-23T18:50:00.000Z"
+      "updatedAt": "2026-09-23T22:48:00.000Z",
+      "lastCheckedAt": "2026-09-23T22:48:00.000Z"
     },
     {
       "id": "A-031",
@@ -6267,6 +6270,24 @@
       "severity": "low",
       "dismissed": false,
       "createdAt": "2026-09-23T20:46:00.000Z"
+    },
+    {
+      "id": "AL-594",
+      "module": "self-audit-check",
+      "title": "Live numbers reconfirmed sane; dashboard static snapshot remains stale",
+      "detail": "index.html's DATA.today snapshot is still dated 'September 13, 2026' and doesn't include the two currently-active campaigns (SORA_TOF, Sora_Sales / Sora_BOF_Based on Mori_Tee, both created 2026-09-20). Live today-spend (ads_get_ad_entities, account, today) is ₹207.18 -- sane, well under the ₹2,750 circuit breaker ceiling. KPI-to-trigger completeness: every metric surfaced on the dashboard (spend, ROAS, purchases) still maps to a module in this table; no gaps found.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-09-23T22:48:00.000Z"
+    },
+    {
+      "id": "AL-595",
+      "module": "campaign-consolidation-watch",
+      "title": "No consolidation flag -- the only two active campaigns target distinct funnel stages/audiences",
+      "detail": "Only 2 campaigns are ACTIVE this pass: SORA_TOF (OUTCOME_TRAFFIC, broad IN 18-65, TOF) and Sora_Sales / Sora_BOF_Based on Mori_Tee (OUTCOME_SALES, 12-city audience with ATC_180D + Purchasers 180D exclusions, BOF). Different objectives and funnel stages, not duplicates -- no campaign-consolidation proposal warranted.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-09-23T22:48:00.000Z"
     }
   ],
   "log": [
