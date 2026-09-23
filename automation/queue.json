@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-23T16:49:00.000Z",
+  "generatedAt": "2026-09-23T18:50:00.000Z",
   "settings": {
     "kill_roas_threshold": "pause if ROAS < 1.0x after ₹500 spend on a sales-objective campaign",
     "reactivate_min_historic_roas": "surface for reactivation if a paused campaign's last active-period ROAS >= 3.0x",
@@ -26,8 +26,8 @@
     "competitor_last_scrape": {
       "gully_labs_active_ads": null,
       "lotto_sport_india_active_ads": null,
-      "scraped_at": "2026-09-23T16:49:00.000Z",
-      "note": "2026-09-23T16:49:00.000Z scheduled run: ads_library_search combined page_ids query (107479854297817 / 426015150606378, ad_active_status=ACTIVE, no country filter) returned estimated_total_count=274, moved from 271 (prior 2026-09-23T14:50 UTC pass) -- +1.11%, well under the 20% alert threshold. Combined-query-only pass (individual per-page counts not independently re-verified this pass, carried forward unchanged from the last per-page split of 210 / 106)."
+      "scraped_at": "2026-09-23T18:50:00.000Z",
+      "note": "2026-09-23T18:50:00.000Z scheduled run: ads_library_search combined page_ids query (107479854297817 / 426015150606378, ad_active_status=ACTIVE, no country filter) returned estimated_total_count=279, moved from 274 (prior 2026-09-23T16:49 UTC pass) -- +1.83%, well under the 20% alert threshold. Combined-query-only pass (individual per-page counts not independently re-verified this pass, carried forward unchanged from the last per-page split of 210 / 106)."
     },
     "audience_label_corrections": {
       "120249907176770159": "ATC_180D -- NOT a purchaser audience (cart-adders, event=AddToCart, retention 180 days). Verified 2026-09-14, reconfirmed 2026-09-20. Superseded note: earlier passes said the account had NO purchaser audience at all -- that's now out of date. See the 120255823280550159 (Purchasers 180D) entry above, created 2026-09-15, which IS a genuine purchaser audience and is already in use for exclusion + lookalike.",
@@ -823,7 +823,7 @@
       "module": "reactivate-winner",
       "tier": "approval",
       "title": "Reactivate Mori + Tee_Sales_0609 -- 3.1x-3.3x ROAS, well above the reactivate threshold",
-      "reasoning": "Mori + Tee_Sales_0609 (id 120255648636980159) remains PAUSED; last_14d ROAS 3.390501x on ₹11,509.74 spend -- consistently clears the 3.0x reactivate_min_historic_roas threshold across every recent pass. Purchaser exclusion already verified compliant account-wide. Reactivating at its existing ₹900/day budget is a conservative resumption. Reasoning history condensed for file-size reasons. Still pending human decision.",
+      "reasoning": "Mori + Tee_Sales_0609 (id 120255648636980159) remains PAUSED; last_14d ROAS 3.267707x on ₹10,811.35 spend, 25 purchases (as of 2026-09-23T18:50 UTC pass; prior recorded figure was 3.390501x on ₹11,509.74) -- still comfortably clears the 3.0x reactivate_min_historic_roas threshold, just with a slightly softer number as the trailing 14d window rolls forward past its highest-spend days. Purchaser exclusion already verified compliant account-wide. Reactivating at its existing ₹900/day budget is a conservative resumption. Still pending human decision.",
       "actionSummary": "Activates campaign 'Mori + Tee_Sales_0609' (id 120255648636980159) and reconfirms its daily budget at its existing ₹900/day (90000 minor units, unchanged) so it resumes delivering at the same pace it was paused at.",
       "metaAction": {
         "tool": "ads_activate_entity",
@@ -844,7 +844,7 @@
       },
       "status": "pending",
       "createdAt": "2026-09-21T06:51:00.000Z",
-      "updatedAt": "2026-09-23T06:50:00.000Z"
+      "updatedAt": "2026-09-23T18:50:00.000Z"
     },
     {
       "id": "A-029",
@@ -871,9 +871,9 @@
       "id": "A-030",
       "module": "age-gender-auto-shift",
       "tier": "approval",
-      "title": "Review Sora_Sales (Sora_BOF_Based on Mori_Tee) age/gender mix -- 25-34 has now converted (4.6x ROAS), reversing this proposal's original 'zero-purchase 18-34' premise; only 18-24 still shows zero purchases",
-      "reasoning": "Refreshed 2026-09-23 (last_14d age/gender breakdown on ad set 120255928784230159, Sora_Sales / campaign Sora_BOF_Based on Mori_Tee): the converting segment has shifted again since the prior pass (2026-09-22 ~20:49 UTC, which had 25-34 converting at 4.6x). This pass shows 35-44 male as the only converting cell -- 4 purchases, 22.87x ROAS on ₹490.43 spend. 25-34 male now shows ZERO purchases on ₹971.26 spend (the single largest-spend cell in the ad set) and 18-24 male also shows zero purchases on ₹398.73 spend. Total account-wide purchases on this ad set over the window are only ~4-5, so per-cell attribution is genuinely noisy at this sample size -- the segment that looks best has flipped between consecutive passes (25-34 -> 35-44) purely from a handful of orders landing in a different cell. Recommend waiting for more data before acting; flagging the volatility rather than proposing a concrete shift this pass.",
-      "actionSummary": "REVISED: the original ask (raise targeting.age_min from 18 to 35) is likely too broad given 25-34 is now converting at 4.6x ROAS -- recommend the human reviewer either reject this proposal outright, or narrow the ask to excluding only 18-24 (targeting.age_min: 18 → 25) if they want to act on the still-zero-purchase 18-24 cell. Leave age_max (65), geo, placements, and excluded_custom_audiences unchanged either way.",
+      "title": "Review Sora_Sales (Sora_BOF_Based on Mori_Tee) age/gender mix -- both 25-34 and 35-44 male now converting, only 18-24 still shows zero purchases",
+      "reasoning": "Refreshed 2026-09-23T18:50 UTC (last_14d age/gender breakdown on ad set 120255928784230159, Sora_Sales / campaign Sora_BOF_Based on Mori_Tee): the picture has changed again since the prior pass (2026-09-23T16:49 UTC, which showed only 35-44 male converting at 22.87x on ₹490.43). This pass shows BOTH 25-34 male (4 purchases, 7.03x ROAS, ₹1,515.37 spend) and 35-44 male (7 purchases, 28.35x ROAS, ₹682.40 spend) converting well. 18-24 (male+female+unknown combined, ₹698.10 spend) still shows ZERO purchases across every pass so far. Total purchases on this ad set over the 14d window are small (~11), so per-cell attribution keeps reshuffling between 25-34 and 35-44 as new orders land -- but the 18-24 zero-purchase result has now been stable across three consecutive passes on rising spend (₹398.73 -> ₹584.31 male alone -> now ₹698.10 combined), which is a firmer signal than the 25-34-vs-35-44 flip-flop.",
+      "actionSummary": "REVISED: given 18-24 is now the only consistently zero-purchase segment across three consecutive passes, recommend narrowing the ask to excluding just 18-24 (targeting.age_min: 18 -> 25) rather than the broader original 18-35 exclusion -- 25-34 and 35-44 are both actively converting and should stay in. Leave age_max (65), geo, placements, and excluded_custom_audiences unchanged.",
       "metaAction": {
         "tool": "ads_update_entity",
         "params": {
@@ -886,7 +886,34 @@
       },
       "status": "pending",
       "createdAt": "2026-09-22T20:49:00.000Z",
-      "updatedAt": "2026-09-23T06:50:00.000Z"
+      "updatedAt": "2026-09-23T18:50:00.000Z"
+    },
+    {
+      "id": "A-031",
+      "module": "reactivate-winner",
+      "tier": "approval",
+      "title": "Reactivate Retargeting_Overall -- 9.2x ROAS on ₹729 last_14d spend, well above the reactivate threshold",
+      "reasoning": "Retargeting_Overall (id 120255851467340159, created 2026-09-16) is currently PAUSED; last_14d ROAS 9.224005x on ₹729 spend, 6 purchases -- well above the 3.0x reactivate_min_historic_roas threshold. This campaign was not part of the 2026-09-12 circuit breaker sweep (created after that trip) and has no existing pending proposal against it. No purchaser-exclusion concern: this is a retargeting campaign by design. Reactivating at its existing ₹250/day budget is a conservative resumption pending human review.",
+      "actionSummary": "Activates campaign 'Retargeting_Overall' (id 120255851467340159) and reconfirms its daily budget at its existing ₹250/day (25000 minor units, unchanged) so it resumes delivering at the same pace it was paused at.",
+      "metaAction": {
+        "tool": "ads_activate_entity",
+        "params": {
+          "entity_id": "120255851467340159",
+          "entity_type": "campaign"
+        },
+        "followUp": {
+          "tool": "ads_update_entity",
+          "params": {
+            "entity_id": "120255851467340159",
+            "entity_type": "campaign",
+            "fields": {
+              "daily_budget": 25000
+            }
+          }
+        }
+      },
+      "status": "pending",
+      "createdAt": "2026-09-23T18:50:00.000Z"
     }
   ],
   "alerts": [
@@ -6132,6 +6159,60 @@
       "severity": "low",
       "dismissed": false,
       "createdAt": "2026-09-23T16:49:00.000Z"
+    },
+    {
+      "id": "AL-582",
+      "module": "pixel-health",
+      "title": "Pixel match quality remains healthy -- every tracked event still above threshold",
+      "detail": "ads_get_dataset_quality on dataset 833131719490535: Purchase composite_score 8.4, AddPaymentInfo 9.0, prepaid_purchase 8.7, cod_purchase 7.3, InitiateCheckout 6.7, PageView/ViewContent/AddToCart/Search/SubscribedButtonClick all 6.1. Converting composite_score/10 to the settings.pixel_quality_min_match_rate (0.6) scale, every event clears the floor (lowest is 0.61). ROAS-driven modules were NOT suppressed this pass.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-09-23T18:50:00.000Z"
+    },
+    {
+      "id": "AL-583",
+      "module": "competitor-rescrape",
+      "title": "Gully Labs / Lotto Sport India combined active-ad count moved 274 -> 279 (+1.83%)",
+      "detail": "ads_library_search combined page_ids query (107479854297817 / 426015150606378, ACTIVE, no country filter): estimated_total_count=279 vs 274 recorded at the prior 2026-09-23T16:49 UTC pass. +1.83%, well under the 20% competitor-spike alert threshold.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-09-23T18:50:00.000Z"
+    },
+    {
+      "id": "AL-584",
+      "module": "campaign-consolidation-watch",
+      "title": "No consolidation flag -- the only two active campaigns target distinct funnel stages/audiences",
+      "detail": "Active campaigns: 'Sora_BOF_Based on Mori_Tee' (OUTCOME_SALES, BOF, excludes both ATC_180D and Purchasers 180D) and 'SORA_TOF' (OUTCOME_TRAFFIC, TOF prospecting, excludes Purchasers 180D). Different objectives and funnel stages targeting the same SORA product -- not a duplicate pair.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-09-23T18:50:00.000Z"
+    },
+    {
+      "id": "AL-585",
+      "module": "anomaly",
+      "title": "No anomaly signals found this pass",
+      "detail": "ads_insights_anomaly_signal (account-wide): no anomaly signal issues found. Checked for auction overlap, creative fatigue, and narrow audience.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-09-23T18:50:00.000Z"
+    },
+    {
+      "id": "AL-586",
+      "module": "self-audit-check",
+      "title": "Live numbers reconfirmed sane; dashboard static snapshot remains stale",
+      "detail": "index.html's DATA.today snapshot is still dated 'September 13, 2026' and doesn't include the two currently-active campaigns (SORA_TOF, Sora_Sales / Sora_BOF_Based on Mori_Tee, both created 2026-09-20). Live today-spend (ads_get_ad_entities, account, today) is ₹38.43 -- sane, well under the ₹2,750 circuit breaker ceiling. KPI-to-trigger completeness: every metric surfaced on the dashboard (spend, revenue, ROAS, purchases, CPM, CTR, frequency) still maps to at least one module in ROUTINE.md's table (threshold-alerts, pause-kill, budget-reallocation, creative-fatigue, frequency-capping, self-audit-check itself) -- no orphaned KPI found this pass.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-09-23T18:50:00.000Z"
+    },
+    {
+      "id": "AL-587",
+      "module": "routine-run-notes",
+      "title": "Run summary -- 2026-09-23 ~18:50 UTC pass",
+      "detail": "Circuit breaker: still tripped (since 2026-09-12), today's spend ₹38.43 vs ₹2,750 ceiling -- not re-breached, no new auto-pause, no auto-resume (awaiting human decision on A-017). Pixel quality gate: healthy, ROAS modules not suppressed. purchaser-exclusion: compliant on both active ad sets (SORA_TOF, Sora_Sales) -- no auto-action needed. lookalike-refresh: 1%/2%/5% Purchasers-180D-based LALs are 8 days old, under the 14-day refresh threshold -- no auto-action needed. hook-angle-tagging: both ads with impressions in the last 3 days (Sora_Sales creative 1059775456834345, sora_TOF creative 1410368037712890) were already tagged in a prior pass -- nothing new to tag. hard-spend-circuit-breaker: not breached. Approval-tier: refreshed A-030 (age-gender-auto-shift, Sora_Sales) and A-028 (reactivate-winner, Mori + Tee_Sales_0609) with current numbers; opened new A-031 (reactivate-winner, Retargeting_Overall -- 9.22x ROAS on ₹729 last_14d spend, no prior proposal existed for this entity). No other approval-tier module triggered new activity this pass -- breakdown-level modules (age/gender, placement, device, geo) were evaluated for both active ad sets but per-cell spend/sample sizes remain too thin for a confident geo/placement/device/dayparting/bid-strategy call this pass.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-09-23T18:50:00.000Z"
     }
   ],
   "log": [
