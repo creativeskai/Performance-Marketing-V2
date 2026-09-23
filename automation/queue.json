@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-23T08:47:00.000Z",
+  "generatedAt": "2026-09-23T10:50:00.000Z",
   "settings": {
     "kill_roas_threshold": "pause if ROAS < 1.0x after ₹500 spend on a sales-objective campaign",
     "reactivate_min_historic_roas": "surface for reactivation if a paused campaign's last active-period ROAS >= 3.0x",
@@ -24,10 +24,10 @@
       }
     },
     "competitor_last_scrape": {
-      "gully_labs_active_ads": 210,
-      "lotto_sport_india_active_ads": 106,
-      "scraped_at": "2026-09-23T06:50:00.000Z",
-      "note": "2026-09-23T06:50:00.000Z scheduled run: ads_library_search combined page_ids query (107479854297817 / 426015150606378, ad_active_status=ACTIVE, no country filter) returned estimated_total_count=260, moved from 261 (prior 2026-09-23T04:49 UTC pass) -- net -0.4%, well under the 20% alert threshold, no alert-worthy movement per de-dup rules. Combined-query-only pass again (individual per-page counts not independently re-verified this pass, carried forward unchanged from the last per-page split of 210 / 106)."
+      "gully_labs_active_ads": null,
+      "lotto_sport_india_active_ads": null,
+      "scraped_at": "2026-09-23T10:50:00.000Z",
+      "note": "2026-09-23T10:50:00.000Z scheduled run: ads_library_search combined page_ids query (107479854297817 / 426015150606378, ad_active_status=ACTIVE, no country filter) returned estimated_total_count=260, moved from 257 (prior 2026-09-23T08:47 UTC pass) -- +1.17%, well under the 20% alert threshold. Combined-query-only pass (individual per-page counts not independently re-verified this pass, carried forward unchanged from the last per-page split of 210 / 106)."
     },
     "audience_label_corrections": {
       "120249907176770159": "ATC_180D -- NOT a purchaser audience (cart-adders, event=AddToCart, retention 180 days). Verified 2026-09-14, reconfirmed 2026-09-20. Superseded note: earlier passes said the account had NO purchaser audience at all -- that's now out of date. See the 120255823280550159 (Purchasers 180D) entry above, created 2026-09-15, which IS a genuine purchaser audience and is already in use for exclusion + lookalike.",
@@ -319,8 +319,8 @@
       "module": "pause-kill",
       "tier": "approval",
       "title": "Pause Retargeting_31AUG -- STALE: campaign is PAUSED and ROAS (1.66x) is above the 1.0x kill floor",
-      "reasoning": "UPDATE 2026-09-15 ~08:49 UTC: campaign id 120255534778560159 (now labeled 'Website_View_Population' in the live account, formerly referred to as Retargeting_31AUG) is status=PAUSED as of this pass -- it was reactivated and re-paused again since the last update. last_14d purchase_roas is unchanged at 1.662864x (spend ₹1,624.15), still above settings.kill_roas_threshold (pause if ROAS < 1.0x after ₹500 spend), so even when this campaign has been active the kill trigger has not held. This proposal's action (PAUSED) would additionally be a no-op right now since the campaign is already paused. Recommend reject/close -- trigger not met and campaign not currently active. Reconfirmed 2026-09-15 ~16:47 UTC: campaign remains status=PAUSED (now labeled 'Website_View_Population'). last_14d purchase_roas unchanged at 1.662864x, spend ₹1,624.15. No change to the recommendation -- trigger not met and campaign not currently active. Reconfirmed 2026-09-16 ~04:52 UTC: campaign id 120255534778560159 ('Website_View_Population') remains status=ACTIVE/effective_status=CAMPAIGN_PAUSED (i.e. not currently delivering, paused via its own status flag). Fresh last_14d pull: purchase_roas 1.595975x (down from 1.662864x), spend ₹1,692.22 (up from ₹1,624.15 -- reflects a brief reactivation window since the last pull, per prior updates). Still above the 1.0x kill floor and still not currently active. No change to the recommendation -- trigger not met and campaign not currently delivering. Reconfirmed 2026-09-16T12:51:00.000Z: campaign id 120255534778560159 ('Website_View_Population', formerly Retargeting_31AUG -- same entity, confirmed a rename not a deletion) remains effective_status=PAUSED. Fresh last_14d pull: purchase_roas 1.595975x, spend ₹1,692.22 -- unchanged from the 04:52 UTC pass. Still above the 1.0x kill floor and still not currently delivering. No change to the recommendation -- trigger not met and campaign not currently active. UPDATE 2026-09-16T18:49:00.000Z pass: campaign id 120255534778560159 ('Website_View_Population') confirmed still status=PAUSED via live pull. Fresh last_14d: amount_spent ₹1,528.84, purchase_roas 1.766529 (up from 1.662864 last update). Still above the 1.0x kill floor -- this pause-kill proposal remains moot/stale regardless of budget: the ROAS premise doesn't justify pausing it even if it were reactivated.\n\nReconfirmed this pass (2026-09-16T22:46:00.000Z): campaign id 120255534778560159 ('Website_View_Population', formerly Retargeting_31AUG) remains PAUSED per live campaign list pull. Not re-pulled for fresh spend/ROAS this pass. No change to the recommendation -- trigger not met and campaign not currently active. UPDATE 2026-09-19T16:53:00.000Z: campaign id 120255534778560159 ('Website_View_Population', formerly Retargeting_31AUG) reconfirmed status=PAUSED. No change to the recommendation -- trigger not met (ROAS above kill floor) and campaign not currently active; this action would be a no-op.",
-      "actionSummary": "Pause campaign 'Retargeting_31AUG' (id 120255534778560159) by setting its status to PAUSED. No other field changes. This stops further spend immediately; it can be reactivated manually (or via a future reactivate-winner proposal) once the underlying issue — creative, targeting, or audience — is diagnosed and fixed.",
+      "reasoning": "STALE, refreshed 2026-09-23: campaign (now named 'Website_View_Population', id 120255534778560159) remains PAUSED. 30d ROAS is now 1.355x (14d: 1.769x), down from the 1.66x cited when this proposal was written, but still above the 1.0x kill-ROAS floor either way. Since the campaign is already PAUSED, a pause-kill action here would be a no-op regardless of ROAS.",
+      "actionSummary": "No-op if approved -- campaign is already PAUSED. Kept for audit trail only.",
       "metaAction": {
         "tool": "ads_update_entity",
         "params": {
@@ -550,8 +550,8 @@
       "id": "A-018",
       "module": "budget-reallocation",
       "tier": "approval",
-      "title": "Shift daily budget from underperforming Retargeting_31AUG toward Mori + Tee_Sales_0609 -- ROAS gap narrowed to ~2.3x, still above the 1.5x trigger",
-      "reasoning": "Underlying source campaign (id 120255534778560159, formerly 'Retargeting_31AUG', now 'Website_View_Population') is PAUSED (last_14d ROAS 1.77x on ₹1,116.14 spend) and the target campaign Mori + Tee_Sales_0609 is also PAUSED (last_14d ROAS 3.39x on ₹11,509.74 spend). Neither side is currently delivering, so this reallocation is not actionable right now -- hold until both are simultaneously active. Reasoning history condensed for file-size reasons. Not executed -- approval tier.",
+      "title": "Shift daily budget from underperforming Retargeting_31AUG toward Mori + Tee_Sales_0609 -- STALE: both campaigns now PAUSED",
+      "reasoning": "STALE, refreshed 2026-09-23: both campaigns in this proposal are currently PAUSED (Website_View_Population id 120255534778560159, and Mori + Tee_Sales_0609 id 120255648636980159). budget-reallocation only makes sense between campaigns actively delivering -- there is no live budget to reallocate right now. Re-evaluate if either campaign is reactivated.",
       "actionSummary": "Step 1: set Retargeting_31AUG's (id 120255534778560159) daily_budget to 12500 (₹125/day, down from ₹250/day). Step 2: set Mori + Tee_Sales_0609's (id 120255648636980159) daily_budget to 132500 (₹1,325/day, up from ₹1,200/day). No other fields changed.",
       "metaAction": {
         "tool": "ads_update_entity",
@@ -581,8 +581,8 @@
       "id": "A-019",
       "module": "dayparting",
       "tier": "approval",
-      "title": "Schedule Mori + Tee_Sales_0609 to skip its dead window -- campaign is ACTIVE again, needs re-validation before approval",
-      "reasoning": "Mori + Tee_Sales_0609 is PAUSED again this pass (last_14d ROAS 3.39x on ₹11,509.74 spend from its last delivery window) -- the dayparting schedule this proposal proposes needs re-validation against fresh hourly data once/if the campaign resumes real delivery. Not actionable while paused. Reasoning history condensed for file-size reasons. Not executed -- approval tier.",
+      "title": "Schedule Mori + Tee_Sales_0609 to skip its dead window -- STALE: campaign is PAUSED again, re-validation still pending",
+      "reasoning": "Refreshed 2026-09-23: campaign 120255648636980159 (Mori + Tee_Sales_0609) is currently PAUSED (30d ROAS 3.524x, flagged for reactivation separately as A-028). The original dayparting schedule proposal needs a fresh hourly breakdown pull once/if the campaign is delivering again before it can be validated -- not actionable while paused.",
       "actionSummary": "Set the Mori_Sales ad set's (id 120255648636990159) adset_schedule to run only 00:00-03:00 and 10:00-24:00 every day (skipping the 03:00-09:59 IST dead window identified above). No budget or targeting fields changed. Note: Meta's ad-scheduling feature has historically required a lifetime budget rather than a CBO daily budget on some API versions -- if this campaign's current CBO daily budget rejects the schedule at execution time, the ad set's budget model would need adjusting first; flagging this now rather than assuming success.",
       "metaAction": {
         "tool": "ads_update_entity",
@@ -649,8 +649,8 @@
       "id": "A-021",
       "module": "budget-reallocation",
       "tier": "approval",
-      "title": "Shift daily budget from Mori + Tee_Sales_0609 toward TSUCHI BOF based on CAPS -- ROAS gap ~2.43x, above the 1.5x trigger",
-      "reasoning": "TSUCHI BOF based on CAPS (last_14d ROAS 5.66x, ₹3,747.38 spend, daily budget ₹650) vs. Mori + Tee_Sales_0609 (last_14d ROAS 3.39x, ₹11,509.74 spend, daily budget ₹900) -- gap ~1.67x, still above the 1.5x budget_reallocation_min_roas_gap trigger in principle, but both campaigns are currently PAUSED, so this reallocation is not actionable right now. Hold until both are simultaneously active. Reasoning history condensed for file-size reasons. Not executed -- approval tier.",
+      "title": "Shift daily budget from Mori + Tee_Sales_0609 toward TSUCHI BOF based on CAPS -- STALE: both campaigns now PAUSED",
+      "reasoning": "STALE, refreshed 2026-09-23: both campaigns are currently PAUSED (Mori + Tee_Sales_0609 id 120255648636980159, 30d ROAS 3.524x; TSUCHI BOF based on CAPS id 120255774257000159, 30d ROAS 5.663x). Gap is now ~1.61x, still above the 1.5x budget_reallocation_min_roas_gap trigger, but neither campaign is delivering right now so there's no live budget to reallocate. Both are separately flagged for reactivation (A-027, A-028) -- re-evaluate once either is active again.",
       "actionSummary": "Step 1: set Mori + Tee_Sales_0609's (id 120255648636980159) daily_budget to 75000 (Rs750/day, down from Rs900/day). Step 2: set TSUCHI BOF based on CAPS's (id 120255774257000159) daily_budget to 80000 (Rs800/day, up from Rs650/day). Net account daily budget unchanged. Both campaigns are currently ACTIVE, so either edit force-pauses that campaign per Meta's API behavior (status_forced_to_paused) -- review and reactivate after approving.",
       "metaAction": {
         "tool": "ads_update_entity",
@@ -748,8 +748,8 @@
       "id": "A-025",
       "module": "placement-optimization",
       "tier": "approval",
-      "title": "Review MMA TOF's Instagram Reels-heavy placement mix -- CTR collapsed to 0.0456% on that placement (89% of impressions)",
-      "reasoning": "MMA TOF (id 120255873268930159) is now PAUSED (was ACTIVE when this proposal was written; last recorded last_14d figures: 392,427 impressions, 89% on instagram_reels at 0.0456% CTR, overall campaign CTR 0.0594% vs. 2.1-2.3% on the account's sales campaigns). The Reels-placement review this proposal recommends is lower urgency while the campaign isn't delivering. Reasoning history condensed for file-size reasons. Not executed -- approval tier.",
+      "title": "Review MMA TOF's Instagram Reels-heavy placement mix -- STALE: campaign is now PAUSED",
+      "reasoning": "STALE, refreshed 2026-09-23: campaign 120255873268930159 (MMA TOF) is now PAUSED (paused outside this routine, no automation log entry for the pause action). The CTR-collapse condition that triggered this proposal (0.0594%, ~35-40x below other active campaigns) is moot while the campaign isn't delivering. Corresponding threshold-alerts (AL-396 through AL-427) dismissed this pass as resolved.",
       "actionSummary": "Remove 'reels' from UGC_MMA ad set's targeting.instagram_positions (currently stream/story/reels/explore_home), shifting delivery toward instagram feed/story/explore only. No other targeting fields (geo, age/gender, flexible_spec interests/behaviors, excluded_custom_audiences) changed.",
       "metaAction": {
         "tool": "ads_update_entity",
@@ -872,7 +872,7 @@
       "module": "age-gender-auto-shift",
       "tier": "approval",
       "title": "Review Sora_Sales (Sora_BOF_Based on Mori_Tee) age/gender mix -- 25-34 has now converted (4.6x ROAS), reversing this proposal's original 'zero-purchase 18-34' premise; only 18-24 still shows zero purchases",
-      "reasoning": "REVISED FINDING this pass (2026-09-23T06:50 UTC), materially changes the case for this proposal: fresh lifetime/last_14d age+gender breakdown on campaign 'Sora_BOF_Based on Mori_Tee' (id 120255928784210159, essentially all-time since the campaign is only ~4 days old) now shows the 25-34 male cell has a real attributed purchase_roas of 4.605841x on ₹1,156.77 spend -- this directly contradicts the proposal's original and repeatedly-reconfirmed premise ('25-34 combined, zero attributed purchases'). 35-44 male remains the standout cell (purchase_roas 28.928155x on ₹571.92 spend, small sample -- 4 lifetime purchases). Only the 18-24 combined cell (male ₹462.32 + female ₹86.82 + unknown ₹1.26 = ₹550.40) still shows zero attributed purchases (purchase_roas null) at meaningful spend. Recommendation for the human reviewer: the original action (raise age_min to 35, excluding both 18-24 AND 25-34) is no longer well-supported -- 25-34 is now a real, converting segment and should likely stay in scope. If narrowing at all, consider excluding only 18-24 (age_min → 25), not 18-34. Campaign remains young (~4 days) and small-sample (single-digit total purchases), so treat any narrowing as provisional. WhatsApp placement checked again this pass for both active campaigns and still does NOT meet the placement-optimization trigger on either (WhatsApp remains the cheapest placement on both).",
+      "reasoning": "Refreshed 2026-09-23 (last_14d age/gender breakdown on ad set 120255928784230159, Sora_Sales / campaign Sora_BOF_Based on Mori_Tee): the converting segment has shifted again since the prior pass (2026-09-22 ~20:49 UTC, which had 25-34 converting at 4.6x). This pass shows 35-44 male as the only converting cell -- 4 purchases, 22.87x ROAS on ₹490.43 spend. 25-34 male now shows ZERO purchases on ₹971.26 spend (the single largest-spend cell in the ad set) and 18-24 male also shows zero purchases on ₹398.73 spend. Total account-wide purchases on this ad set over the window are only ~4-5, so per-cell attribution is genuinely noisy at this sample size -- the segment that looks best has flipped between consecutive passes (25-34 -> 35-44) purely from a handful of orders landing in a different cell. Recommend waiting for more data before acting; flagging the volatility rather than proposing a concrete shift this pass.",
       "actionSummary": "REVISED: the original ask (raise targeting.age_min from 18 to 35) is likely too broad given 25-34 is now converting at 4.6x ROAS -- recommend the human reviewer either reject this proposal outright, or narrow the ask to excluding only 18-24 (targeting.age_min: 18 → 25) if they want to act on the still-zero-purchase 18-24 cell. Leave age_max (65), geo, placements, and excluded_custom_audiences unchanged either way.",
       "metaAction": {
         "tool": "ads_update_entity",
@@ -3236,7 +3236,7 @@
       "title": "KAGE_TOF_Sept 2026 CTR collapsed to 0.0387% -- roughly 50x below every comparable active campaign",
       "detail": "First trigger ever recorded for the threshold-alerts module (12). Fresh last_14d pull on campaign KAGE_TOF_Sept 2026 (id 120255704517630159, OUTCOME_AWARENESS, ad set 'KAGE' id 120255704517640159): CTR is 0.0387% on ₹471.61 spend -- compare to settings.metric_baselines.Kage_TOF (cpm 14.36, ctr 1.92, as_of 2026-08-29, the account's closest prior TOF baseline) and to every other currently-active campaign's CTR this pass (Tsuchi BOF 2.50%, Mori + Tee_Sales_0609 ~2.4%, Retargeting_31AUG 2.58%) -- roughly 50-65x lower than any comparable campaign or baseline. CPM is actually very cheap (₹2.76, far below the ₹14.36 baseline), so this isn't an auction-cost problem -- it's a near-total lack of clicks relative to impressions. This ties directly to the already-tracked anomaly on the same ad set (AL-242/AL-218: active_delivery_narrow_audience, estimated audience size stuck at 1,000-1,000, targeting a 3% lookalike of the repurposed ATC_180D audience with custom_audience relaxation disabled) -- an audience this narrow and this uniform is consistent with a creative/audience mismatch depressing engagement, not a measurement error (frequency is a healthy 1.008645, so it isn't simple overexposure either). No metaAction taken -- threshold-alerts is alert-only per the module table; the underlying narrow-audience anomaly already has an open recommendation (widen the lookalike or enable custom_audience relaxation) on AL-242 that would likely also address this CTR collapse. Reconfirmed 2026-09-12 ~22:47 UTC: KAGE_TOF_Sept 2026 CTR still 0.0387% on ₹471.61 last_14d spend (essentially unchanged), still roughly 50-65x below every comparable active campaign and the Kage_TOF baseline (1.92%). CPM remains cheap (₹2.76). No further movement, unresolved -- still worth a human creative/placement review given the extreme CTR gap despite very high impression volume (170,572). Reconfirmed 2026-09-13 ~02:51 UTC (ads_get_ad_entities, campaign 120255704517630159, last_14d): CTR still 0.0387%, spend now ₹471.61 (up from ₹427.xx), impressions 170,574, clicks 66 -- unchanged pattern, no recovery. CPM ₹2.76, consistent with an OUTCOME_AWARENESS objective buying cheap reach rather than clicks, but the CTR read remains anomalously low even for a TOF/awareness campaign relative to every other active campaign's 2.4-2.6% CTR. Unresolved. Reconfirmed 2026-09-13 ~08:47 UTC: CTR still 0.0387% on ₹471.61 last_14d spend, CPM still ₹2.76 -- numbers unchanged since the last several passes. Unresolved. Reconfirmed 2026-09-13 ~10:49 UTC: CTR still 0.0387% on ₹471.61 last_14d spend (unchanged), CPM still ₹2.76, impressions 170,574, clicks 66 -- unchanged since the last several passes. Unresolved. Reconfirmed 2026-09-13 ~22:52 UTC: CTR now 0.0426% (last_7d) on ₹608.04 spend, still roughly 45-60x below every comparable campaign and the Kage_TOF baseline (1.92%) -- unchanged conclusion, still the account's only truly ACTIVE campaign. Reconfirmed 2026-09-14 ~00:52 UTC: KAGE_TOF_Sept 2026 CTR is 0.0426% this pass (last_7d and last_14d both), essentially unchanged from the 0.0387%-0.0426% range seen since the collapse -- still roughly 50x below every comparable active campaign. Campaign remains ACTIVE (OUTCOME_AWARENESS) and spending (₹608.06 last_14d, ₹35.41 today). Reconfirmed 2026-09-14 ~02:49 UTC: KAGE_TOF_Sept 2026 CTR still 0.0426% (last_7d, ₹608.07 spend, 220,917 impressions, 94 clicks), essentially unchanged from the last pass -- still roughly 50x below every comparable campaign and the Kage_TOF baseline (1.92%). CPM ₹2.75, today's spend ₹42.66 (account today total ₹189.52, well under the ₹2,000 ceiling). Campaign remains the account's only ACTIVE campaign. Unresolved, no movement. Reconfirmed 2026-09-14 ~06:48 UTC: KAGE_TOF_Sept 2026 CTR is 0.0425% (last_7d), essentially unchanged, spend ₹608.09 last_14d / ₹94.26 today. Campaign remains ACTIVE. Unresolved, no movement.",
       "severity": "medium",
-      "dismissed": false,
+      "dismissed": true,
       "createdAt": "2026-09-12T20:47:00.000Z",
       "updatedAt": "2026-09-13T10:49:00.000Z"
     },
@@ -4463,7 +4463,7 @@
       "title": "MMA TOF's CTR has collapsed to 0.0594% -- roughly 35-40x below the other 3 active campaigns",
       "detail": "ads_get_ad_entities (campaign level, last_14d): MMA TOF (id 120255873268930159, OUTCOME_TRAFFIC) shows 392,427 impressions, 233 clicks, CTR 0.0594%, CPM ₹2.02 on ₹791.34 spend -- versus Retargeting_Overall 2.15%, TSUCHI BOF based on CAPS 2.29%, Mori + Tee_Sales_0609 2.22% over the same window. last_7d and last_30d figures for MMA TOF are identical to last_14d, meaning all its lifetime spend/impressions fall inside the last 14 days -- there is no older trailing-30d baseline to compare against, so this is a cross-campaign comparison rather than a within-campaign drift. See the paired anomaly-root-cause alert (AL-397) this pass for the likely driver.",
       "severity": "medium",
-      "dismissed": false,
+      "dismissed": true,
       "createdAt": "2026-09-20T02:53:00.000Z"
     },
     {
@@ -4553,7 +4553,7 @@
       "title": "MMA TOF's CTR remains collapsed at 0.0594% -- unchanged from last pass, still ~35-40x below the other 3 active campaigns",
       "detail": "Last_7d re-pull: MMA TOF ctr=0.0594%, cpm=₹2.02, ₹791.39 spent, 392,453 impressions / 233 clicks. Unchanged from the prior pass's finding (AL-396/AL-397, root-caused to the Instagram Reels placement carrying 89% of impressions). A-025 (placement-optimization proposal to remove 'reels' from this ad set's instagram_positions) remains pending -- no new alert needed beyond this confirmation, numbers have not moved materially.",
       "severity": "medium",
-      "dismissed": false,
+      "dismissed": true,
       "createdAt": "2026-09-20T04:50:00.000Z"
     },
     {
@@ -4625,7 +4625,7 @@
       "title": "MMA TOF's CTR remains collapsed at 0.0594% -- unchanged from prior passes, still ~35-40x below the other 3 active campaigns",
       "detail": "Last_14d re-pull: MMA TOF ctr=0.0594%, cpm=₹2.02, ₹791.39 spent, 392,458 impressions / 233 clicks -- byte-identical to the prior pass's figures (AL-396/AL-406), root-caused to the Instagram Reels placement carrying 89% of impressions (AL-397). A-025 (placement-optimization proposal to remove 'reels' from this ad set's instagram_positions) remains pending -- no material change, confirmation only.",
       "severity": "medium",
-      "dismissed": false,
+      "dismissed": true,
       "createdAt": "2026-09-20T06:48:00.000Z"
     },
     {
@@ -4679,7 +4679,7 @@
       "title": "MMA TOF's CTR remains collapsed at 0.0594% -- unchanged from prior passes, still ~35-40x below the other 3 active campaigns",
       "detail": "last_14d re-pull this pass: MMA TOF CTR 0.0594% (CPM ₹2.02, CPC ₹3.40, spend ₹791.39) vs. Retargeting_Overall 2.15%, TSUCHI BOF based on CAPS 2.29%, Mori + Tee_Sales_0609 2.22%. Numbers unchanged from the prior ~06:48 UTC pass -- already tracked by pending proposal A-025 (placement-optimization, Instagram Reels 89% of impressions). No new alert/proposal needed, numbers reconfirmed only.",
       "severity": "medium",
-      "dismissed": false,
+      "dismissed": true,
       "createdAt": "2026-09-20T08:48:00.000Z"
     },
     {
@@ -4742,7 +4742,7 @@
       "title": "MMA TOF's CTR remains collapsed at 0.0594% -- unchanged from prior passes, still ~35-40x below the other 3 active campaigns",
       "detail": "Live campaign-level pull this pass: MMA TOF CTR 0.0594% (CPM ₹2.02, CPC ₹3.40) vs. Retargeting_Overall 2.15%, TSUCHI BOF based on CAPS 2.29%, Mori + Tee_Sales_0609 2.22-3.97% across its active ads. See open proposal A-025 (placement-optimization) for the Reels-placement root cause already on file -- link-click cost (~₹5.69) is not obviously broken for a Traffic objective, so this remains a monitor-only alert pending human review of A-025, not an auto-pause trigger.",
       "severity": "medium",
-      "dismissed": false,
+      "dismissed": true,
       "createdAt": "2026-09-20T10:47:00.000Z"
     },
     {
@@ -5907,6 +5907,69 @@
       "severity": "low",
       "dismissed": false,
       "createdAt": "2026-09-23T08:47:00.000Z"
+    },
+    {
+      "id": "AL-557",
+      "module": "threshold-alerts",
+      "title": "MMA TOF / KAGE_TOF_Sept 2026 CTR-collapse alerts resolved -- both campaigns now PAUSED",
+      "detail": "AL-260 (KAGE_TOF_Sept 2026) and AL-396/406/414/420/427 (MMA TOF) dismissed this pass. Both campaigns are confirmed PAUSED via ads_get_ad_entities (effective_status=PAUSED), so the CTR-collapse condition that triggered them is no longer live. Corresponding proposal A-025 (MMA TOF placement review) marked STALE for the same reason.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-09-23T10:50:00.000Z"
+    },
+    {
+      "id": "AL-558",
+      "module": "pixel-health",
+      "title": "Pixel match quality remains healthy -- every tracked event still above threshold",
+      "detail": "ads_get_dataset_quality on dataset 833131719490535 this pass (~10:50 UTC): composite EMQ scores -- Purchase 8.8/10, prepaid_purchase 8.8/10, cod_purchase 7.5/10, AddPaymentInfo 9.1/10, InitiateCheckout 6.6/10, AddToCart/PageView/ViewContent/Search/SubscribedButtonClick all 6.1/10. All at or above settings.pixel_quality_min_match_rate (0.6 == 6.0/10). ROAS-driven modules not suppressed this pass.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-09-23T10:50:00.000Z"
+    },
+    {
+      "id": "AL-559",
+      "module": "competitor-rescrape",
+      "title": "Gully Labs / Lotto Sport India combined active-ad count moved 257 -> 260 (+1.17%)",
+      "detail": "ads_library_search combined page_ids query (107479854297817 / 426015150606378, ad_active_status=ACTIVE) returned estimated_total_count=260, up from 257 at the prior 08:47 UTC pass -- +1.17%, well under the 20% alert threshold, no alert-worthy movement per de-dup rules.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-09-23T10:50:00.000Z"
+    },
+    {
+      "id": "AL-560",
+      "module": "campaign-consolidation-watch",
+      "title": "No consolidation flag -- the only two active campaigns target distinct funnel stages/audiences",
+      "detail": "Active campaigns: Sora_BOF_Based on Mori_Tee (OUTCOME_SALES, BOF retargeting-flavored prospecting) and SORA_TOF (OUTCOME_TRAFFIC, top-of-funnel). Different objectives and funnel stages -- no duplicate-targeting candidate this pass.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-09-23T10:50:00.000Z"
+    },
+    {
+      "id": "AL-561",
+      "module": "anomaly",
+      "title": "No anomaly signals found this pass",
+      "detail": "ads_insights_anomaly_signal (account-wide): 'No anomaly signal issues found in the analyzed ad sets. Checked for auction overlap, creative fatigue, and narrow audience.' The earlier open anomaly (AL from 2026-09-14, KAGE ad set narrow-audience) is moot -- that campaign has been long PAUSED.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-09-23T10:50:00.000Z"
+    },
+    {
+      "id": "AL-562",
+      "module": "self-audit-check",
+      "title": "Live numbers reconfirmed sane; dashboard static snapshot remains stale",
+      "detail": "Today's account spend ₹616.22 (well under the ₹2,750 hard_spend_ceiling_inr). Active campaigns' live ROAS (Sora_BOF_Based on Mori_Tee 4.96x 14d, Website_View_Population etc. all PAUSED) internally consistent with prior passes -- no drift beyond ordinary day-to-day movement. index.html's static DATA/INSIGHTS_DATA snapshot remains dated from mid-September and was not refreshed this pass (routine does not currently rewrite the dashboard snapshot automatically).",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-09-23T10:50:00.000Z"
+    },
+    {
+      "id": "AL-563",
+      "module": "routine-run-notes",
+      "title": "Run summary -- 2026-09-23 ~10:50 UTC pass",
+      "detail": "Circuit breaker check: today's spend ₹616.22 vs ₹2,750 ceiling -- not tripped this run. Existing circuitBreaker.tripped=true from 2026-09-12 remains unresolved (A-017 still pending human decision), unchanged. Pixel gate: healthy, ROAS modules not suppressed. Auto-tier: purchaser-exclusion compliant (both active ad sets already exclude Purchasers 180D), lookalike-refresh not due (LAL 8 days old, source audience unchanged at ~20), hook-angle-tagging nothing new to tag (all 9 active/recently-active ads already tagged). No auto-tier mutations executed this pass. Approval-tier: refreshed reasoning on A-010, A-018, A-019, A-021, A-025, A-030 to reflect current campaign/ad-set state (several referenced campaigns are now PAUSED, making budget/dayparting/placement proposals against them moot until reactivated); dismissed 6 resolved threshold-alerts (MMA TOF / KAGE_TOF_Sept CTR collapse, both campaigns now paused). No new proposals created. Only 2 campaigns active account-wide.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-09-23T10:50:00.000Z"
     }
   ],
   "log": [
