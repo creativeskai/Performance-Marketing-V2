@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-24T02:46:00.000Z",
+  "generatedAt": "2026-09-24T04:46:00.000Z",
   "settings": {
     "kill_roas_threshold": "pause if ROAS < 1.0x after ₹500 spend on a sales-objective campaign",
     "reactivate_min_historic_roas": "surface for reactivation if a paused campaign's last active-period ROAS >= 3.0x",
@@ -26,8 +26,8 @@
     "competitor_last_scrape": {
       "gully_labs_active_ads": null,
       "lotto_sport_india_active_ads": null,
-      "scraped_at": "2026-09-24T02:46:00.000Z",
-      "note": "2026-09-24T02:46:00.000Z scheduled run: ads_library_search combined page_ids query (107479854297817 / 426015150606378, ad_active_status=ACTIVE, no country filter) returned estimated_total_count=293, moved from 292 (prior 2026-09-24T00:15 UTC pass) -- +0.34%, well under the 20% alert threshold. Combined-query-only pass (individual per-page counts not independently re-verified this pass, carried forward unchanged from the last per-page split of 210 / 106)."
+      "scraped_at": "2026-09-24T04:46:00.000Z",
+      "note": "2026-09-24T04:46:00.000Z scheduled run: ads_library_search combined page_ids query (107479854297817 / 426015150606378, ad_active_status=ACTIVE, no country filter) returned estimated_total_count=294, moved from 293 (prior 2026-09-24T02:46 UTC pass) -- +0.34%, well under the 20% alert threshold. Combined-query-only pass (individual per-page counts not independently re-verified this pass, carried forward unchanged from the last per-page split of 210 / 106)."
     },
     "audience_label_corrections": {
       "120249907176770159": "ATC_180D -- NOT a purchaser audience (cart-adders, event=AddToCart, retention 180 days). Verified 2026-09-14, reconfirmed 2026-09-20. Superseded note: earlier passes said the account had NO purchaser audience at all -- that's now out of date. See the 120255823280550159 (Purchasers 180D) entry above, created 2026-09-15, which IS a genuine purchaser audience and is already in use for exclusion + lookalike.",
@@ -851,7 +851,7 @@
       "module": "pause-kill",
       "tier": "approval",
       "title": "Pause Sora_BOF_Based on Mori_Tee -- STALE: campaign has real purchases at 4.51x lifetime ROAS, kill trigger does not apply",
-      "reasoning": "STALE (unchanged verdict): Sora_BOF_Based on Mori_Tee remains ACTIVE and healthy -- last_14d spend ₹3,405.96, purchase_roas 8.809378x (up from ₹2,260.84 / 4.96x at the prior 2026-09-21 check -- spend and ROAS have both climbed as more orders land), well above the ₹500 kill_roas_threshold spend floor and comfortably above the 1.0x pause bar. The pause-kill trigger does not apply. Recommend reject/close.",
+      "reasoning": "STALE (unchanged verdict): Sora_BOF_Based on Mori_Tee remains ACTIVE and healthy -- last_14d spend ₹3,406.16, purchase_roas 8.808861x (up marginally from ₹3,405.96 / 8.809378x at the prior 2026-09-23T22:48 check -- essentially flat, both spend and ROAS holding steady), well above the ₹500 kill_roas_threshold spend floor and comfortably above the 1.0x pause bar. The pause-kill trigger does not apply. Recommend reject/close.",
       "actionSummary": "Pauses the Sora_BOF_Based on Mori_Tee campaign (id 120255928784210159).",
       "metaAction": {
         "tool": "ads_update_entity",
@@ -864,15 +864,15 @@
       },
       "status": "pending",
       "createdAt": "2026-09-21T10:47:00.000Z",
-      "lastCheckedAt": "2026-09-23T22:48:00.000Z",
-      "updatedAt": "2026-09-23T22:48:00.000Z"
+      "lastCheckedAt": "2026-09-24T04:46:00.000Z",
+      "updatedAt": "2026-09-24T04:46:00.000Z"
     },
     {
       "id": "A-030",
       "module": "age-gender-auto-shift",
       "tier": "approval",
       "title": "Exclude 18-24 from Sora_Sales (Sora_BOF_Based on Mori_Tee) -- zero purchases on ₹698 spend across 4 passes, 25-34/35-44 both converting well",
-      "reasoning": "Refreshed 2026-09-23T22:48 UTC (last_14d age/gender breakdown on ad set 120255928784230159, Sora_Sales / campaign Sora_BOF_Based on Mori_Tee): 25-34 male continues converting well (₹1,515.78 spend, 7.03x ROAS) and 35-44 male even more so (₹683.22 spend, 28.32x ROAS) -- both essentially unchanged from the prior pass (₹1,515.37/7.03x and ₹682.40/28.35x). 18-24 (male+female+unknown combined, ₹698.22 spend) still shows ZERO purchases across every pass so far -- now stable across four consecutive passes on rising spend. 25-34 and 35-44 should stay in; only 18-24 is a consistently zero-purchase segment.",
+      "reasoning": "Refreshed 2026-09-24T04:46 UTC (last_14d age/gender breakdown on ad set 120255928784230159, Sora_Sales / campaign Sora_BOF_Based on Mori_Tee): 25-34 male continues converting well (₹1,515.92 spend, 7.03x ROAS) and 35-44 male even more so (₹683.23 spend, 28.32x ROAS) -- both essentially unchanged from the prior pass (₹1,515.78/7.03x and ₹683.22/28.32x). 18-24 (male+female+unknown combined, ₹698.27 spend: ₹584.66 male + ₹107.68 female + ₹5.93 unknown) still shows ZERO purchases across every pass so far -- now stable across five consecutive passes on rising spend. 25-34 and 35-44 should stay in; only 18-24 is a consistently zero-purchase segment.",
       "actionSummary": "Narrow targeting by excluding just the 18-24 age band (targeting.age_min: 18 -> 25) -- 25-34 and 35-44 are both actively converting and should stay in. Leave age_max (65), geo, placements, and excluded_custom_audiences unchanged.",
       "metaAction": {
         "tool": "ads_update_entity",
@@ -888,8 +888,8 @@
       },
       "status": "pending",
       "createdAt": "2026-09-22T20:49:00.000Z",
-      "updatedAt": "2026-09-23T22:48:00.000Z",
-      "lastCheckedAt": "2026-09-23T22:48:00.000Z"
+      "updatedAt": "2026-09-24T04:46:00.000Z",
+      "lastCheckedAt": "2026-09-24T04:46:00.000Z"
     },
     {
       "id": "A-031",
@@ -923,7 +923,7 @@
       "module": "placement-optimization",
       "tier": "approval",
       "title": "Exclude WhatsApp placement from Sora_Sales (Sora_BOF_Based on Mori_Tee)",
-      "reasoning": "Sora_Sales ad set (id 120255928784230159, under active OUTCOME_SALES campaign Sora_BOF_Based on Mori_Tee, id 120255928784210159) last_14d: combined WhatsApp placement (status + marketing_messages) spend Rs47.29 across 2,473 impressions, 0 attributed purchases, vs. the campaign's converting placements -- instagram_stories (Rs164.56 CPM, 18.36x ROAS), instagram_reels (Rs76.90 CPM, 10.93x ROAS). Campaign-wide ROAS is 8.81x on Rs3,406.06 last_14d spend, so the WhatsApp share is small (~1.4%) but converts at 0x -- same non-converting-WhatsApp pattern already flagged and pending on 5 other campaigns in this account (A-014, A-022, A-026, and others). SORA_TOF (the sibling TOF/traffic ad set) also spent on WhatsApp (Rs5.93 of Rs755.51 total, <1%) but that campaign optimizes for traffic, not purchases, and the dollar amount is too small to act on -- no proposal written for it this pass.",
+      "reasoning": "Refreshed 2026-09-24T04:46 UTC. Sora_Sales ad set (id 120255928784230159, under active OUTCOME_SALES campaign Sora_BOF_Based on Mori_Tee, id 120255928784210159) last_14d: combined WhatsApp placement (status ₹37.44 + marketing_messages ₹9.85 = ₹47.29) across 2,473 impressions, 0 attributed purchases, vs. the campaign's converting placements -- instagram_stories (₹164.53 CPM, 18.35x ROAS), instagram_reels (₹76.90 CPM, 10.93x ROAS). Campaign-wide ROAS is 8.81x on ₹3,406.16 last_14d spend, so the WhatsApp share is small (~1.4%) but converts at 0x, unchanged from the prior pass -- same non-converting-WhatsApp pattern already flagged and pending on 5 other campaigns in this account (A-014, A-022, A-026, and others). SORA_TOF (the sibling TOF/traffic ad set) also spent on WhatsApp (₹5.93 of ₹755.52 total, <1%) but that campaign optimizes for traffic, not purchases, and the dollar amount is too small to act on -- no proposal written for it this pass.",
       "actionSummary": "Add an explicit targeting.publisher_platforms list on the 'Sora_Sales' ad set covering every currently-effective platform except 'whatsapp' (facebook, instagram, audience_network, threads); leave every other targeting parameter (age/gender, 12-city geo targeting, excluded custom audiences ATC_180D + Purchasers 180D) unchanged.",
       "metaAction": {
         "tool": "ads_update_entity",
@@ -941,7 +941,9 @@
         ]
       },
       "status": "pending",
-      "createdAt": "2026-09-24T00:15:00.000Z"
+      "createdAt": "2026-09-24T00:15:00.000Z",
+      "lastCheckedAt": "2026-09-24T04:46:00.000Z",
+      "updatedAt": "2026-09-24T04:46:00.000Z"
     }
   ],
   "alerts": [
