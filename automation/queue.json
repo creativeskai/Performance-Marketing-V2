@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-23T22:48:00.000Z",
+  "generatedAt": "2026-09-24T00:15:00.000Z",
   "settings": {
     "kill_roas_threshold": "pause if ROAS < 1.0x after ₹500 spend on a sales-objective campaign",
     "reactivate_min_historic_roas": "surface for reactivation if a paused campaign's last active-period ROAS >= 3.0x",
@@ -26,8 +26,8 @@
     "competitor_last_scrape": {
       "gully_labs_active_ads": null,
       "lotto_sport_india_active_ads": null,
-      "scraped_at": "2026-09-23T20:46:00.000Z",
-      "note": "2026-09-23T20:46:00.000Z scheduled run: ads_library_search combined page_ids query (107479854297817 / 426015150606378, ad_active_status=ACTIVE, no country filter) returned estimated_total_count=286, moved from 279 (prior 2026-09-23T18:50 UTC pass) -- +2.51%, well under the 20% alert threshold. Combined-query-only pass (individual per-page counts not independently re-verified this pass, carried forward unchanged from the last per-page split of 210 / 106)."
+      "scraped_at": "2026-09-24T00:15:00.000Z",
+      "note": "2026-09-24T00:15:00.000Z scheduled run: ads_library_search combined page_ids query (107479854297817 / 426015150606378, ad_active_status=ACTIVE, no country filter) returned estimated_total_count=292, moved from 286 (prior 2026-09-23T20:46 UTC pass) -- +2.10%, well under the 20% alert threshold. Combined-query-only pass (individual per-page counts not independently re-verified this pass, carried forward unchanged from the last per-page split of 210 / 106)."
     },
     "audience_label_corrections": {
       "120249907176770159": "ATC_180D -- NOT a purchaser audience (cart-adders, event=AddToCart, retention 180 days). Verified 2026-09-14, reconfirmed 2026-09-20. Superseded note: earlier passes said the account had NO purchaser audience at all -- that's now out of date. See the 120255823280550159 (Purchasers 180D) entry above, created 2026-09-15, which IS a genuine purchaser audience and is already in use for exclusion + lookalike.",
@@ -917,6 +917,31 @@
       },
       "status": "pending",
       "createdAt": "2026-09-23T18:50:00.000Z"
+    },
+    {
+      "id": "A-032",
+      "module": "placement-optimization",
+      "tier": "approval",
+      "title": "Exclude WhatsApp placement from Sora_Sales (Sora_BOF_Based on Mori_Tee)",
+      "reasoning": "Sora_Sales ad set (id 120255928784230159, under active OUTCOME_SALES campaign Sora_BOF_Based on Mori_Tee, id 120255928784210159) last_14d: combined WhatsApp placement (status + marketing_messages) spend Rs47.29 across 2,473 impressions, 0 attributed purchases, vs. the campaign's converting placements -- instagram_stories (Rs164.56 CPM, 18.36x ROAS), instagram_reels (Rs76.90 CPM, 10.93x ROAS). Campaign-wide ROAS is 8.81x on Rs3,406.06 last_14d spend, so the WhatsApp share is small (~1.4%) but converts at 0x -- same non-converting-WhatsApp pattern already flagged and pending on 5 other campaigns in this account (A-014, A-022, A-026, and others). SORA_TOF (the sibling TOF/traffic ad set) also spent on WhatsApp (Rs5.93 of Rs755.51 total, <1%) but that campaign optimizes for traffic, not purchases, and the dollar amount is too small to act on -- no proposal written for it this pass.",
+      "actionSummary": "Add an explicit targeting.publisher_platforms list on the 'Sora_Sales' ad set covering every currently-effective platform except 'whatsapp' (facebook, instagram, audience_network, threads); leave every other targeting parameter (age/gender, 12-city geo targeting, excluded custom audiences ATC_180D + Purchasers 180D) unchanged.",
+      "metaAction": {
+        "tool": "ads_update_entity",
+        "params": {
+          "ad_account_id": "704523148804803",
+          "entity_id": "120255928784230159",
+          "entity_type": "ad_set",
+          "field": "targeting",
+          "note": "remove 'whatsapp' from effective_publisher_platforms by setting an explicit targeting.publisher_platforms list (facebook, instagram, audience_network, threads); leave every other targeting parameter unchanged"
+        }
+      },
+      "targetingDelta": {
+        "remove_publisher_platforms": [
+          "whatsapp"
+        ]
+      },
+      "status": "pending",
+      "createdAt": "2026-09-24T00:15:00.000Z"
     }
   ],
   "alerts": [
@@ -6288,6 +6313,60 @@
       "severity": "low",
       "dismissed": false,
       "createdAt": "2026-09-23T22:48:00.000Z"
+    },
+    {
+      "id": "AL-596",
+      "module": "pixel-health",
+      "title": "Pixel match quality remains healthy -- every tracked event still above threshold",
+      "detail": "ads_get_dataset_quality on pixel 833131719490535: composite Event Match Quality scores range 6.1-8.8/10 across all tracked web events (AddToCart, InitiateCheckout, PageView, ViewContent, AddPaymentInfo, Search, Purchase, cod_purchase, prepaid_purchase), all comfortably above the settings.pixel_quality_min_match_rate (0.6) gate -- ROAS-driven modules were NOT suppressed this pass.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-09-24T00:15:00.000Z"
+    },
+    {
+      "id": "AL-597",
+      "module": "anomaly",
+      "title": "No anomaly signals found this pass",
+      "detail": "ads_insights_anomaly_signal (account-wide) checked for auction overlap, creative fatigue, and narrow audience -- no issues found.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-09-24T00:15:00.000Z"
+    },
+    {
+      "id": "AL-598",
+      "module": "competitor-rescrape",
+      "title": "Gully Labs / Lotto Sport India combined active-ad count moved 286 -> 292 (+2.10%)",
+      "detail": "ads_library_search combined page_ids query, ad_active_status=ACTIVE, no country filter: estimated_total_count=292, up from 286 at the 2026-09-23T20:46 UTC pass -- well under the 20% alert threshold. See settings.competitor_last_scrape for the running note.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-09-24T00:15:00.000Z"
+    },
+    {
+      "id": "AL-599",
+      "module": "campaign-consolidation-watch",
+      "title": "No consolidation flag -- the only two active campaigns target distinct funnel stages/audiences",
+      "detail": "Active campaigns: SORA_TOF (OUTCOME_TRAFFIC, broad IN prospecting, top-of-funnel) and Sora_BOF_Based on Mori_Tee (OUTCOME_SALES, 12-city targeted, excludes ATC_180D + Purchasers 180D, bottom-of-funnel). Different objectives and audiences -- no duplicate-targeting overlap.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-09-24T00:15:00.000Z"
+    },
+    {
+      "id": "AL-600",
+      "module": "self-audit-check",
+      "title": "Live numbers reconfirmed sane; dashboard static snapshot remains stale",
+      "detail": "index.html's DATA object is still a static snapshot dated 2026-09-13 (today/last7/last14/last30 blocks). Live ads_get_ad_entities pulls this pass (account today spend Rs218.14, campaign-level last_14d for the 2 active campaigns) are internally consistent and sane, but do not match the baked-in DATA snapshot -- this drift is expected and already known/accepted (see prior self-audit-check alerts); INSIGHTS_DATA's placements/devices/ageGender/hourly blocks are fetched live client-side so are unaffected. KPI-to-trigger completeness: every dashboard metric checked this pass (spend, ROAS, purchases, CPM/CTR, placement, age/gender, pixel match quality) maps to an existing module in ROUTINE.md -- no gaps found.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-09-24T00:15:00.000Z"
+    },
+    {
+      "id": "AL-601",
+      "module": "routine-run-notes",
+      "title": "Run summary -- 2026-09-24 ~00:15 UTC pass",
+      "detail": "purchaser-exclusion: both active ad sets (SORA_TOF id 120255786838760159, Sora_Sales id 120255928784230159) already exclude 'Purchasers 180D' (120255823280550159) -- compliant, no action. lookalike-refresh: source purchaser audience unchanged at size~20, still 9 days old (created 2026-09-15), under the 14-day refresh threshold -- no action. hook-angle-tagging: all 3 creatives on active/recently-active ads (1059775456834345, 1410368037712890, 1632325644922413) already present in creativeTags -- no untagged creatives found, no action. hard-spend-circuit-breaker: today's account spend Rs218.14 vs Rs2,750 ceiling -- not breached this pass. The pre-existing 2026-09-12 trip remains unresolved (A-017 still pending human review) -- correctly not auto-resumed.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-09-24T00:15:00.000Z"
     }
   ],
   "log": [
