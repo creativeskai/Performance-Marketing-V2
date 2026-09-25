@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-25T12:48:00.000Z",
+  "generatedAt": "2026-09-25T14:46:00.000Z",
   "settings": {
     "kill_roas_threshold": "pause if ROAS < 1.0x after ₹500 spend on a sales-objective campaign",
     "reactivate_min_historic_roas": "surface for reactivation if a paused campaign's last active-period ROAS >= 3.0x",
@@ -26,8 +26,8 @@
     "competitor_last_scrape": {
       "gully_labs_active_ads": null,
       "lotto_sport_india_active_ads": null,
-      "scraped_at": "2026-09-25T10:46:00.000Z",
-      "note": "2026-09-25T10:46:00.000Z scheduled run: ads_library_search combined page_ids query (107479854297817 / 426015150606378, ad_active_status=ACTIVE, no country filter) returned estimated_total_count=318, up from 316 at the prior ~08:51 UTC pass (+2, +0.6%). Well under the 20% alert threshold."
+      "scraped_at": "2026-09-25T14:46:00.000Z",
+      "note": "2026-09-25T14:46:00.000Z scheduled run: ads_library_search combined page_ids query (107479854297817 / 426015150606378, ad_active_status=ACTIVE, no country filter) returned estimated_total_count=319, unchanged from 319 at the prior ~12:48 UTC pass. Well under the 20% alert threshold."
     },
     "audience_label_corrections": {
       "120249907176770159": "ATC_180D -- NOT a purchaser audience (cart-adders, event=AddToCart, retention 180 days). Verified 2026-09-14, reconfirmed 2026-09-20. Superseded note: earlier passes said the account had NO purchaser audience at all -- that's now out of date. See the 120255823280550159 (Purchasers 180D) entry above, created 2026-09-15, which IS a genuine purchaser audience and is already in use for exclusion + lookalike.",
@@ -1003,7 +1003,7 @@
       "module": "engagement-tier-segmentation",
       "tier": "approval",
       "title": "Split Sora_Retargeting_Behaviours's mixed-intent audience -- give checkout/payment abandoners their own ad set",
-      "reasoning": "New ad set 'Sora_Retargeting_Behaviours' (id 120256004517420159, under active campaign 'Sora Retargeting' id 120256004515360159, created 2026-09-24) combines 10 custom audiences spanning every intent depth into a single OR'd inclusion list on one ad set with one ₹300/day campaign budget: broad site visitors (Website_All_30D, Page_View_180D, ViewContent_180D, Search_Customers), mid-intent (ATC_180D listed twice, ATC_NoPurchase_30D), and high-intent checkout-stage (Initiate_Checkout, IC_NoPurchase_30D, Add_Payment_Info). All tiers currently share the same bid/budget, so a payment-info abandoner and a 180-day page viewer compete for the same delivery. Structural match for engagement-tier-segmentation -- account only has ₹118.28 total spend and 1 purchase (23.707727x ROAS) on this ad set so far, too early to know which tier is actually driving conversions, which is exactly the ambiguity this split would resolve.",
+      "reasoning": "New ad set 'Sora_Retargeting_Behaviours' (id 120256004517420159, under active campaign 'Sora Retargeting' id 120256004515360159, created 2026-09-24) combines 10 custom audiences spanning every intent depth into a single OR'd inclusion list on one ad set with one ₹300/day campaign budget: broad site visitors (Website_All_30D, Page_View_180D, ViewContent_180D, Search_Customers), mid-intent (ATC_180D listed twice, ATC_NoPurchase_30D), and high-intent checkout-stage (Initiate_Checkout, IC_NoPurchase_30D, Add_Payment_Info). All tiers currently share the same bid/budget, so a payment-info abandoner and a 180-day page viewer compete for the same delivery. Structural match for engagement-tier-segmentation -- account only has ₹118.28 total spend and 1 purchase (23.707727x ROAS) on this ad set so far, too early to know which tier is actually driving conversions, which is exactly the ambiguity this split would resolve. UPDATE 2026-09-25 ~14:46 UTC pass: a human has since created a new 'Sora_Retargeting_CartAbandoners_30D' ad set (2026-09-25) under this same campaign, targeting exactly the checkout/payment-abandoner audiences (ATC_NoPurchase_30D, IC_NoPurchase_30D, Add_Payment_Info) this proposal recommended splitting out. This converges with, but does not fully replace, this proposal's intent -- the original 'Sora_Retargeting_Behaviours' ad set still runs its full mixed-intent audience unchanged (view/ATC/checkout/search/page-view all in one ad set with a single bid/budget). Left pending for a human to decide whether Behaviours' broader audiences should now be trimmed given the dedicated abandoner ad set exists.",
       "actionSummary": "Creates a new PAUSED ad set under the same 'Sora Retargeting' campaign, targeting only the two highest-intent audiences (Initiate_Checkout id 120254260398310159 + Add_Payment_Info id 120255846181320159) with its own ₹150/day test budget, plus a new PAUSED ad reusing the existing 'Sora_Retargeting' creative (id 1059775456834345). Approving does not start spending -- both the ad set and the ad need a manual activate after review. Leaves the original ad set's broader targeting untouched.",
       "metaAction": {
         "tool": "ads_create_ad_set",
@@ -1102,6 +1102,52 @@
       },
       "status": "pending",
       "createdAt": "2026-09-25T10:46:00.000Z"
+    },
+    {
+      "id": "A-037",
+      "module": "placement-optimization",
+      "tier": "approval",
+      "title": "Exclude WhatsApp placement from Sora_Retargeting_CartAbandoners_30D",
+      "reasoning": "New ad set (created 2026-09-25, under active campaign 'Sora Retargeting') includes whatsapp-status and whatsapp-marketing-messages placements in its effective_publisher_platforms/whatsapp_positions, same as every other ad set in this account -- WhatsApp placement has consistently been flagged account-wide as low-quality delivery worth excluding (see A-005/013/014/022/026/032/033/034). This ad set targets checkout/payment abandoners specifically (ATC_NoPurchase_30D, IC_NoPurchase_30D, Add_Payment_Info inclusion audiences), a high-intent retargeting segment where placement quality matters more, not less.",
+      "actionSummary": "Remove whatsapp from the ad set's publisher_platforms so it no longer serves on WhatsApp Status/marketing messages; all other targeting (age, geo, inclusion/exclusion audiences) stays unchanged.",
+      "metaAction": {
+        "tool": "ads_update_entity",
+        "params": {
+          "ad_account_id": "704523148804803",
+          "entity_id": "120256023374230159",
+          "entity_type": "ad_set"
+        }
+      },
+      "targetingDelta": {
+        "remove_publisher_platforms": [
+          "whatsapp"
+        ]
+      },
+      "status": "pending",
+      "createdAt": "2026-09-25T14:46:00.000Z"
+    },
+    {
+      "id": "A-038",
+      "module": "placement-optimization",
+      "tier": "approval",
+      "title": "Exclude WhatsApp placement from Caps + Kage_26Sept",
+      "reasoning": "New ad set (created 2026-09-25, campaign 'Caps + Kage_26 Sept') includes whatsapp-status and whatsapp-marketing-messages placements, same pattern flagged account-wide on every other ad set (see A-005/013/014/022/026/032/033/034/037). Note: this ad set was force-paused this same pass by the purchaser-exclusion auto-module (see high-severity alert) -- this placement fix is queued for whenever a human reactivates it.",
+      "actionSummary": "Remove whatsapp from the ad set's publisher_platforms so it does not serve on WhatsApp Status/marketing messages once reactivated; all other targeting stays unchanged.",
+      "metaAction": {
+        "tool": "ads_update_entity",
+        "params": {
+          "ad_account_id": "704523148804803",
+          "entity_id": "120255693970460159",
+          "entity_type": "ad_set"
+        }
+      },
+      "targetingDelta": {
+        "remove_publisher_platforms": [
+          "whatsapp"
+        ]
+      },
+      "status": "pending",
+      "createdAt": "2026-09-25T14:46:00.000Z"
     }
   ],
   "alerts": [
@@ -7598,6 +7644,87 @@
       "severity": "low",
       "dismissed": false,
       "createdAt": "2026-09-25T12:48:00.000Z"
+    },
+    {
+      "id": "AL-721",
+      "module": "threshold-alerts",
+      "title": "No CPM/CTR/CPC threshold breaches -- no baselines for the 2 currently active campaigns",
+      "detail": "settings.metric_baselines only has historical baselines for Kage_sales_1908 and Kage_TOF (both long paused). The 2 currently active campaigns (SORA_TOF, Sora Retargeting) and the newly-created Caps + Kage_26 Sept (now paused, see high-severity alert this pass) have no trailing-30d baseline to compare 7d numbers against yet.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-09-25T14:46:00.000Z"
+    },
+    {
+      "id": "AL-722",
+      "module": "anomaly",
+      "title": "No anomaly signals found this pass",
+      "detail": "ads_insights_anomaly_signal checked for auction overlap, creative fatigue, and narrow audience account-wide -- no issues flagged.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-09-25T14:46:00.000Z"
+    },
+    {
+      "id": "AL-723",
+      "module": "learning-phase-stuck",
+      "title": "No ad sets stuck in learning",
+      "detail": "All currently active/recently-created ad sets (SORA_TOF, Sora_Retargeting_Behaviours, Sora_Retargeting_CartAbandoners_30D, Caps + Kage_26Sept) were created within the last 6 days -- none show signs of being stuck in learning past 7 days.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-09-25T14:46:00.000Z"
+    },
+    {
+      "id": "AL-724",
+      "module": "pixel-health",
+      "title": "Pixel match quality remains healthy",
+      "detail": "ads_get_dataset_quality on dataset 833131719490535: Purchase composite_score 7.5 (email/phone/ip/user_agent/zip/country/fn all at or near 100% coverage), AddToCart 6.1, InitiateCheckout 7.0, AddPaymentInfo 7.6, cod_purchase 7.5. Consistent with prior passes -- no ROAS-decision suppression triggered this run.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-09-25T14:46:00.000Z"
+    },
+    {
+      "id": "AL-725",
+      "module": "campaign-consolidation-watch",
+      "title": "No consolidation flag -- 2 active campaigns target distinct funnel stages",
+      "detail": "SORA_TOF (OUTCOME_TRAFFIC, broad interest/behavior prospecting) and Sora Retargeting (OUTCOME_SALES, cart/checkout/payment abandoner retargeting) serve different funnel stages for the same product line -- no duplicate-targeting flag. The 3rd campaign seen this pass, Caps + Kage_26 Sept, was force-paused mid-pass by the purchaser-exclusion auto-module (see high-severity alert) and is no longer active.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-09-25T14:46:00.000Z"
+    },
+    {
+      "id": "AL-726",
+      "module": "self-audit-check",
+      "title": "Live numbers reconfirmed sane; dashboard static snapshot remains stale",
+      "detail": "Live pull this pass: account today spend ₹1,001.10 (well under the ₹2,750 hard ceiling), 2 active campaigns (SORA_TOF last_14d ROAS 1.67x, Sora Retargeting last_14d ROAS 23.7x). No drift beyond what's already flagged in prior passes' self-audit alerts. index.html's static DATA/INSIGHTS_DATA snapshot was not regenerated this pass -- same known staleness as every prior pass.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-09-25T14:46:00.000Z"
+    },
+    {
+      "id": "AL-727",
+      "module": "competitor-rescrape",
+      "title": "Gully Labs / Lotto Sport India combined active-ad count unchanged at 319",
+      "detail": "ads_library_search combined page_ids query (107479854297817 / 426015150606378, ad_active_status=ACTIVE, no country filter) returned estimated_total_count=319, same as the prior ~12:48 UTC pass (319). No change, well under the 20% alert threshold.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-09-25T14:46:00.000Z"
+    },
+    {
+      "id": "AL-728",
+      "module": "purchaser-exclusion",
+      "title": "Caps + Kage_26 Sept force-paused as a purchaser-exclusion side effect, ~1.3 hours after going live",
+      "detail": "This campaign/ad set was created by a human at 2026-09-25T18:58 IST and was ACTIVE at the start of this pass. The purchaser-exclusion auto-module found it had no purchaser-audience exclusion at all and added 'Purchasers 180D' to its targeting -- Meta's API forced the ad set to PAUSED as a side effect of that targeting edit (status_forced_to_paused=true), the same recurring pattern seen on every other prospecting ad set in this account since 2026-09-11. Caps + Kage_26Sept is the only ad set under this campaign, so it is now NOT delivering. ads_activate_entity is forbidden by this run's execution policy -- a human needs to manually reactivate it in Ads Manager once the new exclusion is confirmed in place.",
+      "severity": "high",
+      "dismissed": false,
+      "createdAt": "2026-09-25T14:46:00.000Z"
+    },
+    {
+      "id": "AL-729",
+      "module": "routine-run-notes",
+      "title": "Run summary -- 2026-09-25 ~14:46 UTC pass",
+      "detail": "Circuit breaker: still tripped from 2026-09-12 (no auto-resume; today's spend ₹1,001.10 is well under the ₹2,750 ceiling, not a new breach). Pixel quality: healthy, no ROAS-module suppression. Auto-executed this pass: 1 purchaser-exclusion (Caps + Kage_26Sept ad set -- force-paused as a side effect, see high-severity alert), 2 hook-angle-tagging (creatives 38778409655136383, 2102952076980417). No lookalike-refresh needed (existing 1%/2%/5% Purchasers-180D ladder is 10 days old, under the 14-day threshold; source audience shows no measurable growth). New proposals: A-037 (exclude WhatsApp from Sora_Retargeting_CartAbandoners_30D), A-038 (exclude WhatsApp from Caps + Kage_26Sept). A-035 reasoning updated to note a human already partially converged on its intent by creating the CartAbandoners_30D ad set as a separate checkout/payment-abandoner audience. All 33 pre-existing proposals remain pending, unchanged, no new triggers found for them this pass.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-09-25T14:46:00.000Z"
     }
   ],
   "log": [
@@ -12024,6 +12151,57 @@
       },
       "tier": "auto",
       "executedAt": "2026-09-20T20:52:00.000Z"
+    },
+    {
+      "proposalId": null,
+      "action": "purchaser-exclusion auto-module: executed on the brand-new 'Caps + Kage_26Sept' ad set (id 120255693970460159, campaign 120255693970470159 'Caps + Kage_26 Sept', OUTCOME_SALES). This campaign/ad set did not exist at the prior ~12:48 UTC pass -- created 2026-09-25T18:58 IST (~13:28 UTC), first seen by this routine this pass. It had no custom_audiences or excluded_custom_audiences at all (broad advantage_audience-expanded interest/behavior targeting: Baseball cap, Streetwear, Fashion accessories interests; People who prefer mid/high-value goods + Engaged Shoppers behaviors; 12 India cities; ages 19-65). Added the genuine 'Purchasers 180D' audience (id 120255823280550159, verified Purchase-event, 180d retention) to excluded_custom_audiences, resending the full existing targeting spec (geo_locations, age range, genders, flexible_spec interests/behaviors, targeting_automation) unchanged to avoid wiping those fields, per the pattern established on 2026-09-15/17/20. No rate-limit conflict (no prior purchaser-exclusion log entry for this entity in the last 24h). IMPORTANT SIDE EFFECT: the Meta API forced this ad set to PAUSED (status_forced_to_paused=true) as a consequence of the targeting edit -- the same recurring pattern seen on every other prospecting ad set this account has purchaser-excluded (2026-09-11/13/15/17/20). This is the only ad set under Caps + Kage_26 Sept, so the campaign is now NOT delivering, only ~1.3 hours after a human activated it. Flagged at high severity (see alerts, this pass) for prompt human review. ads_activate_entity is forbidden by this run's execution policy, so this routine cannot reactivate it.",
+      "result": "success",
+      "previousState": {
+        "excluded_custom_audiences": "absent -- ad set had no custom_audiences or excluded_custom_audiences of any kind prior to this edit",
+        "targeting_summary": "age_min 19, age_max 65, age_range [21,45], genders [0] (all), 12 India cities (Ahmedabad/Bangalore/Calicut/Chennai/Hyderabad/Kochi/Mangalore/Mumbai/Mysore/Pune/Rajkot/Surat), flexible_spec interests [Baseball cap, Streetwear, Fashion accessories] + behaviors [People who prefer mid/high-value goods in India, People who prefer high-value goods in India, Engaged Shoppers], targeting_automation.advantage_audience=1"
+      },
+      "detail": {
+        "tool": "ads_update_entity",
+        "success": true,
+        "entity_id": "120255693970460159",
+        "entity_type": "ad_set",
+        "status_forced_to_paused": true,
+        "new_status": "PAUSED",
+        "excluded_custom_audiences_added": [
+          {
+            "id": "120255823280550159",
+            "name": "Purchasers 180D"
+          }
+        ]
+      },
+      "tier": "auto",
+      "executedAt": "2026-09-25T14:46:00.000Z"
+    },
+    {
+      "proposalId": null,
+      "action": "hook-angle-tagging auto-module: tagged creative 38778409655136383 ('SORA at ₹2,663 — Prepaid 2026-09-25' static image, ad 'Sora_Sales - Copy' under new ad set 'Caps + Kage_26Sept' / campaign 'Caps + Kage_26 Sept') -- primary text/headline pulled via ads_get_creatives, no vision pass (Higgsfield not attached this run). No Meta API mutation, wrote to queue.json.creativeTags only.",
+      "result": "success",
+      "previousState": null,
+      "detail": {
+        "tool": "ads_get_creatives",
+        "creative_id": "38778409655136383",
+        "mutation": "none -- queue.json.creativeTags write only"
+      },
+      "tier": "auto",
+      "executedAt": "2026-09-25T14:46:00.000Z"
+    },
+    {
+      "proposalId": null,
+      "action": "hook-angle-tagging auto-module: tagged creative 2102952076980417 ('KAI ARCHIVES 2.0 Restocked' static image, ad 'Caps_26Sept' under new ad set 'Caps + Kage_26Sept' / campaign 'Caps + Kage_26 Sept') -- primary text/headline pulled via ads_get_creatives, no vision pass (Higgsfield not attached this run). No Meta API mutation, wrote to queue.json.creativeTags only.",
+      "result": "success",
+      "previousState": null,
+      "detail": {
+        "tool": "ads_get_creatives",
+        "creative_id": "2102952076980417",
+        "mutation": "none -- queue.json.creativeTags write only"
+      },
+      "tier": "auto",
+      "executedAt": "2026-09-25T14:46:00.000Z"
     }
   ],
   "creativeTags": {
@@ -14494,6 +14672,28 @@
       "visionPassSkipped": true,
       "note": "Higgsfield vision connection not attached to this run -- image content itself not analyzed, only real ad copy text used. No creative description invented.",
       "taggedAt": "2026-09-20T20:52:00.000Z"
+    },
+    "38778409655136383": {
+      "adName": "Sora_Sales - Copy",
+      "campaign": "Caps + Kage_26 Sept",
+      "format": "Static image (SHARE)",
+      "angle": "Prepaid-price led offer for SORA sneaker + free shipping, same intro-price angle reused from SORA_TOF/Sora_BOF creatives, now running under the new Caps + Kage_26 Sept campaign",
+      "hook": "\"SORA at ₹2,663 — Prepaid\" (headline) / \"You’ve seen SORA. Now make it yours. 👟 Premium everyday style, made to go with everything. Get SORA for just ₹2,663 on prepaid orders + FREE SHIPPING. Your next everyday sneaker is right here.\" (primary text)",
+      "taggedFrom": "ad primary text (body) + headline (title), via Meta Ads MCP ads_get_creatives",
+      "visionPassSkipped": true,
+      "note": "Higgsfield vision connection not attached to this run -- image content itself not analyzed, only real ad copy text used. No creative description invented.",
+      "taggedAt": "2026-09-25T14:46:00.000Z"
+    },
+    "2102952076980417": {
+      "adName": "Caps_26Sept",
+      "campaign": "Caps + Kage_26 Sept",
+      "format": "Static image (SHARE)",
+      "angle": "Restock / FOMO announcement for the 'KAI ARCHIVES 2.0' caps line -- previously out of stock, back now",
+      "hook": "\"KAI ARCHIVES 2.0 Restocked - that's the line.\" (headline) / \"SURPRISE SURPRISE SURPRISE! AS YOU CAN SEE IT IS BACK!\" (primary text)",
+      "taggedFrom": "ad primary text (body) + headline (title), via Meta Ads MCP ads_get_creatives",
+      "visionPassSkipped": true,
+      "note": "Higgsfield vision connection not attached to this run -- image content itself not analyzed, only real ad copy text used. No creative description invented.",
+      "taggedAt": "2026-09-25T14:46:00.000Z"
     }
   }
 }
