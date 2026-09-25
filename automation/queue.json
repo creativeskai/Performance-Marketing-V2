@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-25T04:51:00.000Z",
+  "generatedAt": "2026-09-25T06:49:00.000Z",
   "settings": {
     "kill_roas_threshold": "pause if ROAS < 1.0x after ₹500 spend on a sales-objective campaign",
     "reactivate_min_historic_roas": "surface for reactivation if a paused campaign's last active-period ROAS >= 3.0x",
@@ -26,8 +26,8 @@
     "competitor_last_scrape": {
       "gully_labs_active_ads": null,
       "lotto_sport_india_active_ads": null,
-      "scraped_at": "2026-09-25T04:51:00.000Z",
-      "note": "2026-09-25T04:51:00.000Z scheduled run: ads_library_search combined page_ids query (107479854297817 / 426015150606378, ad_active_status=ACTIVE, no country filter) returned estimated_total_count=314, unchanged from 314 at the prior ~02:52 UTC pass. Combined-query-only pass (individual per-page counts not independently re-verified this pass, carried forward unchanged from the last per-page split of 210 / 106)."
+      "scraped_at": "2026-09-25T06:49:00.000Z",
+      "note": "2026-09-25T06:49:00.000Z scheduled run: ads_library_search combined page_ids query (107479854297817 / 426015150606378, ad_active_status=ACTIVE, no country filter) returned estimated_total_count=311, down from 314 at the prior ~04:51 UTC pass (-3, -0.96%). Well under the 20% alert threshold. Combined-query-only pass (individual per-page counts not independently re-verified this pass, carried forward unchanged from the last per-page split of 210 / 106)."
     },
     "audience_label_corrections": {
       "120249907176770159": "ATC_180D -- NOT a purchaser audience (cart-adders, event=AddToCart, retention 180 days). Verified 2026-09-14, reconfirmed 2026-09-20. Superseded note: earlier passes said the account had NO purchaser audience at all -- that's now out of date. See the 120255823280550159 (Purchasers 180D) entry above, created 2026-09-15, which IS a genuine purchaser audience and is already in use for exclusion + lookalike.",
@@ -7307,6 +7307,51 @@
       "severity": "low",
       "dismissed": false,
       "createdAt": "2026-09-25T04:51:00.000Z"
+    },
+    {
+      "id": "AL-692",
+      "module": "campaign-consolidation-watch",
+      "title": "No consolidation flag -- 3 active campaigns target distinct funnel stages",
+      "detail": "Sora Retargeting (BOF retargeting, custom-audience based, last_14d spend Rs118.28, ROAS 23.7x), Sora_BOF_Based on Mori_Tee / Sora_Sales ad set (OUTCOME_SALES prospecting, 12-city targeted, last_14d spend Rs4,542.78, ROAS 7.22x), and SORA_TOF (OUTCOME_TRAFFIC prospecting, broad advantage_audience, last_14d spend Rs954.91, ROAS 1.67x) -- no overlapping product+audience pair. Same conclusion as the prior ~04:51 UTC pass.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-09-25T06:49:00.000Z"
+    },
+    {
+      "id": "AL-693",
+      "module": "self-audit-check",
+      "title": "Live numbers reconfirmed sane; dashboard static snapshot remains stale",
+      "detail": "Fresh ads_get_ad_entities pull (campaign level, last_14d, and age/gender breakdown on Sora_Sales) matches the trajectory already reflected in queue.json's proposals/log almost exactly: 18-24 combined spend Rs952.40 this pass, unchanged from the prior pass; 25-34 male Rs2,008.42 (was Rs2,008.42/Rs2,008.14 across the last two passes); 35-44 male Rs890.49 (was Rs890.49/Rs890.43) -- sub-rupee drift only, confirming this pass ran shortly after the prior one with negligible new spend in between. index.html's static DATA/INSIGHTS_DATA snapshot was not refreshed this pass -- still stale relative to live account state, same gap noted every prior pass. KPI-to-trigger completeness: no dashboard-surfaced metric found without a mapped module this pass.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-09-25T06:49:00.000Z"
+    },
+    {
+      "id": "AL-694",
+      "module": "pixel-health",
+      "title": "Pixel match quality remains healthy",
+      "detail": "ads_get_dataset_quality on the active pixel (833131719490535): Purchase composite_score 7.5 (email/phone/zip/country/fn/ct 100%), cod_purchase 7.5, AddPaymentInfo 7.6, InitiateCheckout 7.0, PageView/ViewContent/AddToCart/Search/SubscribedButtonClick all 6.1 -- all at or above the pixel_quality_min_match_rate=0.6 gate (>=6.0/10 composite), real_time/hourly/daily upload freshness maintained, scores identical to the prior ~04:51 UTC pass. ROAS-driven modules NOT suppressed this pass.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-09-25T06:49:00.000Z"
+    },
+    {
+      "id": "AL-695",
+      "module": "competitor-rescrape",
+      "title": "Gully Labs / Lotto Sport India combined active-ad count dropped slightly to 311",
+      "detail": "ads_library_search combined page_ids query (107479854297817 / 426015150606378, ad_active_status=ACTIVE, no country filter) returned estimated_total_count=311, down from 314 at the prior ~04:51 UTC pass (-3, -0.96%). Well under the 20% competitor-spike alert threshold.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-09-25T06:49:00.000Z"
+    },
+    {
+      "id": "AL-696",
+      "module": "routine-run-notes",
+      "title": "Run summary -- 2026-09-25 ~06:49 UTC pass",
+      "detail": "Circuit breaker: still tripped since 2026-09-12 (never auto-resumes); today's account spend Rs408.60, well under the Rs2,750 ceiling, no new trip. Pixel quality gate: healthy, ROAS modules not suppressed. Anomaly signal: none found (auction overlap, creative fatigue, narrow audience all checked). Auto modules: purchaser-exclusion re-verified compliant on all 3 active ad sets (Purchasers 180D excluded everywhere prospecting/retargeting applies -- SORA_TOF adset, Sora_Retargeting_Behaviours adset, Sora_Sales adset all confirmed via fresh targeting pull); lookalike-refresh not due (laddered LAL built 2026-09-15, 10 days old, under the 14-day threshold; Purchasers 180D audience size unchanged at the ~20 floor bucket via ads_get_custom_audience, no 20% growth signal); hook-angle-tagging found no untagged creatives (all 3 active ads' creatives -- 1059775456834345, 1410368037712890 -- already tagged 2026-09-20, reconfirmed present in queue.json.creativeTags). Hard-spend-circuit-breaker: not triggered (Rs408.60 spend vs Rs2,750 ceiling). No Meta API mutations this pass -- every auto module was already compliant or not due. No new approval-tier proposals -- the 30 existing pending proposals (A-001 onward) were spot-checked against fresh last_14d/last_7d data on the 3 currently-active campaigns and found materially unchanged from the prior ~04:51 UTC pass (sub-rupee spend drift only, no ROAS or targeting-state changes), so left as-is per de-duplication rules rather than rewritten with cosmetically identical numbers.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-09-25T06:49:00.000Z"
     }
   ],
   "log": [
