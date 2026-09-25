@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-25T00:48:00.000Z",
+  "generatedAt": "2026-09-25T02:52:00.000Z",
   "settings": {
     "kill_roas_threshold": "pause if ROAS < 1.0x after ₹500 spend on a sales-objective campaign",
     "reactivate_min_historic_roas": "surface for reactivation if a paused campaign's last active-period ROAS >= 3.0x",
@@ -26,8 +26,8 @@
     "competitor_last_scrape": {
       "gully_labs_active_ads": null,
       "lotto_sport_india_active_ads": null,
-      "scraped_at": "2026-09-25T00:48:00.000Z",
-      "note": "2026-09-25T00:48:00.000Z scheduled run: ads_library_search combined page_ids query (107479854297817 / 426015150606378, ad_active_status=ACTIVE, no country filter) returned estimated_total_count=313, unchanged from 313 at the prior ~22:49 UTC pass -- 0% move, well under the 20% alert threshold. Combined-query-only pass (individual per-page counts not independently re-verified this pass, carried forward unchanged from the last per-page split of 210 / 106)."
+      "scraped_at": "2026-09-25T02:52:00.000Z",
+      "note": "2026-09-25T02:52:00.000Z scheduled run: ads_library_search combined page_ids query (107479854297817 / 426015150606378, ad_active_status=ACTIVE, no country filter) returned estimated_total_count=314, up from 313 at the prior ~00:48 UTC pass -- +0.3% move, well under the 20% alert threshold. Combined-query-only pass (individual per-page counts not independently re-verified this pass, carried forward unchanged from the last per-page split of 210 / 106)."
     },
     "audience_label_corrections": {
       "120249907176770159": "ATC_180D -- NOT a purchaser audience (cart-adders, event=AddToCart, retention 180 days). Verified 2026-09-14, reconfirmed 2026-09-20. Superseded note: earlier passes said the account had NO purchaser audience at all -- that's now out of date. See the 120255823280550159 (Purchasers 180D) entry above, created 2026-09-15, which IS a genuine purchaser audience and is already in use for exclusion + lookalike.",
@@ -7190,6 +7190,51 @@
       "severity": "low",
       "dismissed": false,
       "createdAt": "2026-09-25T00:48:00.000Z"
+    },
+    {
+      "id": "AL-679",
+      "module": "competitor-rescrape",
+      "title": "Gully Labs / Lotto Sport India combined active-ad count nudged to 314 (was 313)",
+      "detail": "ads_library_search combined page_ids query (107479854297817 / 426015150606378, ad_active_status=ACTIVE, no country filter) returned estimated_total_count=314, up from 313 at the prior ~00:48 UTC pass -- +0.3% move, well under the 20% alert threshold. Combined-query-only pass (individual per-page counts not independently re-verified this pass, carried forward unchanged from the last per-page split of 210 / 106).",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-09-25T02:52:00.000Z"
+    },
+    {
+      "id": "AL-680",
+      "module": "learning-phase-stuck",
+      "title": "No ad sets stuck in learning",
+      "detail": "3 active ad sets checked (SORA_TOF, Sora_Sales, Sora_Retargeting_Behaviours) -- no delivery or configuration changes since the ~00:48 UTC pass, which already confirmed none stuck in learning >7 days.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-09-25T02:52:00.000Z"
+    },
+    {
+      "id": "AL-681",
+      "module": "campaign-consolidation-watch",
+      "title": "No consolidation flag -- 3 active campaigns target distinct funnel stages",
+      "detail": "Active set unchanged from the prior pass: Sora Retargeting (retargeting), Sora_BOF_Based on Mori_Tee (BOF/sales), SORA_TOF (TOF/traffic). No overlapping product+audience duplication detected.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-09-25T02:52:00.000Z"
+    },
+    {
+      "id": "AL-682",
+      "module": "self-audit-check",
+      "title": "Live numbers reconfirmed sane; dashboard static snapshot remains stale",
+      "detail": "Today's account spend ₹193.08 (ads_get_ad_entities, level=ad_account, date_preset=today) vs ₹2,750 ceiling -- sane, no drift concern. index.html's baked-in DATA/INSIGHTS_DATA snapshot was not re-diffed line-by-line this pass (known, previously-flagged low-severity staleness, unchanged in kind from prior passes); the dashboard's live sections (queue.json-driven Automation tab, generatedAt) reflect this run's real state via runtime fetch.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-09-25T02:52:00.000Z"
+    },
+    {
+      "id": "AL-683",
+      "module": "routine-run-notes",
+      "title": "Run summary -- 2026-09-25 ~02:52 UTC pass",
+      "detail": "Circuit breaker: not tripped this pass (today's account spend ₹193.08 vs settings.hard_spend_ceiling_inr ₹2,750). The pre-existing 2026-09-12 trip remains in force unchanged (0 of the 4 originally-paused campaigns reactivated, no auto-resume per policy) -- A-017 (resume-after-circuit-breaker) still pending a human decision. Pixel quality: healthy (composite EMQ scores 6.1-7.6 across Purchase/AddToCart/InitiateCheckout/PageView events, all match-key coverages well above the 0.6 gate) -- ROAS-driven modules evaluated normally, not suppressed. Auto-tier modules -- purchaser-exclusion: all 3 active ad sets (SORA_TOF, Sora_Sales, Sora_Retargeting_Behaviours) already exclude the genuine 'Purchasers 180D' audience (120255823280550159), account remains compliant, no write needed. lookalike-refresh: the Purchasers-180D-sourced 1%/2%/5% ladder (built 2026-09-15) is 10 days old, still under the 14-day lookalike_refresh_days threshold, and the source audience size is unchanged (~20, no 20%+ growth) -- not due. hook-angle-tagging: all 3 active ads' creatives (1059775456834345, 1410368037712890) already have creativeTags entries from prior passes -- nothing new to tag; Higgsfield vision pass still not attached, tagging remains ad-copy-only where it applies. hard-spend-circuit-breaker: not triggered (spend well under ceiling). No auto-tier mutations executed this pass -- every module's trigger condition was already satisfied/compliant. Anomaly signal (ads_insights_anomaly_signal): no issues found (auction overlap, creative fatigue, narrow audience all checked clean). Approval-tier: reviewed the 3 live reactivate-winner proposals against fresh last_14d numbers -- A-027 TSUCHI BOF 5.662743x (₹3,747.38 spend), A-028 Mori + Tee_Sales_0609 2.929875x (₹9,784.24 spend, last_30d still 3.524447x), A-031 Retargeting_Overall 9.224005x (₹729 spend) -- all match the prior pass's recorded figures exactly, no drift, no reasoning updates needed. Considered but did not open a new budget-reallocation proposal for the 3 active Sora campaigns despite a >1.5x ROAS gap between them (Sora Retargeting 23.7x / Sora_BOF 7.22x / SORA_TOF 1.67x): Sora Retargeting's spend is only ₹118.28 over last_14d against a ~20-person purchaser-based audience, so it is audience-capped rather than budget-capped and cannot practically absorb a meaningful reallocation; SORA_TOF is the account's only active TOF supply feeding the BOF/retargeting layers, so shrinking it would risk starving the funnel it is designed to feed. Flagging this reasoning here rather than manufacturing a low-value proposal. No other pending proposal's underlying numbers moved since the ~00:48 UTC pass. No new alerts of medium/high severity this pass.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-09-25T02:52:00.000Z"
     }
   ],
   "log": [
