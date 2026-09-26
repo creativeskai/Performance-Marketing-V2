@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-26T17:03:00.000Z",
+  "generatedAt": "2026-09-26T18:46:00.000Z",
   "settings": {
     "kill_roas_threshold": "pause if ROAS < 1.0x after ₹500 spend on a sales-objective campaign",
     "reactivate_min_historic_roas": "surface for reactivation if a paused campaign's last active-period ROAS >= 3.0x",
@@ -26,8 +26,8 @@
     "competitor_last_scrape": {
       "gully_labs_active_ads": null,
       "lotto_sport_india_active_ads": null,
-      "scraped_at": "2026-09-26T17:03:00.000Z",
-      "note": "2026-09-26T17:03:00.000Z scheduled run: ads_library_search combined page_ids query (107479854297817 / 426015150606378, ad_active_status=ACTIVE, no country filter) returned estimated_total_count=333, unchanged from 333 at the prior ~14:52 UTC pass (0% change). Well under the 20% alert threshold."
+      "scraped_at": "2026-09-26T18:46:00.000Z",
+      "note": "2026-09-26T18:46:00.000Z scheduled run: ads_library_search combined page_ids query (107479854297817 / 426015150606378, ad_active_status=ACTIVE, no country filter) returned estimated_total_count=333, unchanged from 333 at the prior ~17:03 UTC pass (0% change). Well under the 20% alert threshold."
     },
     "audience_label_corrections": {
       "120249907176770159": "ATC_180D -- NOT a purchaser audience (cart-adders, event=AddToCart, retention 180 days). Verified 2026-09-14, reconfirmed 2026-09-20. Superseded note: earlier passes said the account had NO purchaser audience at all -- that's now out of date. See the 120255823280550159 (Purchasers 180D) entry above, created 2026-09-15, which IS a genuine purchaser audience and is already in use for exclusion + lookalike.",
@@ -8411,6 +8411,87 @@
       "severity": "low",
       "dismissed": false,
       "createdAt": "2026-09-26T17:03:00.000Z"
+    },
+    {
+      "id": "AL-803",
+      "module": "threshold-alerts",
+      "title": "No CPM/CTR/CPC threshold breaches",
+      "detail": "Both currently active campaigns (Sora Retargeting, id 120256004515360159; Caps + Kage_26 Sept, id 120255693970470159) still have all lifetime spend inside a window too recent for a trailing-30d-baseline vs 7d comparison. settings.metric_baselines' stored Kage_sales_1908/Kage_TOF entries (as_of 2026-08-29) belong to long-paused campaigns and are not applicable to current delivery.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-09-26T18:46:00.000Z"
+    },
+    {
+      "id": "AL-804",
+      "module": "anomaly",
+      "title": "No anomaly signals found this pass",
+      "detail": "ads_insights_anomaly_signal checked auction overlap, creative fatigue, and narrow audience across the account -- no issues found.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-09-26T18:46:00.000Z"
+    },
+    {
+      "id": "AL-805",
+      "module": "learning-phase-stuck",
+      "title": "No ad sets stuck in learning",
+      "detail": "The 3 currently active ad sets (Sora_Retargeting_CartAbandoners_30D id 120256023374230159, Sora_Retargeting_Behaviours id 120256004517420159, Caps + Kage_26Sept id 120255693970460159) returned no learning_stage_info from ads_get_ad_entities -- none is flagged as currently in or stuck in the learning phase.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-09-26T18:46:00.000Z"
+    },
+    {
+      "id": "AL-806",
+      "module": "pixel-health",
+      "title": "Pixel match quality remains healthy",
+      "detail": "ads_get_dataset_quality on dataset 833131719490535: composite EMQ scores 6.1-8.8/10 across all tracked web events (Purchase 8.6, AddPaymentInfo 8.8, prepaid_purchase 8.6, cod_purchase 8.5, InitiateCheckout 7.1, core web events 6.1-6.2), all comfortably above settings.pixel_quality_min_match_rate (0.6, i.e. 6.0/10). ROAS-driven modules NOT suppressed this pass.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-09-26T18:46:00.000Z"
+    },
+    {
+      "id": "AL-807",
+      "module": "campaign-consolidation-watch",
+      "title": "2 active campaign objects, distinct funnel stages -- no consolidation flag",
+      "detail": "Sora Retargeting (id 120256004515360159, retargeting/BOF -- cart abandoners + behavioural engagers, excludes Purchasers 180D) and Caps + Kage_26 Sept (id 120255693970470159, top-of-funnel prospecting on caps/Kage interest+behavior targeting) target different funnel stages and largely non-overlapping audiences -- no duplicate-targeting flag raised.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-09-26T18:46:00.000Z"
+    },
+    {
+      "id": "AL-808",
+      "module": "competitor-rescrape",
+      "title": "Gully Labs / Lotto Sport India combined active-ad count holds at 333",
+      "detail": "ads_library_search combined page_ids query (107479854297817 / 426015150606378, ad_active_status=ACTIVE, no country filter) returned estimated_total_count=333, unchanged from the prior ~17:03 UTC pass. Well under the 20% alert threshold.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-09-26T18:46:00.000Z"
+    },
+    {
+      "id": "AL-809",
+      "module": "creative-fatigue",
+      "title": "Sora_Retargeting_CartAbandoners frequency crossed 3.0, but audience is only ~20 people -- not actionable",
+      "detail": "Ad 'Sora_Retargeting_CartAbandoners' (id 120256023375150159, adset Sora_Retargeting_CartAbandoners_30D id 120256023374230159) shows frequency 3.79 over last_7d (417 impressions, ₹94.50 spend, 0 purchases yet), crossing settings.fatigue_frequency_threshold (3). However the underlying source audience (ATC_NoPurchase_30D, a 30-day AddToCart-without-purchase pool) is only ~20 people (ads_get_custom_audience confirms approximate_count_lower/upper_bound=20) -- the high frequency is simply small-audience math, not creative wear-out. No structured creative-fatigue proposal was written this pass: the audience is already at its practical floor (can't be narrowed further without emptying it), and the module's other remedy (fresh creative variant via Higgsfield) is unavailable -- the Higgsfield vision/generation connection is not attached to this run. Worth revisiting once this ad set accumulates enough reach for frequency to reflect real fatigue rather than pool size.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-09-26T18:46:00.000Z"
+    },
+    {
+      "id": "AL-810",
+      "module": "self-audit-check",
+      "title": "Live numbers reconfirmed sane; dashboard static snapshot remains stale",
+      "detail": "Today's account spend (₹62.60, freshly reset -- the account's local day rolled over since the ~17:03 UTC pass, which reported ₹1,766.08 for the prior day) and the current active-campaign set (Sora Retargeting, Caps + Kage_26 Sept) were reconfirmed live via ads_get_ad_entities and are internally consistent with this pass's other pulls. index.html's DATA/INSIGHTS_DATA snapshot is still dated 'September 13, 2026' and predates all 5 campaigns active or recently active since -- a long-standing, already-tracked staleness, not a new drift. KPI-to-trigger completeness: no dashboard-surfaced metric was found without a corresponding module in ROUTINE.md.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-09-26T18:46:00.000Z"
+    },
+    {
+      "id": "AL-811",
+      "module": "routine-run-notes",
+      "title": "Run summary -- 2026-09-26 ~18:46 UTC pass",
+      "detail": "Circuit breaker: not breached this pass (today's spend ₹62.60 vs ₹2,750 ceiling, 2.3% -- the account's local day just rolled over); the 2026-09-12 trip remains recorded (circuitBreaker.tripped=true) pending a human decision on A-017 -- no auto-resume. Pixel gate: healthy, ROAS modules not suppressed. purchaser-exclusion: all 3 active ad sets under both active campaigns already exclude the Purchasers 180D audience -- no action needed. lookalike-refresh: the 2026-09-15 Purchasers-180D-based ladder is ~12 days old, still under the 14-day refresh threshold, and the source audience is unchanged at ~20 people (no >=20% growth) -- no action. hook-angle-tagging: all 4 currently active ads reuse already-tagged creatives (2102952076980417, 38778409655136383, 1059775456834345) -- no new tagging needed; Higgsfield vision pass still not attached to this run. creative-fatigue: Sora_Retargeting_CartAbandoners crossed the frequency threshold but on a ~20-person audience -- flagged as non-actionable (AL-809), not turned into a proposal. age-gender-auto-shift: checked breakdown for both active campaigns -- no cell reaches meaningful spend (largest is ₹585.59 on Caps + Kage_26 Sept's 25-34 male segment at 2.59x ROAS) to justify a targeting shift yet. No new approval-tier proposals -- both active campaigns' ad sets remain covered by existing pending placement-optimization proposals (A-034, A-037, A-038) and the Sora Retargeting campaign by A-035 (engagement-tier-segmentation); A-039 (reactivate-winner, Sora_BOF_Based on Mori_Tee) reconfirmed unchanged at ₹5,171.39 / 6.34424x last_30d (identical to the ~17:03 UTC pass -- no material spend since). No mutations executed this pass.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-09-26T18:46:00.000Z"
     }
   ],
   "log": [
