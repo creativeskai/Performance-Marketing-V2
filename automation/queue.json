@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-27T04:47:00.000Z",
+  "generatedAt": "2026-09-27T06:54:00.000Z",
   "settings": {
     "kill_roas_threshold": "pause if ROAS < 1.0x after ₹500 spend on a sales-objective campaign",
     "reactivate_min_historic_roas": "surface for reactivation if a paused campaign's last active-period ROAS >= 3.0x",
@@ -26,13 +26,13 @@
     "competitor_last_scrape": {
       "gully_labs_active_ads": null,
       "lotto_sport_india_active_ads": null,
-      "scraped_at": "2026-09-27T04:47:00.000Z",
-      "note": "2026-09-27T04:47:00.000Z scheduled run: ads_library_search combined page_ids query (107479854297817 / 426015150606378, ad_active_status=ACTIVE, no country filter) returned estimated_total_count=333, unchanged from 333 at the prior pass (0% change). Well under the 20% alert threshold."
+      "scraped_at": "2026-09-27T06:54:00.000Z",
+      "note": "2026-09-27T06:54:00.000Z scheduled run: ads_library_search combined page_ids query (107479854297817 / 426015150606378, ad_active_status=ACTIVE, no country filter) returned estimated_total_count=332, down from 333 at the prior pass (-0.3% change). Well under the 20% alert threshold."
     },
     "audience_label_corrections": {
       "120249907176770159": "ATC_180D -- NOT a purchaser audience (cart-adders, event=AddToCart, retention 180 days). Verified 2026-09-14, reconfirmed 2026-09-20. Superseded note: earlier passes said the account had NO purchaser audience at all -- that's now out of date. See the 120255823280550159 (Purchasers 180D) entry above, created 2026-09-15, which IS a genuine purchaser audience and is already in use for exclusion + lookalike.",
       "_note": "Map of custom_audience_id -> authoritative name/meaning. Trust these over any label written in earlier log or proposal prose.",
-      "120255823280550159": "Purchasers 180D -- verified via ads_get_custom_audience on 2026-09-20: real purchaser audience (event=Purchase, retention 180 days), created 2026-09-15, approximate size 20. This account NOW HAS a genuine purchaser-based custom audience (superseding the older note below that said it had none). All 4 currently-active ad sets (UGC_MMA, Retargeting_Overall, TSUCHI, Mori_Sales) already list it under excluded_custom_audiences as of this pass -- purchaser-exclusion is compliant account-wide. A laddered 1%/2%/5% lookalike off this audience was also built 2026-09-15 (ids 120255832535210159/610159/780159), still fresh (5 days old, well under the 14-day lookalike_refresh_days threshold). Reconfirmed 2026-09-27 (~00:52 UTC pass): account composition has shifted again -- only 3 ad sets are ACTIVE now (Caps + Kage_26Sept under campaign 'Caps + Kage_26 Sept', and Sora_Retargeting_Behaviours + Sora_Retargeting_CartAbandoners_30D under a new campaign 'Sora Retargeting', id 120256004515360159). All 3 still exclude this audience in excluded_custom_audiences -- purchaser-exclusion remains compliant account-wide. This supersedes the 2026-09-20 '4 currently-active ad sets' snapshot, which is now stale (those 4 -- UGC_MMA, Retargeting_Overall, TSUCHI, Mori_Sales -- are all PAUSED as of this pass)."
+      "120255823280550159": "Purchasers 180D -- verified via ads_get_custom_audience on 2026-09-20: real purchaser audience (event=Purchase, retention 180 days), created 2026-09-15, approximate size 20. This account NOW HAS a genuine purchaser-based custom audience (superseding the older note below that said it had none). All 4 currently-active ad sets (UGC_MMA, Retargeting_Overall, TSUCHI, Mori_Sales) already list it under excluded_custom_audiences as of this pass -- purchaser-exclusion is compliant account-wide. A laddered 1%/2%/5% lookalike off this audience was also built 2026-09-15 (ids 120255832535210159/610159/780159), still fresh (5 days old, well under the 14-day lookalike_refresh_days threshold). Reconfirmed 2026-09-27 (~00:52 UTC pass): account composition has shifted again -- only 3 ad sets are ACTIVE now (Caps + Kage_26Sept under campaign 'Caps + Kage_26 Sept', and Sora_Retargeting_Behaviours + Sora_Retargeting_CartAbandoners_30D under a new campaign 'Sora Retargeting', id 120256004515360159). All 3 still exclude this audience in excluded_custom_audiences -- purchaser-exclusion remains compliant account-wide. This supersedes the 2026-09-20 '4 currently-active ad sets' snapshot, which is now stale (those 4 -- UGC_MMA, Retargeting_Overall, TSUCHI, Mori_Sales -- are all PAUSED as of this pass). Reconfirmed 2026-09-27T06:54:00.000Z: found a 4th ad set that was ACTIVE but NOT excluding this audience -- 'New STP 3' under campaign 'New Caps Part 3 STP' (zero spend since 2026-03-04, evidently missed by prior passes' active-campaign counts because those keyed off spend). Fixed this pass via purchaser-exclusion: exclusion added, ad set force-paused as a side effect (Meta API behavior for non-rename edits to ACTIVE entities). The 3 previously-known active ad sets (Caps + Kage_26Sept, Sora_Retargeting_Behaviours, Sora_Retargeting_CartAbandoners_30D) remain compliant and unchanged."
     },
     "note": "hard_spend_ceiling_inr raised 2000 -> 2750 on 2026-09-14: active campaign budgets total ~₹2,020/day (Mori+Tee ₹1,120, TSUCHI BOF based on CAPS ₹450, Retargeting_31AUG ₹300, KAGE_TOF_Sept ad set ₹100), which sat level with the old ceiling and left the account permanently at the trip line. ₹2,750 gives roughly 35% headroom. All fields here are editable directly in the Automation tab (Save button) or by telling Claude. See also settings.audience_label_corrections."
   },
@@ -8873,6 +8873,87 @@
       "severity": "low",
       "dismissed": false,
       "createdAt": "2026-09-27T04:47:00.000Z"
+    },
+    {
+      "module": "purchaser-exclusion",
+      "title": "New STP 3 force-paused as a purchaser-exclusion side effect -- a previously-undiscovered zombie active ad set",
+      "detail": "This pass's campaign-level pull (unfiltered, all statuses) surfaced a 3rd ACTIVE campaign, 'New Caps Part 3 STP' (id 120245697720960159), that hadn't shown up in recent passes' '2 active campaigns' counts -- likely because it has carried zero spend for its entire trailing 30d despite an active ₹500/day budget, a live ad set ('New STP 3') and a live ad ('CAPS'). Its targeting had no excluded_custom_audiences at all. Fixed via the purchaser-exclusion auto-module: added the Purchasers 180D audience (120255823280550159). Meta's API force-paused the ad set as a side effect of the non-rename edit, same as every other purchaser-exclusion action in this log. Recommend a human glance at why this ad set carried zero spend for 6 months while nominally active -- possible causes include an exhausted/overlapping audience, a disapproved-then-silently-fine creative, or budget starvation from other active campaigns.",
+      "severity": "medium",
+      "dismissed": false,
+      "createdAt": "2026-09-27T06:54:00.000Z",
+      "id": "AL-852"
+    },
+    {
+      "module": "self-audit-check",
+      "title": "KPI-to-trigger completeness gap found and closed: zero-spend ACTIVE entities weren't being scanned",
+      "detail": "Live ads_get_ad_entities figures this pass (now-3, previously-2 active campaigns; ₹644.08 spent today account-wide; Sora Retargeting 9.39x ROAS / Caps + Kage_26 Sept 7.58x ROAS on last_30d, both unchanged from the prior pass) are internally consistent and not anomalous. The genuine finding this pass: 'New Caps Part 3 STP' / ad set 'New STP 3' has been ACTIVE since 2026-03-04 with zero spend in 30d, and evidently wasn't being counted in prior passes' active-campaign tallies -- fixed under purchaser-exclusion (see that alert) and now paused as a side effect. Process note for future passes: an unfiltered, all-entity campaign-level pull (not just spend-sorted or top-N) is needed each run to catch dormant-but-technically-ACTIVE entities like this one; this pass did that and it should stay the standard. index.html's static DATA/INSIGHTS_DATA snapshot remains unrefreshed (out of scope for this routine run), as in prior passes.",
+      "severity": "medium",
+      "dismissed": false,
+      "createdAt": "2026-09-27T06:54:00.000Z",
+      "id": "AL-853"
+    },
+    {
+      "module": "pixel-health",
+      "title": "Pixel match quality remains healthy",
+      "detail": "ads_get_dataset_quality on dataset 833131719490535 (Shopify Meta Pixel): Purchase EMQ composite 8.8, AddPaymentInfo 9.0, prepaid_purchase/cod_purchase 8.6-8.8, InitiateCheckout 6.9, core browse events (PageView/ViewContent/AddToCart/Search/SubscribedButtonClick) 6.1-6.2 -- all figures unchanged from the prior pass. Core match-key coverage (ip_address/user_agent/fbp/external_id) at 80-100% across events. No drop below settings.pixel_quality_min_match_rate (0.6) -- ROAS-based modules not suppressed this pass.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-09-27T06:54:00.000Z",
+      "id": "AL-854"
+    },
+    {
+      "module": "threshold-alerts",
+      "title": "No CPM/CTR/CPC threshold breaches",
+      "detail": "Today's campaign-level figures for the (now 2, post-fix) real-spend active campaigns: Sora Retargeting CPM ₹159.01 / CTR 1.46% / CPC ₹10.88; Caps + Kage_26 Sept CPM ₹95.24 / CTR 2.22% / CPC ₹4.28. Normal single-day variance vs the last_30d baseline (₹131.79/2.15% and ₹130.29/3.04% respectively, per the prior pass) -- no outlier, no breach flagged. Neither campaign has a recorded settings.metric_baselines entry yet (those remaining entries are stale, for now-paused Kage_sales_1908/Kage_TOF).",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-09-27T06:54:00.000Z",
+      "id": "AL-855"
+    },
+    {
+      "module": "anomaly",
+      "title": "No anomaly signals found this pass",
+      "detail": "ads_insights_anomaly_signal on the full ad account: no anomaly signal issues found (checked auction overlap, creative fatigue, narrow audience).",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-09-27T06:54:00.000Z",
+      "id": "AL-856"
+    },
+    {
+      "module": "learning-phase-stuck",
+      "title": "No ad sets stuck in learning",
+      "detail": "The 3 real-delivery active ad sets (Sora_Retargeting_CartAbandoners_30D, Sora_Retargeting_Behaviours, Caps + Kage_26Sept) were last updated 2026-09-24 to 2026-09-26 -- all well under the 7-day stuck-in-learning trigger.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-09-27T06:54:00.000Z",
+      "id": "AL-857"
+    },
+    {
+      "module": "campaign-consolidation-watch",
+      "title": "2 real-spend active campaign objects, distinct funnel stages -- no consolidation flag",
+      "detail": "Sora Retargeting (BOF/retargeting, excludes purchasers, targets ATC/IC/pageview audiences) and Caps + Kage_26 Sept (prospecting, Advantage+ audience + interest/behavior targeting) serve different funnel stages and different products/audiences -- no duplicate-targeting overlap to flag. 'New Caps Part 3 STP' was a 3rd ACTIVE campaign found this pass but is zero-spend and now paused again (see purchaser-exclusion/self-audit-check alerts), so it doesn't change this picture.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-09-27T06:54:00.000Z",
+      "id": "AL-858"
+    },
+    {
+      "module": "competitor-rescrape",
+      "title": "Gully Labs / Lotto Sport India combined active-ad count holds roughly steady",
+      "detail": "ads_library_search combined page_ids query (107479854297817 / 426015150606378, ad_active_status=ACTIVE, no country filter) returned estimated_total_count=332, down from 333 at the prior pass (-0.3% change). Well under the 20% alert threshold.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-09-27T06:54:00.000Z",
+      "id": "AL-859"
+    },
+    {
+      "module": "routine-run-notes",
+      "title": "Run summary -- 2026-09-27 ~06:54 UTC pass",
+      "detail": "Circuit breaker: not re-tripped this pass (today's account spend ₹644.08 vs ceiling ₹2,750 -- 23% of ceiling); the 2026-09-12 trip remains unresolved pending human action on A-017 (resume-after-circuit-breaker), per policy. Pixel quality gate: healthy, ROAS modules not suppressed. Auto-tier modules: purchaser-exclusion found and fixed a previously-undiscovered ACTIVE ad set ('New STP 3' under 'New Caps Part 3 STP', zero-spend since 2026-03-04) with no exclusion configured -- added Purchasers 180D, force-paused as a side effect (1 action). hook-angle-tagging tagged 1 new creative (1048733148188421, the 'CAPS' ad's creative, swapped in 2026-09-26). lookalike-refresh not due (LALs off Purchasers 180D are 12 days old, refresh threshold is 14 days; source audience size unchanged at ~20). hard-spend-circuit-breaker did not trip. 2 auto-executed actions this pass (both logged above). Approval-tier: re-verified last_30d status/spend/ROAS for every campaign referenced by a pending proposal -- all figures came back identical to what's already stored (these are paused campaigns accruing no new spend), so no proposal text needed updating. Re-verified the 3 real ad sets under the 2 real-spend active campaigns all still exclude Purchasers 180D, and that the 4 active ads' creatives are all tagged. Re-checked A-040's target ad (Sora_Retargeting_CartAbandoners) -- frequency still 3.79 at ₹94.5 spend, unchanged, proposal still valid. Budget-reallocation gap between the 2 real active campaigns (9.39x vs 7.58x ROAS, ~1.24x) remains below the 1.5x threshold -- no new proposal. No new approval-tier proposal warranted this pass. 37 proposals remain pending, awaiting human approval in-app or in chat.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-09-27T06:54:00.000Z",
+      "id": "AL-860"
     }
   ],
   "log": [
@@ -13350,6 +13431,41 @@
       },
       "tier": "auto",
       "executedAt": "2026-09-25T14:46:00.000Z"
+    },
+    {
+      "proposalId": null,
+      "action": "purchaser-exclusion auto-module: executed on 'New STP 3' ad set (id 120245697720950159, campaign 120245697720960159 'New Caps Part 3 STP', OUTCOME_SALES) -- a previously-undiscovered ACTIVE ad set (created 2026-03-04, last touched 2026-04-12, zero spend in the trailing 30d despite an active ₹500/day budget and an active child ad 'CAPS') whose targeting had no excluded_custom_audiences key at all. This slipped past prior passes' '2 active campaigns' counts because those scans evidently keyed off spend; this pass's unfiltered campaign-level pull (ads_get_ad_entities, level=campaign, date_preset=today, no filtering) caught it as a 3rd ACTIVE campaign. Added the Purchasers 180D exclusion audience (120255823280550159) to the ad set's targeting, preserving every other targeting field unchanged.",
+      "result": "success",
+      "previousState": {
+        "status": "ACTIVE",
+        "targeting_excluded_custom_audiences": "absent -- no purchaser (or any) exclusion audience configured"
+      },
+      "detail": {
+        "success": true,
+        "entity_id": "120245697720950159",
+        "entity_type": "ad_set",
+        "status_forced_to_paused": true,
+        "note": "Non-rename edit to an ACTIVE ad set force-paused it (Meta API behavior), consistent with prior purchaser-exclusion actions in this log (e.g. 2026-09-25 Caps + Kage_26Sept, 2026-09-15 Mori_Sales). excluded_custom_audiences now contains {\"id\":\"120255823280550159\"}.",
+        "ads_manager_url": "https://www.facebook.com/adsmanager/manage/adsets/edit?act=704523148804803&selected_adset_ids=120245697720950159"
+      },
+      "tier": "auto",
+      "executedAt": "2026-09-27T06:54:00.000Z"
+    },
+    {
+      "proposalId": null,
+      "action": "hook-angle-tagging auto-module: tagged creative 1048733148188421 ('WHY WEAR HALF THE FIT?' static image, ad 'CAPS' under ad set 'New STP 3' / campaign 'New Caps Part 3 STP') with angle/hook derived from its real primary text/headline via the Meta Ads MCP ads_get_creatives. The creative's internal name carries a '2026-09-26' suffix, meaning it was swapped into this long-dormant ad set only yesterday -- which is why it had no prior tag.",
+      "result": "success",
+      "previousState": {
+        "creativeTags_entry": "none"
+      },
+      "detail": {
+        "creative_id": "1048733148188421",
+        "body": "Revamp your wardrobe with a smart 2-for-1 deal! 💡\nGet two tees for INR 1,399 (upto 30% off) & unlock an extra 5% by going prepaid. Limited stock!\nPair them head-to-toe for endless fits - no weak links allowed! 😎 \n7 day returns. Complete it now and elevate your style game!",
+        "title": "WHY WEAR HALF THE FIT?",
+        "call_to_action_type": "SHOP_NOW"
+      },
+      "tier": "auto",
+      "executedAt": "2026-09-27T06:54:00.000Z"
     }
   ],
   "creativeTags": {
@@ -15842,6 +15958,17 @@
       "visionPassSkipped": true,
       "note": "Higgsfield vision connection not attached to this run -- image content itself not analyzed, only real ad copy text used. No creative description invented.",
       "taggedAt": "2026-09-25T14:46:00.000Z"
+    },
+    "1048733148188421": {
+      "adName": "CAPS",
+      "campaign": "New Caps Part 3 STP",
+      "format": "Static image",
+      "angle": "Bundle/discount offer (2-for-1 tees) with an extra prepaid incentive",
+      "hook": "\"WHY WEAR HALF THE FIT?\" (headline) / \"Revamp your wardrobe with a smart 2-for-1 deal! Get two tees for INR 1,399 (upto 30% off) & unlock an extra 5% by going prepaid. Limited stock!\" (primary text)",
+      "taggedFrom": "ad primary text (body) + headline (title), via Meta Ads MCP ads_get_creatives",
+      "visionPassSkipped": true,
+      "note": "Higgsfield vision connection not attached to this run -- image content itself not analyzed, only real ad copy text used. No creative description invented.",
+      "taggedAt": "2026-09-27T06:54:00.000Z"
     }
   }
 }
