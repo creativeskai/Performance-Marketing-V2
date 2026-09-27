@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-27T02:52:00.000Z",
+  "generatedAt": "2026-09-27T04:47:00.000Z",
   "settings": {
     "kill_roas_threshold": "pause if ROAS < 1.0x after ₹500 spend on a sales-objective campaign",
     "reactivate_min_historic_roas": "surface for reactivation if a paused campaign's last active-period ROAS >= 3.0x",
@@ -26,8 +26,8 @@
     "competitor_last_scrape": {
       "gully_labs_active_ads": null,
       "lotto_sport_india_active_ads": null,
-      "scraped_at": "2026-09-27T02:52:00.000Z",
-      "note": "2026-09-27T02:52:00.000Z scheduled run: ads_library_search combined page_ids query (107479854297817 / 426015150606378, ad_active_status=ACTIVE, no country filter) returned estimated_total_count=333, unchanged from 333 at the prior pass (0% change). Well under the 20% alert threshold."
+      "scraped_at": "2026-09-27T04:47:00.000Z",
+      "note": "2026-09-27T04:47:00.000Z scheduled run: ads_library_search combined page_ids query (107479854297817 / 426015150606378, ad_active_status=ACTIVE, no country filter) returned estimated_total_count=333, unchanged from 333 at the prior pass (0% change). Well under the 20% alert threshold."
     },
     "audience_label_corrections": {
       "120249907176770159": "ATC_180D -- NOT a purchaser audience (cart-adders, event=AddToCart, retention 180 days). Verified 2026-09-14, reconfirmed 2026-09-20. Superseded note: earlier passes said the account had NO purchaser audience at all -- that's now out of date. See the 120255823280550159 (Purchasers 180D) entry above, created 2026-09-15, which IS a genuine purchaser audience and is already in use for exclusion + lookalike.",
@@ -8801,6 +8801,78 @@
       "severity": "low",
       "dismissed": false,
       "createdAt": "2026-09-27T02:52:00.000Z"
+    },
+    {
+      "id": "AL-844",
+      "module": "threshold-alerts",
+      "title": "No CPM/CTR/CPC threshold breaches",
+      "detail": "Campaign-level last_30d vs recorded baselines: only 2 campaigns are ACTIVE (Sora Retargeting, Caps + Kage_26 Sept), neither has a recorded metric_baselines entry yet (those are stale entries for now-paused Kage_sales_1908/Kage_TOF). Live figures this pass -- Sora Retargeting: CPM ₹131.79, CTR 2.15%; Caps + Kage_26 Sept: CPM ₹130.29, CTR 3.04% -- both in a normal range for the account, no outlier vs recent history. No breach flagged.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-09-27T04:47:00.000Z"
+    },
+    {
+      "id": "AL-845",
+      "module": "anomaly",
+      "title": "No anomaly signals found this pass",
+      "detail": "ads_insights_anomaly_signal on the full account: \"No anomaly signal issues found in the analyzed ad sets. Checked for auction overlap, creative fatigue, and narrow audience.\" (Creative fatigue on Sora_Retargeting_CartAbandoners_30D, freq 3.79, is already tracked separately as pending proposal A-040.)",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-09-27T04:47:00.000Z"
+    },
+    {
+      "id": "AL-846",
+      "module": "learning-phase-stuck",
+      "title": "No ad sets stuck in learning",
+      "detail": "All 3 currently ACTIVE ad sets (Sora_Retargeting_CartAbandoners_30D, Sora_Retargeting_Behaviours, Caps + Kage_26Sept) were created 2026-09-24/25 -- under 7 days old, so none can be \"stuck\" by the >7-day-in-learning definition yet regardless of delivery status.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-09-27T04:47:00.000Z"
+    },
+    {
+      "id": "AL-847",
+      "module": "pixel-health",
+      "title": "Pixel match quality remains healthy",
+      "detail": "ads_get_dataset_quality on dataset 833131719490535 (Shopify Meta Pixel): Purchase EMQ composite 8.8, AddPaymentInfo 9.0, prepaid_purchase 8.8, cod_purchase 8.6, InitiateCheckout 6.9, core browse events (PageView/ViewContent/AddToCart/Search/SubscribedButtonClick) 6.1-6.2. Core match-key coverage (ip_address/user_agent/fbp/external_id) at 80-100% across events. No drop below settings.pixel_quality_min_match_rate (0.6) -- ROAS-based modules not suppressed this pass.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-09-27T04:47:00.000Z"
+    },
+    {
+      "id": "AL-848",
+      "module": "campaign-consolidation-watch",
+      "title": "2 active campaign objects, distinct funnel stages -- no consolidation flag",
+      "detail": "Sora Retargeting (BOF/retargeting, excludes purchasers, targets ATC/IC/pageview audiences) and Caps + Kage_26 Sept (prospecting, Advantage+ audience + interest/behavior targeting) serve different funnel stages and different products/audiences -- no duplicate-targeting overlap to flag.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-09-27T04:47:00.000Z"
+    },
+    {
+      "id": "AL-849",
+      "module": "competitor-rescrape",
+      "title": "Gully Labs / Lotto Sport India combined active-ad count holds at 333",
+      "detail": "ads_library_search combined page_ids query (107479854297817 / 426015150606378, ad_active_status=ACTIVE, no country filter) returned estimated_total_count=333, unchanged from 333 at the prior pass (0% change). Well under the 20% alert threshold.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-09-27T04:47:00.000Z"
+    },
+    {
+      "id": "AL-850",
+      "module": "self-audit-check",
+      "title": "Live numbers reconfirmed sane; dashboard static snapshot remains stale",
+      "detail": "Live ads_get_ad_entities figures this pass (2 active campaigns, ₹413.50 spent today account-wide, Sora Retargeting 9.39x ROAS / Caps + Kage_26 Sept 7.58x ROAS on last_30d) are internally consistent and not anomalous. index.html's static DATA/INSIGHTS_DATA snapshot was not refreshed this pass (out of scope for this routine run) and continues to lag live figures, as in prior passes.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-09-27T04:47:00.000Z"
+    },
+    {
+      "id": "AL-851",
+      "module": "routine-run-notes",
+      "title": "Run summary -- 2026-09-27 ~04:47 UTC pass",
+      "detail": "Circuit breaker: not re-tripped this pass (today's account spend ₹413.50 vs ceiling ₹2,750 -- 15% of ceiling); the 2026-09-12 trip remains unresolved pending human action on A-017 (resume-after-circuit-breaker), per policy. Pixel quality gate: healthy, ROAS modules not suppressed. Auto-tier modules: purchaser-exclusion compliant on all 3 active ad sets (no action needed); lookalike-refresh not due (LALs off Purchasers 180D are 12 days old, refresh threshold is 14 days); hook-angle-tagging has nothing new (all 3 active ads' creatives already tagged); hard-spend-circuit-breaker did not trip. 0 auto-executed actions this pass. Approval-tier: checked age/gender, geography, and placement breakdowns on the 2 active campaigns -- spend is too fragmented per cell (max ~₹640, 0-5 purchases) to support a new statistically-grounded proposal beyond the WhatsApp-placement and engagement-tier-segmentation proposals already pending (A-034/A-035/A-037/A-038) and the creative-fatigue proposal already pending (A-040). Reactivate-winner candidates (A-027/A-028/A-031/A-039) re-checked against current last_30d ROAS -- all still consistent with their stored reasoning, no update needed. Budget-reallocation: the 2 active campaigns' ROAS gap (9.39x vs 7.58x, ~1.24x) is below the 1.5x reallocation threshold -- no new proposal. 37 proposals remain pending, awaiting human approval in-app or in chat.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-09-27T04:47:00.000Z"
     }
   ],
   "log": [
