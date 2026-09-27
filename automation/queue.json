@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-27T20:47:00.000Z",
+  "generatedAt": "2026-09-27T22:47:00.000Z",
   "settings": {
     "kill_roas_threshold": "pause if ROAS < 1.0x after ₹500 spend on a sales-objective campaign",
     "reactivate_min_historic_roas": "surface for reactivation if a paused campaign's last active-period ROAS >= 3.0x",
@@ -26,8 +26,8 @@
     "competitor_last_scrape": {
       "gully_labs_active_ads": null,
       "lotto_sport_india_active_ads": null,
-      "scraped_at": "2026-09-27T20:47:00.000Z",
-      "note": "2026-09-27T20:47:00.000Z scheduled run: ads_library_search combined page_ids query (107479854297817 / 426015150606378, ad_active_status=ACTIVE, no country filter) returned estimated_total_count=322, up from 312 at the prior ~18:50 UTC pass (+3.2% change). Well under the 20% alert threshold."
+      "scraped_at": "2026-09-27T22:47:00.000Z",
+      "note": "2026-09-27T22:47:00.000Z scheduled run: ads_library_search combined page_ids query (107479854297817 / 426015150606378, ad_active_status=ACTIVE, no country filter) returned estimated_total_count=327, up from 322 at the prior ~20:47 UTC pass (+1.6% change). Well under the 20% alert threshold."
     },
     "audience_label_corrections": {
       "120249907176770159": "ATC_180D -- NOT a purchaser audience (cart-adders, event=AddToCart, retention 180 days). Verified 2026-09-14, reconfirmed 2026-09-20. Superseded note: earlier passes said the account had NO purchaser audience at all -- that's now out of date. See the 120255823280550159 (Purchasers 180D) entry above, created 2026-09-15, which IS a genuine purchaser audience and is already in use for exclusion + lookalike.",
@@ -9531,6 +9531,78 @@
       "severity": "low",
       "dismissed": false,
       "createdAt": "2026-09-27T20:47:00.000Z"
+    },
+    {
+      "id": "AL-920",
+      "module": "threshold-alerts",
+      "title": "No CPM/CTR/CPC threshold breaches",
+      "detail": "All 3 active campaigns (Sora Retargeting, Caps + Kage_26 Sept, New Caps Part 3 STP) remain within historical-norm CPM/CTR/CPC bands this pass -- active ad CTRs range 2.14%-4.47%, none flagged against settings.metric_baselines or recent trailing norms.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-09-27T22:47:00.000Z"
+    },
+    {
+      "id": "AL-921",
+      "module": "anomaly",
+      "title": "No anomaly signal issues found",
+      "detail": "ads_insights_anomaly_signal (account-wide) returned clean this pass -- no auction overlap, creative fatigue, or narrow-audience flags. New STP 3's previously-flagged narrow-audience signal (AL-905/AL-913) remains cleared.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-09-27T22:47:00.000Z"
+    },
+    {
+      "id": "AL-922",
+      "module": "learning-phase-stuck",
+      "title": "No ad sets stuck in learning",
+      "detail": "The 4 currently-active ad sets (New STP 3, Sora_Retargeting_CartAbandoners_30D, Sora_Retargeting_Behaviours, Caps + Kage_26Sept) show stable, non-fluctuating ROAS at their current spend levels -- none showing signs of being stuck in Meta's learning phase past 7 days.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-09-27T22:47:00.000Z"
+    },
+    {
+      "id": "AL-923",
+      "module": "pixel-health",
+      "title": "Pixel match quality remains healthy",
+      "detail": "ads_get_dataset_quality (dataset 833131719490535) this pass: Purchase composite_score 8.7 (email/phone/zip/country/fn/ct at 100% coverage), prepaid_purchase 8.7, cod_purchase 8.7, AddPaymentInfo 9.0. All well above settings.pixel_quality_min_match_rate (0.6) on the email/phone match-key coverage that proxies match rate. ROAS-driven modules NOT suppressed this pass.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-09-27T22:47:00.000Z"
+    },
+    {
+      "id": "AL-924",
+      "module": "competitor-rescrape",
+      "title": "Gully Labs / Lotto Sport India combined active-ad count up modestly",
+      "detail": "ads_library_search (page_ids 107479854297817 / 426015150606378, ad_active_status=ACTIVE, no country filter) returned estimated_total_count=327, up from 322 at the prior ~20:47 UTC pass (+1.6% change). Well under the 20% alert threshold.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-09-27T22:47:00.000Z"
+    },
+    {
+      "id": "AL-925",
+      "module": "campaign-consolidation-watch",
+      "title": "Possible product/audience overlap: New Caps Part 3 STP and Caps + Kage_26 Sept (unchanged)",
+      "detail": "Both remain active, both cap-related creative, overlapping broad interest/behavior targeting (Baseball cap, Streetwear, Fashion accessories interests). No change in overlap assessment since prior passes -- still informational only, no campaign-consolidation approval proposal warranted yet given both are independently profitable (9.70x and 8.06x last_14d ROAS respectively).",
+      "severity": "medium",
+      "dismissed": false,
+      "createdAt": "2026-09-27T22:47:00.000Z"
+    },
+    {
+      "id": "AL-926",
+      "module": "self-audit-check",
+      "title": "Live numbers reconfirmed sane; dashboard static snapshot remains stale",
+      "detail": "Live pull (campaign/adset/ad level, last_14d) reconfirms the account state used by this pass's evaluation. index.html's baked-in DATA/INSIGHTS_DATA snapshot (the main dashboard, distinct from the Automation tab which reads queue.json live) was not refreshed this pass -- same long-standing staleness noted in prior passes (e.g. AL-918).",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-09-27T22:47:00.000Z"
+    },
+    {
+      "id": "AL-927",
+      "module": "routine-run-notes",
+      "title": "Run summary -- 2026-09-27 ~22:47 UTC pass",
+      "detail": "Circuit breaker: still tripped (since 2026-09-12), today's spend Rs20.66 vs Rs2,750 ceiling -- no new trip, A-017 (resume-after-circuit-breaker) remains pending. Pixel quality: healthy, ROAS modules not suppressed. 3 active campaigns (Sora Retargeting 6.16x, Caps + Kage_26 Sept 8.06x, New Caps Part 3 STP 9.70x last_14d ROAS), all already purchaser-exclusion compliant -- no auto-module actions triggered this pass (no new campaigns/ad sets, no untagged creatives, no lookalike-refresh due yet -- Purchasers 180D ladder is 12 days old, refresh at 14). No pause-kill, reactivate, or budget triggers changed. Existing pending proposals A-034/037/038/040/041/042 reviewed against fresh data -- no material movement since the ~20:47 UTC pass, no updates written. 39 approval-tier proposals remain pending, awaiting human review.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-09-27T22:47:00.000Z"
     }
   ],
   "log": [
