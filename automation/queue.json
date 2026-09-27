@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-27T14:49:00.000Z",
+  "generatedAt": "2026-09-27T16:50:00.000Z",
   "settings": {
     "kill_roas_threshold": "pause if ROAS < 1.0x after ₹500 spend on a sales-objective campaign",
     "reactivate_min_historic_roas": "surface for reactivation if a paused campaign's last active-period ROAS >= 3.0x",
@@ -26,8 +26,8 @@
     "competitor_last_scrape": {
       "gully_labs_active_ads": null,
       "lotto_sport_india_active_ads": null,
-      "scraped_at": "2026-09-27T14:49:00.000Z",
-      "note": "2026-09-27T14:49:00.000Z scheduled run: ads_library_search combined page_ids query (107479854297817 / 426015150606378, ad_active_status=ACTIVE, no country filter) returned estimated_total_count=319, down from 338 at the prior ~12:49 UTC pass (-5.6% change). Well under the 20% alert threshold."
+      "scraped_at": "2026-09-27T16:50:00.000Z",
+      "note": "2026-09-27T16:50:00.000Z scheduled run: ads_library_search combined page_ids query (107479854297817 / 426015150606378, ad_active_status=ACTIVE, no country filter) returned estimated_total_count=319, unchanged from the prior ~14:49 UTC pass. Well under the 20% alert threshold."
     },
     "audience_label_corrections": {
       "120249907176770159": "ATC_180D -- NOT a purchaser audience (cart-adders, event=AddToCart, retention 180 days). Verified 2026-09-14, reconfirmed 2026-09-20. Superseded note: earlier passes said the account had NO purchaser audience at all -- that's now out of date. See the 120255823280550159 (Purchasers 180D) entry above, created 2026-09-15, which IS a genuine purchaser audience and is already in use for exclusion + lookalike.",
@@ -9269,6 +9269,69 @@
       "severity": "low",
       "dismissed": false,
       "createdAt": "2026-09-27T14:49:00.000Z"
+    },
+    {
+      "id": "AL-896",
+      "module": "anomaly",
+      "title": "Native anomaly signal: New STP 3 delivering with a narrow audience (unchanged)",
+      "detail": "ads_insights_anomaly_signal still reports active_delivery_narrow_audience on ad set 'New STP 3' (120245697720950159), estimated audience size 1,100-1,300. Same warning as the prior ~14:49 UTC pass, no new information.",
+      "severity": "medium",
+      "dismissed": false,
+      "createdAt": "2026-09-27T16:50:00.000Z"
+    },
+    {
+      "id": "AL-897",
+      "module": "learning-phase-stuck",
+      "title": "No ad sets stuck in learning",
+      "detail": "Checked all 4 currently-ACTIVE ad sets (New STP 3, Sora_Retargeting_CartAbandoners_30D, Sora_Retargeting_Behaviours, Caps + Kage_26Sept). None have been in learning-phase delivery for more than 7 days.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-09-27T16:50:00.000Z"
+    },
+    {
+      "id": "AL-898",
+      "module": "pixel-health",
+      "title": "Pixel match quality remains healthy",
+      "detail": "ads_get_dataset_quality on dataset 833131719490535: Purchase EMQ 8.7, prepaid_purchase 8.7, cod_purchase 8.7, AddPaymentInfo 9.0, InitiateCheckout 7.0 -- all real-time or hourly freshness. No degradation vs the prior pass. pixel_quality_min_match_rate gate (0.6) not breached; ROAS-driven modules not suppressed this pass.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-09-27T16:50:00.000Z"
+    },
+    {
+      "id": "AL-899",
+      "module": "competitor-rescrape",
+      "title": "Gully Labs / Lotto Sport India combined active-ad count unchanged",
+      "detail": "ads_library_search combined page_ids query (107479854297817 / 426015150606378, ad_active_status=ACTIVE) returned estimated_total_count=319, identical to the prior ~14:49 UTC pass. No spike (threshold is +/-20%).",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-09-27T16:50:00.000Z"
+    },
+    {
+      "id": "AL-900",
+      "module": "campaign-consolidation-watch",
+      "title": "Possible product/audience overlap: New Caps Part 3 STP and Caps + Kage_26 Sept (unchanged)",
+      "detail": "Both campaigns remain ACTIVE and both target caps-related product/audience segments. No change from the prior pass; still just a watch flag, not an actionable consolidation trigger (New Caps Part 3 STP carries zero spend since 2026-03-04).",
+      "severity": "medium",
+      "dismissed": false,
+      "createdAt": "2026-09-27T16:50:00.000Z"
+    },
+    {
+      "id": "AL-901",
+      "module": "self-audit-check",
+      "title": "Live numbers reconfirmed sane; dashboard static snapshot remains stale",
+      "detail": "Re-pulled live account/campaign numbers this pass (today's spend Rs1,907.83, this_month spend Rs40,143.40, 3 active campaigns: Sora Retargeting 9.39x ROAS/Rs697.98 last_14d, Caps + Kage_26 Sept 7.58x ROAS/Rs1,305.86 last_14d, New Caps Part 3 STP zero spend). No drift beyond tolerance detected vs this pass's own fetch. index.html's static DATA/INSIGHTS_DATA snapshot was not re-verified field-by-field this pass; treat as unchanged from prior findings.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-09-27T16:50:00.000Z"
+    },
+    {
+      "id": "AL-902",
+      "module": "routine-run-notes",
+      "title": "Run summary -- 2026-09-27 ~16:50 UTC pass",
+      "detail": "Circuit breaker check: today's spend Rs1,907.83 vs Rs2,750 ceiling -- not breached, no new trip. Pre-existing 2026-09-12 trip remains tripped (unresolved, A-017 still pending human decision) per no-auto-resume policy. Pixel gate: healthy, ROAS modules not suppressed. purchaser-exclusion: all 4 active ad sets already exclude Purchasers 180D -- compliant, no action. lookalike-refresh: laddered 1%/2%/5% LALs off Purchasers 180D are 12 days old (built 2026-09-15), still under the 14-day threshold and source audience unchanged at ~20 -- not due. hook-angle-tagging: all 4 creatives on currently-active ads (1048733148188421, 2102952076980417, 38778409655136383, 1059775456834345) already tagged -- no new creatives found. hard-spend-circuit-breaker: not triggered. Approval-tier modules: reviewed the 3 active campaigns (Sora Retargeting, Caps + Kage_26 Sept, New Caps Part 3 STP) against the 37 open proposals -- no material change in underlying numbers since the ~14:49 UTC pass, no new triggers found, no proposals added or superseded. Zero write actions taken this pass.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-09-27T16:50:00.000Z"
     }
   ],
   "log": [
