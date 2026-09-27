@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-27T08:52:00.000Z",
+  "generatedAt": "2026-09-27T10:50:00.000Z",
   "settings": {
     "kill_roas_threshold": "pause if ROAS < 1.0x after ₹500 spend on a sales-objective campaign",
     "reactivate_min_historic_roas": "surface for reactivation if a paused campaign's last active-period ROAS >= 3.0x",
@@ -9026,6 +9026,87 @@
       "severity": "low",
       "dismissed": false,
       "createdAt": "2026-09-27T08:52:00.000Z"
+    },
+    {
+      "id": "AL-869",
+      "module": "threshold-alerts",
+      "title": "No CPM/CTR/CPC threshold breaches",
+      "detail": "Checked the 3 currently-active campaigns (Sora Retargeting, Caps + Kage_26 Sept, New Caps Part 3 STP) via ads_get_ad_entities last_7d vs last_30d. All 3 are recent enough that last_7d and last_30d CPM/CTR/CPC are effectively identical (no real trailing baseline exists yet), so no breach band is meaningfully violated. Caps + Kage_26 Sept: CPM ₹130.27, CTR 3.04%, CPC ₹4.28. Sora Retargeting: CPM ₹131.79, CTR 2.15%, CPC ₹6.12. New Caps Part 3 STP: effectively zero delivery this window.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-09-27T10:50:00.000Z"
+    },
+    {
+      "id": "AL-870",
+      "module": "anomaly",
+      "title": "Native anomaly signal: New STP 3 delivering with a narrow audience",
+      "detail": "ads_insights_anomaly_signal fired active_delivery_narrow_audience on ad set 'New STP 3' (id 120245697720950159, campaign 'New Caps Part 3 STP', id 120245697720960159). Estimated audience size is in the 1,100–1,300 range. This is the same ad set that was force-paused as a purchaser-exclusion side effect at the 2026-09-27 ~06:54 UTC pass (AL-852) -- a human has since reactivated it (campaign effective_status is now ACTIVE, confirmed this pass), and it is now the account's 3rd active campaign (was 2 at the 08:52 UTC pass). Zero recorded spend in last_7d/last_30d so far.",
+      "severity": "medium",
+      "dismissed": false,
+      "createdAt": "2026-09-27T10:50:00.000Z"
+    },
+    {
+      "id": "AL-871",
+      "module": "anomaly-root-cause",
+      "title": "Root cause for New STP 3's narrow-audience anomaly: stacked targeting restrictions",
+      "detail": "Extending AL-869/anomaly: New STP 3's targeting combines (1) 8 named cities across Maharashtra/Tamil Nadu/Gujarat plus one region (Telangana) and one medium geo area (New Delhi) with 25-mile radii and location_types frequently_in/home/recent, (2) Instagram-only publisher_platforms (no Facebook/Audience Network/WhatsApp), and (3) flexible_spec interest+behavior targeting (Baseball cap, Streetwear, Fashion accessories interests; Frequent Travelers, mid/high-value-goods, Engaged Shoppers behaviors). Any one of these alone would be workable; stacked together with Instagram-only placement they compress the reachable audience to ~1,100-1,300 people. Likely driver: the Instagram-only placement restriction combined with the city-level (not region-level) geo targeting. Recommendation for a human reviewer: widen to region-level geo or add Facebook placement back if this ad set needs to spend meaningfully.",
+      "severity": "medium",
+      "dismissed": false,
+      "createdAt": "2026-09-27T10:50:00.000Z"
+    },
+    {
+      "id": "AL-872",
+      "module": "learning-phase-stuck",
+      "title": "No ad sets stuck in learning",
+      "detail": "Checked learning_stage_info across active ad sets (New STP 3, Sora_Retargeting_CartAbandoners_30D, Sora_Retargeting_Behaviours, Caps + Kage_26Sept). None flagged as stuck in learning >7 days.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-09-27T10:50:00.000Z"
+    },
+    {
+      "id": "AL-873",
+      "module": "pixel-health",
+      "title": "Pixel match quality remains healthy",
+      "detail": "ads_get_dataset_quality on dataset 833131719490535: Purchase composite_score 8.7 (email/ip/user_agent/phone/zip/country/fn/ln/ct all at 100% coverage), prepaid_purchase 8.7, cod_purchase 8.6, AddPaymentInfo 9.0. Lower-tier browser events (PageView/ViewContent/AddToCart/Search) sit around 6.1-6.2 composite, consistent with prior passes and typical for browser-only events without full CAPS match keys. No degradation vs. the 08:52 UTC pass. No ROAS-driven modules suppressed this run.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-09-27T10:50:00.000Z"
+    },
+    {
+      "id": "AL-874",
+      "module": "campaign-consolidation-watch",
+      "title": "3 active campaign objects now, up from 2 -- New Caps Part 3 STP rejoined the active set",
+      "detail": "A human reactivated 'New Caps Part 3 STP' (ad set 'New STP 3') between the 08:52 UTC pass and this one. The account now has 3 active campaigns: Sora Retargeting (retargeting, 2 ad sets), Caps + Kage_26 Sept (prospecting, caps+kage), and New Caps Part 3 STP (prospecting, caps only). New STP 3 and Caps + Kage_26Sept both target the same interest cluster (Baseball cap / Streetwear / Fashion accessories) with overlapping cities (Chennai, Mumbai, Pune, Surat common to both). Not flagging a #34 campaign-consolidation proposal yet -- New STP 3 has ~₹0 spend so there's no confirmed duplicate delivery to consolidate, just a targeting overlap worth watching if it starts spending.",
+      "severity": "medium",
+      "dismissed": false,
+      "createdAt": "2026-09-27T10:50:00.000Z"
+    },
+    {
+      "id": "AL-875",
+      "module": "competitor-rescrape",
+      "title": "Gully Labs / Lotto Sport India combined active-ad count holds roughly steady",
+      "detail": "ads_library_search (page_ids 107479854297817/426015150606378, ad_active_status=ACTIVE) returned estimated_total_count=338, up from 337 at the prior ~08:52 UTC pass (+0.3%). Well under the 20% alert threshold.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-09-27T10:50:00.000Z"
+    },
+    {
+      "id": "AL-876",
+      "module": "self-audit-check",
+      "title": "Live numbers reconfirmed sane; active-campaign count drifted 2→3 since last pass",
+      "detail": "Re-pulled live spend/ROAS for the account and its active campaigns; nothing inconsistent with what's been logged. One drift worth flagging: active campaign count moved from 2 (08:52 UTC pass) to 3 this pass, purely because a human reactivated 'New Caps Part 3 STP' outside the routine -- see AL-869/AL-872. Dashboard's static index.html snapshot remains stale (unchanged this pass, as in every prior pass) and does not yet reflect current account composition. KPI-to-trigger completeness: no dashboard-surfaced metric found this pass without a corresponding module in ROUTINE.md's table.",
+      "severity": "medium",
+      "dismissed": false,
+      "createdAt": "2026-09-27T10:50:00.000Z"
+    },
+    {
+      "id": "AL-877",
+      "module": "routine-run-notes",
+      "title": "Run summary -- 2026-09-27 ~10:50 UTC pass",
+      "detail": "Circuit breaker: not tripped this run (today's account spend ₹1,075.35 vs ₹2,750 ceiling, 39% of ceiling). The 2026-09-12 trip (circuitBreaker.tripped=true) remains open pending a human resume-after-circuit-breaker decision (see pending A-017) -- untouched this pass, no auto-resume. Pixel quality gate: healthy, ROAS-driven modules not suppressed. Auto-tier modules: purchaser-exclusion compliant account-wide (all 4 active ad sets already exclude 'Purchasers 180D'); lookalike-refresh not due (ladder is 12 days old, refreshes at 14); hook-angle-tagging found no untagged creatives among the 4 active ads (all previously tagged); hard-spend-circuit-breaker did not trigger. Zero Meta API mutations this pass. Notable finding: 'New Caps Part 3 STP' was reactivated by a human since the last pass and is now delivering to a narrow (~1,100-1,300) audience -- see AL-869/870/872. 37 approval-tier proposals remain pending human review, unchanged this pass (existing pending proposals' underlying numbers were not re-verified this pass beyond what's noted above, so left as-is per de-duplication rules).",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-09-27T10:50:00.000Z"
     }
   ],
   "log": [
