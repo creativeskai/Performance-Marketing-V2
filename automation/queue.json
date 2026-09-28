@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-28T20:50:00.000Z",
+  "generatedAt": "2026-09-28T22:49:00.000Z",
   "settings": {
     "kill_roas_threshold": "pause if ROAS < 1.0x after ₹500 spend on a sales-objective campaign",
     "reactivate_min_historic_roas": "surface for reactivation if a paused campaign's last active-period ROAS >= 3.0x",
@@ -26,8 +26,8 @@
     "competitor_last_scrape": {
       "gully_labs_active_ads": null,
       "lotto_sport_india_active_ads": null,
-      "scraped_at": "2026-09-28T20:50:00.000Z",
-      "note": "2026-09-28T20:50:00.000Z scheduled run: ads_library_search combined page_ids query (107479854297817 / 426015150606378, ad_active_status=ACTIVE, no country filter) returned estimated_total_count=336, up slightly from the prior ~18:47 UTC pass's 335 (+0.3%). Well under the 20% alert threshold."
+      "scraped_at": "2026-09-28T22:49:00.000Z",
+      "note": "2026-09-28T22:49:00.000Z scheduled run: ads_library_search combined page_ids query (107479854297817 / 426015150606378, ad_active_status=ACTIVE, no country filter) returned estimated_total_count=336, unchanged from the prior ~20:50 UTC pass. Well under the 20% alert threshold."
     },
     "audience_label_corrections": {
       "120249907176770159": "ATC_180D -- NOT a purchaser audience (cart-adders, event=AddToCart, retention 180 days). Verified 2026-09-14, reconfirmed 2026-09-20. Superseded note: earlier passes said the account had NO purchaser audience at all -- that's now out of date. See the 120255823280550159 (Purchasers 180D) entry above, created 2026-09-15, which IS a genuine purchaser audience and is already in use for exclusion + lookalike.",
@@ -512,7 +512,7 @@
       "module": "resume-after-circuit-breaker",
       "tier": "approval",
       "title": "Formally resolve the 2026-09-12 circuit breaker trip -- 0 of the 4 originally-paused campaigns are active now; still awaiting a human decision",
-      "reasoning": "Circuit breaker tripped 2026-09-12 on a ₹2,017.87 spend breach (old ₹2,000 ceiling, since raised to ₹2,750). Re-confirmed this pass (2026-09-28T18:47:00.000Z): of the 4 originally-paused campaigns (Tsuchi BOF, KAGE_TOF_Sept 2026, Mori + Tee_Sales_0609, Retargeting_31AUG/renamed Website_View_Population), all 4 remain PAUSED. Today's account spend is ₹11.58 against the ₹2,750 ceiling (0.4%, day just rolled over in account-local time), not breached this pass -- no new trip. The breaker itself is unaffected by the 3 campaigns that have separately been activated by a human since the trip (Sora Retargeting, Caps + Kage_26 Sept, New Caps Part 3 STP) -- those were never part of the original 4-campaign sweep. Still awaiting a human decision on whether to formally resolve this proposal (reject as moot, or use as a template for reactivating the original 4 individually via reactivate-winner proposals A-027/A-028/A-039 which cover 3 of them).",
+      "reasoning": "Circuit breaker tripped 2026-09-12 on a ₹2,017.87 spend breach (old ₹2,000 ceiling, since raised to ₹2,750). Re-confirmed this pass (2026-09-28T22:49:00.000Z): of the 4 originally-paused campaigns (Tsuchi BOF, KAGE_TOF_Sept 2026, Mori + Tee_Sales_0609, Retargeting_31AUG/renamed Website_View_Population), all 4 remain PAUSED. Today's account spend is ₹210.01 against the ₹2,750 ceiling (7.6%), not breached this pass -- no new trip. The breaker itself is unaffected by the 3 campaigns that have separately been activated by a human since the trip (Sora Retargeting, Caps + Kage_26 Sept, New Caps Part 3 STP) -- those were never part of the original 4-campaign sweep. Still awaiting a human decision on whether to formally resolve this proposal (reject as moot, or use as a template for reactivating the original 4 individually via reactivate-winner proposals A-027/A-028/A-039 which cover 3 of them).",
       "actionSummary": "Confirms (re-issues ads_activate_entity on) all 4 campaigns paused by the 2026-09-12 trip -- a no-op on delivery since all 4 are already ACTIVE. Approving this also clears queue.json's top-level circuitBreaker.tripped flag to false via the normal approval-execution path, formally closing out the 2026-09-12 incident. CAUTION (2026-09-13 update): approving this AS WRITTEN would re-activate all 4 original campaigns including Tsuchi BOF and Retargeting_31AUG, which are currently paused for separate, still-valid reasons (see A-016, A-010). Review before approving.",
       "metaAction": {
         "tool": "ads_activate_entity",
@@ -10404,6 +10404,87 @@
       "severity": "low",
       "dismissed": false,
       "createdAt": "2026-09-28T20:50:00.000Z"
+    },
+    {
+      "id": "AL-1017",
+      "module": "threshold-alerts",
+      "title": "No CPM/CTR/CPC threshold breaches",
+      "detail": "Currently active campaigns (Sora Retargeting, Caps + Kage_26 Sept, New Caps Part 3 STP) have no stored settings.metric_baselines entries to compare against -- only Kage_sales_1908 and Kage_TOF have recorded baselines, and both are PAUSED. No breach evaluated this pass.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-09-28T22:49:00.000Z"
+    },
+    {
+      "id": "AL-1018",
+      "module": "anomaly",
+      "title": "Native anomaly signal returned: New STP 3 delivering with a narrow audience (again)",
+      "detail": "ads_insights_anomaly_signal: active_delivery_narrow_audience on ad set 'New STP 3' (id 120245697720950159, campaign New Caps Part 3 STP) -- estimated audience size 1,200-1,500. Same warning as the prior ~20:50 UTC pass (audience size estimate fluctuating in a similar range); no material change.",
+      "severity": "medium",
+      "dismissed": false,
+      "createdAt": "2026-09-28T22:49:00.000Z"
+    },
+    {
+      "id": "AL-1019",
+      "module": "anomaly-root-cause",
+      "title": "Root cause for New STP 3's narrow-audience anomaly (returned): stacked targeting restrictions, unchanged",
+      "detail": "New STP 3 stacks a ~24 city/region geo list with a 21-45 age range and a flexible_spec of 3 interests + 4 behaviors (Baseball cap/Streetwear/Fashion accessories + Frequent Travelers/mid-and-high-value/high-value/Engaged Shoppers), which compounds down to the reach Meta flags as narrow. No change vs prior passes -- still awaiting a human decision on whether to broaden.",
+      "severity": "medium",
+      "dismissed": false,
+      "createdAt": "2026-09-28T22:49:00.000Z"
+    },
+    {
+      "id": "AL-1020",
+      "module": "learning-phase-stuck",
+      "title": "No ad sets stuck in learning",
+      "detail": "No active ad set returned learning_stage_info indicating >7 days in learning without exit.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-09-28T22:49:00.000Z"
+    },
+    {
+      "id": "AL-1021",
+      "module": "pixel-health",
+      "title": "Dataset quality healthy, gate not breached",
+      "detail": "ads_get_dataset_quality on dataset 833131719490535: composite EMQ scores range 6.1-8.8 across Purchase (8.7), cod_purchase (8.8), prepaid_purchase (8.7), AddPaymentInfo (8.7), InitiateCheckout (7.0), and core browse events (6.1), all real_time or hourly upload freshness. No degradation vs the prior ~20:50 UTC pass. ROAS-driven modules not suppressed this pass.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-09-28T22:49:00.000Z"
+    },
+    {
+      "id": "AL-1022",
+      "module": "competitor-rescrape",
+      "title": "Gully Labs / Lotto Sport India combined active-ad count unchanged",
+      "detail": "ads_library_search combined page_ids query (107479854297817 / 426015150606378, ad_active_status=ACTIVE, no country filter) returned estimated_total_count=336, unchanged from the prior ~20:50 UTC pass. Well under the 20% alert threshold.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-09-28T22:49:00.000Z"
+    },
+    {
+      "id": "AL-1023",
+      "module": "campaign-consolidation-watch",
+      "title": "Possible product/audience overlap: New Caps Part 3 STP and Caps + Kage_26 Sept (unchanged)",
+      "detail": "Both are ACTIVE, both OUTCOME_SALES, both selling caps to overlapping India metro geos with similar interest/behavior flexible_spec (Baseball cap/Streetwear/Fashion accessories). No new campaign-consolidation proposal generated this pass -- watch continues.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-09-28T22:49:00.000Z"
+    },
+    {
+      "id": "AL-1024",
+      "module": "self-audit-check",
+      "title": "Live numbers reconfirmed sane; dashboard static snapshot remains stale",
+      "detail": "Live campaign-level pull (last_14d): Sora Retargeting spend Rs1,296.01 (ROAS 5.06x), Caps + Kage_26 Sept spend Rs3,657.04 (ROAS 9.36x), New Caps Part 3 STP spend Rs1,188.58 (ROAS 4.04x). Today's account-level spend Rs210.01. All three essentially unchanged vs the prior ~20:50 UTC pass. index.html's static DATA/INSIGHTS_DATA was not re-generated this pass (no drift-tolerance breach detected that would require it).",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-09-28T22:49:00.000Z"
+    },
+    {
+      "id": "AL-1025",
+      "module": "routine-run-notes",
+      "title": "Run summary -- 2026-09-28 ~22:49 UTC pass",
+      "detail": "Circuit breaker: not tripped this pass (today's account spend Rs210.01 vs Rs2,750 ceiling); prior 2026-09-12 trip remains open pending a human decision on A-017 (resume-after-circuit-breaker), whose reasoning was refreshed this pass with today's spend figure. Pixel gate: healthy, ROAS modules not suppressed. Auto modules: purchaser-exclusion compliant across all 5 active ad sets (New STP 3, Sora_MOF_Engagers, Sora_Retargeting_CartAbandoners_30D, Sora_Retargeting_Behaviours, Caps + Kage_26Sept -- all exclude Purchasers 180D); lookalike-refresh not due (LAL set built 2026-09-15T18:49 UTC, ~13.2 days old, still under the 14-day threshold, source Purchasers 180D audience size unchanged at ~20 -- expected to fire on the next pass); hook-angle-tagging -- all 4 active ads' creatives (1059775456834345, 1048733148188421, 2102952076980417, 38778409655136383) already tagged in creativeTags, nothing new to tag. No auto-executed Meta API mutations this pass. Approval-tier: reviewed A-040 (creative-fatigue, Sora_Retargeting_CartAbandoners) against fresh last_7d data -- frequency 5.47 / spend Rs170.70, identical to the prior ~20:50 UTC pass, no update needed. Reviewed the remaining 37 pending proposals against the unchanged set of 3 active campaigns / 5 active ad sets -- no material data movement found beyond A-017's spend-figure refresh, none newly stale. Anomaly (New STP 3 narrow audience) and campaign-consolidation-watch (New Caps Part 3 STP / Caps + Kage_26 Sept overlap) both persist unchanged. No new proposals or alerts beyond the standard monitoring set were warranted this pass.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-09-28T22:49:00.000Z"
     }
   ],
   "log": [
