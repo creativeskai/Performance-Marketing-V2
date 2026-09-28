@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-28T00:49:00.000Z",
+  "generatedAt": "2026-09-28T02:49:00.000Z",
   "settings": {
     "kill_roas_threshold": "pause if ROAS < 1.0x after ₹500 spend on a sales-objective campaign",
     "reactivate_min_historic_roas": "surface for reactivation if a paused campaign's last active-period ROAS >= 3.0x",
@@ -26,8 +26,8 @@
     "competitor_last_scrape": {
       "gully_labs_active_ads": null,
       "lotto_sport_india_active_ads": null,
-      "scraped_at": "2026-09-28T00:49:00.000Z",
-      "note": "2026-09-28T00:49:00.000Z scheduled run: ads_library_search combined page_ids query (107479854297817 / 426015150606378, ad_active_status=ACTIVE, no country filter) returned estimated_total_count=327, unchanged from the prior ~22:47 UTC pass (0% change). Well under the 20% alert threshold."
+      "scraped_at": "2026-09-28T02:49:00.000Z",
+      "note": "2026-09-28T02:49:00.000Z scheduled run: ads_library_search combined page_ids query (107479854297817 / 426015150606378, ad_active_status=ACTIVE, no country filter) returned estimated_total_count=327, unchanged from the prior ~00:49 UTC pass (0% change). Well under the 20% alert threshold."
     },
     "audience_label_corrections": {
       "120249907176770159": "ATC_180D -- NOT a purchaser audience (cart-adders, event=AddToCart, retention 180 days). Verified 2026-09-14, reconfirmed 2026-09-20. Superseded note: earlier passes said the account had NO purchaser audience at all -- that's now out of date. See the 120255823280550159 (Purchasers 180D) entry above, created 2026-09-15, which IS a genuine purchaser audience and is already in use for exclusion + lookalike.",
@@ -9684,6 +9684,78 @@
       "severity": "low",
       "dismissed": false,
       "createdAt": "2026-09-28T00:49:00.000Z"
+    },
+    {
+      "id": "AL-937",
+      "module": "anomaly",
+      "title": "Native anomaly signal returned: New STP 3 delivering with a narrow audience (again)",
+      "detail": "ads_insights_anomaly_signal fired active_delivery_narrow_audience on ad set 'New STP 3' (id 120245697720950159, campaign 'New Caps Part 3 STP') this pass -- estimated audience size 1,100-1,400. This flag cleared at the 2026-09-27T20:47 pass (AL-913) and stayed clear for two subsequent passes (AL-921, AL-929), but is back this pass. Underlying targeting is unchanged from AL-871's root-cause analysis (stacked city-level geo + Instagram-only placement + interest/behavior targeting) -- nothing new was changed on this ad set between passes, so this looks like the native signal's own threshold flapping around the ~1,100-1,400 audience-size estimate rather than a real regression.",
+      "severity": "medium",
+      "dismissed": false,
+      "createdAt": "2026-09-28T02:49:00.000Z"
+    },
+    {
+      "id": "AL-938",
+      "module": "anomaly-root-cause",
+      "title": "Root cause for New STP 3's narrow-audience anomaly (returned): stacked targeting restrictions, unchanged",
+      "detail": "Same driver as AL-871: New STP 3 combines 8 named cities (25-mile radius) + 1 region + 1 medium geo area, Instagram-only publisher_platforms, and flexible_spec interest/behavior targeting (Baseball cap, Streetwear, Fashion accessories; Frequent Travelers, mid/high-value-goods, Engaged Shoppers). No targeting field changed on this ad set since AL-871 -- recommendation stands: widen to region-level geo or add Facebook placement back if it needs to spend meaningfully. Not re-proposed as a new action since it's the identical, already-diagnosed condition.",
+      "severity": "medium",
+      "dismissed": false,
+      "createdAt": "2026-09-28T02:49:00.000Z"
+    },
+    {
+      "id": "AL-939",
+      "module": "threshold-alerts",
+      "title": "No CPM/CTR/CPC threshold breaches",
+      "detail": "Checked the 3 active campaigns' 7d CPM/CTR/CPC against settings.metric_baselines. Only Kage_sales_1908 and Kage_TOF have stored baselines and both are currently PAUSED (no live delivery to compare), so no active campaign has a baseline band to breach this pass.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-09-28T02:49:00.000Z"
+    },
+    {
+      "id": "AL-940",
+      "module": "learning-phase-stuck",
+      "title": "No ad sets stuck in learning",
+      "detail": "All 4 active ad sets (New STP 3, Caps + Kage_26Sept, Sora_Retargeting_Behaviours, Sora_Retargeting_CartAbandoners_30D) have long delivery histories or ongoing spend/results this week; none show a stuck-in-learning pattern.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-09-28T02:49:00.000Z"
+    },
+    {
+      "id": "AL-941",
+      "module": "pixel-health",
+      "title": "Dataset quality healthy, gate not breached",
+      "detail": "ads_get_dataset_quality on pixel 833131719490535 this pass: Purchase composite_score 8.7 (email/phone/ip/zip/country/fn/ct all 100% coverage), prepaid_purchase and cod_purchase both 8.7, AddPaymentInfo 9.0, InitiateCheckout 7.1. Standard funnel events (PageView/ViewContent/AddToCart/SubscribedButtonClick/Search) all at composite 6.1, still above settings.pixel_quality_min_match_rate (0.6). No degradation vs the prior pass; ROAS-driven modules not suppressed this run.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-09-28T02:49:00.000Z"
+    },
+    {
+      "id": "AL-942",
+      "module": "competitor-rescrape",
+      "title": "Gully Labs / Lotto Sport India combined active-ad count unchanged",
+      "detail": "ads_library_search combined page_ids query (107479854297817 / 426015150606378, ad_active_status=ACTIVE, no country filter) returned estimated_total_count=327, unchanged from the prior ~00:49 UTC pass (0% change). Well under the 20% alert threshold.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-09-28T02:49:00.000Z"
+    },
+    {
+      "id": "AL-943",
+      "module": "self-audit-check",
+      "title": "Live numbers reconfirmed sane; dashboard static snapshot remains stale",
+      "detail": "Live pull this pass: account today-spend Rs20.66 (well under the Rs2,750 circuit-breaker ceiling), 3 active campaigns with last_14d ROAS 6.16x (Sora Retargeting), 8.06x (Caps + Kage_26 Sept), 9.70x (New Caps Part 3 STP) -- all internally consistent, no red flags. index.html's static DATA/INSIGHTS_DATA snapshot was not regenerated this pass (out of scope for the routine's own file-write step) and continues to lag the live account, same known condition as every prior pass since 2026-09-01. KPI-to-trigger completeness: every dashboard-surfaced metric still maps to at least one module in ROUTINE.md; no orphaned KPI found.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-09-28T02:49:00.000Z"
+    },
+    {
+      "id": "AL-944",
+      "module": "campaign-consolidation-watch",
+      "title": "Possible product/audience overlap: New Caps Part 3 STP and Caps + Kage_26 Sept (unchanged)",
+      "detail": "Both campaigns remain ACTIVE, OUTCOME_SALES, and target caps-buyer demand with the Purchasers 180D exclusion applied. Geographic targeting still differs meaningfully (New STP 3: 8 specific cities + Telangana region + New Delhi medium geo area, Instagram-only; Caps + Kage_26Sept: 12 different cities, Facebook+Instagram+Audience Network+WhatsApp+Threads) so overlap remains partial, not a clean duplicate. Both are currently profitable (9.70x and 8.06x last_14d ROAS respectively) -- no campaign-consolidation proposal warranted yet. Unchanged from the prior pass.",
+      "severity": "medium",
+      "dismissed": false,
+      "createdAt": "2026-09-28T02:49:00.000Z"
     }
   ],
   "log": [
