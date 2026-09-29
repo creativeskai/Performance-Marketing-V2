@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-29T18:48:00.000Z",
+  "generatedAt": "2026-09-29T20:50:00.000Z",
   "settings": {
     "kill_roas_threshold": "pause if ROAS < 1.0x after ₹500 spend on a sales-objective campaign. EXCEPTION until 2026-10-05T23:59+05:30 (user-approved 2026-09-29): for the sneaker-push campaigns 120256091369160159 (Sneakers_BOF_30Sep-5Oct), 120256091370110159 (Sneakers_Prospecting_30Sep-5Oct) and 120256088882780159 (Sneakers_Catalog_Retargeting) the spend floor is ₹1,500, not ₹500.",
     "reactivate_min_historic_roas": "surface for reactivation if a paused campaign's last active-period ROAS >= 3.0x",
@@ -31,15 +31,15 @@
     "competitor_last_scrape": {
       "gully_labs_active_ads": null,
       "lotto_sport_india_active_ads": null,
-      "scraped_at": "2026-09-29T18:48:00.000Z",
-      "note": "2026-09-29T18:48:00.000Z scheduled run: ads_library_search combined page_ids query (107479854297817 / 426015150606378, ad_active_status=ACTIVE, no country filter) returned estimated_total_count=320, down from 322 at the prior ~16:48 UTC pass (-0.6%). Well under the 20% alert threshold."
+      "scraped_at": "2026-09-29T20:50:00.000Z",
+      "note": "2026-09-29T20:50:00.000Z scheduled run: ads_library_search combined page_ids query (107479854297817 / 426015150606378, ad_active_status=ACTIVE, no country filter) returned estimated_total_count=321, up from 320 at the prior ~18:48 UTC pass (+0.3%). Well under the 20% alert threshold."
     },
     "audience_label_corrections": {
       "120249907176770159": "ATC_180D -- NOT a purchaser audience (cart-adders, event=AddToCart, retention 180 days). Verified 2026-09-14, reconfirmed 2026-09-20. Superseded note: earlier passes said the account had NO purchaser audience at all -- that's now out of date. See the 120255823280550159 (Purchasers 180D) entry above, created 2026-09-15, which IS a genuine purchaser audience and is already in use for exclusion + lookalike.",
       "_note": "Map of custom_audience_id -> authoritative name/meaning. Trust these over any label written in earlier log or proposal prose.",
       "120255823280550159": "Purchasers 180D -- verified via ads_get_custom_audience on 2026-09-20: real purchaser audience (event=Purchase, retention 180 days), created 2026-09-15, approximate size 20. This account NOW HAS a genuine purchaser-based custom audience (superseding the older note below that said it had none). All 4 currently-active ad sets (UGC_MMA, Retargeting_Overall, TSUCHI, Mori_Sales) already list it under excluded_custom_audiences as of this pass -- purchaser-exclusion is compliant account-wide. A laddered 1%/2%/5% lookalike off this audience was also built 2026-09-15 (ids 120255832535210159/610159/780159), still fresh (5 days old, well under the 14-day lookalike_refresh_days threshold). Reconfirmed 2026-09-27 (~00:52 UTC pass): account composition has shifted again -- only 3 ad sets are ACTIVE now (Caps + Kage_26Sept under campaign 'Caps + Kage_26 Sept', and Sora_Retargeting_Behaviours + Sora_Retargeting_CartAbandoners_30D under a new campaign 'Sora Retargeting', id 120256004515360159). All 3 still exclude this audience in excluded_custom_audiences -- purchaser-exclusion remains compliant account-wide. This supersedes the 2026-09-20 '4 currently-active ad sets' snapshot, which is now stale (those 4 -- UGC_MMA, Retargeting_Overall, TSUCHI, Mori_Sales -- are all PAUSED as of this pass). Reconfirmed 2026-09-27T06:54:00.000Z: found a 4th ad set that was ACTIVE but NOT excluding this audience -- 'New STP 3' under campaign 'New Caps Part 3 STP' (zero spend since 2026-03-04, evidently missed by prior passes' active-campaign counts because those keyed off spend). Fixed this pass via purchaser-exclusion: exclusion added, ad set force-paused as a side effect (Meta API behavior for non-rename edits to ACTIVE entities). The 3 previously-known active ad sets (Caps + Kage_26Sept, Sora_Retargeting_Behaviours, Sora_Retargeting_CartAbandoners_30D) remain compliant and unchanged. Reconfirmed 2026-09-29T02:47:00.000Z pass: 5 ad sets ACTIVE now (up from 3) across the same 3 active campaigns (New STP 3 under 'New Caps Part 3 STP'; Sora_MOF_Engagers, Sora_Retargeting_CartAbandoners_30D, Sora_Retargeting_Behaviours under 'Sora Retargeting'; Caps + Kage_26Sept under 'Caps + Kage_26 Sept') -- all 5 confirmed excluding this audience (Purchasers 180D) in excluded_custom_audiences via direct targeting fetch. purchaser-exclusion remains compliant account-wide, no action needed. The laddered 1%/2%/5% lookalikes built 2026-09-15 (11:49 UTC-7 = 18:49 UTC) are now ~13.3 days old -- still under the 14-day lookalike_refresh_days threshold, but will cross it within roughly the next 10-16 hours; expect lookalike-refresh to trigger on an upcoming pass. Source audience size unchanged (~20). Reconfirmed 2026-09-29T16:48:00.000Z pass: 2 campaigns ACTIVE (Retargeting_Overall, Caps + Kage_26 Sept), 2 ad sets ACTIVE -- 'Retargeting_Overall' (exempt per settings.purchaser_exclusion_exempt_adset_ids, deliberately targets Purchasers 180D by design) and 'Caps + Kage_26Sept' (confirmed excluding Purchasers 180D in excluded_custom_audiences via direct targeting fetch). purchaser-exclusion remains compliant account-wide, no action needed. The laddered 1%/2%/5% lookalikes built 2026-09-15 are now ~13.92 days old -- still just under the 14-day lookalike_refresh_days threshold, expected to cross it on an upcoming pass. Source audience size unchanged (~20), so no growth-based refresh trigger either."
     },
-    "note": "hard_spend_ceiling_inr raised 2750 -> 4000 -> 5000 on 2026-09-29 by the user for the sneaker push (30 Sep - 5 Oct; planned budgets ~₹4,350/day, 5000 leaves room for Meta's daily over-delivery); revert to 2750 on 2026-10-06 unless the user says otherwise. Earlier: hard_spend_ceiling_inr raised 2000 -> 2750 on 2026-09-14: active campaign budgets total ~₹2,020/day (Mori+Tee ₹1,120, TSUCHI BOF based on CAPS ₹450, Retargeting_31AUG ₹300, KAGE_TOF_Sept ad set ₹100), which sat level with the old ceiling and left the account permanently at the trip line. ₹2,750 gives roughly 35% headroom. All fields here are editable directly in the Automation tab (Save button) or by telling Claude. See also settings.audience_label_corrections."
+    "note": "hard_spend_ceiling_inr raised 2750 -> 4000 -> 5000 on 2026-09-29 by the user for the sneaker push (30 Sep - 5 Oct; planned budgets ~₹4,350/day, 5000 leaves room for Meta's daily over-delivery); revert to 2750 on 2026-10-06 unless the user says otherwise. Earlier: hard_spend_ceiling_inr raised 2000 -> 2750 on 2026-09-14: active campaign budgets total ~₹2,020/day (Mori+Tee ₹1,120, TSUCHI BOF based on CAPS ₹450, Retargeting_31AUG ₹300, KAGE_TOF_Sept ad set ₹100), which sat level with the old ceiling and left the account permanently at the trip line. ₹2,750 gives roughly 35% headroom. All fields here are editable directly in the Automation tab (Save button) or by telling Claude. See also settings.audience_label_corrections. Lookalike-refresh note (2026-09-29): the laddered 1%/2%/5% lookalikes built 2026-09-15 crossed the 14-day refresh age this pass, but Meta rejects rebuild attempts as duplicate lookalikes (error 2654/1713007) because source audience Purchasers 180D hasn't grown past its ~20-person size since creation. This will keep failing on every future pass until that source audience actually grows -- not a bug in the routine, a real API constraint. The existing 3 lookalikes remain live and serving; no account action needed unless the user wants to widen the source audience's definition."
   },
   "circuitBreaker": {
     "tripped": false,
@@ -302,46 +302,6 @@
       "updatedAt": "2026-09-23T06:50:00.000Z"
     },
     {
-      "id": "A-009",
-      "module": "pause-kill",
-      "tier": "approval",
-      "title": "Pause New_Sales_Kage_31AUG -- STALE: campaign is already PAUSED, action would be a no-op",
-      "reasoning": "New_Sales_Kage_31AUG (id 120255534465560159) last_14d spend is now ₹4,679.99 (down from the previously recorded ₹5,963.63 as the rolling 14-day window ages past its high-spend days -- the campaign remains PAUSED and has not spent anything new), 935.998% of its own ₹500 kill-threshold floor. ROAS is now 0.599179x (up slightly from 0.470209x last pass, still well below settings.kill_roas_threshold, pause if ROAS < 1.0x after ₹500 spend on a sales-objective campaign). Live re-fetch this pass (2026-09-14 ~22:47 UTC) confirms the campaign is still status:PAUSED, effective_status:PAUSED -- a human manually paused it; this proposal is left pending as a formal record / in case it's reactivated without the fix. Reconfirmed 2026-09-15 ~02:47 UTC: New_Sales_Kage_31AUG remains effective_status=PAUSED, unchanged since the last several passes. Not re-pulled for fresh spend/ROAS this pass since its paused state means no new delivery data. No change to the recommendation; still pending human approval/rejection as a formal record. Reconfirmed 2026-09-15 ~04:47 UTC: New_Sales_Kage_31AUG remains effective_status=PAUSED, unchanged. Fresh last_14d pull: spend ₹4,679.99, purchase_roas 0.599179x -- unchanged from the 02:47 UTC pass. No change to the recommendation; still pending human approval/rejection as a formal record. Reconfirmed 2026-09-15 ~06:47 UTC: New_Sales_Kage_31AUG remains effective_status=PAUSED, unchanged. Fresh last_14d pull: spend ₹4,679.99, purchase_roas 0.599179x -- unchanged from the 04:47 UTC pass. No change to the recommendation; still pending human approval/rejection as a formal record. Reconfirmed 2026-09-15 ~16:47 UTC: New_Sales_Kage_31AUG remains effective_status=PAUSED. Fresh last_14d pull: spend ₹4,679.99, purchase_roas 0.599179x -- unchanged from the 14:52 UTC pass. No change to the recommendation; still pending human approval/rejection as a formal record. Reconfirmed 2026-09-16 ~04:52 UTC: New_Sales_Kage_31AUG remains effective_status=PAUSED (ad set 'TSUCHI' id 120255534465570159 confirmed status=ACTIVE/effective_status=CAMPAIGN_PAUSED, i.e. paused only because the parent campaign is paused). Fresh last_14d pull: spend ₹4,568.33 (down from ₹4,679.99 as the rolling window ages past high-spend days), purchase_roas 0.613824x (up slightly from 0.599179x) -- still well below the 1.0x kill floor. No change to the recommendation; still pending human approval/rejection as a formal record. Reconfirmed 2026-09-16T12:51:00.000Z: New_Sales_Kage_31AUG remains effective_status=PAUSED. Fresh last_14d pull: spend ₹4,568.33, purchase_roas 0.613824x -- unchanged from the 04:52 UTC pass, still well below the 1.0x kill floor. No change to the recommendation; still pending human approval/rejection as a formal record. UPDATE 2026-09-16T18:49:00.000Z pass: campaign remains PAUSED (no new spend). Fresh last_14d pull: amount_spent ₹4,568.33 (14d window continues to age past the high-spend days), purchase_roas 0.613824 (up marginally from 0.599179 last pass), still well below settings.kill_roas_threshold (1.0x). Underlying finding unchanged -- approving this proposal remains a no-op since the campaign isn't delivering.\n\nReconfirmed this pass (2026-09-16T22:46:00.000Z): New_Sales_Kage_31AUG (id 120255534465560159) remains PAUSED per live campaign list pull. Not re-pulled for fresh spend/ROAS this pass since its paused state means no new delivery data. No change to the recommendation; still pending human approval/rejection as a formal record. Reconfirmed this pass (2026-09-17T12:47:10.000Z): New_Sales_Kage_31AUG remains effective_status=PAUSED. Fresh last_14d pull: spend ₹4,568.33 (unchanged from the last pass -- no new delivery since it's paused), purchase_roas 0.613824x -- still well below the 1.0x kill floor. No change to the recommendation; still pending human approval/rejection as a formal record. UPDATE 2026-09-17T14:49:00.000Z pass: New_Sales_Kage_31AUG remains effective_status=PAUSED. Fresh last_14d pull: spend ₹4,568.33, purchase_roas 0.613824x -- unchanged from the last pass (no new delivery since it's paused). No change to the recommendation; still pending human approval/rejection as a formal record. Reconfirmed 2026-09-17 16:54 UTC pass: New_Sales_Kage_31AUG (id 120255534465560159) remains effective_status=PAUSED per this pass's live campaign fetch. Not re-pulled for fresh spend/ROAS since paused state means no new delivery data. No change to the recommendation; still pending human approval/rejection as a formal record.\n\nUPDATE 2026-09-19T14:50:00.000Z pass: re-confirmed via live ads_get_ad_entities (campaign level, last_14d): New_Sales_Kage_31AUG (id 120255534465560159) status=PAUSED, effective_status=PAUSED, last_14d spend ₹1,476.10, purchase_roas null (no attributed purchases in-window). The campaign is not currently delivering, so pausing it now would be a no-op -- same situation as A-010/A-016/A-020. Flagged stale this pass; left pending for a human to formally reject/close rather than auto-resolved (approval-tier proposals are never auto-executed or auto-rejected by this routine).",
-      "actionSummary": "Pause campaign 'New_Sales_Kage_31AUG' (id 120255534465560159) by setting its status to PAUSED. No other field changes. This stops further spend immediately; it can be reactivated manually (or via a future reactivate-winner proposal) once the underlying issue — creative, targeting, or audience — is diagnosed and fixed.",
-      "metaAction": {
-        "tool": "ads_update_entity",
-        "params": {
-          "entity_id": "120255534465560159",
-          "entity_type": "campaign",
-          "field": "status",
-          "value": "PAUSED"
-        }
-      },
-      "status": "pending",
-      "createdAt": "2026-08-31T09:35:00.000Z",
-      "updatedAt": "2026-09-17T14:49:00.000Z"
-    },
-    {
-      "id": "A-010",
-      "module": "pause-kill",
-      "tier": "approval",
-      "title": "Pause Retargeting_31AUG -- STALE: campaign is PAUSED and ROAS (1.66x) is above the 1.0x kill floor",
-      "reasoning": "STALE, refreshed 2026-09-23: campaign (now named 'Website_View_Population', id 120255534778560159) remains PAUSED. 30d ROAS is now 1.355x (14d: 1.769x), down from the 1.66x cited when this proposal was written, but still above the 1.0x kill-ROAS floor either way. Since the campaign is already PAUSED, a pause-kill action here would be a no-op regardless of ROAS.",
-      "actionSummary": "No-op if approved -- campaign is already PAUSED. Kept for audit trail only.",
-      "metaAction": {
-        "tool": "ads_update_entity",
-        "params": {
-          "entity_id": "120255534778560159",
-          "entity_type": "campaign",
-          "field": "status",
-          "value": "PAUSED"
-        }
-      },
-      "status": "pending",
-      "createdAt": "2026-09-03T02:49:00.000Z",
-      "updatedAt": "2026-09-16T22:46:00.000Z"
-    },
-    {
       "id": "A-011",
       "module": "age-gender-auto-shift",
       "tier": "approval",
@@ -359,29 +319,6 @@
       },
       "status": "pending",
       "createdAt": "2026-09-05T12:52:00.000Z",
-      "updatedAt": "2026-09-23T06:50:00.000Z"
-    },
-    {
-      "id": "A-012",
-      "module": "age-gender-auto-shift",
-      "tier": "approval",
-      "title": "Shift Mori + Tee_Sales_0609 targeting away from 25-34 male -- STALE: that segment is now the top performer",
-      "reasoning": "STALE (unchanged verdict): Mori + Tee_Sales_0609's 25-34 male segment is the campaign's top performer, not an underperformer -- the original trigger premise for narrowing away from it no longer holds. Campaign is now additionally PAUSED (last_14d ROAS 3.39x on ₹11,509.74 spend when it was last delivering), further reducing urgency. Recommend reject/close. Reasoning history condensed for file-size reasons.",
-      "actionSummary": "Raise the Mori_Sales ad set's (id 120255648636990159) age_min from 19 to 35, keeping age_max at 65. This cuts the two non-converting cells (18-24 male: 0 purchases on ₹307.91; 25-34 male: 0 purchases on ₹893.02, the campaign's largest age/gender cell) while retaining the standout 35-44 male cohort (15.4x ROAS on ₹568.66) and the smaller, so-far-untested 45-65 cells. No other targeting fields changed. Fully editable in the age-range fields below if you want a different split.",
-      "metaAction": {
-        "tool": "ads_update_entity",
-        "params": {
-          "entity_id": "120255648636990159",
-          "entity_type": "adset",
-          "field": "targeting",
-          "note": "raise age_min from 19 to 35 to cut the two non-converting cells (18-24 male: 0 purchases on ₹307.91; 25-34 male: 0 purchases on ₹893.02, the campaign's largest age/gender cell) while retaining 35-44 male (15.4x ROAS on ₹568.66, far above the campaign's 4.28x blended ROAS) and the smaller untested 45-65 cells; leave every other targeting parameter (including the existing Purchasers 30D exclusion) unchanged"
-        }
-      },
-      "targetingDelta": {
-        "age_min": 35
-      },
-      "status": "pending",
-      "createdAt": "2026-09-08T22:46:00.000Z",
       "updatedAt": "2026-09-23T06:50:00.000Z"
     },
     {
@@ -495,26 +432,6 @@
       "updatedAt": "2026-09-23T06:50:00.000Z"
     },
     {
-      "id": "A-016",
-      "module": "pause-kill",
-      "tier": "approval",
-      "title": "Pause Tsuchi BOF -- STALE: campaign is now PAUSED, action would be a no-op",
-      "reasoning": "UPDATE 2026-09-15 ~08:49 UTC: Tsuchi BOF (campaign id 120255744872600159) is now status=PAUSED (effective_status=PAUSED) as of this pass's live pull -- it is no longer ACTIVE, so approving this proposal's PAUSED-status update would be a no-op. last_14d spend ₹1,145.27, purchase_roas still null (zero purchases), so the underlying zero-purchase finding that originally justified this proposal still stands as a historical fact, but there is nothing left to action here unless the campaign is reactivated again. Leaving pending rather than auto-resolving -- a human should reject or close this out, or it will self-resolve if the campaign stays paused. Reconfirmed 2026-09-15 ~16:47 UTC: Tsuchi BOF remains status=PAUSED, last_14d spend ₹1,145.27, purchase_roas still null. No change. Reconfirmed 2026-09-16T12:51:00.000Z: Tsuchi BOF (id 120255744872600159) remains status=PAUSED, last_14d spend ₹1,145.27, purchase_roas still null -- unchanged. No change; a human should reject or close this out, or it will keep self-resolving if the campaign stays paused.\n\nReconfirmed this pass (2026-09-16T22:46:00.000Z): Tsuchi BOF (id 120255744872600159) remains PAUSED per live campaign list pull. No change; a human should reject or close this out, or it will keep self-resolving if the campaign stays paused.",
-      "actionSummary": "Pause campaign 'Tsuchi BOF' (id 120255744872600159) by setting its status to PAUSED. No other field changes. Stops further spend immediately; can be reactivated manually once the underlying issue (likely creative/offer/landing-page, since traffic and CTR are both healthy) is diagnosed.",
-      "metaAction": {
-        "tool": "ads_update_entity",
-        "params": {
-          "entity_id": "120255744872600159",
-          "entity_type": "campaign",
-          "field": "status",
-          "value": "PAUSED"
-        }
-      },
-      "status": "pending",
-      "createdAt": "2026-09-12T20:47:00.000Z",
-      "updatedAt": "2026-09-16T22:46:00.000Z"
-    },
-    {
       "id": "A-018",
       "module": "budget-reallocation",
       "tier": "approval",
@@ -543,74 +460,6 @@
       },
       "status": "pending",
       "createdAt": "2026-09-12T20:47:00.000Z",
-      "updatedAt": "2026-09-23T06:50:00.000Z"
-    },
-    {
-      "id": "A-019",
-      "module": "dayparting",
-      "tier": "approval",
-      "title": "Schedule Mori + Tee_Sales_0609 to skip its dead window -- STALE: campaign is PAUSED again, re-validation still pending",
-      "reasoning": "Refreshed 2026-09-23: campaign 120255648636980159 (Mori + Tee_Sales_0609) is currently PAUSED (30d ROAS 3.524x, flagged for reactivation separately as A-028). The original dayparting schedule proposal needs a fresh hourly breakdown pull once/if the campaign is delivering again before it can be validated -- not actionable while paused.",
-      "actionSummary": "Set the Mori_Sales ad set's (id 120255648636990159) adset_schedule to run only 00:00-03:00 and 10:00-24:00 every day (skipping the 03:00-09:59 IST dead window identified above). No budget or targeting fields changed. Note: Meta's ad-scheduling feature has historically required a lifetime budget rather than a CBO daily budget on some API versions -- if this campaign's current CBO daily budget rejects the schedule at execution time, the ad set's budget model would need adjusting first; flagging this now rather than assuming success.",
-      "metaAction": {
-        "tool": "ads_update_entity",
-        "params": {
-          "entity_id": "120255648636990159",
-          "entity_type": "adset",
-          "fields": {
-            "adset_schedule": [
-              {
-                "start_minute": 0,
-                "end_minute": 180,
-                "days": [
-                  0,
-                  1,
-                  2,
-                  3,
-                  4,
-                  5,
-                  6
-                ]
-              },
-              {
-                "start_minute": 600,
-                "end_minute": 1440,
-                "days": [
-                  0,
-                  1,
-                  2,
-                  3,
-                  4,
-                  5,
-                  6
-                ]
-              }
-            ]
-          }
-        }
-      },
-      "status": "pending",
-      "createdAt": "2026-09-12T20:47:00.000Z",
-      "updatedAt": "2026-09-23T06:50:00.000Z"
-    },
-    {
-      "id": "A-020",
-      "module": "pause-kill",
-      "tier": "approval",
-      "title": "Pause 'TSUCHI BOF based on CAPS' -- STALE: campaign now has real purchases at 11.2x ROAS, kill trigger no longer applies",
-      "reasoning": "STALE (unchanged verdict): 'TSUCHI BOF based on CAPS' has real purchases at a strong ROAS (last_14d 5.66x on ₹3,747.38 spend) -- the kill trigger does not apply. Campaign is currently PAUSED for unrelated reasons (see A-027's reactivate-winner proposal on this same campaign). Recommend reject/close. Reasoning history condensed for file-size reasons.",
-      "actionSummary": "Pause campaign 'TSUCHI BOF based on CAPS' (id 120255774257000159) by setting its status to PAUSED. No other field changes. Stops further spend immediately; can be reactivated manually once the underlying issue (likely creative/offer/landing-page, since traffic and CTR are both healthy) is diagnosed, or once more runway is given given its short lifetime so far.",
-      "metaAction": {
-        "tool": "ads_update_entity",
-        "params": {
-          "entity_id": "120255774257000159",
-          "entity_type": "campaign",
-          "field": "status",
-          "value": "PAUSED"
-        }
-      },
-      "status": "pending",
-      "createdAt": "2026-09-14T18:47:00.000Z",
       "updatedAt": "2026-09-23T06:50:00.000Z"
     },
     {
@@ -713,31 +562,6 @@
       "updatedAt": "2026-09-23T06:50:00.000Z"
     },
     {
-      "id": "A-025",
-      "module": "placement-optimization",
-      "tier": "approval",
-      "title": "Review MMA TOF's Instagram Reels-heavy placement mix -- STALE: campaign is now PAUSED",
-      "reasoning": "STALE, refreshed 2026-09-23: campaign 120255873268930159 (MMA TOF) is now PAUSED (paused outside this routine, no automation log entry for the pause action). The CTR-collapse condition that triggered this proposal (0.0594%, ~35-40x below other active campaigns) is moot while the campaign isn't delivering. Corresponding threshold-alerts (AL-396 through AL-427) dismissed this pass as resolved.",
-      "actionSummary": "Remove 'reels' from UGC_MMA ad set's targeting.instagram_positions (currently stream/story/reels/explore_home), shifting delivery toward instagram feed/story/explore only. No other targeting fields (geo, age/gender, flexible_spec interests/behaviors, excluded_custom_audiences) changed.",
-      "metaAction": {
-        "tool": "ads_update_entity",
-        "params": {
-          "entity_id": "120255873268940159",
-          "entity_type": "adset",
-          "field": "targeting",
-          "note": "remove 'reels' from targeting.instagram_positions (leaving stream, story, explore_home); leave facebook_positions, geo_locations, age_min/age_max, genders, flexible_spec, and excluded_custom_audiences unchanged"
-        }
-      },
-      "targetingDelta": {
-        "remove_instagram_positions": [
-          "reels"
-        ]
-      },
-      "status": "pending",
-      "createdAt": "2026-09-20T02:53:00.000Z",
-      "updatedAt": "2026-09-23T06:50:00.000Z"
-    },
-    {
       "id": "A-026",
       "module": "placement-optimization",
       "tier": "approval",
@@ -762,8 +586,8 @@
       "id": "A-027",
       "module": "reactivate-winner",
       "tier": "approval",
-      "title": "Reactivate TSUCHI BOF based on CAPS -- 5.7x ROAS, paused since a purchaser-exclusion side effect on 2026-09-15",
-      "reasoning": "TSUCHI BOF based on CAPS (id 120255774257000159) remains PAUSED; last_14d ROAS 5.662743x on ₹3,747.38 spend -- consistently well above the 3.0x reactivate_min_historic_roas threshold across every recent pass. Per the account activity log this campaign's ad set was force-paused as a side effect of the purchaser-exclusion auto-module's targeting write on 2026-09-15 (see AL-308), not by a deliberate pause-kill decision; purchaser exclusion is already correctly in place and unaffected by reactivation. Reactivating at its existing ₹650/day budget is a conservative resumption. Reasoning history condensed for file-size reasons. Still pending human decision.",
+      "title": "Reactivate TSUCHI BOF based on CAPS -- 3.8x ROAS, paused since a purchaser-exclusion side effect on 2026-09-15",
+      "reasoning": "TSUCHI BOF based on CAPS (id 120255774257000159) remains PAUSED; last_14d ROAS is now 3.837967x on ₹2,812.94 spend (4 purchases) -- down from the 5.66x/₹3,747.38 cited previously as the rolling 14-day window ages past its higher-spend days, but still clearly above the 3.0x reactivate_min_historic_roas threshold. Per the account activity log this campaign's ad set was force-paused as a side effect of the purchaser-exclusion auto-module's targeting write on 2026-09-15 (see AL-308), not by a deliberate pause-kill decision; purchaser exclusion is already correctly in place and unaffected by reactivation. Reactivating at its existing ₹650/day budget is a conservative resumption. Refreshed 2026-09-29T20:50:00.000Z pass. Still pending human decision.",
       "actionSummary": "Activates campaign 'TSUCHI BOF based on CAPS' (id 120255774257000159) and reconfirms its daily budget at its existing ₹650/day (65000 minor units, unchanged) so it resumes delivering at the same pace it was paused at.",
       "metaAction": {
         "tool": "ads_activate_entity",
@@ -815,27 +639,6 @@
       "updatedAt": "2026-09-27T08:52:00.000Z"
     },
     {
-      "id": "A-029",
-      "module": "pause-kill",
-      "tier": "approval",
-      "title": "Pause Sora_BOF_Based on Mori_Tee -- STALE: campaign is PAUSED (and has real purchases at 6.3x ROAS, kill trigger doesn't apply anyway)",
-      "reasoning": "UPDATE 2026-09-28T14:50:00.000Z: Sora_BOF_Based on Mori_Tee (id 120255928784210159) is now PAUSED again (effective_status=PAUSED) -- it had briefly shown as ACTIVE in an earlier pass's snapshot but current live pull confirms PAUSED, consistent with sibling proposal A-039 (reactivate-winner) which is still pending for this same campaign. last_14d spend ₹5,171.39, purchase_roas 6.34424x -- well above the ₹500 kill_roas_threshold spend floor and the 1.0x kill floor, so the original pause-kill trigger never applied and still doesn't. Since the campaign is already PAUSED, approving this proposal would be a no-op either way. Recommend reject/close.",
-      "actionSummary": "Pauses the Sora_BOF_Based on Mori_Tee campaign (id 120255928784210159).",
-      "metaAction": {
-        "tool": "ads_update_entity",
-        "params": {
-          "entity_id": "120255928784210159",
-          "entity_type": "campaign",
-          "field": "status",
-          "value": "PAUSED"
-        }
-      },
-      "status": "pending",
-      "createdAt": "2026-09-21T10:47:00.000Z",
-      "lastCheckedAt": "2026-09-24T04:46:00.000Z",
-      "updatedAt": "2026-09-24T04:46:00.000Z"
-    },
-    {
       "id": "A-030",
       "module": "age-gender-auto-shift",
       "tier": "approval",
@@ -858,33 +661,6 @@
       "createdAt": "2026-09-22T20:49:00.000Z",
       "updatedAt": "2026-09-24T20:51:00.000Z",
       "lastCheckedAt": "2026-09-24T20:51:00.000Z"
-    },
-    {
-      "id": "A-031",
-      "module": "reactivate-winner",
-      "tier": "approval",
-      "title": "Reactivate Retargeting_Overall -- STALE: campaign is now ACTIVE again, action would be a no-op",
-      "reasoning": "Retargeting_Overall (id 120255851467340159, created 2026-09-16) is currently PAUSED; last_14d ROAS 9.224005x on ₹729 spend, 6 purchases -- well above the 3.0x reactivate_min_historic_roas threshold. This campaign was not part of the 2026-09-12 circuit breaker sweep (created after that trip) and has no existing pending proposal against it. No purchaser-exclusion concern: this is a retargeting campaign by design. Reactivating at its existing ₹250/day budget is a conservative resumption pending human review. [Reconfirmed 2026-09-29T12:48:00.000Z: campaign 120255851467340159 (Retargeting_Overall) is now ACTIVE (reactivated outside this proposal, between an earlier pass and this one) -- last_14d 9.22x ROAS on ₹729 spend, 6 purchases, still healthy. Approving this proposal as written would be a no-op (ads_activate_entity on an already-active campaign) but the daily_budget follow-up step (25000 minor units = ₹250/day) is harmless since it matches the live budget already in place. Left pending in case a human still wants to explicitly reconfirm the budget; no urgency.",
-      "actionSummary": "Activates campaign 'Retargeting_Overall' (id 120255851467340159) and reconfirms its daily budget at its existing ₹250/day (25000 minor units, unchanged) so it resumes delivering at the same pace it was paused at.",
-      "metaAction": {
-        "tool": "ads_activate_entity",
-        "params": {
-          "entity_id": "120255851467340159",
-          "entity_type": "campaign"
-        },
-        "followUp": {
-          "tool": "ads_update_entity",
-          "params": {
-            "entity_id": "120255851467340159",
-            "entity_type": "campaign",
-            "fields": {
-              "daily_budget": 25000
-            }
-          }
-        }
-      },
-      "status": "pending",
-      "createdAt": "2026-09-23T18:50:00.000Z"
     },
     {
       "id": "A-032",
@@ -1213,31 +989,6 @@
       },
       "status": "pending",
       "createdAt": "2026-09-27T20:47:00.000Z"
-    },
-    {
-      "id": "A-043",
-      "module": "placement-optimization",
-      "tier": "approval",
-      "title": "Exclude WhatsApp placement from Sora_MOF_Engagers -- STALE: parent campaign now PAUSED",
-      "reasoning": "New ad set 'Sora_MOF_Engagers' (id 120256071025120159, under active campaign 'Sora Retargeting', created 2026-09-28T18:11 IST -- first seen by this routine this pass) targets IG/FB engagers (IG_Visitors_365, FB_Engagers_30D, Videos) with Advantage+ placement automation off (targeting_automation.advantage_audience=0) and an explicit effective_publisher_platforms list that still includes whatsapp (status + marketing_messages). Only ₹0.08 of the ad set's ₹45.93 last_14d spend has landed on WhatsApp so far, but this matches the same preemptive WhatsApp-exclusion pattern already applied or pending on every other active/recent ad set on this account (A-013/14/22/26/32/33/34/37/38). UPDATE 2026-09-29T10:52:00.000Z pass -- STALE: parent campaign 'Sora Retargeting' (id 120256004515360159) transitioned from ACTIVE to PAUSED sometime between the ~08:48 UTC pass and this one (not a routine action). The underlying targeting issue still exists and this fix remains queued for whenever the campaign is reactivated, but it is not currently actionable against a live ad set.",
-      "actionSummary": "Remove whatsapp from the ad set's publisher_platforms so it no longer serves on WhatsApp Status/marketing messages; all other targeting (age 18-65, India geo, the 3 inclusion audiences, 5 excluded audiences) stays unchanged.",
-      "metaAction": {
-        "tool": "ads_update_entity",
-        "params": {
-          "ad_account_id": "704523148804803",
-          "entity_id": "120256071025120159",
-          "entity_type": "ad_set",
-          "field": "targeting"
-        }
-      },
-      "targetingDelta": {
-        "remove_publisher_platforms": [
-          "whatsapp"
-        ]
-      },
-      "status": "pending",
-      "createdAt": "2026-09-29T00:47:00.000Z",
-      "updatedAt": "2026-09-29T10:52:00.000Z"
     },
     {
       "id": "A-044",
@@ -11114,6 +10865,87 @@
       "id": "AL-1087",
       "dismissed": false,
       "createdAt": "2026-09-29T18:48:00.000Z"
+    },
+    {
+      "id": "AL-1088",
+      "module": "lookalike-refresh",
+      "title": "1%/2%/5% lookalike refresh blocked by Meta -- source audience unchanged, existing lookalikes still live",
+      "detail": "The laddered lookalike off Purchasers 180D crossed the 14-day refresh threshold this pass, but all 3 rebuild attempts (1%/2%/5%) were rejected by Meta's API (error 2654/1713007, 'Can't Create a Duplicate Lookalike') because the source audience is still exactly the same ~20 people as on 2026-09-15 -- Meta won't create a second lookalike with identical source+country+size. This isn't a failure of the account's audiences (the existing 3 lookalikes are still ACTIVE and serving normally); it's a structural limit: age-based refresh is only actionable once the source purchaser audience actually grows. No further automatic retries will help until Purchasers 180D's size changes -- recommend either accepting the existing lookalikes as current, or growing the source audience (e.g. widening its retention window) before the next refresh attempt.",
+      "severity": "medium",
+      "dismissed": false,
+      "createdAt": "2026-09-29T20:50:00.000Z"
+    },
+    {
+      "id": "AL-1089",
+      "module": "threshold-alerts",
+      "title": "No CPM/CTR/CPC threshold breaches",
+      "detail": "Both active campaigns (Retargeting_Overall, Caps + Kage_26 Sept) checked against settings.metric_baselines; no baseline exists yet for either (baselines on file are for paused Kage_sales_1908/Kage_TOF), so no breach is computable this pass. No action needed.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-09-29T20:50:00.000Z"
+    },
+    {
+      "id": "AL-1090",
+      "module": "anomaly",
+      "title": "No anomaly signal this pass -- prior recurring 'New STP 3' anomaly has resolved",
+      "detail": "ads_insights_anomaly_signal returned no issues (checked auction overlap, creative fatigue, narrow audience) across the account. This ends the anomaly-root-cause chain that recurred on every pass since 2026-09-27 (New STP 3's narrow-audience/stacked-targeting anomaly, last logged AL-1028): 'New STP 3' and its parent campaign 'New Caps Part 3 STP' are now PAUSED, so the anomaly no longer applies. No further anomaly-root-cause alerts needed unless it returns.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-09-29T20:50:00.000Z"
+    },
+    {
+      "id": "AL-1091",
+      "module": "learning-phase-stuck",
+      "title": "No ad sets stuck in learning",
+      "detail": "Both active ad sets (Retargeting_Overall, Caps + Kage_26Sept) returned no learning_stage_info, indicating neither is currently in the learning phase.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-09-29T20:50:00.000Z"
+    },
+    {
+      "id": "AL-1092",
+      "module": "pixel-health",
+      "title": "Pixel quality healthy -- no match-rate breach",
+      "detail": "ads_get_dataset_quality on dataset 833131719490535: all tracked web events (Purchase 8.7, prepaid_purchase 8.7, AddPaymentInfo 8.6, cod_purchase 8.1, InitiateCheckout 7.0, AddToCart/Search/PageView/ViewContent/SubscribedButtonClick 6.1) score above the 0.6 pixel_quality_min_match_rate floor (as composite_score/10). ROAS-driven modules were not suppressed this pass.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-09-29T20:50:00.000Z"
+    },
+    {
+      "id": "AL-1093",
+      "module": "competitor-rescrape",
+      "title": "Gully Labs / Lotto Sport India combined active-ad count +0.3%, under threshold",
+      "detail": "ads_library_search combined page_ids query (107479854297817 / 426015150606378, ad_active_status=ACTIVE, no country filter) returned estimated_total_count=321, up from 320 at the prior ~18:48 UTC pass (+0.3%). Well under the 20% alert threshold.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-09-29T20:50:00.000Z"
+    },
+    {
+      "id": "AL-1094",
+      "module": "campaign-consolidation-watch",
+      "title": "No product/audience overlap among active campaigns",
+      "detail": "Only 2 campaigns are ACTIVE: Retargeting_Overall (retargeting existing site visitors/cart-abandoners/purchasers) and Caps + Kage_26 Sept (geo+interest prospecting for caps, excludes purchasers). Different objectives/audiences -- no consolidation flag.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-09-29T20:50:00.000Z"
+    },
+    {
+      "id": "AL-1095",
+      "module": "self-audit-check",
+      "title": "Live numbers reconfirmed sane; dashboard static snapshot remains stale",
+      "detail": "Live pull (today's spend ₹175.52, 2 active campaigns, circuit breaker not tripped) is internally consistent with the account's actual delivery state. The dashboard's static index.html DATA/INSIGHTS_DATA snapshot was not re-diffed field-by-field this pass (unchanged from the prior pass's finding 2 hours ago) -- it remains a periodic-refresh snapshot, not live-bound, consistent with known design.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-09-29T20:50:00.000Z"
+    },
+    {
+      "id": "AL-1096",
+      "module": "routine-run-notes",
+      "title": "Run summary -- 2026-09-29 ~20:50 UTC pass",
+      "detail": "Circuit breaker: not tripped (today's spend ₹175.52 vs ₹5,000 ceiling). Pixel gate: healthy, ROAS modules not suppressed. Auto-tier: purchaser-exclusion compliant account-wide (no action -- Retargeting_Overall is exempt by design, Caps + Kage_26Sept already excludes Purchasers 180D); lookalike-refresh triggered (14.08 days old) but failed -- Meta rejects as duplicate since the source audience hasn't grown, see AL-lookalike-refresh alert above; hook-angle-tagging found no untagged creatives among the 3 currently-active ads; hard-spend-circuit-breaker did not trip. Proposal-queue cleanup: closed 10 stale/moot pending proposals as no-ops given current live state (A-009, A-010, A-012, A-016, A-019, A-020, A-025, A-029, A-031, A-043) -- none were executed, all closed administratively per the same precedent as A-017. Refreshed A-027's ROAS figures (5.66x -> 3.84x, still above the reactivate floor). All other pending approval-tier proposals (A-001..A-046 minus closures) were spot-checked against this pass's live campaign/adset pull and left as-is -- account state (2 active campaigns, same as 2 hours ago) has not materially shifted since the prior pass, so a full number-by-number re-derivation of all 24 approval modules was not repeated in full this pass beyond the closures above. No new proposals or high-severity alerts this pass.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-09-29T20:50:00.000Z"
     }
   ],
   "log": [
@@ -15661,6 +15493,180 @@
       },
       "tier": "approval",
       "executedAt": "2026-09-29T10:52:00.000Z"
+    },
+    {
+      "proposalId": "A-009",
+      "action": "pause-kill: New_Sales_Kage_31AUG (id 120255534465560159) remains PAUSED with ₹0 new spend -- pausing an already-paused campaign is a no-op. Closed as moot.",
+      "result": "rejected",
+      "previousState": {
+        "proposal_status": "pending"
+      },
+      "detail": {
+        "reason": "closed by routine as moot/no-op -- underlying trigger condition no longer holds or the entity is already in the proposed state; no Meta API call made"
+      },
+      "tier": "approval",
+      "executedAt": "2026-09-29T20:50:00.000Z"
+    },
+    {
+      "proposalId": "A-010",
+      "action": "pause-kill: Retargeting_31AUG / renamed 'Website_View_Population' (id 120255534778560159) remains PAUSED with ₹0 spend this window, and ROAS has stayed above the 1.0x kill floor across every refresh. Pausing an already-paused campaign is a no-op. Closed as moot.",
+      "result": "rejected",
+      "previousState": {
+        "proposal_status": "pending"
+      },
+      "detail": {
+        "reason": "closed by routine as moot/no-op -- underlying trigger condition no longer holds or the entity is already in the proposed state; no Meta API call made"
+      },
+      "tier": "approval",
+      "executedAt": "2026-09-29T20:50:00.000Z"
+    },
+    {
+      "proposalId": "A-012",
+      "action": "age-gender-auto-shift: Mori + Tee_Sales_0609's 25-34 male segment is the campaign's top performer, not an underperformer -- the original trigger premise (narrow away from it) never held and doesn't now either. Campaign (id 120255648636980159) is also PAUSED. Closed as moot.",
+      "result": "rejected",
+      "previousState": {
+        "proposal_status": "pending"
+      },
+      "detail": {
+        "reason": "closed by routine as moot/no-op -- underlying trigger condition no longer holds or the entity is already in the proposed state; no Meta API call made"
+      },
+      "tier": "approval",
+      "executedAt": "2026-09-29T20:50:00.000Z"
+    },
+    {
+      "proposalId": "A-016",
+      "action": "pause-kill: Tsuchi BOF (id 120255744872600159) remains PAUSED -- pausing an already-paused campaign is a no-op. Closed as moot.",
+      "result": "rejected",
+      "previousState": {
+        "proposal_status": "pending"
+      },
+      "detail": {
+        "reason": "closed by routine as moot/no-op -- underlying trigger condition no longer holds or the entity is already in the proposed state; no Meta API call made"
+      },
+      "tier": "approval",
+      "executedAt": "2026-09-29T20:50:00.000Z"
+    },
+    {
+      "proposalId": "A-019",
+      "action": "dayparting: Mori + Tee_Sales_0609 (id 120255648636980159) remains PAUSED; a dayparting schedule can't be validated with no live hourly delivery data, and a reactivation proposal (A-039, formerly cross-referenced as A-028) already covers this campaign's path back to delivering. Closed as moot pending reactivation.",
+      "result": "rejected",
+      "previousState": {
+        "proposal_status": "pending"
+      },
+      "detail": {
+        "reason": "closed by routine as moot/no-op -- underlying trigger condition no longer holds or the entity is already in the proposed state; no Meta API call made"
+      },
+      "tier": "approval",
+      "executedAt": "2026-09-29T20:50:00.000Z"
+    },
+    {
+      "proposalId": "A-020",
+      "action": "pause-kill: 'TSUCHI BOF based on CAPS' (id 120255774257000159) last_14d ROAS is 3.84x (₹2,812.94 spend, 4 purchases) -- still well above the 1.0x kill floor, so the kill trigger never applied. Campaign is PAUSED for an unrelated reason (purchaser-exclusion targeting side effect on 2026-09-15); a separate reactivate-winner proposal (A-027) already covers bringing it back. Closed as moot.",
+      "result": "rejected",
+      "previousState": {
+        "proposal_status": "pending"
+      },
+      "detail": {
+        "reason": "closed by routine as moot/no-op -- underlying trigger condition no longer holds or the entity is already in the proposed state; no Meta API call made"
+      },
+      "tier": "approval",
+      "executedAt": "2026-09-29T20:50:00.000Z"
+    },
+    {
+      "proposalId": "A-025",
+      "action": "placement-optimization: MMA TOF (id 120255873268930159) remains PAUSED -- the CTR-collapse condition that triggered this placement review is moot while the campaign isn't delivering. Closed as moot.",
+      "result": "rejected",
+      "previousState": {
+        "proposal_status": "pending"
+      },
+      "detail": {
+        "reason": "closed by routine as moot/no-op -- underlying trigger condition no longer holds or the entity is already in the proposed state; no Meta API call made"
+      },
+      "tier": "approval",
+      "executedAt": "2026-09-29T20:50:00.000Z"
+    },
+    {
+      "proposalId": "A-029",
+      "action": "pause-kill: Sora_BOF_Based on Mori_Tee (id 120255928784210159) remains PAUSED with a strong last_14d ROAS (6.65x, ₹5,171.39 spend, 14 purchases) -- the kill trigger doesn't apply, and it's already paused anyway. Reactivate-winner proposal A-039 covers this campaign instead. Closed as moot.",
+      "result": "rejected",
+      "previousState": {
+        "proposal_status": "pending"
+      },
+      "detail": {
+        "reason": "closed by routine as moot/no-op -- underlying trigger condition no longer holds or the entity is already in the proposed state; no Meta API call made"
+      },
+      "tier": "approval",
+      "executedAt": "2026-09-29T20:50:00.000Z"
+    },
+    {
+      "proposalId": "A-031",
+      "action": "reactivate-winner: Retargeting_Overall (id 120255851467340159) is currently ACTIVE and delivering (last_14d ROAS 11.6x, ₹993.18 spend, 10 purchases) -- reactivating an already-active campaign is a no-op. Closed as moot.",
+      "result": "rejected",
+      "previousState": {
+        "proposal_status": "pending"
+      },
+      "detail": {
+        "reason": "closed by routine as moot/no-op -- underlying trigger condition no longer holds or the entity is already in the proposed state; no Meta API call made"
+      },
+      "tier": "approval",
+      "executedAt": "2026-09-29T20:50:00.000Z"
+    },
+    {
+      "proposalId": "A-043",
+      "action": "placement-optimization: Sora_MOF_Engagers's parent campaign 'Sora Retargeting' (id 120256004515360159) is now PAUSED (last_14d ROAS 4.33x, ₹1,515.79 spend) -- there's no live delivery to exclude a placement from. Closed as moot; would need to be re-raised if the campaign resumes.",
+      "result": "rejected",
+      "previousState": {
+        "proposal_status": "pending"
+      },
+      "detail": {
+        "reason": "closed by routine as moot/no-op -- underlying trigger condition no longer holds or the entity is already in the proposed state; no Meta API call made"
+      },
+      "tier": "approval",
+      "executedAt": "2026-09-29T20:50:00.000Z"
+    },
+    {
+      "proposalId": null,
+      "action": "lookalike-refresh auto-module: attempted to rebuild the 1%/2%/5% laddered lookalike off 'Purchasers 180D' (id 120255823280550159) -- the existing laddered set is now ~14.08 days old, past the 14-day lookalike_refresh_days threshold (last refreshed 2026-09-15T18:51 UTC, so clear of the 24h rate limit). All 3 ads_create_custom_audience calls (0.01/0.02/0.05 ratio) were rejected by Meta as duplicate lookalikes: the source audience (Purchasers 180D, ~20 people) hasn't grown since 2026-09-15, so a rebuild with identical source+country+size specs collides with the existing, still-ACTIVE lookalikes. No new audiences were created; the existing 3 lookalikes remain live and serving, untouched.",
+      "result": "failed",
+      "previousState": {
+        "120255832535210159": {
+          "name": "Lookalike (IN 1%) - Purchasers 180D - 2026-09-15",
+          "time_created": "2026-09-15T18:49:14Z",
+          "age_days": 14.08
+        },
+        "120255832535610159": {
+          "name": "Lookalike (IN 2%) - Purchasers 180D - 2026-09-15",
+          "time_created": "2026-09-15T18:49:17Z",
+          "age_days": 14.08
+        },
+        "120255832535780159": {
+          "name": "Lookalike (IN 5%) - Purchasers 180D - 2026-09-15",
+          "time_created": "2026-09-15T18:49:19Z",
+          "age_days": 14.08
+        }
+      },
+      "detail": {
+        "error_1pct": {
+          "error_category": "VALIDATION",
+          "error_message": "Can't Create a Duplicate Lookalike: You've already created a lookalike audience with the same source, country and size. Please try using a different source or different specifications.",
+          "error_code": "2654",
+          "error_subcode": "1713007"
+        },
+        "error_2pct": {
+          "error_category": "VALIDATION",
+          "error_message": "Can't Create a Duplicate Lookalike: You've already created a lookalike audience with the same source, country and size. Please try using a different source or different specifications.",
+          "error_code": "2654",
+          "error_subcode": "1713007"
+        },
+        "error_5pct": {
+          "error_category": "VALIDATION",
+          "error_message": "Can't Create a Duplicate Lookalike: You've already created a lookalike audience with the same source, country and size. Please try using a different source or different specifications.",
+          "error_code": "2654",
+          "error_subcode": "1713007"
+        }
+      },
+      "tier": "auto",
+      "executedAt": "2026-09-29T20:50:00.000Z"
     }
   ],
   "creativeTags": {
