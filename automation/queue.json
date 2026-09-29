@@ -1,13 +1,18 @@
 {
   "generatedAt": "2026-09-29T08:48:00.000Z",
   "settings": {
-    "kill_roas_threshold": "pause if ROAS < 1.0x after ₹500 spend on a sales-objective campaign",
+    "kill_roas_threshold": "pause if ROAS < 1.0x after ₹500 spend on a sales-objective campaign. EXCEPTION until 2026-10-05T23:59+05:30 (user-approved 2026-09-29): for the sneaker-push campaigns 120256091369160159 (Sneakers_BOF_30Sep-5Oct), 120256091370110159 (Sneakers_Prospecting_30Sep-5Oct) and 120256088882780159 (Sneakers_Catalog_Retargeting) the spend floor is ₹1,500, not ₹500.",
     "reactivate_min_historic_roas": "surface for reactivation if a paused campaign's last active-period ROAS >= 3.0x",
     "retarget_window_days": 14,
     "fatigue_frequency_threshold": 3,
     "budget_reallocation_min_roas_gap": "shift budget when one active campaign's ROAS is 1.5x+ another's",
     "monthly_spend_goal_inr": null,
-    "hard_spend_ceiling_inr": 2750,
+    "hard_spend_ceiling_inr": 4000,
+    "purchaser_exclusion_exempt_adset_ids": {
+      "_note": "User-approved 2026-09-29. These ad sets deliberately TARGET past purchasers (cross-sell / all-product retargeting). purchaser-exclusion must NOT add Purchasers 180D to their exclusions and must not edit them (an edit force-pauses a live ad set).",
+      "120256091378350159": "BOF_3_CrossSell_Purchasers180D (campaign Sneakers_BOF_30Sep-5Oct) -- includes Purchasers 180D by design",
+      "120255851467360159": "Retargeting_Overall (campaign Retargeting_Overall) -- includes Purchasers 180D, Prepaid_Purchasers and COD_purchasers by design"
+    },
     "max_auto_actions_per_entity_per_day": 1,
     "lookalike_refresh_days": 14,
     "pixel_quality_min_match_rate": 0.6,
@@ -34,10 +39,12 @@
       "_note": "Map of custom_audience_id -> authoritative name/meaning. Trust these over any label written in earlier log or proposal prose.",
       "120255823280550159": "Purchasers 180D -- verified via ads_get_custom_audience on 2026-09-20: real purchaser audience (event=Purchase, retention 180 days), created 2026-09-15, approximate size 20. This account NOW HAS a genuine purchaser-based custom audience (superseding the older note below that said it had none). All 4 currently-active ad sets (UGC_MMA, Retargeting_Overall, TSUCHI, Mori_Sales) already list it under excluded_custom_audiences as of this pass -- purchaser-exclusion is compliant account-wide. A laddered 1%/2%/5% lookalike off this audience was also built 2026-09-15 (ids 120255832535210159/610159/780159), still fresh (5 days old, well under the 14-day lookalike_refresh_days threshold). Reconfirmed 2026-09-27 (~00:52 UTC pass): account composition has shifted again -- only 3 ad sets are ACTIVE now (Caps + Kage_26Sept under campaign 'Caps + Kage_26 Sept', and Sora_Retargeting_Behaviours + Sora_Retargeting_CartAbandoners_30D under a new campaign 'Sora Retargeting', id 120256004515360159). All 3 still exclude this audience in excluded_custom_audiences -- purchaser-exclusion remains compliant account-wide. This supersedes the 2026-09-20 '4 currently-active ad sets' snapshot, which is now stale (those 4 -- UGC_MMA, Retargeting_Overall, TSUCHI, Mori_Sales -- are all PAUSED as of this pass). Reconfirmed 2026-09-27T06:54:00.000Z: found a 4th ad set that was ACTIVE but NOT excluding this audience -- 'New STP 3' under campaign 'New Caps Part 3 STP' (zero spend since 2026-03-04, evidently missed by prior passes' active-campaign counts because those keyed off spend). Fixed this pass via purchaser-exclusion: exclusion added, ad set force-paused as a side effect (Meta API behavior for non-rename edits to ACTIVE entities). The 3 previously-known active ad sets (Caps + Kage_26Sept, Sora_Retargeting_Behaviours, Sora_Retargeting_CartAbandoners_30D) remain compliant and unchanged. Reconfirmed 2026-09-29T02:47:00.000Z pass: 5 ad sets ACTIVE now (up from 3) across the same 3 active campaigns (New STP 3 under 'New Caps Part 3 STP'; Sora_MOF_Engagers, Sora_Retargeting_CartAbandoners_30D, Sora_Retargeting_Behaviours under 'Sora Retargeting'; Caps + Kage_26Sept under 'Caps + Kage_26 Sept') -- all 5 confirmed excluding this audience (Purchasers 180D) in excluded_custom_audiences via direct targeting fetch. purchaser-exclusion remains compliant account-wide, no action needed. The laddered 1%/2%/5% lookalikes built 2026-09-15 (11:49 UTC-7 = 18:49 UTC) are now ~13.3 days old -- still under the 14-day lookalike_refresh_days threshold, but will cross it within roughly the next 10-16 hours; expect lookalike-refresh to trigger on an upcoming pass. Source audience size unchanged (~20)."
     },
-    "note": "hard_spend_ceiling_inr raised 2000 -> 2750 on 2026-09-14: active campaign budgets total ~₹2,020/day (Mori+Tee ₹1,120, TSUCHI BOF based on CAPS ₹450, Retargeting_31AUG ₹300, KAGE_TOF_Sept ad set ₹100), which sat level with the old ceiling and left the account permanently at the trip line. ₹2,750 gives roughly 35% headroom. All fields here are editable directly in the Automation tab (Save button) or by telling Claude. See also settings.audience_label_corrections."
+    "note": "hard_spend_ceiling_inr raised 2750 -> 4000 on 2026-09-29 by the user for the sneaker push (30 Sep - 5 Oct); revert to 2750 on 2026-10-06 unless the user says otherwise. Earlier: hard_spend_ceiling_inr raised 2000 -> 2750 on 2026-09-14: active campaign budgets total ~₹2,020/day (Mori+Tee ₹1,120, TSUCHI BOF based on CAPS ₹450, Retargeting_31AUG ₹300, KAGE_TOF_Sept ad set ₹100), which sat level with the old ceiling and left the account permanently at the trip line. ₹2,750 gives roughly 35% headroom. All fields here are editable directly in the Automation tab (Save button) or by telling Claude. See also settings.audience_label_corrections."
   },
   "circuitBreaker": {
-    "tripped": true,
+    "tripped": false,
+    "resetAt": "2026-09-29T10:35:00.000Z",
+    "resetBy": "User (via Claude Code session), after reviewing: the 2026-09-12 breach is 17 days old, the campaigns it paused have since been reviewed and replaced, and the ceiling is now ₹4,000.",
     "trippedAt": "2026-09-12T16:47:00.000Z",
     "reason": "Today's account-level spend reached ₹2,017.87 INR (ads_get_ad_entities, level=ad_account, date_preset=today), breaching settings.hard_spend_ceiling_inr (₹2,000). This follows AL-253 (94% of ceiling at the prior ~14:49 UTC pass). All 4 campaigns that were ACTIVE at breach time were paused immediately by this pass: Tsuchi BOF (₹833.57 today), KAGE_TOF_Sept 2026 (₹144.14), Mori + Tee_Sales_0609 (₹869.19), Retargeting_31AUG (₹170.97) -- these 4 figures sum exactly to the account total. No auto-resume; a human must review and, if appropriate, create/approve a resume-after-circuit-breaker proposal on a later pass once today's spend looks sane again."
   },
