@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-29T08:48:00.000Z",
+  "generatedAt": "2026-09-29T10:52:00.000Z",
   "settings": {
     "kill_roas_threshold": "pause if ROAS < 1.0x after ₹500 spend on a sales-objective campaign. EXCEPTION until 2026-10-05T23:59+05:30 (user-approved 2026-09-29): for the sneaker-push campaigns 120256091369160159 (Sneakers_BOF_30Sep-5Oct), 120256091370110159 (Sneakers_Prospecting_30Sep-5Oct) and 120256088882780159 (Sneakers_Catalog_Retargeting) the spend floor is ₹1,500, not ₹500.",
     "reactivate_min_historic_roas": "surface for reactivation if a paused campaign's last active-period ROAS >= 3.0x",
@@ -31,8 +31,8 @@
     "competitor_last_scrape": {
       "gully_labs_active_ads": null,
       "lotto_sport_india_active_ads": null,
-      "scraped_at": "2026-09-29T06:47:00.000Z",
-      "note": "2026-09-29T06:47:00.000Z scheduled run: ads_library_search combined page_ids query (107479854297817 / 426015150606378, ad_active_status=ACTIVE, no country filter) returned estimated_total_count=322, down from 330 at the prior ~04:49 UTC pass. Well under the 20% alert threshold."
+      "scraped_at": "2026-09-29T10:52:00.000Z",
+      "note": "2026-09-29T10:52:00.000Z scheduled run: ads_library_search combined page_ids query (107479854297817 / 426015150606378, ad_active_status=ACTIVE, no country filter) returned estimated_total_count=331, up from 322 at the prior ~06:47 UTC pass (+2.8%). Well under the 20% alert threshold."
     },
     "audience_label_corrections": {
       "120249907176770159": "ATC_180D -- NOT a purchaser audience (cart-adders, event=AddToCart, retention 180 days). Verified 2026-09-14, reconfirmed 2026-09-20. Superseded note: earlier passes said the account had NO purchaser audience at all -- that's now out of date. See the 120255823280550159 (Purchasers 180D) entry above, created 2026-09-15, which IS a genuine purchaser audience and is already in use for exclusion + lookalike.",
@@ -515,46 +515,6 @@
       "updatedAt": "2026-09-16T22:46:00.000Z"
     },
     {
-      "id": "A-017",
-      "module": "resume-after-circuit-breaker",
-      "tier": "approval",
-      "title": "Formally resolve the 2026-09-12 circuit breaker trip -- 0 of the 4 originally-paused campaigns are active now; still awaiting a human decision",
-      "reasoning": "Circuit breaker tripped 2026-09-12 on a ₹2,017.87 spend breach (old ₹2,000 ceiling, since raised to ₹2,750). Re-confirmed this pass (2026-09-28T22:49:00.000Z): of the 4 originally-paused campaigns (Tsuchi BOF, KAGE_TOF_Sept 2026, Mori + Tee_Sales_0609, Retargeting_31AUG/renamed Website_View_Population), all 4 remain PAUSED. Today's account spend is ₹210.01 against the ₹2,750 ceiling (7.6%), not breached this pass -- no new trip. The breaker itself is unaffected by the 3 campaigns that have separately been activated by a human since the trip (Sora Retargeting, Caps + Kage_26 Sept, New Caps Part 3 STP) -- those were never part of the original 4-campaign sweep. Still awaiting a human decision on whether to formally resolve this proposal (reject as moot, or use as a template for reactivating the original 4 individually via reactivate-winner proposals A-027/A-028/A-039 which cover 3 of them). UPDATE 2026-09-29T00:47:00.000Z pass: re-confirmed again -- of the 4 originally-paused campaigns (Tsuchi BOF, KAGE_TOF_Sept 2026, Mori + Tee_Sales_0609, Retargeting_31AUG/renamed), all 4 remain PAUSED. Today's account spend is ₹242.88 against the ₹2,750 ceiling (8.8%), not breached this pass -- no new trip. Still awaiting a human decision. UPDATE 2026-09-29T02:47:00.000Z pass: re-confirmed again -- of the 4 originally-paused campaigns (Tsuchi BOF, KAGE_TOF_Sept 2026, Mori + Tee_Sales_0609, Retargeting_31AUG/renamed), all 4 remain PAUSED. Today's account spend is ₹300.94 against the ₹2,750 ceiling (10.9%), not breached this pass -- no new trip. Still awaiting a human decision. UPDATE 2026-09-29T04:49:00.000Z pass: re-confirmed again -- of the 4 originally-paused campaigns (Tsuchi BOF, KAGE_TOF_Sept 2026, Mori + Tee_Sales_0609, Retargeting_31AUG/renamed), all 4 remain PAUSED. Today's account spend is ₹473.62 against the ₹2750 ceiling (17.2%), not breached this pass -- no new trip. Still awaiting a human decision. UPDATE 2026-09-29T06:47:00.000Z pass: re-confirmed again -- of the 4 originally-paused campaigns (Tsuchi BOF, KAGE_TOF_Sept 2026, Mori + Tee_Sales_0609, Retargeting_31AUG/renamed), all 4 remain PAUSED. Today's account spend is ₹674.97 against the ₹2,750 ceiling (24.5%), not breached this pass -- no new trip. Still awaiting a human decision. UPDATE 2026-09-29T08:48:00.000Z pass: re-confirmed again -- of the 4 originally-paused campaigns (Tsuchi BOF, KAGE_TOF_Sept 2026, Mori + Tee_Sales_0609, Retargeting_31AUG/renamed Website_View_Population), all 4 remain PAUSED. Today's account spend is ₹1,028.31 against the ₹2,750 ceiling (37.4%), not breached this pass -- no new trip. Still awaiting a human decision.",
-      "actionSummary": "Confirms (re-issues ads_activate_entity on) all 4 campaigns paused by the 2026-09-12 trip -- a no-op on delivery since all 4 are already ACTIVE. Approving this also clears queue.json's top-level circuitBreaker.tripped flag to false via the normal approval-execution path, formally closing out the 2026-09-12 incident. CAUTION (2026-09-13 update): approving this AS WRITTEN would re-activate all 4 original campaigns including Tsuchi BOF and Retargeting_31AUG, which are currently paused for separate, still-valid reasons (see A-016, A-010). Review before approving.",
-      "metaAction": {
-        "tool": "ads_activate_entity",
-        "params": {
-          "entity_id": "120255744872600159",
-          "entity_type": "campaign"
-        },
-        "followUp": {
-          "tool": "ads_activate_entity",
-          "params": {
-            "entity_id": "120255704517630159",
-            "entity_type": "campaign"
-          },
-          "followUp": {
-            "tool": "ads_activate_entity",
-            "params": {
-              "entity_id": "120255648636980159",
-              "entity_type": "campaign"
-            },
-            "followUp": {
-              "tool": "ads_activate_entity",
-              "params": {
-                "entity_id": "120255534778560159",
-                "entity_type": "campaign"
-              }
-            }
-          }
-        }
-      },
-      "status": "pending",
-      "createdAt": "2026-09-12T20:47:00.000Z",
-      "updatedAt": "2026-09-28T08:47:00.000Z",
-      "lastCheckedAt": "2026-09-29T00:47:00.000Z"
-    },
-    {
       "id": "A-018",
       "module": "budget-reallocation",
       "tier": "approval",
@@ -984,8 +944,8 @@
       "id": "A-034",
       "module": "placement-optimization",
       "tier": "approval",
-      "title": "Exclude WhatsApp placement from Sora_Retargeting_Behaviours (Sora Retargeting)",
-      "reasoning": "New ad set (id 120256004517420159, under active OUTCOME_SALES campaign 'Sora Retargeting' id 120256004515360159, created 2026-09-24 -- first appears in this pass). Its targeting still includes the WhatsApp status placement plus whatsapp-marketing-messages in effective_publisher_platforms. No spend has actually landed on WhatsApp yet (₹0 of the ₹118.28 total 14d spend -- all delivery so far on facebook/instagram/threads placements; best-converting so far is instagram_reels, ₹39.84 spend at 70.385291x ROAS). This is a preemptive/structural flag rather than a wasted-spend one, matching the same WhatsApp-exclusion pattern already applied or pending on every other active/recent ad set on this account (A-013/14/22/26/32/33). UPDATE 2026-09-27 ~12:49 UTC pass: adset spend has grown to ₹603.48 (last_14d), overall campaign ROAS 10.87x on this adset -- still ₹0 landing on WhatsApp placements specifically (delivery continues to concentrate on facebook/instagram). Targeting still includes whatsapp-status/whatsapp-marketing-messages in effective_publisher_platforms -- fix remains unapplied, pending approval. UPDATE 2026-09-27 ~18:50 UTC pass: adset last_14d spend now Rs915.05 (up from Rs603.48), ROAS 7.166111x (down from 10.87x as spend has scaled) -- still Rs0 landing on WhatsApp specifically per targeting (effective_publisher_platforms still lists whatsapp-status/whatsapp-marketing-messages). Fix remains unapplied, pending approval.",
+      "title": "Exclude WhatsApp placement from Sora_Retargeting_Behaviours (Sora Retargeting) -- STALE: parent campaign now PAUSED",
+      "reasoning": "New ad set (id 120256004517420159, under active OUTCOME_SALES campaign 'Sora Retargeting' id 120256004515360159, created 2026-09-24 -- first appears in this pass). Its targeting still includes the WhatsApp status placement plus whatsapp-marketing-messages in effective_publisher_platforms. No spend has actually landed on WhatsApp yet (₹0 of the ₹118.28 total 14d spend -- all delivery so far on facebook/instagram/threads placements; best-converting so far is instagram_reels, ₹39.84 spend at 70.385291x ROAS). This is a preemptive/structural flag rather than a wasted-spend one, matching the same WhatsApp-exclusion pattern already applied or pending on every other active/recent ad set on this account (A-013/14/22/26/32/33). UPDATE 2026-09-27 ~12:49 UTC pass: adset spend has grown to ₹603.48 (last_14d), overall campaign ROAS 10.87x on this adset -- still ₹0 landing on WhatsApp placements specifically (delivery continues to concentrate on facebook/instagram). Targeting still includes whatsapp-status/whatsapp-marketing-messages in effective_publisher_platforms -- fix remains unapplied, pending approval. UPDATE 2026-09-27 ~18:50 UTC pass: adset last_14d spend now Rs915.05 (up from Rs603.48), ROAS 7.166111x (down from 10.87x as spend has scaled) -- still Rs0 landing on WhatsApp specifically per targeting (effective_publisher_platforms still lists whatsapp-status/whatsapp-marketing-messages). Fix remains unapplied, pending approval. UPDATE 2026-09-29T10:52:00.000Z pass -- STALE: parent campaign 'Sora Retargeting' (id 120256004515360159) transitioned from ACTIVE to PAUSED sometime between the ~08:48 UTC pass and this one (not a routine action). The underlying targeting issue still exists and this fix remains queued for whenever the campaign is reactivated, but it is not currently actionable against a live ad set.",
       "actionSummary": "Add an explicit targeting.publisher_platforms list on the 'Sora_Retargeting_Behaviours' ad set covering every currently-effective platform except 'whatsapp' (facebook, instagram, audience_network, threads); leave every other targeting parameter (age 18-65, India geo, the 10 included retargeting custom audiences, 3 excluded purchaser audiences) unchanged.",
       "metaAction": {
         "tool": "ads_update_entity",
@@ -1003,14 +963,15 @@
         ]
       },
       "status": "pending",
-      "createdAt": "2026-09-24T20:51:00.000Z"
+      "createdAt": "2026-09-24T20:51:00.000Z",
+      "updatedAt": "2026-09-29T10:52:00.000Z"
     },
     {
       "id": "A-035",
       "module": "engagement-tier-segmentation",
       "tier": "approval",
-      "title": "Split Sora_Retargeting_Behaviours's mixed-intent audience -- give checkout/payment abandoners their own ad set",
-      "reasoning": "New ad set 'Sora_Retargeting_Behaviours' (id 120256004517420159, under active campaign 'Sora Retargeting' id 120256004515360159, created 2026-09-24) combines 10 custom audiences spanning every intent depth into a single OR'd inclusion list on one ad set with one ₹300/day campaign budget: broad site visitors (Website_All_30D, Page_View_180D, ViewContent_180D, Search_Customers), mid-intent (ATC_180D listed twice, ATC_NoPurchase_30D), and high-intent checkout-stage (Initiate_Checkout, IC_NoPurchase_30D, Add_Payment_Info). All tiers currently share the same bid/budget, so a payment-info abandoner and a 180-day page viewer compete for the same delivery. Structural match for engagement-tier-segmentation -- account only has ₹118.28 total spend and 1 purchase (23.707727x ROAS) on this ad set so far, too early to know which tier is actually driving conversions, which is exactly the ambiguity this split would resolve. UPDATE 2026-09-25 ~14:46 UTC pass: a human has since created a new 'Sora_Retargeting_CartAbandoners_30D' ad set (2026-09-25) under this same campaign, targeting exactly the checkout/payment-abandoner audiences (ATC_NoPurchase_30D, IC_NoPurchase_30D, Add_Payment_Info) this proposal recommended splitting out. This converges with, but does not fully replace, this proposal's intent -- the original 'Sora_Retargeting_Behaviours' ad set still runs its full mixed-intent audience unchanged (view/ATC/checkout/search/page-view all in one ad set with a single bid/budget). Left pending for a human to decide whether Behaviours' broader audiences should now be trimmed given the dedicated abandoner ad set exists. UPDATE 2026-09-25 ~18:49 UTC pass: ad set now shows ₹321.27 last_14d spend and 2 attributed purchases (11.682386x ROAS, down from 23.707727x at ₹118.28/1 purchase as of the prior update -- still strong, but the ROAS trend as spend scales is exactly the kind of tier-level signal this split would let the account see per-audience instead of blended). The dedicated 'Sora_Retargeting_CartAbandoners_30D' ad set (created 2026-09-25) is still delivering separately (₹32.79 last_14d spend, 0 purchases yet, too early to compare). Still pending a human decision on whether to trim Behaviours' broader audiences now that the dedicated abandoner ad set exists. UPDATE 2026-09-27 ~02:52 UTC pass: 'Sora_Retargeting_Behaviours' now shows ₹603.48 last_14d spend and 10.87x ROAS (up from ₹321.27/11.68x at the prior update) -- still strong and not yet showing the kind of tier-level ROAS compression that would force this split, but the blended-tier ambiguity this proposal addresses still stands. The dedicated 'Sora_Retargeting_CartAbandoners_30D' ad set is now flagged separately for creative fatigue (see A-040, frequency 3.79) rather than for lack of data -- still no purchases attributed to it yet. Left pending for a human decision. UPDATE 2026-09-27 ~18:50 UTC pass: 'Sora_Retargeting_Behaviours' now shows Rs915.05 last_14d spend and 7.166111x ROAS (down from Rs603.48/10.87x at the prior update -- ROAS compression continuing as spend scales, the tier-level ambiguity this split addresses is now more visible, not less). The dedicated 'Sora_Retargeting_CartAbandoners_30D' ad set now shows Rs149.34 last_14d spend, frequency climbed to 4.97 (up from 3.79), still no attributed purchases (see A-040, also updated this pass). Still pending a human decision.",
+      "title": "Split Sora_Retargeting_Behaviours's mixed-intent audience -- give checkout/payment abandoners their own ad set -- STALE: parent campaign now PAUSED",
+      "reasoning": "New ad set 'Sora_Retargeting_Behaviours' (id 120256004517420159, under active campaign 'Sora Retargeting' id 120256004515360159, created 2026-09-24) combines 10 custom audiences spanning every intent depth into a single OR'd inclusion list on one ad set with one ₹300/day campaign budget: broad site visitors (Website_All_30D, Page_View_180D, ViewContent_180D, Search_Customers), mid-intent (ATC_180D listed twice, ATC_NoPurchase_30D), and high-intent checkout-stage (Initiate_Checkout, IC_NoPurchase_30D, Add_Payment_Info). All tiers currently share the same bid/budget, so a payment-info abandoner and a 180-day page viewer compete for the same delivery. Structural match for engagement-tier-segmentation -- account only has ₹118.28 total spend and 1 purchase (23.707727x ROAS) on this ad set so far, too early to know which tier is actually driving conversions, which is exactly the ambiguity this split would resolve. UPDATE 2026-09-25 ~14:46 UTC pass: a human has since created a new 'Sora_Retargeting_CartAbandoners_30D' ad set (2026-09-25) under this same campaign, targeting exactly the checkout/payment-abandoner audiences (ATC_NoPurchase_30D, IC_NoPurchase_30D, Add_Payment_Info) this proposal recommended splitting out. This converges with, but does not fully replace, this proposal's intent -- the original 'Sora_Retargeting_Behaviours' ad set still runs its full mixed-intent audience unchanged (view/ATC/checkout/search/page-view all in one ad set with a single bid/budget). Left pending for a human to decide whether Behaviours' broader audiences should now be trimmed given the dedicated abandoner ad set exists. UPDATE 2026-09-25 ~18:49 UTC pass: ad set now shows ₹321.27 last_14d spend and 2 attributed purchases (11.682386x ROAS, down from 23.707727x at ₹118.28/1 purchase as of the prior update -- still strong, but the ROAS trend as spend scales is exactly the kind of tier-level signal this split would let the account see per-audience instead of blended). The dedicated 'Sora_Retargeting_CartAbandoners_30D' ad set (created 2026-09-25) is still delivering separately (₹32.79 last_14d spend, 0 purchases yet, too early to compare). Still pending a human decision on whether to trim Behaviours' broader audiences now that the dedicated abandoner ad set exists. UPDATE 2026-09-27 ~02:52 UTC pass: 'Sora_Retargeting_Behaviours' now shows ₹603.48 last_14d spend and 10.87x ROAS (up from ₹321.27/11.68x at the prior update) -- still strong and not yet showing the kind of tier-level ROAS compression that would force this split, but the blended-tier ambiguity this proposal addresses still stands. The dedicated 'Sora_Retargeting_CartAbandoners_30D' ad set is now flagged separately for creative fatigue (see A-040, frequency 3.79) rather than for lack of data -- still no purchases attributed to it yet. Left pending for a human decision. UPDATE 2026-09-27 ~18:50 UTC pass: 'Sora_Retargeting_Behaviours' now shows Rs915.05 last_14d spend and 7.166111x ROAS (down from Rs603.48/10.87x at the prior update -- ROAS compression continuing as spend scales, the tier-level ambiguity this split addresses is now more visible, not less). The dedicated 'Sora_Retargeting_CartAbandoners_30D' ad set now shows Rs149.34 last_14d spend, frequency climbed to 4.97 (up from 3.79), still no attributed purchases (see A-040, also updated this pass). Still pending a human decision. UPDATE 2026-09-29T10:52:00.000Z pass -- STALE: parent campaign 'Sora Retargeting' (id 120256004515360159) transitioned from ACTIVE to PAUSED sometime between the ~08:48 UTC pass and this one (not a routine action). The underlying targeting issue still exists and this fix remains queued for whenever the campaign is reactivated, but it is not currently actionable against a live ad set.",
       "actionSummary": "Creates a new PAUSED ad set under the same 'Sora Retargeting' campaign, targeting only the two highest-intent audiences (Initiate_Checkout id 120254260398310159 + Add_Payment_Info id 120255846181320159) with its own ₹150/day test budget, plus a new PAUSED ad reusing the existing 'Sora_Retargeting' creative (id 1059775456834345). Approving does not start spending -- both the ad set and the ad need a manual activate after review. Leaves the original ad set's broader targeting untouched.",
       "metaAction": {
         "tool": "ads_create_ad_set",
@@ -1079,7 +1040,7 @@
       },
       "status": "pending",
       "createdAt": "2026-09-24T20:51:00.000Z",
-      "updatedAt": "2026-09-25T18:49:00.000Z"
+      "updatedAt": "2026-09-29T10:52:00.000Z"
     },
     {
       "id": "A-036",
@@ -1116,8 +1077,8 @@
       "id": "A-037",
       "module": "placement-optimization",
       "tier": "approval",
-      "title": "Exclude WhatsApp placement from Sora_Retargeting_CartAbandoners_30D",
-      "reasoning": "New ad set (created 2026-09-25, under active campaign 'Sora Retargeting') includes whatsapp-status and whatsapp-marketing-messages placements in its effective_publisher_platforms/whatsapp_positions, same as every other ad set in this account -- WhatsApp placement has consistently been flagged account-wide as low-quality delivery worth excluding (see A-005/013/014/022/026/032/033/034). This ad set targets checkout/payment abandoners specifically (ATC_NoPurchase_30D, IC_NoPurchase_30D, Add_Payment_Info inclusion audiences), a high-intent retargeting segment where placement quality matters more, not less.",
+      "title": "Exclude WhatsApp placement from Sora_Retargeting_CartAbandoners_30D -- STALE: parent campaign now PAUSED",
+      "reasoning": "New ad set (created 2026-09-25, under active campaign 'Sora Retargeting') includes whatsapp-status and whatsapp-marketing-messages placements in its effective_publisher_platforms/whatsapp_positions, same as every other ad set in this account -- WhatsApp placement has consistently been flagged account-wide as low-quality delivery worth excluding (see A-005/013/014/022/026/032/033/034). This ad set targets checkout/payment abandoners specifically (ATC_NoPurchase_30D, IC_NoPurchase_30D, Add_Payment_Info inclusion audiences), a high-intent retargeting segment where placement quality matters more, not less. UPDATE 2026-09-29T10:52:00.000Z pass -- STALE: parent campaign 'Sora Retargeting' (id 120256004515360159) transitioned from ACTIVE to PAUSED sometime between the ~08:48 UTC pass and this one (not a routine action). The underlying targeting issue still exists and this fix remains queued for whenever the campaign is reactivated, but it is not currently actionable against a live ad set.",
       "actionSummary": "Remove whatsapp from the ad set's publisher_platforms so it no longer serves on WhatsApp Status/marketing messages; all other targeting (age, geo, inclusion/exclusion audiences) stays unchanged.",
       "metaAction": {
         "tool": "ads_update_entity",
@@ -1133,7 +1094,8 @@
         ]
       },
       "status": "pending",
-      "createdAt": "2026-09-25T14:46:00.000Z"
+      "createdAt": "2026-09-25T14:46:00.000Z",
+      "updatedAt": "2026-09-29T10:52:00.000Z"
     },
     {
       "id": "A-038",
@@ -1256,8 +1218,8 @@
       "id": "A-043",
       "module": "placement-optimization",
       "tier": "approval",
-      "title": "Exclude WhatsApp placement from Sora_MOF_Engagers",
-      "reasoning": "New ad set 'Sora_MOF_Engagers' (id 120256071025120159, under active campaign 'Sora Retargeting', created 2026-09-28T18:11 IST -- first seen by this routine this pass) targets IG/FB engagers (IG_Visitors_365, FB_Engagers_30D, Videos) with Advantage+ placement automation off (targeting_automation.advantage_audience=0) and an explicit effective_publisher_platforms list that still includes whatsapp (status + marketing_messages). Only ₹0.08 of the ad set's ₹45.93 last_14d spend has landed on WhatsApp so far, but this matches the same preemptive WhatsApp-exclusion pattern already applied or pending on every other active/recent ad set on this account (A-013/14/22/26/32/33/34/37/38).",
+      "title": "Exclude WhatsApp placement from Sora_MOF_Engagers -- STALE: parent campaign now PAUSED",
+      "reasoning": "New ad set 'Sora_MOF_Engagers' (id 120256071025120159, under active campaign 'Sora Retargeting', created 2026-09-28T18:11 IST -- first seen by this routine this pass) targets IG/FB engagers (IG_Visitors_365, FB_Engagers_30D, Videos) with Advantage+ placement automation off (targeting_automation.advantage_audience=0) and an explicit effective_publisher_platforms list that still includes whatsapp (status + marketing_messages). Only ₹0.08 of the ad set's ₹45.93 last_14d spend has landed on WhatsApp so far, but this matches the same preemptive WhatsApp-exclusion pattern already applied or pending on every other active/recent ad set on this account (A-013/14/22/26/32/33/34/37/38). UPDATE 2026-09-29T10:52:00.000Z pass -- STALE: parent campaign 'Sora Retargeting' (id 120256004515360159) transitioned from ACTIVE to PAUSED sometime between the ~08:48 UTC pass and this one (not a routine action). The underlying targeting issue still exists and this fix remains queued for whenever the campaign is reactivated, but it is not currently actionable against a live ad set.",
       "actionSummary": "Remove whatsapp from the ad set's publisher_platforms so it no longer serves on WhatsApp Status/marketing messages; all other targeting (age 18-65, India geo, the 3 inclusion audiences, 5 excluded audiences) stays unchanged.",
       "metaAction": {
         "tool": "ads_update_entity",
@@ -1274,7 +1236,8 @@
         ]
       },
       "status": "pending",
-      "createdAt": "2026-09-29T00:47:00.000Z"
+      "createdAt": "2026-09-29T00:47:00.000Z",
+      "updatedAt": "2026-09-29T10:52:00.000Z"
     },
     {
       "id": "A-044",
@@ -1330,6 +1293,28 @@
       },
       "status": "pending",
       "createdAt": "2026-09-29T06:47:00.000Z"
+    },
+    {
+      "id": "A-046",
+      "module": "age-gender-auto-shift",
+      "tier": "approval",
+      "title": "Narrow Caps + Kage_26 Sept away from its underperforming 18-24 male segment",
+      "reasoning": "Ad set 'Caps + Kage_26Sept' (id 120255693970460159, campaign 'Caps + Kage_26 Sept', id 120255693970470159; last_14d blended 9.35x ROAS on ₹3,660.71 spend). Age/gender breakdown (last_14d) shows the 18-24 male cell at ₹450.90 spend -- meaningful, ~12% of ad set spend -- converting at just 3.366804x ROAS, well below the ad set's blended average and dragging on the demonstrably stronger male cohorts: 25-34 male (₹1,722.12 @ 9.008968x), 35-44 male (₹1,083.52 @ 11.529748x), and 45-54 male (₹222.50 @ 14.373285x, thinner sample). Female cells across all ages carry negligible spend (₹0.39-₹36.93) and no meaningful signal either way.",
+      "actionSummary": "Raise age_min from the current 19 to 25 on the ad set's targeting, cutting the underperforming 18-24 slice while fully retaining the 25-54 male cohorts driving the ad set's 9.35x blended ROAS. Existing city/interest/behavior targeting and the Purchasers 180D exclusion stay unchanged. This ad set is also the target of pending A-038 (WhatsApp placement exclusion) and A-042 (Instagram Reels placement) -- all three apply on top of the ad set's live targeting at approval time, in whichever order they are approved.",
+      "metaAction": {
+        "tool": "ads_update_entity",
+        "params": {
+          "ad_account_id": "704523148804803",
+          "entity_id": "120255693970460159",
+          "entity_type": "ad_set",
+          "field": "targeting"
+        }
+      },
+      "targetingDelta": {
+        "age_min": 25
+      },
+      "status": "pending",
+      "createdAt": "2026-09-29T10:52:00.000Z"
     }
   ],
   "alerts": [
@@ -10859,6 +10844,24 @@
       "severity": "low",
       "dismissed": false,
       "createdAt": "2026-09-29T08:48:00.000Z"
+    },
+    {
+      "id": "AL-1058",
+      "module": "pixel-health",
+      "title": "Pixel quality healthy -- no match-rate breach",
+      "detail": "ads_get_dataset_quality (dataset 833131719490535): Purchase/prepaid_purchase composite_score 8.8, AddPaymentInfo 8.8, InitiateCheckout 7.0, core web events (PageView/ViewContent/AddToCart/Search/SubscribedButtonClick) at 6.1 -- materially unchanged from the prior ~08:48 UTC pass. ads_get_dataset_stats confirms PageView/ViewContent/InitiateCheckout/AddToCart/AddPaymentInfo/Purchase/prepaid_purchase all still firing hourly through the latest available hour (2026-09-29T02:00 -0700). No breach of pixel_quality_min_match_rate (0.6); ROAS-driven modules not suppressed this pass.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-09-29T10:52:00.000Z"
+    },
+    {
+      "id": "AL-1059",
+      "module": "self-audit-check",
+      "title": "Self-audit: live numbers consistent; 'Sora Retargeting' paused since prior pass",
+      "detail": "Re-pulled live campaign/adset/account numbers this pass (today's spend ₹1,192.68 against the ₹5,000 hard_spend_ceiling_inr, 23.9% -- circuit breaker not tripped). Only 2 campaigns ACTIVE account-wide now: Retargeting_Overall (₹729 last_14d, 9.22x ROAS, adset exempt from purchaser-exclusion by design per settings) and Caps + Kage_26 Sept (₹3,660.71 last_14d, 9.35x ROAS, already excludes Purchasers 180D -- purchaser-exclusion compliant account-wide, no action needed). 'Sora Retargeting' (5.06x ROAS, ₹1,296.25 last_14d) and 'New Caps Part 3 STP' transitioned from ACTIVE to PAUSED sometime between the ~08:48 UTC pass and this one (not a routine action -- no corresponding log entry, presumably a human change outside this routine). Pending proposals A-034/A-035/A-037/A-043 that targeted Sora Retargeting's ad sets are marked STALE this pass as a result. Laddered 1%/2%/5% Purchasers-180D lookalikes built 2026-09-15 are ~13.7 days old, still under the 14-day lookalike_refresh_days threshold (will cross it later today). Pixel quality healthy, no ads_insights_anomaly_signal issues account-wide, no ad set stuck in learning. Also found and tagged one previously-untagged active creative (1631218968634475, dynamic catalog retargeting ad) via hook-angle-tagging. Also found a new age-gender-auto-shift trigger on Caps + Kage_26 Sept's 18-24 male segment (see new proposal A-046). Circuit-breaker proposal A-017 was resolved this pass: circuitBreaker.tripped is already false (user reset it directly at 2026-09-29T10:35 UTC, outside this proposal's flow), so the proposal is now moot and closed out. index.html's static DATA/INSIGHTS_DATA snapshot was not regenerated this pass (routine does not currently rewrite it) and remains stale relative to live figures, as in every prior self-audit-check pass since this module was added.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-09-29T10:52:00.000Z"
     }
   ],
   "log": [
@@ -15371,6 +15374,41 @@
       },
       "tier": "auto",
       "executedAt": "2026-09-27T06:54:00.000Z"
+    },
+    {
+      "proposalId": null,
+      "action": "hook-angle-tagging: tagged creative 1631218968634475 (ad 'Retargeting-Overall_ProductLinks_v3_Universal', id 120256090614980159, adset Retargeting_Overall) via Meta Ads MCP ads_get_creatives -- no prior creativeTags entry existed for this creative",
+      "result": "success",
+      "previousState": {
+        "creativeTags[1631218968634475]": "absent"
+      },
+      "detail": {
+        "ads_get_creatives_response": {
+          "id": "1631218968634475",
+          "object_type": "SHARE",
+          "body": "Still thinking about it? 👀\nThe piece you checked out is still here — but stock moves fast.\nSneakers, tees, caps and hoodies built for everyday fits.\nFree shipping on prepaid orders.",
+          "title": "{{product.name}}",
+          "call_to_action_type": "SHOP_NOW",
+          "effective_object_story_id": "633696003152355_122180702708824350",
+          "product_set_id": "1169090238657947"
+        }
+      },
+      "tier": "auto",
+      "executedAt": "2026-09-29T10:52:00.000Z"
+    },
+    {
+      "proposalId": "A-017",
+      "action": "resume-after-circuit-breaker: closed out as moot. circuitBreaker.tripped is already false (resetAt 2026-09-29T10:35:00.000Z, resetBy 'User (via Claude Code session)') -- the human resolved the 2026-09-12 trip directly by editing circuitBreaker state, not through this proposal's metaAction flow. No ads_activate_entity calls were made by this routine pass; the 4 originally-paused campaigns (Tsuchi BOF, KAGE_TOF_Sept 2026, Mori + Tee_Sales_0609, Website_View_Population/renamed Retargeting_31AUG) remain PAUSED and untouched, exactly as A-017's reasoning tracked.",
+      "result": "rejected",
+      "previousState": {
+        "circuitBreaker.tripped": false,
+        "proposal_status": "pending"
+      },
+      "detail": {
+        "reason": "superseded by direct user action outside the proposal/approval flow"
+      },
+      "tier": "approval",
+      "executedAt": "2026-09-29T10:52:00.000Z"
     }
   ],
   "creativeTags": {
@@ -17874,6 +17912,17 @@
       "visionPassSkipped": true,
       "note": "Higgsfield vision connection not attached to this run -- image content itself not analyzed, only real ad copy text used. No creative description invented.",
       "taggedAt": "2026-09-27T06:54:00.000Z"
+    },
+    "1631218968634475": {
+      "adName": "Retargeting-Overall_ProductLinks_v3_Universal",
+      "campaign": "Retargeting_Overall",
+      "format": "Dynamic catalog (SHARE, product_set-backed, {{product.name}} template)",
+      "angle": "Retargeting / cart-abandonment reminder, dynamic catalog-driven universal product retargeting, not discount-led (mentions free shipping on prepaid only)",
+      "hook": "\"Still thinking about it? \\ud83d\\udc40\\nThe piece you checked out is still here \\u2014 but stock moves fast.\\nSneakers, tees, caps and hoodies built for everyday fits.\\nFree shipping on prepaid orders.\" (primary text) / \"{{product.name}}\" (headline, dynamic catalog placeholder)",
+      "taggedFrom": "ad primary text (body) + headline (title), via Meta Ads MCP ads_get_creatives",
+      "visionPassSkipped": true,
+      "note": "Higgsfield vision connection not attached to this run -- image/video content itself not analyzed, only real ad copy text used. No creative description invented.",
+      "taggedAt": "2026-09-29T10:52:00.000Z"
     }
   }
 }
