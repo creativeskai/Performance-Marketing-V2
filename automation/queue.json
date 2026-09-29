@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-29T20:50:00.000Z",
+  "generatedAt": "2026-09-29T22:52:00.000Z",
   "settings": {
     "kill_roas_threshold": "pause if ROAS < 1.0x after ₹500 spend on a sales-objective campaign. EXCEPTION until 2026-10-05T23:59+05:30 (user-approved 2026-09-29): for the sneaker-push campaigns 120256091369160159 (Sneakers_BOF_30Sep-5Oct), 120256091370110159 (Sneakers_Prospecting_30Sep-5Oct) and 120256088882780159 (Sneakers_Catalog_Retargeting) the spend floor is ₹1,500, not ₹500.",
     "reactivate_min_historic_roas": "surface for reactivation if a paused campaign's last active-period ROAS >= 3.0x",
@@ -31,13 +31,13 @@
     "competitor_last_scrape": {
       "gully_labs_active_ads": null,
       "lotto_sport_india_active_ads": null,
-      "scraped_at": "2026-09-29T20:50:00.000Z",
-      "note": "2026-09-29T20:50:00.000Z scheduled run: ads_library_search combined page_ids query (107479854297817 / 426015150606378, ad_active_status=ACTIVE, no country filter) returned estimated_total_count=321, up from 320 at the prior ~18:48 UTC pass (+0.3%). Well under the 20% alert threshold."
+      "scraped_at": "2026-09-29T22:52:00.000Z",
+      "note": "2026-09-29T22:52:00.000Z scheduled run: ads_library_search combined page_ids query (107479854297817 / 426015150606378, ad_active_status=ACTIVE, no country filter) returned estimated_total_count=321, unchanged from the prior ~20:50 UTC pass (0% change). Well under the 20% alert threshold."
     },
     "audience_label_corrections": {
       "120249907176770159": "ATC_180D -- NOT a purchaser audience (cart-adders, event=AddToCart, retention 180 days). Verified 2026-09-14, reconfirmed 2026-09-20. Superseded note: earlier passes said the account had NO purchaser audience at all -- that's now out of date. See the 120255823280550159 (Purchasers 180D) entry above, created 2026-09-15, which IS a genuine purchaser audience and is already in use for exclusion + lookalike.",
       "_note": "Map of custom_audience_id -> authoritative name/meaning. Trust these over any label written in earlier log or proposal prose.",
-      "120255823280550159": "Purchasers 180D -- verified via ads_get_custom_audience on 2026-09-20: real purchaser audience (event=Purchase, retention 180 days), created 2026-09-15, approximate size 20. This account NOW HAS a genuine purchaser-based custom audience (superseding the older note below that said it had none). All 4 currently-active ad sets (UGC_MMA, Retargeting_Overall, TSUCHI, Mori_Sales) already list it under excluded_custom_audiences as of this pass -- purchaser-exclusion is compliant account-wide. A laddered 1%/2%/5% lookalike off this audience was also built 2026-09-15 (ids 120255832535210159/610159/780159), still fresh (5 days old, well under the 14-day lookalike_refresh_days threshold). Reconfirmed 2026-09-27 (~00:52 UTC pass): account composition has shifted again -- only 3 ad sets are ACTIVE now (Caps + Kage_26Sept under campaign 'Caps + Kage_26 Sept', and Sora_Retargeting_Behaviours + Sora_Retargeting_CartAbandoners_30D under a new campaign 'Sora Retargeting', id 120256004515360159). All 3 still exclude this audience in excluded_custom_audiences -- purchaser-exclusion remains compliant account-wide. This supersedes the 2026-09-20 '4 currently-active ad sets' snapshot, which is now stale (those 4 -- UGC_MMA, Retargeting_Overall, TSUCHI, Mori_Sales -- are all PAUSED as of this pass). Reconfirmed 2026-09-27T06:54:00.000Z: found a 4th ad set that was ACTIVE but NOT excluding this audience -- 'New STP 3' under campaign 'New Caps Part 3 STP' (zero spend since 2026-03-04, evidently missed by prior passes' active-campaign counts because those keyed off spend). Fixed this pass via purchaser-exclusion: exclusion added, ad set force-paused as a side effect (Meta API behavior for non-rename edits to ACTIVE entities). The 3 previously-known active ad sets (Caps + Kage_26Sept, Sora_Retargeting_Behaviours, Sora_Retargeting_CartAbandoners_30D) remain compliant and unchanged. Reconfirmed 2026-09-29T02:47:00.000Z pass: 5 ad sets ACTIVE now (up from 3) across the same 3 active campaigns (New STP 3 under 'New Caps Part 3 STP'; Sora_MOF_Engagers, Sora_Retargeting_CartAbandoners_30D, Sora_Retargeting_Behaviours under 'Sora Retargeting'; Caps + Kage_26Sept under 'Caps + Kage_26 Sept') -- all 5 confirmed excluding this audience (Purchasers 180D) in excluded_custom_audiences via direct targeting fetch. purchaser-exclusion remains compliant account-wide, no action needed. The laddered 1%/2%/5% lookalikes built 2026-09-15 (11:49 UTC-7 = 18:49 UTC) are now ~13.3 days old -- still under the 14-day lookalike_refresh_days threshold, but will cross it within roughly the next 10-16 hours; expect lookalike-refresh to trigger on an upcoming pass. Source audience size unchanged (~20). Reconfirmed 2026-09-29T16:48:00.000Z pass: 2 campaigns ACTIVE (Retargeting_Overall, Caps + Kage_26 Sept), 2 ad sets ACTIVE -- 'Retargeting_Overall' (exempt per settings.purchaser_exclusion_exempt_adset_ids, deliberately targets Purchasers 180D by design) and 'Caps + Kage_26Sept' (confirmed excluding Purchasers 180D in excluded_custom_audiences via direct targeting fetch). purchaser-exclusion remains compliant account-wide, no action needed. The laddered 1%/2%/5% lookalikes built 2026-09-15 are now ~13.92 days old -- still just under the 14-day lookalike_refresh_days threshold, expected to cross it on an upcoming pass. Source audience size unchanged (~20), so no growth-based refresh trigger either."
+      "120255823280550159": "Purchasers 180D -- verified via ads_get_custom_audience on 2026-09-20: real purchaser audience (event=Purchase, retention 180 days), created 2026-09-15, approximate size 20. This account NOW HAS a genuine purchaser-based custom audience (superseding the older note below that said it had none). All 4 currently-active ad sets (UGC_MMA, Retargeting_Overall, TSUCHI, Mori_Sales) already list it under excluded_custom_audiences as of this pass -- purchaser-exclusion is compliant account-wide. A laddered 1%/2%/5% lookalike off this audience was also built 2026-09-15 (ids 120255832535210159/610159/780159), still fresh (5 days old, well under the 14-day lookalike_refresh_days threshold). Reconfirmed 2026-09-27 (~00:52 UTC pass): account composition has shifted again -- only 3 ad sets are ACTIVE now (Caps + Kage_26Sept under campaign 'Caps + Kage_26 Sept', and Sora_Retargeting_Behaviours + Sora_Retargeting_CartAbandoners_30D under a new campaign 'Sora Retargeting', id 120256004515360159). All 3 still exclude this audience in excluded_custom_audiences -- purchaser-exclusion remains compliant account-wide. This supersedes the 2026-09-20 '4 currently-active ad sets' snapshot, which is now stale (those 4 -- UGC_MMA, Retargeting_Overall, TSUCHI, Mori_Sales -- are all PAUSED as of this pass). Reconfirmed 2026-09-27T06:54:00.000Z: found a 4th ad set that was ACTIVE but NOT excluding this audience -- 'New STP 3' under campaign 'New Caps Part 3 STP' (zero spend since 2026-03-04, evidently missed by prior passes' active-campaign counts because those keyed off spend). Fixed this pass via purchaser-exclusion: exclusion added, ad set force-paused as a side effect (Meta API behavior for non-rename edits to ACTIVE entities). The 3 previously-known active ad sets (Caps + Kage_26Sept, Sora_Retargeting_Behaviours, Sora_Retargeting_CartAbandoners_30D) remain compliant and unchanged. Reconfirmed 2026-09-29T02:47:00.000Z pass: 5 ad sets ACTIVE now (up from 3) across the same 3 active campaigns (New STP 3 under 'New Caps Part 3 STP'; Sora_MOF_Engagers, Sora_Retargeting_CartAbandoners_30D, Sora_Retargeting_Behaviours under 'Sora Retargeting'; Caps + Kage_26Sept under 'Caps + Kage_26 Sept') -- all 5 confirmed excluding this audience (Purchasers 180D) in excluded_custom_audiences via direct targeting fetch. purchaser-exclusion remains compliant account-wide, no action needed. The laddered 1%/2%/5% lookalikes built 2026-09-15 (11:49 UTC-7 = 18:49 UTC) are now ~13.3 days old -- still under the 14-day lookalike_refresh_days threshold, but will cross it within roughly the next 10-16 hours; expect lookalike-refresh to trigger on an upcoming pass. Source audience size unchanged (~20). Reconfirmed 2026-09-29T16:48:00.000Z pass: 2 campaigns ACTIVE (Retargeting_Overall, Caps + Kage_26 Sept), 2 ad sets ACTIVE -- 'Retargeting_Overall' (exempt per settings.purchaser_exclusion_exempt_adset_ids, deliberately targets Purchasers 180D by design) and 'Caps + Kage_26Sept' (confirmed excluding Purchasers 180D in excluded_custom_audiences via direct targeting fetch). purchaser-exclusion remains compliant account-wide, no action needed. The laddered 1%/2%/5% lookalikes built 2026-09-15 are now ~13.92 days old -- still just under the 14-day lookalike_refresh_days threshold, expected to cross it on an upcoming pass. Source audience size unchanged (~20), so no growth-based refresh trigger either. Reconfirmed 2026-09-29T22:52:00.000Z pass: same 2 campaigns ACTIVE (Retargeting_Overall -- exempt per settings.purchaser_exclusion_exempt_adset_ids, deliberately includes Purchasers 180D by design; Caps + Kage_26Sept -- confirmed excluding Purchasers 180D in excluded_custom_audiences via direct targeting fetch). purchaser-exclusion remains compliant account-wide, no action needed. The laddered 1%/2%/5% lookalikes built 2026-09-15 are now ~14.17 days old (past the 14-day threshold); a rebuild attempt was skipped this pass under rate limiting (see alerts for this pass) since the last attempt was at 2026-09-29T20:50:00.000Z, within max_auto_actions_per_entity_per_day=1."
     },
     "note": "hard_spend_ceiling_inr raised 2750 -> 4000 -> 5000 on 2026-09-29 by the user for the sneaker push (30 Sep - 5 Oct; planned budgets ~₹4,350/day, 5000 leaves room for Meta's daily over-delivery); revert to 2750 on 2026-10-06 unless the user says otherwise. Earlier: hard_spend_ceiling_inr raised 2000 -> 2750 on 2026-09-14: active campaign budgets total ~₹2,020/day (Mori+Tee ₹1,120, TSUCHI BOF based on CAPS ₹450, Retargeting_31AUG ₹300, KAGE_TOF_Sept ad set ₹100), which sat level with the old ceiling and left the account permanently at the trip line. ₹2,750 gives roughly 35% headroom. All fields here are editable directly in the Automation tab (Save button) or by telling Claude. See also settings.audience_label_corrections. Lookalike-refresh note (2026-09-29): the laddered 1%/2%/5% lookalikes built 2026-09-15 crossed the 14-day refresh age this pass, but Meta rejects rebuild attempts as duplicate lookalikes (error 2654/1713007) because source audience Purchasers 180D hasn't grown past its ~20-person size since creation. This will keep failing on every future pass until that source audience actually grows -- not a bug in the routine, a real API constraint. The existing 3 lookalikes remain live and serving; no account action needed unless the user wants to widen the source audience's definition."
   },
@@ -54,7 +54,7 @@
       "module": "reactivate-winner",
       "tier": "approval",
       "title": "Reactivate Kage_Sales",
-      "reasoning": "Kage_Sales (id 120255012429830159) remains PAUSED; lifetime ROAS 4.296679x on ₹6,195.22 spend (10 purchases), unchanged since it went idle 2026-08-27 -- still the account's best-ROAS paused campaign, well above the 3.0x reactivate_min_historic_roas threshold. Zero delivery in the last 14d (fully dormant). Reasoning history prior to this pass condensed for file-size reasons; figures unchanged across every prior re-check since 2026-08-27. Still pending human decision; not executed (approval tier, never auto).",
+      "reasoning": "Kage_Sales (id 120255012429830159) remains PAUSED; lifetime ROAS 4.296679x on ₹6,195.22 spend (10 purchases), unchanged since it went idle 2026-08-27 -- still the account's best-ROAS paused campaign, well above the 3.0x reactivate_min_historic_roas threshold. Zero delivery in the last 14d (fully dormant). Reasoning history prior to this pass condensed for file-size reasons; figures unchanged across every prior re-check since 2026-08-27. Still pending human decision; not executed (approval tier, never auto). [Reconfirmed 2026-09-29T22:52:00.000Z pass: last_30d pull for id 120255012429830159 returns zero spend/no result rows -- still fully dormant, lifetime figures unchanged. Still pending human decision.]",
       "actionSummary": "Reactivate campaign 'Kage_Sales' (id 120255012429830159), then set its daily budget to 25000 (Meta's minor-currency-unit field — this is ₹250/day, slightly above its historical ₹206/day average pace to compensate for reactivation ramp-up, still conservative). Monitor for 3 days before scaling further.",
       "metaAction": {
         "tool": "ads_activate_entity",
@@ -73,7 +73,7 @@
       },
       "status": "pending",
       "createdAt": "2026-08-27T00:00:00.000Z",
-      "updatedAt": "2026-09-23T06:50:00.000Z"
+      "updatedAt": "2026-09-29T22:52:00.000Z"
     },
     {
       "id": "A-002",
@@ -566,7 +566,7 @@
       "module": "placement-optimization",
       "tier": "approval",
       "title": "Exclude WhatsApp placement from Retargeting_Overall",
-      "reasoning": "Retargeting_Overall (campaign id 120255851467340159) is ACTIVE again as of this pass (2026-09-29T18:48:00.000Z) -- confirmed via fresh ads_get_ad_entities campaign-level pull. The ad set's targeting (fetched this pass) still lists 'whatsapp' in effective_publisher_platforms (whatsapp-status / whatsapp-marketing-messages placements not excluded), so the underlying WhatsApp-placement issue this proposal addresses is unchanged and now live-relevant again. Last recorded last_14d figures (from proposal creation): WhatsApp placement spend ₹47.25 at ₹1,350 CPM, ~9.9x the CPM of the converting instagram_feed placement, 0 attributed purchases on WhatsApp.",
+      "reasoning": "Retargeting_Overall (campaign id 120255851467340159) is ACTIVE again as of this pass (2026-09-29T18:48:00.000Z) -- confirmed via fresh ads_get_ad_entities campaign-level pull. The ad set's targeting (fetched this pass) still lists 'whatsapp' in effective_publisher_platforms (whatsapp-status / whatsapp-marketing-messages placements not excluded), so the underlying WhatsApp-placement issue this proposal addresses is unchanged and now live-relevant again. Last recorded last_14d figures (from proposal creation): WhatsApp placement spend ₹47.25 at ₹1,350 CPM, ~9.9x the CPM of the converting instagram_feed placement, 0 attributed purchases on WhatsApp. [Reconfirmed 2026-09-29T22:52:00.000Z pass: fresh last_14d publisher_platform/platform_position breakdown on ad set 120255851467360159 -- whatsapp_marketing_messages spend now ₹60.60 (up from ₹47.25 at proposal creation), still 0 attributed purchases (null ROAS). Targeting still includes 'whatsapp' in effective_publisher_platforms. Fix remains unapplied, pending approval.]",
       "actionSummary": "Add an explicit targeting.publisher_platforms list on the 'Retargeting_Overall' ad set covering every currently-effective platform except 'whatsapp' (facebook, instagram, audience_network, threads); leave every other targeting parameter (age/gender, geo, included custom audiences) unchanged.",
       "metaAction": {
         "tool": "ads_update_entity",
@@ -580,7 +580,7 @@
       },
       "status": "pending",
       "createdAt": "2026-09-20T04:50:00.000Z",
-      "updatedAt": "2026-09-23T06:50:00.000Z"
+      "updatedAt": "2026-09-29T22:52:00.000Z"
     },
     {
       "id": "A-027",
@@ -971,7 +971,7 @@
       "module": "placement-optimization",
       "tier": "approval",
       "title": "Reduce Instagram Reels delivery on Caps + Kage_26Sept -- 0.76x ROAS on Rs993 spend vs Stories' 34.6x and Feed's 5.27x",
-      "reasoning": "Ad set 'Caps + Kage_26Sept' (id 120255693970460159, campaign 'Caps + Kage_26 Sept', last_14d blended ROAS 8.06x on Rs2,474.73 spend) shows a stark placement gap: instagram_reels carries Rs993.35 -- about 40% of the ad set's spend -- at just 0.76x ROAS, while instagram_stories (Rs417.86) converts at 34.62x and instagram_feed (Rs895.23) at 5.27x. This ad set uses Advantage+ placement automation (targeting_automation.advantage_audience=1) with no explicit instagram_positions/publisher_platforms restriction currently set, so Meta is auto-allocating spend into the weak Reels placement. Not a kill-floor issue account-wide (ad set still profitable overall), but a clear reallocation opportunity. UPDATE 2026-09-29T00:47:00.000Z pass (last_14d breakdown): Instagram Reels has recovered materially since the original 0.76x read -- now ₹1,412.00 spend at 3.76x ROAS. It's no longer a loss-making placement in absolute terms (well above the 1.0x kill floor), but it remains the weakest of the ad set's three main placements against Instagram Stories (₹652.59 spend, 26.82x ROAS) and Instagram Feed (₹1,333.43 spend, 8.57x ROAS) -- a real efficiency gap persists even though the severity has eased considerably. Flagging the recovery for the human reviewer's context; the underlying reallocation opportunity is smaller than originally proposed but still present. [Reconfirmed 2026-09-29T12:48:00.000Z: fresh last_14d placement breakdown on ad set 120255693970460159 shows the picture has shifted meaningfully since this proposal was written -- instagram_reels is now ₹1,412.07 spend (up from ₹993.35) at 3.76x ROAS (up from 0.76x), no longer catastrophically unprofitable. It still lags instagram_stories (₹652.59 @ 26.82x) and instagram_feed (₹1,333.43 @ 8.57x) by a wide margin, so the underlying placement-efficiency gap this proposal targets is still real, just less severe than originally flagged -- treat the original 0.76x figure in the reasoning above as superseded by this update, not current. [Reconfirmed 2026-09-29T15:37:00.000Z: fresh last_14d placement breakdown on ad set 120255693970460159 -- instagram_reels now ₹1,412.07 spend at 3.76x ROAS, essentially unchanged from the 2026-09-29T12:48:00.000Z read. Still lags instagram_stories (₹652.59 @ 26.82x) and instagram_feed (₹1,333.43 @ 8.57x) by a wide margin. The relative placement-efficiency gap persists at a stable (not worsening) severity -- leaving pending for human review, original 0.76x figure remains superseded.]",
+      "reasoning": "Ad set 'Caps + Kage_26Sept' (id 120255693970460159, campaign 'Caps + Kage_26 Sept', last_14d blended ROAS 8.06x on Rs2,474.73 spend) shows a stark placement gap: instagram_reels carries Rs993.35 -- about 40% of the ad set's spend -- at just 0.76x ROAS, while instagram_stories (Rs417.86) converts at 34.62x and instagram_feed (Rs895.23) at 5.27x. This ad set uses Advantage+ placement automation (targeting_automation.advantage_audience=1) with no explicit instagram_positions/publisher_platforms restriction currently set, so Meta is auto-allocating spend into the weak Reels placement. Not a kill-floor issue account-wide (ad set still profitable overall), but a clear reallocation opportunity. UPDATE 2026-09-29T00:47:00.000Z pass (last_14d breakdown): Instagram Reels has recovered materially since the original 0.76x read -- now ₹1,412.00 spend at 3.76x ROAS. It's no longer a loss-making placement in absolute terms (well above the 1.0x kill floor), but it remains the weakest of the ad set's three main placements against Instagram Stories (₹652.59 spend, 26.82x ROAS) and Instagram Feed (₹1,333.43 spend, 8.57x ROAS) -- a real efficiency gap persists even though the severity has eased considerably. Flagging the recovery for the human reviewer's context; the underlying reallocation opportunity is smaller than originally proposed but still present. [Reconfirmed 2026-09-29T12:48:00.000Z: fresh last_14d placement breakdown on ad set 120255693970460159 shows the picture has shifted meaningfully since this proposal was written -- instagram_reels is now ₹1,412.07 spend (up from ₹993.35) at 3.76x ROAS (up from 0.76x), no longer catastrophically unprofitable. It still lags instagram_stories (₹652.59 @ 26.82x) and instagram_feed (₹1,333.43 @ 8.57x) by a wide margin, so the underlying placement-efficiency gap this proposal targets is still real, just less severe than originally flagged -- treat the original 0.76x figure in the reasoning above as superseded by this update, not current. [Reconfirmed 2026-09-29T15:37:00.000Z: fresh last_14d placement breakdown on ad set 120255693970460159 -- instagram_reels now ₹1,412.07 spend at 3.76x ROAS, essentially unchanged from the 2026-09-29T12:48:00.000Z read. Still lags instagram_stories (₹652.59 @ 26.82x) and instagram_feed (₹1,333.43 @ 8.57x) by a wide margin. The relative placement-efficiency gap persists at a stable (not worsening) severity -- leaving pending for human review, original 0.76x figure remains superseded.] [Reconfirmed 2026-09-29T22:52:00.000Z pass: fresh last_14d placement breakdown on ad set 120255693970460159 -- instagram_reels now ₹1,956.33 spend at 5.04397x ROAS (up from ₹1,412.07 at 3.76x at the 15:37 UTC read), continuing its recovery. instagram_stories now ₹800.62 @ 23.75664x, instagram_feed now ₹1,679.80 @ 7.70584x -- both also grew but Reels remains the relative laggard of the ad set's three main placements, though the efficiency gap keeps narrowing rather than widening. Leaving pending for human review; original 0.76x figure in the title remains superseded.]",
       "actionSummary": "Set explicit instagram_positions excluding 'reels' (keep stream/story/explore_home/profile_feed/ig_search) so Advantage+ placement stops allocating spend to the underperforming Reels surface; all other targeting (geo, age, interests/behaviors, excluded_custom_audiences) unchanged. Reviewer note: because this ad set currently relies on Advantage+ placements with no explicit position list, applying this delta will pin explicit instagram_positions going forward -- confirm that's the intended trade-off before approving.",
       "metaAction": {
         "tool": "ads_update_entity",
@@ -988,7 +988,8 @@
         ]
       },
       "status": "pending",
-      "createdAt": "2026-09-27T20:47:00.000Z"
+      "createdAt": "2026-09-27T20:47:00.000Z",
+      "updatedAt": "2026-09-29T22:52:00.000Z"
     },
     {
       "id": "A-044",
@@ -1050,7 +1051,7 @@
       "module": "age-gender-auto-shift",
       "tier": "approval",
       "title": "Narrow Caps + Kage_26 Sept away from its underperforming 18-24 male segment",
-      "reasoning": "Ad set 'Caps + Kage_26Sept' (id 120255693970460159, campaign 'Caps + Kage_26 Sept', id 120255693970470159; last_14d blended 9.35x ROAS on ₹3,660.71 spend). Age/gender breakdown (last_14d) shows the 18-24 male cell at ₹450.90 spend -- meaningful, ~12% of ad set spend -- converting at just 3.366804x ROAS, well below the ad set's blended average and dragging on the demonstrably stronger male cohorts: 25-34 male (₹1,722.12 @ 9.008968x), 35-44 male (₹1,083.52 @ 11.529748x), and 45-54 male (₹222.50 @ 14.373285x, thinner sample). Female cells across all ages carry negligible spend (₹0.39-₹36.93) and no meaningful signal either way.",
+      "reasoning": "Ad set 'Caps + Kage_26Sept' (id 120255693970460159, campaign 'Caps + Kage_26 Sept', id 120255693970470159; last_14d blended 9.35x ROAS on ₹3,660.71 spend). Age/gender breakdown (last_14d) shows the 18-24 male cell at ₹450.90 spend -- meaningful, ~12% of ad set spend -- converting at just 3.366804x ROAS, well below the ad set's blended average and dragging on the demonstrably stronger male cohorts: 25-34 male (₹1,722.12 @ 9.008968x), 35-44 male (₹1,083.52 @ 11.529748x), and 45-54 male (₹222.50 @ 14.373285x, thinner sample). Female cells across all ages carry negligible spend (₹0.39-₹36.93) and no meaningful signal either way. [Reconfirmed 2026-09-29T22:52:00.000Z pass: fresh last_14d age/gender breakdown on ad set 120255693970460159 -- 18-24 male now ₹630.35 spend at 4.816726x ROAS (up from ₹450.90 at 3.366804x). Still the weakest of the meaningful-spend male cells: 25-34 male ₹2,318.05 @ 7.90777x, 35-44 male ₹1,382.47 @ 11.232717x, 45-54 male ₹274.76 @ 17.164293x. The underlying narrowing case stands, though the 18-24 cell's ROAS is improving, not worsening. Leaving pending for human review.]",
       "actionSummary": "Raise age_min from the current 19 to 25 on the ad set's targeting, cutting the underperforming 18-24 slice while fully retaining the 25-54 male cohorts driving the ad set's 9.35x blended ROAS. Existing city/interest/behavior targeting and the Purchasers 180D exclusion stay unchanged. This ad set is also the target of pending A-038 (WhatsApp placement exclusion) and A-042 (Instagram Reels placement) -- all three apply on top of the ad set's live targeting at approval time, in whichever order they are approved.",
       "metaAction": {
         "tool": "ads_update_entity",
@@ -1065,7 +1066,8 @@
         "age_min": 25
       },
       "status": "pending",
-      "createdAt": "2026-09-29T10:52:00.000Z"
+      "createdAt": "2026-09-29T10:52:00.000Z",
+      "updatedAt": "2026-09-29T22:52:00.000Z"
     }
   ],
   "alerts": [
@@ -10946,6 +10948,87 @@
       "severity": "low",
       "dismissed": false,
       "createdAt": "2026-09-29T20:50:00.000Z"
+    },
+    {
+      "id": "AL-1097",
+      "module": "lookalike-refresh",
+      "title": "Lookalike refresh rate-limited this pass -- skipped re-attempt",
+      "detail": "settings.max_auto_actions_per_entity_per_day (1) was already reached for lookalike-refresh on origin audience 'Purchasers 180D' (120255823280550159): the log already has an entry for this module+entity at 2026-09-29T20:50:00.000Z (attempted rebuild of the 1%/2%/5% ladder, failed -- Meta rejected as duplicate lookalike since the source audience hasn't grown past ~20 people). Per the Safety infrastructure rate-limiting rule, this pass skipped a re-attempt rather than repeating a call expected to fail identically. The existing 3 lookalikes remain live and serving.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-09-29T22:52:00.000Z"
+    },
+    {
+      "id": "AL-1098",
+      "module": "threshold-alerts",
+      "title": "No CPM/CTR/CPC threshold breaches",
+      "detail": "Active campaigns vs their own last_14d baseline: Retargeting_Overall last_7d CPM ₹148.25 / CTR 2.75% / CPC ₹5.39 vs last_14d CPM ₹141.98 / CTR 2.33% / CPC ₹6.09 -- normal week-over-week movement, no breach. Caps + Kage_26 Sept last_7d and last_14d figures identical (CPM ₹91.08 / CTR 2.17% / CPC ₹4.20) since the campaign's full spend history falls inside the trailing 7 days. No threshold breaches this pass.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-09-29T22:52:00.000Z"
+    },
+    {
+      "id": "AL-1099",
+      "module": "anomaly",
+      "title": "No anomaly signal this pass",
+      "detail": "ads_insights_anomaly_signal (account-wide): no anomaly signal issues found. Checked for auction overlap, creative fatigue, and narrow audience.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-09-29T22:52:00.000Z"
+    },
+    {
+      "id": "AL-1100",
+      "module": "learning-phase-stuck",
+      "title": "No ad sets stuck in learning",
+      "detail": "Both currently-ACTIVE ad sets (Retargeting_Overall 120255851467360159, Caps + Kage_26Sept 120255693970460159) show delivery status 'warning' with substatus common_campaign_marketing_message_subscriber_pool_automation_off only -- an unrelated WhatsApp/Messenger automation notice, not a learning-limited flag. No ad sets stuck in learning.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-09-29T22:52:00.000Z"
+    },
+    {
+      "id": "AL-1101",
+      "module": "pixel-health",
+      "title": "Pixel quality healthy -- no match-rate breach",
+      "detail": "ads_get_dataset_quality on dataset 833131719490535: Purchase/prepaid_purchase composite EMQ 8.7/10, AddPaymentInfo 8.6/10, cod_purchase 8.1/10, InitiateCheckout 7.0/10, core web events (PageView/ViewContent/AddToCart/Search/SubscribedButtonClick) 6.1/10 -- unchanged from the prior ~20:50 UTC pass, all well above settings.pixel_quality_min_match_rate (0.6). ROAS-driven modules not suppressed this pass.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-09-29T22:52:00.000Z"
+    },
+    {
+      "id": "AL-1102",
+      "module": "competitor-rescrape",
+      "title": "Gully Labs / Lotto Sport India combined active-ad count unchanged",
+      "detail": "ads_library_search combined page_ids query (107479854297817 / 426015150606378, ad_active_status=ACTIVE) returned estimated_total_count=321, unchanged from the prior ~20:50 UTC pass (0% change). Well under the 20% alert threshold.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-09-29T22:52:00.000Z"
+    },
+    {
+      "id": "AL-1103",
+      "module": "campaign-consolidation-watch",
+      "title": "No product/audience overlap among active campaigns",
+      "detail": "Only 2 campaigns ACTIVE: Retargeting_Overall (broad cross-sell/all-product retargeting off pixel-event audiences) and Caps + Kage_26 Sept (caps-line prospecting via interests/behaviors, 12 Indian cities). Different products, different audience strategies -- no overlap flagged.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-09-29T22:52:00.000Z"
+    },
+    {
+      "id": "AL-1104",
+      "module": "self-audit-check",
+      "title": "Live numbers reconfirmed sane; dashboard static snapshot remains stale",
+      "detail": "Live pull this pass: today's account spend ₹313.80 (well under the ₹5,000 hard ceiling), 2 campaigns ACTIVE with last_14d ROAS 11.6x (Retargeting_Overall) and 9.15x (Caps + Kage_26 Sept) -- both sane, no drift beyond normal day-to-day variance. index.html's static DATA/INSIGHTS_DATA snapshot has not been regenerated to match; this is a long-standing, previously-flagged gap, not a new issue this pass.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-09-29T22:52:00.000Z"
+    },
+    {
+      "id": "AL-1105",
+      "module": "routine-run-notes",
+      "title": "Run summary -- 2026-09-29 ~22:52 UTC pass",
+      "detail": "Circuit breaker: not tripped (today's spend ₹313.80 vs ₹5,000 ceiling). Pixel-quality gate: healthy, ROAS modules not suppressed. purchaser-exclusion: account-wide compliant, no action. lookalike-refresh: rate-limited, skipped re-attempt (see AL this pass). hook-angle-tagging: all 3 currently-active ads already tagged, nothing new. hard-spend-circuit-breaker: not triggered. Approval-tier: reconfirmed and updated numbers on 3 pending proposals whose underlying figures moved since last check (A-026 WhatsApp spend, A-042 Instagram Reels recovery, A-046 18-24 male cell) plus a light reconfirmation on A-001 (still dormant); all other pending proposals unchanged since their last reconfirmation, no new proposals created this pass. No new alerts beyond this pass's routine monitoring set.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-09-29T22:52:00.000Z"
     }
   ],
   "log": [
