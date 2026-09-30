@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-30T06:47:00.000Z",
+  "generatedAt": "2026-09-30T08:46:00.000Z",
   "settings": {
     "kill_roas_threshold": "pause if ROAS < 1.0x after ₹500 spend on a sales-objective campaign. EXCEPTION until 2026-10-05T23:59+05:30 (user-approved 2026-09-29): for the sneaker-push campaigns 120256091369160159 (Sneakers_BOF_30Sep-5Oct), 120256091370110159 (Sneakers_Prospecting_30Sep-5Oct) and 120256088882780159 (Sneakers_Catalog_Retargeting) the spend floor is ₹1,500, not ₹500.",
     "reactivate_min_historic_roas": "surface for reactivation if a paused campaign's last active-period ROAS >= 3.0x",
@@ -31,13 +31,13 @@
     "competitor_last_scrape": {
       "gully_labs_active_ads": null,
       "lotto_sport_india_active_ads": null,
-      "scraped_at": "2026-09-30T06:47:00.000Z",
-      "note": "2026-09-30T06:47:00.000Z scheduled run: ads_library_search combined page_ids query (107479854297817 / 426015150606378, ad_active_status=ACTIVE, no country filter) returned estimated_total_count=312, down from 319 at the prior ~04:50 UTC pass (-2.2% change). Well under the 20% alert threshold."
+      "scraped_at": "2026-09-30T08:46:00.000Z",
+      "note": "2026-09-30T08:46:00.000Z scheduled run: ads_library_search combined page_ids query (107479854297817 / 426015150606378, ad_active_status=ACTIVE, no country filter) returned estimated_total_count=313, up from 312 at the prior ~06:47 UTC pass (+0.3% change). Well under the 20% alert threshold."
     },
     "audience_label_corrections": {
       "120249907176770159": "ATC_180D -- NOT a purchaser audience (cart-adders, event=AddToCart, retention 180 days). Verified 2026-09-14, reconfirmed 2026-09-20. Superseded note: earlier passes said the account had NO purchaser audience at all -- that's now out of date. See the 120255823280550159 (Purchasers 180D) entry above, created 2026-09-15, which IS a genuine purchaser audience and is already in use for exclusion + lookalike.",
       "_note": "Map of custom_audience_id -> authoritative name/meaning. Trust these over any label written in earlier log or proposal prose.",
-      "120255823280550159": "Purchasers 180D -- verified via ads_get_custom_audience on 2026-09-20: real purchaser audience (event=Purchase, retention 180 days), created 2026-09-15, approximate size 20. This account NOW HAS a genuine purchaser-based custom audience (superseding the older note below that said it had none). All 4 currently-active ad sets (UGC_MMA, Retargeting_Overall, TSUCHI, Mori_Sales) already list it under excluded_custom_audiences as of this pass -- purchaser-exclusion is compliant account-wide. A laddered 1%/2%/5% lookalike off this audience was also built 2026-09-15 (ids 120255832535210159/610159/780159), still fresh (5 days old, well under the 14-day lookalike_refresh_days threshold). Reconfirmed 2026-09-27 (~00:52 UTC pass): account composition has shifted again -- only 3 ad sets are ACTIVE now (Caps + Kage_26Sept under campaign 'Caps + Kage_26 Sept', and Sora_Retargeting_Behaviours + Sora_Retargeting_CartAbandoners_30D under a new campaign 'Sora Retargeting', id 120256004515360159). All 3 still exclude this audience in excluded_custom_audiences -- purchaser-exclusion remains compliant account-wide. This supersedes the 2026-09-20 '4 currently-active ad sets' snapshot, which is now stale (those 4 -- UGC_MMA, Retargeting_Overall, TSUCHI, Mori_Sales -- are all PAUSED as of this pass). Reconfirmed 2026-09-27T06:54:00.000Z: found a 4th ad set that was ACTIVE but NOT excluding this audience -- 'New STP 3' under campaign 'New Caps Part 3 STP' (zero spend since 2026-03-04, evidently missed by prior passes' active-campaign counts because those keyed off spend). Fixed this pass via purchaser-exclusion: exclusion added, ad set force-paused as a side effect (Meta API behavior for non-rename edits to ACTIVE entities). The 3 previously-known active ad sets (Caps + Kage_26Sept, Sora_Retargeting_Behaviours, Sora_Retargeting_CartAbandoners_30D) remain compliant and unchanged. Reconfirmed 2026-09-29T02:47:00.000Z pass: 5 ad sets ACTIVE now (up from 3) across the same 3 active campaigns (New STP 3 under 'New Caps Part 3 STP'; Sora_MOF_Engagers, Sora_Retargeting_CartAbandoners_30D, Sora_Retargeting_Behaviours under 'Sora Retargeting'; Caps + Kage_26Sept under 'Caps + Kage_26 Sept') -- all 5 confirmed excluding this audience (Purchasers 180D) in excluded_custom_audiences via direct targeting fetch. purchaser-exclusion remains compliant account-wide, no action needed. The laddered 1%/2%/5% lookalikes built 2026-09-15 (11:49 UTC-7 = 18:49 UTC) are now ~13.3 days old -- still under the 14-day lookalike_refresh_days threshold, but will cross it within roughly the next 10-16 hours; expect lookalike-refresh to trigger on an upcoming pass. Source audience size unchanged (~20). Reconfirmed 2026-09-29T16:48:00.000Z pass: 2 campaigns ACTIVE (Retargeting_Overall, Caps + Kage_26 Sept), 2 ad sets ACTIVE -- 'Retargeting_Overall' (exempt per settings.purchaser_exclusion_exempt_adset_ids, deliberately targets Purchasers 180D by design) and 'Caps + Kage_26Sept' (confirmed excluding Purchasers 180D in excluded_custom_audiences via direct targeting fetch). purchaser-exclusion remains compliant account-wide, no action needed. The laddered 1%/2%/5% lookalikes built 2026-09-15 are now ~13.92 days old -- still just under the 14-day lookalike_refresh_days threshold, expected to cross it on an upcoming pass. Source audience size unchanged (~20), so no growth-based refresh trigger either. Reconfirmed 2026-09-29T22:52:00.000Z pass: same 2 campaigns ACTIVE (Retargeting_Overall -- exempt per settings.purchaser_exclusion_exempt_adset_ids, deliberately includes Purchasers 180D by design; Caps + Kage_26Sept -- confirmed excluding Purchasers 180D in excluded_custom_audiences via direct targeting fetch). purchaser-exclusion remains compliant account-wide, no action needed. The laddered 1%/2%/5% lookalikes built 2026-09-15 are now ~14.17 days old (past the 14-day threshold); a rebuild attempt was skipped this pass under rate limiting (see alerts for this pass) since the last attempt was at 2026-09-29T20:50:00.000Z, within max_auto_actions_per_entity_per_day=1. Reconfirmed 2026-09-30T00:46:00.000Z pass: 2 campaigns ACTIVE (Retargeting_Overall -- exempt per settings.purchaser_exclusion_exempt_adset_ids, deliberately includes Purchasers 180D by design; Caps + Kage_26Sept -- confirmed excluding Purchasers 180D in excluded_custom_audiences via direct targeting fetch). purchaser-exclusion remains compliant account-wide, no action needed. The laddered 1%/2%/5% lookalikes built 2026-09-15 are now ~14.99 days old (past the 14-day threshold); a rebuild attempt was skipped this pass under rate limiting (last attempt 2026-09-29T20:50:00.000Z, within max_auto_actions_per_entity_per_day=1). Source audience size unchanged (~20). Reconfirmed 2026-09-30T02:50:00.000Z pass: same 2 campaigns ACTIVE (Retargeting_Overall -- exempt per settings.purchaser_exclusion_exempt_adset_ids, deliberately includes Purchasers 180D by design; Caps + Kage_26Sept -- confirmed excluding Purchasers 180D in excluded_custom_audiences via direct targeting fetch). purchaser-exclusion remains compliant account-wide, no action needed. The laddered 1%/2%/5% lookalikes built 2026-09-15 are now ~15.15 days old (past the 14-day threshold); a rebuild attempt was skipped this pass under rate limiting (last attempt 2026-09-29T20:50:00.000Z, within max_auto_actions_per_entity_per_day=1). Source audience size unchanged (~20)."
+      "120255823280550159": "Purchasers 180D -- verified via ads_get_custom_audience on 2026-09-20: real purchaser audience (event=Purchase, retention 180 days), created 2026-09-15, approximate size 20. This account NOW HAS a genuine purchaser-based custom audience (superseding the older note below that said it had none). All 4 currently-active ad sets (UGC_MMA, Retargeting_Overall, TSUCHI, Mori_Sales) already list it under excluded_custom_audiences as of this pass -- purchaser-exclusion is compliant account-wide. A laddered 1%/2%/5% lookalike off this audience was also built 2026-09-15 (ids 120255832535210159/610159/780159), still fresh (5 days old, well under the 14-day lookalike_refresh_days threshold). Reconfirmed 2026-09-27 (~00:52 UTC pass): account composition has shifted again -- only 3 ad sets are ACTIVE now (Caps + Kage_26Sept under campaign 'Caps + Kage_26 Sept', and Sora_Retargeting_Behaviours + Sora_Retargeting_CartAbandoners_30D under a new campaign 'Sora Retargeting', id 120256004515360159). All 3 still exclude this audience in excluded_custom_audiences -- purchaser-exclusion remains compliant account-wide. This supersedes the 2026-09-20 '4 currently-active ad sets' snapshot, which is now stale (those 4 -- UGC_MMA, Retargeting_Overall, TSUCHI, Mori_Sales -- are all PAUSED as of this pass). Reconfirmed 2026-09-27T06:54:00.000Z: found a 4th ad set that was ACTIVE but NOT excluding this audience -- 'New STP 3' under campaign 'New Caps Part 3 STP' (zero spend since 2026-03-04, evidently missed by prior passes' active-campaign counts because those keyed off spend). Fixed this pass via purchaser-exclusion: exclusion added, ad set force-paused as a side effect (Meta API behavior for non-rename edits to ACTIVE entities). The 3 previously-known active ad sets (Caps + Kage_26Sept, Sora_Retargeting_Behaviours, Sora_Retargeting_CartAbandoners_30D) remain compliant and unchanged. Reconfirmed 2026-09-29T02:47:00.000Z pass: 5 ad sets ACTIVE now (up from 3) across the same 3 active campaigns (New STP 3 under 'New Caps Part 3 STP'; Sora_MOF_Engagers, Sora_Retargeting_CartAbandoners_30D, Sora_Retargeting_Behaviours under 'Sora Retargeting'; Caps + Kage_26Sept under 'Caps + Kage_26 Sept') -- all 5 confirmed excluding this audience (Purchasers 180D) in excluded_custom_audiences via direct targeting fetch. purchaser-exclusion remains compliant account-wide, no action needed. The laddered 1%/2%/5% lookalikes built 2026-09-15 (11:49 UTC-7 = 18:49 UTC) are now ~13.3 days old -- still under the 14-day lookalike_refresh_days threshold, but will cross it within roughly the next 10-16 hours; expect lookalike-refresh to trigger on an upcoming pass. Source audience size unchanged (~20). Reconfirmed 2026-09-29T16:48:00.000Z pass: 2 campaigns ACTIVE (Retargeting_Overall, Caps + Kage_26 Sept), 2 ad sets ACTIVE -- 'Retargeting_Overall' (exempt per settings.purchaser_exclusion_exempt_adset_ids, deliberately targets Purchasers 180D by design) and 'Caps + Kage_26Sept' (confirmed excluding Purchasers 180D in excluded_custom_audiences via direct targeting fetch). purchaser-exclusion remains compliant account-wide, no action needed. The laddered 1%/2%/5% lookalikes built 2026-09-15 are now ~13.92 days old -- still just under the 14-day lookalike_refresh_days threshold, expected to cross it on an upcoming pass. Source audience size unchanged (~20), so no growth-based refresh trigger either. Reconfirmed 2026-09-29T22:52:00.000Z pass: same 2 campaigns ACTIVE (Retargeting_Overall -- exempt per settings.purchaser_exclusion_exempt_adset_ids, deliberately includes Purchasers 180D by design; Caps + Kage_26Sept -- confirmed excluding Purchasers 180D in excluded_custom_audiences via direct targeting fetch). purchaser-exclusion remains compliant account-wide, no action needed. The laddered 1%/2%/5% lookalikes built 2026-09-15 are now ~14.17 days old (past the 14-day threshold); a rebuild attempt was skipped this pass under rate limiting (see alerts for this pass) since the last attempt was at 2026-09-29T20:50:00.000Z, within max_auto_actions_per_entity_per_day=1. Reconfirmed 2026-09-30T00:46:00.000Z pass: 2 campaigns ACTIVE (Retargeting_Overall -- exempt per settings.purchaser_exclusion_exempt_adset_ids, deliberately includes Purchasers 180D by design; Caps + Kage_26Sept -- confirmed excluding Purchasers 180D in excluded_custom_audiences via direct targeting fetch). purchaser-exclusion remains compliant account-wide, no action needed. The laddered 1%/2%/5% lookalikes built 2026-09-15 are now ~14.99 days old (past the 14-day threshold); a rebuild attempt was skipped this pass under rate limiting (last attempt 2026-09-29T20:50:00.000Z, within max_auto_actions_per_entity_per_day=1). Source audience size unchanged (~20). Reconfirmed 2026-09-30T02:50:00.000Z pass: same 2 campaigns ACTIVE (Retargeting_Overall -- exempt per settings.purchaser_exclusion_exempt_adset_ids, deliberately includes Purchasers 180D by design; Caps + Kage_26Sept -- confirmed excluding Purchasers 180D in excluded_custom_audiences via direct targeting fetch). purchaser-exclusion remains compliant account-wide, no action needed. The laddered 1%/2%/5% lookalikes built 2026-09-15 are now ~15.15 days old (past the 14-day threshold); a rebuild attempt was skipped this pass under rate limiting (last attempt 2026-09-29T20:50:00.000Z, within max_auto_actions_per_entity_per_day=1). Source audience size unchanged (~20). Reconfirmed 2026-09-30T08:46:00.000Z pass: account composition changed materially since the ~06:47 UTC pass -- 3 new campaigns (Sneakers_Prospecting_30Sep-5Oct 120256091370110159, Sneakers_BOF_30Sep-5Oct 120256091369160159, Sneakers_Catalog_Retargeting 120256088882780159; the user-approved 30 Sep-5 Oct sneaker push) went ACTIVE, alongside the 2 already-active campaigns (Retargeting_Overall, Caps + Kage_26 Sept) -- 5 campaigns / 6 ad sets ACTIVE now. Checked all 6: Prosp_Men_25-44_Broad_7am-12am, BOF_2_Warm_IG365_Engagers_Visitors and BOF_1_Hot_ATC_IC_API_30D all exclude Purchasers 180D in excluded_custom_audiences; BOF_3_CrossSell_Purchasers180D (120256091378350159) is on the settings.purchaser_exclusion_exempt_adset_ids list and deliberately targets Purchasers 180D by design; Retargeting_Overall (120255851467360159) is also exempt and deliberately includes it; Caps + Kage_26Sept excludes it. Sneaker_Viewers_ATC_30D_NoPurchase (Sneakers_Catalog_Retargeting's only ad set) uses a product_audience_spec (DPA-style ViewContent/AddToCart audience) with its own built-in Purchase-event exclusion (30d window) rather than the account's excluded_custom_audiences mechanism -- functionally already excludes recent purchasers from this catalog-retargeting audience, so no edit was made (an edit would force-pause this brand-new, actively-launching ad set for no real compliance gain). purchaser-exclusion remains compliant account-wide, no action needed. All 3 new sneaker campaigns show $0 spend so far this pass (just launched) -- too early for pause-kill/age-gender/placement/threshold checks, which need real delivery data first."
     },
     "note": "hard_spend_ceiling_inr raised 2750 -> 4000 -> 5000 on 2026-09-29 by the user for the sneaker push (30 Sep - 5 Oct; planned budgets ~₹4,350/day, 5000 leaves room for Meta's daily over-delivery); revert to 2750 on 2026-10-06 unless the user says otherwise. Earlier: hard_spend_ceiling_inr raised 2000 -> 2750 on 2026-09-14: active campaign budgets total ~₹2,020/day (Mori+Tee ₹1,120, TSUCHI BOF based on CAPS ₹450, Retargeting_31AUG ₹300, KAGE_TOF_Sept ad set ₹100), which sat level with the old ceiling and left the account permanently at the trip line. ₹2,750 gives roughly 35% headroom. All fields here are editable directly in the Automation tab (Save button) or by telling Claude. See also settings.audience_label_corrections. Lookalike-refresh note (2026-09-29): the laddered 1%/2%/5% lookalikes built 2026-09-15 crossed the 14-day refresh age this pass, but Meta rejects rebuild attempts as duplicate lookalikes (error 2654/1713007) because source audience Purchasers 180D hasn't grown past its ~20-person size since creation. This will keep failing on every future pass until that source audience actually grows -- not a bug in the routine, a real API constraint. The existing 3 lookalikes remain live and serving; no account action needed unless the user wants to widen the source audience's definition."
   },
@@ -11416,6 +11416,96 @@
       "severity": "low",
       "dismissed": false,
       "createdAt": "2026-09-30T06:47:00.000Z"
+    },
+    {
+      "id": "AL-1143",
+      "module": "lookalike-refresh",
+      "title": "Lookalike refresh rate-limited this pass -- skipped re-attempt",
+      "detail": "The laddered 1%/2%/5% lookalike off 'Purchasers 180D' (120255823280550159) is past the 14-day lookalike_refresh_days threshold, but the last rebuild attempt was 2026-09-29T20:50:00.000Z (~12h ago), within max_auto_actions_per_entity_per_day=1 (24h window) -- skipped this pass, would have acted otherwise. Source audience size unchanged (~20), so a rebuild would likely fail again with error 2654/1713007 (duplicate lookalike) as noted in settings.note -- not a bug, a real API constraint until the source audience grows.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-09-30T08:46:00.000Z"
+    },
+    {
+      "id": "AL-1144",
+      "module": "threshold-alerts",
+      "title": "No CPM/CTR/CPC threshold breaches",
+      "detail": "Retargeting_Overall (last_7d): CPM ₹148.08, CTR 2.75%, CPC ₹5.39, frequency 1.91 -- healthy. Caps + Kage_26 Sept (last_7d): CPM ₹91.08, CTR 2.17%, CPC ₹4.20, frequency 1.49 -- healthy. The 3 new sneaker campaigns (Sneakers_Prospecting_30Sep-5Oct, Sneakers_BOF_30Sep-5Oct, Sneakers_Catalog_Retargeting) show $0 spend/no delivery data yet -- too new to baseline.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-09-30T08:46:00.000Z"
+    },
+    {
+      "id": "AL-1145",
+      "module": "anomaly",
+      "title": "No anomaly signal this pass",
+      "detail": "ads_insights_anomaly_signal: no anomaly signal issues found (checked for auction overlap, creative fatigue, and narrow audience).",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-09-30T08:46:00.000Z"
+    },
+    {
+      "id": "AL-1146",
+      "module": "learning-phase-stuck",
+      "title": "No ad sets stuck in learning",
+      "detail": "No active ad set showed a >7-day stuck-in-learning signal this pass. The 3 new sneaker campaigns' ad sets just launched (0 spend so far) so learning status is not yet meaningful for them; Retargeting_Overall and Caps + Kage_26Sept are long-established and past learning.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-09-30T08:46:00.000Z"
+    },
+    {
+      "id": "AL-1147",
+      "module": "pixel-health",
+      "title": "Pixel quality remains healthy -- no match-rate breach",
+      "detail": "ads_get_dataset_quality (dataset 833131719490535) this pass: Purchase composite EMQ 8.6, prepaid_purchase 8.7, AddPaymentInfo 8.9, cod_purchase 8.5, InitiateCheckout 7.0, core web events (PageView/ViewContent/AddToCart/Search/SubscribedButtonClick) 6.1 -- unchanged from the prior ~06:47 UTC pass, all at/above the 0.6 pixel_quality_min_match_rate floor (as composite_score/10). Gate not breached -- ROAS-driven modules evaluated normally this pass.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-09-30T08:46:00.000Z"
+    },
+    {
+      "id": "AL-1148",
+      "module": "competitor-rescrape",
+      "title": "Gully Labs / Lotto Sport India combined active-ad count essentially unchanged",
+      "detail": "ads_library_search combined count: 313, up from 312 at the prior ~06:47 UTC pass (+0.3%). Well under the 20% competitor-spike alert threshold.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-09-30T08:46:00.000Z"
+    },
+    {
+      "id": "AL-1149",
+      "module": "campaign-consolidation-watch",
+      "title": "New sneaker-push campaigns launched -- no product/audience overlap, no consolidation flag",
+      "detail": "5 campaigns ACTIVE now (up from 2 at the ~06:47 UTC pass): the new Sneakers_Prospecting_30Sep-5Oct / Sneakers_BOF_30Sep-5Oct / Sneakers_Catalog_Retargeting trio is an intentional 3-stage funnel for the sneaker push (cold prospecting -> warm/hot/cross-sell BOF -> catalog-based viewer/ATC retargeting), not duplicate campaigns targeting the same product+audience. Retargeting_Overall (all-product retargeting) and Caps + Kage_26 Sept (caps/kage prospecting+sales) remain distinct from the sneaker funnel and from each other. No consolidation flag this pass.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-09-30T08:46:00.000Z"
+    },
+    {
+      "id": "AL-1150",
+      "module": "self-audit-check",
+      "title": "Live numbers reconfirmed sane; dashboard static snapshot remains stale",
+      "detail": "Live account spend/ROAS pulled this pass (today's account spend ₹1,283.01; Retargeting_Overall last_14d ROAS 11.6x; Caps + Kage_26 Sept last_14d ROAS 9.15x) look internally consistent. index.html's baked-in DATA/INSIGHTS_DATA snapshot was not regenerated this pass and does not reflect the new sneaker-push campaigns or today's live numbers -- consistent with every prior pass's finding that the dashboard's static snapshot is stale relative to live Meta data. No drift-tolerance breach in the live numbers themselves.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-09-30T08:46:00.000Z"
+    },
+    {
+      "id": "AL-1151",
+      "module": "purchaser-exclusion",
+      "title": "Sneaker-push launch reconfirmed purchaser-exclusion compliant account-wide",
+      "detail": "3 new campaigns went ACTIVE this pass for the user-approved 30 Sep-5 Oct sneaker push. All 6 currently-active ad sets checked: 4 exclude/are exempt correctly (Prosp_Men_25-44_Broad_7am-12am, BOF_2_Warm_IG365_Engagers_Visitors, BOF_1_Hot_ATC_IC_API_30D exclude Purchasers 180D; BOF_3_CrossSell_Purchasers180D and Retargeting_Overall are on settings.purchaser_exclusion_exempt_adset_ids and deliberately target/include it by design), 1 excludes it directly (Caps + Kage_26Sept), and 1 (Sneaker_Viewers_ATC_30D_NoPurchase, the catalog-retargeting ad set) achieves the same intent structurally via a product_audience_spec with its own built-in 30-day Purchase exclusion rather than the account's Purchasers 180D custom audience -- no edit made (would force-pause a brand-new ad set for no compliance gain). No action needed this pass.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-09-30T08:46:00.000Z"
+    },
+    {
+      "id": "AL-1152",
+      "module": "routine-run-notes",
+      "title": "Run summary -- 2026-09-30 ~08:46 UTC pass",
+      "detail": "Circuit breaker: not tripped (today's account spend ₹1,283.01 vs ₹5,000 ceiling). Pixel quality gate: healthy, ROAS modules evaluated normally. Biggest change this pass: the user-approved sneaker push went live -- 3 new campaigns (Sneakers_Prospecting_30Sep-5Oct, Sneakers_BOF_30Sep-5Oct, Sneakers_Catalog_Retargeting) came ACTIVE with 31 ads across 6 ad sets, all purchaser-exclusion compliant, $0 spend so far. Auto-executed: 17 hook-angle-tagging creative tags (all new sneaker-push creatives; Higgsfield vision pass skipped, text-only). Rate-limited: lookalike-refresh (last attempt ~12h ago, within 24h window). No new alerts of note: no anomaly signal, no threshold breaches, no learning-phase-stuck ad sets, competitor count essentially flat (313 vs 312), no campaign-consolidation flag. No new approval-tier proposals this pass -- the 34 existing pending proposals are unchanged (all reference campaigns that are still paused; nothing in their underlying numbers moved). Highest-priority item: none -- routine pass, no circuit-breaker trip, no urgent findings.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-09-30T08:46:00.000Z"
     }
   ],
   "log": [
@@ -16152,6 +16242,244 @@
       },
       "tier": "auto",
       "executedAt": "2026-09-30T02:50:00.000Z"
+    },
+    {
+      "proposalId": null,
+      "action": "hook-angle-tagging auto-module: tagged creative 1870110150685602 (ad 'Sneakers_Catalog_Carousel_v2_ProductLinks', id 120256090547730159) -- part of the new Sneakers_BOF_30Sep-5Oct / Sneakers_Prospecting_30Sep-5Oct / Sneakers_Catalog_Retargeting launch (3 campaigns went ACTIVE between the ~06:47 and ~08:46 UTC passes). Tagged from real primary-text/headline via ads_get_creatives; Higgsfield vision pass skipped (not attached this run). No Meta write -- creativeTags entry only.",
+      "result": "success",
+      "previousState": {
+        "creativeTags_entry": null
+      },
+      "detail": {
+        "creative_id": "1870110150685602",
+        "ad_id": "120256090547730159"
+      },
+      "tier": "auto",
+      "executedAt": "2026-09-30T08:46:00.000Z"
+    },
+    {
+      "proposalId": null,
+      "action": "hook-angle-tagging auto-module: tagged creative 1607006404484477 (ad 'Hot_KAIFEST_KAGE_3198', id 120256091659390159) -- part of the new Sneakers_BOF_30Sep-5Oct / Sneakers_Prospecting_30Sep-5Oct / Sneakers_Catalog_Retargeting launch (3 campaigns went ACTIVE between the ~06:47 and ~08:46 UTC passes). Tagged from real primary-text/headline via ads_get_creatives; Higgsfield vision pass skipped (not attached this run). No Meta write -- creativeTags entry only.",
+      "result": "success",
+      "previousState": {
+        "creativeTags_entry": null
+      },
+      "detail": {
+        "creative_id": "1607006404484477",
+        "ad_id": "120256091659390159"
+      },
+      "tier": "auto",
+      "executedAt": "2026-09-30T08:46:00.000Z"
+    },
+    {
+      "proposalId": null,
+      "action": "hook-angle-tagging auto-module: tagged creative 1073438092281491 (ad 'Prosp_KAIFEST_KAGE_3198', id 120256091667300159) -- part of the new Sneakers_BOF_30Sep-5Oct / Sneakers_Prospecting_30Sep-5Oct / Sneakers_Catalog_Retargeting launch (3 campaigns went ACTIVE between the ~06:47 and ~08:46 UTC passes). Tagged from real primary-text/headline via ads_get_creatives; Higgsfield vision pass skipped (not attached this run). No Meta write -- creativeTags entry only.",
+      "result": "success",
+      "previousState": {
+        "creativeTags_entry": null
+      },
+      "detail": {
+        "creative_id": "1073438092281491",
+        "ad_id": "120256091667300159"
+      },
+      "tier": "auto",
+      "executedAt": "2026-09-30T08:46:00.000Z"
+    },
+    {
+      "proposalId": null,
+      "action": "hook-angle-tagging auto-module: tagged creative 1665190765022363 (ad 'Hot_SORA_2499', id 120256091991130159) -- part of the new Sneakers_BOF_30Sep-5Oct / Sneakers_Prospecting_30Sep-5Oct / Sneakers_Catalog_Retargeting launch (3 campaigns went ACTIVE between the ~06:47 and ~08:46 UTC passes). Tagged from real primary-text/headline via ads_get_creatives; Higgsfield vision pass skipped (not attached this run). No Meta write -- creativeTags entry only.",
+      "result": "success",
+      "previousState": {
+        "creativeTags_entry": null
+      },
+      "detail": {
+        "creative_id": "1665190765022363",
+        "ad_id": "120256091991130159"
+      },
+      "tier": "auto",
+      "executedAt": "2026-09-30T08:46:00.000Z"
+    },
+    {
+      "proposalId": null,
+      "action": "hook-angle-tagging auto-module: tagged creative 2632362627224298 (ad 'Warm_KAIFEST_SORA_3198_v2', id 120256091998430159) -- part of the new Sneakers_BOF_30Sep-5Oct / Sneakers_Prospecting_30Sep-5Oct / Sneakers_Catalog_Retargeting launch (3 campaigns went ACTIVE between the ~06:47 and ~08:46 UTC passes). Tagged from real primary-text/headline via ads_get_creatives; Higgsfield vision pass skipped (not attached this run). No Meta write -- creativeTags entry only.",
+      "result": "success",
+      "previousState": {
+        "creativeTags_entry": null
+      },
+      "detail": {
+        "creative_id": "2632362627224298",
+        "ad_id": "120256091998430159"
+      },
+      "tier": "auto",
+      "executedAt": "2026-09-30T08:46:00.000Z"
+    },
+    {
+      "proposalId": null,
+      "action": "hook-angle-tagging auto-module: tagged creative 1370292451540292 (ad 'XSell_TSUCHI_2499', id 120256091994930159) -- part of the new Sneakers_BOF_30Sep-5Oct / Sneakers_Prospecting_30Sep-5Oct / Sneakers_Catalog_Retargeting launch (3 campaigns went ACTIVE between the ~06:47 and ~08:46 UTC passes). Tagged from real primary-text/headline via ads_get_creatives; Higgsfield vision pass skipped (not attached this run). No Meta write -- creativeTags entry only.",
+      "result": "success",
+      "previousState": {
+        "creativeTags_entry": null
+      },
+      "detail": {
+        "creative_id": "1370292451540292",
+        "ad_id": "120256091994930159"
+      },
+      "tier": "auto",
+      "executedAt": "2026-09-30T08:46:00.000Z"
+    },
+    {
+      "proposalId": null,
+      "action": "hook-angle-tagging auto-module: tagged creative 2308597183306497 (ad 'Prosp_TSUCHI_2499', id 120256091995180159) -- part of the new Sneakers_BOF_30Sep-5Oct / Sneakers_Prospecting_30Sep-5Oct / Sneakers_Catalog_Retargeting launch (3 campaigns went ACTIVE between the ~06:47 and ~08:46 UTC passes). Tagged from real primary-text/headline via ads_get_creatives; Higgsfield vision pass skipped (not attached this run). No Meta write -- creativeTags entry only.",
+      "result": "success",
+      "previousState": {
+        "creativeTags_entry": null
+      },
+      "detail": {
+        "creative_id": "2308597183306497",
+        "ad_id": "120256091995180159"
+      },
+      "tier": "auto",
+      "executedAt": "2026-09-30T08:46:00.000Z"
+    },
+    {
+      "proposalId": null,
+      "action": "hook-angle-tagging auto-module: tagged creative 1087277184225147 (ad 'Warm_TSUCHI_2499', id 120256091993920159) -- part of the new Sneakers_BOF_30Sep-5Oct / Sneakers_Prospecting_30Sep-5Oct / Sneakers_Catalog_Retargeting launch (3 campaigns went ACTIVE between the ~06:47 and ~08:46 UTC passes). Tagged from real primary-text/headline via ads_get_creatives; Higgsfield vision pass skipped (not attached this run). No Meta write -- creativeTags entry only.",
+      "result": "success",
+      "previousState": {
+        "creativeTags_entry": null
+      },
+      "detail": {
+        "creative_id": "1087277184225147",
+        "ad_id": "120256091993920159"
+      },
+      "tier": "auto",
+      "executedAt": "2026-09-30T08:46:00.000Z"
+    },
+    {
+      "proposalId": null,
+      "action": "hook-angle-tagging auto-module: tagged creative 1764037838260997 (ad 'Hot_TSUCHI_2499', id 120256091993340159) -- part of the new Sneakers_BOF_30Sep-5Oct / Sneakers_Prospecting_30Sep-5Oct / Sneakers_Catalog_Retargeting launch (3 campaigns went ACTIVE between the ~06:47 and ~08:46 UTC passes). Tagged from real primary-text/headline via ads_get_creatives; Higgsfield vision pass skipped (not attached this run). No Meta write -- creativeTags entry only.",
+      "result": "success",
+      "previousState": {
+        "creativeTags_entry": null
+      },
+      "detail": {
+        "creative_id": "1764037838260997",
+        "ad_id": "120256091993340159"
+      },
+      "tier": "auto",
+      "executedAt": "2026-09-30T08:46:00.000Z"
+    },
+    {
+      "proposalId": null,
+      "action": "hook-angle-tagging auto-module: tagged creative 28314530104906337 (ad 'Prosp_KAIFEST_TSUCHI_3198', id 120256091666260159) -- part of the new Sneakers_BOF_30Sep-5Oct / Sneakers_Prospecting_30Sep-5Oct / Sneakers_Catalog_Retargeting launch (3 campaigns went ACTIVE between the ~06:47 and ~08:46 UTC passes). Tagged from real primary-text/headline via ads_get_creatives; Higgsfield vision pass skipped (not attached this run). No Meta write -- creativeTags entry only.",
+      "result": "success",
+      "previousState": {
+        "creativeTags_entry": null
+      },
+      "detail": {
+        "creative_id": "28314530104906337",
+        "ad_id": "120256091666260159"
+      },
+      "tier": "auto",
+      "executedAt": "2026-09-30T08:46:00.000Z"
+    },
+    {
+      "proposalId": null,
+      "action": "hook-angle-tagging auto-module: tagged creative 1084977740942074 (ad 'XSell_KAGE_Hero_2499', id 120256091996960159) -- part of the new Sneakers_BOF_30Sep-5Oct / Sneakers_Prospecting_30Sep-5Oct / Sneakers_Catalog_Retargeting launch (3 campaigns went ACTIVE between the ~06:47 and ~08:46 UTC passes). Tagged from real primary-text/headline via ads_get_creatives; Higgsfield vision pass skipped (not attached this run). No Meta write -- creativeTags entry only.",
+      "result": "success",
+      "previousState": {
+        "creativeTags_entry": null
+      },
+      "detail": {
+        "creative_id": "1084977740942074",
+        "ad_id": "120256091996960159"
+      },
+      "tier": "auto",
+      "executedAt": "2026-09-30T08:46:00.000Z"
+    },
+    {
+      "proposalId": null,
+      "action": "hook-angle-tagging auto-module: tagged creative 1474367467842184 (ad 'Warm_KAGE_Hero_2499', id 120256091996480159) -- part of the new Sneakers_BOF_30Sep-5Oct / Sneakers_Prospecting_30Sep-5Oct / Sneakers_Catalog_Retargeting launch (3 campaigns went ACTIVE between the ~06:47 and ~08:46 UTC passes). Tagged from real primary-text/headline via ads_get_creatives; Higgsfield vision pass skipped (not attached this run). No Meta write -- creativeTags entry only.",
+      "result": "success",
+      "previousState": {
+        "creativeTags_entry": null
+      },
+      "detail": {
+        "creative_id": "1474367467842184",
+        "ad_id": "120256091996480159"
+      },
+      "tier": "auto",
+      "executedAt": "2026-09-30T08:46:00.000Z"
+    },
+    {
+      "proposalId": null,
+      "action": "hook-angle-tagging auto-module: tagged creative 1020089611053740 (ad 'Hot_KAGE_Hero_2499', id 120256091995720159) -- part of the new Sneakers_BOF_30Sep-5Oct / Sneakers_Prospecting_30Sep-5Oct / Sneakers_Catalog_Retargeting launch (3 campaigns went ACTIVE between the ~06:47 and ~08:46 UTC passes). Tagged from real primary-text/headline via ads_get_creatives; Higgsfield vision pass skipped (not attached this run). No Meta write -- creativeTags entry only.",
+      "result": "success",
+      "previousState": {
+        "creativeTags_entry": null
+      },
+      "detail": {
+        "creative_id": "1020089611053740",
+        "ad_id": "120256091995720159"
+      },
+      "tier": "auto",
+      "executedAt": "2026-09-30T08:46:00.000Z"
+    },
+    {
+      "proposalId": null,
+      "action": "hook-angle-tagging auto-module: tagged creative 1595890988743449 (ad 'Prosp_KAGE_Lifestyle_2499', id 120256093076440159) -- part of the new Sneakers_BOF_30Sep-5Oct / Sneakers_Prospecting_30Sep-5Oct / Sneakers_Catalog_Retargeting launch (3 campaigns went ACTIVE between the ~06:47 and ~08:46 UTC passes). Tagged from real primary-text/headline via ads_get_creatives; Higgsfield vision pass skipped (not attached this run). No Meta write -- creativeTags entry only.",
+      "result": "success",
+      "previousState": {
+        "creativeTags_entry": null
+      },
+      "detail": {
+        "creative_id": "1595890988743449",
+        "ad_id": "120256093076440159"
+      },
+      "tier": "auto",
+      "executedAt": "2026-09-30T08:46:00.000Z"
+    },
+    {
+      "proposalId": null,
+      "action": "hook-angle-tagging auto-module: tagged creative 1415765204019649 (ad 'XSell_KAIFEST_TSUCHI_3198', id 120256091664150159) -- part of the new Sneakers_BOF_30Sep-5Oct / Sneakers_Prospecting_30Sep-5Oct / Sneakers_Catalog_Retargeting launch (3 campaigns went ACTIVE between the ~06:47 and ~08:46 UTC passes). Tagged from real primary-text/headline via ads_get_creatives; Higgsfield vision pass skipped (not attached this run). No Meta write -- creativeTags entry only.",
+      "result": "success",
+      "previousState": {
+        "creativeTags_entry": null
+      },
+      "detail": {
+        "creative_id": "1415765204019649",
+        "ad_id": "120256091664150159"
+      },
+      "tier": "auto",
+      "executedAt": "2026-09-30T08:46:00.000Z"
+    },
+    {
+      "proposalId": null,
+      "action": "hook-angle-tagging auto-module: tagged creative 1570511944381011 (ad 'Hot_KAIFEST_TSUCHI_3198', id 120256091658470159) -- part of the new Sneakers_BOF_30Sep-5Oct / Sneakers_Prospecting_30Sep-5Oct / Sneakers_Catalog_Retargeting launch (3 campaigns went ACTIVE between the ~06:47 and ~08:46 UTC passes). Tagged from real primary-text/headline via ads_get_creatives; Higgsfield vision pass skipped (not attached this run). No Meta write -- creativeTags entry only.",
+      "result": "success",
+      "previousState": {
+        "creativeTags_entry": null
+      },
+      "detail": {
+        "creative_id": "1570511944381011",
+        "ad_id": "120256091658470159"
+      },
+      "tier": "auto",
+      "executedAt": "2026-09-30T08:46:00.000Z"
+    },
+    {
+      "proposalId": null,
+      "action": "hook-angle-tagging auto-module: tagged creative 2631722323965600 (ad 'Warm_KAIFEST_TSUCHI_3198', id 120256091661640159) -- part of the new Sneakers_BOF_30Sep-5Oct / Sneakers_Prospecting_30Sep-5Oct / Sneakers_Catalog_Retargeting launch (3 campaigns went ACTIVE between the ~06:47 and ~08:46 UTC passes). Tagged from real primary-text/headline via ads_get_creatives; Higgsfield vision pass skipped (not attached this run). No Meta write -- creativeTags entry only.",
+      "result": "success",
+      "previousState": {
+        "creativeTags_entry": null
+      },
+      "detail": {
+        "creative_id": "2631722323965600",
+        "ad_id": "120256091661640159"
+      },
+      "tier": "auto",
+      "executedAt": "2026-09-30T08:46:00.000Z"
     }
   ],
   "creativeTags": {
@@ -18677,6 +19005,193 @@
       "visionPassSkipped": true,
       "note": "Higgsfield vision connection not attached to this run -- image content itself not analyzed, only real ad copy text used. No creative description invented.",
       "taggedAt": "2026-09-30T02:50:00.000Z"
+    },
+    "1870110150685602": {
+      "adName": "Sneakers_Catalog_Carousel_v2_ProductLinks",
+      "campaign": "Sneakers_Catalog_Retargeting",
+      "format": "Dynamic catalog (SHARE, product_set-backed, {{product.name}} template)",
+      "angle": "Catalog-driven retargeting of sneaker viewers/ATC non-purchasers (30d), not discount-led -- reminds shopper the exact product they viewed is still in stock, 7-day returns as the only offer lever",
+      "hook": "\"Still thinking about the {{product.name}}? \\ud83d\\udc5f\\nYour pair is still here \\u2014 built for everyday wear, made to go with everything.\\n7-day returns. Grab it before your size is gone.\" (primary text) / \"{{product.name}}\" (headline, dynamic catalog placeholder)",
+      "taggedFrom": "ad primary text (body) + headline (title), via Meta Ads MCP ads_get_creatives",
+      "visionPassSkipped": true,
+      "note": "Higgsfield vision connection not attached to this run -- image/video content itself not analyzed, only real ad copy text used. No creative description invented.",
+      "taggedAt": "2026-09-30T08:46:00.000Z"
+    },
+    "1607006404484477": {
+      "adName": "Hot_KAIFEST_KAGE_3198 / Warm_KAIFEST_KAGE_3198 / XSell_KAIFEST_KAGE_3198",
+      "campaign": "Sneakers_BOF_30Sep-5Oct",
+      "format": "Static image (SHARE)",
+      "angle": "KAI FEST bundle offer -- KAGE sneaker + any KAI cap for a fixed prepaid bundle price (₹3,198, framed as ₹900 off a ₹4,098 combined value), hard deadline 5 Oct, reused across Hot/Warm/XSell BOF ad set variants",
+      "hook": "\"KAI FEST IS ON \\ud83d\\udd25\\nOne sneaker. Every outfit. KAGE + any KAI cap for just \\u20b93,198 on prepaid orders (worth \\u20b94,098).\\nSave \\u20b9900. Add KAGE + a cap to your cart \\u2014 the price drops at checkout.\\nLimited time offer, till 5th October.\" (primary text) / \"KAI FEST: KAGE + Cap @ \\u20b93,198\" (headline)",
+      "taggedFrom": "ad primary text (body) + headline (title), via Meta Ads MCP ads_get_creatives",
+      "visionPassSkipped": true,
+      "note": "Higgsfield vision connection not attached to this run -- image/video content itself not analyzed, only real ad copy text used. No creative description invented.",
+      "taggedAt": "2026-09-30T08:46:00.000Z"
+    },
+    "1073438092281491": {
+      "adName": "Prosp_KAIFEST_KAGE_3198",
+      "campaign": "Sneakers_Prospecting_30Sep-5Oct",
+      "format": "Static image (SHARE)",
+      "angle": "Same KAI FEST KAGE+cap bundle offer as 1607006404484477, served to the cold prospecting ad set instead of BOF",
+      "hook": "\"KAI FEST IS ON \\ud83d\\udd25\\nOne sneaker. Every outfit. KAGE + any KAI cap for just \\u20b93,198 on prepaid orders (worth \\u20b94,098).\\nSave \\u20b9900. Add KAGE + a cap to your cart \\u2014 the price drops at checkout.\\nLimited time offer, till 5th October.\" (primary text) / \"KAI FEST: KAGE + Cap @ \\u20b93,198\" (headline)",
+      "taggedFrom": "ad primary text (body) + headline (title), via Meta Ads MCP ads_get_creatives",
+      "visionPassSkipped": true,
+      "note": "Higgsfield vision connection not attached to this run -- image/video content itself not analyzed, only real ad copy text used. No creative description invented.",
+      "taggedAt": "2026-09-30T08:46:00.000Z"
+    },
+    "1665190765022363": {
+      "adName": "Hot_SORA_2499 / Warm_SORA_2499 / XSell_SORA_2499 / Prosp_SORA_2499",
+      "campaign": "Sneakers_BOF_30Sep-5Oct + Sneakers_Prospecting_30Sep-5Oct",
+      "format": "Static image (SHARE)",
+      "angle": "Single-sneaker prepaid discount for SORA (₹2,499, was ₹3,299) + free shipping, urgency deadline 5 Oct, reused across BOF and Prospecting ad sets",
+      "hook": "\"You've seen SORA. Now make it yours. \\ud83d\\udc5f\\nPremium everyday style, made to go with everything.\\nNow \\u20b92,499 on prepaid orders (was \\u20b93,299) + FREE SHIPPING.\\nSave \\u20b9800 \\u2014 offer ends 5th October.\" (primary text) / \"SORA at \\u20b92,499 \\u2014 Prepaid\" (headline)",
+      "taggedFrom": "ad primary text (body) + headline (title), via Meta Ads MCP ads_get_creatives",
+      "visionPassSkipped": true,
+      "note": "Higgsfield vision connection not attached to this run -- image/video content itself not analyzed, only real ad copy text used. No creative description invented.",
+      "taggedAt": "2026-09-30T08:46:00.000Z"
+    },
+    "2632362627224298": {
+      "adName": "Warm_KAIFEST_SORA_3198_v2 / XSell_KAIFEST_SORA_3198_v2 / Hot_KAIFEST_SORA_3198_v2 / Prosp_KAIFEST_SORA_3198_v2",
+      "campaign": "Sneakers_BOF_30Sep-5Oct + Sneakers_Prospecting_30Sep-5Oct",
+      "format": "Static image (SHARE)",
+      "angle": "KAI FEST bundle offer -- SORA sneaker + any KAI cap for a fixed prepaid bundle price (₹3,198, framed as ₹900 off a ₹4,098 combined value), hard deadline 5 Oct, reused across Hot/Warm/XSell/Prosp ad set variants",
+      "hook": "\"KAI FEST IS ON \\ud83d\\udd25\\nSORA sneakers + any KAI cap for just \\u20b93,198 on prepaid orders (worth \\u20b94,098).\\nSave \\u20b9900. Add SORA + a cap to your cart \\u2014 the price drops at checkout.\\nLimited time offer, till 5th October.\" (primary text) / \"KAI FEST: SORA + Cap @ \\u20b93,198\" (headline)",
+      "taggedFrom": "ad primary text (body) + headline (title), via Meta Ads MCP ads_get_creatives",
+      "visionPassSkipped": true,
+      "note": "Higgsfield vision connection not attached to this run -- image/video content itself not analyzed, only real ad copy text used. No creative description invented.",
+      "taggedAt": "2026-09-30T08:46:00.000Z"
+    },
+    "1370292451540292": {
+      "adName": "XSell_TSUCHI_2499",
+      "campaign": "Sneakers_BOF_30Sep-5Oct",
+      "format": "Static image (SHARE)",
+      "angle": "Bestseller-restock discount for TSUCHI (₹2,499, was ₹3,299) + free shipping, urgency deadline 5 Oct and limited-stock framing",
+      "hook": "\"OUR BESTSELLER IS BACK \\u2014 KAI TSUCHI \\ud83d\\udc5f\\nNow \\u20b92,499 on prepaid orders (was \\u20b93,299) + FREE SHIPPING.\\nSave \\u20b9800 \\u2014 only till 5th October. Limited stock.\" (primary text) / \"TSUCHI at \\u20b92,499 \\u2014 Prepaid\" (headline)",
+      "taggedFrom": "ad primary text (body) + headline (title), via Meta Ads MCP ads_get_creatives",
+      "visionPassSkipped": true,
+      "note": "Higgsfield vision connection not attached to this run -- image/video content itself not analyzed, only real ad copy text used. No creative description invented.",
+      "taggedAt": "2026-09-30T08:46:00.000Z"
+    },
+    "2308597183306497": {
+      "adName": "Prosp_TSUCHI_2499",
+      "campaign": "Sneakers_Prospecting_30Sep-5Oct",
+      "format": "Static image (SHARE)",
+      "angle": "Same TSUCHI bestseller-restock discount as 1370292451540292, different image asset, served cold to the prospecting ad set",
+      "hook": "\"OUR BESTSELLER IS BACK \\u2014 KAI TSUCHI \\ud83d\\udc5f\\nNow \\u20b92,499 on prepaid orders (was \\u20b93,299) + FREE SHIPPING.\\nSave \\u20b9800 \\u2014 only till 5th October. Limited stock.\" (primary text) / \"TSUCHI at \\u20b92,499 \\u2014 Prepaid\" (headline)",
+      "taggedFrom": "ad primary text (body) + headline (title), via Meta Ads MCP ads_get_creatives",
+      "visionPassSkipped": true,
+      "note": "Higgsfield vision connection not attached to this run -- image/video content itself not analyzed, only real ad copy text used. No creative description invented.",
+      "taggedAt": "2026-09-30T08:46:00.000Z"
+    },
+    "1087277184225147": {
+      "adName": "Warm_TSUCHI_2499",
+      "campaign": "Sneakers_BOF_30Sep-5Oct",
+      "format": "Static image (SHARE)",
+      "angle": "Same TSUCHI bestseller-restock discount, shares its image asset with 2308597183306497/1764037838260997 (near-duplicate creative instances for different ad sets)",
+      "hook": "\"OUR BESTSELLER IS BACK \\u2014 KAI TSUCHI \\ud83d\\udc5f\\nNow \\u20b92,499 on prepaid orders (was \\u20b93,299) + FREE SHIPPING.\\nSave \\u20b9800 \\u2014 only till 5th October. Limited stock.\" (primary text) / \"TSUCHI at \\u20b92,499 \\u2014 Prepaid\" (headline)",
+      "taggedFrom": "ad primary text (body) + headline (title), via Meta Ads MCP ads_get_creatives",
+      "visionPassSkipped": true,
+      "note": "Higgsfield vision connection not attached to this run -- image/video content itself not analyzed, only real ad copy text used. No creative description invented.",
+      "taggedAt": "2026-09-30T08:46:00.000Z"
+    },
+    "1764037838260997": {
+      "adName": "Hot_TSUCHI_2499",
+      "campaign": "Sneakers_BOF_30Sep-5Oct",
+      "format": "Static image (SHARE)",
+      "angle": "Same TSUCHI bestseller-restock discount, shares its image asset with 2308597183306497/1087277184225147 (near-duplicate creative instances for different ad sets)",
+      "hook": "\"OUR BESTSELLER IS BACK \\u2014 KAI TSUCHI \\ud83d\\udc5f\\nNow \\u20b92,499 on prepaid orders (was \\u20b93,299) + FREE SHIPPING.\\nSave \\u20b9800 \\u2014 only till 5th October. Limited stock.\" (primary text) / \"TSUCHI at \\u20b92,499 \\u2014 Prepaid\" (headline)",
+      "taggedFrom": "ad primary text (body) + headline (title), via Meta Ads MCP ads_get_creatives",
+      "visionPassSkipped": true,
+      "note": "Higgsfield vision connection not attached to this run -- image/video content itself not analyzed, only real ad copy text used. No creative description invented.",
+      "taggedAt": "2026-09-30T08:46:00.000Z"
+    },
+    "28314530104906337": {
+      "adName": "Prosp_KAIFEST_TSUCHI_3198",
+      "campaign": "Sneakers_Prospecting_30Sep-5Oct",
+      "format": "Static image or video (SHARE) -- exact media type not distinguishable from API fields returned",
+      "angle": "Inferred only from ad/creative name (\"KAI FEST: TSUCHI + Cap @ ₹3,198\") -- same KAI FEST bundle-offer family as the KAGE/SORA cap bundles, presumably TSUCHI sneaker + cap prepaid bundle",
+      "hook": "Not available -- ads_get_creatives returned no body/title for this creative (thumbnail_url only). Angle above is read off the creative's stored name, not fabricated ad copy.",
+      "taggedFrom": "creative name only (no body/title returned by ads_get_creatives)",
+      "visionPassSkipped": true,
+      "note": "Higgsfield vision connection not attached to this run. This creative also has no primary-text/headline fields available via the Meta Ads MCP this pass -- angle/hook above are inferred from the creative's stored name only, not invented ad copy. Re-check on a future pass once fields are available.",
+      "taggedAt": "2026-09-30T08:46:00.000Z"
+    },
+    "1084977740942074": {
+      "adName": "XSell_KAGE_Hero_2499",
+      "campaign": "Sneakers_BOF_30Sep-5Oct",
+      "format": "Static image (SHARE)",
+      "angle": "Single-sneaker prepaid discount for KAGE (₹2,499, was ₹3,299) + free shipping, framed as a cart-abandonment callback (\"Still thinking about KAGE?\") rather than a cold intro",
+      "hook": "\"Still thinking about KAGE?\\nThe cleanest black sneaker \\u2014 now \\u20b92,499 on prepaid orders (was \\u20b93,299) + FREE SHIPPING.\\nSave \\u20b9800. Offer ends 5th October.\" (primary text) / \"KAGE at \\u20b92,499 \\u2014 Prepaid\" (headline)",
+      "taggedFrom": "ad primary text (body) + headline (title), via Meta Ads MCP ads_get_creatives",
+      "visionPassSkipped": true,
+      "note": "Higgsfield vision connection not attached to this run -- image/video content itself not analyzed, only real ad copy text used. No creative description invented.",
+      "taggedAt": "2026-09-30T08:46:00.000Z"
+    },
+    "1474367467842184": {
+      "adName": "Warm_KAGE_Hero_2499",
+      "campaign": "Sneakers_BOF_30Sep-5Oct",
+      "format": "Static image (SHARE)",
+      "angle": "Same KAGE cart-abandonment-callback discount as 1084977740942074/1020089611053740, different image asset, served to the Warm BOF ad set",
+      "hook": "\"Still thinking about KAGE?\\nThe cleanest black sneaker \\u2014 now \\u20b92,499 on prepaid orders (was \\u20b93,299) + FREE SHIPPING.\\nSave \\u20b9800. Offer ends 5th October.\" (primary text) / \"KAGE at \\u20b92,499 \\u2014 Prepaid\" (headline)",
+      "taggedFrom": "ad primary text (body) + headline (title), via Meta Ads MCP ads_get_creatives",
+      "visionPassSkipped": true,
+      "note": "Higgsfield vision connection not attached to this run -- image/video content itself not analyzed, only real ad copy text used. No creative description invented.",
+      "taggedAt": "2026-09-30T08:46:00.000Z"
+    },
+    "1020089611053740": {
+      "adName": "Hot_KAGE_Hero_2499",
+      "campaign": "Sneakers_BOF_30Sep-5Oct",
+      "format": "Static image (SHARE)",
+      "angle": "Same KAGE cart-abandonment-callback discount as 1084977740942074/1474367467842184, different image asset, served to the Hot BOF ad set",
+      "hook": "\"Still thinking about KAGE?\\nThe cleanest black sneaker \\u2014 now \\u20b92,499 on prepaid orders (was \\u20b93,299) + FREE SHIPPING.\\nSave \\u20b9800. Offer ends 5th October.\" (primary text) / \"KAGE at \\u20b92,499 \\u2014 Prepaid\" (headline)",
+      "taggedFrom": "ad primary text (body) + headline (title), via Meta Ads MCP ads_get_creatives",
+      "visionPassSkipped": true,
+      "note": "Higgsfield vision connection not attached to this run -- image/video content itself not analyzed, only real ad copy text used. No creative description invented.",
+      "taggedAt": "2026-09-30T08:46:00.000Z"
+    },
+    "1595890988743449": {
+      "adName": "Prosp_KAGE_Lifestyle_2499 / XSell_KAGE_Lifestyle_2499 / Hot_KAGE_Lifestyle_2499 / Warm_KAGE_Lifestyle_2499",
+      "campaign": "Sneakers_BOF_30Sep-5Oct + Sneakers_Prospecting_30Sep-5Oct",
+      "format": "Static image (SHARE), lifestyle photography",
+      "angle": "Single-sneaker prepaid discount for KAGE (₹2,499, was ₹3,299) + free shipping, led with lifestyle/product-description copy (\"One sneaker. Every outfit.\") rather than a cart-abandonment callback -- reused across BOF and Prospecting ad sets",
+      "hook": "\"One sneaker. Every outfit.\\nDesigned for everyday wear with premium detailing, durable construction, and a clean all-black aesthetic. Meet KAGE.\\nNow \\u20b92,499 on prepaid orders (was \\u20b93,299) + FREE SHIPPING. Offer ends 5th October.\" (primary text) / \"KAGE at \\u20b92,499 \\u2014 Prepaid\" (headline)",
+      "taggedFrom": "ad primary text (body) + headline (title), via Meta Ads MCP ads_get_creatives",
+      "visionPassSkipped": true,
+      "note": "Higgsfield vision connection not attached to this run -- image/video content itself not analyzed, only real ad copy text used. No creative description invented.",
+      "taggedAt": "2026-09-30T08:46:00.000Z"
+    },
+    "1415765204019649": {
+      "adName": "XSell_KAIFEST_TSUCHI_3198",
+      "campaign": "Sneakers_BOF_30Sep-5Oct",
+      "format": "Static image or video (SHARE) -- exact media type not distinguishable from API fields returned",
+      "angle": "Inferred only from creative name (\"Tsuchi \\u2014 KAI\") -- thumbnail matches the TSUCHI ₹2,499 image family; no ad copy available to confirm the specific offer framing",
+      "hook": "Not available -- ads_get_creatives returned no body/title for this creative (thumbnail_url only).",
+      "taggedFrom": "creative name + thumbnail only (no body/title returned by ads_get_creatives)",
+      "visionPassSkipped": true,
+      "note": "Higgsfield vision connection not attached to this run. This creative also has no primary-text/headline fields available via the Meta Ads MCP this pass -- angle/hook above are not invented ad copy. Re-check on a future pass once fields are available.",
+      "taggedAt": "2026-09-30T08:46:00.000Z"
+    },
+    "1570511944381011": {
+      "adName": "Hot_KAIFEST_TSUCHI_3198",
+      "campaign": "Sneakers_BOF_30Sep-5Oct",
+      "format": "Static image or video (SHARE) -- exact media type not distinguishable from API fields returned",
+      "angle": "Inferred only from creative name (\"Tsuchi \\u2014 KAI\") -- thumbnail matches the TSUCHI ₹2,499 image family; no ad copy available to confirm the specific offer framing",
+      "hook": "Not available -- ads_get_creatives returned no body/title for this creative (thumbnail_url only).",
+      "taggedFrom": "creative name + thumbnail only (no body/title returned by ads_get_creatives)",
+      "visionPassSkipped": true,
+      "note": "Higgsfield vision connection not attached to this run. This creative also has no primary-text/headline fields available via the Meta Ads MCP this pass -- angle/hook above are not invented ad copy. Re-check on a future pass once fields are available.",
+      "taggedAt": "2026-09-30T08:46:00.000Z"
+    },
+    "2631722323965600": {
+      "adName": "Warm_KAIFEST_TSUCHI_3198",
+      "campaign": "Sneakers_BOF_30Sep-5Oct",
+      "format": "Static image or video (SHARE) -- exact media type not distinguishable from API fields returned",
+      "angle": "Inferred only from creative name (\"Tsuchi \\u2014 KAI\") -- thumbnail matches the TSUCHI ₹2,499 image family; no ad copy available to confirm the specific offer framing",
+      "hook": "Not available -- ads_get_creatives returned no body/title for this creative (thumbnail_url only).",
+      "taggedFrom": "creative name + thumbnail only (no body/title returned by ads_get_creatives)",
+      "visionPassSkipped": true,
+      "note": "Higgsfield vision connection not attached to this run. This creative also has no primary-text/headline fields available via the Meta Ads MCP this pass -- angle/hook above are not invented ad copy. Re-check on a future pass once fields are available.",
+      "taggedAt": "2026-09-30T08:46:00.000Z"
     }
   }
 }
