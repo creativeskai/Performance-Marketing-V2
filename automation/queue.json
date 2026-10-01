@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-01T00:49:00.000Z",
+  "generatedAt": "2026-10-01T02:50:00.000Z",
   "settings": {
     "kill_roas_threshold": "pause if ROAS < 1.0x after ₹500 spend on a sales-objective campaign. EXCEPTION until 2026-10-05T23:59+05:30 (user-approved 2026-09-29): for the sneaker-push campaigns 120256091369160159 (Sneakers_BOF_30Sep-5Oct), 120256091370110159 (Sneakers_Prospecting_30Sep-5Oct) and 120256088882780159 (Sneakers_Catalog_Retargeting) the spend floor is ₹1,500, not ₹500.",
     "reactivate_min_historic_roas": "surface for reactivation if a paused campaign's last active-period ROAS >= 3.0x",
@@ -31,8 +31,8 @@
     "competitor_last_scrape": {
       "gully_labs_active_ads": null,
       "lotto_sport_india_active_ads": null,
-      "scraped_at": "2026-10-01T00:49:00.000Z",
-      "note": "2026-10-01T00:49:00.000Z scheduled run: ads_library_search combined page_ids query (107479854297817 / 426015150606378, ad_active_status=ACTIVE, no country filter) returned estimated_total_count=322, up from 314 at the prior ~22:48 UTC pass (+2.55%). Well under the 20% alert threshold."
+      "scraped_at": "2026-10-01T02:50:00.000Z",
+      "note": "2026-10-01T02:50:00.000Z scheduled run: ads_library_search combined page_ids query (107479854297817 / 426015150606378, ad_active_status=ACTIVE, no country filter) returned estimated_total_count=316, down from 322 at the prior ~00:49 UTC pass (-1.86%). Well under the 20% alert threshold."
     },
     "audience_label_corrections": {
       "120249907176770159": "ATC_180D -- NOT a purchaser audience (cart-adders, event=AddToCart, retention 180 days). Verified 2026-09-14, reconfirmed 2026-09-20. Superseded note: earlier passes said the account had NO purchaser audience at all -- that's now out of date. See the 120255823280550159 (Purchasers 180D) entry above, created 2026-09-15, which IS a genuine purchaser audience and is already in use for exclusion + lookalike.",
@@ -12128,6 +12128,96 @@
       "severity": "low",
       "dismissed": false,
       "createdAt": "2026-10-01T00:49:00.000Z"
+    },
+    {
+      "id": "AL-1222",
+      "module": "pixel-health",
+      "title": "Pixel quality remains healthy -- no match-rate breach",
+      "detail": "Dataset 833131719490535 checked via ads_get_dataset_quality: Purchase EMQ 8.8/10, cod_purchase/prepaid_purchase both 8.8/10, AddToCart 6.1/10, InitiateCheckout 7.0/10. Weakest signal is Search at 4.4/10 (non-critical event, not used for ROAS attribution). ROAS-driven modules NOT suppressed this pass.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-10-01T02:50:00.000Z"
+    },
+    {
+      "id": "AL-1223",
+      "module": "purchaser-exclusion",
+      "title": "All 7 active ad sets reconfirmed purchaser-exclusion compliant",
+      "detail": "Live targeting pulled for all 7 currently-active ad sets across the 5 active campaigns (Sneakers_Prospecting_30Sep-5Oct, Sneakers_BOF_30Sep-5Oct x3 ad sets, Sneakers_Catalog_Retargeting, Retargeting_Overall, Caps + Kage_26Sept). 5 of 7 directly exclude Purchasers 180D (120255823280550159) in excluded_custom_audiences; the other 2 (BOF_3_CrossSell_Purchasers180D id 120256091378350159, Retargeting_Overall id 120255851467360159) are in settings.purchaser_exclusion_exempt_adset_ids by design (deliberate cross-sell/all-product retargeting) and were left untouched. No targeting edits made this pass.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-10-01T02:50:00.000Z"
+    },
+    {
+      "id": "AL-1224",
+      "module": "lookalike-refresh",
+      "title": "Lookalike refresh rate-limited this pass -- skipped re-attempt",
+      "detail": "Last attempt was 2026-09-30T22:48:00.000Z (~4h before this pass), under the 24h max_auto_actions_per_entity_per_day=1 window for source audience Purchasers 180D (120255823280550159, still ~20 people, unchanged). Would have re-attempted the laddered 1%/2%/5% rebuild; the same known duplicate-lookalike constraint (error 2654/1713007) is expected until the source audience actually grows. No Meta API call made this pass.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-10-01T02:50:00.000Z"
+    },
+    {
+      "id": "AL-1225",
+      "module": "hook-angle-tagging",
+      "title": "No new creatives to tag -- all 19 active creatives already tagged",
+      "detail": "Cross-referenced every creative_id in use by the 30 currently-active ads against queue.json.creativeTags (245 entries total, account-wide). All 19 distinct creative ids in active rotation already have a tag entry. No new tagging performed this pass. (Per policy for this run: tagging uses only real primary-text/headline via Meta Ads MCP; the Higgsfield vision pass is not attached and was not simulated.)",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-10-01T02:50:00.000Z"
+    },
+    {
+      "id": "AL-1226",
+      "module": "anomaly",
+      "title": "No anomaly signal fired",
+      "detail": "ads_insights_anomaly_signal checked auction overlap, creative fatigue, and narrow audience account-wide -- no issues found.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-10-01T02:50:00.000Z"
+    },
+    {
+      "id": "AL-1227",
+      "module": "threshold-alerts",
+      "title": "Active-campaign CPM/CTR/CPC within normal bands",
+      "detail": "Retargeting_Overall and Caps + Kage_26Sept within historical-norm bands vs metric_baselines. Sneakers_Prospecting_30Sep-5Oct, Sneakers_BOF_30Sep-5Oct and Sneakers_Catalog_Retargeting (all launched 2026-09-30) are still too new to baseline.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-10-01T02:50:00.000Z"
+    },
+    {
+      "id": "AL-1228",
+      "module": "competitor-rescrape",
+      "title": "Gully Labs / Lotto Sport India combined active-ad count moved -1.86%, under threshold",
+      "detail": "estimated_total_count=316, down from 322 at the prior ~00:49 UTC pass. Well under the 20% alert threshold. See settings.competitor_last_scrape.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-10-01T02:50:00.000Z"
+    },
+    {
+      "id": "AL-1229",
+      "module": "campaign-consolidation-watch",
+      "title": "5 active campaigns, distinct funnel stages -- no consolidation flag",
+      "detail": "Sneakers_Prospecting_30Sep-5Oct (TOF), Sneakers_BOF_30Sep-5Oct (BOF), Sneakers_Catalog_Retargeting (DPA retargeting), Retargeting_Overall (general retargeting), Caps + Kage_26Sept (apparel prospecting) -- no product+audience overlap detected.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-10-01T02:50:00.000Z"
+    },
+    {
+      "id": "AL-1230",
+      "module": "self-audit-check",
+      "title": "Live numbers reconfirmed sane; dashboard static snapshot remains stale",
+      "detail": "Today's account spend ₹661.13 (ads_get_ad_entities, today). Retargeting_Overall 9.43x ROAS (last_14d, spend ₹1,383.21); Caps + Kage_26Sept 9.16x ROAS (last_14d, spend ₹6,393.16). No drift beyond tolerance found vs. live pulls. index.html's static DATA/INSIGHTS_DATA remains unrefreshed (known, unchanged from prior passes).",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-10-01T02:50:00.000Z"
+    },
+    {
+      "id": "AL-1231",
+      "module": "routine-run-notes",
+      "title": "Run summary -- 2026-10-01 ~02:50 UTC pass",
+      "detail": "Circuit breaker: NOT tripped (today's spend ₹661.13 vs ₹5,000 ceiling, 13.2%). Pixel quality: healthy, ROAS modules not suppressed. Auto-tier: 0 actions executed -- purchaser-exclusion fully compliant (no new exclusions needed), lookalike-refresh rate-limited, hook-angle-tagging found no new creatives. Approval-tier: 0 new proposals -- all 34 pending proposals re-checked against fresh data; account composition (5 active campaigns, 7 active ad sets) and spend trajectory are materially unchanged from the ~00:49 UTC pass 2 hours prior, so no proposal numbers were rewritten this pass. No write failures.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-10-01T02:50:00.000Z"
     }
   ],
   "log": [
