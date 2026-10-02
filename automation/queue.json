@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-02T16:47:29.000Z",
+  "generatedAt": "2026-10-02T18:50:00.000Z",
   "settings": {
     "kill_roas_threshold": "pause if ROAS < 1.0x after ₹500 spend on a sales-objective campaign. EXCEPTION until 2026-10-05T23:59+05:30 (user-approved 2026-09-29): for the sneaker-push campaigns 120256091369160159 (Sneakers_BOF_30Sep-5Oct), 120256091370110159 (Sneakers_Prospecting_30Sep-5Oct) and 120256088882780159 (Sneakers_Catalog_Retargeting) the spend floor is ₹1,500, not ₹500.",
     "reactivate_min_historic_roas": "surface for reactivation if a paused campaign's last active-period ROAS >= 3.0x",
@@ -30,9 +30,9 @@
     },
     "competitor_last_scrape": {
       "gully_labs_active_ads": null,
-      "lotto_sport_india_active_ads": 419,
-      "scraped_at": "2026-10-02T16:47:29.000Z",
-      "note": "2026-10-02T16:47:29.000Z scheduled run: ads_library_search combined page_ids query (107479854297817 / 426015150606378, ad_active_status=ACTIVE, no country filter) returned estimated_total_count=419, down from 447 at the 14:50 UTC pass (itself flat vs 12:47) and down from the 446 peak recorded by AL-1319 at 10:46 UTC. The 2026-10-02T10:46 UTC spike (313->446, +42.5%) is receding (-6.3% off peak) but still +33.9% above the original 313 baseline -- not yet fully reverted. See AL-1319."
+      "lotto_sport_india_active_ads": 423,
+      "scraped_at": "2026-10-02T18:50:00.000Z",
+      "note": "2026-10-02T18:50 UTC scheduled run: ads_library_search combined page_ids query (107479854297817 / 426015150606378, ad_active_status=ACTIVE, no country filter) returned estimated_total_count=423, roughly flat vs 419 at the 16:47 UTC pass (+1.0%). Still receding off the 446 peak recorded at 10:46 UTC (-5.2% off peak) but remains +35.1% above the original 313 baseline -- not yet reverted. No new ≥20%-move spike this pass. See AL-1319 for the original spike detection."
     },
     "audience_label_corrections": {
       "120249907176770159": "ATC_180D -- NOT a purchaser audience (cart-adders, event=AddToCart, retention 180 days). Verified 2026-09-14, reconfirmed 2026-09-20. Superseded note: earlier passes said the account had NO purchaser audience at all -- that's now out of date. See the 120255823280550159 (Purchasers 180D) entry above, created 2026-09-15, which IS a genuine purchaser audience and is already in use for exclusion + lookalike.",
@@ -80,7 +80,7 @@
       "module": "high-intent-retargeting",
       "tier": "approval",
       "title": "Launch a retargeting campaign against 30d add-to-cart non-purchasers",
-      "reasoning": "Structural ATC/checkout-non-purchaser retargeting gap persists at the account level. Note: the human-built 'Retargeting_Overall' campaign (id 120255851467340159, active 2026-09-16 through recently) that previously overlapped with this proposal's intended audience is now itself PAUSED as of this pass -- so the overlap caveat from prior passes is currently moot (nothing is actively covering this segment right now). Pixel quality healthy (composite EMQ 6.1-9.1/10 across tracked events, gate cleared). The stored 4-step chain (audience → campaign → ad set → ad, every step created PAUSED) remains real and executable against the account's actual pixel (833131719490535) and Kage_Sales creative (1063318642863205). Reasoning history condensed for file-size reasons. Not executed -- approval tier, no campaign/ad set/ad created.",
+      "reasoning": "Structural ATC/checkout-non-purchaser retargeting gap persists at the account level. Update 2026-10-02T18:50:00.000Z pass: 'Retargeting_Overall' (id 120255851467340159) is ACTIVE again (11.18x last_30d ROAS on Rs2,250.86 spend) and already targets Initiate_Checkout/ATC_180D audiences -- it materially overlaps this proposal's intended segment, so the structural gap this proposal addresses is currently being covered, at least partially, by an existing live campaign. Pixel quality healthy (composite EMQ 6.1-9.0/10, gate cleared). The stored 4-step chain remains real and executable against the account's actual pixel (833131719490535) and Kage_Sales creative (1063318642863205) if a human still wants a dedicated ATC-non-purchaser campaign distinct from Retargeting_Overall's broader audience mix. Not executed -- approval tier.",
       "actionSummary": "4-step chain, each step feeding the next real Meta-assigned ID (not guessed): (1) create the WEBSITE pixel audience — AddToCart OR InitiateCheckout in the last 14 days, excluding Purchase; (2) create the campaign (OUTCOME_SALES); (3) create the ad set targeting that new audience, India, Facebook+Instagram, optimizing for purchases, daily_budget 25000 (Meta's minor-currency-unit field — this is ₹250/day, editable via the parameter editor below, same conservative range as A-001's reactivation budget); (4) create the ad reusing the Kage_Sales creative. Every step is created PAUSED — approving this does NOT start spending. You'd review it in Ads Manager and activate manually, or tell Claude to activate once you're satisfied.",
       "metaAction": {
         "tool": "ads_create_custom_audience",
@@ -193,7 +193,7 @@
       },
       "status": "pending",
       "createdAt": "2026-08-29T12:15:00.000Z",
-      "updatedAt": "2026-09-23T06:50:00.000Z"
+      "updatedAt": "2026-10-02T18:50:00.000Z"
     },
     {
       "id": "A-003",
@@ -508,7 +508,7 @@
       "module": "placement-optimization",
       "tier": "approval",
       "title": "Exclude WhatsApp placement from Retargeting_Overall",
-      "reasoning": "Retargeting_Overall (campaign id 120255851467340159) is ACTIVE again as of this pass (2026-09-29T18:48:00.000Z) -- confirmed via fresh ads_get_ad_entities campaign-level pull. The ad set's targeting (fetched this pass) still lists 'whatsapp' in effective_publisher_platforms (whatsapp-status / whatsapp-marketing-messages placements not excluded), so the underlying WhatsApp-placement issue this proposal addresses is unchanged and now live-relevant again. Last recorded last_14d figures (from proposal creation): WhatsApp placement spend ₹47.25 at ₹1,350 CPM, ~9.9x the CPM of the converting instagram_feed placement, 0 attributed purchases on WhatsApp. [Reconfirmed 2026-09-29T22:52:00.000Z pass: fresh last_14d publisher_platform/platform_position breakdown on ad set 120255851467360159 -- whatsapp_marketing_messages spend now ₹60.60 (up from ₹47.25 at proposal creation), still 0 attributed purchases (null ROAS). Targeting still includes 'whatsapp' in effective_publisher_platforms. Fix remains unapplied, pending approval.] UPDATE 2026-09-30T18:47:00.000Z: WhatsApp placement spend on Retargeting_Overall now Rs70.60 (whatsapp_marketing_messages, last_14d), up from Rs47.25 at creation, still 0 attributed purchases (website_purchase_roas null). Underlying trigger still holds. Reconfirmed 2026-10-01T14:46:00.000Z pass: WhatsApp placement spend on Retargeting_Overall unchanged at Rs70.60 (whatsapp_marketing_messages, last_14d), still 0 attributed purchases. Underlying trigger still holds. Reconfirmed 2026-10-02T08:50:00.000Z pass: fresh last_14d platform/platform_position breakdown on ad set 120255851467360159 -- whatsapp_marketing_messages spend now ₹74.88 (4 clicks), still 0 attributed purchases (null ROAS). Targeting still includes 'whatsapp' in effective_publisher_platforms. Fix remains unapplied, pending approval. Reconfirmed 2026-10-02T14:50:31.000Z pass: fresh last_14d publisher_platform breakdown on ad set 120255851467360159 (campaign Retargeting_Overall, ACTIVE) -- whatsapp spend unchanged at Rs74.88, 0 attributed purchases (null ROAS). Targeting still includes 'whatsapp' in effective_publisher_platforms. Fix remains unapplied, pending approval. Reconfirmed 2026-10-02T16:47:29.000Z pass: fresh last_14d publisher_platform breakdown on ad set 120255851467360159 (campaign Retargeting_Overall, ACTIVE) -- whatsapp spend unchanged at Rs74.88, still 0 attributed purchases (null ROAS). Targeting still includes 'whatsapp' in effective_publisher_platforms. Fix remains unapplied, pending approval.",
+      "reasoning": "Reasoning history condensed for file-size reasons (see log for prior reconfirmations back to 2026-09-20). Retargeting_Overall (campaign 120255851467340159) is ACTIVE, last_30d 11.178039x ROAS on Rs2,250.86 spend. Reconfirmed 2026-10-02T18:50:00.000Z pass: fresh last_14d publisher_platform breakdown on ad set 120255851467360159 -- whatsapp spend Rs68.08, still 0 attributed purchases (null ROAS), vs facebook (Rs121.92, 26.23x) and instagram (Rs1,749.77, 11.68x). Targeting still includes 'whatsapp' in effective_publisher_platforms. Fix remains unapplied, pending approval.",
       "actionSummary": "Add an explicit targeting.publisher_platforms list on the 'Retargeting_Overall' ad set covering every currently-effective platform except 'whatsapp' (facebook, instagram, audience_network, threads); leave every other targeting parameter (age/gender, geo, included custom audiences) unchanged.",
       "metaAction": {
         "tool": "ads_update_entity",
@@ -522,7 +522,7 @@
       },
       "status": "pending",
       "createdAt": "2026-09-20T04:50:00.000Z",
-      "updatedAt": "2026-10-02T14:50:31.000Z"
+      "updatedAt": "2026-10-02T18:50:00.000Z"
     },
     {
       "id": "A-027",
@@ -665,7 +665,7 @@
       "module": "placement-optimization",
       "tier": "approval",
       "title": "Exclude WhatsApp placement from Caps + Kage_26Sept",
-      "reasoning": "New ad set (created 2026-09-25, campaign 'Caps + Kage_26 Sept') includes whatsapp-status and whatsapp-marketing-messages placements, same pattern flagged account-wide on every other ad set (see A-005/013/014/022/026/032/033/034/037). Note: this ad set was force-paused this same pass by the purchaser-exclusion auto-module (see high-severity alert) -- this placement fix is queued for whenever a human reactivates it. UPDATE 2026-09-27 ~02:52 UTC pass: this ad set (and its parent campaign 'Caps + Kage_26 Sept') is ACTIVE and delivering again as of this pass (₹1,305.81 last_14d spend, 7.58x ROAS) -- the prior note about this fix being 'queued for whenever a human reactivates it' is now stale; the WhatsApp placement issue is live, not just queued. Targeting still includes whatsapp-status/whatsapp-marketing-messages in effective_publisher_platforms -- fix remains unapplied, pending approval. UPDATE 2026-09-27 ~18:50 UTC pass: 'Caps + Kage_26Sept' last_14d spend now Rs2,474.67 (up from Rs1,305.81), ROAS 8.057967x (up from 7.58x). Targeting still includes whatsapp-status/whatsapp-marketing-messages in effective_publisher_platforms -- fix remains unapplied, pending approval. [Reconfirmed 2026-09-29T15:37:00.000Z: fresh last_14d placement breakdown on ad set 120255693970460159 -- combined WhatsApp spend (whatsapp-status + whatsapp-marketing-messages) is ₹20.29 (₹3.48 + ₹16.81) over the last 14 days, a small fraction of the ad set's ₹3,660.73 last_30d spend, with zero attributed purchases on either placement. Targeting still includes both WhatsApp placements. Fix remains unapplied, pending approval; low-impact but still a clean removal.] UPDATE 2026-09-30T18:47:00.000Z: ad set and parent campaign remain ACTIVE and delivering (Rs6,391.96 last_14d spend, 8.19x ROAS). WhatsApp placements (status + marketing_messages) carry Rs31.56 combined last_14d spend, 0 attributed purchases. Underlying trigger still holds. Reconfirmed 2026-10-01T14:46:00.000Z pass: combined WhatsApp placement spend on Caps + Kage_26Sept unchanged at Rs31.56 (last_14d), still 0 attributed purchases. Underlying trigger still holds. UPDATE 2026-10-02T02:49:36.000Z: fresh last_14d placement breakdown on ad set 120255693970460159 -- combined WhatsApp spend (status Rs5.23 + whatsapp_marketing_messages Rs40.73) is Rs45.96, still a small fraction of total ad set spend, zero attributed purchases on either placement. Targeting still includes both WhatsApp placements. Fix remains unapplied, pending approval; low-impact but still a clean removal. Reconfirmed 2026-10-02T08:50:00.000Z pass: fresh last_14d placement breakdown on ad set 120255693970460159 -- combined WhatsApp spend (whatsapp-status ₹5.23 + whatsapp-marketing-messages ₹40.73) now ₹45.96 (10 clicks), up from ₹20.29 at the 2026-09-29 update, still 0 attributed purchases. Targeting still includes whatsapp-status/whatsapp-marketing-messages in effective_publisher_platforms. Fix remains unapplied, pending approval. Reconfirmed 2026-10-02T14:50:31.000Z pass: fresh last_14d placement breakdown on ad set 120255693970460159 (campaign Caps + Kage_26 Sept, ACTIVE, Rs7,503.19 last_30d spend / 9.835851x ROAS) -- combined WhatsApp spend unchanged at Rs45.96, still 0 attributed purchases. Targeting still includes both WhatsApp placements. Fix remains unapplied, pending approval; low-impact but still a clean removal. Reconfirmed 2026-10-02T16:47:29.000Z pass: fresh last_14d publisher_platform breakdown on ad set 120255693970460159 (campaign Caps + Kage_26 Sept, ACTIVE) -- whatsapp spend unchanged at Rs45.96, still 0 attributed purchases. Targeting still includes both WhatsApp placements. Fix remains unapplied, pending approval.",
+      "reasoning": "Reasoning history condensed for file-size reasons (see log for prior reconfirmations back to 2026-09-25). Caps + Kage_26Sept ad set (120255693970460159, campaign Caps + Kage_26 Sept) is ACTIVE, last_30d 8.558251x ROAS on Rs8,711.98 spend. Reconfirmed 2026-10-02T18:50:00.000Z pass: fresh last_14d publisher_platform breakdown -- whatsapp spend Rs50.26, still 0 attributed purchases (null ROAS), vs facebook (Rs770.54, 5.73x) and instagram (Rs7,869.63, 8.91x). Targeting still includes both WhatsApp placements. Fix remains unapplied, pending approval; low-impact but still a clean removal.",
       "actionSummary": "Remove whatsapp from the ad set's publisher_platforms so it does not serve on WhatsApp Status/marketing messages once reactivated; all other targeting stays unchanged.",
       "metaAction": {
         "tool": "ads_update_entity",
@@ -682,7 +682,7 @@
       },
       "status": "pending",
       "createdAt": "2026-09-25T14:46:00.000Z",
-      "updatedAt": "2026-10-02T14:50:31.000Z"
+      "updatedAt": "2026-10-02T18:50:00.000Z"
     },
     {
       "id": "A-039",
@@ -744,7 +744,7 @@
       "module": "budget-reallocation",
       "tier": "approval",
       "title": "Shift budget from Sneakers_BOF_30Sep-5Oct toward Caps + Kage_26 Sept / Retargeting_Overall -- large ROAS gap",
-      "reasoning": "last_14d purchase_roas: Caps + Kage_26 Sept 9.84x on ₹7,503.19 spend, Retargeting_Overall 8.88x on ₹1,647.67 spend, vs Sneakers_BOF_30Sep-5Oct only 2.03x on ₹3,824.97 spend (Sneakers_Prospecting_30Sep-5Oct sits at 2.51x, similar). The gap (4.3x-4.8x) is well past settings.budget_reallocation_min_roas_gap (1.5x+). IMPORTANT CONTEXT: Sneakers_BOF is part of the user-approved 30 Sep-5 Oct sneaker push, which has its own ₹1,500 kill-threshold spend-floor exception through 2026-10-05T23:59+05:30 specifically because it's a new, deliberately-funded launch window, not an underperforming legacy campaign. This proposal surfaces the mechanical trigger as the module requires, but a human should weigh the sneaker launch's strategic window (ends 2026-10-05) before cutting its budget -- rejecting this until the push concludes is a reasonable call. Reconfirmed 2026-10-02T08:50:00.000Z pass: last_14d purchase_roas essentially unchanged -- Caps + Kage_26 Sept 9.835851x on ₹7,503.19 spend, Retargeting_Overall 8.883089x on ₹1,647.67 spend, vs Sneakers_BOF_30Sep-5Oct 2.029114x on ₹3,824.97 spend (Sneakers_Prospecting_30Sep-5Oct 2.51263x on ₹2,094.18). Gap still well past the 1.5x+ threshold. Sneaker push's ₹1,500 spend-floor exception still runs through 2026-10-05T23:59+05:30 -- same strategic-window caveat as before; no change to the proposed action. Reconfirmed 2026-10-02T12:47:23.000Z pass: Sneakers_BOF_30Sep-5Oct still 2.029114x on ₹3,824.97 (last_30d; same last_14d window spend), Retargeting_Overall now 8.093608x/₹1,808.39 (last_30d) / 8.883089x/₹1,647.67 (last_14d) -- gap unchanged, still well past threshold. IMPORTANT UPDATE: Caps + Kage_26 Sept (the followUp step's budget-raise target) is now PAUSED as of this pass (confirmed via fresh campaign-level pull) -- it was ACTIVE when this proposal was created. Approving as-written would raise the daily_budget of a paused campaign, which won't spend until someone also reactivates it (see A-set reactivate-winner proposals for other paused campaigns, though none currently cover Caps + Kage_26 Sept itself). A human should either edit the followUp target to Retargeting_Overall (still ACTIVE, 8.09x-8.88x ROAS) before approving, or pair this approval with reactivating Caps + Kage_26 Sept. Sneaker push's ₹1,500 spend-floor exception still runs through 2026-10-05T23:59+05:30. Reconfirmed 2026-10-02T14:50:31.000Z pass: Caps + Kage_26 Sept is ACTIVE again (fresh campaign-level pull: Rs7,503.19 last_30d spend, 9.835851x ROAS) -- the prior pass's pause of the followUp target has resolved on its own, so the caveat about raising a paused campaign's budget no longer applies. Sneakers_BOF_30Sep-5Oct unchanged at 2.029114x/Rs3,824.97 (last_30d), Retargeting_Overall 8.093608x/Rs1,808.39 (last_30d). Gap still well past the 1.5x+ threshold. Sneaker push's Rs1,500 spend-floor exception still runs through 2026-10-05T23:59+05:30. Reconfirmed 2026-10-02T16:47:29.000Z pass: fresh last_30d campaign-level pull -- Sneakers_BOF_30Sep-5Oct unchanged at 2.029114x/Rs3,824.97, Caps + Kage_26 Sept 9.835851x/Rs7,503.19, Retargeting_Overall 8.093608x/Rs1,808.39. Gap still well past the 1.5x+ budget_reallocation_min_roas_gap threshold. Sneaker push's Rs1,500 spend-floor exception still runs through 2026-10-05T23:59+05:30. No change to the proposed action.",
+      "reasoning": "Reconfirmed 2026-10-02T18:50:00.000Z pass: Sneakers_BOF_30Sep-5Oct's ROAS has moved substantially since this proposal was created -- last_30d/last_14d purchase_roas is now 4.995882x on Rs6,191.79 spend (up from 2.029114x on Rs3,824.97 at the prior pass), closing most of the gap that motivated this reallocation. Caps + Kage_26 Sept is 8.558251x on Rs8,711.98 (last_30d), Retargeting_Overall is 11.178039x on Rs2,250.86 (last_30d) -- the gap vs Sneakers_BOF is now ~1.7x-2.2x, still above settings.budget_reallocation_min_roas_gap (1.5x+) but much narrower than the 4.3x-4.8x gap originally cited. Both campaigns (Caps + Kage_26 Sept, Sneakers_BOF_30Sep-5Oct) are ACTIVE. The sneaker push's Rs1,500 spend-floor kill-exception still runs through 2026-10-05T23:59+05:30. Given Sneakers_BOF's clear recovery, a human should weigh whether this reallocation is still worth doing before the push's strategic window closes on 2026-10-05, or whether to let it run its course given the ROAS trend is now positive.",
       "actionSummary": "If approved: reduces Sneakers_BOF_30Sep-5Oct's daily_budget from ₹2,400 to ₹1,500/day, and raises Caps + Kage_26 Sept's daily_budget from ₹1,600 to ₹2,200/day, shifting roughly ₹900/day toward the higher-ROAS campaign. Exact split is editable in the dashboard's budget field before approving.",
       "metaAction": {
         "tool": "ads_update_entity",
@@ -770,7 +770,7 @@
       },
       "status": "pending",
       "createdAt": "2026-10-02T04:52:30.000Z",
-      "updatedAt": "2026-10-02T14:50:31.000Z"
+      "updatedAt": "2026-10-02T18:50:00.000Z"
     }
   ],
   "alerts": [
@@ -12784,6 +12784,105 @@
       "severity": "medium",
       "dismissed": false,
       "createdAt": "2026-10-02T16:47:29.000Z"
+    },
+    {
+      "id": "AL-1332",
+      "module": "purchaser-exclusion",
+      "title": "All 5 active ad sets reconfirmed purchaser-exclusion compliant",
+      "detail": "Fresh targeting fetch on all 5 ACTIVE ad sets this pass: BOF_3_CrossSell_Purchasers180D (120256091378350159) and Retargeting_Overall (120255851467360159) are on settings.purchaser_exclusion_exempt_adset_ids and deliberately include Purchasers 180D by design; BOF_2_Warm_IG365_Engagers_Visitors, BOF_1_Hot_ATC_IC_API_30D, Yin Yang_TOF, and Caps + Kage_26Sept all carry Purchasers 180D (120255823280550159) in excluded_custom_audiences. Account-wide compliant, no action needed. Note: Yin Yang_TOF (previously force-paused by this same module on 2026-10-02T04:52:30Z) is ACTIVE again and already carries the exclusion -- a human reactivated it with the fix intact.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-10-02T18:50:00.000Z"
+    },
+    {
+      "id": "AL-1333",
+      "module": "lookalike-refresh",
+      "title": "Lookalike refresh still rate-limited this pass -- skipped re-attempt",
+      "detail": "Last rebuild attempt on the laddered 1%/2%/5% lookalike off Purchasers 180D (120255823280550159) was 2026-10-02T00:47:50Z (failed -- Meta duplicate-lookalike error 2654/1713007, source audience still ~20 people, unchanged since 2026-09-15). That is ~18h before this pass, inside the max_auto_actions_per_entity_per_day=1 / 24h window, so no re-attempt was made this pass. The 3 existing lookalikes remain live and serving.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-10-02T18:50:00.000Z"
+    },
+    {
+      "id": "AL-1334",
+      "module": "threshold-alerts",
+      "title": "No active campaign has a recorded CPM/CTR/CPC baseline this pass",
+      "detail": "settings.metric_baselines only covers Kage_sales_1908 and Kage_TOF, both currently PAUSED. None of the 4 ACTIVE campaigns (Sneakers_BOF_30Sep-5Oct, Retargeting_Overall, Yin Yang_TOF, Caps + Kage_26 Sept) has a stored baseline to compare against -- nothing to flag this pass.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-10-02T18:50:00.000Z"
+    },
+    {
+      "id": "AL-1335",
+      "module": "learning-phase-stuck",
+      "title": "No ad sets stuck in learning",
+      "detail": "All 5 ACTIVE ad sets are established and delivering with recorded purchase activity or stable spend; none shows signs of a stuck learning phase this pass.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-10-02T18:50:00.000Z"
+    },
+    {
+      "id": "AL-1336",
+      "module": "pixel-health",
+      "title": "Pixel quality remains healthy -- no match-rate breach",
+      "detail": "ads_get_dataset_quality on pixel 833131719490535: composite EMQ scores across tracked web events range 6.1-9.0/10 (PageView/ViewContent/AddToCart/SubscribedButtonClick/Search at 6.1, InitiateCheckout 7.0, Purchase 8.3, cod_purchase/prepaid_purchase 8.8, AddPaymentInfo 9.0) -- all at/above settings.pixel_quality_min_match_rate=0.6. ROAS-based modules not suppressed this pass.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-10-02T18:50:00.000Z"
+    },
+    {
+      "id": "AL-1337",
+      "module": "competitor-rescrape",
+      "title": "Gully Labs / Lotto Sport India combined active-ad count roughly flat at 423",
+      "detail": "ads_library_search (combined page_ids, ACTIVE, no country filter) returned estimated_total_count=423, up marginally from 419 at the 16:47 UTC pass (+1.0%, not a new ≥20% spike). Still receding off the 446 peak (-5.2%) but +35.1% above the original 313 baseline -- the 2026-10-02T10:46 UTC spike has not yet fully reverted. See AL-1319.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-10-02T18:50:00.000Z"
+    },
+    {
+      "id": "AL-1338",
+      "module": "self-audit-check",
+      "title": "Live numbers reconfirmed sane vs. dashboard snapshot -- snapshot still stale",
+      "detail": "index.html's baked-in DATA/INSIGHTS_DATA was last modified 2026-09-30 and has not been regenerated since -- live figures pulled this pass (e.g. Retargeting_Overall 12.16x/Rs2,250.86 last_30d, Caps + Kage_26 Sept 8.56x/Rs8,711.98 last_30d) are directionally consistent with the dashboard's snapshot but the snapshot itself remains stale and should be regenerated from current data when convenient. KPI-to-trigger completeness: every metric surfaced on the dashboard (spend, ROAS, purchases, CPM, frequency, CTR) still maps to at least one module in ROUTINE.md's table -- no gap found.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-10-02T18:50:00.000Z"
+    },
+    {
+      "id": "AL-1339",
+      "module": "campaign-consolidation-watch",
+      "title": "4 active campaigns, distinct products/funnel stages -- no consolidation flag",
+      "detail": "ACTIVE this pass: Sneakers_BOF_30Sep-5Oct (sneaker BOF/prospecting), Retargeting_Overall (all-product retargeting), Yin Yang_TOF (traffic/awareness), Caps + Kage_26 Sept (caps+kage sales). No two target the same product+audience combination -- no consolidation needed.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-10-02T18:50:00.000Z"
+    },
+    {
+      "id": "AL-1340",
+      "module": "creative-fatigue",
+      "title": "Two Sneakers_BOF ad sets crossed frequency 3.0 but spend/audience still thin -- not actionable yet",
+      "detail": "last_14d frequency: BOF_3_CrossSell_Purchasers180D 3.48 (Rs120.49 spend), BOF_1_Hot_ATC_IC_API_30D 4.42 (Rs192.13 spend) -- both over fatigue_frequency_threshold=3 but on very thin spend/audience size, same pattern as AL-1330. Not enough signal yet to propose a creative swap or targeting narrow; monitor.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-10-02T18:50:00.000Z"
+    },
+    {
+      "id": "AL-1341",
+      "module": "creative-fatigue",
+      "title": "Retargeting_Overall frequency continues above fatigue threshold (3.38) at healthy spend/ROAS",
+      "detail": "Retargeting_Overall ad set last_14d: frequency 3.38 (up from 3.13 at the 16:47 UTC pass), Rs1,942.89 spend, 12.163272x ROAS. Frequency keeps creeping up on an ad set with only one active creative currently serving (Retargeting-Overall / Retargeting-Overall_ProductLinks_v3_Universal) -- healthy ROAS for now, but worth a fresh creative variant if frequency keeps climbing. No new creative asset available to propose a swap this pass (no vision/generation pass attached).",
+      "severity": "medium",
+      "dismissed": false,
+      "createdAt": "2026-10-02T18:50:00.000Z"
+    },
+    {
+      "id": "AL-1342",
+      "module": "routine-run-notes",
+      "title": "Run summary -- 2026-10-02 ~18:50 UTC pass",
+      "detail": "Circuit breaker: not tripped (today's spend Rs46.90 vs Rs6,500 ceiling). Pixel gate: cleared (EMQ 6.1-9.0/10). Auto modules: purchaser-exclusion compliant account-wide (no edits needed), lookalike-refresh rate-limited (skipped), hook-angle-tagging had nothing new to tag (all 17 distinct active creatives already tagged). No auto-executed mutations this pass. Approval-tier: updated reasoning on A-049 (Sneakers_BOF ROAS recovered to 4.996x, narrowing the reallocation gap), A-026/A-038 (fresh WhatsApp placement numbers, condensed history), A-002 (Retargeting_Overall active again, overlaps this proposal's segment). No new proposals created. 9 new monitoring alerts (AL-1332 to AL-1341): all-clear on threshold-alerts/learning-phase/self-audit/campaign-consolidation, competitor count flat at 423, two creative-fatigue notes (Retargeting_Overall frequency 3.38 at healthy ROAS is the one worth watching).",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-10-02T18:50:00.000Z"
     }
   ],
   "log": [
