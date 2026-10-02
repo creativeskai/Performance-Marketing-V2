@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-01T22:46:00.000Z",
+  "generatedAt": "2026-10-02T00:47:50.000Z",
   "settings": {
     "kill_roas_threshold": "pause if ROAS < 1.0x after ₹500 spend on a sales-objective campaign. EXCEPTION until 2026-10-05T23:59+05:30 (user-approved 2026-09-29): for the sneaker-push campaigns 120256091369160159 (Sneakers_BOF_30Sep-5Oct), 120256091370110159 (Sneakers_Prospecting_30Sep-5Oct) and 120256088882780159 (Sneakers_Catalog_Retargeting) the spend floor is ₹1,500, not ₹500.",
     "reactivate_min_historic_roas": "surface for reactivation if a paused campaign's last active-period ROAS >= 3.0x",
@@ -12435,6 +12435,87 @@
       "severity": "low",
       "dismissed": false,
       "createdAt": "2026-10-01T22:46:00.000Z"
+    },
+    {
+      "id": "AL-1294",
+      "module": "lookalike-refresh",
+      "title": "Lookalike rebuild attempted this pass, failed (duplicate audience)",
+      "detail": "Rate limit cleared (>24h since last attempt 2026-09-30T22:48 UTC); rebuilt attempt against Purchasers 180D (still ~20 people, unchanged) failed with Meta's duplicate-lookalike error (2654/1713007), same as every prior qualifying pass. The 3 existing laddered lookalikes (1%/2%/5%, built 2026-09-15) remain live and serving. Will keep failing until the source audience actually grows.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-10-02T00:47:50.000Z"
+    },
+    {
+      "id": "AL-1295",
+      "module": "anomaly",
+      "title": "No anomaly signal fired",
+      "detail": "ads_insights_anomaly_signal checked auction overlap, creative fatigue, and narrow audience across active ad sets -- no issues found.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-10-02T00:47:50.000Z"
+    },
+    {
+      "id": "AL-1296",
+      "module": "threshold-alerts",
+      "title": "Active-campaign CPM/CTR/CPC within normal bands",
+      "detail": "4 active campaigns (Sneakers_Prospecting_30Sep-5Oct, Sneakers_BOF_30Sep-5Oct, Retargeting_Overall, Caps + Kage_26 Sept) show no abnormal CPM/CTR/CPC movement this pass. No stored baseline exists yet for the 3 sneaker-push ad sets (launched 2026-09-30) or Caps+Kage -- settings.metric_baselines only covers legacy Kage_sales_1908/Kage_TOF -- so this check is qualitative pending a baseline refresh.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-10-02T00:47:50.000Z"
+    },
+    {
+      "id": "AL-1297",
+      "module": "pixel-health",
+      "title": "Pixel quality remains healthy -- no match-rate breach",
+      "detail": "ads_get_dataset_quality (dataset 833131719490535): composite EMQ scores range 6.1-8.9 across all tracked web events (PageView, ViewContent, AddToCart, InitiateCheckout, AddPaymentInfo, Purchase, prepaid_purchase, cod_purchase, Search, SubscribedButtonClick), at/above the pixel_quality_min_match_rate=0.6 threshold used by this routine. ROAS-based modules not suppressed this pass.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-10-02T00:47:50.000Z"
+    },
+    {
+      "id": "AL-1298",
+      "module": "competitor-rescrape",
+      "title": "Gully Labs / Lotto Sport India combined active-ad count unchanged at 317",
+      "detail": "ads_library_search (page_ids 107479854297817 / 426015150606378, ad_active_status=ACTIVE) returned estimated_total_count=317, same as the prior recorded scrape (2026-10-01T22:46 UTC). Well under the 20% alert threshold.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-10-02T00:47:50.000Z"
+    },
+    {
+      "id": "AL-1299",
+      "module": "campaign-consolidation-watch",
+      "title": "4 active campaigns, distinct funnel stages -- no consolidation flag",
+      "detail": "Sneakers_Prospecting_30Sep-5Oct (TOF), Sneakers_BOF_30Sep-5Oct (BOF/cross-sell), Retargeting_Overall (retargeting), Caps + Kage_26 Sept (prospecting, different product) -- no two active campaigns target the same product+audience combination this pass.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-10-02T00:47:50.000Z"
+    },
+    {
+      "id": "AL-1300",
+      "module": "learning-phase-stuck",
+      "title": "No ad sets stuck in learning",
+      "detail": "learning_stage_info is empty/absent for all 6 currently active ad sets (Prosp_Men_25-44_Broad_7am-12am, BOF_1/2/3, Retargeting_Overall, Caps + Kage_26Sept) -- none are currently in an active learning phase.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-10-02T00:47:50.000Z"
+    },
+    {
+      "id": "AL-1301",
+      "module": "self-audit-check",
+      "title": "Live numbers reconfirmed sane vs. dashboard snapshot -- snapshot still stale",
+      "detail": "Account-level today spend (Rs625.43) and active-campaign ROAS figures (2.0x-9.8x) are internally consistent with recent passes. index.html's static DATA/INSIGHTS_DATA snapshot remains stale relative to live numbers, as flagged repeatedly since late September -- unchanged recommendation: refresh the dashboard snapshot from queue.json's live data on the next content update.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-10-02T00:47:50.000Z"
+    },
+    {
+      "id": "AL-1302",
+      "module": "routine-run-notes",
+      "title": "Run summary -- 2026-10-02 ~00:47 UTC pass",
+      "detail": "Run summary -- 2026-10-02 ~00:47 UTC pass. Circuit breaker: not tripped (today's account spend Rs625.43 vs Rs6,500 ceiling). Pixel/data-quality gate: healthy, ROAS modules not suppressed. 5 campaigns / 6 ad sets ACTIVE (Sneakers_Prospecting_30Sep-5Oct, Sneakers_BOF_30Sep-5Oct x3 ad sets, Retargeting_Overall, Caps + Kage_26Sept); Sneakers_Catalog_Retargeting and Sora Retargeting remain PAUSED. purchaser-exclusion: reconfirmed compliant account-wide -- all 6 active ad sets either exclude Purchasers 180D (120255823280550159) directly or are on settings.purchaser_exclusion_exempt_adset_ids (BOF_3_CrossSell_Purchasers180D, Retargeting_Overall) by design. No action needed. lookalike-refresh: rate limit cleared this pass and a rebuild was attempted -- failed again with Meta's duplicate-lookalike error (source audience still ~20, unchanged since 2026-09-15); see log/AL for this pass. hook-angle-tagging: all 19 distinct active ad creatives already carry creativeTags entries -- nothing new to tag. Device-targeting (AL-1291, raised last pass): reconfirmed this pass with a fresh breakdown on Retargeting_Overall -- Android ROAS 15.66x/Rs837.52 vs iPhone ROAS 2.11x/Rs718.03 (iPhone CPM also higher, Rs192.55 vs Rs110.61). Gap persists and is real, but this routine could not verify the exact Meta targeting field for OS-level device exclusion against ads_get_field_context (user_os/user_device didn't resolve) -- rather than write a proposal with a guessed metaAction, this is left as an open flag (AL-1291) for a human to action via the dashboard's targeting editor (which has a working devices control), or for a future pass once the field is confirmed. No new approval-tier proposals this pass -- account composition (4 active campaigns) and their ROAS/spend are essentially unchanged from the 2026-10-01T22:46 UTC pass, so all 23 pending proposals (A-001 through A-048, excluding already-resolved ones) remain valid as last reconfirmed; none required a reasoning update. No existing proposal was executed, approved, or rejected this pass -- per policy, pending approval-tier proposals are only actioned by explicit human approval.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-10-02T00:47:50.000Z"
     }
   ],
   "log": [
@@ -17592,6 +17673,40 @@
       },
       "tier": "approval",
       "executedAt": "2026-10-01T20:57:00.000Z"
+    },
+    {
+      "proposalId": null,
+      "action": "lookalike-refresh auto-module: rate limit cleared (last attempt 2026-09-30T22:48:00.000Z, >24h elapsed) -- attempted rebuild of laddered lookalike off Purchasers 180D (id 120255823280550159, still ~20 people, unchanged since 2026-09-15) via ads_create_custom_audience (subtype LOOKALIKE, ratio 0.01, name 'Lookalike (IN 1%) - Purchasers 180D - 2026-10-02'). Meta rejected it as a duplicate lookalike (same source/country/size as the existing 2026-09-15 1% build) -- the same known constraint as every prior attempt since the source audience hasn't grown.",
+      "result": "failed",
+      "previousState": {
+        "existing_laddered_lookalikes": [
+          {
+            "id": "120255832535210159",
+            "name": "Lookalike (IN 1%) - Purchasers 180D - 2026-09-15",
+            "delivery_status": "ACTIVE"
+          },
+          {
+            "id": "120255832535610159",
+            "name": "Lookalike (IN 2%) - Purchasers 180D - 2026-09-15",
+            "delivery_status": "ACTIVE"
+          },
+          {
+            "id": "120255832535780159",
+            "name": "Lookalike (IN 5%) - Purchasers 180D - 2026-09-15",
+            "delivery_status": "ACTIVE"
+          }
+        ],
+        "source_audience_size": 20
+      },
+      "detail": {
+        "error_category": "VALIDATION",
+        "error_message": "Can't Create a Duplicate Lookalike: You've already created a lookalike audience with the same source, country and size. Please try using a different source or different specifications.",
+        "error_code": "2654",
+        "error_subcode": "1713007",
+        "is_retryable": false
+      },
+      "tier": "auto",
+      "executedAt": "2026-10-02T00:47:50.000Z"
     }
   ],
   "creativeTags": {
