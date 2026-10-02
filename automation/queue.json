@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-02T06:51:52.000Z",
+  "generatedAt": "2026-10-02T08:50:00.000Z",
   "settings": {
     "kill_roas_threshold": "pause if ROAS < 1.0x after ₹500 spend on a sales-objective campaign. EXCEPTION until 2026-10-05T23:59+05:30 (user-approved 2026-09-29): for the sneaker-push campaigns 120256091369160159 (Sneakers_BOF_30Sep-5Oct), 120256091370110159 (Sneakers_Prospecting_30Sep-5Oct) and 120256088882780159 (Sneakers_Catalog_Retargeting) the spend floor is ₹1,500, not ₹500.",
     "reactivate_min_historic_roas": "surface for reactivation if a paused campaign's last active-period ROAS >= 3.0x",
@@ -30,9 +30,9 @@
     },
     "competitor_last_scrape": {
       "gully_labs_active_ads": null,
-      "lotto_sport_india_active_ads": 356,
-      "scraped_at": "2026-10-02T06:51:52.000Z",
-      "note": "2026-10-02T06:51:52.000Z scheduled run: ads_library_search combined page_ids query (107479854297817 / 426015150606378, ad_active_status=ACTIVE, no country filter) returned estimated_total_count=356, up from the prior recorded scrape of 312 (+14.1% change). Under the 20% alert threshold -- no competitor-spike alert."
+      "lotto_sport_india_active_ads": 313,
+      "scraped_at": "2026-10-02T08:50:00.000Z",
+      "note": "2026-10-02T08:50:00.000Z scheduled run: ads_library_search combined page_ids query (107479854297817 / 426015150606378, ad_active_status=ACTIVE, no country filter) returned estimated_total_count=313, down from the prior recorded scrape of 356 (-12.1% change). Under the 20% alert threshold -- no competitor-spike alert."
     },
     "audience_label_corrections": {
       "120249907176770159": "ATC_180D -- NOT a purchaser audience (cart-adders, event=AddToCart, retention 180 days). Verified 2026-09-14, reconfirmed 2026-09-20. Superseded note: earlier passes said the account had NO purchaser audience at all -- that's now out of date. See the 120255823280550159 (Purchasers 180D) entry above, created 2026-09-15, which IS a genuine purchaser audience and is already in use for exclusion + lookalike.",
@@ -504,7 +504,7 @@
       "module": "placement-optimization",
       "tier": "approval",
       "title": "Exclude WhatsApp placement from Retargeting_Overall",
-      "reasoning": "Retargeting_Overall (campaign id 120255851467340159) is ACTIVE again as of this pass (2026-09-29T18:48:00.000Z) -- confirmed via fresh ads_get_ad_entities campaign-level pull. The ad set's targeting (fetched this pass) still lists 'whatsapp' in effective_publisher_platforms (whatsapp-status / whatsapp-marketing-messages placements not excluded), so the underlying WhatsApp-placement issue this proposal addresses is unchanged and now live-relevant again. Last recorded last_14d figures (from proposal creation): WhatsApp placement spend ₹47.25 at ₹1,350 CPM, ~9.9x the CPM of the converting instagram_feed placement, 0 attributed purchases on WhatsApp. [Reconfirmed 2026-09-29T22:52:00.000Z pass: fresh last_14d publisher_platform/platform_position breakdown on ad set 120255851467360159 -- whatsapp_marketing_messages spend now ₹60.60 (up from ₹47.25 at proposal creation), still 0 attributed purchases (null ROAS). Targeting still includes 'whatsapp' in effective_publisher_platforms. Fix remains unapplied, pending approval.] UPDATE 2026-09-30T18:47:00.000Z: WhatsApp placement spend on Retargeting_Overall now Rs70.60 (whatsapp_marketing_messages, last_14d), up from Rs47.25 at creation, still 0 attributed purchases (website_purchase_roas null). Underlying trigger still holds. Reconfirmed 2026-10-01T14:46:00.000Z pass: WhatsApp placement spend on Retargeting_Overall unchanged at Rs70.60 (whatsapp_marketing_messages, last_14d), still 0 attributed purchases. Underlying trigger still holds.",
+      "reasoning": "Retargeting_Overall (campaign id 120255851467340159) is ACTIVE again as of this pass (2026-09-29T18:48:00.000Z) -- confirmed via fresh ads_get_ad_entities campaign-level pull. The ad set's targeting (fetched this pass) still lists 'whatsapp' in effective_publisher_platforms (whatsapp-status / whatsapp-marketing-messages placements not excluded), so the underlying WhatsApp-placement issue this proposal addresses is unchanged and now live-relevant again. Last recorded last_14d figures (from proposal creation): WhatsApp placement spend ₹47.25 at ₹1,350 CPM, ~9.9x the CPM of the converting instagram_feed placement, 0 attributed purchases on WhatsApp. [Reconfirmed 2026-09-29T22:52:00.000Z pass: fresh last_14d publisher_platform/platform_position breakdown on ad set 120255851467360159 -- whatsapp_marketing_messages spend now ₹60.60 (up from ₹47.25 at proposal creation), still 0 attributed purchases (null ROAS). Targeting still includes 'whatsapp' in effective_publisher_platforms. Fix remains unapplied, pending approval.] UPDATE 2026-09-30T18:47:00.000Z: WhatsApp placement spend on Retargeting_Overall now Rs70.60 (whatsapp_marketing_messages, last_14d), up from Rs47.25 at creation, still 0 attributed purchases (website_purchase_roas null). Underlying trigger still holds. Reconfirmed 2026-10-01T14:46:00.000Z pass: WhatsApp placement spend on Retargeting_Overall unchanged at Rs70.60 (whatsapp_marketing_messages, last_14d), still 0 attributed purchases. Underlying trigger still holds. Reconfirmed 2026-10-02T08:50:00.000Z pass: fresh last_14d platform/platform_position breakdown on ad set 120255851467360159 -- whatsapp_marketing_messages spend now ₹74.88 (4 clicks), still 0 attributed purchases (null ROAS). Targeting still includes 'whatsapp' in effective_publisher_platforms. Fix remains unapplied, pending approval.",
       "actionSummary": "Add an explicit targeting.publisher_platforms list on the 'Retargeting_Overall' ad set covering every currently-effective platform except 'whatsapp' (facebook, instagram, audience_network, threads); leave every other targeting parameter (age/gender, geo, included custom audiences) unchanged.",
       "metaAction": {
         "tool": "ads_update_entity",
@@ -659,7 +659,7 @@
       "module": "placement-optimization",
       "tier": "approval",
       "title": "Exclude WhatsApp placement from Caps + Kage_26Sept",
-      "reasoning": "New ad set (created 2026-09-25, campaign 'Caps + Kage_26 Sept') includes whatsapp-status and whatsapp-marketing-messages placements, same pattern flagged account-wide on every other ad set (see A-005/013/014/022/026/032/033/034/037). Note: this ad set was force-paused this same pass by the purchaser-exclusion auto-module (see high-severity alert) -- this placement fix is queued for whenever a human reactivates it. UPDATE 2026-09-27 ~02:52 UTC pass: this ad set (and its parent campaign 'Caps + Kage_26 Sept') is ACTIVE and delivering again as of this pass (₹1,305.81 last_14d spend, 7.58x ROAS) -- the prior note about this fix being 'queued for whenever a human reactivates it' is now stale; the WhatsApp placement issue is live, not just queued. Targeting still includes whatsapp-status/whatsapp-marketing-messages in effective_publisher_platforms -- fix remains unapplied, pending approval. UPDATE 2026-09-27 ~18:50 UTC pass: 'Caps + Kage_26Sept' last_14d spend now Rs2,474.67 (up from Rs1,305.81), ROAS 8.057967x (up from 7.58x). Targeting still includes whatsapp-status/whatsapp-marketing-messages in effective_publisher_platforms -- fix remains unapplied, pending approval. [Reconfirmed 2026-09-29T15:37:00.000Z: fresh last_14d placement breakdown on ad set 120255693970460159 -- combined WhatsApp spend (whatsapp-status + whatsapp-marketing-messages) is ₹20.29 (₹3.48 + ₹16.81) over the last 14 days, a small fraction of the ad set's ₹3,660.73 last_30d spend, with zero attributed purchases on either placement. Targeting still includes both WhatsApp placements. Fix remains unapplied, pending approval; low-impact but still a clean removal.] UPDATE 2026-09-30T18:47:00.000Z: ad set and parent campaign remain ACTIVE and delivering (Rs6,391.96 last_14d spend, 8.19x ROAS). WhatsApp placements (status + marketing_messages) carry Rs31.56 combined last_14d spend, 0 attributed purchases. Underlying trigger still holds. Reconfirmed 2026-10-01T14:46:00.000Z pass: combined WhatsApp placement spend on Caps + Kage_26Sept unchanged at Rs31.56 (last_14d), still 0 attributed purchases. Underlying trigger still holds. UPDATE 2026-10-02T02:49:36.000Z: fresh last_14d placement breakdown on ad set 120255693970460159 -- combined WhatsApp spend (status Rs5.23 + whatsapp_marketing_messages Rs40.73) is Rs45.96, still a small fraction of total ad set spend, zero attributed purchases on either placement. Targeting still includes both WhatsApp placements. Fix remains unapplied, pending approval; low-impact but still a clean removal.",
+      "reasoning": "New ad set (created 2026-09-25, campaign 'Caps + Kage_26 Sept') includes whatsapp-status and whatsapp-marketing-messages placements, same pattern flagged account-wide on every other ad set (see A-005/013/014/022/026/032/033/034/037). Note: this ad set was force-paused this same pass by the purchaser-exclusion auto-module (see high-severity alert) -- this placement fix is queued for whenever a human reactivates it. UPDATE 2026-09-27 ~02:52 UTC pass: this ad set (and its parent campaign 'Caps + Kage_26 Sept') is ACTIVE and delivering again as of this pass (₹1,305.81 last_14d spend, 7.58x ROAS) -- the prior note about this fix being 'queued for whenever a human reactivates it' is now stale; the WhatsApp placement issue is live, not just queued. Targeting still includes whatsapp-status/whatsapp-marketing-messages in effective_publisher_platforms -- fix remains unapplied, pending approval. UPDATE 2026-09-27 ~18:50 UTC pass: 'Caps + Kage_26Sept' last_14d spend now Rs2,474.67 (up from Rs1,305.81), ROAS 8.057967x (up from 7.58x). Targeting still includes whatsapp-status/whatsapp-marketing-messages in effective_publisher_platforms -- fix remains unapplied, pending approval. [Reconfirmed 2026-09-29T15:37:00.000Z: fresh last_14d placement breakdown on ad set 120255693970460159 -- combined WhatsApp spend (whatsapp-status + whatsapp-marketing-messages) is ₹20.29 (₹3.48 + ₹16.81) over the last 14 days, a small fraction of the ad set's ₹3,660.73 last_30d spend, with zero attributed purchases on either placement. Targeting still includes both WhatsApp placements. Fix remains unapplied, pending approval; low-impact but still a clean removal.] UPDATE 2026-09-30T18:47:00.000Z: ad set and parent campaign remain ACTIVE and delivering (Rs6,391.96 last_14d spend, 8.19x ROAS). WhatsApp placements (status + marketing_messages) carry Rs31.56 combined last_14d spend, 0 attributed purchases. Underlying trigger still holds. Reconfirmed 2026-10-01T14:46:00.000Z pass: combined WhatsApp placement spend on Caps + Kage_26Sept unchanged at Rs31.56 (last_14d), still 0 attributed purchases. Underlying trigger still holds. UPDATE 2026-10-02T02:49:36.000Z: fresh last_14d placement breakdown on ad set 120255693970460159 -- combined WhatsApp spend (status Rs5.23 + whatsapp_marketing_messages Rs40.73) is Rs45.96, still a small fraction of total ad set spend, zero attributed purchases on either placement. Targeting still includes both WhatsApp placements. Fix remains unapplied, pending approval; low-impact but still a clean removal. Reconfirmed 2026-10-02T08:50:00.000Z pass: fresh last_14d placement breakdown on ad set 120255693970460159 -- combined WhatsApp spend (whatsapp-status ₹5.23 + whatsapp-marketing-messages ₹40.73) now ₹45.96 (10 clicks), up from ₹20.29 at the 2026-09-29 update, still 0 attributed purchases. Targeting still includes whatsapp-status/whatsapp-marketing-messages in effective_publisher_platforms. Fix remains unapplied, pending approval.",
       "actionSummary": "Remove whatsapp from the ad set's publisher_platforms so it does not serve on WhatsApp Status/marketing messages once reactivated; all other targeting stays unchanged.",
       "metaAction": {
         "tool": "ads_update_entity",
@@ -707,56 +707,6 @@
       "updatedAt": "2026-09-30T22:48:00.000Z"
     },
     {
-      "id": "A-046",
-      "module": "age-gender-auto-shift",
-      "tier": "approval",
-      "title": "Narrow Caps + Kage_26 Sept away from its underperforming 18-24 male segment",
-      "reasoning": "Ad set 'Caps + Kage_26Sept' (id 120255693970460159, campaign 'Caps + Kage_26 Sept', id 120255693970470159; last_14d blended 9.35x ROAS on ₹3,660.71 spend). Age/gender breakdown (last_14d) shows the 18-24 male cell at ₹450.90 spend -- meaningful, ~12% of ad set spend -- converting at just 3.366804x ROAS, well below the ad set's blended average and dragging on the demonstrably stronger male cohorts: 25-34 male (₹1,722.12 @ 9.008968x), 35-44 male (₹1,083.52 @ 11.529748x), and 45-54 male (₹222.50 @ 14.373285x, thinner sample). Female cells across all ages carry negligible spend (₹0.39-₹36.93) and no meaningful signal either way. [Reconfirmed 2026-09-29T22:52:00.000Z pass: fresh last_14d age/gender breakdown on ad set 120255693970460159 -- 18-24 male now ₹630.35 spend at 4.816726x ROAS (up from ₹450.90 at 3.366804x). Still the weakest of the meaningful-spend male cells: 25-34 male ₹2,318.05 @ 7.90777x, 35-44 male ₹1,382.47 @ 11.232717x, 45-54 male ₹274.76 @ 17.164293x. The underlying narrowing case stands, though the 18-24 cell's ROAS is improving, not worsening. Leaving pending for human review.] UPDATE 2026-09-30T18:47:00.000Z: fresh age/gender breakdown (last_14d, ad set now Rs6,391.96 total spend) shows 18-24 male at Rs896.09 spend / 5.08x ROAS -- improved from the Rs450.90 @ 3.37x cited at creation, but still materially below the ad set's blended 8.19x and below 25-34 male (Rs3,121.93 @ 6.87x), 35-44 male (Rs1,725.84 @ 10.76x) and 45-54 male (Rs324.25 @ 14.54x). Underlying trigger still holds. UPDATE 2026-10-01T06:50:00.000Z: fresh age/gender breakdown (last_14d, ad set now Rs6,610.74 total spend) shows 18-24 male at Rs896.19 spend / 9.634542x ROAS -- a further improvement from the Rs896.09 @ 5.08x cited at the last update, and now essentially in line with the ad set's 9.163045x blended ROAS (25-34 male Rs3,122.17 @ 7.57x, 35-44 male Rs1,726.60 @ 10.75x, 45-54 male Rs324.35 @ 14.54x). The 18-24 male cell is no longer clearly underperforming -- the original narrowing case has materially weakened since this proposal's creation. Leaving pending; flagging for human reconsideration rather than auto-rejecting. Reconfirmed 2026-10-01T14:46:00.000Z pass: fresh age/gender breakdown (last_14d) shows 18-24 male unchanged at Rs896.19 spend / 9.634542x ROAS -- same figures as the 2026-10-01T06:50 update, essentially in line with the ad set's 9.163045x blended ROAS (25-34 male Rs3,122.17 @ 7.568x, 35-44 male Rs1,726.60 @ 10.752x, 45-54 male Rs324.35 @ 14.540x). The 18-24 male cell still shows no clear underperformance -- leaving pending for human reconsideration rather than auto-rejecting. UPDATE 2026-10-02T02:49:36.000Z: fresh last_14d age/gender breakdown on ad set 120255693970460159 -- 18-24 male now Rs1,115.62 spend / 9.171922x ROAS, essentially in line with 25-34 male (Rs3,710.14 @ 9.200292x) and no longer a clear outlier versus 35-44 male (Rs1,929.51 @ 11.23664x) or 45-54 male (Rs373.47 @ 12.627788x). The underperformance that originally triggered this proposal has continued to narrow each pass; leaving pending for human review rather than auto-resolving, since narrowing tier is approval-only.",
-      "actionSummary": "Raise age_min from the current 19 to 25 on the ad set's targeting, cutting the underperforming 18-24 slice while fully retaining the 25-54 male cohorts driving the ad set's 9.35x blended ROAS. Existing city/interest/behavior targeting and the Purchasers 180D exclusion stay unchanged. This ad set is also the target of pending A-038 (WhatsApp placement exclusion) and A-042 (Instagram Reels placement) -- all three apply on top of the ad set's live targeting at approval time, in whichever order they are approved.",
-      "metaAction": {
-        "tool": "ads_update_entity",
-        "params": {
-          "ad_account_id": "704523148804803",
-          "entity_id": "120255693970460159",
-          "entity_type": "ad_set",
-          "field": "targeting"
-        }
-      },
-      "targetingDelta": {
-        "age_min": 25
-      },
-      "status": "pending",
-      "createdAt": "2026-09-29T10:52:00.000Z",
-      "updatedAt": "2026-10-01T14:46:00.000Z"
-    },
-    {
-      "id": "A-047",
-      "module": "reactivate-winner",
-      "tier": "approval",
-      "title": "Reactivate New Caps Part 3 STP -- 3.96x ROAS (last_30d), paused 2026-09-29 outside the routine",
-      "reasoning": "New Caps Part 3 STP (id 120245697720960159) is PAUSED (changed outside the routine on 2026-09-29T07:42 UTC per its updated_time, as already noted on stale proposal A-045). Fresh this pass: last_30d spend Rs1,211.82 with purchase_roas 3.957683x (2 purchases, cost_per_result Rs605.91) -- comfortably above settings.reactivate_min_historic_roas (>= 3.0x). Purchaser exclusion is not a factor here (campaign has no currently-active ad set to check). No existing pending reactivate-winner proposal covers this campaign. Reactivating at its existing Rs500/day budget is a conservative resumption at the same pace it was paused at. Note: A-045 (budget-reallocation shifting spend away from this same campaign toward Caps + Kage_26 Sept) is marked stale/superseded-in-spirit by this proposal -- a human should treat A-045 and A-047 as alternatives (reactivate vs. leave paused) rather than approving both. Reconfirmed 2026-10-01T20:57:00.000Z pass: last_30d spend is unchanged at Rs1,211.82 (campaign still not spending, as expected while paused), but purchase_roas now reads 5.21x, up from 3.957683x recorded previously -- likely the same kind of Meta-side attribution/order-value update already observed on A-039's paused campaign. Still comfortably above threshold either way; no change to the proposed action.",
-      "actionSummary": "Activates campaign 'New Caps Part 3 STP' (id 120245697720960159) and reconfirms its daily budget at its existing Rs500/day (50000 minor units, unchanged) so it resumes delivering at the same pace it was paused at.",
-      "metaAction": {
-        "tool": "ads_activate_entity",
-        "params": {
-          "entity_id": "120245697720960159",
-          "entity_type": "campaign"
-        },
-        "followUp": {
-          "tool": "ads_update_entity",
-          "params": {
-            "entity_id": "120245697720960159",
-            "entity_type": "campaign",
-            "fields": {
-              "daily_budget": 50000
-            }
-          }
-        }
-      },
-      "status": "pending",
-      "createdAt": "2026-09-30T00:46:00.000Z"
-    },
-    {
       "id": "A-048",
       "module": "reactivate-winner",
       "tier": "approval",
@@ -788,7 +738,7 @@
       "module": "budget-reallocation",
       "tier": "approval",
       "title": "Shift budget from Sneakers_BOF_30Sep-5Oct toward Caps + Kage_26 Sept / Retargeting_Overall -- large ROAS gap",
-      "reasoning": "last_14d purchase_roas: Caps + Kage_26 Sept 9.84x on ₹7,503.19 spend, Retargeting_Overall 8.88x on ₹1,647.67 spend, vs Sneakers_BOF_30Sep-5Oct only 2.03x on ₹3,824.97 spend (Sneakers_Prospecting_30Sep-5Oct sits at 2.51x, similar). The gap (4.3x-4.8x) is well past settings.budget_reallocation_min_roas_gap (1.5x+). IMPORTANT CONTEXT: Sneakers_BOF is part of the user-approved 30 Sep-5 Oct sneaker push, which has its own ₹1,500 kill-threshold spend-floor exception through 2026-10-05T23:59+05:30 specifically because it's a new, deliberately-funded launch window, not an underperforming legacy campaign. This proposal surfaces the mechanical trigger as the module requires, but a human should weigh the sneaker launch's strategic window (ends 2026-10-05) before cutting its budget -- rejecting this until the push concludes is a reasonable call.",
+      "reasoning": "last_14d purchase_roas: Caps + Kage_26 Sept 9.84x on ₹7,503.19 spend, Retargeting_Overall 8.88x on ₹1,647.67 spend, vs Sneakers_BOF_30Sep-5Oct only 2.03x on ₹3,824.97 spend (Sneakers_Prospecting_30Sep-5Oct sits at 2.51x, similar). The gap (4.3x-4.8x) is well past settings.budget_reallocation_min_roas_gap (1.5x+). IMPORTANT CONTEXT: Sneakers_BOF is part of the user-approved 30 Sep-5 Oct sneaker push, which has its own ₹1,500 kill-threshold spend-floor exception through 2026-10-05T23:59+05:30 specifically because it's a new, deliberately-funded launch window, not an underperforming legacy campaign. This proposal surfaces the mechanical trigger as the module requires, but a human should weigh the sneaker launch's strategic window (ends 2026-10-05) before cutting its budget -- rejecting this until the push concludes is a reasonable call. Reconfirmed 2026-10-02T08:50:00.000Z pass: last_14d purchase_roas essentially unchanged -- Caps + Kage_26 Sept 9.835851x on ₹7,503.19 spend, Retargeting_Overall 8.883089x on ₹1,647.67 spend, vs Sneakers_BOF_30Sep-5Oct 2.029114x on ₹3,824.97 spend (Sneakers_Prospecting_30Sep-5Oct 2.51263x on ₹2,094.18). Gap still well past the 1.5x+ threshold. Sneaker push's ₹1,500 spend-floor exception still runs through 2026-10-05T23:59+05:30 -- same strategic-window caveat as before; no change to the proposed action.",
       "actionSummary": "If approved: reduces Sneakers_BOF_30Sep-5Oct's daily_budget from ₹2,400 to ₹1,500/day, and raises Caps + Kage_26 Sept's daily_budget from ₹1,600 to ₹2,200/day, shifting roughly ₹900/day toward the higher-ROAS campaign. Exact split is editable in the dashboard's budget field before approving.",
       "metaAction": {
         "tool": "ads_update_entity",
@@ -12665,6 +12615,33 @@
       "severity": "low",
       "dismissed": false,
       "createdAt": "2026-10-02T06:51:52.000Z"
+    },
+    {
+      "id": "AL-1316",
+      "module": "anomaly",
+      "title": "New anomaly: 'New STP 3' ad set flagged as narrow audience",
+      "detail": "ads_insights_anomaly_signal fired active_delivery_narrow_audience for ad set 'New STP 3' (id 120245697720950159, campaign New Caps Part 3 STP, reactivated outside the routine since the 2026-10-01T20:57 pass -- see A-047 closure). Estimated audience size is in the 1,500-1,800 range, categorized as narrow in Ads Manager. Meta's recommendation: evaluate expanding the audience or A/B test using Advantage+ audience. Root-cause context (anomaly-root-cause): this ad set layers a tight geo list (8 specific cities + Telangana + New Delhi, 25 mile radius each) with a Baseball cap / Streetwear / Fashion accessories interest+behavior flexible_spec on top of a small 1% lookalike seed (ATC Caps, origin audience). The combination of narrow geo + narrow interest/behavior stack is the likely driver, not creative fatigue or a bid-landscape shift -- delivery itself still looks healthy (5.21x last_30d ROAS, ₹1,211.82 spend). No action taken (alert-only module); worth a human review of whether to widen geo or switch on broader Advantage+ audience expansion if delivery volume stays constrained.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-10-02T08:50:00.000Z"
+    },
+    {
+      "id": "AL-1317",
+      "module": "competitor-rescrape",
+      "title": "Gully Labs / Lotto Sport India combined active-ad count down to 313",
+      "detail": "ads_library_search (combined page_ids query 107479854297817 / 426015150606378, ad_active_status=ACTIVE, no country filter) returned estimated_total_count=313, down from the prior recorded scrape of 356 (-12.1% change). Under the 20% alert threshold -- no competitor-spike alert.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-10-02T08:50:00.000Z"
+    },
+    {
+      "id": "AL-1318",
+      "module": "routine-run-notes",
+      "title": "Run summary -- 2026-10-02 ~08:50 UTC pass",
+      "detail": "Circuit breaker: not tripped -- today's account spend ₹2,816.08 vs ₹6,500 ceiling (43.3%). Pixel quality gate: all tracked event composite EMQ scores 6.1-9.0, healthy -- ROAS modules not suppressed. purchaser-exclusion: verified via direct targeting fetch on all 7 currently-active ad sets (Prosp_Men_25-44_Broad_7am-12am, BOF_3_CrossSell_Purchasers180D, BOF_2_Warm_IG365_Engagers_Visitors, BOF_1_Hot_ATC_IC_API_30D, New STP 3, Retargeting_Overall, Caps + Kage_26Sept) -- all compliant (the two exempt ad sets per settings.purchaser_exclusion_exempt_adset_ids still deliberately include Purchasers 180D by design; the other 5 exclude it). No action needed. lookalike-refresh: still rate-limited (last attempt 2026-10-02T00:47:50Z failed with Meta's duplicate-lookalike error, <24h elapsed, source audience size unchanged ~20) -- skipped, no new alert. hook-angle-tagging: 2 new creatives tagged this pass -- 2145122129441897 ('Yin Yang_BOF - Copy' under Sneakers_Prospecting_30Sep-5Oct) and 1090244783865361 ('CAPS' under New Caps Part 3 STP, which was reactivated outside the routine since the last pass). hard-spend-circuit-breaker: no trip. anomaly: active_delivery_narrow_audience fired on 'New STP 3' ad set (see AL for detail) -- new this pass. campaign-consolidation-watch: 5 campaigns actively delivering (Sneakers_Prospecting_30Sep-5Oct, Sneakers_BOF_30Sep-5Oct, Retargeting_Overall, Caps + Kage_26 Sept, New Caps Part 3 STP) across distinct funnel stages/geos, plus Yin Yang_TOF (nominally active, non-delivering) -- no consolidation flag. Approval-tier: closed A-046 (age-gender-auto-shift on Caps + Kage_26 Sept) as moot -- the 18-24 male cell recovered to 9.17x ROAS, no longer underperforming. Closed A-047 (reactivate-winner on New Caps Part 3 STP) as moot -- campaign already reactivated outside the routine. Refreshed reasoning/numbers on A-026, A-038 (WhatsApp placement spend ticked up slightly, still 0 purchases) and A-049 (budget-reallocation gap essentially unchanged, sneaker-push window caveat still applies). The other 19 pending proposals (A-001/002/003/005/006/011/013/014/015/022/023/024/027/028/030/032/033/039/048) target campaigns that remain PAUSED and unchanged this pass -- left as-is, no new data to update. Competitor rescrape: Gully Labs / Lotto Sport India combined active-ad count now 313, down from 356 (-12.1%, under the 20% threshold). self-audit-check: dashboard snapshot (index.html, dated Sep 13 2026) remains stale vs. live data -- unchanged finding, not re-alerted this pass. learning-phase-stuck: no ad sets confirmed stuck in learning (>7 days); the 3 lowest-spend active ad sets (BOF_3_CrossSell_Purchasers180D ₹102.92, BOF_1_Hot_ATC_IC_API_30D ₹148.56 last_30d) are new/low-volume rather than stuck. threshold-alerts: active-campaign CPM/CTR/CPC within normal bands, nothing flagged. No weekly/monthly digest due (Friday, not day-1-of-month).",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-10-02T08:50:00.000Z"
     }
   ],
   "log": [
@@ -17907,6 +17884,68 @@
       },
       "tier": "auto",
       "executedAt": "2026-10-02T04:52:30.000Z"
+    },
+    {
+      "proposalId": null,
+      "action": "hook-angle-tagging auto-module: tagged creative 2145122129441897 ('BLACK OR WHITE? GET BOTH.' single-image creative, ad 'Yin Yang_BOF - Copy' under active ad set Prosp_Men_25-44_Broad_7am-12am / campaign Sneakers_Prospecting_30Sep-5Oct) -- primary text/headline pulled via ads_get_creatives, no vision pass (Higgsfield not attached this run). No Meta API mutation, wrote to queue.json.creativeTags only.",
+      "result": "success",
+      "previousState": {
+        "creativeTags[2145122129441897]": null
+      },
+      "detail": {
+        "tool": "ads_get_creatives",
+        "creative_id": "2145122129441897",
+        "body": "Black or White? Why choose when you can have both.\nMeet KAI Yin Yang — our newest sneaker, now at an introductory price of ₹2,631.\nFree shipping on prepaid orders (At INR 2,499).",
+        "title": "BLACK OR WHITE? GET BOTH.",
+        "call_to_action_type": "SEE_DETAILS",
+        "object_type": "SHARE"
+      },
+      "tier": "auto",
+      "executedAt": "2026-10-02T08:50:00.000Z"
+    },
+    {
+      "proposalId": null,
+      "action": "hook-angle-tagging auto-module: tagged creative 1090244783865361 ('WHY WEAR HALF THE FIT?' single-image creative, ad 'CAPS' under active ad set New STP 3 / campaign New Caps Part 3 STP) -- primary text/headline pulled via ads_get_creatives, no vision pass (Higgsfield not attached this run). No Meta API mutation, wrote to queue.json.creativeTags only.",
+      "result": "success",
+      "previousState": {
+        "creativeTags[1090244783865361]": null
+      },
+      "detail": {
+        "tool": "ads_get_creatives",
+        "creative_id": "1090244783865361",
+        "body": "MOST AWAITED PRODUCTS ARE HERE.\n\nUpto 30% off. On Combination Deals Go prepaid and unlock another 5%\n\nBut the real flex?\n\nWearing it the way it was meant to be worn.\n\nHead to toe.\nNo random pairing.\nNo weak fits.\n\n7 day returns.\nLimited stock.\n\nComplete it.",
+        "title": "WHY WEAR HALF THE FIT?",
+        "call_to_action_type": "SHOP_NOW",
+        "object_type": "SHARE"
+      },
+      "tier": "auto",
+      "executedAt": "2026-10-02T08:50:00.000Z"
+    },
+    {
+      "proposalId": "A-046",
+      "action": "age-gender-auto-shift: Reconfirmed this pass: Caps + Kage_26 Sept's 18-24 male segment has recovered substantially -- last_14d spend ₹1,115.62 at 9.171922x ROAS (up from 5.08x/₹896.09 at the 2026-09-30 update and 3.37x/₹450.90 at proposal creation), now in line with the ad set's other strong male cohorts (25-34 male ₹3,710.14 @ 9.200292x, 35-44 male ₹1,929.51 @ 11.23664x) and no longer materially underperforming the ad set's blended average (9.835851x last_30d). The underlying underperformance trigger no longer holds -- reactivating this proposal now would narrow a segment that is currently converting well. Closed as moot.",
+      "result": "rejected",
+      "previousState": {
+        "proposal_status": "pending"
+      },
+      "detail": {
+        "reason": "closed by routine as moot/no-op -- underlying trigger condition no longer holds (18-24 male cell ROAS recovered to parity with other cohorts); no Meta API call made"
+      },
+      "tier": "approval",
+      "executedAt": "2026-10-02T08:50:00.000Z"
+    },
+    {
+      "proposalId": "A-047",
+      "action": "reactivate-winner: New Caps Part 3 STP (id 120245697720960159) is ACTIVE again as of this pass -- fresh ads_get_ad_entities campaign-level pull shows status ACTIVE/effective_status ACTIVE, and its ad set 'New STP 3' (id 120245697720950159) is ACTIVE and delivering (last_30d spend ₹1,211.82, 5.210427x ROAS; also the subject of this pass's active_delivery_narrow_audience anomaly, AL-1317). Reactivated outside the routine between the 2026-10-01T20:57 and this pass. Reactivating an already-active campaign is a no-op. Closed as moot.",
+      "result": "rejected",
+      "previousState": {
+        "proposal_status": "pending"
+      },
+      "detail": {
+        "reason": "closed by routine as moot/no-op -- underlying trigger condition no longer holds (campaign already reactivated outside the routine); no Meta API call made"
+      },
+      "tier": "approval",
+      "executedAt": "2026-10-02T08:50:00.000Z"
     }
   ],
   "creativeTags": {
@@ -20630,6 +20669,28 @@
       "visionPassSkipped": true,
       "note": "Higgsfield vision connection not attached to this run -- image/video content itself not analyzed, only real ad copy text used. No creative description invented.",
       "taggedAt": "2026-10-02T04:52:30.000Z"
+    },
+    "2145122129441897": {
+      "adName": "Yin Yang_BOF - Copy",
+      "campaign": "Sneakers_Prospecting_30Sep-5Oct",
+      "format": "Static image",
+      "angle": "New product launch (KAI Yin Yang sneaker) at an introductory price, prepaid free-shipping incentive",
+      "hook": "\"BLACK OR WHITE? GET BOTH.\" (headline) / \"Black or White? Why choose when you can have both. Meet KAI Yin Yang — our newest sneaker, now at an introductory price of ₹2,631. Free shipping on prepaid orders (At INR 2,499).\" (primary text)",
+      "taggedFrom": "ad primary text (body) + headline (title), via Meta Ads MCP ads_get_creatives",
+      "visionPassSkipped": true,
+      "note": "Higgsfield vision connection not attached to this run -- image content itself not analyzed, only real ad copy text used. No creative description invented.",
+      "taggedAt": "2026-10-02T08:50:00.000Z"
+    },
+    "1090244783865361": {
+      "adName": "CAPS",
+      "campaign": "New Caps Part 3 STP",
+      "format": "Static image",
+      "angle": "Combination/bundle deal discount (up to 30% off, extra 5% prepaid), styling-complete angle (\"wear it head to toe\")",
+      "hook": "\"WHY WEAR HALF THE FIT?\" (headline) / \"MOST AWAITED PRODUCTS ARE HERE. Upto 30% off. On Combination Deals Go prepaid and unlock another 5% But the real flex? Wearing it the way it was meant to be worn. Head to toe. No random pairing. No weak fits. 7 day returns. Limited stock. Complete it.\" (primary text)",
+      "taggedFrom": "ad primary text (body) + headline (title), via Meta Ads MCP ads_get_creatives",
+      "visionPassSkipped": true,
+      "note": "Higgsfield vision connection not attached to this run -- image content itself not analyzed, only real ad copy text used. No creative description invented.",
+      "taggedAt": "2026-10-02T08:50:00.000Z"
     }
   }
 }
