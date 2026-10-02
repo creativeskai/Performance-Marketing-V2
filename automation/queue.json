@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-02T08:50:00.000Z",
+  "generatedAt": "2026-10-02T10:46:25.000Z",
   "settings": {
     "kill_roas_threshold": "pause if ROAS < 1.0x after ₹500 spend on a sales-objective campaign. EXCEPTION until 2026-10-05T23:59+05:30 (user-approved 2026-09-29): for the sneaker-push campaigns 120256091369160159 (Sneakers_BOF_30Sep-5Oct), 120256091370110159 (Sneakers_Prospecting_30Sep-5Oct) and 120256088882780159 (Sneakers_Catalog_Retargeting) the spend floor is ₹1,500, not ₹500.",
     "reactivate_min_historic_roas": "surface for reactivation if a paused campaign's last active-period ROAS >= 3.0x",
@@ -30,9 +30,9 @@
     },
     "competitor_last_scrape": {
       "gully_labs_active_ads": null,
-      "lotto_sport_india_active_ads": 313,
-      "scraped_at": "2026-10-02T08:50:00.000Z",
-      "note": "2026-10-02T08:50:00.000Z scheduled run: ads_library_search combined page_ids query (107479854297817 / 426015150606378, ad_active_status=ACTIVE, no country filter) returned estimated_total_count=313, down from the prior recorded scrape of 356 (-12.1% change). Under the 20% alert threshold -- no competitor-spike alert."
+      "lotto_sport_india_active_ads": 446,
+      "scraped_at": "2026-10-02T10:46:25.000Z",
+      "note": "2026-10-02T10:46:25.000Z scheduled run: ads_library_search combined page_ids query (107479854297817 / 426015150606378, ad_active_status=ACTIVE, no country filter) returned estimated_total_count=446, up from the prior recorded scrape of 313 (+42.5% change). Over the 20% alert threshold -- see AL-1319."
     },
     "audience_label_corrections": {
       "120249907176770159": "ATC_180D -- NOT a purchaser audience (cart-adders, event=AddToCart, retention 180 days). Verified 2026-09-14, reconfirmed 2026-09-20. Superseded note: earlier passes said the account had NO purchaser audience at all -- that's now out of date. See the 120255823280550159 (Purchasers 180D) entry above, created 2026-09-15, which IS a genuine purchaser audience and is already in use for exclusion + lookalike.",
@@ -12642,6 +12642,24 @@
       "severity": "low",
       "dismissed": false,
       "createdAt": "2026-10-02T08:50:00.000Z"
+    },
+    {
+      "id": "AL-1319",
+      "module": "competitor-spike",
+      "title": "Combined Gully Labs / Lotto Sport India active-ad count spiked 42% (313 -> 446)",
+      "detail": "ads_library_search combined page_ids query (107479854297817 / 426015150606378, ad_active_status=ACTIVE, no country filter) returned estimated_total_count=446 this pass, up from the prior recorded scrape of 313 (2026-10-02T08:50 UTC pass) -- a +42.5% change, well above the 20% competitor-spike alert threshold. This reverses the prior pass's -12.1% dip. No account action is implied by this module (informational only); worth a manual look at what Lotto Sport India is currently running if creative strategy needs reviewing.",
+      "severity": "medium",
+      "dismissed": false,
+      "createdAt": "2026-10-02T10:46:25.000Z"
+    },
+    {
+      "id": "AL-1320",
+      "module": "routine-run-notes",
+      "title": "Run summary -- 2026-10-02 ~10:46 UTC pass",
+      "detail": "Circuit breaker: not tripped -- today's account spend Rs3,514.13 vs Rs6,500 ceiling. Pixel quality gate: all tracked event composite EMQ scores between 6.1 and 8.8, at/above pixel_quality_min_match_rate=0.6 -- ROAS-based modules not suppressed. Purchaser-exclusion: 6 ad sets ACTIVE across 5 campaigns (Sneakers_Prospecting_30Sep-5Oct, Sneakers_BOF_30Sep-5Oct x3 ad sets, New Caps Part 3 STP, Retargeting_Overall) -- fresh targeting fetch confirms BOF_3_CrossSell_Purchasers180D and Retargeting_Overall remain exempt by design (settings.purchaser_exclusion_exempt_adset_ids) and deliberately include Purchasers 180D; the other 4 ad sets (Prosp_Men_25-44_Broad_7am-12am, BOF_2_Warm_IG365_Engagers_Visitors, BOF_1_Hot_ATC_IC_API_30D, New STP 3) all exclude it in excluded_custom_audiences. Account-wide compliant, no action needed. Yin Yang_TOF campaign remains ACTIVE with its only ad set still force-paused from the purchaser-exclusion fix recorded in AL-1312 -- still needs human review to reactivate, unchanged this pass. Lookalike-refresh: laddered 1%/2%/5% lookalikes off Purchasers 180D (built 2026-09-15, last rebuild attempt 2026-10-02T00:47:50Z failed with Meta's duplicate-lookalike error 2654/1713007) remain rate-limited this pass (<24h since last attempt, max_auto_actions_per_entity_per_day=1) -- next eligible ~2026-10-03T00:48 UTC. Source audience size unchanged (~20). Hook-angle-tagging: all 20 distinct active ads' creatives already have creativeTags entries -- nothing new to tag this pass. Anomaly: same single warning as the ~08:50 UTC pass -- 'New STP 3' ad set flagged as narrow audience (1,500-1,800 estimated reach), no new anomalies. Competitor-rescrape: see AL-1319 -- combined active-ad count spiked to 446 (+42.5% vs the last recorded 313), above the 20% alert threshold. Campaign-consolidation-watch: same 5 active campaigns as last pass, no product+audience overlap -- no consolidation flag. Self-audit-check / learning-phase-stuck / threshold-alerts: no new signal this pass (no active-campaign metric_baselines entries exist for the currently-active campaigns, so threshold-alerts has nothing to compare against). Approval-tier proposals: all 22 pending proposals (A-001 onward) were freshly reconfirmed at the ~08:50 UTC pass 2 hours ago against an account state that has not materially changed since (same active campaigns, same paused campaigns) -- not re-derived from scratch this pass to avoid redundant churn; reasoning stands. No auto-tier mutations executed this pass (purchaser-exclusion already compliant, lookalike-refresh rate-limited, hook-angle-tagging had nothing new, circuit breaker not tripped).",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-10-02T10:46:25.000Z"
     }
   ],
   "log": [
