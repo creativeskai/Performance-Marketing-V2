@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-02T02:49:36.000Z",
+  "generatedAt": "2026-10-02T04:52:30.000Z",
   "settings": {
     "kill_roas_threshold": "pause if ROAS < 1.0x after ₹500 spend on a sales-objective campaign. EXCEPTION until 2026-10-05T23:59+05:30 (user-approved 2026-09-29): for the sneaker-push campaigns 120256091369160159 (Sneakers_BOF_30Sep-5Oct), 120256091370110159 (Sneakers_Prospecting_30Sep-5Oct) and 120256088882780159 (Sneakers_Catalog_Retargeting) the spend floor is ₹1,500, not ₹500.",
     "reactivate_min_historic_roas": "surface for reactivation if a paused campaign's last active-period ROAS >= 3.0x",
@@ -31,8 +31,8 @@
     "competitor_last_scrape": {
       "gully_labs_active_ads": null,
       "lotto_sport_india_active_ads": null,
-      "scraped_at": "2026-10-02T02:49:36.000Z",
-      "note": "2026-10-02T02:49:36.000Z scheduled run: ads_library_search combined page_ids query (107479854297817 / 426015150606378, ad_active_status=ACTIVE, no country filter) returned estimated_total_count=316, down from the prior recorded scrape of 317 (0.3% change). Well under the 20% alert threshold."
+      "scraped_at": "2026-10-02T04:52:30.000Z",
+      "note": "2026-10-02T04:52:30.000Z scheduled run: ads_library_search combined page_ids query (107479854297817 / 426015150606378, ad_active_status=ACTIVE, no country filter) returned estimated_total_count=312, down from the prior recorded scrape of 316 (-1.3% change). Well under the 20% alert threshold."
     },
     "audience_label_corrections": {
       "120249907176770159": "ATC_180D -- NOT a purchaser audience (cart-adders, event=AddToCart, retention 180 days). Verified 2026-09-14, reconfirmed 2026-09-20. Superseded note: earlier passes said the account had NO purchaser audience at all -- that's now out of date. See the 120255823280550159 (Purchasers 180D) entry above, created 2026-09-15, which IS a genuine purchaser audience and is already in use for exclusion + lookalike.",
@@ -782,6 +782,38 @@
       },
       "status": "pending",
       "createdAt": "2026-09-30T04:50:00.000Z"
+    },
+    {
+      "id": "A-049",
+      "module": "budget-reallocation",
+      "tier": "approval",
+      "title": "Shift budget from Sneakers_BOF_30Sep-5Oct toward Caps + Kage_26 Sept / Retargeting_Overall -- large ROAS gap",
+      "reasoning": "last_14d purchase_roas: Caps + Kage_26 Sept 9.84x on ₹7,503.19 spend, Retargeting_Overall 8.88x on ₹1,647.67 spend, vs Sneakers_BOF_30Sep-5Oct only 2.03x on ₹3,824.97 spend (Sneakers_Prospecting_30Sep-5Oct sits at 2.51x, similar). The gap (4.3x-4.8x) is well past settings.budget_reallocation_min_roas_gap (1.5x+). IMPORTANT CONTEXT: Sneakers_BOF is part of the user-approved 30 Sep-5 Oct sneaker push, which has its own ₹1,500 kill-threshold spend-floor exception through 2026-10-05T23:59+05:30 specifically because it's a new, deliberately-funded launch window, not an underperforming legacy campaign. This proposal surfaces the mechanical trigger as the module requires, but a human should weigh the sneaker launch's strategic window (ends 2026-10-05) before cutting its budget -- rejecting this until the push concludes is a reasonable call.",
+      "actionSummary": "If approved: reduces Sneakers_BOF_30Sep-5Oct's daily_budget from ₹2,400 to ₹1,500/day, and raises Caps + Kage_26 Sept's daily_budget from ₹1,600 to ₹2,200/day, shifting roughly ₹900/day toward the higher-ROAS campaign. Exact split is editable in the dashboard's budget field before approving.",
+      "metaAction": {
+        "tool": "ads_update_entity",
+        "params": {
+          "ad_account_id": "704523148804803",
+          "entity_id": "120256091369160159",
+          "entity_type": "campaign",
+          "fields": {
+            "daily_budget": 150000
+          }
+        },
+        "followUp": {
+          "tool": "ads_update_entity",
+          "params": {
+            "ad_account_id": "704523148804803",
+            "entity_id": "120255693970470159",
+            "entity_type": "campaign",
+            "fields": {
+              "daily_budget": 220000
+            }
+          }
+        }
+      },
+      "status": "pending",
+      "createdAt": "2026-10-02T04:52:30.000Z"
     }
   ],
   "alerts": [
@@ -12525,6 +12557,105 @@
       "severity": "low",
       "dismissed": false,
       "createdAt": "2026-10-02T02:49:36.000Z"
+    },
+    {
+      "id": "AL-1304",
+      "module": "lookalike-refresh",
+      "title": "Lookalike refresh still rate-limited this pass -- skipped re-attempt",
+      "detail": "Last rebuild attempt was 2026-10-02T00:47:50.000Z (failed with Meta's duplicate-lookalike error 2654/1713007); only ~4h elapsed since then, within settings.max_auto_actions_per_entity_per_day=1 (24h), so this pass skipped re-attempting rather than silently dropping it. The laddered 1%/2%/5% lookalikes built 2026-09-15 off Purchasers 180D are well past the 14-day lookalike_refresh_days threshold; source audience size unchanged (~20), so the rebuild is expected to keep failing until it grows. The 3 existing lookalikes remain live and serving.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-10-02T04:52:30.000Z"
+    },
+    {
+      "id": "AL-1305",
+      "module": "anomaly",
+      "title": "No anomaly signal fired",
+      "detail": "ads_insights_anomaly_signal checked auction overlap, creative fatigue, and narrow audience across active ad sets -- no issues found.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-10-02T04:52:30.000Z"
+    },
+    {
+      "id": "AL-1306",
+      "module": "threshold-alerts",
+      "title": "Active-campaign CPM/CTR/CPC within normal bands",
+      "detail": "Checked the 4 non-trivial active campaigns this pass: Sneakers_Prospecting_30Sep-5Oct (CPM ₹66.32, CTR 2.51%, CPC ₹2.64), Sneakers_BOF_30Sep-5Oct (CPM ₹81.34, CTR 2.74%, CPC ₹2.97), Retargeting_Overall (CPM ₹143.79, CTR 2.43%, CPC ₹5.91), Caps + Kage_26 Sept (CPM ₹73.63, CTR 1.85%, CPC ₹3.99) -- all consistent with recent norms, no threshold breach.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-10-02T04:52:30.000Z"
+    },
+    {
+      "id": "AL-1307",
+      "module": "pixel-health",
+      "title": "Pixel quality remains healthy -- no match-rate breach",
+      "detail": "ads_get_dataset_quality on the active pixel (833131719490535): composite EMQ scores range 6.1-8.9 across all tracked events (AddPaymentInfo 8.9, Purchase 8.8, prepaid_purchase/cod_purchase 8.8, InitiateCheckout 7.0, AddToCart/ViewContent/PageView/Search/SubscribedButtonClick 6.1), all at/above settings.pixel_quality_min_match_rate=0.6 -- ROAS-based modules not suppressed this pass.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-10-02T04:52:30.000Z"
+    },
+    {
+      "id": "AL-1308",
+      "module": "competitor-rescrape",
+      "title": "Gully Labs / Lotto Sport India combined active-ad count down slightly, unchanged materially",
+      "detail": "ads_library_search (page_ids 107479854297817 / 426015150606378, ad_active_status=ACTIVE) returned estimated_total_count=312, down from the prior recorded scrape of 316 (-1.3%). Well under the 20% alert threshold.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-10-02T04:52:30.000Z"
+    },
+    {
+      "id": "AL-1309",
+      "module": "campaign-consolidation-watch",
+      "title": "5 active campaigns this pass (one new, now paused again) -- no consolidation flag",
+      "detail": "Account had 5 campaigns reach ACTIVE this pass: the existing 4 (Sneakers_Prospecting_30Sep-5Oct, Sneakers_BOF_30Sep-5Oct, Retargeting_Overall, Caps + Kage_26 Sept -- distinct funnel stages, no overlap) plus a newly-launched 'Yin Yang_TOF' (OUTCOME_TRAFFIC, new-product awareness/traffic play, no overlap with the sales campaigns either) which purchaser-exclusion force-paused this same pass (see AL-1312). No true duplicate-targeting pairs -- no consolidation flag.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-10-02T04:52:30.000Z"
+    },
+    {
+      "id": "AL-1310",
+      "module": "learning-phase-stuck",
+      "title": "No ad sets stuck in learning",
+      "detail": "learning_stage_info checked across all active ad sets -- none flagged as stuck.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-10-02T04:52:30.000Z"
+    },
+    {
+      "id": "AL-1311",
+      "module": "self-audit-check",
+      "title": "Live numbers reconfirmed sane vs. dashboard snapshot -- snapshot still stale",
+      "detail": "Today's account spend ₹1,513.35 vs ₹6,500 ceiling; active-campaign ROAS all healthy (2.0x-9.8x last_14d). No drift beyond known staleness of the static dashboard snapshot.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-10-02T04:52:30.000Z"
+    },
+    {
+      "id": "AL-1312",
+      "module": "purchaser-exclusion",
+      "title": "Yin Yang_TOF ad set force-paused by purchaser-exclusion auto-fix -- needs review to reactivate",
+      "detail": "The newly-active 'Yin Yang_TOF' ad set (120255822449200159, campaign 120255822449220159) had no purchaser exclusion and was not on the exempt list, so the auto-module added Purchasers 180D to its excluded_custom_audiences this pass. Per Meta API behavior, any non-rename edit to an ACTIVE entity force-pauses it -- this ad set is now PAUSED as a side effect, not because of a performance or compliance issue beyond the missing exclusion itself. See log entry at this pass's timestamp. A human should review and reactivate it (the exclusion is already in place and will hold).",
+      "severity": "medium",
+      "dismissed": false,
+      "createdAt": "2026-10-02T04:52:30.000Z"
+    },
+    {
+      "id": "AL-1313",
+      "module": "hook-angle-tagging",
+      "title": "Tagged 1 new creative this pass",
+      "detail": "Creative 1749882392795404 (ad 'Yin Yang_TOF', the new sneaker launch ad) had no creativeTags entry -- tagged from its real primary text/headline via the Meta Ads MCP. Vision pass skipped (Higgsfield connection not attached to this run).",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-10-02T04:52:30.000Z"
+    },
+    {
+      "id": "AL-1314",
+      "module": "routine-run-notes",
+      "title": "Run summary -- 2026-10-02 ~04:52 UTC pass",
+      "detail": "Circuit breaker: not tripped (today's spend ₹1,513.35 vs ₹6,500 ceiling). Pixel quality: healthy, no gate suppression. Auto-executed: 1 action (purchaser-exclusion fix on new 'Yin Yang_TOF' ad set, force-paused as a side effect -- see AL-1312). Lookalike-refresh: still rate-limited, skipped. Hook-angle-tagging: 1 new creative tagged. New proposal: A-049 (budget-reallocation, Sneakers_BOF -> Caps+Kage/Retargeting_Overall, flagged with sneaker-push context for human judgment). No anomalies, no threshold breaches, no learning-phase-stuck ad sets, competitor count down slightly (not material), campaign-consolidation-watch clear. No weekly/monthly digest due this pass.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-10-02T04:52:30.000Z"
     }
   ],
   "log": [
@@ -17716,6 +17847,57 @@
       },
       "tier": "auto",
       "executedAt": "2026-10-02T00:47:50.000Z"
+    },
+    {
+      "proposalId": null,
+      "action": "purchaser-exclusion auto-module: added Purchasers 180D (120255823280550159) to excluded_custom_audiences on ad set 'Yin Yang_TOF' (120255822449200159, campaign 'Yin Yang_TOF' 120255822449220159, OUTCOME_TRAFFIC) -- this ad set went ACTIVE since the prior pass (broad Advantage+ audience, age 21-65, no included custom audiences, not on settings.purchaser_exclusion_exempt_adset_ids) and had no purchaser exclusion at all. Edit force-paused the ad set as a side effect (Meta API behavior for non-rename edits to ACTIVE entities) -- see AL-1312, a human should review and reactivate once satisfied.",
+      "result": "success",
+      "previousState": {
+        "excluded_custom_audiences": "none -- ad set had no excluded_custom_audiences entry prior to this edit",
+        "status": "ACTIVE",
+        "effective_status": "ACTIVE"
+      },
+      "detail": {
+        "success": true,
+        "entity_id": "120255822449200159",
+        "entity_type": "ad_set",
+        "is_draft": false,
+        "updated_fields": {
+          "targeting": {
+            "age_min": 21,
+            "age_max": 65,
+            "geo_locations": {
+              "countries": [
+                "IN"
+              ],
+              "location_types": [
+                "frequently_in",
+                "home",
+                "recent"
+              ]
+            },
+            "targeting_optimization": "expansion_all",
+            "brand_safety_content_filter_levels": [
+              "FACEBOOK_RELAXED",
+              "AN_RELAXED"
+            ],
+            "targeting_automation": {
+              "advantage_audience": 1
+            },
+            "user_age_unknown": true,
+            "excluded_custom_audiences": [
+              {
+                "id": "120255823280550159"
+              }
+            ]
+          },
+          "status": "PAUSED"
+        },
+        "status_forced_to_paused": true,
+        "ads_manager_url": "https://www.facebook.com/adsmanager/manage/adsets/edit?act=704523148804803&selected_adset_ids=120255822449200159"
+      },
+      "tier": "auto",
+      "executedAt": "2026-10-02T04:52:30.000Z"
     }
   ],
   "creativeTags": {
@@ -20428,6 +20610,17 @@
       "visionPassSkipped": true,
       "note": "Higgsfield vision connection not attached to this run. This creative also has no primary-text/headline fields available via the Meta Ads MCP this pass -- angle/hook above are not invented ad copy. Re-check on a future pass once fields are available.",
       "taggedAt": "2026-09-30T08:46:00.000Z"
+    },
+    "1749882392795404": {
+      "adName": "Yin Yang_TOF",
+      "campaign": "Yin Yang_TOF",
+      "format": "Static image (SHARE)",
+      "angle": "New-product launch for the Yin Yang sneaker at an introductory price (₹2,663) -- cold-audience intro offer rather than a bundle/cross-sell play",
+      "hook": "\"Meet Yin Yang — the new KAI sneaker.\\nNow at an introductory price of ₹2,663\" (primary text) / \"Yin Yang. New Arrival.\" (headline)",
+      "taggedFrom": "ad primary text (body) + headline (title), via Meta Ads MCP ads_get_creatives",
+      "visionPassSkipped": true,
+      "note": "Higgsfield vision connection not attached to this run -- image/video content itself not analyzed, only real ad copy text used. No creative description invented.",
+      "taggedAt": "2026-10-02T04:52:30.000Z"
     }
   }
 }
