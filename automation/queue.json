@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-03T02:46:23.000Z",
+  "generatedAt": "2026-10-03T14:46:44.000Z",
   "settings": {
     "kill_roas_threshold": "pause if ROAS < 1.0x after ₹500 spend on a sales-objective campaign. EXCEPTION until 2026-10-05T23:59+05:30 (user-approved 2026-09-29): for the sneaker-push campaigns 120256091369160159 (Sneakers_BOF_30Sep-5Oct), 120256091370110159 (Sneakers_Prospecting_30Sep-5Oct) and 120256088882780159 (Sneakers_Catalog_Retargeting) the spend floor is ₹1,500, not ₹500.",
     "reactivate_min_historic_roas": "surface for reactivation if a paused campaign's last active-period ROAS >= 3.0x",
@@ -30,9 +30,9 @@
     },
     "competitor_last_scrape": {
       "gully_labs_active_ads": null,
-      "lotto_sport_india_active_ads": 459,
-      "scraped_at": "2026-10-03T02:46:23.000Z",
-      "note": "2026-10-03T02:46 UTC scheduled run: ads_library_search combined page_ids query (107479854297817 / 426015150606378, ad_active_status=ACTIVE, no country filter) returned estimated_total_count=459, flat vs the 2026-10-02T22:46 UTC pass. Below the >=20% single-pass spike threshold -- no new competitor-spike alert. Still +46.6% above the original 313 baseline. See AL-1319 for the original spike detection."
+      "lotto_sport_india_active_ads": 506,
+      "scraped_at": "2026-10-03T14:46:44.000Z",
+      "note": "2026-10-03T14:46 UTC scheduled run: ads_library_search combined page_ids query (107479854297817 / 426015150606378, ad_active_status=ACTIVE, no country filter) returned estimated_total_count=506, up from 459 at the 2026-10-03T02:46 UTC pass (+10.2%) -- below the >=20% single-pass spike threshold, no new competitor-spike alert. Now +61.7% above the original 313 baseline. See AL-1319 for the original spike detection."
     },
     "audience_label_corrections": {
       "120249907176770159": "ATC_180D -- NOT a purchaser audience (cart-adders, event=AddToCart, retention 180 days). Verified 2026-09-14, reconfirmed 2026-09-20. Superseded note: earlier passes said the account had NO purchaser audience at all -- that's now out of date. See the 120255823280550159 (Purchasers 180D) entry above, created 2026-09-15, which IS a genuine purchaser audience and is already in use for exclusion + lookalike.",
@@ -13162,6 +13162,24 @@
       "severity": "low",
       "dismissed": false,
       "createdAt": "2026-10-03T02:46:23.000Z"
+    },
+    {
+      "id": "AL-1369",
+      "module": "lookalike-refresh",
+      "title": "Lookalike rebuild skipped this pass -- rate limited",
+      "detail": "The laddered 1%/2%/5% lookalikes off 'Purchasers 180D' (120255823280550159, still ~20 people, unchanged since 2026-09-15) remain past the 14-day lookalike_refresh_days threshold. Last rebuild attempt was 2026-10-03T00:52:37.000Z (failed with Meta's duplicate-lookalike error 2654/1713007, source audience unchanged) -- only ~13h54m elapsed since then, within max_auto_actions_per_entity_per_day=1 (24h window), so this pass skipped the attempt per rate limiting rather than retrying. Next eligible attempt ~2026-10-03T22:48 UTC. The 3 existing lookalikes remain live and serving.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-10-03T14:46:44.000Z"
+    },
+    {
+      "id": "AL-1370",
+      "module": "routine-run-notes",
+      "title": "Run summary -- 2026-10-03 ~14:46 UTC pass",
+      "detail": "Circuit breaker: not tripped, today's account spend Rs3,362.78 vs Rs6,500 ceiling. Pixel quality gate: all tracked event EMQ scores 6.1-8.9, at/above the 0.6 threshold -- ROAS modules not suppressed. 4 campaigns ACTIVE (Sneakers_BOF_30Sep-5Oct, Retargeting_Overall, Yin Yang_TOF, Caps + Kage_26 Sept) / 6 ad sets ACTIVE -- fresh targeting fetch on all 6 confirms purchaser-exclusion remains compliant account-wide (BOF_3_CrossSell_Purchasers180D and Retargeting_Overall exempt by design per settings.purchaser_exclusion_exempt_adset_ids; the other 4 directly exclude Purchasers 180D). No anomaly signal fired. All 17 distinct active ads' creatives already have creativeTags entries -- hook-angle-tagging has nothing new to tag. Lookalike-refresh skipped under rate limiting this pass (see AL-1369). Campaign-level ROAS for all 4 active campaigns and all pending reactivate-winner/placement-optimization/budget-reallocation proposals (A-026, A-027, A-028, A-038, A-039, A-048, A-049, A-050, A-051) is unchanged to the decimal from the ~00:52/02:46 UTC passes earlier today -- no reasoning updates needed, no new proposals or alerts warranted beyond the competitor-rescrape refresh (AL-1319 trend note) and the rate-limit alert above. Genuinely quiet pass: nothing else moved since the last two runs today.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-10-03T14:46:44.000Z"
     }
   ],
   "log": [
