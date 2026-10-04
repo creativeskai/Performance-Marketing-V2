@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-04T04:48:57.000Z",
+  "generatedAt": "2026-10-04T06:46:00.000Z",
   "settings": {
     "kill_roas_threshold": "pause if ROAS < 1.0x after ₹500 spend on a sales-objective campaign. EXCEPTION until 2026-10-05T23:59+05:30 (user-approved 2026-09-29): for the sneaker-push campaigns 120256091369160159 (Sneakers_BOF_30Sep-5Oct), 120256091370110159 (Sneakers_Prospecting_30Sep-5Oct) and 120256088882780159 (Sneakers_Catalog_Retargeting) the spend floor is ₹1,500, not ₹500.",
     "reactivate_min_historic_roas": "surface for reactivation if a paused campaign's last active-period ROAS >= 3.0x",
@@ -30,9 +30,9 @@
     },
     "competitor_last_scrape": {
       "gully_labs_active_ads": null,
-      "lotto_sport_india_active_ads": 399,
-      "scraped_at": "2026-10-04T04:48:57.000Z",
-      "note": "2026-10-04T04:48:57.000Z scheduled run: ads_library_search combined page_ids query (107479854297817 / 426015150606378, ad_active_status=ACTIVE, no country filter) returned estimated_total_count=399, DOWN from 499 at the prior 2026-10-04T02:52:00.000Z pass -- a drop of 100 (20.0%), crossing the >=20% single-pass spike/drop threshold. See AL-1379 (competitor-spike). Still well above the original 313 baseline (see AL-1319)."
+      "lotto_sport_india_active_ads": 538,
+      "scraped_at": "2026-10-04T06:46:00.000Z",
+      "note": "2026-10-04T06:46:00.000Z scheduled run: ads_library_search combined page_ids query (107479854297817 / 426015150606378, ad_active_status=ACTIVE, no country filter) returned estimated_total_count=538, UP from 399 at the prior 2026-10-04T04:48:57.000Z pass -- a rise of 139 (34.8%), crossing the >=20% single-pass spike/drop threshold again (opposite direction from the prior pass's drop). See new alert for competitor-spike. Well above the original 313 baseline and above the prior 459/499 high-water marks seen earlier this week."
     },
     "audience_label_corrections": {
       "120249907176770159": "ATC_180D -- NOT a purchaser audience (cart-adders, event=AddToCart, retention 180 days). Verified 2026-09-14, reconfirmed 2026-09-20. Superseded note: earlier passes said the account had NO purchaser audience at all -- that's now out of date. See the 120255823280550159 (Purchasers 180D) entry above, created 2026-09-15, which IS a genuine purchaser audience and is already in use for exclusion + lookalike.",
@@ -13344,6 +13344,24 @@
       "severity": "low",
       "dismissed": false,
       "createdAt": "2026-10-04T04:48:57.000Z"
+    },
+    {
+      "id": "AL-1381",
+      "module": "competitor-spike",
+      "title": "Lotto Sport India active-ad count jumped >=20% (399 -> 538)",
+      "detail": "ads_library_search (combined page_ids 107479854297817/426015150606378, ACTIVE, no country filter) returned estimated_total_count=538 this pass, up from 399 at the 2026-10-04T04:48:57.000Z pass -- a rise of 139 (34.8%), crossing the competitor-spike >=20% threshold. This reverses the prior pass's drop (499->399) and is now above both the 459 and 499 counts seen earlier this week, and well above the original 313 baseline. No account action taken (this module is informational only) -- flagging for awareness in case Lotto Sport India is scaling a new campaign push.",
+      "severity": "medium",
+      "dismissed": false,
+      "createdAt": "2026-10-04T06:46:00.000Z"
+    },
+    {
+      "id": "AL-1382",
+      "module": "routine-run-notes",
+      "title": "Run summary -- 2026-10-04 ~06:46 UTC pass",
+      "detail": "Circuit breaker: not tripped -- today's account spend Rs2,236.77 vs Rs6,500 ceiling (34.4%). Pixel quality gate: healthy, all tracked event composite EMQ scores between 6.1 and 9.1 (>= pixel_quality_min_match_rate=0.6 threshold) -- ROAS-based modules not suppressed. Account composition unchanged from the ~04:48:57 UTC pass: 5 campaigns ACTIVE (Sneakers_BOF_30Sep-5Oct w/ 3 ad sets, Retargeting_Overall, Yin Yang_TOF, Caps + Kage_26 Sept, and the empty duplicate shell 'Caps + Kage_26 Sept - Copy' already covered by pending proposal A-054). purchaser-exclusion: reconfirmed compliant account-wide via fresh targeting fetch on all 6 real ad sets (BOF_1/BOF_2 exclude Purchasers 180D; BOF_3_CrossSell_Purchasers180D and Retargeting_Overall remain on the exempt list and deliberately include it; Yin Yang_TOF and Caps + Kage_26Sept exclude it) -- no action needed. lookalike-refresh: still rate-limited (last attempt 2026-10-04T02:52:00.000Z failed on Meta's duplicate-lookalike error, source audience still ~20 people, unchanged since 2026-09-15; next eligible ~2026-10-05T02:52 UTC) -- skipped, no new alert written since AL-1378 from the prior pass already captures this unchanged state. hook-angle-tagging: all 23 distinct active ads' creatives (including the newer Hot/XSell/Warm_KAIFEST_TSUCHI_3198 and Hot_KAGE_Hero_2499 ads) already have creativeTags entries -- nothing new to tag. No anomaly signal fired (ads_insights_anomaly_signal). No ad set newly stuck in learning (the only ad sets under 7 days old -- the 3 Sneakers_BOF_30Sep-5Oct ad sets, launched 2026-09-30 -- are ~4-5 days in and already converting, 16 purchases recorded). Active sales-campaign ROAS all comfortably above kill_roas_threshold floor (Sneakers_BOF_30Sep-5Oct 4.62x, Caps + Kage_26 Sept 8.01x, Retargeting_Overall 11.27x on last_14d) -- no pause-kill trigger. competitor-rescrape found a fresh spike (see new alert) -- Lotto Sport India combined active-ad count jumped from 399 to 538 (+34.8%). No change to the 21 existing pending approval-tier proposals (A-001 through A-054, excluding already-executed ids) -- all still reference currently-active or still-paused entities with no material numbers movement in the ~2h since the last pass, so none were rewritten this pass. No new approval-tier proposals and no auto-tier mutations this pass.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-10-04T06:46:00.000Z"
     }
   ],
   "log": [
