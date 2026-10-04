@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-04T16:51:00.000Z",
+  "generatedAt": "2026-10-04T18:49:00.000Z",
   "settings": {
     "kill_roas_threshold": "pause if ROAS < 1.0x after ₹500 spend on a sales-objective campaign. EXCEPTION until 2026-10-05T23:59+05:30 (user-approved 2026-09-29): for the sneaker-push campaigns 120256091369160159 (Sneakers_BOF_30Sep-5Oct), 120256091370110159 (Sneakers_Prospecting_30Sep-5Oct) and 120256088882780159 (Sneakers_Catalog_Retargeting) the spend floor is ₹1,500, not ₹500.",
     "reactivate_min_historic_roas": "surface for reactivation if a paused campaign's last active-period ROAS >= 3.0x",
@@ -30,9 +30,9 @@
     },
     "competitor_last_scrape": {
       "gully_labs_active_ads": null,
-      "lotto_sport_india_active_ads": 613,
-      "scraped_at": "2026-10-04T16:51:00.000Z",
-      "note": "2026-10-04T16:51:00.000Z scheduled run: ads_library_search combined page_ids query (107479854297817 / 426015150606378, ad_active_status=ACTIVE, no country filter) returned estimated_total_count=613, up from 607 at the prior 2026-10-04T14:48 UTC pass -- a change of +6 (+1.0%), well BELOW the >=20% swing threshold. No competitor-spike alert this pass."
+      "lotto_sport_india_active_ads": 616,
+      "scraped_at": "2026-10-04T18:49:00.000Z",
+      "note": "2026-10-04T18:49:00.000Z scheduled run: ads_library_search combined page_ids query (107479854297817 / 426015150606378, ad_active_status=ACTIVE, no country filter) returned estimated_total_count=616, up from 613 at the prior 2026-10-04T16:51 UTC pass -- a change of +3 (+0.49%), well BELOW the >=20% swing threshold. No competitor-spike alert this pass."
     },
     "audience_label_corrections": {
       "120249907176770159": "ATC_180D -- NOT a purchaser audience (cart-adders, event=AddToCart, retention 180 days). Verified 2026-09-14, reconfirmed 2026-09-20. Superseded note: earlier passes said the account had NO purchaser audience at all -- that's now out of date. See the 120255823280550159 (Purchasers 180D) entry above, created 2026-09-15, which IS a genuine purchaser audience and is already in use for exclusion + lookalike.",
@@ -13201,10 +13201,10 @@
       "id": "AL-1365",
       "module": "campaign-consolidation-watch",
       "title": "New duplicate campaign shell found -- 'Caps + Kage_26 Sept – Copy' (empty, zero ad sets)",
-      "detail": "Sneakers_BOF_30Sep-5Oct (sneaker BOF/cross-sell), Retargeting_Overall (all-product retargeting), Yin Yang_TOF (traffic/TOF), Caps + Kage_26 Sept (caps prospecting) target distinct products and funnel stages -- no duplicate campaign/audience overlap flagged. Reconfirmed 2026-10-03T16:46:00.000Z pass: same 4 active campaigns, still distinct products/funnel stages (Sneakers_BOF = sneaker cross-sell/BOF, Retargeting_Overall = all-product retargeting, Yin Yang_TOF = new traffic/TOF test, Caps + Kage_26 Sept = caps prospecting) -- no consolidation flag. Reconfirmed 2026-10-03T18:55:00.000Z pass: a 5th campaign, 'Caps + Kage_26 Sept – Copy' (id 120256175667450159), is now ACTIVE at the campaign level -- same daily_budget (Rs1,280) and objective (OUTCOME_SALES) as 'Caps + Kage_26 Sept' (120255693970470159), and the name is literally a Meta 'duplicate campaign' copy of it. Direct checks: ads_get_ad_entities (level=campaign, last_30d) returns no spend/purchase_roas fields for it at all, and a level=adset fetch filtered to this campaign id returns zero ad sets -- it is an empty shell with nothing actually serving or spending. This was not created by this routine and is not referenced anywhere in prior settings notes/log -- it appears to have been duplicated manually outside the routine (e.g. via Ads Manager's 'Duplicate' button) and left as a bare campaign shell. Flagging per campaign-consolidation-watch (module 11); a campaign-consolidation proposal (module 34, approval tier) has been written this pass (A-054) to pause it, since an ACTIVE duplicate campaign shell -- even a non-spending one -- clutters the account's active-campaign count and could start delivering if ad sets are added to it later without review. Reconfirmed 2026-10-04T14:48:00.000Z pass: 'Caps + Kage_26 Sept – Copy' (120256175667450159) is still ACTIVE at the campaign level with zero ad sets and no spend -- still an empty shell. A-054 (pause it) remains pending. The other 4 active campaigns (Sneakers_BOF_30Sep-5Oct, Retargeting_Overall, Yin Yang_TOF, Caps + Kage_26 Sept) remain distinct products/funnel stages -- no further consolidation flag. Reconfirmed 2026-10-04T16:51:00.000Z pass: 5 campaigns ACTIVE now (Sneakers_BOF_30Sep-5Oct, Retargeting_Overall, Yin Yang_TOF, Caps + Kage_26 Sept, and the still-empty 'Caps + Kage_26 Sept - Copy' shell) -- still distinct products/funnel stages apart from the known Copy-shell duplicate (A-054, still pending). No new consolidation flag.",
+      "detail": "Sneakers_BOF_30Sep-5Oct (sneaker BOF/cross-sell), Retargeting_Overall (all-product retargeting), Yin Yang_TOF (traffic/TOF), Caps + Kage_26 Sept (caps prospecting) target distinct products and funnel stages -- no duplicate campaign/audience overlap flagged. Reconfirmed 2026-10-03T16:46:00.000Z pass: same 4 active campaigns, still distinct products/funnel stages (Sneakers_BOF = sneaker cross-sell/BOF, Retargeting_Overall = all-product retargeting, Yin Yang_TOF = new traffic/TOF test, Caps + Kage_26 Sept = caps prospecting) -- no consolidation flag. Reconfirmed 2026-10-03T18:55:00.000Z pass: a 5th campaign, 'Caps + Kage_26 Sept – Copy' (id 120256175667450159), is now ACTIVE at the campaign level -- same daily_budget (Rs1,280) and objective (OUTCOME_SALES) as 'Caps + Kage_26 Sept' (120255693970470159), and the name is literally a Meta 'duplicate campaign' copy of it. Direct checks: ads_get_ad_entities (level=campaign, last_30d) returns no spend/purchase_roas fields for it at all, and a level=adset fetch filtered to this campaign id returns zero ad sets -- it is an empty shell with nothing actually serving or spending. This was not created by this routine and is not referenced anywhere in prior settings notes/log -- it appears to have been duplicated manually outside the routine (e.g. via Ads Manager's 'Duplicate' button) and left as a bare campaign shell. Flagging per campaign-consolidation-watch (module 11); a campaign-consolidation proposal (module 34, approval tier) has been written this pass (A-054) to pause it, since an ACTIVE duplicate campaign shell -- even a non-spending one -- clutters the account's active-campaign count and could start delivering if ad sets are added to it later without review. Reconfirmed 2026-10-04T14:48:00.000Z pass: 'Caps + Kage_26 Sept – Copy' (120256175667450159) is still ACTIVE at the campaign level with zero ad sets and no spend -- still an empty shell. A-054 (pause it) remains pending. The other 4 active campaigns (Sneakers_BOF_30Sep-5Oct, Retargeting_Overall, Yin Yang_TOF, Caps + Kage_26 Sept) remain distinct products/funnel stages -- no further consolidation flag. Reconfirmed 2026-10-04T16:51:00.000Z pass: 5 campaigns ACTIVE now (Sneakers_BOF_30Sep-5Oct, Retargeting_Overall, Yin Yang_TOF, Caps + Kage_26 Sept, and the still-empty 'Caps + Kage_26 Sept - Copy' shell) -- still distinct products/funnel stages apart from the known Copy-shell duplicate (A-054, still pending). No new consolidation flag. Reconfirmed 2026-10-04T18:49:00.000Z pass: the 'Caps + Kage_26 Sept - Copy' empty shell (120256175667450159) remains ACTIVE at the campaign level with zero ad sets/spend -- still awaiting human decision on pending A-054 (pause). The 3 new Caps_FB-A/B/C ad sets that appeared this pass under the real 'Caps + Kage_26 Sept' campaign are intentional interest-based audience splits within a single campaign (EngagedShoppers / HighValueGoods / Interests), not duplicate campaigns -- no new consolidation concern. No other campaign/audience overlap flagged.",
       "severity": "medium",
       "dismissed": false,
-      "createdAt": "2026-10-03T02:46:23.000Z",
+      "createdAt": "2026-10-04T18:49:00.000Z",
       "lastConfirmedAt": "2026-10-04T14:48:00.000Z"
     },
     {
@@ -13430,20 +13430,20 @@
       "id": "AL-1390",
       "module": "lookalike-refresh",
       "title": "Lookalike rebuild still rate-limited -- source audience unchanged",
-      "detail": "The laddered 1%/2%/5% lookalikes built 2026-09-15 off Purchasers 180D remain past the 14-day lookalike_refresh_days threshold, but the last rebuild attempt was 2026-10-04T02:52:00.000Z (~9h56m ago), within max_auto_actions_per_entity_per_day=1 (<24h). Re-attempt skipped this pass rather than re-tried. Source audience size unchanged (~20) -- rebuilds have been failing with Meta's duplicate-lookalike error (2654/1713007) until the source grows; the 3 existing lookalikes remain live and serving. Reconfirmed 2026-10-04T14:48:00.000Z pass: last rebuild attempt was 2026-10-04T02:52:00.000Z (failed, duplicate-lookalike error 2654/1713007) -- only ~11h56m elapsed, within max_auto_actions_per_entity_per_day=1 (24h window), so rebuild skipped again this pass rather than re-attempted. Source audience 'Purchasers 180D' (120255823280550159) size unchanged (~20 people) -- the 3 existing laddered 1%/2%/5% lookalikes (120255832535210159/610159/780159, built 2026-09-15) remain ACTIVE and serving. Next eligible rebuild attempt ~2026-10-05T02:52 UTC. Reconfirmed 2026-10-04T16:51:00.000Z pass: source audience 'Purchasers 180D' (120255823280550159) still ~20 people, unchanged since 2026-09-15 (now ~19 days old, past lookalike_refresh_days=14). Last rebuild attempt was 2026-10-04T02:52:00.000Z (failed, duplicate-lookalike error) -- only ~13h59m elapsed, within max_auto_actions_per_entity_per_day=1 (24h window), so a retry was skipped this pass rather than re-attempted. The existing 3 laddered lookalikes (120255832535210159/610159/780159) remain live and serving.",
+      "detail": "The laddered 1%/2%/5% lookalikes built 2026-09-15 off Purchasers 180D remain past the 14-day lookalike_refresh_days threshold, but the last rebuild attempt was 2026-10-04T02:52:00.000Z (~9h56m ago), within max_auto_actions_per_entity_per_day=1 (<24h). Re-attempt skipped this pass rather than re-tried. Source audience size unchanged (~20) -- rebuilds have been failing with Meta's duplicate-lookalike error (2654/1713007) until the source grows; the 3 existing lookalikes remain live and serving. Reconfirmed 2026-10-04T14:48:00.000Z pass: last rebuild attempt was 2026-10-04T02:52:00.000Z (failed, duplicate-lookalike error 2654/1713007) -- only ~11h56m elapsed, within max_auto_actions_per_entity_per_day=1 (24h window), so rebuild skipped again this pass rather than re-attempted. Source audience 'Purchasers 180D' (120255823280550159) size unchanged (~20 people) -- the 3 existing laddered 1%/2%/5% lookalikes (120255832535210159/610159/780159, built 2026-09-15) remain ACTIVE and serving. Next eligible rebuild attempt ~2026-10-05T02:52 UTC. Reconfirmed 2026-10-04T16:51:00.000Z pass: source audience 'Purchasers 180D' (120255823280550159) still ~20 people, unchanged since 2026-09-15 (now ~19 days old, past lookalike_refresh_days=14). Last rebuild attempt was 2026-10-04T02:52:00.000Z (failed, duplicate-lookalike error) -- only ~13h59m elapsed, within max_auto_actions_per_entity_per_day=1 (24h window), so a retry was skipped this pass rather than re-attempted. The existing 3 laddered lookalikes (120255832535210159/610159/780159) remain live and serving. Reconfirmed 2026-10-04T18:49:00.000Z pass: last rebuild attempt remains 2026-10-04T02:52:00.000Z (failed, Meta duplicate-lookalike error 2654/1713007) -- only ~15h57m elapsed, still within max_auto_actions_per_entity_per_day=1 (24h window), so rebuild skipped again this pass rather than re-attempted. Source audience 'Purchasers 180D' size unchanged (~20). The 3 existing laddered lookalikes (120255832535210159/610159/780159) remain live and serving, untouched.",
       "severity": "low",
       "dismissed": false,
-      "createdAt": "2026-10-04T12:48:00.000Z",
+      "createdAt": "2026-10-04T18:49:00.000Z",
       "lastConfirmedAt": "2026-10-04T14:48:00.000Z"
     },
     {
       "id": "AL-1391",
       "module": "purchaser-exclusion",
       "title": "All 6 active ad sets reconfirmed purchaser-exclusion compliant",
-      "detail": "Fresh targeting fetch on all 6 ACTIVE ad sets (BOF_2_Warm_IG365_Engagers_Visitors, Yin Yang_TOF, BOF_3_CrossSell_Purchasers180D, BOF_1_Hot_ATC_IC_API_30D, Retargeting_Overall, Caps + Kage_26Sept): BOF_3_CrossSell_Purchasers180D and Retargeting_Overall are on settings.purchaser_exclusion_exempt_adset_ids and deliberately include Purchasers 180D by design; the other 4 explicitly exclude it in excluded_custom_audiences. purchaser-exclusion remains compliant account-wide, no action needed. Reconfirmed 2026-10-04T14:48:00.000Z pass: fresh targeting fetch on all 6 currently-active ad sets -- BOF_2_Warm_IG365_Engagers_Visitors, BOF_1_Hot_ATC_IC_API_30D, Caps + Kage_26Sept and Yin Yang_TOF all exclude 'Purchasers 180D' (120255823280550159) in excluded_custom_audiences; BOF_3_CrossSell_Purchasers180D and Retargeting_Overall remain on settings.purchaser_exclusion_exempt_adset_ids and deliberately include it by design. purchaser-exclusion remains compliant account-wide, no action needed. Yin Yang_TOF (new traffic campaign) is confirmed compliant from its first pass as an active ad set. Reconfirmed 2026-10-04T16:51:00.000Z pass: fresh targeting fetch on all 6 active ad sets (BOF_2_Warm_IG365_Engagers_Visitors, Yin Yang_TOF, BOF_3_CrossSell_Purchasers180D, BOF_1_Hot_ATC_IC_API_30D, Retargeting_Overall, Caps + Kage_26Sept) confirms the same compliance picture: BOF_3_CrossSell_Purchasers180D and Retargeting_Overall remain on the exempt list and still deliberately include Purchasers 180D by design; the other 4 ad sets still exclude it directly in excluded_custom_audiences. purchaser-exclusion remains compliant account-wide, no action needed.",
+      "detail": "Fresh targeting fetch on all 6 ACTIVE ad sets (BOF_2_Warm_IG365_Engagers_Visitors, Yin Yang_TOF, BOF_3_CrossSell_Purchasers180D, BOF_1_Hot_ATC_IC_API_30D, Retargeting_Overall, Caps + Kage_26Sept): BOF_3_CrossSell_Purchasers180D and Retargeting_Overall are on settings.purchaser_exclusion_exempt_adset_ids and deliberately include Purchasers 180D by design; the other 4 explicitly exclude it in excluded_custom_audiences. purchaser-exclusion remains compliant account-wide, no action needed. Reconfirmed 2026-10-04T14:48:00.000Z pass: fresh targeting fetch on all 6 currently-active ad sets -- BOF_2_Warm_IG365_Engagers_Visitors, BOF_1_Hot_ATC_IC_API_30D, Caps + Kage_26Sept and Yin Yang_TOF all exclude 'Purchasers 180D' (120255823280550159) in excluded_custom_audiences; BOF_3_CrossSell_Purchasers180D and Retargeting_Overall remain on settings.purchaser_exclusion_exempt_adset_ids and deliberately include it by design. purchaser-exclusion remains compliant account-wide, no action needed. Yin Yang_TOF (new traffic campaign) is confirmed compliant from its first pass as an active ad set. Reconfirmed 2026-10-04T16:51:00.000Z pass: fresh targeting fetch on all 6 active ad sets (BOF_2_Warm_IG365_Engagers_Visitors, Yin Yang_TOF, BOF_3_CrossSell_Purchasers180D, BOF_1_Hot_ATC_IC_API_30D, Retargeting_Overall, Caps + Kage_26Sept) confirms the same compliance picture: BOF_3_CrossSell_Purchasers180D and Retargeting_Overall remain on the exempt list and still deliberately include Purchasers 180D by design; the other 4 ad sets still exclude it directly in excluded_custom_audiences. purchaser-exclusion remains compliant account-wide, no action needed. Reconfirmed 2026-10-04T18:49:00.000Z pass: account composition has grown to 9 ACTIVE ad sets (up from 6) -- 3 new ad sets appeared under campaign 'Caps + Kage_26 Sept' (Caps_FB-A_EngagedShoppers, Caps_FB-B_HighValueGoods, Caps_FB-C_Interests, all brand-new interest-based audience splits with <Rs10 spend each so far) alongside the pre-existing BOF_2_Warm_IG365_Engagers_Visitors, Yin Yang_TOF, BOF_1_Hot_ATC_IC_API_30D, Retargeting_Overall and 'Caps + Kage_26Sept' ad sets. Fresh targeting fetch on all 9 confirms: the 3 new Caps_FB-* ad sets and the 4 other non-exempt ad sets (BOF_2_Warm_IG365_Engagers_Visitors, Yin Yang_TOF, BOF_1_Hot_ATC_IC_API_30D, Caps + Kage_26Sept) all exclude 'Purchasers 180D' (120255823280550159) in excluded_custom_audiences; Retargeting_Overall remains on settings.purchaser_exclusion_exempt_adset_ids and deliberately includes it by design. purchaser-exclusion remains compliant account-wide, no action needed.",
       "severity": "low",
       "dismissed": false,
-      "createdAt": "2026-10-04T12:48:00.000Z",
+      "createdAt": "2026-10-04T18:49:00.000Z",
       "lastConfirmedAt": "2026-10-04T14:48:00.000Z"
     },
     {
@@ -13468,10 +13468,10 @@
       "id": "AL-1394",
       "module": "self-audit-check",
       "title": "Live numbers reconfirmed sane vs. dashboard snapshot -- snapshot still stale",
-      "detail": "index.html's static DATA/INSIGHTS_DATA snapshot is unchanged since 2026-09-30 (file mtime). Live ads_get_ad_entities pulls this pass (today's account spend Rs4,876.84 vs Rs6,500 hard_spend_ceiling_inr -- 75% of ceiling, circuit breaker not tripped; 4 active campaigns: Sneakers_BOF_30Sep-5Oct 4.62x ROAS, Retargeting_Overall 11.27x ROAS, Caps + Kage_26 Sept 8.01x ROAS, Yin Yang_TOF traffic-objective no ROAS; plus the empty 'Caps + Kage_26 Sept – Copy' shell) are internally consistent with no red flags. No metric drift beyond tolerance detected in what's comparable; flagging dashboard staleness only. Reconfirmed 2026-10-04T16:51:00.000Z pass: today's account spend Rs5,512.23 vs Rs6,500 hard_spend_ceiling_inr -- 84.8% of ceiling, circuit breaker not tripped; 5 active campaigns: Sneakers_BOF_30Sep-5Oct 4.618261x ROAS (last_14d), Retargeting_Overall 11.267074x ROAS (last_14d), Caps + Kage_26 Sept 8.010119x ROAS (last_14d), Yin Yang_TOF traffic-objective no ROAS, plus the still-empty 'Caps + Kage_26 Sept - Copy' shell. Internally consistent with no red flags. index.html's static DATA/INSIGHTS_DATA snapshot remains unchanged since 2026-09-30 (file mtime) -- still stale, flagged as before.",
+      "detail": "index.html's static DATA/INSIGHTS_DATA snapshot is unchanged since 2026-09-30 (file mtime). Live ads_get_ad_entities pulls this pass (today's account spend Rs4,876.84 vs Rs6,500 hard_spend_ceiling_inr -- 75% of ceiling, circuit breaker not tripped; 4 active campaigns: Sneakers_BOF_30Sep-5Oct 4.62x ROAS, Retargeting_Overall 11.27x ROAS, Caps + Kage_26 Sept 8.01x ROAS, Yin Yang_TOF traffic-objective no ROAS; plus the empty 'Caps + Kage_26 Sept – Copy' shell) are internally consistent with no red flags. No metric drift beyond tolerance detected in what's comparable; flagging dashboard staleness only. Reconfirmed 2026-10-04T16:51:00.000Z pass: today's account spend Rs5,512.23 vs Rs6,500 hard_spend_ceiling_inr -- 84.8% of ceiling, circuit breaker not tripped; 5 active campaigns: Sneakers_BOF_30Sep-5Oct 4.618261x ROAS (last_14d), Retargeting_Overall 11.267074x ROAS (last_14d), Caps + Kage_26 Sept 8.010119x ROAS (last_14d), Yin Yang_TOF traffic-objective no ROAS, plus the still-empty 'Caps + Kage_26 Sept - Copy' shell. Internally consistent with no red flags. index.html's static DATA/INSIGHTS_DATA snapshot remains unchanged since 2026-09-30 (file mtime) -- still stale, flagged as before. Reconfirmed 2026-10-04T18:49:00.000Z pass: the IST trading day rolled over since the 2026-10-04T16:51 UTC pass (IST midnight = 18:30 UTC) -- today's account spend reset to Rs48.37 vs the Rs6,500 hard_spend_ceiling_inr (0.7% of ceiling), circuit breaker not tripped. 6 active campaigns now: Sneakers_BOF_30Sep-5Oct (4.77x last_30d ROAS), Retargeting_Overall (9.40x), Caps + Kage_26 Sept (7.28x), SORA_TOF (1.16x, traffic objective, not a pause-kill candidate), Yin Yang_TOF (traffic objective, no ROAS), plus the empty 'Caps + Kage_26 Sept - Copy' shell (still flagged by campaign-consolidation-watch / A-054). No anomaly signal fired (ads_insights_anomaly_signal: no auction overlap, creative fatigue, or narrow-audience issues found). No metric drift beyond tolerance detected.",
       "severity": "low",
       "dismissed": false,
-      "createdAt": "2026-10-04T14:48:00.000Z"
+      "createdAt": "2026-10-04T18:49:00.000Z"
     },
     {
       "id": "AL-1395",
@@ -13490,6 +13490,15 @@
       "severity": "low",
       "dismissed": false,
       "createdAt": "2026-10-04T16:51:00.000Z"
+    },
+    {
+      "id": "AL-1397",
+      "module": "routine-run-notes",
+      "title": "Run summary -- 2026-10-04 ~18:49 UTC pass",
+      "detail": "Circuit breaker: not tripped (today's spend Rs48.37 vs Rs6,500 ceiling; IST day just rolled over at 18:30 UTC). Pixel quality gate: all tracked event composite EMQ scores between 6.1 and 8.9, at/above threshold -- ROAS modules not suppressed. purchaser-exclusion: compliant account-wide across all 9 active ad sets (see updated AL-1391). lookalike-refresh: skipped, rate-limited (last attempt 2026-10-04T02:52, <24h elapsed; see updated AL-1390). hook-angle-tagging: 12 new creatives tagged this pass (KAI FEST bundle carousels/statics, KAI ARCHIVES 2.0 restock statics, and the new Yin Yang/KAGE/TSUCHI Japanese-static retargeting creatives) -- no vision pass (Higgsfield not attached this run). hard-spend-circuit-breaker: no trip. competitor-spike: Lotto Sport India active-ad count 613->616 (+0.49%), below the 20% threshold, no alert. self-audit-check and campaign-consolidation-watch reconfirmed, no new findings (see updated AL-1394 / AL-1365). No new anomaly signal. No new approval-tier proposals this pass -- existing pending reactivate-winner/placement/age-gender/device/budget-reallocation/campaign-consolidation proposals (A-001 onward) remain accurate against fresh data pulled this pass (TSUCHI BOF 5.66x, Mori+Tee 3.52x, Sora_BOF 6.65x, New Caps Part 3 STP 4.89x -- all matching their proposals' already-current figures, no reasoning updates needed).",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-10-04T18:49:00.000Z"
     }
   ],
   "log": [
@@ -19222,6 +19231,210 @@
       },
       "tier": "auto",
       "executedAt": "2026-10-04T02:52:00.000Z"
+    },
+    {
+      "proposalId": null,
+      "action": "hook-angle-tagging auto-module: tagged creative 977679704622332 ('KAI ARCHIVES 2.0 Restocked - that's the line.' creative, ad 'Caps_26Sept_Group_1' under campaign/ad set Caps + Kage_26 Sept (Caps_FB-C_Interests)) -- primary text/headline pulled via ads_get_creatives, no vision pass (Higgsfield not attached this run). No Meta API mutation, wrote to queue.json.creativeTags only.",
+      "result": "success",
+      "previousState": {
+        "creativeTags[977679704622332]": null
+      },
+      "detail": {
+        "tool": "ads_get_creatives",
+        "creative_id": "977679704622332",
+        "body": "SURPRISE SURPRISE SURPRISE! AS YOU CAN SEE IT IS BACK!",
+        "title": "KAI ARCHIVES 2.0 Restocked - that's the line.",
+        "object_type": "SHARE"
+      },
+      "tier": "auto",
+      "executedAt": "2026-10-04T18:49:00.000Z"
+    },
+    {
+      "proposalId": null,
+      "action": "hook-angle-tagging auto-module: tagged creative 915945701386467 ('KAI ARCHIVES 2.0 Restocked - that's the line.' creative, ad 'Caps_26Sept' under campaign/ad set Caps + Kage_26 Sept) -- primary text/headline pulled via ads_get_creatives, no vision pass (Higgsfield not attached this run). No Meta API mutation, wrote to queue.json.creativeTags only.",
+      "result": "success",
+      "previousState": {
+        "creativeTags[915945701386467]": null
+      },
+      "detail": {
+        "tool": "ads_get_creatives",
+        "creative_id": "915945701386467",
+        "body": "SURPRISE SURPRISE SURPRISE! AS YOU CAN SEE IT IS BACK!",
+        "title": "KAI ARCHIVES 2.0 Restocked - that's the line.",
+        "object_type": "SHARE"
+      },
+      "tier": "auto",
+      "executedAt": "2026-10-04T18:49:00.000Z"
+    },
+    {
+      "proposalId": null,
+      "action": "hook-angle-tagging auto-module: tagged creative 1785009965737443 ('KAI ARCHIVES 2.0 Restocked - that's the line.' creative, ad 'Caps_26Sept_Group_1' under campaign/ad set Caps + Kage_26 Sept (Caps_FB-B_HighValueGoods)) -- primary text/headline pulled via ads_get_creatives, no vision pass (Higgsfield not attached this run). No Meta API mutation, wrote to queue.json.creativeTags only.",
+      "result": "success",
+      "previousState": {
+        "creativeTags[1785009965737443]": null
+      },
+      "detail": {
+        "tool": "ads_get_creatives",
+        "creative_id": "1785009965737443",
+        "body": "SURPRISE SURPRISE SURPRISE! AS YOU CAN SEE IT IS BACK!",
+        "title": "KAI ARCHIVES 2.0 Restocked - that's the line.",
+        "object_type": "SHARE"
+      },
+      "tier": "auto",
+      "executedAt": "2026-10-04T18:49:00.000Z"
+    },
+    {
+      "proposalId": null,
+      "action": "hook-angle-tagging auto-module: tagged creative 4389038721313497 ('KAI' creative, ad 'Warm_KAIFEST_KAGE_JP_Carousel' under campaign/ad set Sneakers_BOF_30Sep-5Oct (BOF_2_Warm_IG365_Engagers_Visitors)) -- primary text/headline pulled via ads_get_creatives, no vision pass (Higgsfield not attached this run). No Meta API mutation, wrote to queue.json.creativeTags only.",
+      "result": "success",
+      "previousState": {
+        "creativeTags[4389038721313497]": null
+      },
+      "detail": {
+        "tool": "ads_get_creatives",
+        "creative_id": "4389038721313497",
+        "body": "KAI FEST IS ON 🔥\n影 KAGE + any KAI cap for just ₹3,198 on prepaid orders (worth ₹4,098).\nSave ₹900. Add KAGE + a cap to your cart — the price drops at checkout.\nLimited time offer, till 9th October.",
+        "title": "KAI",
+        "object_type": "SHARE"
+      },
+      "tier": "auto",
+      "executedAt": "2026-10-04T18:49:00.000Z"
+    },
+    {
+      "proposalId": null,
+      "action": "hook-angle-tagging auto-module: tagged creative 1047843404976960 ('KAI' creative, ad 'Warm_KAIFEST_TSUCHI_JP_Carousel' under campaign/ad set Sneakers_BOF_30Sep-5Oct (BOF_2_Warm_IG365_Engagers_Visitors)) -- primary text/headline pulled via ads_get_creatives, no vision pass (Higgsfield not attached this run). No Meta API mutation, wrote to queue.json.creativeTags only.",
+      "result": "success",
+      "previousState": {
+        "creativeTags[1047843404976960]": null
+      },
+      "detail": {
+        "tool": "ads_get_creatives",
+        "creative_id": "1047843404976960",
+        "body": "KAI FEST IS ON 🔥\n土 TSUCHI + any KAI cap for just ₹3,198 on prepaid orders (worth ₹4,098).\nSave ₹900. Add TSUCHI + a cap to your cart — the price drops at checkout.\nLimited time offer, till 9th October.",
+        "title": "KAI",
+        "object_type": "SHARE"
+      },
+      "tier": "auto",
+      "executedAt": "2026-10-04T18:49:00.000Z"
+    },
+    {
+      "proposalId": null,
+      "action": "hook-angle-tagging auto-module: tagged creative 1625646545933358 ('KAI' creative, ad 'Warm_KAIFEST_SORA_3198_Carousel' under campaign/ad set Sneakers_BOF_30Sep-5Oct (BOF_2_Warm_IG365_Engagers_Visitors)) -- primary text/headline pulled via ads_get_creatives, no vision pass (Higgsfield not attached this run). No Meta API mutation, wrote to queue.json.creativeTags only.",
+      "result": "success",
+      "previousState": {
+        "creativeTags[1625646545933358]": null
+      },
+      "detail": {
+        "tool": "ads_get_creatives",
+        "creative_id": "1625646545933358",
+        "body": "KAI FEST IS ON 🔥\nSORA sneakers + any KAI cap for just ₹3,198 on prepaid orders (worth ₹4,098).\nSave ₹900. Add SORA + a cap to your cart — the price drops at checkout.\nLimited time offer, till 9th October.",
+        "title": "KAI",
+        "object_type": "SHARE"
+      },
+      "tier": "auto",
+      "executedAt": "2026-10-04T18:49:00.000Z"
+    },
+    {
+      "proposalId": null,
+      "action": "hook-angle-tagging auto-module: tagged creative 1066217796230903 ('KAI FEST: KAGE + Cap @ ₹3,198' creative, ad 'Warm_KAIFEST_KAGE_3198_9Oct' under campaign/ad set Sneakers_BOF_30Sep-5Oct (BOF_1_Hot_ATC_IC_API_30D)) -- primary text/headline pulled via ads_get_creatives, no vision pass (Higgsfield not attached this run). No Meta API mutation, wrote to queue.json.creativeTags only.",
+      "result": "success",
+      "previousState": {
+        "creativeTags[1066217796230903]": null
+      },
+      "detail": {
+        "tool": "ads_get_creatives",
+        "creative_id": "1066217796230903",
+        "body": "KAI FEST IS ON 🔥\nOne sneaker. Every outfit. KAGE + any KAI cap for just ₹3,198 on prepaid orders (worth ₹4,098).\nSave ₹900. Add KAGE + a cap to your cart — the price drops at checkout.\nLimited time offer, till 9th October.",
+        "title": "KAI FEST: KAGE + Cap @ ₹3,198",
+        "object_type": "SHARE"
+      },
+      "tier": "auto",
+      "executedAt": "2026-10-04T18:49:00.000Z"
+    },
+    {
+      "proposalId": null,
+      "action": "hook-angle-tagging auto-module: tagged creative 955645840946961 ('SORA at ₹2,499 — Prepaid' creative, ad 'Retargeting_SORA_JP_2499' under campaign/ad set Retargeting_Overall) -- primary text/headline pulled via ads_get_creatives, no vision pass (Higgsfield not attached this run). No Meta API mutation, wrote to queue.json.creativeTags only.",
+      "result": "success",
+      "previousState": {
+        "creativeTags[955645840946961]": null
+      },
+      "detail": {
+        "tool": "ads_get_creatives",
+        "creative_id": "955645840946961",
+        "body": "空 SORA — light on its feet.\nNow ₹2,499 on prepaid orders (was ₹3,299) + FREE SHIPPING.\nSave ₹800 — only till 9th October. Limited stock.",
+        "title": "SORA at ₹2,499 — Prepaid",
+        "object_type": "SHARE"
+      },
+      "tier": "auto",
+      "executedAt": "2026-10-04T18:49:00.000Z"
+    },
+    {
+      "proposalId": null,
+      "action": "hook-angle-tagging auto-module: tagged creative 1471164315061727 ('TSUCHI at ₹2,499 — Prepaid' creative, ad 'Retargeting_TSUCHI_JP_2499' under campaign/ad set Retargeting_Overall) -- primary text/headline pulled via ads_get_creatives, no vision pass (Higgsfield not attached this run). No Meta API mutation, wrote to queue.json.creativeTags only.",
+      "result": "success",
+      "previousState": {
+        "creativeTags[1471164315061727]": null
+      },
+      "detail": {
+        "tool": "ads_get_creatives",
+        "creative_id": "1471164315061727",
+        "body": "土 TSUCHI — rooted in earth. Our bestseller is back 👟\nNow ₹2,499 on prepaid orders (was ₹3,299) + FREE SHIPPING.\nSave ₹800 — only till 9th October. Limited stock.",
+        "title": "TSUCHI at ₹2,499 — Prepaid",
+        "object_type": "SHARE"
+      },
+      "tier": "auto",
+      "executedAt": "2026-10-04T18:49:00.000Z"
+    },
+    {
+      "proposalId": null,
+      "action": "hook-angle-tagging auto-module: tagged creative 1659024329166292 ('Yin Yang at ₹2,499 — Prepaid' creative, ad 'Retargeting_YINYANG_JP_2499' under campaign/ad set Retargeting_Overall) -- primary text/headline pulled via ads_get_creatives, no vision pass (Higgsfield not attached this run). No Meta API mutation, wrote to queue.json.creativeTags only.",
+      "result": "success",
+      "previousState": {
+        "creativeTags[1659024329166292]": null
+      },
+      "detail": {
+        "tool": "ads_get_creatives",
+        "creative_id": "1659024329166292",
+        "body": "Meet Yin Yang — the new KAI sneaker.\nNow ₹2,499 on prepaid orders (was ₹3,299) + FREE SHIPPING.\nSave ₹800 — only till 9th October. Limited stock.",
+        "title": "Yin Yang at ₹2,499 — Prepaid",
+        "object_type": "SHARE"
+      },
+      "tier": "auto",
+      "executedAt": "2026-10-04T18:49:00.000Z"
+    },
+    {
+      "proposalId": null,
+      "action": "hook-angle-tagging auto-module: tagged creative 1346073041924526 ('KAGE at ₹2,499 — Prepaid' creative, ad 'Retargeting_KAGE_JP_2499' under campaign/ad set Retargeting_Overall) -- primary text/headline pulled via ads_get_creatives, no vision pass (Higgsfield not attached this run). No Meta API mutation, wrote to queue.json.creativeTags only.",
+      "result": "success",
+      "previousState": {
+        "creativeTags[1346073041924526]": null
+      },
+      "detail": {
+        "tool": "ads_get_creatives",
+        "creative_id": "1346073041924526",
+        "body": "影 KAGE — shadow, refined.\nThe cleanest black sneaker — now ₹2,499 on prepaid orders (was ₹3,299) + FREE SHIPPING.\nSave ₹800. Offer ends 9th October.",
+        "title": "KAGE at ₹2,499 — Prepaid",
+        "object_type": "SHARE"
+      },
+      "tier": "auto",
+      "executedAt": "2026-10-04T18:49:00.000Z"
+    },
+    {
+      "proposalId": null,
+      "action": "hook-angle-tagging auto-module: tagged creative 2574070523056775 ('KAGE at ₹2,499 — Prepaid' creative, ad 'Hot_KAGE_Lifestyle_2499_9Oct' under campaign/ad set Sneakers_BOF_30Sep-5Oct (BOF_1_Hot_ATC_IC_API_30D)) -- primary text/headline pulled via ads_get_creatives, no vision pass (Higgsfield not attached this run). No Meta API mutation, wrote to queue.json.creativeTags only.",
+      "result": "success",
+      "previousState": {
+        "creativeTags[2574070523056775]": null
+      },
+      "detail": {
+        "tool": "ads_get_creatives",
+        "creative_id": "2574070523056775",
+        "body": "One sneaker. Every outfit.\nDesigned for everyday wear with premium detailing, durable construction, and a clean all-black aesthetic. Meet KAGE.\nNow ₹2,499 on prepaid orders (was ₹3,299) + FREE SHIPPING. Offer ends 9th October.",
+        "title": "KAGE at ₹2,499 — Prepaid",
+        "object_type": "SHARE"
+      },
+      "tier": "auto",
+      "executedAt": "2026-10-04T18:49:00.000Z"
     }
   ],
   "creativeTags": {
@@ -22154,6 +22367,138 @@
       "visionPassSkipped": true,
       "note": "Higgsfield vision connection not attached to this run -- image content itself not analyzed, only real ad copy text used. No creative description invented.",
       "taggedAt": "2026-10-03T20:47:00.000Z"
+    },
+    "977679704622332": {
+      "adName": "Caps_26Sept_Group_1",
+      "campaign": "Caps + Kage_26 Sept",
+      "format": "Static image (share)",
+      "angle": "Restock announcement / scarcity-urgency, not discount-led",
+      "hook": "\"SURPRISE SURPRISE SURPRISE! AS YOU CAN SEE IT IS BACK!\" (primary text) / \"KAI ARCHIVES 2.0 Restocked - that's the line.\" (headline)",
+      "taggedFrom": "ad primary text (body) + headline (title), via Meta Ads MCP ads_get_creatives",
+      "visionPassSkipped": true,
+      "note": "Higgsfield vision connection not attached to this run -- image content itself not analyzed, only real ad copy text used. No creative description invented.",
+      "taggedAt": "2026-10-04T18:49:00.000Z"
+    },
+    "915945701386467": {
+      "adName": "Caps_26Sept",
+      "campaign": "Caps + Kage_26 Sept",
+      "format": "Static image (share)",
+      "angle": "Restock announcement / scarcity-urgency, not discount-led",
+      "hook": "\"SURPRISE SURPRISE SURPRISE! AS YOU CAN SEE IT IS BACK!\" (primary text) / \"KAI ARCHIVES 2.0 Restocked - that's the line.\" (headline)",
+      "taggedFrom": "ad primary text (body) + headline (title), via Meta Ads MCP ads_get_creatives",
+      "visionPassSkipped": true,
+      "note": "Higgsfield vision connection not attached to this run -- image content itself not analyzed, only real ad copy text used. No creative description invented.",
+      "taggedAt": "2026-10-04T18:49:00.000Z"
+    },
+    "1785009965737443": {
+      "adName": "Caps_26Sept_Group_1",
+      "campaign": "Caps + Kage_26 Sept",
+      "format": "Static image (share)",
+      "angle": "Restock announcement / scarcity-urgency, not discount-led",
+      "hook": "\"SURPRISE SURPRISE SURPRISE! AS YOU CAN SEE IT IS BACK!\" (primary text) / \"KAI ARCHIVES 2.0 Restocked - that's the line.\" (headline)",
+      "taggedFrom": "ad primary text (body) + headline (title), via Meta Ads MCP ads_get_creatives",
+      "visionPassSkipped": true,
+      "note": "Higgsfield vision connection not attached to this run -- image content itself not analyzed, only real ad copy text used. No creative description invented.",
+      "taggedAt": "2026-10-04T18:49:00.000Z"
+    },
+    "4389038721313497": {
+      "adName": "Warm_KAIFEST_KAGE_JP_Carousel",
+      "campaign": "Sneakers_BOF_30Sep-5Oct",
+      "format": "Carousel (SHARE)",
+      "angle": "Bundle cross-sell discount (KAGE + any cap at a fixed bundle price), limited-time urgency",
+      "hook": "\"KAI FEST IS ON 🔥 影 KAGE + any KAI cap for just ₹3,198 on prepaid orders (worth ₹4,098). Save ₹900...\" (primary text) / \"KAI\" (headline)",
+      "taggedFrom": "ad primary text (body) + headline (title), via Meta Ads MCP ads_get_creatives",
+      "visionPassSkipped": true,
+      "note": "Higgsfield vision connection not attached to this run -- image/video content itself not analyzed, only real ad copy text used. No creative description invented.",
+      "taggedAt": "2026-10-04T18:49:00.000Z"
+    },
+    "1047843404976960": {
+      "adName": "Warm_KAIFEST_TSUCHI_JP_Carousel",
+      "campaign": "Sneakers_BOF_30Sep-5Oct",
+      "format": "Carousel (SHARE)",
+      "angle": "Bundle cross-sell discount (TSUCHI + any cap at a fixed bundle price), limited-time urgency",
+      "hook": "\"KAI FEST IS ON 🔥 土 TSUCHI + any KAI cap for just ₹3,198 on prepaid orders (worth ₹4,098). Save ₹900...\" (primary text) / \"KAI\" (headline)",
+      "taggedFrom": "ad primary text (body) + headline (title), via Meta Ads MCP ads_get_creatives",
+      "visionPassSkipped": true,
+      "note": "Higgsfield vision connection not attached to this run -- image/video content itself not analyzed, only real ad copy text used. No creative description invented.",
+      "taggedAt": "2026-10-04T18:49:00.000Z"
+    },
+    "1625646545933358": {
+      "adName": "Warm_KAIFEST_SORA_3198_Carousel",
+      "campaign": "Sneakers_BOF_30Sep-5Oct",
+      "format": "Carousel (SHARE)",
+      "angle": "Bundle cross-sell discount (SORA + any cap at a fixed bundle price), limited-time urgency",
+      "hook": "\"KAI FEST IS ON 🔥 SORA sneakers + any KAI cap for just ₹3,198 on prepaid orders (worth ₹4,098). Save ₹900...\" (primary text) / \"KAI\" (headline)",
+      "taggedFrom": "ad primary text (body) + headline (title), via Meta Ads MCP ads_get_creatives",
+      "visionPassSkipped": true,
+      "note": "Higgsfield vision connection not attached to this run -- image/video content itself not analyzed, only real ad copy text used. No creative description invented.",
+      "taggedAt": "2026-10-04T18:49:00.000Z"
+    },
+    "1066217796230903": {
+      "adName": "Warm_KAIFEST_KAGE_3198_9Oct",
+      "campaign": "Sneakers_BOF_30Sep-5Oct",
+      "format": "Static image (share)",
+      "angle": "Bundle cross-sell discount (KAGE + any cap at a fixed bundle price), limited-time urgency",
+      "hook": "\"KAI FEST IS ON 🔥 One sneaker. Every outfit. KAGE + any KAI cap for just ₹3,198 on prepaid orders...\" (primary text) / \"KAI FEST: KAGE + Cap @ ₹3,198\" (headline)",
+      "taggedFrom": "ad primary text (body) + headline (title), via Meta Ads MCP ads_get_creatives",
+      "visionPassSkipped": true,
+      "note": "Higgsfield vision connection not attached to this run -- image content itself not analyzed, only real ad copy text used. No creative description invented.",
+      "taggedAt": "2026-10-04T18:49:00.000Z"
+    },
+    "955645840946961": {
+      "adName": "Retargeting_SORA_JP_2499 / Hot_SORA_JP_2499",
+      "campaign": "Retargeting_Overall / Sneakers_BOF_30Sep-5Oct",
+      "format": "Static image (share)",
+      "angle": "Single-SKU prepaid discount + free shipping, deadline urgency",
+      "hook": "\"空 SORA — light on its feet. Now ₹2,499 on prepaid orders (was ₹3,299) + FREE SHIPPING. Save ₹800...\" (primary text) / \"SORA at ₹2,499 — Prepaid\" (headline)",
+      "taggedFrom": "ad primary text (body) + headline (title), via Meta Ads MCP ads_get_creatives",
+      "visionPassSkipped": true,
+      "note": "Higgsfield vision connection not attached to this run -- image content itself not analyzed, only real ad copy text used. No creative description invented.",
+      "taggedAt": "2026-10-04T18:49:00.000Z"
+    },
+    "1471164315061727": {
+      "adName": "Retargeting_TSUCHI_JP_2499 / Hot_TSUCHI_JP_2499 / Warm_TSUCHI_JP_2499",
+      "campaign": "Retargeting_Overall / Sneakers_BOF_30Sep-5Oct",
+      "format": "Static image (share)",
+      "angle": "Single-SKU prepaid discount + free shipping, deadline urgency",
+      "hook": "\"土 TSUCHI — rooted in earth. Our bestseller is back 👟 Now ₹2,499 on prepaid orders (was ₹3,299) + FREE SHIPPING...\" (primary text) / \"TSUCHI at ₹2,499 — Prepaid\" (headline)",
+      "taggedFrom": "ad primary text (body) + headline (title), via Meta Ads MCP ads_get_creatives",
+      "visionPassSkipped": true,
+      "note": "Higgsfield vision connection not attached to this run -- image content itself not analyzed, only real ad copy text used. No creative description invented.",
+      "taggedAt": "2026-10-04T18:49:00.000Z"
+    },
+    "1659024329166292": {
+      "adName": "Retargeting_YINYANG_JP_2499 / Hot_YINYANG_2499_JP / Warm_YINYANG_2499_JP / Yin Yang_TOF_2499_JP",
+      "campaign": "Retargeting_Overall / Sneakers_BOF_30Sep-5Oct / Yin Yang_TOF",
+      "format": "Static image (share)",
+      "angle": "New-SKU introduction (brand-new silhouette) + prepaid discount, deadline urgency",
+      "hook": "\"Meet Yin Yang — the new KAI sneaker. Now ₹2,499 on prepaid orders (was ₹3,299) + FREE SHIPPING. Save ₹800...\" (primary text) / \"Yin Yang at ₹2,499 — Prepaid\" (headline)",
+      "taggedFrom": "ad primary text (body) + headline (title), via Meta Ads MCP ads_get_creatives",
+      "visionPassSkipped": true,
+      "note": "Higgsfield vision connection not attached to this run -- image content itself not analyzed, only real ad copy text used. No creative description invented.",
+      "taggedAt": "2026-10-04T18:49:00.000Z"
+    },
+    "1346073041924526": {
+      "adName": "Retargeting_KAGE_JP_2499 / Hot_KAGE_Hero_JP_2499 / Warm_KAGE_Hero_JP_2499",
+      "campaign": "Retargeting_Overall / Sneakers_BOF_30Sep-5Oct",
+      "format": "Static image (share)",
+      "angle": "Single-SKU prepaid discount + brand positioning (refined/minimal), deadline urgency",
+      "hook": "\"影 KAGE — shadow, refined. The cleanest black sneaker — now ₹2,499 on prepaid orders (was ₹3,299) + FREE SHIPPING...\" (primary text) / \"KAGE at ₹2,499 — Prepaid\" (headline)",
+      "taggedFrom": "ad primary text (body) + headline (title), via Meta Ads MCP ads_get_creatives",
+      "visionPassSkipped": true,
+      "note": "Higgsfield vision connection not attached to this run -- image content itself not analyzed, only real ad copy text used. No creative description invented.",
+      "taggedAt": "2026-10-04T18:49:00.000Z"
+    },
+    "2574070523056775": {
+      "adName": "Hot_KAGE_Lifestyle_2499_9Oct",
+      "campaign": "Sneakers_BOF_30Sep-5Oct",
+      "format": "Static image (share)",
+      "angle": "Lifestyle/versatility positioning (everyday wear) + prepaid discount, deadline urgency",
+      "hook": "\"One sneaker. Every outfit. Designed for everyday wear with premium detailing, durable construction, and a clean all-black aesthetic. Meet KAGE. Now ₹2,499 on prepaid orders...\" (primary text) / \"KAGE at ₹2,499 — Prepaid\" (headline)",
+      "taggedFrom": "ad primary text (body) + headline (title), via Meta Ads MCP ads_get_creatives",
+      "visionPassSkipped": true,
+      "note": "Higgsfield vision connection not attached to this run -- image content itself not analyzed, only real ad copy text used. No creative description invented.",
+      "taggedAt": "2026-10-04T18:49:00.000Z"
     }
   }
 }
