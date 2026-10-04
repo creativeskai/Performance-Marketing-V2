@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-04T08:49:00.000Z",
+  "generatedAt": "2026-10-04T10:47:00.000Z",
   "settings": {
     "kill_roas_threshold": "pause if ROAS < 1.0x after ₹500 spend on a sales-objective campaign. EXCEPTION until 2026-10-05T23:59+05:30 (user-approved 2026-09-29): for the sneaker-push campaigns 120256091369160159 (Sneakers_BOF_30Sep-5Oct), 120256091370110159 (Sneakers_Prospecting_30Sep-5Oct) and 120256088882780159 (Sneakers_Catalog_Retargeting) the spend floor is ₹1,500, not ₹500.",
     "reactivate_min_historic_roas": "surface for reactivation if a paused campaign's last active-period ROAS >= 3.0x",
@@ -30,9 +30,9 @@
     },
     "competitor_last_scrape": {
       "gully_labs_active_ads": null,
-      "lotto_sport_india_active_ads": 345,
-      "scraped_at": "2026-10-04T08:49:00.000Z",
-      "note": "2026-10-04T08:49:00.000Z scheduled run: ads_library_search combined page_ids query (107479854297817 / 426015150606378, ad_active_status=ACTIVE, no country filter) returned estimated_total_count=345, DOWN from 538 at the prior 2026-10-04T06:46:00.000Z pass -- a drop of 193 (35.9%), crossing the >=20% single-pass spike/drop threshold again. Third >=20% swing this week (313 baseline -> 399 -> 459/499 highs -> 399 -> 538 -> 345) -- looks like noisy Ad Library estimated-count reporting rather than sustained competitor activity change."
+      "lotto_sport_india_active_ads": 522,
+      "scraped_at": "2026-10-04T10:47:00.000Z",
+      "note": "2026-10-04T10:47:00.000Z scheduled run: ads_library_search combined page_ids query (107479854297817 / 426015150606378, ad_active_status=ACTIVE, no country filter) returned estimated_total_count=522, UP from 345 at the prior 2026-10-04T08:49:00.000Z pass -- a jump of 177 (51.3%), crossing the >=20% single-pass spike/drop threshold again. Fourth+ >=20% swing this week on this same query -- reinforces the existing read (see AL-1383/AL-1381/AL-1379) that this is noisy Ad Library estimated-count reporting rather than a real competitor activity change."
     },
     "audience_label_corrections": {
       "120249907176770159": "ATC_180D -- NOT a purchaser audience (cart-adders, event=AddToCart, retention 180 days). Verified 2026-09-14, reconfirmed 2026-09-20. Superseded note: earlier passes said the account had NO purchaser audience at all -- that's now out of date. See the 120255823280550159 (Purchasers 180D) entry above, created 2026-09-15, which IS a genuine purchaser audience and is already in use for exclusion + lookalike.",
@@ -795,7 +795,7 @@
       "module": "reactivate-winner",
       "tier": "approval",
       "title": "Reactivate New Caps Part 3 STP -- 3.54x ROAS, above the reactivate threshold",
-      "reasoning": "Campaign 'New Caps Part 3 STP' (id 120245697720960159, ad set 'New STP 3') is PAUSED again as of this 2026-10-03T00:52 UTC pass -- fresh ads_get_ad_entities pull shows last_14d and last_30d both at purchase_roas 3.544658x on Rs1,781.30 spend (all of its recorded spend falls inside the trailing 14 days, so the two windows match), comfortably above settings.reactivate_min_historic_roas (>= 3.0x). This campaign was previously reactivated and a prior reactivate-winner proposal (A-047) was auto-resolved as moot on 2026-10-02T08:50 UTC when the campaign came back ACTIVE on its own -- it has since gone PAUSED again with no routine action logged in between, so this is a fresh recreation of that recommendation rather than a duplicate of a still-open item. No existing pending reactivate-winner proposal currently covers this campaign.",
+      "reasoning": "Campaign 'New Caps Part 3 STP' (id 120245697720960159, ad set 'New STP 3') remains PAUSED as of this 2026-10-04T10:47 UTC pass -- fresh ads_get_ad_entities pull shows last_30d purchase_roas now 4.890866x on Rs1,781.30 spend (up from 3.544658x at this proposal's 2026-10-03T00:52 UTC creation; spend unchanged, so the move is purely a ROAS recalculation window/attribution update, not new delivery), still comfortably above settings.reactivate_min_historic_roas (>= 3.0x). No action taken -- reactivate-winner is approval-tier; awaiting human decision.",
       "actionSummary": "Reactivates the campaign and its one ad set ('New STP 3'), keeping the daily budget unchanged at Rs500/day.",
       "metaAction": {
         "tool": "ads_activate_entity",
@@ -13380,6 +13380,51 @@
       "severity": "low",
       "dismissed": false,
       "createdAt": "2026-10-04T08:49:00.000Z"
+    },
+    {
+      "id": "AL-1385",
+      "module": "competitor-spike",
+      "title": "Lotto Sport India active-ad count jumped >=20% (345 -> 522)",
+      "detail": "ads_library_search (combined page_ids, ACTIVE) estimated_total_count rose from 345 to 522 (51.3%) since the 2026-10-04T08:49 UTC pass, crossing the >=20% swing threshold. Consistent with the week's pattern of large back-and-forth swings on this same query (313->399->459/499->399->538->345->522) -- read as Ad Library estimated-count noise rather than sustained competitor activity change. No action.",
+      "severity": "medium",
+      "dismissed": false,
+      "createdAt": "2026-10-04T10:47:00.000Z"
+    },
+    {
+      "id": "AL-1386",
+      "module": "purchaser-exclusion",
+      "title": "All 6 active ad sets reconfirmed purchaser-exclusion compliant",
+      "detail": "Fresh targeting fetch on all 6 ACTIVE ad sets (BOF_2_Warm_IG365_Engagers_Visitors, Yin Yang_TOF, BOF_3_CrossSell_Purchasers180D, BOF_1_Hot_ATC_IC_API_30D, Retargeting_Overall, Caps + Kage_26Sept): BOF_3_CrossSell_Purchasers180D and Retargeting_Overall are on settings.purchaser_exclusion_exempt_adset_ids and deliberately include Purchasers 180D by design; the other 4 explicitly exclude it in excluded_custom_audiences. purchaser-exclusion remains compliant account-wide, no action needed.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-10-04T10:47:00.000Z"
+    },
+    {
+      "id": "AL-1387",
+      "module": "lookalike-refresh",
+      "title": "Lookalike rebuild skipped this pass -- rate limited",
+      "detail": "The laddered 1%/2%/5% lookalikes built 2026-09-15 off Purchasers 180D remain past the 14-day lookalike_refresh_days threshold, but the last rebuild attempt was 2026-10-04T02:52:00.000Z (~7h55m ago), within max_auto_actions_per_entity_per_day=1 (<24h). Re-attempt skipped this pass rather than re-tried. Source audience size unchanged (~20) -- rebuilds have been failing with Meta's duplicate-lookalike error (2654/1713007) until the source grows; the 3 existing lookalikes remain live and serving.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-10-04T10:47:00.000Z"
+    },
+    {
+      "id": "AL-1388",
+      "module": "self-audit-check",
+      "title": "Live numbers reconfirmed sane vs. dashboard snapshot -- snapshot still stale",
+      "detail": "index.html's static DATA/INSIGHTS_DATA snapshot is unchanged since 2026-09-30 (file mtime). Live ads_get_ad_entities pulls this pass (today's spend Rs3,807.90 vs Rs6,500 ceiling; active-campaign ROAS range 4.62x-9.80x) are internally consistent with no red flags, but the dashboard's static snapshot has not been regenerated to reflect current numbers. No metric drift beyond tolerance detected in what's comparable; flagging staleness only.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-10-04T10:47:00.000Z"
+    },
+    {
+      "id": "AL-1389",
+      "module": "routine-run-notes",
+      "title": "Run summary -- 2026-10-04 ~10:47 UTC pass",
+      "detail": "Circuit breaker: not tripped (today's spend Rs3,807.90 vs Rs6,500 ceiling). Pixel quality gate: healthy (composite EMQ scores 6.1-8.8, >= 0.6 threshold) -- ROAS-based modules not suppressed. 6 ad sets ACTIVE across 4 campaigns (Sneakers_BOF_30Sep-5Oct, Retargeting_Overall, Yin Yang_TOF, Caps + Kage_26 Sept) plus the empty duplicate shell 'Caps + Kage_26 Sept - Copy' (still covered by pending A-054). purchaser-exclusion compliant account-wide. All 22 distinct active ads' creatives already have creativeTags entries -- hook-angle-tagging has nothing new to tag this pass. Lookalike rebuild rate-limited, skipped. No anomaly signal fired. Age/gender and device breakdowns pulled for Caps + Kage_26 Sept (the one active big-spend campaign without an existing segmentation proposal): all cells with meaningful spend show strong ROAS (7x-11x), no underperforming segment at meaningful spend -- no new age-gender-auto-shift/device-targeting proposal warranted. Reactivate-winner proposal A-051 (New Caps Part 3 STP) refreshed with current ROAS (4.89x, up from 3.54x at creation, still PAUSED, still above threshold). Competitor-spike fired again (Lotto Sport India 345->522, +51.3%) -- consistent with this week's noisy Ad Library estimated-count pattern. No auto-executed actions this pass (nothing qualified: purchaser-exclusion already compliant, lookalike-refresh rate-limited, hook-angle-tagging had nothing new, circuit breaker not tripped). No new approval-tier proposals created this pass.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-10-04T10:47:00.000Z"
     }
   ],
   "log": [
