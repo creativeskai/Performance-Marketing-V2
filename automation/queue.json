@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-04T00:48:00.000Z",
+  "generatedAt": "2026-10-04T02:52:00.000Z",
   "settings": {
     "kill_roas_threshold": "pause if ROAS < 1.0x after ₹500 spend on a sales-objective campaign. EXCEPTION until 2026-10-05T23:59+05:30 (user-approved 2026-09-29): for the sneaker-push campaigns 120256091369160159 (Sneakers_BOF_30Sep-5Oct), 120256091370110159 (Sneakers_Prospecting_30Sep-5Oct) and 120256088882780159 (Sneakers_Catalog_Retargeting) the spend floor is ₹1,500, not ₹500.",
     "reactivate_min_historic_roas": "surface for reactivation if a paused campaign's last active-period ROAS >= 3.0x",
@@ -30,9 +30,9 @@
     },
     "competitor_last_scrape": {
       "gully_labs_active_ads": null,
-      "lotto_sport_india_active_ads": 497,
-      "scraped_at": "2026-10-04T00:48:00.000Z",
-      "note": "2026-10-04T00:48:00.000Z scheduled run: ads_library_search combined page_ids query (107479854297817 / 426015150606378, ad_active_status=ACTIVE, no country filter) returned estimated_total_count=497, unchanged from the 2026-10-03T22:46 UTC pass -- below the >=20% single-pass spike/drop threshold, no new competitor-spike alert. Still +58.8% above the original 313 baseline. See AL-1319 for the original spike detection."
+      "lotto_sport_india_active_ads": 499,
+      "scraped_at": "2026-10-04T02:52:00.000Z",
+      "note": "2026-10-04T02:52:00.000Z scheduled run: ads_library_search combined page_ids query (107479854297817 / 426015150606378, ad_active_status=ACTIVE, no country filter) returned estimated_total_count=499, essentially flat vs the prior 497 -- below the >=20% single-pass spike/drop threshold, no new competitor-spike alert. Still well above the original 313 baseline (see AL-1319)."
     },
     "audience_label_corrections": {
       "120249907176770159": "ATC_180D -- NOT a purchaser audience (cart-adders, event=AddToCart, retention 180 days). Verified 2026-09-14, reconfirmed 2026-09-20. Superseded note: earlier passes said the account had NO purchaser audience at all -- that's now out of date. See the 120255823280550159 (Purchasers 180D) entry above, created 2026-09-15, which IS a genuine purchaser audience and is already in use for exclusion + lookalike.",
@@ -13303,6 +13303,15 @@
       "severity": "low",
       "dismissed": false,
       "createdAt": "2026-10-04T00:48:00.000Z"
+    },
+    {
+      "id": "AL-1377",
+      "module": "routine-run-notes",
+      "title": "Run summary -- 2026-10-04 ~02:52 UTC pass",
+      "detail": "Circuit breaker: not tripped (today's spend Rs1,326.75 vs Rs6,500 ceiling). Pixel quality gate: all tracked event EMQ composite scores 6.1-9.1, above pixel_quality_min_match_rate=0.6 -- ROAS modules not suppressed. purchaser-exclusion: compliant account-wide -- all 6 active ad sets (BOF_2_Warm_IG365_Engagers_Visitors, Yin Yang_TOF, BOF_3_CrossSell_Purchasers180D [exempt by design], BOF_1_Hot_ATC_IC_API_30D, Retargeting_Overall [exempt by design], Caps + Kage_26Sept) either exclude Purchasers 180D or are on settings.purchaser_exclusion_exempt_adset_ids by design -- no action needed. lookalike-refresh: rate limit cleared, rebuild re-attempted and failed again with Meta's duplicate-lookalike error (2654/1713007) -- source audience still ~20, unchanged; see new log entry. hook-angle-tagging: all 21 active ads' creatives already have creativeTags entries -- nothing new to tag. Anomaly signal: none fired. Competitor rescrape: Lotto Sport India active-ad count 499, essentially flat vs 497 -- settings.competitor_last_scrape updated, no spike alert. 5 campaigns ACTIVE (Sneakers_BOF_30Sep-5Oct 4.62x/Rs8,919.84 last_14d, Retargeting_Overall 11.27x/Rs2,097.43, Yin Yang_TOF traffic-only, Caps + Kage_26 Sept 8.01x/Rs9,971.47, and the still-empty duplicate shell 'Caps + Kage_26 Sept – Copy' covered by pending A-054). Checked pending proposals A-027, A-028, A-049, A-052, A-053, A-054 against fresh live data -- all numbers are materially unchanged from the 00:48 UTC pass 2 hours ago (same last_30d figures; last_14d windows moved only as expected with time), so left as-is rather than appending redundant reconfirmation text (see AL-1261 file-size note). Reminder: the user-approved sneaker-push window (Sneakers_BOF_30Sep-5Oct, Sneakers_Prospecting_30Sep-5Oct via A-050, and the Rs1,500 kill-floor exception) closes 2026-10-05T23:59+05:30 -- tomorrow. No new proposals or alerts beyond this summary and the lookalike-refresh log entry this pass.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-10-04T02:52:00.000Z"
     }
   ],
   "log": [
@@ -18991,6 +19000,50 @@
       },
       "tier": "auto",
       "executedAt": "2026-10-03T20:47:00.000Z"
+    },
+    {
+      "proposalId": null,
+      "action": "lookalike-refresh auto-module: rate limit cleared (last attempt 2026-10-03T00:52:37.000Z, >24h elapsed) -- attempted to rebuild the 1%/2%/5% laddered lookalike off 'Purchasers 180D' (id 120255823280550159, still ~20 people, unchanged since 2026-09-15). All 3 ads_create_custom_audience calls (0.01/0.02/0.05 ratio) were rejected by Meta as duplicate lookalikes -- the source audience hasn't grown, so a rebuild with identical source+country+size specs collides with the existing, still-ACTIVE laddered set. No new audiences were created; the existing 3 lookalikes (120255832535210159/610159/780159) remain live and serving, untouched.",
+      "result": "failed",
+      "previousState": {
+        "120255832535210159": {
+          "name": "Lookalike (IN 1%) - Purchasers 180D - 2026-09-15",
+          "time_created": "2026-09-15T18:49:14Z",
+          "delivery_status": "ACTIVE"
+        },
+        "120255832535610159": {
+          "name": "Lookalike (IN 2%) - Purchasers 180D - 2026-09-15",
+          "time_created": "2026-09-15T18:49:17Z",
+          "delivery_status": "ACTIVE"
+        },
+        "120255832535780159": {
+          "name": "Lookalike (IN 5%) - Purchasers 180D - 2026-09-15",
+          "time_created": "2026-09-15T18:49:19Z",
+          "delivery_status": "ACTIVE"
+        }
+      },
+      "detail": {
+        "error_1pct": {
+          "error_category": "VALIDATION",
+          "error_message": "Can't Create a Duplicate Lookalike: You've already created a lookalike audience with the same source, country and size. Please try using a different source or different specifications.",
+          "error_code": "2654",
+          "error_subcode": "1713007"
+        },
+        "error_2pct": {
+          "error_category": "VALIDATION",
+          "error_message": "Can't Create a Duplicate Lookalike: You've already created a lookalike audience with the same source, country and size. Please try using a different source or different specifications.",
+          "error_code": "2654",
+          "error_subcode": "1713007"
+        },
+        "error_5pct": {
+          "error_category": "VALIDATION",
+          "error_message": "Can't Create a Duplicate Lookalike: You've already created a lookalike audience with the same source, country and size. Please try using a different source or different specifications.",
+          "error_code": "2654",
+          "error_subcode": "1713007"
+        }
+      },
+      "tier": "auto",
+      "executedAt": "2026-10-04T02:52:00.000Z"
     }
   ],
   "creativeTags": {
