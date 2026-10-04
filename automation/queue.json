@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-04T20:50:00.000Z",
+  "generatedAt": "2026-10-04T22:48:00.000Z",
   "settings": {
     "kill_roas_threshold": "DISABLED 2026-10-05 by user instruction: the ROAS pause-kill is OFF. Module 16 (pause-kill) must NOT auto-pause any campaign for low ROAS; surface low-ROAS campaigns as alerts only. The hard spend circuit breaker is a separate mechanism and stays ON. Former rule, for reference: pause if ROAS < 1.0x after ₹500 spend on a sales-objective campaign. EXCEPTION until 2026-10-05T23:59+05:30 (user-approved 2026-09-29): for the sneaker-push campaigns 120256091369160159 (Sneakers_BOF_30Sep-5Oct), 120256091370110159 (Sneakers_Prospecting_30Sep-5Oct) and 120256088882780159 (Sneakers_Catalog_Retargeting) the spend floor is ₹1,500, not ₹500.",
     "reactivate_min_historic_roas": "surface for reactivation if a paused campaign's last active-period ROAS >= 3.0x",
@@ -30,9 +30,9 @@
     },
     "competitor_last_scrape": {
       "gully_labs_active_ads": null,
-      "lotto_sport_india_active_ads": 617,
-      "scraped_at": "2026-10-04T20:50:00.000Z",
-      "note": "2026-10-04T20:50:00.000Z scheduled run: ads_library_search combined page_ids query (107479854297817 / 426015150606378, ad_active_status=ACTIVE, no country filter) returned estimated_total_count=617, up from 616 at the prior 2026-10-04T18:49 UTC pass -- a change of +0.16%, well BELOW the >=20% swing threshold. No competitor-spike alert this pass. (Note: a separate, noisier competitor-spike alert sequence earlier today -- 399->538->345->522 -- used a different query shape and is not this methodology; disregard that volatility, it reflects estimate instability, not real ad-count swings.)"
+      "lotto_sport_india_active_ads": 616,
+      "scraped_at": "2026-10-04T22:48:00.000Z",
+      "note": "2026-10-04T22:48:00.000Z scheduled run: ads_library_search combined page_ids query (107479854297817 / 426015150606378, ad_active_status=ACTIVE, no country filter) returned estimated_total_count=616, down from 617 at the prior 2026-10-04T20:50 UTC pass -- a change of -0.16%, well BELOW the >=20% swing threshold. No competitor-spike alert this pass."
     },
     "audience_label_corrections": {
       "120249907176770159": "ATC_180D -- NOT a purchaser audience (cart-adders, event=AddToCart, retention 180 days). Verified 2026-09-14, reconfirmed 2026-09-20. Superseded note: earlier passes said the account had NO purchaser audience at all -- that's now out of date. See the 120255823280550159 (Purchasers 180D) entry above, created 2026-09-15, which IS a genuine purchaser audience and is already in use for exclusion + lookalike.",
@@ -844,7 +844,7 @@
       "module": "device-targeting",
       "tier": "approval",
       "title": "Shift BOF_2_Warm_IG365_Engagers_Visitors (Sneakers_BOF_30Sep-5Oct) away from Android -- 2.06x vs 7.56x on iPhone",
-      "reasoning": "Ad set BOF_2_Warm_IG365_Engagers_Visitors (120256091376920159, campaign Sneakers_BOF_30Sep-5Oct 120256091369160159) last_14d impression_device breakdown: android_smartphone Rs2,421.75 spend at 2.064127x ROAS vs iphone Rs3,428.43 spend at 7.564585x ROAS -- a 3.7x efficiency gap at substantial spend on both sides within the same ad set. android_smartphone ROAS (2.06x) is still above the user-approved sneaker-push kill-floor exception (1.0x at Rs1,500 spend through 2026-10-05), so this is an efficiency opportunity, not a pause-kill trigger. Campaign closes 2026-10-05T23:59+05:30, so only ~2 days of remaining spend would be affected. Reconfirmed 2026-10-03T20:47:00.000Z pass: last_14d gap has widened -- android_smartphone now Rs3,576.41 spend at 1.397713x ROAS (down from 2.064127x), vs iphone Rs4,823.42 at 7.504091x (roughly flat) -- a ~5.4x efficiency gap, up from ~3.7x when this proposal was created. android_smartphone ROAS (1.40x) remains above the user-approved sneaker-push kill-floor exception (1.0x through 2026-10-05), so this stays an efficiency recommendation, not a kill candidate. No change to the proposed action. Reconfirmed 2026-10-04T00:48:00.000Z pass: last_14d impression_device breakdown now shows android_smartphone Rs3,576.35 spend at 1.397738x ROAS vs iphone Rs4,823.48 spend at 7.503991x ROAS -- the efficiency gap has widened further (was 2.06x vs 7.56x). android_smartphone ROAS (1.40x) remains above the user-approved sneaker-push kill-floor exception (1.0x). Campaign closes 2026-10-05T23:59+05:30. Still pending.",
+      "reasoning": "Ad set BOF_2_Warm_IG365_Engagers_Visitors (120256091376920159, campaign Sneakers_BOF_30Sep-5Oct 120256091369160159) last_14d impression_device breakdown: android_smartphone Rs2,421.75 spend at 2.064127x ROAS vs iphone Rs3,428.43 spend at 7.564585x ROAS -- a 3.7x efficiency gap at substantial spend on both sides within the same ad set. android_smartphone ROAS (2.06x) is still above the user-approved sneaker-push kill-floor exception (1.0x at Rs1,500 spend through 2026-10-05), so this is an efficiency opportunity, not a pause-kill trigger. Campaign closes 2026-10-05T23:59+05:30, so only ~2 days of remaining spend would be affected. Reconfirmed 2026-10-03T20:47:00.000Z pass: last_14d gap has widened -- android_smartphone now Rs3,576.41 spend at 1.397713x ROAS (down from 2.064127x), vs iphone Rs4,823.42 at 7.504091x (roughly flat) -- a ~5.4x efficiency gap, up from ~3.7x when this proposal was created. android_smartphone ROAS (1.40x) remains above the user-approved sneaker-push kill-floor exception (1.0x through 2026-10-05), so this stays an efficiency recommendation, not a kill candidate. No change to the proposed action. Reconfirmed 2026-10-04T00:48:00.000Z pass: last_14d impression_device breakdown now shows android_smartphone Rs3,576.35 spend at 1.397738x ROAS vs iphone Rs4,823.48 spend at 7.503991x ROAS -- the efficiency gap has widened further (was 2.06x vs 7.56x). android_smartphone ROAS (1.40x) remains above the user-approved sneaker-push kill-floor exception (1.0x). Campaign closes 2026-10-05T23:59+05:30. Still pending. Reconfirmed 2026-10-04T22:48:00.000Z pass: last_14d impression_device breakdown has shifted materially -- android_smartphone now Rs5,033.23 spend at 2.979476x ROAS (up from 1.397738x at the 2026-10-04T00:48 UTC update), vs iphone Rs6,759.87 spend at 5.354444x ROAS (down from 7.503991x). The efficiency gap has narrowed from ~5.4x to ~1.8x (iphone/android ROAS ratio) -- still a real gap favoring iPhone, but meaningfully weaker than when this proposal was drafted. android_smartphone ROAS (2.98x) remains well above the user-approved sneaker-push kill-floor exception (1.0x through 2026-10-05). Campaign closes 2026-10-05T23:59+05:30 (tomorrow), so very little remaining spend would be affected either way. Flagging the narrowed gap for the reviewer's judgment -- still pending, no change to the proposed action.",
       "actionSummary": "Restricts BOF_2_Warm_IG365_Engagers_Visitors's targeting to iOS devices only, redirecting the remaining campaign-window budget away from the underperforming Android segment toward the iPhone segment that is converting ~3.7x more efficiently.",
       "metaAction": {
         "tool": "ads_update_entity",
@@ -860,7 +860,8 @@
         ]
       },
       "status": "pending",
-      "createdAt": "2026-10-03T16:46:00.000Z"
+      "createdAt": "2026-10-03T16:46:00.000Z",
+      "updatedAt": "2026-10-04T22:48:00.000Z"
     },
     {
       "id": "A-054",
@@ -13431,11 +13432,11 @@
       "id": "AL-1390",
       "module": "lookalike-refresh",
       "title": "Lookalike rebuild still rate-limited -- source audience unchanged",
-      "detail": "The laddered 1%/2%/5% lookalikes built 2026-09-15 off Purchasers 180D remain past the 14-day lookalike_refresh_days threshold, but the last rebuild attempt was 2026-10-04T02:52:00.000Z (~17h58m ago), within max_auto_actions_per_entity_per_day=1 (<24h). Re-attempt skipped this pass rather than re-tried; next eligible ~2026-10-04T02:52 UTC + 24h. Source audience size unchanged (Purchasers 180D still approximate_count ~20) -- rebuilds have been failing with Meta's duplicate-lookalike error (2654/1713007) until the source grows; the 3 existing lookalikes (120255832535210159/610159/780159) remain ACTIVE and serving.",
+      "detail": "The laddered 1%/2%/5% lookalikes built 2026-09-15 off Purchasers 180D remain past the 14-day lookalike_refresh_days threshold, but the last rebuild attempt was 2026-10-04T02:52:00.000Z (~17h58m ago), within max_auto_actions_per_entity_per_day=1 (<24h). Re-attempt skipped this pass rather than re-tried; next eligible ~2026-10-04T02:52 UTC + 24h. Source audience size unchanged (Purchasers 180D still approximate_count ~20) -- rebuilds have been failing with Meta's duplicate-lookalike error (2654/1713007) until the source grows; the 3 existing lookalikes (120255832535210159/610159/780159) remain ACTIVE and serving. Reconfirmed 2026-10-04T22:48:00.000Z pass: last rebuild attempt remains 2026-10-04T02:52:00.000Z (~19h56m ago), still within max_auto_actions_per_entity_per_day=1 (<24h) -- re-attempt skipped again rather than re-tried; next eligible ~2026-10-05T02:52 UTC. Source audience (Purchasers 180D) size unchanged (~20). The 3 existing lookalikes remain ACTIVE and serving, untouched.",
       "severity": "low",
       "dismissed": false,
       "createdAt": "2026-10-04T20:50:00.000Z",
-      "lastConfirmedAt": "2026-10-04T14:48:00.000Z"
+      "lastConfirmedAt": "2026-10-04T22:48:00.000Z"
     },
     {
       "id": "AL-1391",
@@ -13469,10 +13470,11 @@
       "id": "AL-1394",
       "module": "self-audit-check",
       "title": "Live numbers reconfirmed sane vs. dashboard snapshot -- snapshot still stale",
-      "detail": "index.html's static DATA/INSIGHTS_DATA snapshot is unchanged since 2026-09-30 (file mtime). Live ads_get_ad_entities pulls this pass (today's account spend Rs1,039.69 vs Rs5,700 hard_spend_ceiling_inr -- 18.2% of ceiling, circuit breaker not tripped; 4 active campaigns: Prospecting_JP_Purchase_5-9Oct (brand new, Rs15.78 today, no ROAS data yet), Sneakers_BOF_30Sep-5Oct (last_14d 4.77x ROAS on Rs12,936.88), Retargeting_Overall (last_14d 11.79x ROAS on Rs2,224.70), Caps + Kage_26 Sept (last_14d 7.28x ROAS on Rs11,389.53)) show nothing inconsistent with the dashboard's narrative -- numbers reconfirmed sane, snapshot still stale but not misleading. No self-audit alert escalation needed.",
-      "severity": "low",
+      "detail": "index.html's static DATA/INSIGHTS_DATA snapshot is unchanged since 2026-09-30 (file mtime). Live ads_get_ad_entities pulls this pass (today's account spend Rs1,039.69 vs Rs5,700 hard_spend_ceiling_inr -- 18.2% of ceiling, circuit breaker not tripped; 4 active campaigns: Prospecting_JP_Purchase_5-9Oct (brand new, Rs15.78 today, no ROAS data yet), Sneakers_BOF_30Sep-5Oct (last_14d 4.77x ROAS on Rs12,936.88), Retargeting_Overall (last_14d 11.79x ROAS on Rs2,224.70), Caps + Kage_26 Sept (last_14d 7.28x ROAS on Rs11,389.53)) show nothing inconsistent with the dashboard's narrative -- numbers reconfirmed sane, snapshot still stale but not misleading. No self-audit alert escalation needed. Reconfirmed 2026-10-04T22:48:00.000Z pass: today's account spend Rs1,376.60 vs Rs5,700 ceiling (24.2%), circuit breaker not tripped; same 4 active campaigns as last pass (Prospecting_JP_Purchase_5-9Oct, Sneakers_BOF_30Sep-5Oct 4.77x last_14d, Retargeting_Overall 11.79x last_14d, Caps + Kage_26 Sept 7.28x last_14d) -- nothing inconsistent with the dashboard's narrative. NEW FINDING this pass: direct object_ids lookups on two long-pending proposals' target campaigns show both have moved to a terminal state since they were drafted -- A-001 (reactivate-winner, 'Kage_Sales' 120255012429830159) is now ARCHIVED (previously PAUSED; Meta generally does not allow reactivating an ARCHIVED campaign via ads_activate_entity, so this proposal's metaAction would likely fail if approved as-is), and A-054 (campaign-consolidation, 'Caps + Kage_26 Sept – Copy' 120256175667450159) is now DELETED (previously ACTIVE) -- the duplicate shell this proposal wanted to pause is already gone, so approving it would be a no-op/fail and it can be safely rejected. Recommend the user reject A-001 and A-054 in-app; no automatic action taken on either (status changes to pending proposals are a human/approval-tier decision, not a self-audit-check mutation).",
+      "severity": "medium",
       "dismissed": false,
-      "createdAt": "2026-10-04T20:50:00.000Z"
+      "createdAt": "2026-10-04T20:50:00.000Z",
+      "lastConfirmedAt": "2026-10-04T22:48:00.000Z"
     },
     {
       "id": "AL-1395",
@@ -13518,6 +13520,15 @@
       "severity": "low",
       "dismissed": false,
       "createdAt": "2026-10-04T20:50:00.000Z"
+    },
+    {
+      "id": "AL-1400",
+      "module": "routine-run-notes",
+      "title": "Run summary -- 2026-10-04 ~22:48 UTC pass",
+      "detail": "Circuit breaker: not tripped (today's spend Rs1,376.60 vs Rs5,700 ceiling, 24.2%). Pixel quality gate: all tracked event composite EMQ scores between 6.1 and 8.8, at/above threshold -- ROAS modules not suppressed. purchaser-exclusion: compliant account-wide across the same 9 active ad sets as last pass (Retargeting_Overall exempt by design per settings.purchaser_exclusion_exempt_adset_ids, the other 8 explicitly exclude Purchasers 180D) -- no change, no new alert (see AL-1391). lookalike-refresh: skipped, still rate-limited (last attempt 2026-10-04T02:52, <24h elapsed; see updated AL-1390). hook-angle-tagging: all 14 distinct creatives on active ads already carry creativeTags entries -- nothing new to tag this pass. hard-spend-circuit-breaker: no trip. competitor-rescrape: Lotto Sport India active-ad count 617->616 (-0.16%), below the 20% spike threshold, no alert. anomaly: same narrow-audience signal as last pass for Retargeting_NoBuyers_JP (still brand-new, still informational -- see AL-1398), nothing new. creative-fatigue: BOF_1_Hot_ATC_IC_API_30D frequency unchanged at 8.43 (last_7d), still monitoring per AL-1367, no new action. self-audit-check: live numbers reconfirmed sane; NEW finding this pass -- A-001's target campaign (Kage_Sales) is now ARCHIVED and A-054's target (Caps + Kage_26 Sept – Copy) is now DELETED, both stale/unexecutable as-is; see updated AL-1394, recommend the user reject both in-app. age-gender-auto-shift (A-052): 35-44 male spend essentially flat (Rs1,475.09 -> Rs1,475.21), no reasoning change. device-targeting (A-053): last_14d efficiency gap narrowed materially (android 1.40x->2.98x ROAS, iphone 7.50x->5.35x ROAS) -- reasoning updated, still pending. budget-reallocation (A-049), reactivate-winner proposals (A-027/028/039/048/050/051), and the remaining placement/consolidation proposals were not re-pulled fresh this pass beyond what's reflected above; no sign of material change given the account's composition held steady since the 20:50 UTC pass. No new proposals or auto-executed Meta API mutations this pass. 23 proposals remain pending (2 of which -- A-001, A-054 -- are now flagged stale per AL-1394), 6 rejected; none approved/executed via chat this pass.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-10-04T22:48:00.000Z"
     }
   ],
   "log": [
