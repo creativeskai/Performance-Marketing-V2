@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-05T08:50:00.000Z",
+  "generatedAt": "2026-10-05T10:49:00.000Z",
   "settings": {
     "kill_roas_threshold": "DISABLED 2026-10-05 by user instruction: the ROAS pause-kill is OFF. Module 16 (pause-kill) must NOT auto-pause any campaign for low ROAS; surface low-ROAS campaigns as alerts only. The hard spend circuit breaker is a separate mechanism and stays ON. Former rule, for reference: pause if ROAS < 1.0x after ₹500 spend on a sales-objective campaign. EXCEPTION until 2026-10-05T23:59+05:30 (user-approved 2026-09-29): for the sneaker-push campaigns 120256091369160159 (Sneakers_BOF_30Sep-5Oct), 120256091370110159 (Sneakers_Prospecting_30Sep-5Oct) and 120256088882780159 (Sneakers_Catalog_Retargeting) the spend floor is ₹1,500, not ₹500.",
     "reactivate_min_historic_roas": "surface for reactivation if a paused campaign's last active-period ROAS >= 3.0x",
@@ -30,9 +30,9 @@
     },
     "competitor_last_scrape": {
       "gully_labs_active_ads": null,
-      "lotto_sport_india_active_ads": 589,
-      "scraped_at": "2026-10-05T08:50:00.000Z",
-      "note": "2026-10-05T08:50:00.000Z scheduled run: ads_library_search combined page_ids query (107479854297817 / 426015150606378, ad_active_status=ACTIVE, no country filter) returned estimated_total_count=589, unchanged from the prior 2026-10-05T06:47:00.000Z pass (589) -- 0% change, well below the >=20% swing threshold. No competitor-spike alert this pass."
+      "lotto_sport_india_active_ads": 565,
+      "scraped_at": "2026-10-05T10:49:00.000Z",
+      "note": "2026-10-05T10:49:00.000Z scheduled run: ads_library_search combined page_ids query (107479854297817 / 426015150606378, ad_active_status=ACTIVE, no country filter) returned estimated_total_count=565, down from the prior 2026-10-05T08:50:00.000Z pass (589) -- a -4.1% move, well below the >=20% swing threshold. No competitor-spike alert this pass."
     },
     "audience_label_corrections": {
       "120249907176770159": "ATC_180D -- NOT a purchaser audience (cart-adders, event=AddToCart, retention 180 days). Verified 2026-09-14, reconfirmed 2026-09-20. Superseded note: earlier passes said the account had NO purchaser audience at all -- that's now out of date. See the 120255823280550159 (Purchasers 180D) entry above, created 2026-09-15, which IS a genuine purchaser audience and is already in use for exclusion + lookalike.",
@@ -871,7 +871,7 @@
       "module": "campaign-consolidation",
       "tier": "approval",
       "title": "Pause duplicate campaign shell 'Caps + Kage_26 Sept – Copy' (empty, zero ad sets)",
-      "reasoning": "A 5th campaign, 'Caps + Kage_26 Sept – Copy' (id 120256175667450159), is ACTIVE at the campaign level with the same daily_budget (Rs1,280) and objective (OUTCOME_SALES) as the real 'Caps + Kage_26 Sept' campaign (120255693970470159, currently 8.01x last_30d ROAS on Rs9,969.94 spend) -- the name itself is a literal Meta 'Duplicate' of it. It is not mentioned anywhere in prior settings notes, alerts or log, so it was created outside this routine, presumably via Ads Manager's Duplicate-campaign action, and left unfinished. Direct checks this pass: ads_get_ad_entities (level=campaign, last_30d) returns no amount_spent/purchase_roas fields for it at all (zero delivery), and a level=adset fetch filtered to campaign.id=120256175667450159 returns zero ad sets -- it is a bare campaign shell with nothing to pause at the ad-set level and nothing currently serving or spending. It poses no immediate budget risk, but being left ACTIVE at the campaign level means it clutters the account's active-campaign count (flagged via campaign-consolidation-watch this pass, see the updated campaign-consolidation-watch alert) and could silently start delivering if ad sets are ever added to it without review. Per ROUTINE.md module 34, pausing a confirmed duplicate is approval tier -- not executed automatically.",
+      "reasoning": "A 5th campaign, 'Caps + Kage_26 Sept – Copy' (id 120256175667450159), is ACTIVE at the campaign level with the same daily_budget (Rs1,280) and objective (OUTCOME_SALES) as the real 'Caps + Kage_26 Sept' campaign (120255693970470159, currently 8.01x last_30d ROAS on Rs9,969.94 spend) -- the name itself is a literal Meta 'Duplicate' of it. It is not mentioned anywhere in prior settings notes, alerts or log, so it was created outside this routine, presumably via Ads Manager's Duplicate-campaign action, and left unfinished. Direct checks this pass: ads_get_ad_entities (level=campaign, last_30d) returns no amount_spent/purchase_roas fields for it at all (zero delivery), and a level=adset fetch filtered to campaign.id=120256175667450159 returns zero ad sets -- it is a bare campaign shell with nothing to pause at the ad-set level and nothing currently serving or spending. It poses no immediate budget risk, but being left ACTIVE at the campaign level means it clutters the account's active-campaign count (flagged via campaign-consolidation-watch this pass, see the updated campaign-consolidation-watch alert) and could silently start delivering if ad sets are ever added to it without review. Per ROUTINE.md module 34, pausing a confirmed duplicate is approval tier -- not executed automatically. RESOLVED 2026-10-05T10:49 UTC pass: a direct ads_get_ad_entities fetch on this campaign id (120256175667450159) now returns status=DELETED/effective_status=DELETED. It was deleted outside this routine (no matching ads_update_entity log entry exists), most likely a direct Ads Manager action by the user. The proposed pause is now moot -- nothing left to pause -- so this proposal is marked resolved rather than left pending.",
       "actionSummary": "Sets the 'Caps + Kage_26 Sept – Copy' campaign (120256175667450159) to status=PAUSED. No ad sets exist under it, so this only changes the campaign-level status; nothing currently delivering or spending is affected.",
       "metaAction": {
         "tool": "ads_update_entity",
@@ -884,8 +884,9 @@
           }
         }
       },
-      "status": "pending",
-      "createdAt": "2026-10-03T18:55:00.000Z"
+      "status": "resolved",
+      "createdAt": "2026-10-03T18:55:00.000Z",
+      "resolvedAt": "2026-10-05T10:49:00.000Z"
     }
   ],
   "alerts": [
@@ -13605,6 +13606,69 @@
       "severity": "low",
       "dismissed": false,
       "createdAt": "2026-10-05T08:50:00.000Z"
+    },
+    {
+      "id": "AL-1409",
+      "module": "purchaser-exclusion",
+      "title": "All 9 active ad sets reconfirmed purchaser-exclusion compliant",
+      "detail": "Direct targeting fetch on all 9 currently-ACTIVE ad sets: Retargeting_NoBuyers_JP, Prosp_Men_25-44_Purchase_JP, BOF_2_Warm_IG365_Engagers_Visitors, Caps_FB-C_Interests, Caps_FB-B_HighValueGoods, Caps_FB-A_EngagedShoppers, BOF_1_Hot_ATC_IC_API_30D, Caps + Kage_26Sept all list Purchasers 180D (120255823280550159) in excluded_custom_audiences. Retargeting_Overall (120255851467360159) is on settings.purchaser_exclusion_exempt_adset_ids and deliberately includes it by design. purchaser-exclusion remains compliant account-wide -- no mutation needed this pass.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-10-05T10:49:00.000Z"
+    },
+    {
+      "id": "AL-1410",
+      "module": "threshold-alerts",
+      "title": "No active campaign has a recorded CPM/CTR/CPC baseline this pass",
+      "detail": "settings.metric_baselines only holds entries for Kage_sales_1908 and Kage_TOF, neither of which matches any of the 4 currently-active campaigns (Prospecting_JP_Purchase_5-9Oct, Sneakers_BOF_30Sep-5Oct, Retargeting_Overall, Caps + Kage_26 Sept). Nothing to compare against a 30d baseline this pass.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-10-05T10:49:00.000Z"
+    },
+    {
+      "id": "AL-1411",
+      "module": "pixel-health",
+      "title": "Pixel quality remains healthy -- no match-rate breach",
+      "detail": "ads_get_dataset_quality on dataset 833131719490535: composite EMQ scores range 6.1 (AddToCart/PageView/ViewContent/Search/SubscribedButtonClick) to 8.8 (Purchase/AddPaymentInfo), all at/above pixel_quality_min_match_rate=0.6 (i.e. score/10 >= 0.6). ROAS-based modules not suppressed this pass.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-10-05T10:49:00.000Z"
+    },
+    {
+      "id": "AL-1412",
+      "module": "learning-phase-stuck",
+      "title": "No ad sets stuck in learning",
+      "detail": "The newest active ad sets (Caps_FB-A/B/C, Retargeting_NoBuyers_JP, Prosp_Men_25-44_Purchase_JP) are all under 24h old -- too new to judge. The remaining active ad sets (BOF_1/BOF_2 under Sneakers_BOF, Retargeting_Overall, Caps + Kage_26Sept) are all >6 days old and delivering with healthy, stable ROAS -- clearly past learning. Nothing stuck.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-10-05T10:49:00.000Z"
+    },
+    {
+      "id": "AL-1413",
+      "module": "campaign-consolidation-watch",
+      "title": "Duplicate campaign shell 'Caps + Kage_26 Sept – Copy' deleted externally -- resolves A-054",
+      "detail": "The empty duplicate campaign shell flagged on 2026-10-04 (AL-1365, A-054 proposed pausing it) now returns status=DELETED on a direct fetch -- deleted outside this routine since the ~08:50 UTC pass, most likely a manual Ads Manager action. A-054 marked resolved. Current 4 active campaigns (Prospecting_JP_Purchase_5-9Oct, Sneakers_BOF_30Sep-5Oct, Retargeting_Overall, Caps + Kage_26 Sept) target distinct products/funnel stages -- no new consolidation flag.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-10-05T10:49:00.000Z"
+    },
+    {
+      "id": "AL-1414",
+      "module": "self-audit-check",
+      "title": "Live numbers reconfirmed sane vs. dashboard snapshot -- snapshot still stale",
+      "detail": "Today's account spend Rs3,590.14 vs Rs5,700 ceiling; last_14d campaign spend/ROAS for the 3 real-delivery active campaigns unchanged from the ~08:50 UTC pass (no new attributable spend landed in this window). index.html's static DATA/INSIGHTS_DATA snapshot remains stale relative to these live figures as previously noted -- no drift beyond that pre-existing staleness.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-10-05T10:49:00.000Z"
+    },
+    {
+      "id": "AL-1415",
+      "module": "routine-run-notes",
+      "title": "Run summary -- 2026-10-05 ~10:49 UTC pass",
+      "detail": "Circuit breaker: not tripped (today's spend Rs3,590.14 vs ceiling Rs5,700). Pixel quality gate: composite EMQ 6.1-8.8, ROAS modules not suppressed. purchaser-exclusion: all 9 active ad sets compliant, no mutation needed. lookalike-refresh: still rate-limited (last attempt 2026-10-05T00:51:00.000Z, <24h elapsed; next eligible ~2026-10-06T00:51 UTC) -- skipped, no new alert (AL-1390 already covers it, unchanged). hook-angle-tagging: all 14 distinct creative IDs behind today's active ads already tagged, nothing new. hard-spend-circuit-breaker: n/a, not tripped. Notable change this pass: the duplicate campaign shell 'Caps + Kage_26 Sept – Copy' (A-054) was deleted externally (outside this routine) sometime after the ~08:50 UTC pass -- A-054 marked resolved, no pause needed. Competitor watch: Lotto Sport India active-ad count ticked down to 565 from 589 (-4.1%), below the 20% spike threshold. A-049/A-052/A-053's underlying breakdown numbers (budget-reallocation, age-gender dead zone, device gap) re-checked against fresh pulls -- identical to the ~08:50 UTC pass, left unchanged. Reactivate-winner candidates (Sneakers_Prospecting_30Sep-5Oct, New Caps Part 3 STP, Sora_BOF_Based on Mori_Tee, Sora Retargeting) all already covered by existing pending proposals (A-050/A-051/A-039/A-048) with unchanged numbers. Geo breakdown (region) returned no purchase_roas attribution at all for any of the 3 real-spend campaigns this pass -- insufficient data for geo-scaling/geo-suppression/new-geo-testing to act on. No anomaly/creative-fatigue change since the last pass's AL-1398/AL-1367. 0 auto-executed mutations this pass (account already compliant, nothing eligible to act on); 1 proposal resolved (A-054, moot after external deletion); 0 new proposals; 6 new informational alerts.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-10-05T10:49:00.000Z"
     }
   ],
   "log": [
