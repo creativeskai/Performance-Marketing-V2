@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-05T12:48:00.000Z",
+  "generatedAt": "2026-10-05T14:52:00.000Z",
   "settings": {
     "kill_roas_threshold": "DISABLED 2026-10-05 by user instruction: the ROAS pause-kill is OFF. Module 16 (pause-kill) must NOT auto-pause any campaign for low ROAS; surface low-ROAS campaigns as alerts only. The hard spend circuit breaker is a separate mechanism and stays ON. Former rule, for reference: pause if ROAS < 1.0x after ₹500 spend on a sales-objective campaign. EXCEPTION until 2026-10-05T23:59+05:30 (user-approved 2026-09-29): for the sneaker-push campaigns 120256091369160159 (Sneakers_BOF_30Sep-5Oct), 120256091370110159 (Sneakers_Prospecting_30Sep-5Oct) and 120256088882780159 (Sneakers_Catalog_Retargeting) the spend floor is ₹1,500, not ₹500.",
     "reactivate_min_historic_roas": "surface for reactivation if a paused campaign's last active-period ROAS >= 3.0x",
@@ -30,9 +30,9 @@
     },
     "competitor_last_scrape": {
       "gully_labs_active_ads": null,
-      "lotto_sport_india_active_ads": 551,
-      "scraped_at": "2026-10-05T12:48:00.000Z",
-      "note": "2026-10-05T12:47:00.000Z scheduled run: ads_library_search combined page_ids query (107479854297817 / 426015150606378, ad_active_status=ACTIVE, no country filter) returned estimated_total_count=551, down from the prior 2026-10-05T10:49:00.000Z pass (565) -- a -2.5% move, well below the >=20% swing threshold. No competitor-spike alert this pass."
+      "lotto_sport_india_active_ads": 432,
+      "scraped_at": "2026-10-05T14:52:00.000Z",
+      "note": "2026-10-05T14:52:00.000Z scheduled run: ads_library_search combined page_ids query (107479854297817 / 426015150606378, ad_active_status=ACTIVE, no country filter) returned estimated_total_count=432, down from the prior 2026-10-05T12:48:00.000Z pass (551) -- a -21.6% move, crossing the >=20% swing threshold. See AL-1419."
     },
     "audience_label_corrections": {
       "120249907176770159": "ATC_180D -- NOT a purchaser audience (cart-adders, event=AddToCart, retention 180 days). Verified 2026-09-14, reconfirmed 2026-09-20. Superseded note: earlier passes said the account had NO purchaser audience at all -- that's now out of date. See the 120255823280550159 (Purchasers 180D) entry above, created 2026-09-15, which IS a genuine purchaser audience and is already in use for exclusion + lookalike.",
@@ -13227,11 +13227,12 @@
       "id": "AL-1367",
       "module": "creative-fatigue",
       "title": "BOF_1_Hot_ATC_IC_API_30D frequency spiked to 8.43 -- Retargeting_Overall still elevated too, both still healthy ROAS",
-      "detail": "Retargeting_Overall ad set frequency is now 3.602188 (last_14d, up from 3.38 at the prior pass) against the fatigue_frequency_threshold of 3.0, but ROAS remains very healthy (11.27x last_14d on Rs2,097.43 spend) and CTR/CPM show no fatigue-driven decay -- monitoring, not yet a creative-fatigue action. Reconfirmed 2026-10-04T16:51:00.000Z pass: Retargeting_Overall frequency is 3.602437 (last_14d), essentially flat vs the prior pass (3.602188), against the fatigue_frequency_threshold of 3.0. ROAS remains very healthy (11.267074x last_14d on Rs2,097.43 spend) and CTR (2.43%) shows no fatigue-driven decay -- still monitoring, not yet a creative-fatigue action. Reconfirmed 2026-10-04T20:50:00.000Z pass: a materially new escalation -- BOF_1_Hot_ATC_IC_API_30D (Sneakers_BOF_30Sep-5Oct, 30-day hot-ATC retargeting ad set) now shows frequency 8.431034 (last_7d), nearly 3x the fatigue_frequency_threshold of 3.0 and well above the 'crossed 3.0+' reading from 2026-10-02/03. ROAS on this ad set remains strong (7.506812x last_14d; the 35-44 male segment alone is 41.2x on Rs127.66 spend), and CTR (2.38-5.56% across placements) shows no decay -- still a monitoring case, not yet a creative-fatigue action, since no fresh creative asset is available to rotate in this run and the ad set's audience (hot 30-day ATC) is deliberately narrow by design. Retargeting_Overall frequency is now 3.843165 (last_7d), essentially flat vs. the prior ~3.6 reading, ROAS still 9.45-11.79x depending on window. Severity raised to medium given the magnitude of BOF_1's jump; flagging for human attention on the next creative refresh cycle rather than forcing an automatic narrow/rotate action now. Reconfirmed 2026-10-05T00:51:00.000Z pass: BOF_1_Hot_ATC_IC_API_30D frequency 8.431034 (last_14d), unchanged vs the prior pass; ROAS still strong at 7.506812x. Retargeting_Overall frequency 3.843402 (last_14d), essentially flat; ROAS still 11.789304x. Still monitoring, not yet a creative-fatigue action -- no fresh creative asset available to rotate this run (Higgsfield not attached), and both ad sets' audiences are deliberately narrow by design. Reconfirmed 2026-10-05T08:50:00.000Z pass: BOF_1_Hot_ATC_IC_API_30D frequency 8.431034 (last_7d), unchanged vs the prior pass; ROAS still strong at 7.506812x. Retargeting_Overall frequency 3.843202 (last_7d), essentially flat; ROAS 9.453687x (last_7d) / 11.789251x (last_14d). Still monitoring, not yet a creative-fatigue action -- no fresh creative asset available to rotate this run (Higgsfield not attached), both ad sets' audiences deliberately narrow by design.",
+      "detail": "Retargeting_Overall ad set frequency is now 3.602188 (last_14d, up from 3.38 at the prior pass) against the fatigue_frequency_threshold of 3.0, but ROAS remains very healthy (11.27x last_14d on Rs2,097.43 spend) and CTR/CPM show no fatigue-driven decay -- monitoring, not yet a creative-fatigue action. Reconfirmed 2026-10-04T16:51:00.000Z pass: Retargeting_Overall frequency is 3.602437 (last_14d), essentially flat vs the prior pass (3.602188), against the fatigue_frequency_threshold of 3.0. ROAS remains very healthy (11.267074x last_14d on Rs2,097.43 spend) and CTR (2.43%) shows no fatigue-driven decay -- still monitoring, not yet a creative-fatigue action. Reconfirmed 2026-10-04T20:50:00.000Z pass: a materially new escalation -- BOF_1_Hot_ATC_IC_API_30D (Sneakers_BOF_30Sep-5Oct, 30-day hot-ATC retargeting ad set) now shows frequency 8.431034 (last_7d), nearly 3x the fatigue_frequency_threshold of 3.0 and well above the 'crossed 3.0+' reading from 2026-10-02/03. ROAS on this ad set remains strong (7.506812x last_14d; the 35-44 male segment alone is 41.2x on Rs127.66 spend), and CTR (2.38-5.56% across placements) shows no decay -- still a monitoring case, not yet a creative-fatigue action, since no fresh creative asset is available to rotate in this run and the ad set's audience (hot 30-day ATC) is deliberately narrow by design. Retargeting_Overall frequency is now 3.843165 (last_7d), essentially flat vs. the prior ~3.6 reading, ROAS still 9.45-11.79x depending on window. Severity raised to medium given the magnitude of BOF_1's jump; flagging for human attention on the next creative refresh cycle rather than forcing an automatic narrow/rotate action now. Reconfirmed 2026-10-05T00:51:00.000Z pass: BOF_1_Hot_ATC_IC_API_30D frequency 8.431034 (last_14d), unchanged vs the prior pass; ROAS still strong at 7.506812x. Retargeting_Overall frequency 3.843402 (last_14d), essentially flat; ROAS still 11.789304x. Still monitoring, not yet a creative-fatigue action -- no fresh creative asset available to rotate this run (Higgsfield not attached), and both ad sets' audiences are deliberately narrow by design. Reconfirmed 2026-10-05T08:50:00.000Z pass: BOF_1_Hot_ATC_IC_API_30D frequency 8.431034 (last_7d), unchanged vs the prior pass; ROAS still strong at 7.506812x. Retargeting_Overall frequency 3.843202 (last_7d), essentially flat; ROAS 9.453687x (last_7d) / 11.789251x (last_14d). Still monitoring, not yet a creative-fatigue action -- no fresh creative asset available to rotate this run (Higgsfield not attached), both ad sets' audiences deliberately narrow by design. Reconfirmed 2026-10-05T14:52:00.000Z pass: ad-level frequency (last_7d) for 'Retargeting-Overall' (id 120255851467350159, ad set Retargeting_Overall) is now 3.06 -- still at/above the 3.0 fatigue threshold but down from the 8.43 spike reported at the 08:50 UTC pass, and ROAS for the parent campaign remains strong (11.79x last_14d). 'Retargeting-Overall_ProductLinks_v3_Universal' (same ad set) is at 2.62, back under threshold. Still not actionable -- healthy ROAS, no rotation needed.",
       "severity": "medium",
       "dismissed": false,
       "createdAt": "2026-10-05T08:50:00.000Z",
-      "lastConfirmedAt": "2026-10-05T00:51:00.000Z"
+      "lastConfirmedAt": "2026-10-05T00:51:00.000Z",
+      "updatedAt": "2026-10-05T14:52:00.000Z"
     },
     {
       "id": "AL-1368",
@@ -13435,12 +13436,13 @@
     {
       "id": "AL-1390",
       "module": "lookalike-refresh",
-      "title": "Lookalike rebuild still rate-limited -- source audience unchanged",
-      "detail": "The laddered 1%/2%/5% lookalikes built 2026-09-15 off Purchasers 180D remain past the 14-day lookalike_refresh_days threshold, but the last rebuild attempt was 2026-10-04T02:52:00.000Z (~17h58m ago), within max_auto_actions_per_entity_per_day=1 (<24h). Re-attempt skipped this pass rather than re-tried; next eligible ~2026-10-04T02:52 UTC + 24h. Source audience size unchanged (Purchasers 180D still approximate_count ~20) -- rebuilds have been failing with Meta's duplicate-lookalike error (2654/1713007) until the source grows; the 3 existing lookalikes (120255832535210159/610159/780159) remain ACTIVE and serving. Reconfirmed 2026-10-04T22:48:00.000Z pass: last rebuild attempt remains 2026-10-04T02:52:00.000Z (~19h56m ago), still within max_auto_actions_per_entity_per_day=1 (<24h) -- re-attempt skipped again rather than re-tried; next eligible ~2026-10-05T02:52 UTC. Source audience (Purchasers 180D) size unchanged (~20). The 3 existing lookalikes remain ACTIVE and serving, untouched. Reconfirmed 2026-10-05T12:47:00.000Z pass: last rebuild attempt remains 2026-10-05T00:51:00.000Z (~11h56m ago), still within max_auto_actions_per_entity_per_day=1 (<24h) -- re-attempt skipped again rather than re-tried; next eligible ~2026-10-05T00:51 UTC + 24h. Source audience (Purchasers 180D) size unchanged (~20). The 3 existing lookalikes (120255832535210159/610159/780159) remain ACTIVE and serving, untouched.",
+      "title": "Lookalike rebuild still rate-limited -- source audience unchanged (reconfirmed 14:52 UTC)",
+      "detail": "The laddered 1%/2%/5% lookalikes built 2026-09-15 off Purchasers 180D remain past the 14-day lookalike_refresh_days threshold, but the last rebuild attempt was 2026-10-04T02:52:00.000Z (~17h58m ago), within max_auto_actions_per_entity_per_day=1 (<24h). Re-attempt skipped this pass rather than re-tried; next eligible ~2026-10-04T02:52 UTC + 24h. Source audience size unchanged (Purchasers 180D still approximate_count ~20) -- rebuilds have been failing with Meta's duplicate-lookalike error (2654/1713007) until the source grows; the 3 existing lookalikes (120255832535210159/610159/780159) remain ACTIVE and serving. Reconfirmed 2026-10-04T22:48:00.000Z pass: last rebuild attempt remains 2026-10-04T02:52:00.000Z (~19h56m ago), still within max_auto_actions_per_entity_per_day=1 (<24h) -- re-attempt skipped again rather than re-tried; next eligible ~2026-10-05T02:52 UTC. Source audience (Purchasers 180D) size unchanged (~20). The 3 existing lookalikes remain ACTIVE and serving, untouched. Reconfirmed 2026-10-05T12:47:00.000Z pass: last rebuild attempt remains 2026-10-05T00:51:00.000Z (~11h56m ago), still within max_auto_actions_per_entity_per_day=1 (<24h) -- re-attempt skipped again rather than re-tried; next eligible ~2026-10-05T00:51 UTC + 24h. Source audience (Purchasers 180D) size unchanged (~20). The 3 existing lookalikes (120255832535210159/610159/780159) remain ACTIVE and serving, untouched. Reconfirmed 2026-10-05T14:52:00.000Z pass: last rebuild attempt remains 2026-10-05T00:51:00.000Z (~14h01m ago, within max_auto_actions_per_entity_per_day=1 <24h) -- re-attempt skipped again this pass. Source audience 'Purchasers 180D' (120255823280550159) still approximate_count 20, unchanged since 2026-09-15 creation. The 3 existing laddered lookalikes (120255832535210159/610159/780159) remain ACTIVE and serving, untouched. Today's account spend at this pass: Rs4,518.04 against the Rs5,700 ceiling -- no circuit-breaker concern.",
       "severity": "low",
       "dismissed": false,
       "createdAt": "2026-10-04T20:50:00.000Z",
-      "lastConfirmedAt": "2026-10-05T12:48:00.000Z"
+      "lastConfirmedAt": "2026-10-05T12:48:00.000Z",
+      "updatedAt": "2026-10-05T14:52:00.000Z"
     },
     {
       "id": "AL-1391",
@@ -13680,6 +13682,42 @@
       "severity": "low",
       "dismissed": false,
       "createdAt": "2026-10-05T12:48:00.000Z"
+    },
+    {
+      "id": "AL-1417",
+      "module": "purchaser-exclusion",
+      "title": "All 9 active ad sets reconfirmed purchaser-exclusion compliant -- 2 new ad sets added since last pass",
+      "detail": "Account composition changed since the ~12:48 UTC pass: a new campaign 'Prospecting_JP_Purchase_5-9Oct' (120256186544730159, ad set Prosp_Men_25-44_Purchase_JP, 120256186545330159) and a new ad set 'Retargeting_NoBuyers_JP' (120256186551550159, under campaign Retargeting_Overall) are now ACTIVE. Direct targeting fetch on all 9 currently-active ad sets: Prosp_Men_25-44_Purchase_JP excludes Purchasers 180D (120255823280550159) in excluded_custom_audiences -- compliant. Retargeting_NoBuyers_JP also excludes Purchasers 180D directly (plus Prepaid_Purchasers and COD_purchasers) -- compliant. The other 7 (BOF_2_Warm_IG365_Engagers_Visitors, BOF_1_Hot_ATC_IC_API_30D, Caps_FB-A_EngagedShoppers, Caps_FB-B_HighValueGoods, Caps_FB-C_Interests, Caps + Kage_26Sept all exclude it directly; Retargeting_Overall ad set 120255851467360159 remains on settings.purchaser_exclusion_exempt_adset_ids and deliberately includes Purchasers 180D by design. purchaser-exclusion remains compliant account-wide -- no action needed this pass.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-10-05T14:52:00.000Z"
+    },
+    {
+      "id": "AL-1418",
+      "module": "anomaly",
+      "title": "New anomaly: 'Retargeting_NoBuyers_JP' ad set flagged as narrow audience",
+      "detail": "ads_insights_anomaly_signal fired active_delivery_narrow_audience for ad set 'Retargeting_NoBuyers_JP' (id 120256186551550159, campaign Retargeting_Overall, new this pass). Estimated audience size is in the 23,800-28,100 range, categorized as narrow in Ads Manager. Meta's recommendation: evaluate expanding the audience or A/B test using Advantage+ audience. Root-cause context (anomaly-root-cause): this ad set combines 6 bottom-funnel retargeting audiences (Initiate_Checkout, ATC_180D, Add_Payment_Info, Search_Customers, Page_View_180D, ViewContent_180D) under an OR-style custom-audience match, ages 20-54, India, with device_platforms restricted to mobile only -- it already excludes Purchasers 180D/Prepaid_Purchasers/COD_purchasers (see purchaser-exclusion alert this pass). A combined checkout/ATC/payment-info retargeting pool is inherently smaller than a prospecting audience, and the mobile-only device restriction narrows it further; this looks like an expected characteristic of a bottom-funnel retargeting ad set rather than creative fatigue or a targeting regression. No action taken (alert-only module) -- worth a human review of whether to add desktop back in if delivery volume looks constrained.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-10-05T14:52:00.000Z"
+    },
+    {
+      "id": "AL-1419",
+      "module": "competitor-spike",
+      "title": "Lotto Sport India active-ad count dropped >=20% (551 -> 432)",
+      "detail": "ads_library_search combined page_ids query (107479854297817 / 426015150606378, ad_active_status=ACTIVE, no country filter) returned estimated_total_count=432 this pass, DOWN from 551 at the prior 2026-10-05T12:48:00.000Z pass -- a drop of 119 (21.6%), crossing the >=20% swing threshold. Consistent with the past week's pattern of large back-and-forth swings on this same combined query (see AL-1381/1383/1385 from 2026-10-04) -- most likely Ad Library estimated-count volatility rather than a real pullback in competitor spend. No action taken (alert-only module).",
+      "severity": "medium",
+      "dismissed": false,
+      "createdAt": "2026-10-05T14:52:00.000Z"
+    },
+    {
+      "id": "AL-1420",
+      "module": "routine-run-notes",
+      "title": "Run summary -- 2026-10-05 ~14:52 UTC pass",
+      "detail": "Circuit breaker: not tripped (today's account spend Rs4,518.04 vs Rs5,700 ceiling, 79.3%). Pixel quality gate: healthy, all tracked event composite EMQ scores 6.1-8.8, at/above pixel_quality_min_match_rate=0.6 -- ROAS-based modules not suppressed. purchaser-exclusion: compliant account-wide across all 9 active ad sets, including 2 new ones (see AL-1417). lookalike-refresh: rate-limited again, no new attempt (see AL-1390 update). hook-angle-tagging: all distinct active creatives already tagged -- nothing new. hard-spend-circuit-breaker: no trip. anomaly: 1 new narrow-audience flag on Retargeting_NoBuyers_JP (AL-1418), otherwise none. competitor-spike: Lotto Sport India combined count swung -21.6% (AL-1419), within the week's established noise pattern. threshold-alerts / pixel-health / learning-phase-stuck / campaign-consolidation-watch / self-audit-check: unchanged from the ~12:48 UTC pass, no new findings. creative-fatigue: Retargeting-Overall ad frequency still above 3.0 (3.06) but down from an 8.43 spike, ROAS healthy, not actionable (AL-1367 update). No approval-tier proposal numbers moved materially since the last reconfirmation pass -- no updates written. No new proposals this pass. 4 campaigns / 9 ad sets ACTIVE: Prospecting_JP_Purchase_5-9Oct (new today), Sneakers_BOF_30Sep-5Oct, Retargeting_Overall (incl. new Retargeting_NoBuyers_JP ad set), Caps + Kage_26 Sept.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-10-05T14:52:00.000Z"
     }
   ],
   "log": [
