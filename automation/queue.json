@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-05T00:51:00.000Z",
+  "generatedAt": "2026-10-05T02:48:50.000Z",
   "settings": {
     "kill_roas_threshold": "DISABLED 2026-10-05 by user instruction: the ROAS pause-kill is OFF. Module 16 (pause-kill) must NOT auto-pause any campaign for low ROAS; surface low-ROAS campaigns as alerts only. The hard spend circuit breaker is a separate mechanism and stays ON. Former rule, for reference: pause if ROAS < 1.0x after ₹500 spend on a sales-objective campaign. EXCEPTION until 2026-10-05T23:59+05:30 (user-approved 2026-09-29): for the sneaker-push campaigns 120256091369160159 (Sneakers_BOF_30Sep-5Oct), 120256091370110159 (Sneakers_Prospecting_30Sep-5Oct) and 120256088882780159 (Sneakers_Catalog_Retargeting) the spend floor is ₹1,500, not ₹500.",
     "reactivate_min_historic_roas": "surface for reactivation if a paused campaign's last active-period ROAS >= 3.0x",
@@ -30,9 +30,9 @@
     },
     "competitor_last_scrape": {
       "gully_labs_active_ads": null,
-      "lotto_sport_india_active_ads": 616,
-      "scraped_at": "2026-10-05T00:51:00.000Z",
-      "note": "2026-10-05T00:51:00.000Z scheduled run: ads_library_search combined page_ids query (107479854297817 / 426015150606378, ad_active_status=ACTIVE, no country filter) returned estimated_total_count=616, unchanged vs the prior 2026-10-04T22:48 UTC pass (616) -- a change of 0%, well BELOW the >=20% swing threshold. No competitor-spike alert this pass."
+      "lotto_sport_india_active_ads": 612,
+      "scraped_at": "2026-10-05T02:48:50.000Z",
+      "note": "2026-10-05T02:48:50.000Z scheduled run: ads_library_search combined page_ids query (107479854297817 / 426015150606378, ad_active_status=ACTIVE, no country filter) returned estimated_total_count=612, down from the prior 2026-10-05T00:51:00.000Z pass (616) -- a change of -0.65%, well BELOW the >=20% swing threshold. No competitor-spike alert this pass."
     },
     "audience_label_corrections": {
       "120249907176770159": "ATC_180D -- NOT a purchaser audience (cart-adders, event=AddToCart, retention 180 days). Verified 2026-09-14, reconfirmed 2026-09-20. Superseded note: earlier passes said the account had NO purchaser audience at all -- that's now out of date. See the 120255823280550159 (Purchasers 180D) entry above, created 2026-09-15, which IS a genuine purchaser audience and is already in use for exclusion + lookalike.",
@@ -13539,6 +13539,15 @@
       "severity": "low",
       "createdAt": "2026-10-05T00:51:00.000Z",
       "dismissed": false
+    },
+    {
+      "id": "AL-1402",
+      "module": "routine-run-notes",
+      "title": "Run summary -- 2026-10-05 ~02:48 UTC pass",
+      "detail": "Circuit breaker: not tripped -- today's account spend Rs1,730.56 vs Rs5,700 ceiling (settings.hard_spend_ceiling_inr), no action. Pixel quality gate: all tracked event composite EMQ scores 6.1-8.8, at/above pixel_quality_min_match_rate=0.6 -- ROAS-based modules not suppressed. 4 campaigns ACTIVE: Prospecting_JP_Purchase_5-9Oct (120256186544730159, brand new, Rs59.04 spent today, no history yet), Sneakers_BOF_30Sep-5Oct (last_30d Rs12,936.94 @ 4.77x ROAS), Retargeting_Overall (last_30d Rs2,953.73 @ 9.40x ROAS, last_14d 11.79x), Caps + Kage_26 Sept (last_30d Rs11,389.56 @ 7.28x ROAS). purchaser-exclusion: all 9 active ad sets reconfirmed compliant -- Retargeting_Overall and the new Prosp_Men_25-44_Purchase_JP / Retargeting_NoBuyers_JP ad sets all correctly exclude or (Retargeting_Overall, exempt by design) deliberately include Purchasers 180D (120255823280550159). lookalike-refresh: rate-limited this pass (last attempt 2026-10-05T00:51:00.000Z, <24h elapsed) -- not retried. hook-angle-tagging: all active ads' creatives (incl. the 2 new ad sets, which reuse existing already-tagged creatives) already have creativeTags entries -- nothing new to tag. anomaly: active_delivery_narrow_audience still showing on new ad set Retargeting_NoBuyers_JP (120256186551550159, audience size 23,900-28,100) -- already covered by AL-1398 (2026-10-04T20:50), no new alert. competitor-rescrape: Lotto Sport India + Gully Labs combined active-ad count 612, down from 616 (-0.65%), below the 20% swing threshold -- no competitor-spike alert. campaign-consolidation-watch: duplicate shell 'Caps + Kage_26 Sept - Copy' still flagged (AL-1365) with its pause proposal (A-054) still pending -- no new flag needed. No new anomaly-root-cause, threshold-alert, learning-phase-stuck, or self-audit-check findings this pass beyond what's already on record. No proposals created or executed this pass -- the two new active entities (Prospecting_JP_Purchase_5-9Oct, Retargeting_NoBuyers_JP) have too little spend/history yet for pause-kill/age-gender/placement/device checks.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-10-05T02:48:50.000Z"
     }
   ],
   "log": [
