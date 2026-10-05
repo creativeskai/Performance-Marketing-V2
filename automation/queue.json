@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-05T14:52:00.000Z",
+  "generatedAt": "2026-10-05T16:52:00.000Z",
   "settings": {
     "kill_roas_threshold": "DISABLED 2026-10-05 by user instruction: the ROAS pause-kill is OFF. Module 16 (pause-kill) must NOT auto-pause any campaign for low ROAS; surface low-ROAS campaigns as alerts only. The hard spend circuit breaker is a separate mechanism and stays ON. Former rule, for reference: pause if ROAS < 1.0x after ₹500 spend on a sales-objective campaign. EXCEPTION until 2026-10-05T23:59+05:30 (user-approved 2026-09-29): for the sneaker-push campaigns 120256091369160159 (Sneakers_BOF_30Sep-5Oct), 120256091370110159 (Sneakers_Prospecting_30Sep-5Oct) and 120256088882780159 (Sneakers_Catalog_Retargeting) the spend floor is ₹1,500, not ₹500.",
     "reactivate_min_historic_roas": "surface for reactivation if a paused campaign's last active-period ROAS >= 3.0x",
@@ -30,9 +30,9 @@
     },
     "competitor_last_scrape": {
       "gully_labs_active_ads": null,
-      "lotto_sport_india_active_ads": 432,
-      "scraped_at": "2026-10-05T14:52:00.000Z",
-      "note": "2026-10-05T14:52:00.000Z scheduled run: ads_library_search combined page_ids query (107479854297817 / 426015150606378, ad_active_status=ACTIVE, no country filter) returned estimated_total_count=432, down from the prior 2026-10-05T12:48:00.000Z pass (551) -- a -21.6% move, crossing the >=20% swing threshold. See AL-1419."
+      "lotto_sport_india_active_ads": 586,
+      "scraped_at": "2026-10-05T16:52:00.000Z",
+      "note": "2026-10-05T16:52:00.000Z scheduled run: ads_library_search combined page_ids query (107479854297817 / 426015150606378, ad_active_status=ACTIVE, no country filter) returned estimated_total_count=586, up from the prior 2026-10-05T14:52:00.000Z pass (432) -- a +35.6% move, crossing the >=20% swing threshold. See AL-1422."
     },
     "audience_label_corrections": {
       "120249907176770159": "ATC_180D -- NOT a purchaser audience (cart-adders, event=AddToCart, retention 180 days). Verified 2026-09-14, reconfirmed 2026-09-20. Superseded note: earlier passes said the account had NO purchaser audience at all -- that's now out of date. See the 120255823280550159 (Purchasers 180D) entry above, created 2026-09-15, which IS a genuine purchaser audience and is already in use for exclusion + lookalike.",
@@ -54,7 +54,7 @@
       "module": "reactivate-winner",
       "tier": "approval",
       "title": "Reactivate Kage_Sales",
-      "reasoning": "Kage_Sales (id 120255012429830159) remains PAUSED; lifetime ROAS 4.296679x on ₹6,195.22 spend (10 purchases), unchanged since it went idle 2026-08-27 -- still the account's best-ROAS paused campaign, well above the 3.0x reactivate_min_historic_roas threshold. Zero delivery in the last 14d (fully dormant). Reasoning history prior to this pass condensed for file-size reasons; figures unchanged across every prior re-check since 2026-08-27. Still pending human decision; not executed (approval tier, never auto). [Reconfirmed 2026-09-29T22:52:00.000Z pass: last_30d pull for id 120255012429830159 returns zero spend/no result rows -- still fully dormant, lifetime figures unchanged. Still pending human decision.]",
+      "reasoning": "Kage_Sales (id 120255012429830159) remains PAUSED; lifetime ROAS 4.296679x on ₹6,195.22 spend (10 purchases), unchanged since it went idle 2026-08-27 -- still the account's best-ROAS paused campaign, well above the 3.0x reactivate_min_historic_roas threshold. Zero delivery in the last 14d (fully dormant). Reasoning history prior to this pass condensed for file-size reasons; figures unchanged across every prior re-check since 2026-08-27. Still pending human decision; not executed (approval tier, never auto). [Reconfirmed 2026-09-29T22:52:00.000Z pass: last_30d pull for id 120255012429830159 returns zero spend/no result rows -- still fully dormant, lifetime figures unchanged. Still pending human decision.] Reconfirmed 2026-10-05T16:52:00.000Z pass: campaign status has changed from PAUSED to ARCHIVED (effective_status also ARCHIVED) -- lifetime figures unchanged (Rs6,195.22 spend, 4.296679x ROAS). This is a material change: Meta's ads_activate_entity generally cannot bring an ARCHIVED campaign back to ACTIVE directly (archiving is a one-way state short of deletion) -- this proposal's stored metaAction may fail if approved as-is. Flagging for human review rather than silently leaving stale PAUSED-era wording; a rebuild (new campaign cloned from this one's settings) may be the real path forward if the user still wants to resume this concept. Not executed -- approval tier, never auto.",
       "actionSummary": "Reactivate campaign 'Kage_Sales' (id 120255012429830159), then set its daily budget to 25000 (Meta's minor-currency-unit field — this is ₹250/day, slightly above its historical ₹206/day average pace to compensate for reactivation ramp-up, still conservative). Monitor for 3 days before scaling further.",
       "metaAction": {
         "tool": "ads_activate_entity",
@@ -73,7 +73,7 @@
       },
       "status": "pending",
       "createdAt": "2026-08-27T00:00:00.000Z",
-      "updatedAt": "2026-09-29T22:52:00.000Z"
+      "updatedAt": "2026-10-05T16:52:00.000Z"
     },
     {
       "id": "A-002",
@@ -13718,6 +13718,33 @@
       "severity": "low",
       "dismissed": false,
       "createdAt": "2026-10-05T14:52:00.000Z"
+    },
+    {
+      "id": "AL-1421",
+      "module": "reactivate-winner",
+      "title": "A-001's target campaign (Kage_Sales) is now ARCHIVED, not PAUSED",
+      "detail": "Kage_Sales (id 120255012429830159), the subject of pending proposal A-001, changed status from PAUSED to ARCHIVED since the last pass -- lifetime spend/ROAS unchanged (Rs6,195.22 / 4.296679x). Archiving is generally a one-way state in the Meta Ads API; ads_activate_entity cannot restore an ARCHIVED campaign to ACTIVE. A-001's stored metaAction would likely fail if approved as-is -- a human should review before approving, and may need to rebuild this as a new campaign instead. A-001's reasoning has been updated to reflect this.",
+      "severity": "medium",
+      "dismissed": false,
+      "createdAt": "2026-10-05T16:52:00.000Z"
+    },
+    {
+      "id": "AL-1422",
+      "module": "competitor-spike",
+      "title": "Lotto Sport India active-ad count rebounded >=20% (432 -> 586)",
+      "detail": "ads_library_search combined page_ids query (107479854297817 / 426015150606378, ad_active_status=ACTIVE, no country filter) returned estimated_total_count=586, up from the prior 2026-10-05T14:52:00.000Z pass (432) -- a +35.6% move, crossing the >=20% swing threshold again in the opposite direction from AL-1419's -21.6% drop two passes ago. Net effect over the last two scrapes: 551 -> 432 -> 586, i.e. choppy/noisy rather than a clean trend -- informational only, no action taken (gully_labs_active_ads remains unavailable/null, consistent with prior passes).",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-10-05T16:52:00.000Z"
+    },
+    {
+      "id": "AL-1423",
+      "module": "routine-run-notes",
+      "title": "Run summary -- 2026-10-05 ~16:52 UTC pass",
+      "detail": "Circuit breaker: not tripped (today's account spend Rs5,093.96 vs Rs5,700 ceiling, 89.4%). Pixel quality gate: healthy, all tracked event composite EMQ scores 6.1-8.8, at/above pixel_quality_min_match_rate=0.6 -- ROAS-based modules not suppressed. purchaser-exclusion: reconfirmed compliant account-wide across all 9 active ad sets (same set as the ~14:52 UTC pass) -- Retargeting_Overall and BOF_3_CrossSell_Purchasers180D-style exemptions where applicable remain correctly on the exempt list, Retargeting_NoBuyers_JP and Prosp_Men_25-44_Purchase_JP (both new this window) already exclude Purchasers 180D. lookalike-refresh: still rate-limited (last attempt 2026-10-05T00:51:00.000Z, ~16h elapsed, within max_auto_actions_per_entity_per_day=1); no new attempt. hook-angle-tagging: all 13 distinct active creatives already have creativeTags entries -- nothing new to tag. hard-spend-circuit-breaker: no trip. anomaly: same narrow-audience flag on Retargeting_NoBuyers_JP as AL-1418, no new signal -- not re-alerted (duplicate). competitor-spike: Lotto Sport India count rebounded 432 -> 586 (+35.6%), crossing the swing threshold again (AL-1422). reactivate-winner: Kage_Sales (A-001's target) changed PAUSED -> ARCHIVED -- flagged (AL-1421), A-001 updated. A-027/A-028/A-039/A-048/A-050/A-051 reconfirmed, fresh last_14d/last_30d figures match already-recorded numbers exactly -- no updates needed. budget-reallocation (A-049): fresh last_14d figures for Sneakers_BOF, Caps + Kage_26 Sept, and Retargeting_Overall all match already-recorded numbers exactly -- no update needed. age-gender-auto-shift (A-052) and device-targeting (A-053): fresh breakdowns for BOF_2_Warm_IG365_Engagers_Visitors match already-recorded numbers exactly -- no updates needed. threshold-alerts / pixel-health / learning-phase-stuck / campaign-consolidation-watch / self-audit-check: unchanged from the ~14:52 UTC pass, no new findings. creative-fatigue: no new finding this pass. No approval-tier proposal numbers moved materially otherwise. No new proposals this pass. 4 campaigns / 9 ad sets ACTIVE: Prospecting_JP_Purchase_5-9Oct, Sneakers_BOF_30Sep-5Oct, Retargeting_Overall (incl. Retargeting_NoBuyers_JP), Caps + Kage_26 Sept.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-10-05T16:52:00.000Z"
     }
   ],
   "log": [
