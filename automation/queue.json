@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-05T16:52:00.000Z",
+  "generatedAt": "2026-10-05T18:49:00.000Z",
   "settings": {
     "kill_roas_threshold": "DISABLED 2026-10-05 by user instruction: the ROAS pause-kill is OFF. Module 16 (pause-kill) must NOT auto-pause any campaign for low ROAS; surface low-ROAS campaigns as alerts only. The hard spend circuit breaker is a separate mechanism and stays ON. Former rule, for reference: pause if ROAS < 1.0x after ₹500 spend on a sales-objective campaign. EXCEPTION until 2026-10-05T23:59+05:30 (user-approved 2026-09-29): for the sneaker-push campaigns 120256091369160159 (Sneakers_BOF_30Sep-5Oct), 120256091370110159 (Sneakers_Prospecting_30Sep-5Oct) and 120256088882780159 (Sneakers_Catalog_Retargeting) the spend floor is ₹1,500, not ₹500.",
     "reactivate_min_historic_roas": "surface for reactivation if a paused campaign's last active-period ROAS >= 3.0x",
@@ -30,9 +30,9 @@
     },
     "competitor_last_scrape": {
       "gully_labs_active_ads": null,
-      "lotto_sport_india_active_ads": 586,
-      "scraped_at": "2026-10-05T16:52:00.000Z",
-      "note": "2026-10-05T16:52:00.000Z scheduled run: ads_library_search combined page_ids query (107479854297817 / 426015150606378, ad_active_status=ACTIVE, no country filter) returned estimated_total_count=586, up from the prior 2026-10-05T14:52:00.000Z pass (432) -- a +35.6% move, crossing the >=20% swing threshold. See AL-1422."
+      "lotto_sport_india_active_ads": 680,
+      "scraped_at": "2026-10-05T18:49:00.000Z",
+      "note": "2026-10-05T18:49:00.000Z scheduled run: ads_library_search combined page_ids query (107479854297817 / 426015150606378, ad_active_status=ACTIVE, no country filter) returned estimated_total_count=680, up from the prior 2026-10-05T16:52:00.000Z pass (586) -- a +16.0% move, under the >=20% swing threshold. No alert this pass."
     },
     "audience_label_corrections": {
       "120249907176770159": "ATC_180D -- NOT a purchaser audience (cart-adders, event=AddToCart, retention 180 days). Verified 2026-09-14, reconfirmed 2026-09-20. Superseded note: earlier passes said the account had NO purchaser audience at all -- that's now out of date. See the 120255823280550159 (Purchasers 180D) entry above, created 2026-09-15, which IS a genuine purchaser audience and is already in use for exclusion + lookalike.",
@@ -13745,6 +13745,24 @@
       "severity": "low",
       "dismissed": false,
       "createdAt": "2026-10-05T16:52:00.000Z"
+    },
+    {
+      "id": "AL-1424",
+      "module": "purchaser-exclusion",
+      "title": "All 7 active ad sets reconfirmed purchaser-exclusion compliant -- account composition shifted again",
+      "detail": "Account composition changed since the ~16:52 UTC pass: a new campaign 'Prospecting_JP_Purchase_5-9Oct' (120256186544730159, OUTCOME_SALES, launched today) is now ACTIVE with 1 ad set (Prosp_Men_25-44_Purchase_JP), and 3 new ad sets (Caps_FB-A_EngagedShoppers, Caps_FB-B_HighValueGoods, Caps_FB-C_Interests) were added under 'Caps + Kage_26 Sept'. Sneakers_Prospecting_30Sep-5Oct and Retargeting_Overall are now PAUSED (sneaker-push window ends today). 7 ad sets ACTIVE now across 3 campaigns (Prosp_Men_25-44_Purchase_JP; BOF_2_Warm_IG365_Engagers_Visitors and BOF_1_Hot_ATC_IC_API_30D under Sneakers_BOF_30Sep-5Oct; Caps_FB-A/B/C and Caps + Kage_26Sept under Caps + Kage_26 Sept). Direct targeting fetch on all 7 confirms every one excludes Purchasers 180D (120255823280550159) in excluded_custom_audiences -- purchaser-exclusion remains compliant account-wide, no action needed. None of the 7 are on settings.purchaser_exclusion_exempt_adset_ids this pass.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-10-05T18:49:00.000Z"
+    },
+    {
+      "id": "AL-1425",
+      "module": "routine-run-notes",
+      "title": "Run summary -- 2026-10-05 ~18:49 UTC pass",
+      "detail": "Circuit breaker: not tripped (today's account spend Rs35.21 vs Rs6,000 ceiling). Pixel quality gate: healthy, all tracked event composite EMQ scores between 6.1 and 8.8 -- ROAS-based modules not suppressed. Anomaly signal: none fired. Learning-phase-stuck: none of the 7 active ad sets show learning_stage_info -- none stuck. Threshold-alerts: none of the 3 active campaigns (Prospecting_JP_Purchase_5-9Oct, Sneakers_BOF_30Sep-5Oct, Caps + Kage_26 Sept) have a recorded CPM/CTR/CPC baseline in settings.metric_baselines -- no alert. Spend-pacing: skipped, monthly_spend_goal_inr is null. Purchaser-exclusion: see AL-1424 -- compliant account-wide across all 7 active ad sets, including the new Prospecting_JP_Purchase_5-9Oct campaign (spend Rs479.05 so far, too early for ROAS-driven checks). Lookalike-refresh: the laddered 1%/2%/5% lookalikes (built 2026-09-15, source Purchasers 180D still ~20) remain ~20 days old, well past the 14-day threshold, but rate-limited this pass -- last rebuild attempt was 2026-10-05T00:51:00.000Z (failed, Meta duplicate-lookalike error 2654/1713007), only ~18h elapsed (<24h), so skipped rather than re-attempted; the 3 existing lookalikes remain live and serving. Hook-angle-tagging: all 12 distinct creatives behind the 29 currently-active ads already carry creativeTags entries -- nothing new to tag. Competitor-rescrape: Lotto Sport India active-ad count moved 586 -> 680 (+16.0%) since the ~16:52 UTC pass -- under the 20% swing threshold, no alert; settings.competitor_last_scrape updated. Weekly-digest: last one was written 2026-10-04T00:48:00.000Z (week ending 2026-10-04) -- skipped as not yet due again despite today being Monday. Monthly-digest: not due (next due 2026-11-01). Campaign-consolidation-watch: no duplicate campaigns targeting the same product+audience detected among active campaigns. Self-audit-check: live numbers reconfirmed sane vs. dashboard snapshot; snapshot still stale (unchanged from prior passes). Reactivate-winner candidates (A-027, A-028, A-039, A-048, A-050, A-051): all target campaigns confirmed still PAUSED (not archived/deleted), proposals remain actionable. A-001 (reactivate Kage_Sales) remains blocked -- target campaign is ARCHIVED, not PAUSED, per AL-1421 from the prior pass; still pending human review/rejection. No auto-tier actions executed this pass (purchaser-exclusion and hook-angle-tagging had nothing new; lookalike-refresh rate-limited; circuit breaker not tripped). No new or updated approval-tier proposals this pass.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-10-05T18:49:00.000Z"
     }
   ],
   "log": [
