@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-05T10:49:00.000Z",
+  "generatedAt": "2026-10-05T12:48:00.000Z",
   "settings": {
     "kill_roas_threshold": "DISABLED 2026-10-05 by user instruction: the ROAS pause-kill is OFF. Module 16 (pause-kill) must NOT auto-pause any campaign for low ROAS; surface low-ROAS campaigns as alerts only. The hard spend circuit breaker is a separate mechanism and stays ON. Former rule, for reference: pause if ROAS < 1.0x after ₹500 spend on a sales-objective campaign. EXCEPTION until 2026-10-05T23:59+05:30 (user-approved 2026-09-29): for the sneaker-push campaigns 120256091369160159 (Sneakers_BOF_30Sep-5Oct), 120256091370110159 (Sneakers_Prospecting_30Sep-5Oct) and 120256088882780159 (Sneakers_Catalog_Retargeting) the spend floor is ₹1,500, not ₹500.",
     "reactivate_min_historic_roas": "surface for reactivation if a paused campaign's last active-period ROAS >= 3.0x",
@@ -30,9 +30,9 @@
     },
     "competitor_last_scrape": {
       "gully_labs_active_ads": null,
-      "lotto_sport_india_active_ads": 565,
-      "scraped_at": "2026-10-05T10:49:00.000Z",
-      "note": "2026-10-05T10:49:00.000Z scheduled run: ads_library_search combined page_ids query (107479854297817 / 426015150606378, ad_active_status=ACTIVE, no country filter) returned estimated_total_count=565, down from the prior 2026-10-05T08:50:00.000Z pass (589) -- a -4.1% move, well below the >=20% swing threshold. No competitor-spike alert this pass."
+      "lotto_sport_india_active_ads": 551,
+      "scraped_at": "2026-10-05T12:48:00.000Z",
+      "note": "2026-10-05T12:47:00.000Z scheduled run: ads_library_search combined page_ids query (107479854297817 / 426015150606378, ad_active_status=ACTIVE, no country filter) returned estimated_total_count=551, down from the prior 2026-10-05T10:49:00.000Z pass (565) -- a -2.5% move, well below the >=20% swing threshold. No competitor-spike alert this pass."
     },
     "audience_label_corrections": {
       "120249907176770159": "ATC_180D -- NOT a purchaser audience (cart-adders, event=AddToCart, retention 180 days). Verified 2026-09-14, reconfirmed 2026-09-20. Superseded note: earlier passes said the account had NO purchaser audience at all -- that's now out of date. See the 120255823280550159 (Purchasers 180D) entry above, created 2026-09-15, which IS a genuine purchaser audience and is already in use for exclusion + lookalike.",
@@ -13436,11 +13436,11 @@
       "id": "AL-1390",
       "module": "lookalike-refresh",
       "title": "Lookalike rebuild still rate-limited -- source audience unchanged",
-      "detail": "The laddered 1%/2%/5% lookalikes built 2026-09-15 off Purchasers 180D remain past the 14-day lookalike_refresh_days threshold, but the last rebuild attempt was 2026-10-04T02:52:00.000Z (~17h58m ago), within max_auto_actions_per_entity_per_day=1 (<24h). Re-attempt skipped this pass rather than re-tried; next eligible ~2026-10-04T02:52 UTC + 24h. Source audience size unchanged (Purchasers 180D still approximate_count ~20) -- rebuilds have been failing with Meta's duplicate-lookalike error (2654/1713007) until the source grows; the 3 existing lookalikes (120255832535210159/610159/780159) remain ACTIVE and serving. Reconfirmed 2026-10-04T22:48:00.000Z pass: last rebuild attempt remains 2026-10-04T02:52:00.000Z (~19h56m ago), still within max_auto_actions_per_entity_per_day=1 (<24h) -- re-attempt skipped again rather than re-tried; next eligible ~2026-10-05T02:52 UTC. Source audience (Purchasers 180D) size unchanged (~20). The 3 existing lookalikes remain ACTIVE and serving, untouched.",
+      "detail": "The laddered 1%/2%/5% lookalikes built 2026-09-15 off Purchasers 180D remain past the 14-day lookalike_refresh_days threshold, but the last rebuild attempt was 2026-10-04T02:52:00.000Z (~17h58m ago), within max_auto_actions_per_entity_per_day=1 (<24h). Re-attempt skipped this pass rather than re-tried; next eligible ~2026-10-04T02:52 UTC + 24h. Source audience size unchanged (Purchasers 180D still approximate_count ~20) -- rebuilds have been failing with Meta's duplicate-lookalike error (2654/1713007) until the source grows; the 3 existing lookalikes (120255832535210159/610159/780159) remain ACTIVE and serving. Reconfirmed 2026-10-04T22:48:00.000Z pass: last rebuild attempt remains 2026-10-04T02:52:00.000Z (~19h56m ago), still within max_auto_actions_per_entity_per_day=1 (<24h) -- re-attempt skipped again rather than re-tried; next eligible ~2026-10-05T02:52 UTC. Source audience (Purchasers 180D) size unchanged (~20). The 3 existing lookalikes remain ACTIVE and serving, untouched. Reconfirmed 2026-10-05T12:47:00.000Z pass: last rebuild attempt remains 2026-10-05T00:51:00.000Z (~11h56m ago), still within max_auto_actions_per_entity_per_day=1 (<24h) -- re-attempt skipped again rather than re-tried; next eligible ~2026-10-05T00:51 UTC + 24h. Source audience (Purchasers 180D) size unchanged (~20). The 3 existing lookalikes (120255832535210159/610159/780159) remain ACTIVE and serving, untouched.",
       "severity": "low",
       "dismissed": false,
       "createdAt": "2026-10-04T20:50:00.000Z",
-      "lastConfirmedAt": "2026-10-04T22:48:00.000Z"
+      "lastConfirmedAt": "2026-10-05T12:48:00.000Z"
     },
     {
       "id": "AL-1391",
@@ -13511,11 +13511,11 @@
       "id": "AL-1398",
       "module": "anomaly-root-cause",
       "title": "New ad set Retargeting_NoBuyers_JP flagged narrow-audience by native anomaly signal",
-      "detail": "ads_insights_anomaly_signal fired warning type active_delivery_narrow_audience for Retargeting_NoBuyers_JP (120256186551550159, under campaign Retargeting_Overall), estimated audience size 23,700-27,800, categorized narrow in Ads Manager. Root cause: this is a brand-new ad set (launched within the last few hours, effectively $0 spend so far this pass) targeting a 'no past buyers' retargeting segment -- it includes several platform custom audiences (ATC_180D, Add_Payment_Info, Search_Customers, Page_View_180D, ViewContent_180D, a legacy audience 120254260398310159) while excluding Purchasers 180D, COD_purchasers and Prepaid_Purchasers, which inherently shrinks the eligible pool. This is a targeting-composition characteristic of a newly-launched ad set, not a sign of creative fatigue, seasonality, or bid-landscape shift. Recommendation (from Meta's own signal): consider expanding the audience or A/B testing against an Advantage+ audience if delivery/learning stalls. No action taken -- informational only, too early for spend-based evaluation. Reconfirmed 2026-10-05T00:51:00.000Z pass: same active_delivery_narrow_audience signal still firing for this ad set (audience size 23,700-27,900), no change. Reconfirmed 2026-10-05T06:47:00.000Z pass: same active_delivery_narrow_audience signal still firing for this ad set (audience size 23,400-27,600), still $0 spend -- too early for a kill/narrow evaluation, no change.",
+      "detail": "ads_insights_anomaly_signal fired warning type active_delivery_narrow_audience for Retargeting_NoBuyers_JP (120256186551550159, under campaign Retargeting_Overall), estimated audience size 23,700-27,800, categorized narrow in Ads Manager. Root cause: this is a brand-new ad set (launched within the last few hours, effectively $0 spend so far this pass) targeting a 'no past buyers' retargeting segment -- it includes several platform custom audiences (ATC_180D, Add_Payment_Info, Search_Customers, Page_View_180D, ViewContent_180D, a legacy audience 120254260398310159) while excluding Purchasers 180D, COD_purchasers and Prepaid_Purchasers, which inherently shrinks the eligible pool. This is a targeting-composition characteristic of a newly-launched ad set, not a sign of creative fatigue, seasonality, or bid-landscape shift. Recommendation (from Meta's own signal): consider expanding the audience or A/B testing against an Advantage+ audience if delivery/learning stalls. No action taken -- informational only, too early for spend-based evaluation. Reconfirmed 2026-10-05T00:51:00.000Z pass: same active_delivery_narrow_audience signal still firing for this ad set (audience size 23,700-27,900), no change. Reconfirmed 2026-10-05T06:47:00.000Z pass: same active_delivery_narrow_audience signal still firing for this ad set (audience size 23,400-27,600), still $0 spend -- too early for a kill/narrow evaluation, no change. Reconfirmed 2026-10-05T12:47:00.000Z pass: same active_delivery_narrow_audience signal still firing for Retargeting_NoBuyers_JP (audience size 24,300-28,500), still effectively $0 spend recorded at the ad-set level -- too early for a kill/narrow evaluation, no change.",
       "severity": "low",
       "dismissed": false,
       "createdAt": "2026-10-04T20:50:00.000Z",
-      "lastConfirmedAt": "2026-10-05T06:47:00.000Z"
+      "lastConfirmedAt": "2026-10-05T12:48:00.000Z"
     },
     {
       "id": "AL-1399",
@@ -13611,10 +13611,11 @@
       "id": "AL-1409",
       "module": "purchaser-exclusion",
       "title": "All 9 active ad sets reconfirmed purchaser-exclusion compliant",
-      "detail": "Direct targeting fetch on all 9 currently-ACTIVE ad sets: Retargeting_NoBuyers_JP, Prosp_Men_25-44_Purchase_JP, BOF_2_Warm_IG365_Engagers_Visitors, Caps_FB-C_Interests, Caps_FB-B_HighValueGoods, Caps_FB-A_EngagedShoppers, BOF_1_Hot_ATC_IC_API_30D, Caps + Kage_26Sept all list Purchasers 180D (120255823280550159) in excluded_custom_audiences. Retargeting_Overall (120255851467360159) is on settings.purchaser_exclusion_exempt_adset_ids and deliberately includes it by design. purchaser-exclusion remains compliant account-wide -- no mutation needed this pass.",
+      "detail": "Direct targeting fetch on all 9 currently-ACTIVE ad sets: Retargeting_NoBuyers_JP, Prosp_Men_25-44_Purchase_JP, BOF_2_Warm_IG365_Engagers_Visitors, Caps_FB-C_Interests, Caps_FB-B_HighValueGoods, Caps_FB-A_EngagedShoppers, BOF_1_Hot_ATC_IC_API_30D, Caps + Kage_26Sept all list Purchasers 180D (120255823280550159) in excluded_custom_audiences. Retargeting_Overall (120255851467360159) is on settings.purchaser_exclusion_exempt_adset_ids and deliberately includes it by design. purchaser-exclusion remains compliant account-wide -- no mutation needed this pass. Reconfirmed 2026-10-05T12:47:00.000Z pass: same 9 ad sets ACTIVE across the same 4 campaigns (Retargeting_Overall incl. Retargeting_NoBuyers_JP + the exempt Retargeting_Overall ad set; Prospecting_JP_Purchase_5-9Oct/Prosp_Men_25-44_Purchase_JP; Sneakers_BOF_30Sep-5Oct's BOF_1_Hot_ATC_IC_API_30D and BOF_2_Warm_IG365_Engagers_Visitors; Caps + Kage_26 Sept's 4 ad sets) -- fresh targeting fetch confirms all excluding ad sets still exclude Purchasers 180D directly, and the one exempt ad set (Retargeting_Overall, 120255851467360159) remains on settings.purchaser_exclusion_exempt_adset_ids by design. purchaser-exclusion remains compliant account-wide, no action needed.",
       "severity": "low",
       "dismissed": false,
-      "createdAt": "2026-10-05T10:49:00.000Z"
+      "createdAt": "2026-10-05T10:49:00.000Z",
+      "lastConfirmedAt": "2026-10-05T12:48:00.000Z"
     },
     {
       "id": "AL-1410",
@@ -13638,10 +13639,11 @@
       "id": "AL-1412",
       "module": "learning-phase-stuck",
       "title": "No ad sets stuck in learning",
-      "detail": "The newest active ad sets (Caps_FB-A/B/C, Retargeting_NoBuyers_JP, Prosp_Men_25-44_Purchase_JP) are all under 24h old -- too new to judge. The remaining active ad sets (BOF_1/BOF_2 under Sneakers_BOF, Retargeting_Overall, Caps + Kage_26Sept) are all >6 days old and delivering with healthy, stable ROAS -- clearly past learning. Nothing stuck.",
+      "detail": "The newest active ad sets (Caps_FB-A/B/C, Retargeting_NoBuyers_JP, Prosp_Men_25-44_Purchase_JP) are all under 24h old -- too new to judge. The remaining active ad sets (BOF_1/BOF_2 under Sneakers_BOF, Retargeting_Overall, Caps + Kage_26Sept) are all >6 days old and delivering with healthy, stable ROAS -- clearly past learning. Nothing stuck. Reconfirmed 2026-10-05T12:47:00.000Z pass: no ad set shows signs of being stuck in learning >7 days; the newest ad sets (Caps_FB-B_HighValueGoods, Caps_FB-C_Interests, Prosp_Men_25-44_Purchase_JP) are freshly launched with near-zero delivery so far, too early to evaluate learning-phase exit.",
       "severity": "low",
       "dismissed": false,
-      "createdAt": "2026-10-05T10:49:00.000Z"
+      "createdAt": "2026-10-05T10:49:00.000Z",
+      "lastConfirmedAt": "2026-10-05T12:48:00.000Z"
     },
     {
       "id": "AL-1413",
@@ -13669,6 +13671,15 @@
       "severity": "low",
       "dismissed": false,
       "createdAt": "2026-10-05T10:49:00.000Z"
+    },
+    {
+      "id": "AL-1416",
+      "module": "routine-run-notes",
+      "title": "Run summary -- 2026-10-05 ~12:47 UTC pass",
+      "detail": "Circuit breaker: today's account spend Rs3,969.73 vs Rs5,700 ceiling -- no trip. Pixel quality gate: composite EMQ scores 6.1-8.8 across all tracked events, healthy -- ROAS-based modules not suppressed. 4 campaigns / 9 ad sets ACTIVE (Retargeting_Overall, Prospecting_JP_Purchase_5-9Oct, Sneakers_BOF_30Sep-5Oct, Caps + Kage_26 Sept) -- purchaser-exclusion compliant account-wide (see AL-1409), no new untagged creatives (hook-angle-tagging had nothing to do), no ad sets stuck in learning (AL-1412). Lookalike-refresh still rate-limited, last attempt 2026-10-05T00:51 UTC, <24h elapsed (see AL-1390). Anomaly signal: Retargeting_NoBuyers_JP still flagged narrow-audience, unchanged situation, informational only (see AL-1398). No active-campaign CPM/CTR/CPC baseline on file for threshold-alerts (settings.metric_baselines only covers two retired campaign names) -- nothing to compare against this pass. Competitor rescrape: combined Gully Labs / Lotto Sport India active-ad count (ads_library_search) now 551, down from 565 at the prior ~10:49 UTC pass (-2.5%), well below the 20% swing threshold -- no competitor-spike alert. Weekly digest last written 2026-10-04 (within the last 3 days) -- skipped this pass per de-duplication. No new or duplicate campaigns detected (campaign-consolidation-watch: same 4 active campaigns, distinct products/funnel stages). No approval-tier proposals executed (per policy, a human approves A-001 onward). No settings or pending-proposal numbers required updating this pass -- all active-campaign ROAS/spend figures are consistent with the reasoning already on file for A-049/A-050/A-053. Note on file size: per AL-1261's retention-policy flag, this pass folded several repeat 'all clear' confirmations (purchaser-exclusion, learning-phase-stuck, anomaly, lookalike rate-limit) into updates on their existing alert entries instead of new ones, rather than appending fresh near-duplicate alerts every pass -- reduces growth rate without losing any signal (each updated alert's lastConfirmedAt shows it was re-checked this pass).",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-10-05T12:48:00.000Z"
     }
   ],
   "log": [
