@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-06T18:48:00.000Z",
+  "generatedAt": "2026-10-06T20:47:00.000Z",
   "settings": {
     "kill_roas_threshold": "DISABLED 2026-10-05 by user instruction: the ROAS pause-kill is OFF. Module 16 (pause-kill) must NOT auto-pause any campaign for low ROAS; surface low-ROAS campaigns as alerts only. The hard spend circuit breaker is a separate mechanism and stays ON. Former rule, for reference: pause if ROAS < 1.0x after ₹500 spend on a sales-objective campaign. EXCEPTION until 2026-10-05T23:59+05:30 (user-approved 2026-09-29): for the sneaker-push campaigns 120256091369160159 (Sneakers_BOF_30Sep-5Oct), 120256091370110159 (Sneakers_Prospecting_30Sep-5Oct) and 120256088882780159 (Sneakers_Catalog_Retargeting) the spend floor is ₹1,500, not ₹500.",
     "reactivate_min_historic_roas": "surface for reactivation if a paused campaign's last active-period ROAS >= 3.0x",
@@ -908,6 +908,31 @@
       },
       "status": "pending",
       "createdAt": "2026-10-06T18:48:00.000Z"
+    },
+    {
+      "id": "A-056",
+      "module": "placement-optimization",
+      "tier": "approval",
+      "title": "Exclude WhatsApp placement from Sneakers_BOF_30Sep-5Oct",
+      "reasoning": "Sneakers_BOF_30Sep-5Oct (campaign 120256091369160159) is ACTIVE, last_7d blended purchase_roas 4.46x on Rs18,578.22 spend. Fresh last_7d publisher_platform/platform_position breakdown (pulled 2026-10-06T20:47 UTC) shows WhatsApp placement (whatsapp_marketing_messages) at Rs18.45 spend, 0.00% CTR, 0 attributed purchases, CPM Rs1,153.13 -- versus the campaign's real placements: Facebook feed (Rs285.46, 30.04x ROAS), Instagram feed (Rs4,029.73, 2.03x), Instagram Reels (Rs10,971.11, 4.36x), Instagram Stories (Rs3,222.05, 5.63x). Same dead-WhatsApp-placement pattern already flagged and pending on this account's other active/recent ad sets (A-014, A-026, A-033, A-038). Low absolute spend but a clean removal with zero conversion history.",
+      "actionSummary": "Add an explicit targeting.publisher_platforms list on Sneakers_BOF_30Sep-5Oct's ad set(s) (BOF_1_Hot_ATC_IC_API_30D 120256091373980159, BOF_2_Warm_IG365_Engagers_Visitors 120256091376920159) covering every currently-effective platform except 'whatsapp' (facebook, instagram, audience_network, threads); leave every other targeting parameter (age/gender, geo, included/excluded custom audiences) unchanged. The dashboard applies this on top of a fresh live fetch of each ad set's current targeting.",
+      "metaAction": {
+        "tool": "ads_update_entity",
+        "params": {
+          "ad_account_id": "704523148804803",
+          "entity_id": "120256091373980159",
+          "entity_type": "ad_set",
+          "field": "targeting",
+          "note": "remove 'whatsapp' from effective_publisher_platforms by setting an explicit targeting.publisher_platforms list (facebook, instagram, audience_network, threads); leave every other targeting parameter unchanged"
+        }
+      },
+      "targetingDelta": {
+        "remove_publisher_platforms": [
+          "whatsapp"
+        ]
+      },
+      "status": "pending",
+      "createdAt": "2026-10-06T20:47:00.000Z"
     }
   ],
   "alerts": [
@@ -13915,11 +13940,11 @@
     {
       "id": "AL-1440",
       "module": "lookalike-refresh",
-      "title": "Lookalike rebuild rate-limited this pass",
-      "detail": "Last rebuild attempt was 2026-10-06T02:50:00.000Z (<24h elapsed) -- skipped per max_auto_actions_per_entity_per_day=1, no new attempt made this pass. Source audience 'Purchasers 180D' (120255823280550159) approximate size still ~20, unchanged since 2026-09-15 creation. The 3 existing laddered 1%/2%/5% lookalikes (120255832535210159/610159/780159) remain live and serving, untouched. Reconfirmed 2026-10-06T18:48:00.000Z pass: last attempt still 2026-10-06T02:50:00.000Z (~16h elapsed, <24h) -- still rate-limited, no new attempt made. Source audience size unchanged (~20).",
+      "title": "Lookalike rebuild rate-limited this pass (reconfirmed 20:47 UTC)",
+      "detail": "Laddered 1%/2%/5% lookalikes off Purchasers 180D (120255832535210159/610159/780159), built 2026-09-15, are now ~21 days old (past the 14-day lookalike_refresh_days threshold). Source audience size unchanged (~20, confirmed via ads_get_custom_audience). Last rebuild attempt was 2026-10-06T02:50:00.000Z (failed with Meta's duplicate-lookalike error 2654/1713007) -- within the 24h max_auto_actions_per_entity_per_day=1 window (~17h57m elapsed), so this pass skipped the auto-execution rather than re-attempting. Next eligible attempt ~2026-10-07T02:50 UTC. The 3 existing lookalikes remain live and serving.",
       "severity": "low",
       "dismissed": false,
-      "createdAt": "2026-10-06T10:51:00.000Z",
+      "createdAt": "2026-10-06T20:47:00.000Z",
       "lastConfirmedAt": "2026-10-06T18:48:00.000Z",
       "updatedAt": "2026-10-06T18:48:00.000Z"
     },
