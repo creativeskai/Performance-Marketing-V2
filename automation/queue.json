@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-06T08:50:00.000Z",
+  "generatedAt": "2026-10-06T10:51:00.000Z",
   "settings": {
     "kill_roas_threshold": "DISABLED 2026-10-05 by user instruction: the ROAS pause-kill is OFF. Module 16 (pause-kill) must NOT auto-pause any campaign for low ROAS; surface low-ROAS campaigns as alerts only. The hard spend circuit breaker is a separate mechanism and stays ON. Former rule, for reference: pause if ROAS < 1.0x after ₹500 spend on a sales-objective campaign. EXCEPTION until 2026-10-05T23:59+05:30 (user-approved 2026-09-29): for the sneaker-push campaigns 120256091369160159 (Sneakers_BOF_30Sep-5Oct), 120256091370110159 (Sneakers_Prospecting_30Sep-5Oct) and 120256088882780159 (Sneakers_Catalog_Retargeting) the spend floor is ₹1,500, not ₹500.",
     "reactivate_min_historic_roas": "surface for reactivation if a paused campaign's last active-period ROAS >= 3.0x",
@@ -30,9 +30,9 @@
     },
     "competitor_last_scrape": {
       "gully_labs_active_ads": null,
-      "lotto_sport_india_active_ads": 768,
-      "scraped_at": "2026-10-06T08:50:00.000Z",
-      "note": "2026-10-06T08:50:00.000Z scheduled run: ads_library_search combined page_ids query (107479854297817 / 426015150606378, ad_active_status=ACTIVE, no country filter) returned estimated_total_count=768, up from the prior 2026-10-06T06:54:00.000Z pass (760) -- a +1.05% move, well under the >=20% swing threshold. No alert this pass."
+      "lotto_sport_india_active_ads": 818,
+      "scraped_at": "2026-10-06T10:51:00.000Z",
+      "note": "2026-10-06T10:46:00.000Z pass: ads_library_search combined page_ids query (107479854297817 / 426015150606378, ad_active_status=ACTIVE, no country filter) returned estimated_total_count=818, up from the prior 2026-10-06T08:50:00.000Z pass (768) -- a +6.5% move, well under the >=20% swing threshold. No alert this pass."
     },
     "audience_label_corrections": {
       "120249907176770159": "ATC_180D -- NOT a purchaser audience (cart-adders, event=AddToCart, retention 180 days). Verified 2026-09-14, reconfirmed 2026-09-20. Superseded note: earlier passes said the account had NO purchaser audience at all -- that's now out of date. See the 120255823280550159 (Purchasers 180D) entry above, created 2026-09-15, which IS a genuine purchaser audience and is already in use for exclusion + lookalike.",
@@ -781,7 +781,7 @@
       "module": "reactivate-winner",
       "tier": "approval",
       "title": "Reactivate Sneakers_Prospecting_30Sep-5Oct -- 6.32x ROAS, part of the open sneaker push window",
-      "reasoning": "Campaign Sneakers_Prospecting_30Sep-5Oct (120256091370110159) is PAUSED but shows last_30d ROAS 6.317251x on Rs3,248.47 spend (lifetime_budget Rs5,000, ~Rs1,751.53 remaining) -- well above reactivate_min_historic_roas=3.0x. This is one of the three user-approved sneaker-push campaigns (30Sep-5Oct window, still open through 2026-10-05T23:59+05:30 per the kill_roas_threshold spend-floor exception in settings) alongside Sneakers_BOF_30Sep-5Oct (currently ACTIVE, 4.99x) and Sneakers_Catalog_Retargeting (also PAUSED). No existing pending or recently-resolved reactivate-winner proposal covers this campaign. Reactivating now would let it keep delivering against its remaining lifetime budget for the final ~3 days of the approved push window.",
+      "reasoning": "Campaign Sneakers_Prospecting_30Sep-5Oct (120256091370110159) is PAUSED but shows last_30d ROAS 6.317251x on Rs3,248.47 spend (lifetime_budget Rs5,000, ~Rs1,751.53 remaining) -- well above reactivate_min_historic_roas=3.0x. This is one of the three user-approved sneaker-push campaigns (30Sep-5Oct window, still open through 2026-10-05T23:59+05:30 per the kill_roas_threshold spend-floor exception in settings) alongside Sneakers_BOF_30Sep-5Oct (currently ACTIVE, 4.99x) and Sneakers_Catalog_Retargeting (also PAUSED). No existing pending or recently-resolved reactivate-winner proposal covers this campaign. Reactivating now would let it keep delivering against its remaining lifetime budget for the final ~3 days of the approved push window. UPDATE 2026-10-06T10:51Z: the user-approved sneaker-push spend-floor exception window (through 2026-10-05T23:59+05:30) has now closed. The 'open push window' framing in this proposal's original reasoning is stale -- reactivating this campaign now would do so outside that approved window, under the normal (disabled) pause-kill rules rather than the sneaker-push exception. ROAS is unchanged at 6.316143x on Rs3,249.04 last_30d spend (lifetime_budget Rs5,000, ~Rs1,750.96 remaining), still well above reactivate_min_historic_roas (>=3.0x), so the underlying performance case still stands -- flagging the window closure for the human reviewer's awareness before approving, not retracting the recommendation. metaAction unchanged.",
       "actionSummary": "Reactivates campaign Sneakers_Prospecting_30Sep-5Oct (120256091370110159) from PAUSED to ACTIVE. No budget change -- lifetime_budget stays at Rs5,000 with ~Rs1,751.53 remaining to spend before the campaign's own pacing winds down.",
       "metaAction": {
         "tool": "ads_activate_entity",
@@ -13893,6 +13893,24 @@
       "severity": "low",
       "dismissed": false,
       "createdAt": "2026-10-06T08:50:00.000Z"
+    },
+    {
+      "id": "AL-1440",
+      "module": "lookalike-refresh",
+      "title": "Lookalike rebuild rate-limited this pass",
+      "detail": "Last rebuild attempt was 2026-10-06T02:50:00.000Z (<24h elapsed) -- skipped per max_auto_actions_per_entity_per_day=1, no new attempt made this pass. Source audience 'Purchasers 180D' (120255823280550159) approximate size still ~20, unchanged since 2026-09-15 creation. The 3 existing laddered 1%/2%/5% lookalikes (120255832535210159/610159/780159) remain live and serving, untouched.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-10-06T10:51:00.000Z"
+    },
+    {
+      "id": "AL-1441",
+      "module": "routine-run-notes",
+      "title": "Run summary -- 2026-10-06 ~10:46 UTC pass",
+      "detail": "Circuit breaker: not tripped (today's account spend Rs3,024.22 vs Rs6,000 ceiling, ads_get_ad_entities level=ad_account date_preset=today). Pixel quality gate: passed -- all tracked event EMQ composite scores (ads_get_dataset_quality, dataset 833131719490535) between 6.1 and 8.7, above the 0.6 threshold; ROAS-based modules not suppressed. 3 new campaigns detected since the last pass, launched outside routine control: Sora_BOF_Test_5Oct (120256202021140159), Tsuchi_BOF_Test_5Oct (120256202020640159), Prospecting_JP_Purchase_5-9Oct (120256186544730159) -- fresh targeting fetch on all their active ad sets confirms purchaser-exclusion compliance (each excludes Purchasers 180D 120255823280550159); all three are too new/thin on spend for performance-based modules (pause-kill, age-gender, placement, device) to apply yet. The user-approved sneaker-push spend-floor exception window closed 2026-10-05T23:59+05:30: Sneakers_Prospecting_30Sep-5Oct and Sneakers_Catalog_Retargeting are now PAUSED; Sneakers_BOF_30Sep-5Oct remains ACTIVE. Updated pending proposal A-050 to flag the window closure for the human reviewer. Retargeting_Overall is ACTIVE again as of this pass (had been briefly PAUSED around 2026-10-05T18:49 UTC per A-049's history) -- still exempt from purchaser-exclusion by design, still excluded-audience-compliant structurally. Reconfirmed all 13 currently-active ad sets account-wide (6 active campaigns) are purchaser-exclusion compliant -- no action needed. Lookalike rebuild rate-limited this pass -- see AL-1440. hook-angle-tagging: all 41 currently-active ads (14 distinct creative IDs) already have creativeTags entries from prior passes -- nothing new to tag. Anomaly signal: Retargeting_NoBuyers_JP (120256186551550159) narrow-audience warning persists (estimated audience 24,300-28,600) -- already alerted at AL-1434, no new alert (same condition, within dedup window). Competitor check: combined Gully Labs/Lotto Sport India active-ad count moved 768 -> 818 (+6.5%), under the >=20% swing threshold -- no alert. Learning-phase-stuck: no currently-active ad set reported in-learning this pass. No auto-tier Meta API mutations executed this pass (purchaser-exclusion already compliant account-wide; lookalike-refresh rate-limited; circuit breaker not tripped). Reviewed all pending reactivate-winner/budget-reallocation/age-gender/device-targeting proposals (A-027, A-028, A-039, A-048, A-049, A-051, A-052, A-053) against fresh data -- all numbers unchanged since the last pass (02:50-08:50 UTC window), no edits needed beyond A-050 above.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-10-06T10:51:00.000Z"
     }
   ],
   "log": [
