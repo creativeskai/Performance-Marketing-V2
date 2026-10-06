@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-06T20:47:00.000Z",
+  "generatedAt": "2026-10-06T22:47:00.000Z",
   "settings": {
     "kill_roas_threshold": "DISABLED 2026-10-05 by user instruction: the ROAS pause-kill is OFF. Module 16 (pause-kill) must NOT auto-pause any campaign for low ROAS; surface low-ROAS campaigns as alerts only. The hard spend circuit breaker is a separate mechanism and stays ON. Former rule, for reference: pause if ROAS < 1.0x after ₹500 spend on a sales-objective campaign. EXCEPTION until 2026-10-05T23:59+05:30 (user-approved 2026-09-29): for the sneaker-push campaigns 120256091369160159 (Sneakers_BOF_30Sep-5Oct), 120256091370110159 (Sneakers_Prospecting_30Sep-5Oct) and 120256088882780159 (Sneakers_Catalog_Retargeting) the spend floor is ₹1,500, not ₹500.",
     "reactivate_min_historic_roas": "surface for reactivation if a paused campaign's last active-period ROAS >= 3.0x",
@@ -30,9 +30,9 @@
     },
     "competitor_last_scrape": {
       "gully_labs_active_ads": null,
-      "lotto_sport_india_active_ads": 1169,
-      "scraped_at": "2026-10-06T18:48:00.000Z",
-      "note": "2026-10-06T18:48:00.000Z pass: ads_library_search combined page_ids query (107479854297817 / 426015150606378, ad_active_status=ACTIVE, no country filter) returned estimated_total_count=1169, up from the prior 2026-10-06T10:46:00.000Z pass (818) -- a +42.9% move, well over the >=20% swing threshold. See AL-1442."
+      "lotto_sport_india_active_ads": 1203,
+      "scraped_at": "2026-10-06T22:47:00.000Z",
+      "note": "2026-10-06T22:47:00.000Z pass: ads_library_search combined page_ids query (107479854297817 / 426015150606378, ad_active_status=ACTIVE, no country filter) returned estimated_total_count=1203, up from the prior 2026-10-06T18:48:00.000Z pass (1169) -- a +2.9% move, well under the >=20% competitor-spike swing threshold. No new alert this pass."
     },
     "audience_label_corrections": {
       "120249907176770159": "ATC_180D -- NOT a purchaser audience (cart-adders, event=AddToCart, retention 180 days). Verified 2026-09-14, reconfirmed 2026-09-20. Superseded note: earlier passes said the account had NO purchaser audience at all -- that's now out of date. See the 120255823280550159 (Purchasers 180D) entry above, created 2026-09-15, which IS a genuine purchaser audience and is already in use for exclusion + lookalike.",
@@ -532,7 +532,7 @@
       "module": "reactivate-winner",
       "tier": "approval",
       "title": "Reactivate TSUCHI BOF based on CAPS -- 3.8x ROAS, paused since a purchaser-exclusion side effect on 2026-09-15",
-      "reasoning": "TSUCHI BOF based on CAPS (id 120255774257000159) remains PAUSED; last_14d ROAS is now 4.512913x on ₹2,392.24 spend (fresh ads_get_ad_entities pull this pass) -- up from the 3.837967x/₹2,812.94 cited at the 2026-09-29T20:50 pass, still clearly above the 3.0x reactivate_min_historic_roas threshold. Per the account activity log this campaign's ad set was force-paused as a side effect of the purchaser-exclusion auto-module's targeting write on 2026-09-15 (see AL-308), not by a deliberate pause-kill decision; purchaser exclusion is already correctly in place and unaffected by reactivation. Reactivating at its existing ₹650/day budget is a conservative resumption. Refreshed 2026-10-01T12:50:00.000Z pass. Still pending human decision. Reconfirmed 2026-10-01T20:57:00.000Z pass: last_30d spend is Rs3,747.38 at purchase_roas 5.663x (module's canonical window per ROUTINE.md is last_30d+lifetime) -- even more clearly above the 3.0x reactivate_min_historic_roas threshold than the last_14d figures previously cited. No change to the proposed action. Reconfirmed 2026-10-02T22:46:00.000Z pass: last_30d purchase_roas is 5.662743x on Rs3,747.38 spend (10 purchases) -- still well above the 3.0x reactivate_min_historic_roas threshold. Campaign remains PAUSED; no change to the proposed action. Reconfirmed 2026-10-03T00:52:37.000Z pass: fresh last_30d pull shows purchase_roas 5.662743x on Rs3,747.38 spend (broader window than the last_14d figure cited above) -- still clearly above the 3.0x threshold. Campaign remains PAUSED. UPDATE 2026-10-06T06:54Z: last_30d purchase_roas has since risen to 5.66x (amount_spent Rs3,747.38), up from 3.8x at original proposal time -- reactivation case is stronger, not weaker. metaAction unchanged.",
+      "reasoning": "TSUCHI BOF based on CAPS (id 120255774257000159) remains PAUSED; last_14d ROAS is now 4.512913x on ₹2,392.24 spend (fresh ads_get_ad_entities pull this pass) -- up from the 3.837967x/₹2,812.94 cited at the 2026-09-29T20:50 pass, still clearly above the 3.0x reactivate_min_historic_roas threshold. Per the account activity log this campaign's ad set was force-paused as a side effect of the purchaser-exclusion auto-module's targeting write on 2026-09-15 (see AL-308), not by a deliberate pause-kill decision; purchaser exclusion is already correctly in place and unaffected by reactivation. Reactivating at its existing ₹650/day budget is a conservative resumption. Refreshed 2026-10-01T12:50:00.000Z pass. Still pending human decision. Reconfirmed 2026-10-01T20:57:00.000Z pass: last_30d spend is Rs3,747.38 at purchase_roas 5.663x (module's canonical window per ROUTINE.md is last_30d+lifetime) -- even more clearly above the 3.0x reactivate_min_historic_roas threshold than the last_14d figures previously cited. No change to the proposed action. Reconfirmed 2026-10-02T22:46:00.000Z pass: last_30d purchase_roas is 5.662743x on Rs3,747.38 spend (10 purchases) -- still well above the 3.0x reactivate_min_historic_roas threshold. Campaign remains PAUSED; no change to the proposed action. Reconfirmed 2026-10-03T00:52:37.000Z pass: fresh last_30d pull shows purchase_roas 5.662743x on Rs3,747.38 spend (broader window than the last_14d figure cited above) -- still clearly above the 3.0x threshold. Campaign remains PAUSED. UPDATE 2026-10-06T06:54Z: last_30d purchase_roas has since risen to 5.66x (amount_spent Rs3,747.38), up from 3.8x at original proposal time -- reactivation case is stronger, not weaker. metaAction unchanged. Reconfirmed 2026-10-06T22:47:00.000Z pass: fresh ads_get_ad_entities pull (last_30d) shows TSUCHI BOF based on CAPS purchase_roas has risen further to 5.662743x on Rs3,747.38 spend (up from 4.512913x/Rs2,392.24 at the 2026-10-01 update) -- continued late-arriving attribution on a campaign with no new delivery since it was paused. Still comfortably above the 3.0x reactivate_min_historic_roas threshold. Still pending human decision.",
       "actionSummary": "Activates campaign 'TSUCHI BOF based on CAPS' (id 120255774257000159) and reconfirms its daily budget at its existing ₹650/day (65000 minor units, unchanged) so it resumes delivering at the same pace it was paused at.",
       "metaAction": {
         "tool": "ads_activate_entity",
@@ -826,7 +826,7 @@
       "module": "age-gender-auto-shift",
       "tier": "approval",
       "title": "Narrow BOF_2_Warm_IG365_Engagers_Visitors (Sneakers_BOF_30Sep-5Oct) away from 35-44 -- zero purchases on Rs858 spend",
-      "reasoning": "Reconfirmed 2026-10-05T04:50:00.000Z pass: ad set BOF_2_Warm_IG365_Engagers_Visitors (120256091376920159, campaign Sneakers_BOF_30Sep-5Oct 120256091369160159) last_14d age/gender breakdown: 35-44 male spend has grown to Rs1,475.21 (up from Rs858.37) with STILL 0 attributed purchases (null ROAS) -- the dead zone is getting more expensive, not resolving itself. 18-24 male (Rs2,713.93, 6.02x) and 25-34 male (Rs6,888.67, 5.82x) in the same ad set continue converting well. Older segments (45-54 male Rs344.11, 55-64 male Rs88.09, 65+ male Rs40.08) remain thin and null-ROAS too but are not worth a separate action at this spend level. Recommendation stands, now on firmer evidence. Reconfirmed 2026-10-05T20:48:19.000Z pass: 35-44 male spend in BOF_2_Warm_IG365_Engagers_Visitors has grown further to Rs1,680.91 (up from Rs1,475.21) with STILL 0 attributed purchases (null ROAS) -- the dead zone keeps getting more expensive without resolving. 18-24 male (Rs3,626.18, 4.505262x) and 25-34 male (Rs8,264.14, 5.459198x) continue converting well in the same ad set. Older segments (45-54 male Rs398.86, 55-64 male Rs98.00, 65+ male Rs48.44) remain thin and null-ROAS too but still not worth a separate carve-out at this spend level. Reconfirmed 2026-10-05T22:46:00.000Z pass: 35-44 male spend in BOF_2_Warm_IG365_Engagers_Visitors unchanged at Rs1,680.90 (still 0 attributed purchases) -- no new delivery since the 20:48 UTC pass. 18-24 male and 25-34 male figures also unchanged. Recommendation stands. Reconfirmed 2026-10-06T02:50:00.000Z pass: ad set BOF_2_Warm_IG365_Engagers_Visitors last_14d age/gender breakdown: 35-44 male spend has grown to Rs1,680.90 (up from Rs1,475.21) with STILL 0 attributed purchases (null ROAS) -- the dead zone keeps getting more expensive without resolving. 18-24 male (Rs3,626.21, 4.505231x) and 25-34 male (Rs8,264.23, 5.459133x) in the same ad set continue converting, though both segments' ROAS has also softened as spend accumulates. Still pending.",
+      "reasoning": "Reconfirmed 2026-10-05T04:50:00.000Z pass: ad set BOF_2_Warm_IG365_Engagers_Visitors (120256091376920159, campaign Sneakers_BOF_30Sep-5Oct 120256091369160159) last_14d age/gender breakdown: 35-44 male spend has grown to Rs1,475.21 (up from Rs858.37) with STILL 0 attributed purchases (null ROAS) -- the dead zone is getting more expensive, not resolving itself. 18-24 male (Rs2,713.93, 6.02x) and 25-34 male (Rs6,888.67, 5.82x) in the same ad set continue converting well. Older segments (45-54 male Rs344.11, 55-64 male Rs88.09, 65+ male Rs40.08) remain thin and null-ROAS too but are not worth a separate action at this spend level. Recommendation stands, now on firmer evidence. Reconfirmed 2026-10-05T20:48:19.000Z pass: 35-44 male spend in BOF_2_Warm_IG365_Engagers_Visitors has grown further to Rs1,680.91 (up from Rs1,475.21) with STILL 0 attributed purchases (null ROAS) -- the dead zone keeps getting more expensive without resolving. 18-24 male (Rs3,626.18, 4.505262x) and 25-34 male (Rs8,264.14, 5.459198x) continue converting well in the same ad set. Older segments (45-54 male Rs398.86, 55-64 male Rs98.00, 65+ male Rs48.44) remain thin and null-ROAS too but still not worth a separate carve-out at this spend level. Reconfirmed 2026-10-05T22:46:00.000Z pass: 35-44 male spend in BOF_2_Warm_IG365_Engagers_Visitors unchanged at Rs1,680.90 (still 0 attributed purchases) -- no new delivery since the 20:48 UTC pass. 18-24 male and 25-34 male figures also unchanged. Recommendation stands. Reconfirmed 2026-10-06T02:50:00.000Z pass: ad set BOF_2_Warm_IG365_Engagers_Visitors last_14d age/gender breakdown: 35-44 male spend has grown to Rs1,680.90 (up from Rs1,475.21) with STILL 0 attributed purchases (null ROAS) -- the dead zone keeps getting more expensive without resolving. 18-24 male (Rs3,626.21, 4.505231x) and 25-34 male (Rs8,264.23, 5.459133x) in the same ad set continue converting, though both segments' ROAS has also softened as spend accumulates. Still pending. REJECTED (moot) at 2026-10-06T22:47:00.000Z pass: fresh ads_get_ad_entities age/gender pull on BOF_2_Warm_IG365_Engagers_Visitors (120256091376920159) shows the 35-44 male segment no longer at zero purchases -- spend Rs1,862.36 now carries purchase_roas 2.825392x. The dead zone this proposal was built on has resolved itself; narrowing the ad set away from 35-44 is no longer warranted. 18-24 male (Rs4,456.45, 3.665897x) and 25-34 male (Rs9,520.73, 5.015005x) remain the strongest segments, but 35-44 is now converting too, just at a lower rate -- not a candidate for exclusion.",
       "actionSummary": "Narrows BOF_2_Warm_IG365_Engagers_Visitors's age range to 18-34 (age_max 34, down from 65), stopping delivery to the 35-44 and older bands that have shown zero attributed purchases this window. Does not touch BOF_1 or BOF_3 (same campaign, different ad sets, each has only thin spend in those bands).",
       "metaAction": {
         "tool": "ads_update_entity",
@@ -839,17 +839,18 @@
       "targetingDelta": {
         "age_max": 34
       },
-      "status": "pending",
+      "status": "rejected",
       "createdAt": "2026-10-03T16:46:00.000Z",
       "updatedAt": "2026-10-04T20:50:00.000Z",
-      "lastReconfirmedAt": "2026-10-05T04:50:00.000Z"
+      "lastReconfirmedAt": "2026-10-05T04:50:00.000Z",
+      "resolvedAt": "2026-10-06T22:47:00.000Z"
     },
     {
       "id": "A-053",
       "module": "device-targeting",
       "tier": "approval",
       "title": "Shift BOF_2_Warm_IG365_Engagers_Visitors (Sneakers_BOF_30Sep-5Oct) away from Android -- 2.06x vs 7.56x on iPhone",
-      "reasoning": "Reconfirmed 2026-10-05T04:50:00.000Z pass: ad set BOF_2_Warm_IG365_Engagers_Visitors (120256091376920159, campaign Sneakers_BOF_30Sep-5Oct 120256091369160159) last_14d impression_device breakdown: android_smartphone Rs5,033.24 spend (up from Rs2,421.75) at 2.979470x ROAS (up from 2.064127x) vs iphone Rs6,759.89 spend (up from Rs3,428.43) at 5.354428x ROAS (down from 7.564585x) -- efficiency gap narrowed from ~3.7x to ~1.8x as the rolling window absorbs more spend on both sides, but iPhone still converts materially better at similar spend levels. android_smartphone ROAS (2.98x) remains well above the user-approved sneaker-push kill-floor exception (1.0x at Rs1,500 spend through 2026-10-05), so this stays an efficiency recommendation, not a kill. Recommendation stands, gap narrower than previously recorded. Reconfirmed 2026-10-05T20:48:19.000Z pass: android_smartphone is now Rs6,138.10 spend (up from Rs5,033.24) at 3.257555x ROAS (up from 2.979470x) vs iphone Rs8,269.29 spend (up from Rs6,759.89) at 4.377078x ROAS (down from 5.354428x) -- the efficiency gap has narrowed further to ~1.34x, now BELOW this account's typical 1.5x+ action threshold as the rolling 14-day window absorbs more spend on both sides. Still directionally in iPhone's favor, but the case for an explicit device exclusion is weaker than at the proposal's creation -- flagging for human judgment on whether to still proceed, narrow the ask, or let it ride another pass. Reconfirmed 2026-10-05T22:46:00.000Z pass: android_smartphone Rs6,138.09/3.257559x vs iphone Rs8,269.36/4.377042x -- essentially unchanged from the 20:48 UTC pass (no new delivery). Gap remains narrower than at proposal creation; still flagging for human judgment. Reconfirmed 2026-10-06T02:50:00.000Z pass: ad set BOF_2_Warm_IG365_Engagers_Visitors last_14d impression_device breakdown: android_smartphone Rs6,138.10 spend (up from Rs5,033.24) at 3.257554x ROAS (up from 2.98x) vs iphone Rs8,269.41 spend (up from Rs6,759.89) at 4.377015x ROAS (down from 5.354428x) -- the efficiency gap has narrowed further, from ~1.8x to ~1.47x, as more spend lands on both sides. iPhone still converts somewhat better, but the gap is now modest enough that a hard device exclusion looks less clearly warranted than when this proposal was first written (2.06x vs 7.56x, a ~3.7x gap). Flagging this narrowing for the human reviewer's judgment rather than strengthening the case. Still pending.",
+      "reasoning": "Reconfirmed 2026-10-05T04:50:00.000Z pass: ad set BOF_2_Warm_IG365_Engagers_Visitors (120256091376920159, campaign Sneakers_BOF_30Sep-5Oct 120256091369160159) last_14d impression_device breakdown: android_smartphone Rs5,033.24 spend (up from Rs2,421.75) at 2.979470x ROAS (up from 2.064127x) vs iphone Rs6,759.89 spend (up from Rs3,428.43) at 5.354428x ROAS (down from 7.564585x) -- efficiency gap narrowed from ~3.7x to ~1.8x as the rolling window absorbs more spend on both sides, but iPhone still converts materially better at similar spend levels. android_smartphone ROAS (2.98x) remains well above the user-approved sneaker-push kill-floor exception (1.0x at Rs1,500 spend through 2026-10-05), so this stays an efficiency recommendation, not a kill. Recommendation stands, gap narrower than previously recorded. Reconfirmed 2026-10-05T20:48:19.000Z pass: android_smartphone is now Rs6,138.10 spend (up from Rs5,033.24) at 3.257555x ROAS (up from 2.979470x) vs iphone Rs8,269.29 spend (up from Rs6,759.89) at 4.377078x ROAS (down from 5.354428x) -- the efficiency gap has narrowed further to ~1.34x, now BELOW this account's typical 1.5x+ action threshold as the rolling 14-day window absorbs more spend on both sides. Still directionally in iPhone's favor, but the case for an explicit device exclusion is weaker than at the proposal's creation -- flagging for human judgment on whether to still proceed, narrow the ask, or let it ride another pass. Reconfirmed 2026-10-05T22:46:00.000Z pass: android_smartphone Rs6,138.09/3.257559x vs iphone Rs8,269.36/4.377042x -- essentially unchanged from the 20:48 UTC pass (no new delivery). Gap remains narrower than at proposal creation; still flagging for human judgment. Reconfirmed 2026-10-06T02:50:00.000Z pass: ad set BOF_2_Warm_IG365_Engagers_Visitors last_14d impression_device breakdown: android_smartphone Rs6,138.10 spend (up from Rs5,033.24) at 3.257554x ROAS (up from 2.98x) vs iphone Rs8,269.41 spend (up from Rs6,759.89) at 4.377015x ROAS (down from 5.354428x) -- the efficiency gap has narrowed further, from ~1.8x to ~1.47x, as more spend lands on both sides. iPhone still converts somewhat better, but the gap is now modest enough that a hard device exclusion looks less clearly warranted than when this proposal was first written (2.06x vs 7.56x, a ~3.7x gap). Flagging this narrowing for the human reviewer's judgment rather than strengthening the case. Still pending. Reconfirmed 2026-10-06T22:47:00.000Z pass: ad set BOF_2_Warm_IG365_Engagers_Visitors last_14d impression_device breakdown: android_smartphone Rs7,221.61 spend (up from Rs6,138.10) at 2.7688x ROAS (down slightly from 3.257554x) vs iphone Rs9,578.56 spend (up from Rs8,269.41) at 4.602798x ROAS (up from 4.377015x) -- the efficiency gap has widened back out to ~1.66x from the ~1.47x recorded at the 02:50 UTC pass, moving back above this account's typical 1.5x+ action threshold. Still flagging for human judgment rather than treating this as settled; the gap has oscillated between ~1.3x and ~3.7x across passes as spend accumulates on both sides.",
       "actionSummary": "Restricts BOF_2_Warm_IG365_Engagers_Visitors's targeting to iOS devices only, redirecting the remaining campaign-window budget away from the underperforming Android segment toward the iPhone segment that is converting ~3.7x more efficiently.",
       "metaAction": {
         "tool": "ads_update_entity",
@@ -13940,13 +13941,13 @@
     {
       "id": "AL-1440",
       "module": "lookalike-refresh",
-      "title": "Lookalike rebuild rate-limited this pass (reconfirmed 20:47 UTC)",
-      "detail": "Laddered 1%/2%/5% lookalikes off Purchasers 180D (120255832535210159/610159/780159), built 2026-09-15, are now ~21 days old (past the 14-day lookalike_refresh_days threshold). Source audience size unchanged (~20, confirmed via ads_get_custom_audience). Last rebuild attempt was 2026-10-06T02:50:00.000Z (failed with Meta's duplicate-lookalike error 2654/1713007) -- within the 24h max_auto_actions_per_entity_per_day=1 window (~17h57m elapsed), so this pass skipped the auto-execution rather than re-attempting. Next eligible attempt ~2026-10-07T02:50 UTC. The 3 existing lookalikes remain live and serving.",
+      "title": "Lookalike rebuild rate-limited this pass (reconfirmed 22:47 UTC)",
+      "detail": "Laddered 1%/2%/5% lookalikes off Purchasers 180D (120255832535210159/610159/780159), built 2026-09-15, are now ~21.3 days old (past the 14-day lookalike_refresh_days threshold). Source audience size unchanged (~20, reconfirmed via ads_get_custom_audience this pass). Last rebuild attempt was 2026-10-06T02:50:00.000Z (failed with Meta's duplicate-lookalike error 2654/1713007) -- within the 24h max_auto_actions_per_entity_per_day=1 window (~19h57m elapsed), so this pass again skipped the auto-execution rather than re-attempting. Next eligible attempt ~2026-10-07T02:50 UTC. The 3 existing lookalikes remain live and serving.",
       "severity": "low",
       "dismissed": false,
       "createdAt": "2026-10-06T20:47:00.000Z",
-      "lastConfirmedAt": "2026-10-06T18:48:00.000Z",
-      "updatedAt": "2026-10-06T18:48:00.000Z"
+      "lastConfirmedAt": "2026-10-06T22:47:00.000Z",
+      "updatedAt": "2026-10-06T22:47:00.000Z"
     },
     {
       "id": "AL-1441",
@@ -13983,6 +13984,24 @@
       "severity": "low",
       "dismissed": false,
       "createdAt": "2026-10-06T18:48:00.000Z"
+    },
+    {
+      "id": "AL-1445",
+      "module": "spend-pacing",
+      "title": "Sneakers_BOF_30Sep-5Oct still ACTIVE past its named window; sneaker-push kill-floor exception has lapsed",
+      "detail": "Campaign 'Sneakers_BOF_30Sep-5Oct' (120256091369160159) is still effective_status=ACTIVE as of this 2026-10-06T22:47 UTC pass, despite its name indicating a 30 Sep-5 Oct window -- daily_budget remains Rs2,700 and last_30d spend has reached Rs18,578.22 (4.457047x purchase_roas, still healthy). Separately, settings.kill_roas_threshold's user-approved Rs1,500 spend-floor exception for the 3 sneaker-push campaigns (120256091369160159, 120256091370110159, 120256088882780159) expired 2026-10-05T23:59+05:30 and has now lapsed -- moot in practice since pause-kill (module 16) is globally DISABLED per the same setting and this campaign's ROAS is nowhere near any kill floor. Flagging only because the campaign's own naming suggests it was meant to end yesterday; no automatic action taken (budget/schedule changes are approval-tier or human-only). Two new per-brand test campaigns (Sora_BOF_Test_5Oct, Tsuchi_BOF_Test_5Oct) are also now running alongside it, per AL-1442.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-10-06T22:47:00.000Z"
+    },
+    {
+      "id": "AL-1446",
+      "module": "routine-run-notes",
+      "title": "Run summary -- 2026-10-06 ~22:47 UTC pass",
+      "detail": "Circuit breaker: not tripped (today's account spend Rs198.35 vs Rs6,000 ceiling). Pixel/data-quality gate: all tracked event composite EMQ scores between 6.1 and 8.8, at/above pixel_quality_min_match_rate=0.6 -- ROAS-based modules not suppressed. purchaser-exclusion: all 11 active ad sets reconfirmed compliant (exclude Purchasers 180D or are on the exempt list) -- no action needed. lookalike-refresh: still rate-limited (see AL-1440). hook-angle-tagging: all active ads' creatives already tagged -- nothing new. anomaly: no anomaly signal fired. creative-fatigue: BOF_1_Hot_ATC_IC_API_30D frequency unchanged at 11.86 (still healthy ROAS 10.36x) -- no new alert, already on record. device-targeting (A-053): Android vs iPhone efficiency gap on BOF_2_Warm_IG365_Engagers_Visitors narrowed further to ~1.66x (2.77x vs 4.60x) -- reconfirmed, still pending human judgment. age-gender-auto-shift (A-052): REJECTED as moot this pass -- the 35-44 male segment that had zero attributed purchases now shows purchase_roas 2.825x on Rs1,862.36 spend; the dead zone resolved itself. reactivate-winner proposals (A-027/A-028/A-039/A-048/A-050/A-051/A-055): all 7 target campaigns remain PAUSED with healthy historic ROAS, reconfirmed via fresh last_30d pull; A-027's TSUCHI BOF based on CAPS figure updated to 5.66x/Rs3,747.38 (late-arriving attribution). competitor-spike: Lotto Sport India active-ad count moved 1169->1203 (+2.9%), under the 20% threshold -- no new alert. New observation: Sneakers_BOF_30Sep-5Oct still active past its named window (AL-1445). 19 proposals remain pending; no new proposals created this pass.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-10-06T22:47:00.000Z"
     }
   ],
   "log": [
@@ -20030,6 +20049,22 @@
       },
       "tier": "approval",
       "executedAt": "2026-10-06T08:50:00.000Z"
+    },
+    {
+      "proposalId": "A-052",
+      "action": "age-gender-auto-shift: proposal to narrow BOF_2_Warm_IG365_Engagers_Visitors away from 35-44 male rejected as moot -- fresh pull shows the segment now has purchase_roas 2.825392x on Rs1,862.36 spend (previously zero attributed purchases). No Meta API call made.",
+      "result": "rejected",
+      "previousState": {
+        "proposal_status": "pending"
+      },
+      "detail": {
+        "age_gender_breakdown_35_44_male": {
+          "spend_inr": 1862.36,
+          "purchase_roas": 2.825392
+        }
+      },
+      "tier": "approval",
+      "executedAt": "2026-10-06T22:47:00.000Z"
     }
   ],
   "creativeTags": {
