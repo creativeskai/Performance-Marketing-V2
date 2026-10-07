@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-07T02:51:00.000Z",
+  "generatedAt": "2026-10-07T04:52:00.000Z",
   "settings": {
     "kill_roas_threshold": "DISABLED 2026-10-05 by user instruction: the ROAS pause-kill is OFF. Module 16 (pause-kill) must NOT auto-pause any campaign for low ROAS; surface low-ROAS campaigns as alerts only. The hard spend circuit breaker is a separate mechanism and stays ON. Former rule, for reference: pause if ROAS < 1.0x after ₹500 spend on a sales-objective campaign. EXCEPTION until 2026-10-05T23:59+05:30 (user-approved 2026-09-29): for the sneaker-push campaigns 120256091369160159 (Sneakers_BOF_30Sep-5Oct), 120256091370110159 (Sneakers_Prospecting_30Sep-5Oct) and 120256088882780159 (Sneakers_Catalog_Retargeting) the spend floor is ₹1,500, not ₹500.",
     "reactivate_min_historic_roas": "surface for reactivation if a paused campaign's last active-period ROAS >= 3.0x",
@@ -30,9 +30,9 @@
     },
     "competitor_last_scrape": {
       "gully_labs_active_ads": null,
-      "lotto_sport_india_active_ads": 1212,
-      "scraped_at": "2026-10-07T02:51:00.000Z",
-      "note": "2026-10-07T02:51:00.000Z pass: ads_library_search combined page_ids query (107479854297817 / 426015150606378, ad_active_status=ACTIVE, no country filter) returned estimated_total_count=1212, up from the prior 2026-10-07T00:52:00.000Z pass (1209) -- a +0.25% move, well under the >=20% competitor-spike swing threshold. No new alert this pass."
+      "lotto_sport_india_active_ads": 1215,
+      "scraped_at": "2026-10-07T04:52:00.000Z",
+      "note": "2026-10-07T04:52:00.000Z pass: ads_library_search combined page_ids query (107479854297817 / 426015150606378, ad_active_status=ACTIVE, no country filter) returned estimated_total_count=1215, up from the prior 2026-10-07T02:51:00.000Z pass (1212) -- a +0.25% move, well under the >=20% competitor-spike swing threshold. No new alert this pass."
     },
     "audience_label_corrections": {
       "120249907176770159": "ATC_180D -- NOT a purchaser audience (cart-adders, event=AddToCart, retention 180 days). Verified 2026-09-14, reconfirmed 2026-09-20. Superseded note: earlier passes said the account had NO purchaser audience at all -- that's now out of date. See the 120255823280550159 (Purchasers 180D) entry above, created 2026-09-15, which IS a genuine purchaser audience and is already in use for exclusion + lookalike.",
@@ -14038,6 +14038,42 @@
       "severity": "low",
       "dismissed": false,
       "createdAt": "2026-10-07T02:51:00.000Z"
+    },
+    {
+      "id": "AL-1451",
+      "module": "creative-fatigue",
+      "title": "Hot_KAIFEST_KAGE_JP_Carousel (Sneakers_BOF_30Sep-5Oct) frequency crossed fatigue threshold (3.54 vs 3.0)",
+      "detail": "Ad 'Hot_KAIFEST_KAGE_JP_Carousel' (id 120256186382870159, creative 4389038721313497, ad set BOF_1_Hot_ATC_IC_API_30D under campaign Sneakers_BOF_30Sep-5Oct) shows frequency 3.544304 over last_14d, above fatigue_frequency_threshold=3.0. Spend is still thin at this frequency (Rs248.55 over the window), consistent with prior passes' 'crossed 3.0 but spend/audience still thin -- not actionable yet' pattern for other ad sets in this same campaign (see AL history for BOF_1/BOF_2). No creative swap proposed this pass; will escalate if frequency keeps climbing at materially higher spend.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-10-07T04:52:00.000Z"
+    },
+    {
+      "id": "AL-1452",
+      "module": "lookalike-refresh",
+      "title": "Lookalike rebuild rate-limited this pass",
+      "detail": "Laddered 1%/2%/5% lookalikes off Purchasers 180D (120255823280550159) are well past lookalike_refresh_days=14, but the last rebuild attempt was 2026-10-07T02:51:00.000Z (this pass is 2026-10-07T04:52:00.000Z, <24h elapsed) -- skipped under max_auto_actions_per_entity_per_day=1 rather than re-attempted. Source audience size still unchanged (~20); the duplicate-lookalike error (2654/1713007) is expected to keep recurring until that audience grows. The 3 existing lookalikes remain live and serving.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-10-07T04:52:00.000Z"
+    },
+    {
+      "id": "AL-1453",
+      "module": "self-audit-check",
+      "title": "Routine pass summary -- 2026-10-07T04:52 UTC",
+      "detail": "Circuit breaker: today's account spend Rs458.05 vs Rs6,000 ceiling -- not tripped, no action. Pixel/data-quality gate: composite EMQ scores 6.1-8.9 across all tracked events, at/above pixel_quality_min_match_rate=0.6 -- ROAS modules not suppressed; dataset_stats confirms PageView/ViewContent/InitiateCheckout/AddToCart events firing continuously through the most recent hour, no gaps. 5 campaigns / 11 ad sets ACTIVE this pass, unchanged from the ~02:51 UTC pass: Sora_BOF_Test_5Oct, Tsuchi_BOF_Test_5Oct, Prospecting_JP_Purchase_5-9Oct, Sneakers_BOF_30Sep-5Oct, Caps + Kage_26 Sept. purchaser-exclusion: all 11 active ad sets confirmed excluding Purchasers 180D (120255823280550159) in excluded_custom_audiences via direct targeting fetch -- compliant account-wide, no action needed. hook-angle-tagging: all 12 distinct active-ad creatives already have creativeTags entries -- nothing new to tag this pass. lookalike-refresh: rate-limited, see AL-1452. No anomaly signal fired (ads_insights_anomaly_signal). learning-phase-stuck: no ad set stuck -- the two newest (Sora_BOF_Test_5Oct / Tsuchi_BOF_Test_5Oct ad sets, ~2 days old) are still too new to judge, the rest are long past learning with stable delivery. campaign-consolidation-watch: Sora_BOF_Test_5Oct/Tsuchi_BOF_Test_5Oct overlapping Sneakers_BOF's combined BOF audience remains flagged from AL (2026-10-06T18:48), unchanged, no new flag needed. Reviewed all 24 pending approval proposals against fresh entity status this pass (direct object_id fetch on referenced campaigns/ad sets): none are ARCHIVED/dead -- all target campaigns/ad sets are still either ACTIVE or ordinarily PAUSED (CAMPAIGN_PAUSED), so none are moot; no proposal updates needed. index.html's baked-in DATA/INSIGHTS_DATA snapshot (dated ~September 13, 2026) remains stale relative to live figures, as noted in every pass since AL-1261; no new KPI-to-trigger gaps identified this pass (all dashboard-surfaced metrics -- spend, ROAS, purchases, frequency, placement/device/age breakdowns -- still map to an existing module above).",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-10-07T04:52:00.000Z"
+    },
+    {
+      "id": "AL-1454",
+      "module": "routine-run-notes",
+      "title": "Run summary -- 2026-10-07 ~04:52 UTC pass",
+      "detail": "No auto-executed actions this pass (purchaser-exclusion compliant account-wide; lookalike-refresh rate-limited, see AL-1452; hook-angle-tagging had nothing new; hard-spend-circuit-breaker not tripped, spend Rs458.05 vs Rs6,000). No new approval proposals created -- no new triggers found beyond what's already pending, and the 2 new test campaigns (Sora_BOF_Test_5Oct, Tsuchi_BOF_Test_5Oct) are still too new/thin on spend for placement/device/age-gender analysis. One new informational alert: AL-1451 (creative-fatigue, Hot_KAIFEST_KAGE_JP_Carousel frequency 3.54 at thin spend, not actionable yet). Competitor rescrape: Lotto Sport India active-ad count 1215 (+0.25% vs prior pass), well under the 20% spike threshold -- no new alert. See AL-1453 for the full self-audit-check summary.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-10-07T04:52:00.000Z"
     }
   ],
   "log": [
