@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-07T12:50:00.000Z",
+  "generatedAt": "2026-10-07T14:49:00.000Z",
   "settings": {
     "kill_roas_threshold": "DISABLED 2026-10-05 by user instruction: the ROAS pause-kill is OFF. Module 16 (pause-kill) must NOT auto-pause any campaign for low ROAS; surface low-ROAS campaigns as alerts only. The hard spend circuit breaker is a separate mechanism and stays ON. Former rule, for reference: pause if ROAS < 1.0x after ₹500 spend on a sales-objective campaign. EXCEPTION until 2026-10-05T23:59+05:30 (user-approved 2026-09-29): for the sneaker-push campaigns 120256091369160159 (Sneakers_BOF_30Sep-5Oct), 120256091370110159 (Sneakers_Prospecting_30Sep-5Oct) and 120256088882780159 (Sneakers_Catalog_Retargeting) the spend floor is ₹1,500, not ₹500.",
     "reactivate_min_historic_roas": "surface for reactivation if a paused campaign's last active-period ROAS >= 3.0x",
@@ -14155,8 +14155,8 @@
     {
       "id": "AL-1460",
       "module": "lookalike-refresh",
-      "title": "Lookalike rebuild rate-limited this pass (reconfirmed 10:47 UTC)",
-      "detail": "2026-10-07T10:47 UTC pass: the laddered 1%/2%/5% lookalikes off 'Purchasers 180D' (120255823280550159, approximate_count still ~20, unchanged since 2026-09-15 creation) remain past the 14-day lookalike_refresh_days threshold, but the last real rebuild attempt was 2026-10-07T02:51:00.000Z (failed with Meta's duplicate-lookalike error 2654/1713007, source audience unchanged) -- only ~7h56m elapsed, within max_auto_actions_per_entity_per_day=1 (24h window), so no rebuild attempted this pass. The 3 existing lookalikes (120255832535210159/610159/780159) remain live and serving, untouched. Next eligible attempt ~2026-10-08T02:51 UTC. Reconfirmed 2026-10-07T12:50:00.000Z: last real attempt was 2026-10-07T02:51:00.000Z (~9h59m elapsed), still within max_auto_actions_per_entity_per_day=1's 24h window -- rebuild skipped again this pass. Source audience (Purchasers 180D) size still ~20, unchanged. Next eligible ~2026-10-08T02:51 UTC.",
+      "title": "Lookalike rebuild rate-limited this pass (reconfirmed 14:49 UTC)",
+      "detail": "2026-10-07T10:47 UTC pass: the laddered 1%/2%/5% lookalikes off 'Purchasers 180D' (120255823280550159, approximate_count still ~20, unchanged since 2026-09-15 creation) remain past the 14-day lookalike_refresh_days threshold, but the last real rebuild attempt was 2026-10-07T02:51:00.000Z (failed with Meta's duplicate-lookalike error 2654/1713007, source audience unchanged) -- only ~7h56m elapsed, within max_auto_actions_per_entity_per_day=1 (24h window), so no rebuild attempted this pass. The 3 existing lookalikes (120255832535210159/610159/780159) remain live and serving, untouched. Next eligible attempt ~2026-10-08T02:51 UTC. Reconfirmed 2026-10-07T12:50:00.000Z: last real attempt was 2026-10-07T02:51:00.000Z (~9h59m elapsed), still within max_auto_actions_per_entity_per_day=1's 24h window -- rebuild skipped again this pass. Source audience (Purchasers 180D) size still ~20, unchanged. Next eligible ~2026-10-08T02:51 UTC. Reconfirmed 2026-10-07T14:49:00.000Z pass: last real rebuild attempt remains 2026-10-07T02:51:00.000Z (~11h58m elapsed), still within max_auto_actions_per_entity_per_day=1's 24h window -- rebuild skipped again this pass. Source audience (Purchasers 180D, 120255823280550159) size still ~20, unchanged. Next eligible ~2026-10-08T02:51 UTC.",
       "severity": "low",
       "dismissed": false,
       "createdAt": "2026-10-07T12:50:00.000Z"
@@ -14214,6 +14214,24 @@
       "severity": "low",
       "dismissed": false,
       "createdAt": "2026-10-07T12:50:00.000Z"
+    },
+    {
+      "id": "AL-1467",
+      "module": "self-audit-check",
+      "title": "Routine pass summary -- 2026-10-07T14:49:00.000Z",
+      "detail": "2026-10-07T14:49:00.000Z pass. Circuit breaker: not tripped (today's account spend Rs2,744.08 vs hard_spend_ceiling_inr=6,000, ads_get_ad_entities level=ad_account date_preset=today). Pixel quality gate: dataset 833131719490535 composite EMQ scores between 6.1 and 8.9, all at/above pixel_quality_min_match_rate=0.6 -- ROAS-based modules not suppressed. 5 campaigns / 11 ad sets ACTIVE (Sora_BOF_Test_5Oct, Tsuchi_BOF_Test_5Oct, Prospecting_JP_Purchase_5-9Oct, Sneakers_BOF_30Sep-5Oct, Caps + Kage_26 Sept) -- unchanged from the 12:50 UTC pass. purchaser-exclusion: direct targeting fetch on all 11 active ad sets confirms every one excludes Purchasers 180D (120255823280550159) -- compliant account-wide, no action needed. lookalike-refresh: still rate-limited, see updated AL-1460. hook-angle-tagging: all 12 distinct active creative ids already have creativeTags entries -- nothing new to tag. anomaly: ads_insights_anomaly_signal returned no issues. New campaign Prospecting_JP_Purchase_5-9Oct (120256186544730159, launched since the last check) is ACTIVE with a strong 16.5x last_14d purchase_roas on Rs955.79 spend and its only ad set already excludes Purchasers 180D -- no compliance gap. Spot-checked 4 live pending proposals against fresh data (A-026 Retargeting_Overall-whatsapp, A-038 Caps+Kage-whatsapp, A-053 device-targeting, A-049 budget-reallocation): all four were already reconfirmed within the last 2-4 hours and the fresh pulls this pass (Sneakers_BOF 4.74x/Rs18,578.22, Caps+Kage 7.13x/Rs14,610.10 last_14d; BOF_2 android 2.77x/Rs7,221.61 vs iphone 4.60x/Rs9,578.56) match those recordings within normal noise -- no edits made, nothing moved enough to warrant a rewrite. Dashboard-staleness drift (index.html's baked-in DATA snapshot still dated 2026-09-13) was already reconfirmed as recently as AL-1432 (2026-10-06) -- within the 3-day dedup window, not re-flagged. Competitor rescrape skipped this pass as redundant (Gully Labs/Lotto Sport India were both freshly scraped at the immediately prior 12:50 UTC pass, ~2h ago).",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-10-07T14:49:00.000Z"
+    },
+    {
+      "id": "AL-1468",
+      "module": "routine-run-notes",
+      "title": "Run summary -- 2026-10-07 ~14:49 UTC pass",
+      "detail": "Automated run at 2026-10-07T14:49:00.000Z. 0 auto-executed actions (purchaser-exclusion compliant account-wide, lookalike-refresh still rate-limited, hook-angle-tagging had nothing new to tag, circuit breaker not tripped). 0 new proposals. 0 new alerts beyond the 2 per-pass summary alerts (self-audit-check, routine-run-notes) and one updated alert (AL-1460, lookalike-refresh, reconfirmed). No pending-proposal reasoning rewrites -- the 4 proposals spot-checked against fresh live data (A-026, A-038, A-049, A-053) were all reconfirmed within the last 2-4 hours and nothing moved enough to update. Highest-priority item: none urgent -- no circuit-breaker trip, no anomaly, no new compliance gap.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-10-07T14:49:00.000Z"
     }
   ],
   "log": [
