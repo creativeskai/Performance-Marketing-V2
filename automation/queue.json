@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-07T08:52:00.000Z",
+  "generatedAt": "2026-10-07T10:47:00.000Z",
   "settings": {
     "kill_roas_threshold": "DISABLED 2026-10-05 by user instruction: the ROAS pause-kill is OFF. Module 16 (pause-kill) must NOT auto-pause any campaign for low ROAS; surface low-ROAS campaigns as alerts only. The hard spend circuit breaker is a separate mechanism and stays ON. Former rule, for reference: pause if ROAS < 1.0x after ₹500 spend on a sales-objective campaign. EXCEPTION until 2026-10-05T23:59+05:30 (user-approved 2026-09-29): for the sneaker-push campaigns 120256091369160159 (Sneakers_BOF_30Sep-5Oct), 120256091370110159 (Sneakers_Prospecting_30Sep-5Oct) and 120256088882780159 (Sneakers_Catalog_Retargeting) the spend floor is ₹1,500, not ₹500.",
     "reactivate_min_historic_roas": "surface for reactivation if a paused campaign's last active-period ROAS >= 3.0x",
@@ -29,10 +29,10 @@
       }
     },
     "competitor_last_scrape": {
-      "gully_labs_active_ads": 192,
-      "lotto_sport_india_active_ads": 750,
-      "scraped_at": "2026-10-07T08:52:00.000Z",
-      "note": "2026-10-07T08:52:00.000Z pass: individual ads_library_search queries -- Gully Labs (107479854297817) estimated_total_count=192 (first individual reading, no prior baseline to compare), Lotto Sport India (426015150606378) estimated_total_count=750, down from 1223 at the prior 2026-10-07T06:52:00.000Z pass -- a -38.7% move, over the >=20% competitor-spike swing threshold (see AL-1458 this pass). Combined page_ids query returned estimated_total_count=941."
+      "gully_labs_active_ads": 195,
+      "lotto_sport_india_active_ads": 1056,
+      "scraped_at": "2026-10-07T10:47:00.000Z",
+      "note": "2026-10-07T10:47 UTC pass: individual ads_library_search queries -- Gully Labs 195 (+1.6% vs 192), Lotto Sport India 1056 (+40.8% vs 750, see AL-1463; continues a volatile noisy pattern over the last few passes, likely Ad Library sampling variance). Combined page_ids query estimated_total_count=1251."
     },
     "audience_label_corrections": {
       "120249907176770159": "ATC_180D -- NOT a purchaser audience (cart-adders, event=AddToCart, retention 180 days). Verified 2026-09-14, reconfirmed 2026-09-20. Superseded note: earlier passes said the account had NO purchaser audience at all -- that's now out of date. See the 120255823280550159 (Purchasers 180D) entry above, created 2026-09-15, which IS a genuine purchaser audience and is already in use for exclusion + lookalike.",
@@ -511,7 +511,7 @@
       "module": "placement-optimization",
       "tier": "approval",
       "title": "Exclude WhatsApp placement from Retargeting_Overall",
-      "reasoning": "Reasoning history condensed for file-size reasons (see log for prior reconfirmations back to 2026-09-20). Retargeting_Overall (campaign 120255851467340159) is ACTIVE, last_30d 11.178039x ROAS on Rs2,250.86 spend. Reconfirmed 2026-10-02T18:50:00.000Z pass: fresh last_14d publisher_platform breakdown on ad set 120255851467360159 -- whatsapp spend Rs68.08, still 0 attributed purchases (null ROAS), vs facebook (Rs121.92, 26.23x) and instagram (Rs1,749.77, 11.68x). Targeting still includes 'whatsapp' in effective_publisher_platforms. Fix remains unapplied, pending approval. Reconfirmed 2026-10-03T16:46:00.000Z pass: fresh last_14d publisher_platform breakdown on ad set 120255851467360159 -- whatsapp spend Rs68.08, still 0 attributed purchases (null ROAS), vs facebook (Rs122.16, 26.18x) and instagram (Rs1,749.86, 11.68x). Targeting still includes 'whatsapp' in effective_publisher_platforms. Fix remains unapplied, pending approval. Reconfirmed 2026-10-07T02:51 UTC pass: Retargeting_Overall campaign (120255851467340159) and its ad set (120255851467360159) are now PAUSED (this campaign has flipped active/paused repeatedly -- see A-055/AL-1441/AL-1444). Downgraded to low urgency while not delivering; targeting still includes whatsapp in publisher_platforms, so the recommendation stands for whenever it's next reactivated. No action taken -- approval tier.",
+      "reasoning": "Reasoning history condensed for file-size reasons (see log for prior reconfirmations back to 2026-09-20). Retargeting_Overall (campaign 120255851467340159) is ACTIVE, last_30d 11.178039x ROAS on Rs2,250.86 spend. Reconfirmed 2026-10-02T18:50:00.000Z pass: fresh last_14d publisher_platform breakdown on ad set 120255851467360159 -- whatsapp spend Rs68.08, still 0 attributed purchases (null ROAS), vs facebook (Rs121.92, 26.23x) and instagram (Rs1,749.77, 11.68x). Targeting still includes 'whatsapp' in effective_publisher_platforms. Fix remains unapplied, pending approval. Reconfirmed 2026-10-03T16:46:00.000Z pass: fresh last_14d publisher_platform breakdown on ad set 120255851467360159 -- whatsapp spend Rs68.08, still 0 attributed purchases (null ROAS), vs facebook (Rs122.16, 26.18x) and instagram (Rs1,749.86, 11.68x). Targeting still includes 'whatsapp' in effective_publisher_platforms. Fix remains unapplied, pending approval. Reconfirmed 2026-10-07T02:51 UTC pass: Retargeting_Overall campaign (120255851467340159) and its ad set (120255851467360159) are now PAUSED (this campaign has flipped active/paused repeatedly -- see A-055/AL-1441/AL-1444). Downgraded to low urgency while not delivering; targeting still includes whatsapp in publisher_platforms, so the recommendation stands for whenever it's next reactivated. No action taken -- approval tier. [Reconfirmed 2026-10-07T10:47 UTC pass: fresh ads_get_ad_entities pull shows campaign 'Retargeting_Overall' (120255851467340159) is now PAUSED again (last_30d purchase_roas 8.289451x on Rs3,632.84 spend) -- continues the active/paused flip-flopping noted on A-055 (manual Ads Manager activity, not automation). The ad set and its targeting (still including 'whatsapp') are unchanged and still exist; this proposal remains actionable whenever the campaign is next reactivated, just currently low-urgency while paused. No Meta API call made this pass.]",
       "actionSummary": "Add an explicit targeting.publisher_platforms list on the 'Retargeting_Overall' ad set covering every currently-effective platform except 'whatsapp' (facebook, instagram, audience_network, threads); leave every other targeting parameter (age/gender, geo, included custom audiences) unchanged.",
       "metaAction": {
         "tool": "ads_update_entity",
@@ -13860,11 +13860,11 @@
     {
       "id": "AL-1431",
       "module": "purchaser-exclusion",
-      "title": "All 7 active ad sets reconfirmed purchaser-exclusion compliant -- no change since 22:46 UTC pass",
-      "detail": "Fresh targeting fetch on all 7 currently-active ad sets (Prosp_Men_25-44_Purchase_JP under Prospecting_JP_Purchase_5-9Oct; Caps_FB-A_EngagedShoppers, Caps_FB-B_HighValueGoods, Caps_FB-C_Interests and the original Caps + Kage_26Sept ad set, all under campaign Caps + Kage_26 Sept; BOF_1_Hot_ATC_IC_API_30D and BOF_2_Warm_IG365_Engagers_Visitors under Sneakers_BOF_30Sep-5Oct) confirms every one excludes 'Purchasers 180D' (120255823280550159) in excluded_custom_audiences. purchaser-exclusion remains compliant account-wide, no action needed.",
+      "title": "All 11 active ad sets reconfirmed purchaser-exclusion compliant -- account composition shifted again",
+      "detail": "2026-10-07T10:47 UTC pass: account composition has shifted materially since the last purchaser-exclusion reconfirmation -- 5 campaigns / 11 ad sets now ACTIVE (Sora_BOF_Test_5Oct: Sora_Hot_ATC_IC_API_30D, Sora_Warm_IG365_Engagers_Visitors; Tsuchi_BOF_Test_5Oct: Tsuchi_Hot_ATC_IC_API_30D, Tsuchi_Warm_IG365_Engagers_Visitors; Prospecting_JP_Purchase_5-9Oct: Prosp_Men_25-44_Purchase_JP; Caps + Kage_26 Sept: Caps_FB-A_EngagedShoppers, Caps_FB-B_HighValueGoods, Caps_FB-C_Interests, Caps + Kage_26Sept; Sneakers_BOF_30Sep-5Oct: BOF_1_Hot_ATC_IC_API_30D, BOF_2_Warm_IG365_Engagers_Visitors). Fresh direct targeting fetch on all 11 confirms every one excludes 'Purchasers 180D' (120255823280550159) in excluded_custom_audiences -- none of the currently-active ad sets are on the settings.purchaser_exclusion_exempt_adset_ids exempt list this pass (Retargeting_Overall and BOF_3_CrossSell_Purchasers180D, the two exempt ad sets, are both PAUSED right now). purchaser-exclusion remains compliant account-wide, no action needed. Source audience size unchanged (~20).",
       "severity": "low",
       "dismissed": false,
-      "createdAt": "2026-10-06T00:49:00.000Z"
+      "createdAt": "2026-10-07T10:47:00.000Z"
     },
     {
       "id": "AL-1432",
@@ -14123,11 +14123,11 @@
     {
       "id": "AL-1460",
       "module": "lookalike-refresh",
-      "title": "Lookalike rebuild rate-limited this pass",
-      "detail": "2026-10-07T08:52 UTC pass: the laddered 1%/2%/5% lookalikes off 'Purchasers 180D' (120255823280550159, approximate_count still ~20, unchanged since 2026-09-15 creation) are past the 14-day lookalike_refresh_days threshold, but the last real rebuild attempt was 2026-10-07T02:51:00.000Z (failed with Meta's duplicate-lookalike error 2654/1713007, source audience unchanged) -- within max_auto_actions_per_entity_per_day=1, so no rebuild attempted this pass. The 3 existing lookalikes (120255832535210159/610159/780159) remain ACTIVE and serving. Next eligible attempt ~2026-10-08T02:51 UTC.",
+      "title": "Lookalike rebuild rate-limited this pass (reconfirmed 10:47 UTC)",
+      "detail": "2026-10-07T10:47 UTC pass: the laddered 1%/2%/5% lookalikes off 'Purchasers 180D' (120255823280550159, approximate_count still ~20, unchanged since 2026-09-15 creation) remain past the 14-day lookalike_refresh_days threshold, but the last real rebuild attempt was 2026-10-07T02:51:00.000Z (failed with Meta's duplicate-lookalike error 2654/1713007, source audience unchanged) -- only ~7h56m elapsed, within max_auto_actions_per_entity_per_day=1 (24h window), so no rebuild attempted this pass. The 3 existing lookalikes (120255832535210159/610159/780159) remain live and serving, untouched. Next eligible attempt ~2026-10-08T02:51 UTC.",
       "severity": "low",
       "dismissed": false,
-      "createdAt": "2026-10-07T08:52:00.000Z"
+      "createdAt": "2026-10-07T10:47:00.000Z"
     },
     {
       "id": "AL-1461",
@@ -14146,6 +14146,15 @@
       "severity": "low",
       "dismissed": false,
       "createdAt": "2026-10-07T08:52:00.000Z"
+    },
+    {
+      "id": "AL-1463",
+      "module": "competitor-spike",
+      "title": "Lotto Sport India active-ad count jumped ~40.8% since last scrape",
+      "detail": "2026-10-07T10:47 UTC pass: individual ads_library_search queries -- Lotto Sport India (426015150606378) estimated_total_count=1056, up from 750 at the prior 2026-10-07T08:52:00.000Z pass -- a +40.8% move, over the >=20% competitor-spike swing threshold. This continues a volatile pattern: 750 (08:52 pass) was itself a -38.7% drop from 1223 (06:52 pass). The swings look like Ad Library estimated_total_count sampling noise rather than a real step-change in Lotto's active-ad volume -- no action recommended, flagging per the module's literal trigger. Gully Labs (107479854297817) estimated_total_count=195, up slightly from 192 (+1.6%), well under the swing threshold. Combined page_ids query returned estimated_total_count=1251.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-10-07T10:47:00.000Z"
     }
   ],
   "log": [
