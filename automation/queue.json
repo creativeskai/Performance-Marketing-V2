@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-08T02:52:00.000Z",
+  "generatedAt": "2026-10-08T04:53:00.000Z",
   "settings": {
     "kill_roas_threshold": "DISABLED 2026-10-05 by user instruction: the ROAS pause-kill is OFF. Module 16 (pause-kill) must NOT auto-pause any campaign for low ROAS; surface low-ROAS campaigns as alerts only. The hard spend circuit breaker is a separate mechanism and stays ON. Former rule, for reference: pause if ROAS < 1.0x after ₹500 spend on a sales-objective campaign. EXCEPTION until 2026-10-05T23:59+05:30 (user-approved 2026-09-29): for the sneaker-push campaigns 120256091369160159 (Sneakers_BOF_30Sep-5Oct), 120256091370110159 (Sneakers_Prospecting_30Sep-5Oct) and 120256088882780159 (Sneakers_Catalog_Retargeting) the spend floor is ₹1,500, not ₹500.",
     "reactivate_min_historic_roas": "surface for reactivation if a paused campaign's last active-period ROAS >= 3.0x",
@@ -29,10 +29,10 @@
       }
     },
     "competitor_last_scrape": {
-      "gully_labs_active_ads": 189,
-      "lotto_sport_india_active_ads": 800,
-      "scraped_at": "2026-10-08T02:52:00.000Z",
-      "note": "2026-10-08T02:52:00.000Z pass: Gully Labs 189 (+21.9% vs 155), Lotto Sport India 800 (+47.6% vs 542) -- both moved >=20%, continuing the same noisy Ad Library sampling-variance pattern seen across prior passes (see settings.note's existing diagnosis). No real-world competitor action implied."
+      "gully_labs_active_ads": 155,
+      "lotto_sport_india_active_ads": 597,
+      "scraped_at": "2026-10-08T04:53:00.000Z",
+      "note": "2026-10-08T04:53:00.000Z pass: Gully Labs 155 (-18.0% vs 189), Lotto Sport India 597 (-25.4% vs 800) -- Lotto moved >=20%, continuing the same noisy Ad Library sampling-variance pattern seen across prior passes (see settings.note's existing diagnosis). No real-world competitor action implied."
     },
     "audience_label_corrections": {
       "120249907176770159": "ATC_180D -- NOT a purchaser audience (cart-adders, event=AddToCart, retention 180 days). Verified 2026-09-14, reconfirmed 2026-09-20. Superseded note: earlier passes said the account had NO purchaser audience at all -- that's now out of date. See the 120255823280550159 (Purchasers 180D) entry above, created 2026-09-15, which IS a genuine purchaser audience and is already in use for exclusion + lookalike.",
@@ -967,6 +967,66 @@
       },
       "status": "pending",
       "createdAt": "2026-10-07T12:50:00.000Z"
+    },
+    {
+      "id": "A-058",
+      "module": "placement-optimization",
+      "tier": "approval",
+      "title": "Exclude WhatsApp placement from BOF_2_Warm_IG365_Engagers_Visitors (Sneakers_BOF_30Sep-5Oct)",
+      "reasoning": "last_30d publisher_platform breakdown: WhatsApp spend ₹10.28 at CPM ₹790.77 and 0.00% CTR (13 impressions, 0 clicks, no purchases) vs Instagram ₹18,445.21 at CPM ₹57.56, 2.47% CTR, 4.26x ROAS and Facebook ₹252.74 at CPM ₹115.09, 3.32% CTR, 33.93x ROAS -- the same near-zero-engagement WhatsApp-placement pattern already flagged and pending exclusion on several other ad sets in this account (A-014, A-026, A-033, A-038, A-056). This ad set carries ₹18.7k of last-30d spend under Sneakers_BOF_30Sep-5Oct and was missed by A-056, which targeted its sibling ad set BOF_1_Hot_ATC_IC_API_30D instead.",
+      "actionSummary": "Remove 'whatsapp' from BOF_2_Warm_IG365_Engagers_Visitors' effective placements by setting an explicit targeting.publisher_platforms list covering facebook, instagram, audience_network and threads; every other targeting parameter stays unchanged.",
+      "metaAction": {
+        "tool": "ads_update_entity",
+        "params": {
+          "ad_account_id": "704523148804803",
+          "entity_id": "120256091376920159",
+          "entity_type": "ad_set",
+          "field": "targeting",
+          "note": "remove 'whatsapp' from effective_publisher_platforms by setting an explicit targeting.publisher_platforms list (facebook, instagram, audience_network, threads); leave every other targeting parameter unchanged"
+        }
+      },
+      "status": "pending",
+      "createdAt": "2026-10-08T04:53:00.000Z"
+    },
+    {
+      "id": "A-059",
+      "module": "placement-optimization",
+      "tier": "approval",
+      "title": "Exclude WhatsApp placement from Caps_FB-A_EngagedShoppers (Caps + Kage_26 Sept)",
+      "reasoning": "last_30d publisher_platform breakdown: WhatsApp spend ₹8.24 at CPM ₹749.09 and 0.00% CTR (11 impressions, 0 clicks) vs Instagram ₹2,730.10 at CPM ₹58.93, 1.45% CTR, 5.15x ROAS -- same account-wide WhatsApp pattern as A-014/A-026/A-033/A-038/A-056. This is a newly-active ad set (Engaged Shoppers behavior test) under Caps + Kage_26 Sept not previously covered by any placement-optimization proposal.",
+      "actionSummary": "Remove 'whatsapp' from Caps_FB-A_EngagedShoppers' effective placements by setting an explicit targeting.publisher_platforms list covering facebook, instagram, audience_network and threads; every other targeting parameter stays unchanged.",
+      "metaAction": {
+        "tool": "ads_update_entity",
+        "params": {
+          "ad_account_id": "704523148804803",
+          "entity_id": "120256186197980159",
+          "entity_type": "ad_set",
+          "field": "targeting",
+          "note": "remove 'whatsapp' from effective_publisher_platforms by setting an explicit targeting.publisher_platforms list (facebook, instagram, audience_network, threads); leave every other targeting parameter unchanged"
+        }
+      },
+      "status": "pending",
+      "createdAt": "2026-10-08T04:53:00.000Z"
+    },
+    {
+      "id": "A-060",
+      "module": "placement-optimization",
+      "tier": "approval",
+      "title": "Exclude WhatsApp placement from Caps_FB-C_Interests (Caps + Kage_26 Sept)",
+      "reasoning": "last_30d publisher_platform breakdown: WhatsApp spend ₹4.95 at CPM ₹550.00 and 0.00% CTR (9 impressions, 0 clicks) vs Instagram ₹1,401.74 at CPM ₹63.91, 1.38% CTR, 7.81x ROAS -- same account-wide WhatsApp pattern as A-014/A-026/A-033/A-038/A-056. This is a newly-active ad set (interest test: Baseball cap / Streetwear / Fashion accessories) under Caps + Kage_26 Sept not previously covered by any placement-optimization proposal.",
+      "actionSummary": "Remove 'whatsapp' from Caps_FB-C_Interests' effective placements by setting an explicit targeting.publisher_platforms list covering facebook, instagram, audience_network and threads; every other targeting parameter stays unchanged.",
+      "metaAction": {
+        "tool": "ads_update_entity",
+        "params": {
+          "ad_account_id": "704523148804803",
+          "entity_id": "120256186199220159",
+          "entity_type": "ad_set",
+          "field": "targeting",
+          "note": "remove 'whatsapp' from effective_publisher_platforms by setting an explicit targeting.publisher_platforms list (facebook, instagram, audience_network, threads); leave every other targeting parameter unchanged"
+        }
+      },
+      "status": "pending",
+      "createdAt": "2026-10-08T04:53:00.000Z"
     }
   ],
   "alerts": [
@@ -14318,6 +14378,33 @@
       "severity": "low",
       "dismissed": false,
       "createdAt": "2026-10-08T02:52:00.000Z"
+    },
+    {
+      "id": "AL-1478",
+      "module": "competitor-spike",
+      "title": "Lotto Sport India active-ad count dropped ~25.4% since last scrape",
+      "detail": "ads_library_search (page_name filter via search_terms='Lotto Sport India', country=IN, active) estimated_total_count now 597, down from 800 at the prior 2026-10-08T02:52 UTC scrape (-25.4%), crossing the >=20% alert threshold. Gully Labs moved 189 -> 155 (-18.0%), just under threshold this pass. Continues the same Ad Library sampling-variance pattern already diagnosed in settings.note -- these estimated counts fluctuate significantly between identical queries and do not reflect real campaign activity changes. No real-world competitor action implied.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-10-08T04:53:00.000Z"
+    },
+    {
+      "id": "AL-1479",
+      "module": "self-audit-check",
+      "title": "Routine pass summary -- 2026-10-08T04:53:00.000Z",
+      "detail": "Circuit breaker: not tripped, today's account spend ₹1,120.06 vs ₹6,000 ceiling. Pixel quality gate: all tracked event composite EMQ scores 6.1-8.7, at/above pixel_quality_min_match_rate=0.6 -- ROAS modules not suppressed. 6 campaigns ACTIVE / 11 ad sets ACTIVE this pass (Sora_BOF_Test_5Oct, Tsuchi_BOF_Test_5Oct, Prospecting_JP_Purchase_5-9Oct, Sneakers_BOF_30Sep-5Oct, Caps + Kage_26 Sept [now 4 ad sets incl. new Caps_FB-A/B/C interest/behavior tests], Sneakers_Catalog_Retargeting [0 active ad sets this pass]). purchaser-exclusion: all 11 active ad sets confirmed excluding Purchasers 180D (120255823280550159) via direct targeting fetch -- compliant account-wide, no action needed. lookalike-refresh: rate limit cleared (last attempt 2026-10-07T02:51 UTC), rebuild attempted and failed again with Meta's duplicate-lookalike error (2654/1713007) -- source audience still ~20, unchanged since 2026-09-15; existing 1%/2%/5% ladder remains live and serving. hook-angle-tagging: all active ads' creatives already have creativeTags entries -- nothing new to tag this pass. No anomaly signal fired (ads_insights_anomaly_signal). No ad set in learning phase. placement-optimization: 3 new WhatsApp-placement proposals opened (A-058/A-059/A-060) for ad sets not previously covered (BOF_2_Warm_IG365_Engagers_Visitors, Caps_FB-A_EngagedShoppers, Caps_FB-C_Interests) -- same near-zero-engagement, 10x+ worse CPM WhatsApp pattern as every other ad set in the account; Caps_FB-B_HighValueGoods also includes WhatsApp but spend is too trivial (₹8.29 total) to act on this pass. spend-pacing skipped (monthly_spend_goal_inr is null). Weekly/monthly digest not due this pass (last weekly 2026-10-04, last monthly 2026-10-01). pause-kill remains disabled per settings.kill_roas_threshold (user instruction 2026-10-05) -- no active campaign showed concerning ROAS this pass regardless (lowest non-null was 4.26x). 27 proposals now pending awaiting human review (reactivate-winner x7, placement-optimization x4 pre-existing + 3 new, age-gender-auto-shift x1, engagement-tier-segmentation x1, device-targeting x1, campaign-consolidation x1, high-intent-retargeting x1, catalog-dpa-launch x1).",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-10-08T04:53:00.000Z"
+    },
+    {
+      "id": "AL-1480",
+      "module": "routine-run-notes",
+      "title": "Run summary -- 2026-10-08 ~04:53 UTC pass",
+      "detail": "Auto-tier: lookalike-refresh attempted (rate limit clear) and failed with duplicate-lookalike error, logged to `log`; purchaser-exclusion, hook-angle-tagging and hard-spend-circuit-breaker all evaluated with no action needed this pass. Approval-tier: opened 3 new placement-optimization proposals (A-058/A-059/A-060) for WhatsApp exclusion on ad sets not covered by any prior proposal; reviewed all pre-existing pending proposals against fresh live data and found none moot (every referenced campaign/ad set remains in the same active/paused state as when its proposal was written). Competitor-rescrape refreshed (Gully Labs 155 [-18.0%], Lotto Sport India 597 [-25.4%]) -- see AL-1478. No anomaly signal, no circuit-breaker concern, no learning-phase-stuck ad sets this pass.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-10-08T04:53:00.000Z"
     }
   ],
   "log": [
@@ -20440,6 +20527,29 @@
       "detail": null,
       "tier": "approval",
       "executedAt": "2026-10-07T22:49:00.000Z"
+    },
+    {
+      "proposalId": null,
+      "action": "lookalike-refresh auto-module: rate limit cleared (last attempt 2026-10-07T02:51:00.000Z, >24h elapsed) -- attempted to rebuild the 1% laddered lookalike off 'Purchasers 180D' (id 120255823280550159, approximate_count_lower_bound/upper_bound still 20, unchanged since creation on 2026-09-15) via ads_create_custom_audience (subtype LOOKALIKE, ratio 0.01, name 'Lookalike (IN 1%) - Purchasers 180D - 2026-10-08'). Call failed with Meta's duplicate-lookalike validation error (error_code 2654, error_subcode 1713007) -- the same real API constraint seen on every qualifying pass since 2026-09-29: the source audience has not grown, so Meta rejects a new lookalike as a duplicate of the existing laddered 1%/2%/5% set (120255832535210159/610159/780159, still ACTIVE and serving). Not retried this pass per the one-attempt-per-mutation rule.",
+      "result": "failed",
+      "previousState": {
+        "source_audience_size": 20,
+        "existing_lookalikes": [
+          "120255832535210159",
+          "120255832535610159",
+          "120255832535780159"
+        ],
+        "existing_ladder_age_days": 23
+      },
+      "detail": {
+        "error_category": "VALIDATION",
+        "error_message": "Can't Create a Duplicate Lookalike: You've already created a lookalike audience with the same source, country and size. Please try using a different source or different specifications.",
+        "error_code": "2654",
+        "error_subcode": "1713007",
+        "is_retryable": false
+      },
+      "tier": "auto",
+      "executedAt": "2026-10-08T04:53:00.000Z"
     }
   ],
   "creativeTags": {
