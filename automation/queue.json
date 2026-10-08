@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-08T08:54:00.000Z",
+  "generatedAt": "2026-10-08T10:52:00.000Z",
   "settings": {
     "kill_roas_threshold": "DISABLED 2026-10-05 by user instruction: the ROAS pause-kill is OFF. Module 16 (pause-kill) must NOT auto-pause any campaign for low ROAS; surface low-ROAS campaigns as alerts only. The hard spend circuit breaker is a separate mechanism and stays ON. Former rule, for reference: pause if ROAS < 1.0x after ₹500 spend on a sales-objective campaign. EXCEPTION until 2026-10-05T23:59+05:30 (user-approved 2026-09-29): for the sneaker-push campaigns 120256091369160159 (Sneakers_BOF_30Sep-5Oct), 120256091370110159 (Sneakers_Prospecting_30Sep-5Oct) and 120256088882780159 (Sneakers_Catalog_Retargeting) the spend floor is ₹1,500, not ₹500.",
     "reactivate_min_historic_roas": "surface for reactivation if a paused campaign's last active-period ROAS >= 3.0x",
@@ -29,10 +29,10 @@
       }
     },
     "competitor_last_scrape": {
-      "gully_labs_active_ads": 155,
-      "lotto_sport_india_active_ads": 597,
-      "scraped_at": "2026-10-08T04:53:00.000Z",
-      "note": "2026-10-08T04:53:00.000Z pass: Gully Labs 155 (-18.0% vs 189), Lotto Sport India 597 (-25.4% vs 800) -- Lotto moved >=20%, continuing the same noisy Ad Library sampling-variance pattern seen across prior passes (see settings.note's existing diagnosis). No real-world competitor action implied."
+      "gully_labs_active_ads": 161,
+      "lotto_sport_india_active_ads": 323,
+      "scraped_at": "2026-10-08T10:52:00.000Z",
+      "note": "2026-10-08T10:52:00.000Z pass: Gully Labs 161 (+3.9% vs 155, under 20% threshold, no alert). Lotto Sport India 323 (-45.9% vs 597) -- crossed the 20% threshold again, continuing the same noisy Ad Library sampling-variance pattern seen across prior passes (see settings.note's existing diagnosis and AL-1261). No real-world competitor action implied."
     },
     "audience_label_corrections": {
       "120249907176770159": "ATC_180D -- NOT a purchaser audience (cart-adders, event=AddToCart, retention 180 days). Verified 2026-09-14, reconfirmed 2026-09-20. Superseded note: earlier passes said the account had NO purchaser audience at all -- that's now out of date. See the 120255823280550159 (Purchasers 180D) entry above, created 2026-09-15, which IS a genuine purchaser audience and is already in use for exclusion + lookalike.",
@@ -917,7 +917,7 @@
       "module": "placement-optimization",
       "tier": "approval",
       "title": "Exclude WhatsApp placement from Sneakers_BOF_30Sep-5Oct",
-      "reasoning": "Sneakers_BOF_30Sep-5Oct (campaign 120256091369160159) is ACTIVE, last_7d blended purchase_roas 4.46x on Rs18,578.22 spend. Fresh last_7d publisher_platform/platform_position breakdown (pulled 2026-10-06T20:47 UTC) shows WhatsApp placement (whatsapp_marketing_messages) at Rs18.45 spend, 0.00% CTR, 0 attributed purchases, CPM Rs1,153.13 -- versus the campaign's real placements: Facebook feed (Rs285.46, 30.04x ROAS), Instagram feed (Rs4,029.73, 2.03x), Instagram Reels (Rs10,971.11, 4.36x), Instagram Stories (Rs3,222.05, 5.63x). Same dead-WhatsApp-placement pattern already flagged and pending on this account's other active/recent ad sets (A-014, A-026, A-033, A-038). Low absolute spend but a clean removal with zero conversion history. Reconfirmed 2026-10-07T02:51 UTC pass: Sneakers_BOF_30Sep-5Oct (120256091369160159) is ACTIVE. Fresh last_14d campaign-level publisher_platform breakdown: whatsapp spend Rs18.45 on 17 impressions (0.00% CTR, no attributed purchases/null ROAS, CPM Rs1,085.29) vs. facebook (Rs330.22, 25.97x ROAS) and instagram (Rs18,223.04, 4.07x ROAS). Targeting still includes whatsapp. No action taken -- approval tier. Reconfirmed 2026-10-07T22:49 UTC pass: Sneakers_BOF_30Sep-5Oct (120256091369160159) still ACTIVE. Fresh last_14d campaign-level publisher_platform breakdown: whatsapp spend Rs23.79 on 23 impressions (0.00% CTR, still 0 attributed purchases/null ROAS) vs. facebook (Rs355.43, 24.13x ROAS) and instagram (Rs20,247.38, 4.54x ROAS). Targeting still includes whatsapp. No action taken -- approval tier.",
+      "reasoning": "Sneakers_BOF_30Sep-5Oct (campaign 120256091369160159) is ACTIVE, last_7d blended purchase_roas 4.46x on Rs18,578.22 spend. Fresh last_7d publisher_platform/platform_position breakdown (pulled 2026-10-06T20:47 UTC) shows WhatsApp placement (whatsapp_marketing_messages) at Rs18.45 spend, 0.00% CTR, 0 attributed purchases, CPM Rs1,153.13 -- versus the campaign's real placements: Facebook feed (Rs285.46, 30.04x ROAS), Instagram feed (Rs4,029.73, 2.03x), Instagram Reels (Rs10,971.11, 4.36x), Instagram Stories (Rs3,222.05, 5.63x). Same dead-WhatsApp-placement pattern already flagged and pending on this account's other active/recent ad sets (A-014, A-026, A-033, A-038). Low absolute spend but a clean removal with zero conversion history. Reconfirmed 2026-10-07T02:51 UTC pass: Sneakers_BOF_30Sep-5Oct (120256091369160159) is ACTIVE. Fresh last_14d campaign-level publisher_platform breakdown: whatsapp spend Rs18.45 on 17 impressions (0.00% CTR, no attributed purchases/null ROAS, CPM Rs1,085.29) vs. facebook (Rs330.22, 25.97x ROAS) and instagram (Rs18,223.04, 4.07x ROAS). Targeting still includes whatsapp. No action taken -- approval tier. Reconfirmed 2026-10-07T22:49 UTC pass: Sneakers_BOF_30Sep-5Oct (120256091369160159) still ACTIVE. Fresh last_14d campaign-level publisher_platform breakdown: whatsapp spend Rs23.79 on 23 impressions (0.00% CTR, still 0 attributed purchases/null ROAS) vs. facebook (Rs355.43, 24.13x ROAS) and instagram (Rs20,247.38, 4.54x ROAS). Targeting still includes whatsapp. No action taken -- approval tier. CLOSED AS MOOT 2026-10-08T10:52:00.000Z: direct fetch this pass shows this proposal's target ad set, BOF_1_Hot_ATC_IC_API_30D (120256091373980159), is now PAUSED (not delivering) -- no live WhatsApp spend to cut. The campaign's only currently-ACTIVE ad set, BOF_2_Warm_IG365_Engagers_Visitors (120256091376920159), is already covered by the separate A-058 proposal. No Meta API call made.",
       "actionSummary": "Add an explicit targeting.publisher_platforms list on Sneakers_BOF_30Sep-5Oct's ad set(s) (BOF_1_Hot_ATC_IC_API_30D 120256091373980159, BOF_2_Warm_IG365_Engagers_Visitors 120256091376920159) covering every currently-effective platform except 'whatsapp' (facebook, instagram, audience_network, threads); leave every other targeting parameter (age/gender, geo, included/excluded custom audiences) unchanged. The dashboard applies this on top of a fresh live fetch of each ad set's current targeting.",
       "metaAction": {
         "tool": "ads_update_entity",
@@ -934,15 +934,16 @@
           "whatsapp"
         ]
       },
-      "status": "pending",
-      "createdAt": "2026-10-06T20:47:00.000Z"
+      "status": "rejected",
+      "createdAt": "2026-10-06T20:47:00.000Z",
+      "resolvedAt": "2026-10-08T10:52:00.000Z"
     },
     {
       "id": "A-057",
       "module": "campaign-consolidation",
       "tier": "approval",
       "title": "Pause duplicate test campaigns Sora_BOF_Test_5Oct / Tsuchi_BOF_Test_5Oct",
-      "reasoning": "Flagged by campaign-consolidation-watch at the 2026-10-07T08:52 UTC pass (AL-1459): Sora_BOF_Test_5Oct (120256202021140159) and Tsuchi_BOF_Test_5Oct (120256202020640159), both launched 2026-10-05, duplicate the exact same audiences (ATC_NoPurchase_30D, IC_NoPurchase_30D, Add_Payment_Info, IG_Visitors_365, FB_Engagers_30D, Website_100D, ViewContent_180D, Videos) and creatives (e.g. 1625646545933358, 1471164315061727, 955645840946961, 1346073041924526) already live under the BOF_1_Hot_ATC_IC_API_30D and BOF_2_Warm_IG365_Engagers_Visitors ad sets of Sneakers_BOF_30Sep-5Oct (120256091369160159). Reconfirmed 2026-10-07T12:50:00.000Z: both still ACTIVE, combined last_14d spend only ₹68.88 (Sora ₹40.07, Tsuchi ₹28.81) with purchase_roas still null for both -- real but very small, and this is now the second pass since the duplication was first confirmed with no human action yet. Consolidating avoids these two shells silently splitting budget/learning against the sneaker campaign's identical targeting. RESOLVED 2026-10-07T18:46 UTC pass: direct ads_get_ad_entities fetches on both target campaigns show Sora_BOF_Test_5Oct (120256202021140159) status=PAUSED/effective_status=PAUSED and Tsuchi_BOF_Test_5Oct (120256202020640159) status=PAUSED/effective_status=PAUSED. Both were already paused outside this routine (no matching ads_update_entity log entry exists for either id) -- most likely a direct Ads Manager action by the user. The proposed pause is now moot; marked resolved rather than left pending, no Meta API call made. REOPENED 2026-10-08T02:52:00.000Z pass: both campaigns are ACTIVE again -- direct ads_get_ad_entities fetch this pass shows Sora_BOF_Test_5Oct (120256202021140159) status=ACTIVE/effective_status=ACTIVE and Tsuchi_BOF_Test_5Oct (120256202020640159) status=ACTIVE/effective_status=ACTIVE, reversing the 2026-10-07T18:46 UTC pass's finding that both were PAUSED (which had resolved this proposal as moot). No matching ads_update_entity log entry exists for either reactivation, so this was most likely a direct Ads Manager action by the user, not something this routine did. Current last_30d spend: Sora Rs216.48 (purchase_roas null), Tsuchi Rs173.41 (purchase_roas null) -- both still real but small, and both still duplicate the same audiences/creatives already live under Sneakers_BOF_30Sep-5Oct. Reopening to pending with the original metaAction unchanged (pause both) since the underlying duplication issue is unresolved and the campaigns are delivering again -- a human should decide whether this was an intentional reactivation (e.g. resuming a real test) or should be paused again. Refreshed 2026-10-08T08:54:00.000Z: both duplicate test campaigns remain ACTIVE -- Sora_BOF_Test_5Oct spend Rs216.48 (last_14d), Tsuchi_BOF_Test_5Oct spend Rs173.41 (last_14d), both still duplicating Sneakers_BOF_30Sep-5Oct's audiences/creatives per original reasoning. Still pending human review.",
+      "reasoning": "Flagged by campaign-consolidation-watch at the 2026-10-07T08:52 UTC pass (AL-1459): Sora_BOF_Test_5Oct (120256202021140159) and Tsuchi_BOF_Test_5Oct (120256202020640159), both launched 2026-10-05, duplicate the same BOF audience-tier structure already proven out on Sneakers_BOF_30Sep-5Oct (Hot_ATC_IC_API_30D + Warm_IG365_Engagers_Visitors ad sets, same excluded Purchasers 180D). A prior instance of this proposal was closed as moot on 2026-10-07T18:46 UTC when a direct fetch found both campaigns PAUSED outside this routine. Reconfirmed 2026-10-08T10:52:00.000Z: both campaigns are ACTIVE again -- Sora_BOF_Test_5Oct spending Rs216.48 and Tsuchi_BOF_Test_5Oct spending Rs173.41 (last_30d, effectively all since launch), both still purchase_roas=null (zero attributed purchases so far). Since they're delivering again and duplicate an already-proven structure with no purchases yet to show for the spend, the pause recommendation stands -- re-opening this proposal rather than filing a new one (same module+entity, within the 3-day de-dup window).",
       "actionSummary": "Pause Sora_BOF_Test_5Oct and Tsuchi_BOF_Test_5Oct. Does not touch Sneakers_BOF_30Sep-5Oct or any other active campaign.",
       "metaAction": {
         "tool": "ads_update_entity",
@@ -14460,6 +14461,51 @@
       "severity": "low",
       "dismissed": false,
       "createdAt": "2026-10-08T08:54:00.000Z"
+    },
+    {
+      "id": "AL-1487",
+      "module": "lookalike-refresh",
+      "title": "Lookalike rebuild skipped this pass -- rate-limited",
+      "detail": "Laddered 1%/2%/5% lookalike off 'Purchasers 180D' (120255823280550159, still ~20 members, unchanged since 2026-09-15) is past the 14-day lookalike_refresh_days threshold, but the last rebuild attempt was 2026-10-08T04:53:00.000Z (<24h ago), within max_auto_actions_per_entity_per_day=1. Skipped this pass; would have failed again with Meta's duplicate-lookalike error (2654/1713007) regardless, since the source audience hasn't grown. The 3 existing lookalikes remain live and serving.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-10-08T10:52:00.000Z"
+    },
+    {
+      "id": "AL-1488",
+      "module": "anomaly",
+      "title": "Native anomaly signal: narrow audience on Retargeting_NoBuyers_JP",
+      "detail": "ads_insights_anomaly_signal flagged ad set 'Retargeting_NoBuyers_JP' (120256186551550159, under active campaign Retargeting_Overall) as actively delivering with a narrow estimated audience (27,300-32,200). Meta's recommendation: evaluate expanding the audience or A/B test with Advantage+ audience. Informational -- no module in this table currently proposes an audience-expansion action for this signal type.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-10-08T10:52:00.000Z"
+    },
+    {
+      "id": "AL-1489",
+      "module": "competitor-spike",
+      "title": "Lotto Sport India active-ad count dropped ~45.9% since last scrape",
+      "detail": "ads_library_search: Lotto Sport India active ads now 323 (estimated_total_count), vs 597 recorded at the 2026-10-08T04:53 UTC scrape -- a -45.9% move, past the 20% competitor-spike threshold. Gully Labs moved +3.9% (155 -> 161), under threshold. Consistent with the already-diagnosed noisy Ad Library sampling-variance pattern (see settings.note, AL-1261) -- no real-world competitor action implied.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-10-08T10:52:00.000Z"
+    },
+    {
+      "id": "AL-1490",
+      "module": "self-audit-check",
+      "title": "Routine pass summary -- 2026-10-08T10:52:00.000Z",
+      "detail": "Circuit breaker: not tripped (today's spend Rs2,832.23 vs Rs6,000 ceiling). Pixel quality gate: all tracked event composite EMQ scores 6.1-8.7, at/above pixel_quality_min_match_rate=0.6 -- ROAS-based modules not suppressed. purchaser-exclusion: compliant account-wide -- all 12 active ad sets either exclude Purchasers 180D directly, are on the exempt list by design (Retargeting_Overall), or carry their own built-in Purchase exclusion via product_audience_spec (Sneaker_Viewers_ATC_30D_NoPurchase, currently paused). lookalike-refresh: rate-limited, skipped (see AL for detail). hook-angle-tagging: all 15 distinct active creative ids already have creativeTags entries -- nothing new to tag this pass. hard-spend-circuit-breaker: not triggered. catalog-dpa-launch (A-003): catalog 1149969713295773 diagnostics clean (0 issues), still zero DPA campaigns running -- structural gap unchanged. 7 campaigns ACTIVE this pass: Sora_BOF_Test_5Oct, Tsuchi_BOF_Test_5Oct (both reactivated since the 2026-10-07T18:46 pass -- see A-057 update), Prospecting_JP_Purchase_5-9Oct (17.84x ROAS), Sneakers_BOF_30Sep-5Oct (4.87x), Retargeting_Overall (8.29x), Caps + Kage_26 Sept (6.96x), Sneakers_Catalog_Retargeting (its only ad set is paused, so effectively not delivering). No threshold-alert triggered (settings.metric_baselines' two reference campaigns, Kage_sales_1908 and Kage_TOF, are not currently active, so no live comparison). No learning-phase-stuck or spend-pacing signal evaluated with fresh breakdown data this pass (monthly_spend_goal_inr is null -- spend-pacing skipped by design). Proposals: A-057 (campaign-consolidation) re-opened with fresh active-state numbers; A-056 (placement-optimization) closed as moot, its target ad set is now paused. 33 pending proposals remain for human review in-app or chat.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-10-08T10:52:00.000Z"
+    },
+    {
+      "id": "AL-1491",
+      "module": "routine-run-notes",
+      "title": "Run summary -- 2026-10-08T10:52:00.000Z pass",
+      "detail": "Auto-executed: 0 (purchaser-exclusion compliant, lookalike-refresh rate-limited, hook-angle-tagging nothing new, circuit breaker not tripped). New/updated proposals: 1 re-opened (A-057), 1 closed as moot (A-056). New alerts: 5 (lookalike rate-limit, anomaly narrow-audience, competitor-spike, self-audit-check, this summary). Highest-priority item this pass: Sora_BOF_Test_5Oct / Tsuchi_BOF_Test_5Oct are active again and duplicating an already-proven BOF structure with zero purchases so far -- see A-057.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-10-08T10:52:00.000Z"
     }
   ],
   "log": [
@@ -20631,6 +20677,15 @@
       "detail": null,
       "tier": "approval",
       "executedAt": "2026-10-08T08:54:00.000Z"
+    },
+    {
+      "proposalId": "A-056",
+      "action": "placement-optimization: A-056 (Exclude WhatsApp placement from Sneakers_BOF_30Sep-5Oct) closed as moot -- fresh fetch this pass shows its target ad set BOF_1_Hot_ATC_IC_API_30D (120256091373980159) is now PAUSED. The campaign's currently-active ad set (BOF_2_Warm_IG365_Engagers_Visitors) is already covered by A-058. No Meta API call made.",
+      "result": "rejected",
+      "previousState": null,
+      "detail": null,
+      "tier": "approval",
+      "executedAt": "2026-10-08T10:52:00.000Z"
     }
   ],
   "creativeTags": {
