@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-08T00:48:00.000Z",
+  "generatedAt": "2026-10-08T02:52:00.000Z",
   "settings": {
     "kill_roas_threshold": "DISABLED 2026-10-05 by user instruction: the ROAS pause-kill is OFF. Module 16 (pause-kill) must NOT auto-pause any campaign for low ROAS; surface low-ROAS campaigns as alerts only. The hard spend circuit breaker is a separate mechanism and stays ON. Former rule, for reference: pause if ROAS < 1.0x after ₹500 spend on a sales-objective campaign. EXCEPTION until 2026-10-05T23:59+05:30 (user-approved 2026-09-29): for the sneaker-push campaigns 120256091369160159 (Sneakers_BOF_30Sep-5Oct), 120256091370110159 (Sneakers_Prospecting_30Sep-5Oct) and 120256088882780159 (Sneakers_Catalog_Retargeting) the spend floor is ₹1,500, not ₹500.",
     "reactivate_min_historic_roas": "surface for reactivation if a paused campaign's last active-period ROAS >= 3.0x",
@@ -29,10 +29,10 @@
       }
     },
     "competitor_last_scrape": {
-      "gully_labs_active_ads": 155,
-      "lotto_sport_india_active_ads": 542,
-      "scraped_at": "2026-10-08T00:48:00.000Z",
-      "note": "2026-10-08T00:48:00.000Z pass: Gully Labs 155 (unchanged, 0% vs 155), Lotto Sport India 542 (+4.4% vs 519) -- both under the 20%-move alert threshold this pass, consistent with prior noisy-sampling diagnosis. No new alert."
+      "gully_labs_active_ads": 189,
+      "lotto_sport_india_active_ads": 800,
+      "scraped_at": "2026-10-08T02:52:00.000Z",
+      "note": "2026-10-08T02:52:00.000Z pass: Gully Labs 189 (+21.9% vs 155), Lotto Sport India 800 (+47.6% vs 542) -- both moved >=20%, continuing the same noisy Ad Library sampling-variance pattern seen across prior passes (see settings.note's existing diagnosis). No real-world competitor action implied."
     },
     "audience_label_corrections": {
       "120249907176770159": "ATC_180D -- NOT a purchaser audience (cart-adders, event=AddToCart, retention 180 days). Verified 2026-09-14, reconfirmed 2026-09-20. Superseded note: earlier passes said the account had NO purchaser audience at all -- that's now out of date. See the 120255823280550159 (Purchasers 180D) entry above, created 2026-09-15, which IS a genuine purchaser audience and is already in use for exclusion + lookalike.",
@@ -941,7 +941,7 @@
       "module": "campaign-consolidation",
       "tier": "approval",
       "title": "Pause duplicate test campaigns Sora_BOF_Test_5Oct / Tsuchi_BOF_Test_5Oct",
-      "reasoning": "Flagged by campaign-consolidation-watch at the 2026-10-07T08:52 UTC pass (AL-1459): Sora_BOF_Test_5Oct (120256202021140159) and Tsuchi_BOF_Test_5Oct (120256202020640159), both launched 2026-10-05, duplicate the exact same audiences (ATC_NoPurchase_30D, IC_NoPurchase_30D, Add_Payment_Info, IG_Visitors_365, FB_Engagers_30D, Website_100D, ViewContent_180D, Videos) and creatives (e.g. 1625646545933358, 1471164315061727, 955645840946961, 1346073041924526) already live under the BOF_1_Hot_ATC_IC_API_30D and BOF_2_Warm_IG365_Engagers_Visitors ad sets of Sneakers_BOF_30Sep-5Oct (120256091369160159). Reconfirmed 2026-10-07T12:50:00.000Z: both still ACTIVE, combined last_14d spend only ₹68.88 (Sora ₹40.07, Tsuchi ₹28.81) with purchase_roas still null for both -- real but very small, and this is now the second pass since the duplication was first confirmed with no human action yet. Consolidating avoids these two shells silently splitting budget/learning against the sneaker campaign's identical targeting. RESOLVED 2026-10-07T18:46 UTC pass: direct ads_get_ad_entities fetches on both target campaigns show Sora_BOF_Test_5Oct (120256202021140159) status=PAUSED/effective_status=PAUSED and Tsuchi_BOF_Test_5Oct (120256202020640159) status=PAUSED/effective_status=PAUSED. Both were already paused outside this routine (no matching ads_update_entity log entry exists for either id) -- most likely a direct Ads Manager action by the user. The proposed pause is now moot; marked resolved rather than left pending, no Meta API call made.",
+      "reasoning": "Flagged by campaign-consolidation-watch at the 2026-10-07T08:52 UTC pass (AL-1459): Sora_BOF_Test_5Oct (120256202021140159) and Tsuchi_BOF_Test_5Oct (120256202020640159), both launched 2026-10-05, duplicate the exact same audiences (ATC_NoPurchase_30D, IC_NoPurchase_30D, Add_Payment_Info, IG_Visitors_365, FB_Engagers_30D, Website_100D, ViewContent_180D, Videos) and creatives (e.g. 1625646545933358, 1471164315061727, 955645840946961, 1346073041924526) already live under the BOF_1_Hot_ATC_IC_API_30D and BOF_2_Warm_IG365_Engagers_Visitors ad sets of Sneakers_BOF_30Sep-5Oct (120256091369160159). Reconfirmed 2026-10-07T12:50:00.000Z: both still ACTIVE, combined last_14d spend only ₹68.88 (Sora ₹40.07, Tsuchi ₹28.81) with purchase_roas still null for both -- real but very small, and this is now the second pass since the duplication was first confirmed with no human action yet. Consolidating avoids these two shells silently splitting budget/learning against the sneaker campaign's identical targeting. RESOLVED 2026-10-07T18:46 UTC pass: direct ads_get_ad_entities fetches on both target campaigns show Sora_BOF_Test_5Oct (120256202021140159) status=PAUSED/effective_status=PAUSED and Tsuchi_BOF_Test_5Oct (120256202020640159) status=PAUSED/effective_status=PAUSED. Both were already paused outside this routine (no matching ads_update_entity log entry exists for either id) -- most likely a direct Ads Manager action by the user. The proposed pause is now moot; marked resolved rather than left pending, no Meta API call made. REOPENED 2026-10-08T02:52:00.000Z pass: both campaigns are ACTIVE again -- direct ads_get_ad_entities fetch this pass shows Sora_BOF_Test_5Oct (120256202021140159) status=ACTIVE/effective_status=ACTIVE and Tsuchi_BOF_Test_5Oct (120256202020640159) status=ACTIVE/effective_status=ACTIVE, reversing the 2026-10-07T18:46 UTC pass's finding that both were PAUSED (which had resolved this proposal as moot). No matching ads_update_entity log entry exists for either reactivation, so this was most likely a direct Ads Manager action by the user, not something this routine did. Current last_30d spend: Sora Rs216.48 (purchase_roas null), Tsuchi Rs173.41 (purchase_roas null) -- both still real but small, and both still duplicate the same audiences/creatives already live under Sneakers_BOF_30Sep-5Oct. Reopening to pending with the original metaAction unchanged (pause both) since the underlying duplication issue is unresolved and the campaigns are delivering again -- a human should decide whether this was an intentional reactivation (e.g. resuming a real test) or should be paused again.",
       "actionSummary": "Pause Sora_BOF_Test_5Oct and Tsuchi_BOF_Test_5Oct. Does not touch Sneakers_BOF_30Sep-5Oct or any other active campaign.",
       "metaAction": {
         "tool": "ads_update_entity",
@@ -965,9 +965,8 @@
           }
         }
       },
-      "status": "resolved",
-      "createdAt": "2026-10-07T12:50:00.000Z",
-      "resolvedAt": "2026-10-07T18:46:00.000Z"
+      "status": "pending",
+      "createdAt": "2026-10-07T12:50:00.000Z"
     }
   ],
   "alerts": [
@@ -13307,13 +13306,13 @@
     {
       "id": "AL-1367",
       "module": "creative-fatigue",
-      "title": "BOF_1_Hot_ATC_IC_API_30D frequency climbed further to 11.86 -- still healthy ROAS",
-      "detail": "Ad set BOF_1_Hot_ATC_IC_API_30D (120256091373980159, campaign Sneakers_BOF_30Sep-5Oct) last_14d frequency is now 10.64 (up from 8.43 at the 2026-10-05T08:50 pass), well above fatigue_frequency_threshold=3.0. This is a narrow hot-retargeting audience (ATC/InitiateCheckout/AddPaymentInfo non-purchasers, 30d window) so high frequency is structurally expected on a small pool, and purchase_roas remains strong at 7.694526x on Rs1,099.47 last_14d spend -- not actionable as a kill or budget cut. Retargeting_Overall, previously also elevated, is now PAUSED and no longer part of this comparison. Flagging for awareness only; creative-fatigue (module 28) would call for a new creative variant or narrower targeting if ROAS starts slipping. Reconfirmed 2026-10-06T18:48:00.000Z pass: ad set BOF_1_Hot_ATC_IC_API_30D (120256091373980159) last_14d frequency is now 11.86 (up from 10.64), spend Rs1,298.90, purchase_roas 10.361614x -- still comfortably healthy, not actionable.",
+      "title": "BOF_1_Hot_ATC_IC_API_30D frequency climbed further to 13.22 -- still healthy ROAS",
+      "detail": "Ad set BOF_1_Hot_ATC_IC_API_30D (120256091373980159, campaign Sneakers_BOF_30Sep-5Oct) last_14d frequency is now 10.64 (up from 8.43 at the 2026-10-05T08:50 pass), well above fatigue_frequency_threshold=3.0. This is a narrow hot-retargeting audience (ATC/InitiateCheckout/AddPaymentInfo non-purchasers, 30d window) so high frequency is structurally expected on a small pool, and purchase_roas remains strong at 7.694526x on Rs1,099.47 last_14d spend -- not actionable as a kill or budget cut. Retargeting_Overall, previously also elevated, is now PAUSED and no longer part of this comparison. Flagging for awareness only; creative-fatigue (module 28) would call for a new creative variant or narrower targeting if ROAS starts slipping. Reconfirmed 2026-10-06T18:48:00.000Z pass: ad set BOF_1_Hot_ATC_IC_API_30D (120256091373980159) last_14d frequency is now 11.86 (up from 10.64), spend Rs1,298.90, purchase_roas 10.361614x -- still comfortably healthy, not actionable. Reconfirmed 2026-10-08T02:52:00.000Z pass: ad set BOF_1_Hot_ATC_IC_API_30D (120256091373980159) last_14d frequency is now 13.223618 (up from 11.86), spend Rs1,538.52, purchase_roas 8.747823x -- still comfortably healthy, not actionable. Ad-level check this pass: Hot_KAIFEST_KAGE_JP_Carousel (120256186382870159) frequency 4.295918 unchanged from the 2026-10-07T22:49 pass (AL-1451), Hot_KAIFEST_KAGE_3198_9Oct (120256186330220159) frequency exactly 3.0 unchanged -- no new ad-level move.",
       "severity": "medium",
       "dismissed": false,
       "createdAt": "2026-10-05T22:46:00.000Z",
-      "lastConfirmedAt": "2026-10-06T18:48:00.000Z",
-      "updatedAt": "2026-10-06T18:48:00.000Z"
+      "lastConfirmedAt": "2026-10-08T02:52:00.000Z",
+      "updatedAt": "2026-10-08T02:52:00.000Z"
     },
     {
       "id": "AL-1368",
@@ -14148,20 +14147,24 @@
     {
       "id": "AL-1459",
       "module": "campaign-consolidation-watch",
-      "title": "New Sora_BOF_Test_5Oct / Tsuchi_BOF_Test_5Oct campaigns duplicate audiences/creatives already live in Sneakers_BOF_30Sep-5Oct",
-      "detail": "2026-10-07T08:52 UTC pass: two new ACTIVE campaigns launched 2026-10-05 outside routine control -- Sora_BOF_Test_5Oct (120256202021140159, ad sets Sora_Hot_ATC_IC_API_30D / Sora_Warm_IG365_Engagers_Visitors) and Tsuchi_BOF_Test_5Oct (120256202020640159, ad sets Tsuchi_Hot_ATC_IC_API_30D / Tsuchi_Warm_IG365_Engagers_Visitors) -- mirror the same Hot-ATC/Warm-IG365 retargeting structure and the same creatives (e.g. creative_id 955645840946961 'SORA at Rs2,499 -- Prepaid' is live simultaneously in both Sneakers_BOF_30Sep-5Oct's BOF_2_Warm_IG365_Engagers_Visitors ad set and the new Sora_BOF_Test_5Oct's Warm_SORA_JP_2499 ad; creative_id 1471164315061727 'TSUCHI at Rs2,499 -- Prepaid' is live in both Sneakers_BOF_30Sep-5Oct and Tsuchi_BOF_Test_5Oct) targeting the same retargeting pools (ATC/IC 30D, IG 365 engagers). Both new campaigns are very fresh (2 days old, Rs40.07 and Rs28.81 spent respectively, no purchase_roas yet) -- too early to recommend a consolidation pause (module 34, campaign-consolidation) with confidence; flagging now per module 11 (campaign-consolidation-watch, informational only, auto-tier) so this overlap is on record before more spend accumulates. All ad sets involved correctly exclude Purchasers 180D -- no purchaser-exclusion compliance issue. Worth a fresh look once these test campaigns have a few more days of delivery data to see whether they're splitting the same audience against Sneakers_BOF's existing ad sets (auction overlap) or serving a genuinely different purpose.",
+      "title": "Sora_BOF_Test_5Oct / Tsuchi_BOF_Test_5Oct reactivated -- duplicate-audience issue recurs",
+      "detail": "2026-10-07T08:52 UTC pass: two new ACTIVE campaigns launched 2026-10-05 outside routine control -- Sora_BOF_Test_5Oct (120256202021140159, ad sets Sora_Hot_ATC_IC_API_30D / Sora_Warm_IG365_Engagers_Visitors) and Tsuchi_BOF_Test_5Oct (120256202020640159, ad sets Tsuchi_Hot_ATC_IC_API_30D / Tsuchi_Warm_IG365_Engagers_Visitors) -- mirror the same Hot-ATC/Warm-IG365 retargeting structure and the same creatives (e.g. creative_id 955645840946961 'SORA at Rs2,499 -- Prepaid' is live simultaneously in both Sneakers_BOF_30Sep-5Oct's BOF_2_Warm_IG365_Engagers_Visitors ad set and the new Sora_BOF_Test_5Oct's Warm_SORA_JP_2499 ad; creative_id 1471164315061727 'TSUCHI at Rs2,499 -- Prepaid' is live in both Sneakers_BOF_30Sep-5Oct and Tsuchi_BOF_Test_5Oct) targeting the same retargeting pools (ATC/IC 30D, IG 365 engagers). Both new campaigns are very fresh (2 days old, Rs40.07 and Rs28.81 spent respectively, no purchase_roas yet) -- too early to recommend a consolidation pause (module 34, campaign-consolidation) with confidence; flagging now per module 11 (campaign-consolidation-watch, informational only, auto-tier) so this overlap is on record before more spend accumulates. All ad sets involved correctly exclude Purchasers 180D -- no purchaser-exclusion compliance issue. Worth a fresh look once these test campaigns have a few more days of delivery data to see whether they're splitting the same audience against Sneakers_BOF's existing ad sets (auction overlap) or serving a genuinely different purpose. Reconfirmed 2026-10-08T02:52:00.000Z pass: both campaigns, found PAUSED at the 2026-10-07T18:46 UTC pass (which resolved proposal A-057 as moot), are ACTIVE again as of this pass -- status flipped back outside this routine (no matching ads_update_entity log entry for either id), most likely a direct Ads Manager action by the user. Current last_30d: Sora_BOF_Test_5Oct (120256202021140159) spend Rs216.48, purchase_roas null; Tsuchi_BOF_Test_5Oct (120256202020640159) spend Rs173.41, purchase_roas null. Both still duplicate the same audiences/creatives already live under Sneakers_BOF_30Sep-5Oct's BOF_1_Hot_ATC_IC_API_30D / BOF_2_Warm_IG365_Engagers_Visitors ad sets. A-057 has been reopened to pending with this updated state rather than creating a new proposal.",
       "severity": "low",
       "dismissed": false,
-      "createdAt": "2026-10-07T08:52:00.000Z"
+      "createdAt": "2026-10-07T08:52:00.000Z",
+      "updatedAt": "2026-10-08T02:52:00.000Z",
+      "lastConfirmedAt": "2026-10-08T02:52:00.000Z"
     },
     {
       "id": "AL-1460",
       "module": "lookalike-refresh",
-      "title": "Lookalike rebuild rate-limited this pass (reconfirmed 00:48 UTC 2026-10-08)",
-      "detail": "The laddered 1%/2%/5% lookalikes built 2026-09-15 off 'Purchasers 180D' (120255823280550159) are now ~22.8 days old, well past the 14-day lookalike_refresh_days threshold. Source audience size reconfirmed via ads_get_custom_audience this pass: still 20/20, unchanged since creation. Rebuild remains rate-limited: last real attempt 2026-10-07T02:51:00.000Z (failed with Meta's duplicate-lookalike error 2654/1713007, a real API constraint while the source audience stays at 20), ~17h56m elapsed at this pass (20:47 UTC) -- still under 24h, within max_auto_actions_per_entity_per_day=1. No rebuild attempted this pass; would have acted, rate-limited. The 3 existing lookalikes (120255832535210159/610159/780159) remain live and serving, untouched. Next eligible attempt ~2026-10-08T02:51 UTC. Reconfirmed across the 02:51, 04:52, 06:52, 08:52, 12:50, 14:49, 18:46 and now 20:47 UTC passes with no change in the underlying constraint. Reconfirmed 2026-10-07T22:49:00.000Z: last rebuild attempt was 2026-10-07T02:51:00.000Z (~19h58m elapsed at this pass, still under 24h), so max_auto_actions_per_entity_per_day=1 keeps this rate-limited -- skipped again this pass. Source audience 'Purchasers 180D' (120255823280550159) still ~20 (unchanged). Next eligible attempt ~2026-10-08T02:51 UTC. Reconfirmed 2026-10-08T00:48:00.000Z: last rebuild attempt was 2026-10-07T02:51:00.000Z (~21h57m elapsed at this pass, still under 24h), so max_auto_actions_per_entity_per_day=1 keeps this rate-limited -- skipped again this pass. Source audience 'Purchasers 180D' (120255823280550159) still 20/20 (unchanged). Next eligible attempt ~2026-10-08T02:51 UTC.",
+      "title": "Lookalike rebuild rate-limited this pass (reconfirmed 02:52 UTC 2026-10-08)",
+      "detail": "The laddered 1%/2%/5% lookalikes built 2026-09-15 off 'Purchasers 180D' (120255823280550159) are now ~22.8 days old, well past the 14-day lookalike_refresh_days threshold. Source audience size reconfirmed via ads_get_custom_audience this pass: still 20/20, unchanged since creation. Rebuild remains rate-limited: last real attempt 2026-10-07T02:51:00.000Z (failed with Meta's duplicate-lookalike error 2654/1713007, a real API constraint while the source audience stays at 20), ~17h56m elapsed at this pass (20:47 UTC) -- still under 24h, within max_auto_actions_per_entity_per_day=1. No rebuild attempted this pass; would have acted, rate-limited. The 3 existing lookalikes (120255832535210159/610159/780159) remain live and serving, untouched. Next eligible attempt ~2026-10-08T02:51 UTC. Reconfirmed across the 02:51, 04:52, 06:52, 08:52, 12:50, 14:49, 18:46 and now 20:47 UTC passes with no change in the underlying constraint. Reconfirmed 2026-10-07T22:49:00.000Z: last rebuild attempt was 2026-10-07T02:51:00.000Z (~19h58m elapsed at this pass, still under 24h), so max_auto_actions_per_entity_per_day=1 keeps this rate-limited -- skipped again this pass. Source audience 'Purchasers 180D' (120255823280550159) still ~20 (unchanged). Next eligible attempt ~2026-10-08T02:51 UTC. Reconfirmed 2026-10-08T00:48:00.000Z: last rebuild attempt was 2026-10-07T02:51:00.000Z (~21h57m elapsed at this pass, still under 24h), so max_auto_actions_per_entity_per_day=1 keeps this rate-limited -- skipped again this pass. Source audience 'Purchasers 180D' (120255823280550159) still 20/20 (unchanged). Next eligible attempt ~2026-10-08T02:51 UTC. Reconfirmed 2026-10-08T02:52:00.000Z: last rebuild attempt was 2026-10-07T02:51:00.000Z (~23h58m elapsed at this pass, still just under 24h), so max_auto_actions_per_entity_per_day=1 keeps this rate-limited -- skipped again this pass. Source audience 'Purchasers 180D' (120255823280550159) reconfirmed via ads_get_custom_audience: still 20/20 (unchanged). Next eligible attempt ~2026-10-08T02:51 UTC (i.e. essentially immediately on the next scheduled pass).",
       "severity": "low",
       "dismissed": false,
-      "createdAt": "2026-10-08T00:48:00.000Z"
+      "createdAt": "2026-10-08T00:48:00.000Z",
+      "updatedAt": "2026-10-08T02:52:00.000Z",
+      "lastConfirmedAt": "2026-10-08T02:52:00.000Z"
     },
     {
       "id": "AL-1461",
@@ -14288,6 +14291,33 @@
       "severity": "low",
       "dismissed": false,
       "createdAt": "2026-10-08T00:48:00.000Z"
+    },
+    {
+      "id": "AL-1475",
+      "module": "competitor-spike",
+      "title": "Gully Labs / Lotto Sport India active-ad counts both moved >=20% again (noisy pattern continues)",
+      "detail": "This pass's ads_library_search re-scrape (page_ids 107479854297817 Gully Labs, 426015150606378 Lotto Sport India, ad_active_status=ACTIVE): Gully Labs 189 (+21.9% vs last recorded 155), Lotto Sport India 800 (+47.6% vs last recorded 542). Both over the >=20% competitor-spike swing threshold, continuing the same volatile, noisy Ad Library estimated_total_count pattern observed across the last several dozen passes (AL-1442, AL-1458, AL-1463, AL-1464) -- most likely sampling variance rather than a real step-change in either competitor's active-ad volume. No account action taken.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-10-08T02:52:00.000Z"
+    },
+    {
+      "id": "AL-1476",
+      "module": "self-audit-check",
+      "title": "Routine pass summary -- 2026-10-08T02:52:00.000Z",
+      "detail": "Circuit breaker: not tripped (today's account spend Rs633.52 vs Rs6,000 ceiling). Pixel quality: healthy (EMQ 6.1-8.7, all >= pixel_quality_min_match_rate) -- ROAS-based modules not suppressed. 6 campaigns / 11 ad sets ACTIVE this pass (Prospecting_JP_Purchase_5-9Oct 17.84x last_30d ROAS, Sneakers_BOF_30Sep-5Oct 4.87x, Caps + Kage_26 Sept 6.96x, plus Sora_BOF_Test_5Oct and Tsuchi_BOF_Test_5Oct -- both unexpectedly reactivated since the last pass, and Sneakers_Catalog_Retargeting whose only ad set remains PAUSED) -- purchaser-exclusion compliant account-wide (all 11 active ad sets exclude Purchasers 180D directly, and Sneaker_Viewers_ATC_30D_NoPurchase carries its own built-in Purchase-event exclusion while paused). Lookalike rebuild still rate-limited (~23h58m since last attempt, next eligible ~02:51 UTC). All active ads' creatives already carry creativeTags -- hook-angle-tagging had nothing new. No anomaly signal fired (ads_insights_anomaly_signal). CPM/CTR/CPC on active campaigns with an established baseline (Caps + Kage_26 Sept, Sneakers_BOF_30Sep-5Oct) within normal 7d-vs-30d bands -- no threshold-alert; the two reactivated test campaigns and the new Prospecting_JP_Purchase_5-9Oct campaign are too new/thin for a baseline. Competitor rescrape: Gully Labs 189 (+21.9%), Lotto Sport India 800 (+47.6%) -- both over the 20% threshold, consistent with the ongoing noisy-sampling diagnosis (see new competitor-spike alert). BOF_1_Hot_ATC_IC_API_30D frequency continues climbing (13.22, up from 11.86) but ROAS remains strong (8.75x) -- reconfirmed on the existing creative-fatigue alert (AL-1367), not actionable yet. Device-targeting gap on A-053 (BOF_2_Warm_IG365_Engagers_Visitors) reconfirmed essentially unchanged (Android 3.37x vs iPhone 4.96x). Reconfirmed reasoning/numbers on pending reactivate-winner proposals A-027/A-028/A-039/A-048/A-050/A-051/A-055 -- all still PAUSED with unchanged lifetime spend/ROAS well above the 3.0x reactivate threshold. Key finding this pass: Sora_BOF_Test_5Oct / Tsuchi_BOF_Test_5Oct flipped back to ACTIVE after being found PAUSED (and A-057 resolved as moot) just one pass ago -- reopened A-057 to pending (campaign-consolidation, approval tier, human decides) rather than auto-pausing. No KPI-to-trigger completeness gaps identified beyond those already tracked.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-10-08T02:52:00.000Z"
+    },
+    {
+      "id": "AL-1477",
+      "module": "routine-run-notes",
+      "title": "Run summary -- 2026-10-08 ~02:52 UTC pass",
+      "detail": "Auto-tier: purchaser-exclusion compliant (no action); lookalike-refresh skipped (rate-limited, ~23h58m elapsed, see AL-1460); hook-angle-tagging had nothing new; hard-spend-circuit-breaker not tripped (Rs633.52/Rs6,000). Approval-tier: no new proposals created for reactivate-winner/placement/age-gender/device-targeting/engagement-tier/high-intent-retargeting/catalog-dpa-launch -- all reconfirmed numbers essentially unchanged from the 00:48 UTC pass. One proposal reopened: A-057 (campaign-consolidation) moved from resolved back to pending because Sora_BOF_Test_5Oct and Tsuchi_BOF_Test_5Oct were found ACTIVE again this pass after having been confirmed PAUSED (and the proposal closed as moot) at the 2026-10-07T18:46 UTC pass -- a human needs to decide again given the reactivation. New/updated alerts this pass: competitor-spike (both competitors moved >=20%, noisy pattern), lookalike-refresh rate-limit reconfirmation (AL-1460), creative-fatigue reconfirmation on BOF_1_Hot_ATC_IC_API_30D (AL-1367, frequency now 13.22), campaign-consolidation-watch reconfirmation flagging the test-campaign reactivation (AL-1459), and this self-audit-check/run-notes digest pair. Nothing met the circuit-breaker or pixel-quality-gate trigger conditions.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-10-08T02:52:00.000Z"
     }
   ],
   "log": [
