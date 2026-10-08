@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-08T16:47:00.000Z",
+  "generatedAt": "2026-10-08T18:49:00.000Z",
   "settings": {
     "kill_roas_threshold": "DISABLED 2026-10-05 by user instruction: the ROAS pause-kill is OFF. Module 16 (pause-kill) must NOT auto-pause any campaign for low ROAS; surface low-ROAS campaigns as alerts only. The hard spend circuit breaker is a separate mechanism and stays ON. Former rule, for reference: pause if ROAS < 1.0x after ₹500 spend on a sales-objective campaign. EXCEPTION until 2026-10-05T23:59+05:30 (user-approved 2026-09-29): for the sneaker-push campaigns 120256091369160159 (Sneakers_BOF_30Sep-5Oct), 120256091370110159 (Sneakers_Prospecting_30Sep-5Oct) and 120256088882780159 (Sneakers_Catalog_Retargeting) the spend floor is ₹1,500, not ₹500.",
     "reactivate_min_historic_roas": "surface for reactivation if a paused campaign's last active-period ROAS >= 3.0x",
@@ -29,10 +29,10 @@
       }
     },
     "competitor_last_scrape": {
-      "gully_labs_active_ads": 162,
-      "lotto_sport_india_active_ads": 320,
-      "scraped_at": "2026-10-08T14:52:00.000Z",
-      "note": "2026-10-08T14:52:00.000Z pass: Gully Labs 162 (+5.2% vs 154, under 20% threshold, no alert). Lotto Sport India 320 (+9.6% vs 292, under 20% threshold, no alert) -- continuing the same noisy Ad Library sampling-variance pattern already diagnosed (see settings.note, AL-1261). No real-world competitor action implied."
+      "gully_labs_active_ads": 165,
+      "lotto_sport_india_active_ads": 346,
+      "scraped_at": "2026-10-08T18:49:00.000Z",
+      "note": "2026-10-08T18:49:00.000Z pass: Gully Labs 165 (+1.9% vs 162, under 20% threshold, no alert). Lotto Sport India 346 (+8.1% vs 320, under 20% threshold, no alert) -- continuing the same noisy Ad Library sampling-variance pattern already diagnosed (see settings.note, AL-1261). No real-world competitor action implied."
     },
     "audience_label_corrections": {
       "120249907176770159": "ATC_180D -- NOT a purchaser audience (cart-adders, event=AddToCart, retention 180 days). Verified 2026-09-14, reconfirmed 2026-09-20. Superseded note: earlier passes said the account had NO purchaser audience at all -- that's now out of date. See the 120255823280550159 (Purchasers 180D) entry above, created 2026-09-15, which IS a genuine purchaser audience and is already in use for exclusion + lookalike.",
@@ -14560,7 +14560,7 @@
       "id": "AL-1497",
       "module": "budget-reallocation",
       "title": "Prospecting_JP_Purchase_5-9Oct showing 17.84x ROAS vs Sneakers_BOF's 4.87x -- sample too thin to action yet",
-      "detail": "New campaign Prospecting_JP_Purchase_5-9Oct (120256186544730159, its name implies a 5-9 Oct test window) shows last_30d purchase_roas=17.84x on Rs1,475.02 spend -- its only active ad set (Prosp_Men_25-44_Purchase_JP) correctly excludes Purchasers 180D/ATC_180D/Website_100D/IG_Visitors_365, so purchaser-exclusion is compliant. That's a ~3.66x gap over Sneakers_BOF_30Sep-5Oct's 4.87x (Rs20,635.12 last_30d spend), past budget_reallocation_min_roas_gap=1.5x. Not raised as a formal budget-reallocation proposal this pass: (1) only ~3-4 days of delivery and well under Rs1,500 spend -- too thin a sample for a stable ROAS read; (2) the campaign's own name signals it may be scheduled to end around 2026-10-09, so a budget shift might not have time to take effect. Flagging for a human to decide whether to extend/scale this campaign past its named window before any formal reallocation is proposed.",
+      "detail": "New campaign Prospecting_JP_Purchase_5-9Oct (120256186544730159, its name implies a 5-9 Oct test window) shows last_30d purchase_roas=17.84x on Rs1,475.02 spend -- its only active ad set (Prosp_Men_25-44_Purchase_JP) correctly excludes Purchasers 180D/ATC_180D/Website_100D/IG_Visitors_365, so purchaser-exclusion is compliant. That's a ~3.66x gap over Sneakers_BOF_30Sep-5Oct's 4.87x (Rs20,635.12 last_30d spend), past budget_reallocation_min_roas_gap=1.5x. Not raised as a formal budget-reallocation proposal this pass: (1) only ~3-4 days of delivery and well under Rs1,500 spend -- too thin a sample for a stable ROAS read; (2) the campaign's own name signals it may be scheduled to end around 2026-10-09, so a budget shift might not have time to take effect. Flagging for a human to decide whether to extend/scale this campaign past its named window before any formal reallocation is proposed. UPDATE 2026-10-08T18:49:00.000Z pass: last_7d purchase_roas now 23.64x on Rs1,870.05 spend (up from 17.84x on Rs1,475.02 last_30d at the 14:52 UTC pass) -- gap over Sneakers_BOF_30Sep-5Oct's last_7d 5.48x has widened further. Campaign is still ACTIVE past its named 5-9 Oct window (today is 2026-10-08, one day before the implied end date) -- still too early to call this a stable read or to raise a formal budget-reallocation proposal; flagging again for a human decision on whether to extend/scale before the window closes.",
       "severity": "low",
       "dismissed": false,
       "createdAt": "2026-10-08T14:52:00.000Z"
@@ -14591,6 +14591,24 @@
       "severity": "low",
       "dismissed": false,
       "createdAt": "2026-10-08T16:47:00.000Z"
+    },
+    {
+      "id": "AL-1501",
+      "module": "self-audit-check",
+      "title": "Routine pass summary -- 2026-10-08T18:49:00.000Z",
+      "detail": "Circuit breaker: not tripped (today's account spend Rs19.73 vs hard_spend_ceiling_inr=6,000 -- IST day just rolled over). Pixel quality gate: dataset 833131719490535 composite EMQ scores 6.1-8.7 across all tracked web events, at/above pixel_quality_min_match_rate=0.6 -- ROAS-based modules not suppressed; dataset_stats confirms PageView/ViewContent/InitiateCheckout/AddToCart/AddPaymentInfo/Purchase/prepaid_purchase/cod_purchase events firing continuously through this morning (latest hourly bucket 2026-10-08T10:00-0700), no gaps. 5 campaigns ACTIVE / 10 ad sets ACTIVE this pass (Sora_BOF_Test_5Oct, Tsuchi_BOF_Test_5Oct -- both still duplicating Sneakers_BOF_30Sep-5Oct per open A-057, Prospecting_JP_Purchase_5-9Oct, Sneakers_BOF_30Sep-5Oct, Caps + Kage_26 Sept). purchaser-exclusion: direct targeting fetch on all 10 active ad sets confirms all exclude Purchasers 180D (120255823280550159) in excluded_custom_audiences -- compliant account-wide, no action needed. lookalike-refresh: still rate-limited this pass (last attempt 2026-10-08T04:53:00.000Z, ~14h elapsed, needs >24h; next eligible ~2026-10-09T04:53 UTC) -- not re-alerted, see AL-1500 (same underlying issue, 2h old). hook-angle-tagging: found 3 untagged active creatives this pass -- Caps_Maroon_Hero/Caps_Grey_Hero/Caps_Indigo_Hero (ids 1845702323532238/1620396399786566/2022714631727219), new static-image variants of the Caps restock creative uploaded today under Caps + Kage_26 Sept; tagged from real primary text/headline via ads_get_creatives (vision pass skipped, Higgsfield not attached). No ad sets show learning_stage_info (none stuck in learning). No native anomaly signal fired (ads_insights_anomaly_signal). No live metric_baselines applicable to currently-active campaigns (Kage_sales_1908/Kage_TOF both inactive) -- threshold-alerts has nothing to compare against this pass. monthly_spend_goal_inr is null -- spend-pacing skipped per spec. Competitor-rescrape: Gully Labs 165 (+1.9% vs 162), Lotto Sport India 346 (+8.1% vs 320), both under the 20% threshold -- no alert, settings.competitor_last_scrape updated. campaign-consolidation-watch: Sora_BOF_Test_5Oct / Tsuchi_BOF_Test_5Oct remain active duplicates of Sneakers_BOF_30Sep-5Oct's audiences/creatives, already covered by pending approval A-057 (not re-flagged). 15 pending approval-tier proposals spot-checked against fresh active-campaign/ad-set lists: none are moot this pass (all referenced entities still exist in the state the proposal describes -- paused campaigns referenced by reactivate-winner proposals A-027/A-028/A-039/A-048/A-050/A-051 remain paused; active ad sets referenced by placement/device proposals A-038/A-053/A-058/A-059/A-060 remain active; A-057's two duplicate test campaigns remain active and still spending). Numbers not fully re-derived for every proposal this pass (most were reconfirmed with fresh numbers earlier today, within the last few hours) -- see individual proposals for their own createdAt/reasoning timestamps. self-audit-check / KPI-to-trigger note: the dashboard's static index.html DATA snapshot is still dated 'September 13, 2026' -- now ~26 days stale relative to today (2026-10-08). This has been a known, repeatedly-flagged condition since AL-007 (2026-08-29); the routine does not rewrite index.html itself, only the live queue.json data the Automation tab reads, so this is flagged again for a human content-refresh pass on the dashboard's baked-in snapshot, not treated as a new finding.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-10-08T18:49:00.000Z"
+    },
+    {
+      "id": "AL-1502",
+      "module": "routine-run-notes",
+      "title": "Run summary -- 2026-10-08T18:49:00.000Z pass",
+      "detail": "Auto-tier: 3 actions executed (hook-angle-tagging tagged 3 new Caps restock creative variants -- Caps_Maroon_Hero/Caps_Grey_Hero/Caps_Indigo_Hero). purchaser-exclusion compliant account-wide, no action needed. lookalike-refresh rate-limited, skipped (not re-alerted, see AL-1500). Hard spend circuit breaker: not tripped (Rs19.73 of Rs6,000 today, day just rolled over IST). Approval-tier: 0 new proposals, 0 closed as moot (all 15 pending proposals spot-checked against fresh active-entity lists and remain valid). 1 existing alert (AL-1497, budget-reallocation observation on Prospecting_JP_Purchase_5-9Oct) updated in place with fresh numbers instead of creating a duplicate, per de-dup. 2 new alerts this pass (this summary + AL-1501 self-audit-check). Highest-priority item: none urgent -- account in steady state, all live delivery compliant, circuit breaker nowhere near tripping. Most notable item: Prospecting_JP_Purchase_5-9Oct's ROAS keeps climbing (23.64x last_7d) against its named window closing tomorrow (2026-10-09) -- see AL-1497 for the human decision this still needs. The two duplicate test campaigns (Sora_BOF_Test_5Oct, Tsuchi_BOF_Test_5Oct, ~Rs888 combined spend so far) remain active and un-actioned pending human approval of A-057.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-10-08T18:49:00.000Z"
     }
   ],
   "log": [
@@ -21105,6 +21123,57 @@
       },
       "tier": "auto",
       "executedAt": "2026-10-08T16:47:00.000Z"
+    },
+    {
+      "proposalId": null,
+      "action": "hook-angle-tagging auto-module: tagged creative 1845702323532238 ('Caps_26Sept restock' creative, ad 'Caps_Maroon_Hero' under campaign 'Caps + Kage_26 Sept') -- primary text/headline pulled via ads_get_creatives, no vision pass (Higgsfield not attached this run). No Meta API mutation, wrote to queue.json.creativeTags only.",
+      "result": "success",
+      "previousState": {
+        "creativeTags[1845702323532238]": null
+      },
+      "detail": {
+        "tool": "ads_get_creatives",
+        "creative_id": "1845702323532238",
+        "body": "SURPRISE SURPRISE SURPRISE! AS YOU CAN SEE IT IS BACK!",
+        "title": "KAI ARCHIVES 2.0 Restocked - that's the line.",
+        "call_to_action_type": "SHOP_NOW"
+      },
+      "tier": "auto",
+      "executedAt": "2026-10-08T18:49:00.000Z"
+    },
+    {
+      "proposalId": null,
+      "action": "hook-angle-tagging auto-module: tagged creative 1620396399786566 ('Caps_26Sept restock' creative, ad 'Caps_Grey_Hero' under campaign 'Caps + Kage_26 Sept') -- primary text/headline pulled via ads_get_creatives, no vision pass (Higgsfield not attached this run). No Meta API mutation, wrote to queue.json.creativeTags only.",
+      "result": "success",
+      "previousState": {
+        "creativeTags[1620396399786566]": null
+      },
+      "detail": {
+        "tool": "ads_get_creatives",
+        "creative_id": "1620396399786566",
+        "body": "SURPRISE SURPRISE SURPRISE! AS YOU CAN SEE IT IS BACK!",
+        "title": "KAI ARCHIVES 2.0 Restocked - that's the line.",
+        "call_to_action_type": "SHOP_NOW"
+      },
+      "tier": "auto",
+      "executedAt": "2026-10-08T18:49:00.000Z"
+    },
+    {
+      "proposalId": null,
+      "action": "hook-angle-tagging auto-module: tagged creative 2022714631727219 ('Caps_26Sept restock' creative, ad 'Caps_Indigo_Hero' under campaign 'Caps + Kage_26 Sept') -- primary text/headline pulled via ads_get_creatives, no vision pass (Higgsfield not attached this run). No Meta API mutation, wrote to queue.json.creativeTags only.",
+      "result": "success",
+      "previousState": {
+        "creativeTags[2022714631727219]": null
+      },
+      "detail": {
+        "tool": "ads_get_creatives",
+        "creative_id": "2022714631727219",
+        "body": "SURPRISE SURPRISE SURPRISE! AS YOU CAN SEE IT IS BACK!",
+        "title": "KAI ARCHIVES 2.0 Restocked - that's the line.",
+        "call_to_action_type": "SHOP_NOW"
+      },
+      "tier": "auto",
+      "executedAt": "2026-10-08T18:49:00.000Z"
     }
   ],
   "creativeTags": {
@@ -24367,6 +24436,39 @@
       "visionPassSkipped": true,
       "note": "Higgsfield vision connection not attached to this run -- image content itself not analyzed, only real ad copy text used. No creative description invented.",
       "taggedAt": "2026-10-08T16:47:00.000Z"
+    },
+    "1845702323532238": {
+      "adName": "Caps_Maroon_Hero",
+      "campaign": "Caps + Kage_26 Sept",
+      "format": "Static image (share)",
+      "angle": "Restock announcement -- surprise reveal that a discontinued/sold-out archive drop is back, scarcity/urgency implied by the restock itself",
+      "hook": "\"SURPRISE SURPRISE SURPRISE! AS YOU CAN SEE IT IS BACK!\" (primary text) / \"KAI ARCHIVES 2.0 Restocked - that's the line.\" (headline)",
+      "taggedFrom": "ad primary text (body) + headline (title), via Meta Ads MCP ads_get_creatives",
+      "visionPassSkipped": true,
+      "note": "Higgsfield vision connection not attached to this run -- image content itself not analyzed, only real ad copy text used. No creative description invented.",
+      "taggedAt": "2026-10-08T18:49:00.000Z"
+    },
+    "1620396399786566": {
+      "adName": "Caps_Grey_Hero",
+      "campaign": "Caps + Kage_26 Sept",
+      "format": "Static image (share)",
+      "angle": "Restock announcement -- surprise reveal that a discontinued/sold-out archive drop is back, scarcity/urgency implied by the restock itself",
+      "hook": "\"SURPRISE SURPRISE SURPRISE! AS YOU CAN SEE IT IS BACK!\" (primary text) / \"KAI ARCHIVES 2.0 Restocked - that's the line.\" (headline)",
+      "taggedFrom": "ad primary text (body) + headline (title), via Meta Ads MCP ads_get_creatives",
+      "visionPassSkipped": true,
+      "note": "Higgsfield vision connection not attached to this run -- image content itself not analyzed, only real ad copy text used. No creative description invented.",
+      "taggedAt": "2026-10-08T18:49:00.000Z"
+    },
+    "2022714631727219": {
+      "adName": "Caps_Indigo_Hero",
+      "campaign": "Caps + Kage_26 Sept",
+      "format": "Static image (share)",
+      "angle": "Restock announcement -- surprise reveal that a discontinued/sold-out archive drop is back, scarcity/urgency implied by the restock itself",
+      "hook": "\"SURPRISE SURPRISE SURPRISE! AS YOU CAN SEE IT IS BACK!\" (primary text) / \"KAI ARCHIVES 2.0 Restocked - that's the line.\" (headline)",
+      "taggedFrom": "ad primary text (body) + headline (title), via Meta Ads MCP ads_get_creatives",
+      "visionPassSkipped": true,
+      "note": "Higgsfield vision connection not attached to this run -- image content itself not analyzed, only real ad copy text used. No creative description invented.",
+      "taggedAt": "2026-10-08T18:49:00.000Z"
     }
   }
 }
