@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-08T04:53:00.000Z",
+  "generatedAt": "2026-10-08T06:53:00.000Z",
   "settings": {
     "kill_roas_threshold": "DISABLED 2026-10-05 by user instruction: the ROAS pause-kill is OFF. Module 16 (pause-kill) must NOT auto-pause any campaign for low ROAS; surface low-ROAS campaigns as alerts only. The hard spend circuit breaker is a separate mechanism and stays ON. Former rule, for reference: pause if ROAS < 1.0x after ₹500 spend on a sales-objective campaign. EXCEPTION until 2026-10-05T23:59+05:30 (user-approved 2026-09-29): for the sneaker-push campaigns 120256091369160159 (Sneakers_BOF_30Sep-5Oct), 120256091370110159 (Sneakers_Prospecting_30Sep-5Oct) and 120256088882780159 (Sneakers_Catalog_Retargeting) the spend floor is ₹1,500, not ₹500.",
     "reactivate_min_historic_roas": "surface for reactivation if a paused campaign's last active-period ROAS >= 3.0x",
@@ -800,7 +800,7 @@
       "module": "reactivate-winner",
       "tier": "approval",
       "title": "Reactivate New Caps Part 3 STP -- 3.54x ROAS, above the reactivate threshold",
-      "reasoning": "Campaign 'New Caps Part 3 STP' (id 120245697720960159, ad set 'New STP 3') remains PAUSED as of this 2026-10-04T10:47 UTC pass -- fresh ads_get_ad_entities pull shows last_30d purchase_roas now 4.890866x on Rs1,781.30 spend (up from 3.544658x at this proposal's 2026-10-03T00:52 UTC creation; spend unchanged, so the move is purely a ROAS recalculation window/attribution update, not new delivery), still comfortably above settings.reactivate_min_historic_roas (>= 3.0x). No action taken -- reactivate-winner is approval-tier; awaiting human decision. UPDATE 2026-10-06T06:54Z: last_30d purchase_roas has since risen to 4.89x (amount_spent Rs1,781.30), up from 3.54x at original proposal time -- reactivation case is stronger, not weaker. metaAction unchanged. Reconfirmed 2026-10-07T02:51 UTC pass: New Caps Part 3 STP (120245697720960159) remains PAUSED. Fresh last_30d pull: purchase_roas 4.890866x on Rs1,781.30 spend -- unchanged. No action taken -- approval tier. Reconfirmed 2026-10-07T12:50:00.000Z: still PAUSED; last_30d spend ₹1,781.30, purchase_roas 4.89x (was cited as 3.54x), still well above reactivate_min_historic_roas=3.0x. No change needed, numbers refreshed. Reconfirmed 2026-10-07T22:49 UTC pass: New Caps Part 3 STP (120245697720960159) still PAUSED, last_30d purchase_roas 4.890866x on Rs1,781.30 spend -- still above threshold. No action taken -- approval tier.\n\nReconfirmed 2026-10-08T00:48:00.000Z: campaign still PAUSED, last_30d purchase_roas now 4.890866x (up from 3.54x cited originally), still above threshold. No Meta action taken (approval tier).",
+      "reasoning": "Campaign 'New Caps Part 3 STP' (id 120245697720960159, ad set 'New STP 3') remains PAUSED as of this 2026-10-04T10:47 UTC pass -- fresh ads_get_ad_entities pull shows last_30d purchase_roas now 4.890866x on Rs1,781.30 spend (up from 3.544658x at this proposal's 2026-10-03T00:52 UTC creation; spend unchanged, so the move is purely a ROAS recalculation window/attribution update, not new delivery), still comfortably above settings.reactivate_min_historic_roas (>= 3.0x). No action taken -- reactivate-winner is approval-tier; awaiting human decision. UPDATE 2026-10-06T06:54Z: last_30d purchase_roas has since risen to 4.89x (amount_spent Rs1,781.30), up from 3.54x at original proposal time -- reactivation case is stronger, not weaker. metaAction unchanged. Reconfirmed 2026-10-07T02:51 UTC pass: New Caps Part 3 STP (120245697720960159) remains PAUSED. Fresh last_30d pull: purchase_roas 4.890866x on Rs1,781.30 spend -- unchanged. No action taken -- approval tier. Reconfirmed 2026-10-07T12:50:00.000Z: still PAUSED; last_30d spend ₹1,781.30, purchase_roas 4.89x (was cited as 3.54x), still well above reactivate_min_historic_roas=3.0x. No change needed, numbers refreshed. Reconfirmed 2026-10-07T22:49 UTC pass: New Caps Part 3 STP (120245697720960159) still PAUSED, last_30d purchase_roas 4.890866x on Rs1,781.30 spend -- still above threshold. No action taken -- approval tier.\n\nReconfirmed 2026-10-08T00:48:00.000Z: campaign still PAUSED, last_30d purchase_roas now 4.890866x (up from 3.54x cited originally), still above threshold. No Meta action taken (approval tier). UPDATED 2026-10-08T06:53 UTC pass: fresh last_14d pull shows New Caps Part 3 STP's purchase_roas has moved to 4.890866x (Rs1,781.30 spend) -- up from the 3.54x this proposal was originally written against. Still well above the 3.0x reactivate_min_historic_roas threshold; no status change, still pending human decision.",
       "actionSummary": "Reactivates the campaign and its one ad set ('New STP 3'), keeping the daily budget unchanged at Rs500/day.",
       "metaAction": {
         "tool": "ads_activate_entity",
@@ -14405,6 +14405,33 @@
       "severity": "low",
       "dismissed": false,
       "createdAt": "2026-10-08T04:53:00.000Z"
+    },
+    {
+      "id": "AL-1481",
+      "module": "lookalike-refresh",
+      "title": "Lookalike rebuild skipped this pass -- rate-limited",
+      "detail": "The laddered 1%/2%/5% lookalike off 'Purchasers 180D' (120255823280550159, source still ~20, unchanged since creation) is past the 14-day lookalike_refresh_days threshold, but the last rebuild attempt was this same cycle (2026-10-08T04:53:00.000Z, failed with Meta's duplicate-lookalike error 2654/1713007 -- source audience unchanged). max_auto_actions_per_entity_per_day=1 not yet cleared (<24h elapsed). Skipped this pass per rate limiting; the 3 existing lookalikes remain live and serving.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-10-08T06:53:00.000Z"
+    },
+    {
+      "id": "AL-1482",
+      "module": "self-audit-check",
+      "title": "Routine pass summary -- 2026-10-08T06:53:00.000Z",
+      "detail": "Account-level spend today Rs1,898.45 vs Rs6,000 hard_spend_ceiling_inr -- no circuit-breaker concern. 6 campaigns ACTIVE: Sora_BOF_Test_5Oct, Tsuchi_BOF_Test_5Oct (both still duplicating Sneakers_BOF_30Sep-5Oct's audiences/creatives per open A-057), Prospecting_JP_Purchase_5-9Oct (new since last pass, launched within the last few days -- purchase_roas 17.84x on Rs1,475.02 last_14d spend, purchaser-exclusion compliant, no WhatsApp delivery yet so no placement-optimization trigger), Sneakers_BOF_30Sep-5Oct (4.87x), Caps + Kage_26 Sept (6.96x), Sneakers_Catalog_Retargeting. All active ad sets (13 total) reconfirmed purchaser-exclusion compliant -- either excluding Purchasers 180D directly, on the documented exempt list (BOF_3_CrossSell_Purchasers180D, by design), or using a built-in product_audience_spec Purchase exclusion (Sneaker_Viewers_ATC_30D_NoPurchase). All active ads' creatives already carry creativeTags entries -- hook-angle-tagging has nothing new. No anomaly signal fired. Pixel dataset quality: composite EMQ scores 6.1-8.7 across all tracked web events, at/above pixel_quality_min_match_rate=0.6 -- ROAS-based modules not suppressed. Weekly digest not due (last: week ending 2026-10-04; next due ~2026-10-11). Monthly digest not due (last: September 2026, done 2026-10-01). Competitor rescrape skipped this pass -- last scrape was this same ~04:53 UTC cycle, re-running within ~2h would just add Ad Library sampling noise. KPI-to-trigger completeness: no dashboard metric observed without a mapped module this pass.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-10-08T06:53:00.000Z"
+    },
+    {
+      "id": "AL-1483",
+      "module": "routine-run-notes",
+      "title": "Run summary -- 2026-10-08 ~06:53 UTC pass",
+      "detail": "0 auto-executed actions this pass (purchaser-exclusion already compliant account-wide; lookalike-refresh rate-limited -- see alert; hook-angle-tagging had nothing new to tag; hard spend circuit breaker not tripped, Rs1,898.45 vs Rs6,000 ceiling). 0 new proposals (checked the new Prosp_Men_25-44_Purchase_JP ad set for a WhatsApp placement-exclusion proposal -- its last_30d publisher_platform breakdown shows zero WhatsApp impressions/spend, so the trigger condition isn't met yet). 1 existing proposal refreshed: A-051's reactivate-winner ROAS updated from 3.54x to 4.89x (fresh last_14d pull) -- still well above the 3.0x reactivate_min_historic_roas threshold, no status change. A-057 (campaign-consolidation, Sora/Tsuchi BOF test campaigns) reconfirmed accurate with no changes needed -- spend figures match exactly. 3 alerts written (this one, self-audit-check, lookalike-refresh rate-limit). No circuit-breaker trip.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-10-08T06:53:00.000Z"
     }
   ],
   "log": [
