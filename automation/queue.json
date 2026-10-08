@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-08T20:51:00.000Z",
+  "generatedAt": "2026-10-08T22:48:00.000Z",
   "settings": {
     "kill_roas_threshold": "DISABLED 2026-10-05 by user instruction: the ROAS pause-kill is OFF. Module 16 (pause-kill) must NOT auto-pause any campaign for low ROAS; surface low-ROAS campaigns as alerts only. The hard spend circuit breaker is a separate mechanism and stays ON. Former rule, for reference: pause if ROAS < 1.0x after ₹500 spend on a sales-objective campaign. EXCEPTION until 2026-10-05T23:59+05:30 (user-approved 2026-09-29): for the sneaker-push campaigns 120256091369160159 (Sneakers_BOF_30Sep-5Oct), 120256091370110159 (Sneakers_Prospecting_30Sep-5Oct) and 120256088882780159 (Sneakers_Catalog_Retargeting) the spend floor is ₹1,500, not ₹500.",
     "reactivate_min_historic_roas": "surface for reactivation if a paused campaign's last active-period ROAS >= 3.0x",
@@ -14614,10 +14614,10 @@
       "id": "AL-1503",
       "module": "lookalike-refresh",
       "title": "Lookalike rebuild skipped this pass -- rate-limited",
-      "detail": "The laddered 1%/2%/5% lookalike off 'Purchasers 180D' (120255823280550159) is well past the 14-day lookalike_refresh_days threshold (built 2026-09-15, source audience still ~20, unchanged). Last rebuild attempt was 2026-10-08T04:53:00.000Z (failed with Meta's duplicate-lookalike error 2654/1713007, as expected until the source audience grows) -- that attempt itself counts against max_auto_actions_per_entity_per_day=1, and under 24h have elapsed since, so this pass skipped rather than re-attempting. Next eligible ~2026-10-09T04:53 UTC. The 3 existing lookalikes remain live and serving.",
+      "detail": "The laddered 1%/2%/5% lookalike off 'Purchasers 180D' (120255823280550159) is well past the 14-day lookalike_refresh_days threshold (built 2026-09-15, source audience still ~20, unchanged). Last rebuild attempt was 2026-10-08T04:53:00.000Z (failed with Meta's duplicate-lookalike error 2654/1713007, as expected until the source audience grows) -- that attempt counts against max_auto_actions_per_entity_per_day=1, and under 24h have elapsed since (17h55m at this pass), so this pass again skipped rather than re-attempting. Next eligible ~2026-10-09T04:53 UTC. The 3 existing lookalikes remain live and serving. Reconfirmed this pass: all other auto-tier modules clear -- purchaser-exclusion compliant account-wide (all 10 active ad sets exclude Purchasers 180D), hook-angle-tagging has nothing new (all 30 active ads' creatives already tagged), hard-spend-circuit-breaker not tripped (today's spend Rs489.60 vs Rs6,000 ceiling).",
       "severity": "low",
       "dismissed": false,
-      "createdAt": "2026-10-08T20:51:00.000Z"
+      "createdAt": "2026-10-08T22:48:00.000Z"
     },
     {
       "id": "AL-1504",
