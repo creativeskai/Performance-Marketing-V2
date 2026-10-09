@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-09T04:47:00.000Z",
+  "generatedAt": "2026-10-09T06:52:00.000Z",
   "settings": {
     "kill_roas_threshold": "DISABLED 2026-10-05 by user instruction: the ROAS pause-kill is OFF. Module 16 (pause-kill) must NOT auto-pause any campaign for low ROAS; surface low-ROAS campaigns as alerts only. The hard spend circuit breaker is a separate mechanism and stays ON. Former rule, for reference: pause if ROAS < 1.0x after ₹500 spend on a sales-objective campaign. EXCEPTION until 2026-10-05T23:59+05:30 (user-approved 2026-09-29): for the sneaker-push campaigns 120256091369160159 (Sneakers_BOF_30Sep-5Oct), 120256091370110159 (Sneakers_Prospecting_30Sep-5Oct) and 120256088882780159 (Sneakers_Catalog_Retargeting) the spend floor is ₹1,500, not ₹500.",
     "reactivate_min_historic_roas": "surface for reactivation if a paused campaign's last active-period ROAS >= 3.0x",
@@ -29,10 +29,10 @@
       }
     },
     "competitor_last_scrape": {
-      "gully_labs_active_ads": 137,
-      "lotto_sport_india_active_ads": 342,
-      "scraped_at": "2026-10-09T04:47:00.000Z",
-      "note": "2026-10-09T04:47:00.000Z pass: Gully Labs 137 (-19.9% vs 171, just under 20% threshold, no alert). Lotto Sport India 342 (+2.4% vs 334, no alert). Same noisy Ad Library sampling-variance pattern already diagnosed (see settings.note, AL-1261). No real-world competitor action implied."
+      "gully_labs_active_ads": 171,
+      "lotto_sport_india_active_ads": 350,
+      "scraped_at": "2026-10-09T06:52:00.000Z",
+      "note": "2026-10-09T06:52:00.000Z pass: Gully Labs 171 (+24.8% vs last recorded 137) -- crosses the mechanical 20% threshold, but this is the same page swinging back to the previously-diagnosed noisy raw estimated_total_count value (171) already seen and diagnosed as Ad Library sampling variance, not real competitor spend change (see AL-1261 and prior note history). Alert written per spec since the mechanical threshold was crossed, but flagged as likely noise. Lotto Sport India 350 (+2.3% vs 334... see note -- last recorded 342), no alert."
     },
     "audience_label_corrections": {
       "120249907176770159": "ATC_180D -- NOT a purchaser audience (cart-adders, event=AddToCart, retention 180 days). Verified 2026-09-14, reconfirmed 2026-09-20. Superseded note: earlier passes said the account had NO purchaser audience at all -- that's now out of date. See the 120255823280550159 (Purchasers 180D) entry above, created 2026-09-15, which IS a genuine purchaser audience and is already in use for exclusion + lookalike.",
@@ -14751,6 +14751,42 @@
       "severity": "low",
       "dismissed": false,
       "createdAt": "2026-10-09T04:47:00.000Z"
+    },
+    {
+      "id": "AL-1518",
+      "module": "competitor-spike",
+      "title": "Gully Labs active-ad count moved +24.8% since last recorded scrape",
+      "detail": "ads_library_search(search_terms='Gully Labs', countries=['IN'], ad_active_status=ACTIVE) returned estimated_total_count=171 this pass vs the last recorded 137 (+24.8%), crossing the module's 20% threshold. However, this exact oscillation between ~171 and ~137 on this same noisy raw Ad Library text-match count (which also catches unrelated pages like 'boxout.fm' and 'Thums Up' whose ad copy mentions 'Gully Labs') has already been diagnosed as Ad Library sampling variance, not a real change in competitor spend/activity (see AL-1261 and settings.note history). No real-world competitor action implied; informational only.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-10-09T06:52:00.000Z"
+    },
+    {
+      "id": "AL-1519",
+      "module": "pixel-health",
+      "title": "Pixel quality remains healthy -- no match-rate breach",
+      "detail": "ads_get_dataset_quality(dataset_id=833131719490535): composite EMQ scores across all 10 tracked events remain between 6.1 (PageView/ViewContent/AddToCart/SubscribedButtonClick/Search) and 8.8 (AddPaymentInfo/prepaid_purchase), at/above pixel_quality_min_match_rate=0.6 -- ROAS-based modules not suppressed this pass.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-10-09T06:52:00.000Z"
+    },
+    {
+      "id": "AL-1520",
+      "module": "self-audit-check",
+      "title": "Routine pass summary -- 2026-10-09T06:52:00.000Z",
+      "detail": "Circuit breaker: today's account spend Rs1,436.24 vs Rs6,000 ceiling -- no trip (ads_get_ad_entities, level=ad_account, date_preset=today). Pixel quality gate: healthy, see pixel-health alert. Purchaser-exclusion: all 10 currently-active ad sets (Sora_Hot_ATC_IC_API_30D, Sora_Warm_IG365_Engagers_Visitors, Tsuchi_Hot_ATC_IC_API_30D, Tsuchi_Warm_IG365_Engagers_Visitors, Prosp_Men_25-44_Purchase_JP, Caps_FB-A_EngagedShoppers, Caps_FB-B_HighValueGoods, Caps_FB-C_Interests, Caps + Kage_26Sept, BOF_2_Warm_IG365_Engagers_Visitors) confirmed excluding Purchasers 180D (120255823280550159) via fresh targeting fetch -- compliant account-wide, unchanged from the 04:47 UTC pass. No anomaly signal fired (ads_insights_anomaly_signal). Account composition (5 active campaigns, 10 active ad sets) and all active creatives' tags are unchanged since the 04:47 UTC pass. Dashboard self-audit note: index.html's static DATA/INSIGHTS_DATA snapshot (dated September 13, 2026) remains far out of date vs. the live account (now running Sora/Tsuchi/Sneakers/Caps+Kage campaigns not present in that snapshot) -- this is a known, long-standing drift already flagged in many prior passes; fixing it is a dashboard rebuild task outside this routine's write scope, not a new finding.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-10-09T06:52:00.000Z"
+    },
+    {
+      "id": "AL-1521",
+      "module": "routine-run-notes",
+      "title": "Run summary -- 2026-10-09T06:52:00.000Z pass",
+      "detail": "Auto-tier: 0 actions executed with live effect (purchaser-exclusion compliant account-wide, hook-angle-tagging nothing new to tag -- all active ads' creatives already tagged, hard spend circuit breaker checked first and did not trip). 1 auto-tier attempt failed: lookalike-refresh rate limit cleared (last attempt 2026-10-08T04:53:00.000Z, >25h elapsed) so a rebuild of the 1% laddered lookalike off 'Purchasers 180D' was attempted and rejected again by Meta as a duplicate lookalike (error 2654/1713007) -- source audience unchanged at ~20, same persistent API constraint seen on every qualifying pass since 2026-09-29; the existing 3 lookalikes remain live and serving, untouched. Approval-tier: 0 new proposals, 0 status changes -- every current trigger is already covered by an existing pending proposal (A-002/A-003/A-026/A-027/A-028/A-038/A-039/A-048/A-050/A-051/A-053/A-055/A-057/A-058/A-059/A-060); fresh pulls this pass (A-027/A-028/A-039/A-051/A-053 reactivate-winner and device-targeting figures) matched the numbers already recorded at the 00:55/04:47 UTC passes exactly, so no reasoning updates were needed. New alerts: 4 this pass (competitor-spike for Gully Labs -- flagged as likely sampling noise per AL-1261's prior diagnosis, pixel-health healthy, this self-audit summary, this run-notes summary). Circuit breaker remains untripped (clean since the 2026-09-29 reset); today's spend Rs1,436.24 vs Rs6,000 ceiling.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-10-09T06:52:00.000Z"
     }
   ],
   "log": [
@@ -21316,6 +21352,30 @@
       },
       "tier": "auto",
       "executedAt": "2026-10-08T18:49:00.000Z"
+    },
+    {
+      "proposalId": null,
+      "action": "lookalike-refresh auto-module: rate limit cleared (last attempt 2026-10-08T04:53:00.000Z, >25h57m elapsed) -- attempted to rebuild the 1% laddered lookalike off 'Purchasers 180D' (id 120255823280550159, approximate_count_lower_bound/upper_bound still 20, unchanged since creation on 2026-09-15) via ads_create_custom_audience (subtype LOOKALIKE, ratio 0.01, name 'Purchasers_180D_LAL_1pct_refresh_2026-10-09'). Call failed with Meta's duplicate-lookalike validation error (error_code 2654, error_subcode 1713007) -- the same real API constraint seen on every qualifying pass since 2026-09-29: the source audience has not grown, so Meta rejects a new lookalike as a duplicate of the existing laddered 1%/2%/5% set (120255832535210159/120255832535610159/120255832535780159, still ACTIVE and serving). Not retried this pass per the one-attempt-per-mutation rule.",
+      "result": "failed",
+      "previousState": {
+        "source_audience_id": "120255823280550159",
+        "source_audience_name": "Purchasers 180D",
+        "source_audience_size": "20 (approximate_count_lower_bound=upper_bound=20)",
+        "existing_lookalikes": [
+          "120255832535210159",
+          "120255832535610159",
+          "120255832535780159"
+        ]
+      },
+      "detail": {
+        "error_category": "VALIDATION",
+        "error_message": "Can't Create a Duplicate Lookalike: You've already created a lookalike audience with the same source, country and size. Please try using a different source or different specifications.",
+        "error_code": "2654",
+        "error_subcode": "1713007",
+        "is_retryable": false
+      },
+      "tier": "auto",
+      "executedAt": "2026-10-09T06:52:00.000Z"
     }
   ],
   "creativeTags": {
