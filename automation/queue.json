@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-09T18:46:00.000Z",
+  "generatedAt": "2026-10-09T20:48:00.000Z",
   "settings": {
     "kill_roas_threshold": "DISABLED 2026-10-05 by user instruction: the ROAS pause-kill is OFF. Module 16 (pause-kill) must NOT auto-pause any campaign for low ROAS; surface low-ROAS campaigns as alerts only. The hard spend circuit breaker is a separate mechanism and stays ON. Former rule, for reference: pause if ROAS < 1.0x after ₹500 spend on a sales-objective campaign. EXCEPTION until 2026-10-05T23:59+05:30 (user-approved 2026-09-29): for the sneaker-push campaigns 120256091369160159 (Sneakers_BOF_30Sep-5Oct), 120256091370110159 (Sneakers_Prospecting_30Sep-5Oct) and 120256088882780159 (Sneakers_Catalog_Retargeting) the spend floor is ₹1,500, not ₹500.",
     "reactivate_min_historic_roas": "surface for reactivation if a paused campaign's last active-period ROAS >= 3.0x",
@@ -14988,19 +14988,19 @@
       "id": "AL-1542",
       "module": "lookalike-refresh",
       "title": "Lookalike rebuild skipped this pass -- rate-limited",
-      "detail": "Rate limit check: last rebuild attempt for the 1% laddered lookalike off 'Purchasers 180D' (120255823280550159) was at 2026-10-09T06:52:00.000Z, ~11h54m ago -- within max_auto_actions_per_entity_per_day=1 (24h window), so no rebuild attempt was made this pass. Source audience size unchanged (~20, approximate_count_lower_bound=upper_bound=20) since creation on 2026-09-15 (confirmed via ads_get_ad_account_custom_audiences this pass); the existing laddered 1%/2%/5% lookalikes (120255832535210159/610159/780159) remain ACTIVE and serving. Next eligible attempt ~2026-10-10T06:52 UTC.",
+      "detail": "Rate limit check: last rebuild attempt for the 1% laddered lookalike off 'Purchasers 180D' (120255823280550159) was at 2026-10-09T06:52:00.000Z, ~13h56m ago -- within max_auto_actions_per_entity_per_day=1 (24h window), so no rebuild attempt was made this pass. Source audience size unchanged (~20, approximate_count_lower_bound=upper_bound=20) since creation on 2026-09-15; the existing laddered 1%%/2%%/5%% lookalikes (120255832535210159/610159/780159) remain ACTIVE and serving. Next eligible attempt ~2026-10-10T06:52 UTC.",
       "severity": "low",
       "dismissed": false,
-      "createdAt": "2026-10-09T18:46:00.000Z"
+      "createdAt": "2026-10-09T20:48:00.000Z"
     },
     {
       "id": "AL-1543",
       "module": "pixel-health",
       "title": "Pixel quality remains healthy -- no match-rate breach",
-      "detail": "ads_get_dataset_quality (dataset 833131719490535) this pass: composite EMQ scores across all 10 tracked web events range 6.1-8.8 (PageView/AddToCart/ViewContent/SubscribedButtonClick/Search at 6.1, InitiateCheckout 7.0, AddPaymentInfo 8.7, cod_purchase 8.7, Purchase/prepaid_purchase 8.8), all at/above the pixel_quality_min_match_rate=0.6 threshold (interpreting composite_score/10 vs the 0-1 threshold, consistent with prior passes). ROAS-based modules not suppressed this pass.",
+      "detail": "ads_get_dataset_quality (dataset 833131719490535) this pass: composite EMQ scores across all 10 tracked web events range 6.1-8.8 (PageView/AddToCart/ViewContent/SubscribedButtonClick/Search at 6.1, InitiateCheckout 6.9, AddPaymentInfo/Purchase/cod_purchase 8.7, prepaid_purchase 8.8), all at/above the pixel_quality_min_match_rate=0.6 threshold (interpreting composite_score/10 vs the 0-1 threshold, consistent with prior passes). ROAS-based modules not suppressed this pass.",
       "severity": "low",
       "dismissed": false,
-      "createdAt": "2026-10-09T18:46:00.000Z"
+      "createdAt": "2026-10-09T20:48:00.000Z"
     },
     {
       "id": "AL-1544",
@@ -15019,6 +15019,24 @@
       "severity": "low",
       "dismissed": false,
       "createdAt": "2026-10-09T18:46:00.000Z"
+    },
+    {
+      "id": "AL-1546",
+      "module": "self-audit-check",
+      "title": "Routine pass summary -- 2026-10-09T20:48:00.000Z",
+      "detail": "Account snapshot this pass: today's spend Rs459.83 vs hard_spend_ceiling_inr=6,000 (7.7%) -- no circuit-breaker concern. 5 campaigns ACTIVE / 10 ad sets ACTIVE / 21 distinct active creatives, same composition as the ~18:46 UTC pass: Sora_BOF_Test_5Oct and Tsuchi_BOF_Test_5Oct (both covered by pending A-057 campaign-consolidation proposal, last_14d spend Rs826.49/Rs717.38), Prospecting_JP_Purchase_5-9Oct (24.62x purchase_roas last_14d on Rs2,212.19 spend), Sneakers_BOF_30Sep-5Oct (5.03x ROAS, Rs24,611.78 spend last_14d), Caps + Kage_26 Sept (6.99x ROAS, Rs18,383.52 spend last_14d). purchaser-exclusion: all 10 active ad sets confirmed excluding 'Purchasers 180D' (120255823280550159) via direct targeting fetch (none are on the exempt list this pass, since neither exempt ad set is currently active) -- compliant account-wide, no action needed. hook-angle-tagging: all 21 distinct active creatives already have creativeTags entries -- nothing new to tag. No anomaly signal fired (ads_insights_anomaly_signal: no auction overlap/creative fatigue/narrow audience issues). The 7 pending reactivate-winner proposals (A-027/028/039/048/050/051/055) were reconfirmed against fresh last_30d ROAS -- all 7 target campaigns remain PAUSED with ROAS still comfortably above reactivate_min_historic_roas=3.0x (TSUCHI BOF 5.66x, Mori+Tee 3.27x, Sora_BOF 6.65x, Sora Retargeting 4.33x, Sneakers_Prospecting 6.32x, New Caps Part 3 STP 4.89x, Retargeting_Overall 7.70x). The 4 pending placement-optimization WhatsApp-exclusion proposals (A-038/058/059/060) and the campaign-consolidation proposal (A-057) all still target currently-ACTIVE entities, unchanged. A-002 (high-intent-retargeting) and A-003 (catalog-dpa-launch) remain open structural proposals, no change. No KPI-to-trigger gaps identified.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-10-09T20:48:00.000Z"
+    },
+    {
+      "id": "AL-1547",
+      "module": "routine-run-notes",
+      "title": "Run summary -- 2026-10-09T20:48:00.000Z pass",
+      "detail": "Circuit breaker: not tripped (today's spend Rs459.83 vs Rs6,000 ceiling). Pixel gate: healthy, ROAS modules active. purchaser-exclusion: compliant account-wide, no action. lookalike-refresh: rate-limited, skipped (see AL-1542, updated). hook-angle-tagging: nothing new to tag (21/21 active creatives already tagged). hard-spend-circuit-breaker: not triggered. No approval-tier proposals added, closed, or materially changed this pass -- all 14 previously-open proposals (A-002, A-003, A-027, A-028, A-038, A-039, A-048, A-050, A-051, A-055, A-057, A-058, A-059, A-060) remain pending and were reconfirmed against fresh account state this pass (effective_status + ROAS). competitor-rescrape: not re-run this pass (last scrape was this same account-day, 2026-10-09T18:46 UTC, both competitors under the 20%% alert threshold as of that scrape) -- no new scrape needed yet. No circuit-breaker trip, no new alerts beyond this pass's routine pair.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-10-09T20:48:00.000Z"
     }
   ],
   "log": [
