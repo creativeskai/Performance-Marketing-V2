@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-10T14:50:00.000Z",
+  "generatedAt": "2026-10-10T16:50:00.000Z",
   "settings": {
     "kill_roas_threshold": "DISABLED 2026-10-05 by user instruction: the ROAS pause-kill is OFF. Module 16 (pause-kill) must NOT auto-pause any campaign for low ROAS; surface low-ROAS campaigns as alerts only. The hard spend circuit breaker is a separate mechanism and stays ON. Former rule, for reference: pause if ROAS < 1.0x after ₹500 spend on a sales-objective campaign. EXCEPTION until 2026-10-05T23:59+05:30 (user-approved 2026-09-29): for the sneaker-push campaigns 120256091369160159 (Sneakers_BOF_30Sep-5Oct), 120256091370110159 (Sneakers_Prospecting_30Sep-5Oct) and 120256088882780159 (Sneakers_Catalog_Retargeting) the spend floor is ₹1,500, not ₹500.",
     "reactivate_min_historic_roas": "surface for reactivation if a paused campaign's last active-period ROAS >= 3.0x",
@@ -42,11 +42,9 @@
     "note": "hard_spend_ceiling_inr is 6000 (user-set 2026-10-06; supersedes the earlier 6500 sneaker-push raise and its planned 2026-10-06 revert -- do NOT revert it; active daily budgets total 5532 at that time). All fields here are editable directly in the Automation tab (Save button) or by telling Claude. See also settings.audience_label_corrections for audience identity notes. Lookalike-refresh: the laddered 1%/2%/5% lookalikes built 2026-09-15 off Purchasers 180D (source audience still ~20, unchanged since creation) keep failing rebuild attempts with Meta's duplicate-lookalike error (2654/1713007) -- not a bug, a real API constraint until the source audience grows. The 3 existing lookalikes remain live and serving. CORRECTION 2026-10-01T10:50 UTC pass: earlier revisions of this note incorrectly blamed settings.note itself for queue.json's 2MB+ file size. The real driver is the alerts array (~1.58MB of the ~2.2MB file from 1250+ accumulated entries, since the routine writes a fresh alert for most monitoring modules every single pass even when nothing changed) -- see AL-1261 for the corrected diagnosis and a retention-policy recommendation for the user. This note is now kept short going forward; detailed per-pass reconfirmation history lives in the alerts/log arrays, not here."
   },
   "circuitBreaker": {
-    "tripped": false,
-    "resetAt": "2026-09-29T10:35:00.000Z",
-    "resetBy": "User (via Claude Code session), after reviewing: the 2026-09-12 breach is 17 days old, the campaigns it paused have since been reviewed and replaced, and the ceiling is now ₹5,000.",
-    "trippedAt": "2026-09-12T16:47:00.000Z",
-    "reason": "Today's account-level spend reached ₹2,017.87 INR (ads_get_ad_entities, level=ad_account, date_preset=today), breaching settings.hard_spend_ceiling_inr (₹2,000). This follows AL-253 (94% of ceiling at the prior ~14:49 UTC pass). All 4 campaigns that were ACTIVE at breach time were paused immediately by this pass: Tsuchi BOF (₹833.57 today), KAGE_TOF_Sept 2026 (₹144.14), Mori + Tee_Sales_0609 (₹869.19), Retargeting_31AUG (₹170.97) -- these 4 figures sum exactly to the account total. No auto-resume; a human must review and, if appropriate, create/approve a resume-after-circuit-breaker proposal on a later pass once today's spend looks sane again."
+    "tripped": true,
+    "trippedAt": "2026-10-10T16:50:00.000Z",
+    "reason": "ads_get_ad_entities (level=ad_account, date_preset=today) at this pass showed today's account spend at ₹6,406.69, breaching settings.hard_spend_ceiling_inr (₹6,000) -- the previous pass (2026-10-10T14:50:00.000Z, AL-1573) had already flagged the account at 90.8% of the ceiling (₹5,450.13) with ~₹549.87 of headroom; delivery continued and crossed it. All 5 campaigns that were ACTIVE at breach time were paused immediately this pass: Sora_BOF_Test_5Oct (₹347.88 today), Tsuchi_BOF_Test_5Oct (₹370.18), Prospecting_JP_Purchase_5-9Oct (₹807.51), Sneakers_BOF_30Sep-5Oct (₹3,820.63), Caps + Kage_26 Sept (₹1,060.49) -- these 5 figures sum exactly to the account total of ₹6,406.69. No auto-resume; a human must review and, if appropriate, approve a resume-after-circuit-breaker proposal on a later pass once today's spend looks sane again."
   },
   "proposals": [
     {
@@ -81,7 +79,7 @@
       "module": "high-intent-retargeting",
       "tier": "approval",
       "title": "Launch a retargeting campaign against 30d add-to-cart non-purchasers",
-      "reasoning": "Structural ATC/checkout-non-purchaser retargeting gap persists at the account level. Update 2026-10-02T18:50:00.000Z pass: 'Retargeting_Overall' (id 120255851467340159) is ACTIVE again (11.18x last_30d ROAS on Rs2,250.86 spend) and already targets Initiate_Checkout/ATC_180D audiences -- it materially overlaps this proposal's intended segment, so the structural gap this proposal addresses is currently being covered, at least partially, by an existing live campaign. Pixel quality healthy (composite EMQ 6.1-9.0/10, gate cleared). The stored 4-step chain remains real and executable against the account's actual pixel (833131719490535) and Kage_Sales creative (1063318642863205) if a human still wants a dedicated ATC-non-purchaser campaign distinct from Retargeting_Overall's broader audience mix. Not executed -- approval tier. Reconfirmed 2026-10-09T10:48:00.000Z pass: no change to the structural ATC/checkout-non-purchaser retargeting gap this pass; still pending. Reconfirmed 2026-10-10T04:47:00.000Z pass: no change to the structural ATC/checkout-non-purchaser retargeting gap; still pending.",
+      "reasoning": "Structural ATC/checkout-non-purchaser retargeting gap persists at the account level. Update 2026-10-02T18:50:00.000Z pass: 'Retargeting_Overall' (id 120255851467340159) is ACTIVE again (11.18x last_30d ROAS on Rs2,250.86 spend) and already targets Initiate_Checkout/ATC_180D audiences -- it materially overlaps this proposal's intended segment, so the structural gap this proposal addresses is currently being covered, at least partially, by an existing live campaign. Pixel quality healthy (composite EMQ 6.1-9.0/10, gate cleared). The stored 4-step chain remains real and executable against the account's actual pixel (833131719490535) and Kage_Sales creative (1063318642863205) if a human still wants a dedicated ATC-non-purchaser campaign distinct from Retargeting_Overall's broader audience mix. Not executed -- approval tier. Reconfirmed 2026-10-09T10:48:00.000Z pass: no change to the structural ATC/checkout-non-purchaser retargeting gap this pass; still pending. Reconfirmed 2026-10-10T04:47:00.000Z pass: no change to the structural ATC/checkout-non-purchaser retargeting gap; still pending. Reconfirmed 2026-10-10T16:50:00.000Z pass: no material change since the prior pass; numbers and recommendation stand.",
       "actionSummary": "4-step chain, each step feeding the next real Meta-assigned ID (not guessed): (1) create the WEBSITE pixel audience — AddToCart OR InitiateCheckout in the last 14 days, excluding Purchase; (2) create the campaign (OUTCOME_SALES); (3) create the ad set targeting that new audience, India, Facebook+Instagram, optimizing for purchases, daily_budget 25000 (Meta's minor-currency-unit field — this is ₹250/day, editable via the parameter editor below, same conservative range as A-001's reactivation budget); (4) create the ad reusing the Kage_Sales creative. Every step is created PAUSED — approving this does NOT start spending. You'd review it in Ads Manager and activate manually, or tell Claude to activate once you're satisfied.",
       "metaAction": {
         "tool": "ads_create_custom_audience",
@@ -194,15 +192,15 @@
       },
       "status": "pending",
       "createdAt": "2026-08-29T12:15:00.000Z",
-      "updatedAt": "2026-10-02T18:50:00.000Z",
-      "lastReconfirmedAt": "2026-10-10T14:50:00.000Z"
+      "updatedAt": "2026-10-10T16:50:00.000Z",
+      "lastReconfirmedAt": "2026-10-10T16:50:00.000Z"
     },
     {
       "id": "A-003",
       "module": "catalog-dpa-launch",
       "tier": "approval",
       "title": "Launch a Dynamic Product Ads (DPA) campaign from the connected Shopify catalog",
-      "reasoning": "Shopify catalog 1149969713295773 remains connected with zero DPA/catalog-based campaigns running -- a structural gap, not a performance one. Catalog diagnostics have been trending healthier over recent passes (out-of-stock and unmatched-content-ID counts both falling); the 3-step chain (product set → campaign → ad set, all PAUSED) remains real and executable. Known scope limit unchanged: the actual dynamic template ad (step 4) isn't wired into this automation's creative editor yet. Reasoning history condensed for file-size reasons. Not executed -- approval tier. Reconfirmed 2026-10-09T10:48:00.000Z pass: Shopify catalog still connected with zero DPA/catalog-based campaigns running; proposal remains pending and unchanged. Reconfirmed 2026-10-10T04:47:00.000Z pass: Shopify catalog still connected, zero DPA/catalog-based campaigns running; unchanged.",
+      "reasoning": "Shopify catalog 1149969713295773 remains connected with zero DPA/catalog-based campaigns running -- a structural gap, not a performance one. Catalog diagnostics have been trending healthier over recent passes (out-of-stock and unmatched-content-ID counts both falling); the 3-step chain (product set → campaign → ad set, all PAUSED) remains real and executable. Known scope limit unchanged: the actual dynamic template ad (step 4) isn't wired into this automation's creative editor yet. Reasoning history condensed for file-size reasons. Not executed -- approval tier. Reconfirmed 2026-10-09T10:48:00.000Z pass: Shopify catalog still connected with zero DPA/catalog-based campaigns running; proposal remains pending and unchanged. Reconfirmed 2026-10-10T04:47:00.000Z pass: Shopify catalog still connected, zero DPA/catalog-based campaigns running; unchanged. Reconfirmed 2026-10-10T16:50:00.000Z pass: no material change since the prior pass; numbers and recommendation stand.",
       "actionSummary": "3-step chain, each real: (1) create a product set filtered to in-stock items only; (2) create the campaign (OUTCOME_SALES, PAUSED); (3) create the ad set targeting India broadly with Advantage+ audience (matching the account's existing targeting_automation pattern on Kage_sales_1908), promoted_object pointing at the new product set, daily_budget 25000 (that's ₹250/day), PAUSED. Honest scope limit: the 4th step — the actual dynamic template ad (Meta's product-template creative format, distinct from a static image/video ad) — isn't wired into this automation's creative editor yet, which only builds static ads. Approving this proposal completes steps 1-3; the ad set will sit ready with its promoted_object set, and the final template ad needs one more manual step in Ads Manager (or a follow-up once template-creative support is built).",
       "metaAction": {
         "tool": "ads_catalog_create_product_set",
@@ -253,8 +251,8 @@
       },
       "status": "pending",
       "createdAt": "2026-08-27T00:00:00.000Z",
-      "updatedAt": "2026-09-23T06:50:00.000Z",
-      "lastReconfirmedAt": "2026-10-10T14:50:00.000Z"
+      "updatedAt": "2026-10-10T16:50:00.000Z",
+      "lastReconfirmedAt": "2026-10-10T16:50:00.000Z"
     },
     {
       "id": "A-005",
@@ -538,7 +536,7 @@
       "module": "reactivate-winner",
       "tier": "approval",
       "title": "Reactivate TSUCHI BOF based on CAPS -- 3.8x ROAS, paused since a purchaser-exclusion side effect on 2026-09-15",
-      "reasoning": "TSUCHI BOF based on CAPS (120255774257000159) last_30d purchase_roas is now 5.66x (up from 3.8x when this proposal was created 2026-09-20), spend to date Rs3,747.38 -- well above reactivate_min_historic_roas=3.0x. Paused since a purchaser-exclusion side-effect edit on 2026-09-15. Reconfirmed via fresh ads_get_ad_entities pull on this pass. Reconfirmed 2026-10-09T10:48:00.000Z pass: last_30d purchase_roas unchanged at 5.66x on Rs3,747.38 spend (still PAUSED). Reconfirmed 2026-10-09T18:46:00.000Z pass: TSUCHI BOF based on CAPS (120255774257000159) still PAUSED, last_30d purchase_roas 5.662743x -- well above reactivate_min_historic_roas=3.0x. Proposal remains pending. Reconfirmed 2026-10-09T22:51:00.000Z pass: last_30d purchase_roas unchanged at 5.662743x on Rs3,747.38 spend. Still PAUSED. Reconfirmed 2026-10-10T00:52:00.000Z pass: last_30d purchase_roas unchanged at 5.662743x on Rs3,747.38 spend. Still PAUSED. Reconfirmed 2026-10-10T04:47:00.000Z pass: last_30d purchase_roas unchanged at 5.662743x on Rs3,747.38 spend. Still PAUSED. Reconfirmed 2026-10-10T10:47:00.000Z pass: TSUCHI BOF based on CAPS (120255774257000159) still PAUSED, last_30d purchase_roas 5.662743x on Rs3,747.38 spend -- above reactivate_min_historic_roas=3.0x.",
+      "reasoning": "TSUCHI BOF based on CAPS (120255774257000159) last_30d purchase_roas is now 5.66x (up from 3.8x when this proposal was created 2026-09-20), spend to date Rs3,747.38 -- well above reactivate_min_historic_roas=3.0x. Paused since a purchaser-exclusion side-effect edit on 2026-09-15. Reconfirmed via fresh ads_get_ad_entities pull on this pass. Reconfirmed 2026-10-09T10:48:00.000Z pass: last_30d purchase_roas unchanged at 5.66x on Rs3,747.38 spend (still PAUSED). Reconfirmed 2026-10-09T18:46:00.000Z pass: TSUCHI BOF based on CAPS (120255774257000159) still PAUSED, last_30d purchase_roas 5.662743x -- well above reactivate_min_historic_roas=3.0x. Proposal remains pending. Reconfirmed 2026-10-09T22:51:00.000Z pass: last_30d purchase_roas unchanged at 5.662743x on Rs3,747.38 spend. Still PAUSED. Reconfirmed 2026-10-10T00:52:00.000Z pass: last_30d purchase_roas unchanged at 5.662743x on Rs3,747.38 spend. Still PAUSED. Reconfirmed 2026-10-10T04:47:00.000Z pass: last_30d purchase_roas unchanged at 5.662743x on Rs3,747.38 spend. Still PAUSED. Reconfirmed 2026-10-10T10:47:00.000Z pass: TSUCHI BOF based on CAPS (120255774257000159) still PAUSED, last_30d purchase_roas 5.662743x on Rs3,747.38 spend -- above reactivate_min_historic_roas=3.0x. Reconfirmed 2026-10-10T16:50:00.000Z pass: no material change since the prior pass; numbers and recommendation stand.",
       "actionSummary": "Activates campaign 'TSUCHI BOF based on CAPS' (id 120255774257000159) and reconfirms its daily budget at its existing ₹650/day (65000 minor units, unchanged) so it resumes delivering at the same pace it was paused at.",
       "metaAction": {
         "tool": "ads_activate_entity",
@@ -559,15 +557,15 @@
       },
       "status": "pending",
       "createdAt": "2026-09-20T16:50:00.000Z",
-      "updatedAt": "2026-10-09T18:46:00.000Z",
-      "lastReconfirmedAt": "2026-10-10T14:50:00.000Z"
+      "updatedAt": "2026-10-10T16:50:00.000Z",
+      "lastReconfirmedAt": "2026-10-10T16:50:00.000Z"
     },
     {
       "id": "A-028",
       "module": "reactivate-winner",
       "tier": "approval",
       "title": "Reactivate Mori + Tee_Sales_0609 -- 3.1x-3.3x ROAS, well above the reactivate threshold",
-      "reasoning": "Mori + Tee_Sales_0609 (id 120255648636980159) remains PAUSED. Fresh this pass (2026-09-27 ~08:52 UTC): last_14d ROAS 2.762846x on ₹7,399.99 spend -- still BELOW the 3.0x reactivate_min_historic_roas threshold on this shorter, rolling window (prior recorded figure was 2.929875x on ₹9,784.24 as of 2026-09-25). last_30d ROAS is 3.524447x on ₹13,556.67 spend -- still comfortably above threshold. The module's data source per ROUTINE.md is 'last_30d + lifetime', which clears the bar, but the trailing-14d number sliding further below 3.0x each pass is worth the human reviewer's attention before approving. Purchaser exclusion already verified compliant account-wide. Reactivating at its existing ₹900/day budget remains a conservative resumption if approved. Still pending human decision. Reconfirmed 2026-10-01T14:46:00.000Z pass: as the rolling last_14d window has aged past this paused campaign's final high-spend delivery days, last_14d now reads Rs2,930.62 spend / 4.844077x ROAS (9 purchases) -- back comfortably above the 3.0x threshold on both windows, not just last_30d. last_30d is unchanged at Rs13,556.67 / 3.524447x (32 purchases) since the campaign has not spent in 30+ days. The borderline trailing-14d concern noted on 2026-09-27 no longer applies; this was an artifact of the rolling window including the campaign's final, weaker delivery days, which have now aged out. No change to the proposed action. Reconfirmed 2026-10-02T22:46:00.000Z pass: last_30d purchase_roas is 3.524447x on Rs13,556.67 spend (32 purchases) -- unchanged from the prior pass's last_30d figure, still comfortably above threshold. Campaign remains PAUSED; no change to the proposed action. Reconfirmed 2026-10-07T02:51 UTC pass: Mori + Tee_Sales_0609 (120255648636980159) remains PAUSED. Fresh last_30d pull: purchase_roas 3.32953x on Rs12,750.11 spend -- down from the 3.524447x/Rs13,556.67 cited previously, but still above the 3.0x threshold. Trend is downward as the window absorbs older, lower-converting spend; worth watching but still qualifies. No action taken -- approval tier. Reconfirmed 2026-10-07T12:50:00.000Z: still PAUSED; last_30d spend ₹12,750.11, purchase_roas 3.33x (was cited as 3.1x-3.3x), still well above reactivate_min_historic_roas=3.0x. No change needed, numbers refreshed. Reconfirmed 2026-10-07T22:49 UTC pass: Mori + Tee_Sales_0609 (120255648636980159) still PAUSED, last_30d purchase_roas 3.228828x on Rs12,322.72 spend -- still above the 3.0x threshold, though narrower margin than when first raised. No action taken -- approval tier.\n\nReconfirmed 2026-10-08T00:48:00.000Z: campaign still PAUSED, last_30d purchase_roas now 3.228828x (previously cited 3.1x-3.3x), just above the 3.0x threshold. No Meta action taken (approval tier). Reconfirmed 2026-10-09T00:55:00.000Z pass: still PAUSED, last_30d purchase_roas now 3.390501x on Rs11,509.74 spend (up from 3.228828x) -- still just above the 3.0x threshold. No Meta action taken (approval tier). Reconfirmed 2026-10-09T10:48:00.000Z pass: last_30d purchase_roas now 3.39x on Rs11,509.74 spend (up from Rs9,784.24 last recorded) -- still above reactivate_min_historic_roas=3.0x. Still PAUSED. Reconfirmed 2026-10-09T12:52:00.000Z pass: last_30d purchase_roas now 3.390501x on Rs11,509.74 spend (down slightly from 3.524447x recorded previously) -- still above reactivate_min_historic_roas=3.0x. Still PAUSED. Reconfirmed 2026-10-09T18:46:00.000Z pass: Mori + Tee_Sales_0609 (120255648636980159) still PAUSED, last_30d purchase_roas 3.267707x -- above reactivate_min_historic_roas=3.0x. Proposal remains pending. Reconfirmed 2026-10-09T22:51:00.000Z pass: last_30d purchase_roas now 3.267707x on Rs10,811.35 spend (rolling window dropped some older spend/conversions vs the prior Rs13,556.67 figure) -- still above reactivate_min_historic_roas=3.0x but closer to the floor than before. Still PAUSED. Reconfirmed 2026-10-10T00:52:00.000Z pass: last_30d purchase_roas unchanged at 3.267707x on Rs10,811.35 spend -- still above reactivate_min_historic_roas=3.0x. Still PAUSED. Reconfirmed 2026-10-10T04:47:00.000Z pass: last_30d purchase_roas unchanged at 3.267707x on Rs10,811.35 spend. Still PAUSED. Reconfirmed 2026-10-10T10:47:00.000Z pass: Mori + Tee_Sales_0609 (120255648636980159) still PAUSED, last_30d purchase_roas 3.267707x on Rs10,811.35 spend -- above reactivate_min_historic_roas=3.0x.",
+      "reasoning": "Mori + Tee_Sales_0609 (id 120255648636980159) remains PAUSED. Fresh this pass (2026-09-27 ~08:52 UTC): last_14d ROAS 2.762846x on ₹7,399.99 spend -- still BELOW the 3.0x reactivate_min_historic_roas threshold on this shorter, rolling window (prior recorded figure was 2.929875x on ₹9,784.24 as of 2026-09-25). last_30d ROAS is 3.524447x on ₹13,556.67 spend -- still comfortably above threshold. The module's data source per ROUTINE.md is 'last_30d + lifetime', which clears the bar, but the trailing-14d number sliding further below 3.0x each pass is worth the human reviewer's attention before approving. Purchaser exclusion already verified compliant account-wide. Reactivating at its existing ₹900/day budget remains a conservative resumption if approved. Still pending human decision. Reconfirmed 2026-10-01T14:46:00.000Z pass: as the rolling last_14d window has aged past this paused campaign's final high-spend delivery days, last_14d now reads Rs2,930.62 spend / 4.844077x ROAS (9 purchases) -- back comfortably above the 3.0x threshold on both windows, not just last_30d. last_30d is unchanged at Rs13,556.67 / 3.524447x (32 purchases) since the campaign has not spent in 30+ days. The borderline trailing-14d concern noted on 2026-09-27 no longer applies; this was an artifact of the rolling window including the campaign's final, weaker delivery days, which have now aged out. No change to the proposed action. Reconfirmed 2026-10-02T22:46:00.000Z pass: last_30d purchase_roas is 3.524447x on Rs13,556.67 spend (32 purchases) -- unchanged from the prior pass's last_30d figure, still comfortably above threshold. Campaign remains PAUSED; no change to the proposed action. Reconfirmed 2026-10-07T02:51 UTC pass: Mori + Tee_Sales_0609 (120255648636980159) remains PAUSED. Fresh last_30d pull: purchase_roas 3.32953x on Rs12,750.11 spend -- down from the 3.524447x/Rs13,556.67 cited previously, but still above the 3.0x threshold. Trend is downward as the window absorbs older, lower-converting spend; worth watching but still qualifies. No action taken -- approval tier. Reconfirmed 2026-10-07T12:50:00.000Z: still PAUSED; last_30d spend ₹12,750.11, purchase_roas 3.33x (was cited as 3.1x-3.3x), still well above reactivate_min_historic_roas=3.0x. No change needed, numbers refreshed. Reconfirmed 2026-10-07T22:49 UTC pass: Mori + Tee_Sales_0609 (120255648636980159) still PAUSED, last_30d purchase_roas 3.228828x on Rs12,322.72 spend -- still above the 3.0x threshold, though narrower margin than when first raised. No action taken -- approval tier.\n\nReconfirmed 2026-10-08T00:48:00.000Z: campaign still PAUSED, last_30d purchase_roas now 3.228828x (previously cited 3.1x-3.3x), just above the 3.0x threshold. No Meta action taken (approval tier). Reconfirmed 2026-10-09T00:55:00.000Z pass: still PAUSED, last_30d purchase_roas now 3.390501x on Rs11,509.74 spend (up from 3.228828x) -- still just above the 3.0x threshold. No Meta action taken (approval tier). Reconfirmed 2026-10-09T10:48:00.000Z pass: last_30d purchase_roas now 3.39x on Rs11,509.74 spend (up from Rs9,784.24 last recorded) -- still above reactivate_min_historic_roas=3.0x. Still PAUSED. Reconfirmed 2026-10-09T12:52:00.000Z pass: last_30d purchase_roas now 3.390501x on Rs11,509.74 spend (down slightly from 3.524447x recorded previously) -- still above reactivate_min_historic_roas=3.0x. Still PAUSED. Reconfirmed 2026-10-09T18:46:00.000Z pass: Mori + Tee_Sales_0609 (120255648636980159) still PAUSED, last_30d purchase_roas 3.267707x -- above reactivate_min_historic_roas=3.0x. Proposal remains pending. Reconfirmed 2026-10-09T22:51:00.000Z pass: last_30d purchase_roas now 3.267707x on Rs10,811.35 spend (rolling window dropped some older spend/conversions vs the prior Rs13,556.67 figure) -- still above reactivate_min_historic_roas=3.0x but closer to the floor than before. Still PAUSED. Reconfirmed 2026-10-10T00:52:00.000Z pass: last_30d purchase_roas unchanged at 3.267707x on Rs10,811.35 spend -- still above reactivate_min_historic_roas=3.0x. Still PAUSED. Reconfirmed 2026-10-10T04:47:00.000Z pass: last_30d purchase_roas unchanged at 3.267707x on Rs10,811.35 spend. Still PAUSED. Reconfirmed 2026-10-10T10:47:00.000Z pass: Mori + Tee_Sales_0609 (120255648636980159) still PAUSED, last_30d purchase_roas 3.267707x on Rs10,811.35 spend -- above reactivate_min_historic_roas=3.0x. Reconfirmed 2026-10-10T16:50:00.000Z pass: no material change since the prior pass; numbers and recommendation stand.",
       "actionSummary": "Activates campaign 'Mori + Tee_Sales_0609' (id 120255648636980159) and reconfirms its daily budget at its existing ₹900/day (90000 minor units, unchanged) so it resumes delivering at the same pace it was paused at.",
       "metaAction": {
         "tool": "ads_activate_entity",
@@ -588,8 +586,8 @@
       },
       "status": "pending",
       "createdAt": "2026-09-21T06:51:00.000Z",
-      "updatedAt": "2026-10-09T18:46:00.000Z",
-      "lastReconfirmedAt": "2026-10-10T14:50:00.000Z"
+      "updatedAt": "2026-10-10T16:50:00.000Z",
+      "lastReconfirmedAt": "2026-10-10T16:50:00.000Z"
     },
     {
       "id": "A-030",
@@ -677,7 +675,7 @@
       "module": "placement-optimization",
       "tier": "approval",
       "title": "Exclude WhatsApp placement from Caps + Kage_26Sept",
-      "reasoning": "Reasoning history condensed for file-size reasons (see log for prior reconfirmations back to 2026-09-25). Caps + Kage_26Sept ad set (120255693970460159, campaign Caps + Kage_26 Sept) is ACTIVE, last_30d 8.558251x ROAS on Rs8,711.98 spend. Reconfirmed 2026-10-02T18:50:00.000Z pass: fresh last_14d publisher_platform breakdown -- whatsapp spend Rs50.26, still 0 attributed purchases (null ROAS), vs facebook (Rs770.54, 5.73x) and instagram (Rs7,869.63, 8.91x). Targeting still includes both WhatsApp placements. Fix remains unapplied, pending approval; low-impact but still a clean removal. Reconfirmed 2026-10-03T16:46:00.000Z pass: fresh last_14d publisher_platform breakdown -- whatsapp spend Rs50.26, still 0 attributed purchases (null ROAS), vs facebook (Rs770.50, 5.73x) and instagram (Rs7,871.21, 8.91x). Targeting still includes both WhatsApp placements. Fix remains unapplied, pending approval; low-impact but still a clean removal. Reconfirmed 2026-10-05T22:46:00.000Z pass: fresh last_14d publisher_platform breakdown on the main ad set -- whatsapp spend Rs61.50, still 0 attributed purchases (null ROAS), vs facebook (Rs817.48, 5.40x) and instagram (Rs10,586.06, 7.49x). Targeting still includes both WhatsApp placements. Also checked the 3 new Caps_FB-A/B/C split ad sets added under the same campaign this pass -- each shows the identical WhatsApp-placement pattern (Rs1.66/Rs0/Rs3.09 spend respectively, 0 purchases) but at spend too thin to warrant separate proposals yet; worth folding into this fix or revisiting once they accrue more spend. Fix remains unapplied, pending approval. Reconfirmed 2026-10-06T02:50:00.000Z pass: fresh last_14d publisher_platform breakdown -- whatsapp spend now Rs66.25 (status Rs6.08 + marketing_messages Rs60.17), still 0 attributed purchases, vs instagram (~Rs12,153 blended, 6-10x ROAS range) and facebook (~Rs836, mixed). Targeting still includes both WhatsApp placements. Fix remains unapplied, pending approval. Reconfirmed 2026-10-07T02:51 UTC pass: Caps + Kage_26Sept ad set (120255693970460159, campaign Caps + Kage_26 Sept) is ACTIVE. Fresh last_14d campaign-level publisher_platform breakdown: whatsapp spend Rs70.59 on 438 impressions (3.42% CTR, no attributed purchases/null ROAS) vs. facebook (Rs850.72, 5.19x ROAS) and instagram (Rs13,652.26, 7.31x ROAS). Targeting still includes whatsapp. No action taken -- approval tier. Reconfirmed 2026-10-07T22:49 UTC pass: Caps + Kage_26Sept ad set still ACTIVE. Fresh last_14d campaign-level publisher_platform breakdown: whatsapp spend Rs75.76 on 441 impressions (3.40% CTR, still 0 attributed purchases/null ROAS) vs. facebook (Rs872.72, 5.06x ROAS) and instagram (Rs14,953.09, 7.13x ROAS). Targeting still includes whatsapp. Also re-checked the Caps_FB-A/B/C split ad sets: whatsapp spend still thin (Rs8.24/Rs0.03/Rs4.95 lifetime) -- not yet worth separate proposals. No action taken -- approval tier. Reconfirmed 2026-10-09T00:55:00.000Z pass: fresh last_14d publisher_platform breakdown on the Caps + Kage_26Sept main ad set -- whatsapp spend Rs62.95 (3.56% CTR, still 0 attributed purchases/null ROAS) vs facebook (Rs824.40, 5.35x ROAS) and instagram (Rs10,946.21, 7.53x ROAS). Targeting still has no explicit publisher_platforms override, so whatsapp remains included. Fix remains unapplied, pending approval. Reconfirmed 2026-10-09T08:47:00.000Z pass: fresh last_30d publisher_platform breakdown on Caps + Kage_26Sept ad set -- whatsapp spend Rs62.95 (CPM Rs149.17, 3.55% CTR, 422 impressions, still 0 attributed purchases/null ROAS) vs facebook Rs824.40 (5.35x) and instagram Rs10,946.23 (7.53x). Same pattern, fix remains unapplied, pending approval. Reconfirmed 2026-10-09T10:48:00.000Z pass: fresh last_30d publisher_platform breakdown -- WhatsApp spend now Rs62.95 (CPM Rs149.17, CTR 3.55%, still 0 attributed purchases) vs Instagram Rs10,946.23 (CPM Rs66.93, CTR 1.58%, 7.53x ROAS) and Facebook Rs824.40 (CPM Rs141.07, CTR 3.63%, 5.35x ROAS). Ad set still ACTIVE. Pattern unchanged, proposal remains pending. Reconfirmed 2026-10-09T12:52:00.000Z pass: fresh last_14d publisher_platform breakdown -- WhatsApp spend now Rs62.95 (status Rs5.99 + whatsapp_marketing_messages Rs56.96), still 0 attributed purchases, vs Instagram feed Rs3,422.60 at 6.68x ROAS and Instagram Reels Rs5,493.92 at 6.68x ROAS on the same ad set. Still ACTIVE, still pending. Reconfirmed 2026-10-09T18:46:00.000Z pass: fresh last_30d publisher_platform breakdown -- whatsapp spend Rs67.40 (CPM Rs158.59, 3.76% CTR, still 0 attributed purchases/null ROAS) vs facebook (Rs830.12, 5.32x) and instagram (Rs11,190.54, 7.88x). Targeting still includes WhatsApp placements. Fix remains unapplied, pending approval. Reconfirmed 2026-10-10T00:52:00.000Z pass: fresh last_30d publisher_platform breakdown on Caps + Kage_26Sept ad set -- whatsapp spend Rs67.40 (CPM Rs158.59, 3.76% CTR, still 0 attributed purchases/null ROAS) vs facebook (Rs830.12, 5.32x) and instagram (Rs11,190.54, 7.88x). Pattern unchanged since the prior pass. Targeting still includes WhatsApp placements. Fix remains unapplied, pending approval. Reconfirmed 2026-10-10T04:47:00.000Z pass: ad set still ACTIVE, excluded_custom_audiences unchanged. No fresh placement breakdown pulled this pass (last pulled 00:52Z, unchanged pattern); pending. Reconfirmed 2026-10-10T14:50:00.000Z pass: Rs90.01 whatsapp spend (Caps + Kage_26 Sept campaign-level, last_14d), CPM Rs195.25 vs Instagram Rs66.47, still 0 attributed purchases.",
+      "reasoning": "Reasoning history condensed for file-size reasons (see log for prior reconfirmations back to 2026-09-25). Caps + Kage_26Sept ad set (120255693970460159, campaign Caps + Kage_26 Sept) is ACTIVE, last_30d 8.558251x ROAS on Rs8,711.98 spend. Reconfirmed 2026-10-02T18:50:00.000Z pass: fresh last_14d publisher_platform breakdown -- whatsapp spend Rs50.26, still 0 attributed purchases (null ROAS), vs facebook (Rs770.54, 5.73x) and instagram (Rs7,869.63, 8.91x). Targeting still includes both WhatsApp placements. Fix remains unapplied, pending approval; low-impact but still a clean removal. Reconfirmed 2026-10-03T16:46:00.000Z pass: fresh last_14d publisher_platform breakdown -- whatsapp spend Rs50.26, still 0 attributed purchases (null ROAS), vs facebook (Rs770.50, 5.73x) and instagram (Rs7,871.21, 8.91x). Targeting still includes both WhatsApp placements. Fix remains unapplied, pending approval; low-impact but still a clean removal. Reconfirmed 2026-10-05T22:46:00.000Z pass: fresh last_14d publisher_platform breakdown on the main ad set -- whatsapp spend Rs61.50, still 0 attributed purchases (null ROAS), vs facebook (Rs817.48, 5.40x) and instagram (Rs10,586.06, 7.49x). Targeting still includes both WhatsApp placements. Also checked the 3 new Caps_FB-A/B/C split ad sets added under the same campaign this pass -- each shows the identical WhatsApp-placement pattern (Rs1.66/Rs0/Rs3.09 spend respectively, 0 purchases) but at spend too thin to warrant separate proposals yet; worth folding into this fix or revisiting once they accrue more spend. Fix remains unapplied, pending approval. Reconfirmed 2026-10-06T02:50:00.000Z pass: fresh last_14d publisher_platform breakdown -- whatsapp spend now Rs66.25 (status Rs6.08 + marketing_messages Rs60.17), still 0 attributed purchases, vs instagram (~Rs12,153 blended, 6-10x ROAS range) and facebook (~Rs836, mixed). Targeting still includes both WhatsApp placements. Fix remains unapplied, pending approval. Reconfirmed 2026-10-07T02:51 UTC pass: Caps + Kage_26Sept ad set (120255693970460159, campaign Caps + Kage_26 Sept) is ACTIVE. Fresh last_14d campaign-level publisher_platform breakdown: whatsapp spend Rs70.59 on 438 impressions (3.42% CTR, no attributed purchases/null ROAS) vs. facebook (Rs850.72, 5.19x ROAS) and instagram (Rs13,652.26, 7.31x ROAS). Targeting still includes whatsapp. No action taken -- approval tier. Reconfirmed 2026-10-07T22:49 UTC pass: Caps + Kage_26Sept ad set still ACTIVE. Fresh last_14d campaign-level publisher_platform breakdown: whatsapp spend Rs75.76 on 441 impressions (3.40% CTR, still 0 attributed purchases/null ROAS) vs. facebook (Rs872.72, 5.06x ROAS) and instagram (Rs14,953.09, 7.13x ROAS). Targeting still includes whatsapp. Also re-checked the Caps_FB-A/B/C split ad sets: whatsapp spend still thin (Rs8.24/Rs0.03/Rs4.95 lifetime) -- not yet worth separate proposals. No action taken -- approval tier. Reconfirmed 2026-10-09T00:55:00.000Z pass: fresh last_14d publisher_platform breakdown on the Caps + Kage_26Sept main ad set -- whatsapp spend Rs62.95 (3.56% CTR, still 0 attributed purchases/null ROAS) vs facebook (Rs824.40, 5.35x ROAS) and instagram (Rs10,946.21, 7.53x ROAS). Targeting still has no explicit publisher_platforms override, so whatsapp remains included. Fix remains unapplied, pending approval. Reconfirmed 2026-10-09T08:47:00.000Z pass: fresh last_30d publisher_platform breakdown on Caps + Kage_26Sept ad set -- whatsapp spend Rs62.95 (CPM Rs149.17, 3.55% CTR, 422 impressions, still 0 attributed purchases/null ROAS) vs facebook Rs824.40 (5.35x) and instagram Rs10,946.23 (7.53x). Same pattern, fix remains unapplied, pending approval. Reconfirmed 2026-10-09T10:48:00.000Z pass: fresh last_30d publisher_platform breakdown -- WhatsApp spend now Rs62.95 (CPM Rs149.17, CTR 3.55%, still 0 attributed purchases) vs Instagram Rs10,946.23 (CPM Rs66.93, CTR 1.58%, 7.53x ROAS) and Facebook Rs824.40 (CPM Rs141.07, CTR 3.63%, 5.35x ROAS). Ad set still ACTIVE. Pattern unchanged, proposal remains pending. Reconfirmed 2026-10-09T12:52:00.000Z pass: fresh last_14d publisher_platform breakdown -- WhatsApp spend now Rs62.95 (status Rs5.99 + whatsapp_marketing_messages Rs56.96), still 0 attributed purchases, vs Instagram feed Rs3,422.60 at 6.68x ROAS and Instagram Reels Rs5,493.92 at 6.68x ROAS on the same ad set. Still ACTIVE, still pending. Reconfirmed 2026-10-09T18:46:00.000Z pass: fresh last_30d publisher_platform breakdown -- whatsapp spend Rs67.40 (CPM Rs158.59, 3.76% CTR, still 0 attributed purchases/null ROAS) vs facebook (Rs830.12, 5.32x) and instagram (Rs11,190.54, 7.88x). Targeting still includes WhatsApp placements. Fix remains unapplied, pending approval. Reconfirmed 2026-10-10T00:52:00.000Z pass: fresh last_30d publisher_platform breakdown on Caps + Kage_26Sept ad set -- whatsapp spend Rs67.40 (CPM Rs158.59, 3.76% CTR, still 0 attributed purchases/null ROAS) vs facebook (Rs830.12, 5.32x) and instagram (Rs11,190.54, 7.88x). Pattern unchanged since the prior pass. Targeting still includes WhatsApp placements. Fix remains unapplied, pending approval. Reconfirmed 2026-10-10T04:47:00.000Z pass: ad set still ACTIVE, excluded_custom_audiences unchanged. No fresh placement breakdown pulled this pass (last pulled 00:52Z, unchanged pattern); pending. Reconfirmed 2026-10-10T14:50:00.000Z pass: Rs90.01 whatsapp spend (Caps + Kage_26 Sept campaign-level, last_14d), CPM Rs195.25 vs Instagram Rs66.47, still 0 attributed purchases. Reconfirmed 2026-10-10T16:50:00.000Z pass: the hard spend circuit breaker tripped this pass (today's spend ₹6,406.69 vs ₹6,000 ceiling) and this proposal's underlying campaign/ad set was among the 5 force-paused as the emergency brake -- see circuitBreaker and AL for this pass. The recommendation itself is unchanged; it will need re-review once/if the account resumes from the circuit-breaker pause.",
       "actionSummary": "Remove whatsapp from the ad set's publisher_platforms so it does not serve on WhatsApp Status/marketing messages once reactivated; all other targeting stays unchanged.",
       "metaAction": {
         "tool": "ads_update_entity",
@@ -694,15 +692,15 @@
       },
       "status": "pending",
       "createdAt": "2026-09-25T14:46:00.000Z",
-      "updatedAt": "2026-10-10T14:50:00.000Z",
-      "lastReconfirmedAt": "2026-10-10T14:50:00.000Z"
+      "updatedAt": "2026-10-10T16:50:00.000Z",
+      "lastReconfirmedAt": "2026-10-10T16:50:00.000Z"
     },
     {
       "id": "A-039",
       "module": "reactivate-winner",
       "tier": "approval",
       "title": "Reactivate Sora_BOF_Based on Mori_Tee -- 6.3x ROAS (last_30d), well above the reactivate threshold",
-      "reasoning": "Sora_BOF_Based on Mori_Tee (id 120255928784210159) has been PAUSED since 2026-09-20 (force-paused as a side effect of that day's purchaser-exclusion targeting edit on its only ad set 'Sora_Sales', id 120255928784230159 -- see the 2026-09-20T19:15 UTC log entry). Refreshed this pass (2026-09-26): last_30d spend is now ₹5,171.39 at purchase_roas 6.34424x (12 purchases), up from ₹4,542.91 at 7.221922x recorded on 2026-09-25 -- ROAS has drifted down somewhat as more (lower-converting) spend has accumulated inside the same paused window, but it still clears settings.reactivate_min_historic_roas (>= 3.0x) with a wide margin. Purchaser exclusion is already verified compliant (Purchasers 180D added 2026-09-20 alongside the pre-existing ATC_180D exclusion). A separate pending proposal, A-032, would additionally exclude the WhatsApp placement on this same ad set -- that can be approved independently before or after reactivation. A-029 (pause-kill on this campaign) and A-036 (budget-reallocation assuming it was still active) are both now stale/superseded by this proposal. Reactivating at its existing ₹1,080/day budget is a conservative resumption at the same pace it was paused at. Reconfirmed 2026-09-30T22:48:00.000Z pass: last_30d spend unchanged at ₹5,171.39, but purchase_roas has been recalculated to 6.653248x (up from 6.34424x recorded previously) -- likely a Meta-side attribution/order-value update on the same paused, non-spending campaign. Still comfortably above settings.reactivate_min_historic_roas (>= 3.0x); no change to the proposed action. Reconfirmed 2026-10-02T22:46:00.000Z pass: last_30d purchase_roas is 6.653248x on Rs5,171.39 spend (14 purchases) -- up slightly from 6.34424x cited previously at the same spend level, still well above threshold. Campaign remains PAUSED; no change to the proposed action. Reconfirmed 2026-10-03T00:52:37.000Z pass: fresh last_30d pull shows purchase_roas 6.653248x on Rs5,171.39 spend (up slightly from 6.34424x cited above as attribution settles) -- still comfortably above the 3.0x threshold. Campaign remains PAUSED. Reconfirmed 2026-10-06T02:50:00.000Z pass: last_14d spend Rs4,030.18 at purchase_roas 7.145646x -- comfortably above settings.reactivate_min_historic_roas (>=3.0x). Campaign remains PAUSED. No action taken -- reactivate-winner is approval-tier; awaiting human decision. Reconfirmed 2026-10-07T02:51 UTC pass: Sora_BOF_Based on Mori_Tee (120255928784210159) remains PAUSED. Fresh last_30d pull: purchase_roas 6.653248x on Rs5,171.39 spend -- consistent with prior readings, still well above the 3.0x threshold. No action taken -- approval tier. Reconfirmed 2026-10-07T12:50:00.000Z: still PAUSED; last_30d spend ₹5,171.39, purchase_roas 6.65x (was cited as 6.3x), still well above reactivate_min_historic_roas=3.0x. No change needed, numbers refreshed. Reconfirmed 2026-10-07T22:49 UTC pass: Sora_BOF_Based on Mori_Tee (120255928784210159) still PAUSED, last_30d purchase_roas 6.653248x on Rs5,171.39 spend -- still well above threshold. No action taken -- approval tier.\n\nReconfirmed 2026-10-08T00:48:00.000Z: campaign still PAUSED, last_30d purchase_roas now 6.653248x (previously cited 6.3x), still well above threshold. No Meta action taken (approval tier). Reconfirmed 2026-10-09T00:55:00.000Z pass: still PAUSED, last_30d purchase_roas unchanged at 6.653248x on Rs5,171.39 spend -- still well above threshold. No Meta action taken (approval tier). Reconfirmed 2026-10-09T10:48:00.000Z pass: last_30d purchase_roas now 6.65x on Rs5,171.39 spend (unchanged spend, roas up slightly from 6.34x). Still PAUSED. Reconfirmed 2026-10-09T18:46:00.000Z pass: Sora_BOF_Based on Mori_Tee (120255928784210159) still PAUSED, last_30d purchase_roas 6.653248x -- well above reactivate_min_historic_roas=3.0x. Proposal remains pending. Reconfirmed 2026-10-09T22:51:00.000Z pass: last_30d spend unchanged at Rs5,171.39, purchase_roas now 6.653248x (up slightly from 6.344x). Still PAUSED, still comfortably above threshold. Reconfirmed 2026-10-10T00:52:00.000Z pass: last_30d spend unchanged at Rs5,171.39, purchase_roas 6.653248x. Still PAUSED, still comfortably above threshold. Reconfirmed 2026-10-10T04:47:00.000Z pass: last_30d purchase_roas unchanged at 6.653248x on Rs5,171.39 spend. Still PAUSED. Reconfirmed 2026-10-10T10:47:00.000Z pass: Sora_BOF_Based on Mori_Tee (120255928784210159) still PAUSED, last_30d purchase_roas 6.653248x on Rs5,171.39 spend -- above reactivate_min_historic_roas=3.0x.",
+      "reasoning": "Sora_BOF_Based on Mori_Tee (id 120255928784210159) has been PAUSED since 2026-09-20 (force-paused as a side effect of that day's purchaser-exclusion targeting edit on its only ad set 'Sora_Sales', id 120255928784230159 -- see the 2026-09-20T19:15 UTC log entry). Refreshed this pass (2026-09-26): last_30d spend is now ₹5,171.39 at purchase_roas 6.34424x (12 purchases), up from ₹4,542.91 at 7.221922x recorded on 2026-09-25 -- ROAS has drifted down somewhat as more (lower-converting) spend has accumulated inside the same paused window, but it still clears settings.reactivate_min_historic_roas (>= 3.0x) with a wide margin. Purchaser exclusion is already verified compliant (Purchasers 180D added 2026-09-20 alongside the pre-existing ATC_180D exclusion). A separate pending proposal, A-032, would additionally exclude the WhatsApp placement on this same ad set -- that can be approved independently before or after reactivation. A-029 (pause-kill on this campaign) and A-036 (budget-reallocation assuming it was still active) are both now stale/superseded by this proposal. Reactivating at its existing ₹1,080/day budget is a conservative resumption at the same pace it was paused at. Reconfirmed 2026-09-30T22:48:00.000Z pass: last_30d spend unchanged at ₹5,171.39, but purchase_roas has been recalculated to 6.653248x (up from 6.34424x recorded previously) -- likely a Meta-side attribution/order-value update on the same paused, non-spending campaign. Still comfortably above settings.reactivate_min_historic_roas (>= 3.0x); no change to the proposed action. Reconfirmed 2026-10-02T22:46:00.000Z pass: last_30d purchase_roas is 6.653248x on Rs5,171.39 spend (14 purchases) -- up slightly from 6.34424x cited previously at the same spend level, still well above threshold. Campaign remains PAUSED; no change to the proposed action. Reconfirmed 2026-10-03T00:52:37.000Z pass: fresh last_30d pull shows purchase_roas 6.653248x on Rs5,171.39 spend (up slightly from 6.34424x cited above as attribution settles) -- still comfortably above the 3.0x threshold. Campaign remains PAUSED. Reconfirmed 2026-10-06T02:50:00.000Z pass: last_14d spend Rs4,030.18 at purchase_roas 7.145646x -- comfortably above settings.reactivate_min_historic_roas (>=3.0x). Campaign remains PAUSED. No action taken -- reactivate-winner is approval-tier; awaiting human decision. Reconfirmed 2026-10-07T02:51 UTC pass: Sora_BOF_Based on Mori_Tee (120255928784210159) remains PAUSED. Fresh last_30d pull: purchase_roas 6.653248x on Rs5,171.39 spend -- consistent with prior readings, still well above the 3.0x threshold. No action taken -- approval tier. Reconfirmed 2026-10-07T12:50:00.000Z: still PAUSED; last_30d spend ₹5,171.39, purchase_roas 6.65x (was cited as 6.3x), still well above reactivate_min_historic_roas=3.0x. No change needed, numbers refreshed. Reconfirmed 2026-10-07T22:49 UTC pass: Sora_BOF_Based on Mori_Tee (120255928784210159) still PAUSED, last_30d purchase_roas 6.653248x on Rs5,171.39 spend -- still well above threshold. No action taken -- approval tier.\n\nReconfirmed 2026-10-08T00:48:00.000Z: campaign still PAUSED, last_30d purchase_roas now 6.653248x (previously cited 6.3x), still well above threshold. No Meta action taken (approval tier). Reconfirmed 2026-10-09T00:55:00.000Z pass: still PAUSED, last_30d purchase_roas unchanged at 6.653248x on Rs5,171.39 spend -- still well above threshold. No Meta action taken (approval tier). Reconfirmed 2026-10-09T10:48:00.000Z pass: last_30d purchase_roas now 6.65x on Rs5,171.39 spend (unchanged spend, roas up slightly from 6.34x). Still PAUSED. Reconfirmed 2026-10-09T18:46:00.000Z pass: Sora_BOF_Based on Mori_Tee (120255928784210159) still PAUSED, last_30d purchase_roas 6.653248x -- well above reactivate_min_historic_roas=3.0x. Proposal remains pending. Reconfirmed 2026-10-09T22:51:00.000Z pass: last_30d spend unchanged at Rs5,171.39, purchase_roas now 6.653248x (up slightly from 6.344x). Still PAUSED, still comfortably above threshold. Reconfirmed 2026-10-10T00:52:00.000Z pass: last_30d spend unchanged at Rs5,171.39, purchase_roas 6.653248x. Still PAUSED, still comfortably above threshold. Reconfirmed 2026-10-10T04:47:00.000Z pass: last_30d purchase_roas unchanged at 6.653248x on Rs5,171.39 spend. Still PAUSED. Reconfirmed 2026-10-10T10:47:00.000Z pass: Sora_BOF_Based on Mori_Tee (120255928784210159) still PAUSED, last_30d purchase_roas 6.653248x on Rs5,171.39 spend -- above reactivate_min_historic_roas=3.0x. Reconfirmed 2026-10-10T16:50:00.000Z pass: no material change since the prior pass; numbers and recommendation stand.",
       "actionSummary": "Activates campaign 'Sora_BOF_Based on Mori_Tee' (id 120255928784210159) and reconfirms its daily budget at its existing ₹1,080/day (108000 minor units, unchanged) so it resumes delivering at the same pace it was paused at. Its ad set was force-paused by Meta as a side effect of the 2026-09-20 targeting edit; reactivating the campaign does not by itself reactivate a PAUSED ad set beneath it -- the ad set ('Sora_Sales', id 120255928784230159) may also need a manual/separate ACTIVE status change if it does not resume automatically.",
       "metaAction": {
         "tool": "ads_activate_entity",
@@ -723,15 +721,15 @@
       },
       "status": "pending",
       "createdAt": "2026-09-25T16:46:00.000Z",
-      "updatedAt": "2026-10-09T18:46:00.000Z",
-      "lastReconfirmedAt": "2026-10-10T14:50:00.000Z"
+      "updatedAt": "2026-10-10T16:50:00.000Z",
+      "lastReconfirmedAt": "2026-10-10T16:50:00.000Z"
     },
     {
       "id": "A-048",
       "module": "reactivate-winner",
       "tier": "approval",
       "title": "Reactivate Sora Retargeting -- 4.33x ROAS (last_30d/last_14d), well above the reactivate threshold",
-      "reasoning": "Campaign 'Sora Retargeting' (id 120256004515360159, comprising ad sets Sora_MOF_Engagers, Sora_Retargeting_CartAbandoners_30D, Sora_Retargeting_Behaviours) is PAUSED. Fresh this pass: both last_14d and last_30d windows show spend Rs1,515.79 at purchase_roas 4.326028x -- comfortably above settings.reactivate_min_historic_roas (>= 3.0x). No existing pending reactivate-winner proposal covers this campaign (A-034/A-035/A-037/A-040/A-041 all touch its ad sets but for placement/segmentation/creative-fatigue modules, and are themselves marked stale while the campaign is paused). Purchaser exclusion is not currently a live concern since no ad set under this campaign is ACTIVE. Reactivating at its existing Rs300/day budget is a conservative resumption at the same pace it was paused at. Reconfirmed 2026-10-07T02:51 UTC pass: Sora Retargeting (120256004515360159) remains PAUSED. Fresh last_30d pull: purchase_roas 4.326028x on Rs1,515.79 spend -- unchanged from the prior pass. No action taken -- approval tier. Reconfirmed 2026-10-07T12:50:00.000Z: still PAUSED; last_30d spend ₹1,515.79, purchase_roas 4.33x (was cited as 4.33x), still well above reactivate_min_historic_roas=3.0x. No change needed, numbers refreshed. Reconfirmed 2026-10-07T22:49 UTC pass: Sora Retargeting (120256004515360159) still PAUSED, last_30d purchase_roas 4.326028x on Rs1,515.79 spend -- still above threshold. No action taken -- approval tier.\n\nReconfirmed 2026-10-08T00:48:00.000Z: campaign still PAUSED, last_30d purchase_roas now 4.326028x (previously cited 4.33x), essentially unchanged. No Meta action taken (approval tier). Reconfirmed 2026-10-09T00:55:00.000Z pass: still PAUSED, last_30d purchase_roas unchanged at 4.326028x on Rs1,515.79 spend -- still well above threshold. No Meta action taken (approval tier). Reconfirmed 2026-10-09T10:48:00.000Z pass: last_30d purchase_roas unchanged at 4.33x on Rs1,515.79 spend. Still PAUSED. Reconfirmed 2026-10-09T18:46:00.000Z pass: Sora Retargeting (120256004515360159) still PAUSED, last_30d purchase_roas 4.326028x -- above reactivate_min_historic_roas=3.0x. Proposal remains pending. Reconfirmed 2026-10-09T22:51:00.000Z pass: spend/roas unchanged (Rs1,515.79 at 4.326028x). Still PAUSED. Reconfirmed 2026-10-10T00:52:00.000Z pass: spend/roas unchanged (Rs1,515.79 at 4.326028x). Still PAUSED. Reconfirmed 2026-10-10T04:47:00.000Z pass: last_30d purchase_roas unchanged at 4.326028x on Rs1,515.79 spend. Still PAUSED. Reconfirmed 2026-10-10T10:47:00.000Z pass: Sora Retargeting (120256004515360159) still PAUSED, last_30d purchase_roas 4.326028x on Rs1,515.79 spend -- above reactivate_min_historic_roas=3.0x.",
+      "reasoning": "Campaign 'Sora Retargeting' (id 120256004515360159, comprising ad sets Sora_MOF_Engagers, Sora_Retargeting_CartAbandoners_30D, Sora_Retargeting_Behaviours) is PAUSED. Fresh this pass: both last_14d and last_30d windows show spend Rs1,515.79 at purchase_roas 4.326028x -- comfortably above settings.reactivate_min_historic_roas (>= 3.0x). No existing pending reactivate-winner proposal covers this campaign (A-034/A-035/A-037/A-040/A-041 all touch its ad sets but for placement/segmentation/creative-fatigue modules, and are themselves marked stale while the campaign is paused). Purchaser exclusion is not currently a live concern since no ad set under this campaign is ACTIVE. Reactivating at its existing Rs300/day budget is a conservative resumption at the same pace it was paused at. Reconfirmed 2026-10-07T02:51 UTC pass: Sora Retargeting (120256004515360159) remains PAUSED. Fresh last_30d pull: purchase_roas 4.326028x on Rs1,515.79 spend -- unchanged from the prior pass. No action taken -- approval tier. Reconfirmed 2026-10-07T12:50:00.000Z: still PAUSED; last_30d spend ₹1,515.79, purchase_roas 4.33x (was cited as 4.33x), still well above reactivate_min_historic_roas=3.0x. No change needed, numbers refreshed. Reconfirmed 2026-10-07T22:49 UTC pass: Sora Retargeting (120256004515360159) still PAUSED, last_30d purchase_roas 4.326028x on Rs1,515.79 spend -- still above threshold. No action taken -- approval tier.\n\nReconfirmed 2026-10-08T00:48:00.000Z: campaign still PAUSED, last_30d purchase_roas now 4.326028x (previously cited 4.33x), essentially unchanged. No Meta action taken (approval tier). Reconfirmed 2026-10-09T00:55:00.000Z pass: still PAUSED, last_30d purchase_roas unchanged at 4.326028x on Rs1,515.79 spend -- still well above threshold. No Meta action taken (approval tier). Reconfirmed 2026-10-09T10:48:00.000Z pass: last_30d purchase_roas unchanged at 4.33x on Rs1,515.79 spend. Still PAUSED. Reconfirmed 2026-10-09T18:46:00.000Z pass: Sora Retargeting (120256004515360159) still PAUSED, last_30d purchase_roas 4.326028x -- above reactivate_min_historic_roas=3.0x. Proposal remains pending. Reconfirmed 2026-10-09T22:51:00.000Z pass: spend/roas unchanged (Rs1,515.79 at 4.326028x). Still PAUSED. Reconfirmed 2026-10-10T00:52:00.000Z pass: spend/roas unchanged (Rs1,515.79 at 4.326028x). Still PAUSED. Reconfirmed 2026-10-10T04:47:00.000Z pass: last_30d purchase_roas unchanged at 4.326028x on Rs1,515.79 spend. Still PAUSED. Reconfirmed 2026-10-10T10:47:00.000Z pass: Sora Retargeting (120256004515360159) still PAUSED, last_30d purchase_roas 4.326028x on Rs1,515.79 spend -- above reactivate_min_historic_roas=3.0x. Reconfirmed 2026-10-10T16:50:00.000Z pass: no material change since the prior pass; numbers and recommendation stand.",
       "actionSummary": "Activates campaign 'Sora Retargeting' (id 120256004515360159) and reconfirms its daily budget at its existing Rs300/day (30000 minor units, unchanged) so it resumes delivering at the same pace it was paused at. Its ad sets were left PAUSED when the campaign was paused; reactivating the campaign does not by itself reactivate a PAUSED ad set beneath it -- at least one ad set may need a manual/separate ACTIVE status change if none resumes automatically.",
       "metaAction": {
         "tool": "ads_activate_entity",
@@ -752,8 +750,8 @@
       },
       "status": "pending",
       "createdAt": "2026-09-30T04:50:00.000Z",
-      "updatedAt": "2026-10-09T18:46:00.000Z",
-      "lastReconfirmedAt": "2026-10-10T14:50:00.000Z"
+      "updatedAt": "2026-10-10T16:50:00.000Z",
+      "lastReconfirmedAt": "2026-10-10T16:50:00.000Z"
     },
     {
       "id": "A-049",
@@ -795,7 +793,7 @@
       "module": "reactivate-winner",
       "tier": "approval",
       "title": "Reactivate Sneakers_Prospecting_30Sep-5Oct -- 6.32x ROAS, part of the open sneaker push window",
-      "reasoning": "Campaign Sneakers_Prospecting_30Sep-5Oct (120256091370110159) is PAUSED but shows last_30d ROAS 6.317251x on Rs3,248.47 spend (lifetime_budget Rs5,000, ~Rs1,751.53 remaining) -- well above reactivate_min_historic_roas=3.0x. This is one of the three user-approved sneaker-push campaigns (30Sep-5Oct window, still open through 2026-10-05T23:59+05:30 per the kill_roas_threshold spend-floor exception in settings) alongside Sneakers_BOF_30Sep-5Oct (currently ACTIVE, 4.99x) and Sneakers_Catalog_Retargeting (also PAUSED). No existing pending or recently-resolved reactivate-winner proposal covers this campaign. Reactivating now would let it keep delivering against its remaining lifetime budget for the final ~3 days of the approved push window. UPDATE 2026-10-06T10:51Z: the user-approved sneaker-push spend-floor exception window (through 2026-10-05T23:59+05:30) has now closed. The 'open push window' framing in this proposal's original reasoning is stale -- reactivating this campaign now would do so outside that approved window, under the normal (disabled) pause-kill rules rather than the sneaker-push exception. ROAS is unchanged at 6.316143x on Rs3,249.04 last_30d spend (lifetime_budget Rs5,000, ~Rs1,750.96 remaining), still well above reactivate_min_historic_roas (>=3.0x), so the underlying performance case still stands -- flagging the window closure for the human reviewer's awareness before approving, not retracting the recommendation. metaAction unchanged. Reconfirmed 2026-10-07T02:51 UTC pass: Sneakers_Prospecting_30Sep-5Oct (120256091370110159) remains PAUSED. Fresh last_30d pull: purchase_roas 6.316143x on Rs3,249.04 spend -- essentially unchanged. Note: the named 30Sep-5Oct sneaker-push window and its kill-floor spend-ceiling exception both lapsed 2026-10-05T23:59+05:30 -- this campaign's window is now closed, which may affect whether reactivation still fits current strategy; flagging for human judgment rather than withdrawing automatically. No action taken -- approval tier. Reconfirmed 2026-10-07T12:50:00.000Z: still PAUSED; last_30d spend ₹3,249.04, purchase_roas 6.32x (was cited as 6.32x), still well above reactivate_min_historic_roas=3.0x. No change needed, numbers refreshed. Reconfirmed 2026-10-07T22:49 UTC pass: Sneakers_Prospecting_30Sep-5Oct (120256091370110159) still PAUSED, last_30d purchase_roas 6.316143x on Rs3,249.04 spend -- still above threshold. Note: the user-approved 30Sep-5Oct sneaker push window has now closed (today is 2026-10-07); reactivation would be a fresh decision outside that original window. No action taken -- approval tier.\n\nReconfirmed 2026-10-08T00:48:00.000Z: campaign still PAUSED, last_30d purchase_roas now 6.316143x (previously cited 6.32x), essentially unchanged. NOTE: the user-approved sneaker-push spend-floor exception (settings.kill_roas_threshold) expired 2026-10-05T23:59 IST -- the 'open sneaker push window' framing in the original title is now stale, but the reactivation case stands on ROAS alone. No Meta action taken (approval tier). Reconfirmed 2026-10-09T00:55:00.000Z pass: still PAUSED, last_30d purchase_roas unchanged at 6.316143x on Rs3,249.04 spend -- still well above threshold. No Meta action taken (approval tier). Reconfirmed 2026-10-09T10:48:00.000Z pass: last_30d purchase_roas now 6.32x on Rs3,249.04 spend (essentially unchanged). Note: the user-approved 30Sep-5Oct sneaker-push spend-floor exception window (settings.kill_roas_threshold) closed 2026-10-05T23:59+05:30 -- this is a reactivate-winner proposal, unaffected by that exception (which only ever governed pause-kill), but flagging for context. Still PAUSED. Reconfirmed 2026-10-09T18:46:00.000Z pass: Sneakers_Prospecting_30Sep-5Oct (120256091370110159) still PAUSED, last_30d purchase_roas 6.316143x -- well above reactivate_min_historic_roas=3.0x. Proposal remains pending. Reconfirmed 2026-10-09T22:51:00.000Z pass: last_30d purchase_roas 6.316143x on Rs3,249.04 spend (materially unchanged). Still PAUSED. Reconfirmed 2026-10-10T00:52:00.000Z pass: last_30d purchase_roas 6.316143x on Rs3,249.04 spend (materially unchanged). Still PAUSED. Reconfirmed 2026-10-10T04:47:00.000Z pass: last_30d purchase_roas unchanged at 6.316143x on Rs3,249.04 spend. Still PAUSED. Reconfirmed 2026-10-10T10:47:00.000Z pass: Sneakers_Prospecting_30Sep-5Oct (120256091370110159) still PAUSED, last_30d purchase_roas 6.316143x on Rs3,249.04 spend -- above reactivate_min_historic_roas=3.0x. Note: the user-approved 30Sep-5Oct sneaker-push spend-floor exception has now closed (through 2026-10-05), but the reactivation case stands on the ROAS threshold alone.",
+      "reasoning": "Campaign Sneakers_Prospecting_30Sep-5Oct (120256091370110159) is PAUSED but shows last_30d ROAS 6.317251x on Rs3,248.47 spend (lifetime_budget Rs5,000, ~Rs1,751.53 remaining) -- well above reactivate_min_historic_roas=3.0x. This is one of the three user-approved sneaker-push campaigns (30Sep-5Oct window, still open through 2026-10-05T23:59+05:30 per the kill_roas_threshold spend-floor exception in settings) alongside Sneakers_BOF_30Sep-5Oct (currently ACTIVE, 4.99x) and Sneakers_Catalog_Retargeting (also PAUSED). No existing pending or recently-resolved reactivate-winner proposal covers this campaign. Reactivating now would let it keep delivering against its remaining lifetime budget for the final ~3 days of the approved push window. UPDATE 2026-10-06T10:51Z: the user-approved sneaker-push spend-floor exception window (through 2026-10-05T23:59+05:30) has now closed. The 'open push window' framing in this proposal's original reasoning is stale -- reactivating this campaign now would do so outside that approved window, under the normal (disabled) pause-kill rules rather than the sneaker-push exception. ROAS is unchanged at 6.316143x on Rs3,249.04 last_30d spend (lifetime_budget Rs5,000, ~Rs1,750.96 remaining), still well above reactivate_min_historic_roas (>=3.0x), so the underlying performance case still stands -- flagging the window closure for the human reviewer's awareness before approving, not retracting the recommendation. metaAction unchanged. Reconfirmed 2026-10-07T02:51 UTC pass: Sneakers_Prospecting_30Sep-5Oct (120256091370110159) remains PAUSED. Fresh last_30d pull: purchase_roas 6.316143x on Rs3,249.04 spend -- essentially unchanged. Note: the named 30Sep-5Oct sneaker-push window and its kill-floor spend-ceiling exception both lapsed 2026-10-05T23:59+05:30 -- this campaign's window is now closed, which may affect whether reactivation still fits current strategy; flagging for human judgment rather than withdrawing automatically. No action taken -- approval tier. Reconfirmed 2026-10-07T12:50:00.000Z: still PAUSED; last_30d spend ₹3,249.04, purchase_roas 6.32x (was cited as 6.32x), still well above reactivate_min_historic_roas=3.0x. No change needed, numbers refreshed. Reconfirmed 2026-10-07T22:49 UTC pass: Sneakers_Prospecting_30Sep-5Oct (120256091370110159) still PAUSED, last_30d purchase_roas 6.316143x on Rs3,249.04 spend -- still above threshold. Note: the user-approved 30Sep-5Oct sneaker push window has now closed (today is 2026-10-07); reactivation would be a fresh decision outside that original window. No action taken -- approval tier.\n\nReconfirmed 2026-10-08T00:48:00.000Z: campaign still PAUSED, last_30d purchase_roas now 6.316143x (previously cited 6.32x), essentially unchanged. NOTE: the user-approved sneaker-push spend-floor exception (settings.kill_roas_threshold) expired 2026-10-05T23:59 IST -- the 'open sneaker push window' framing in the original title is now stale, but the reactivation case stands on ROAS alone. No Meta action taken (approval tier). Reconfirmed 2026-10-09T00:55:00.000Z pass: still PAUSED, last_30d purchase_roas unchanged at 6.316143x on Rs3,249.04 spend -- still well above threshold. No Meta action taken (approval tier). Reconfirmed 2026-10-09T10:48:00.000Z pass: last_30d purchase_roas now 6.32x on Rs3,249.04 spend (essentially unchanged). Note: the user-approved 30Sep-5Oct sneaker-push spend-floor exception window (settings.kill_roas_threshold) closed 2026-10-05T23:59+05:30 -- this is a reactivate-winner proposal, unaffected by that exception (which only ever governed pause-kill), but flagging for context. Still PAUSED. Reconfirmed 2026-10-09T18:46:00.000Z pass: Sneakers_Prospecting_30Sep-5Oct (120256091370110159) still PAUSED, last_30d purchase_roas 6.316143x -- well above reactivate_min_historic_roas=3.0x. Proposal remains pending. Reconfirmed 2026-10-09T22:51:00.000Z pass: last_30d purchase_roas 6.316143x on Rs3,249.04 spend (materially unchanged). Still PAUSED. Reconfirmed 2026-10-10T00:52:00.000Z pass: last_30d purchase_roas 6.316143x on Rs3,249.04 spend (materially unchanged). Still PAUSED. Reconfirmed 2026-10-10T04:47:00.000Z pass: last_30d purchase_roas unchanged at 6.316143x on Rs3,249.04 spend. Still PAUSED. Reconfirmed 2026-10-10T10:47:00.000Z pass: Sneakers_Prospecting_30Sep-5Oct (120256091370110159) still PAUSED, last_30d purchase_roas 6.316143x on Rs3,249.04 spend -- above reactivate_min_historic_roas=3.0x. Note: the user-approved 30Sep-5Oct sneaker-push spend-floor exception has now closed (through 2026-10-05), but the reactivation case stands on the ROAS threshold alone. Reconfirmed 2026-10-10T16:50:00.000Z pass: no material change since the prior pass; numbers and recommendation stand.",
       "actionSummary": "Reactivates campaign Sneakers_Prospecting_30Sep-5Oct (120256091370110159) from PAUSED to ACTIVE. No budget change -- lifetime_budget stays at Rs5,000 with ~Rs1,751.53 remaining to spend before the campaign's own pacing winds down.",
       "metaAction": {
         "tool": "ads_activate_entity",
@@ -807,15 +805,15 @@
       },
       "status": "pending",
       "createdAt": "2026-10-02T20:49:00.000Z",
-      "updatedAt": "2026-10-09T18:46:00.000Z",
-      "lastReconfirmedAt": "2026-10-10T14:50:00.000Z"
+      "updatedAt": "2026-10-10T16:50:00.000Z",
+      "lastReconfirmedAt": "2026-10-10T16:50:00.000Z"
     },
     {
       "id": "A-051",
       "module": "reactivate-winner",
       "tier": "approval",
       "title": "Reactivate New Caps Part 3 STP -- 3.54x ROAS, above the reactivate threshold",
-      "reasoning": "New Caps Part 3 STP (120245697720960159) last_30d purchase_roas is now 4.89x (up from 3.54x when this proposal was created 2026-10-03), spend to date Rs1,781.30 -- well above reactivate_min_historic_roas=3.0x. Reconfirmed via fresh ads_get_ad_entities pull on this pass. Reconfirmed 2026-10-09T10:48:00.000Z pass: last_30d purchase_roas unchanged at 4.89x on Rs1,781.30 spend. Still PAUSED. Reconfirmed 2026-10-09T18:46:00.000Z pass: New Caps Part 3 STP (120245697720960159) still PAUSED, last_30d purchase_roas 4.890866x -- above reactivate_min_historic_roas=3.0x. Proposal remains pending. Reconfirmed 2026-10-09T22:51:00.000Z pass: last_30d purchase_roas unchanged at 4.890866x on Rs1,781.30 spend. Still PAUSED. Reconfirmed 2026-10-10T00:52:00.000Z pass: last_30d purchase_roas unchanged at 4.890866x on Rs1,781.30 spend. Still PAUSED. Reconfirmed 2026-10-10T04:47:00.000Z pass: last_30d purchase_roas unchanged at 4.890866x on Rs1,781.30 spend. Still PAUSED. Reconfirmed 2026-10-10T10:47:00.000Z pass: last_30d purchase_roas unchanged at 4.890866x on Rs1,781.30 spend. Still PAUSED.",
+      "reasoning": "New Caps Part 3 STP (120245697720960159) last_30d purchase_roas is now 4.89x (up from 3.54x when this proposal was created 2026-10-03), spend to date Rs1,781.30 -- well above reactivate_min_historic_roas=3.0x. Reconfirmed via fresh ads_get_ad_entities pull on this pass. Reconfirmed 2026-10-09T10:48:00.000Z pass: last_30d purchase_roas unchanged at 4.89x on Rs1,781.30 spend. Still PAUSED. Reconfirmed 2026-10-09T18:46:00.000Z pass: New Caps Part 3 STP (120245697720960159) still PAUSED, last_30d purchase_roas 4.890866x -- above reactivate_min_historic_roas=3.0x. Proposal remains pending. Reconfirmed 2026-10-09T22:51:00.000Z pass: last_30d purchase_roas unchanged at 4.890866x on Rs1,781.30 spend. Still PAUSED. Reconfirmed 2026-10-10T00:52:00.000Z pass: last_30d purchase_roas unchanged at 4.890866x on Rs1,781.30 spend. Still PAUSED. Reconfirmed 2026-10-10T04:47:00.000Z pass: last_30d purchase_roas unchanged at 4.890866x on Rs1,781.30 spend. Still PAUSED. Reconfirmed 2026-10-10T10:47:00.000Z pass: last_30d purchase_roas unchanged at 4.890866x on Rs1,781.30 spend. Still PAUSED. Reconfirmed 2026-10-10T16:50:00.000Z pass: no material change since the prior pass; numbers and recommendation stand.",
       "actionSummary": "Reactivates the campaign and its one ad set ('New STP 3'), keeping the daily budget unchanged at Rs500/day.",
       "metaAction": {
         "tool": "ads_activate_entity",
@@ -836,8 +834,8 @@
       },
       "status": "pending",
       "createdAt": "2026-10-03T00:52:37.000Z",
-      "updatedAt": "2026-10-09T18:46:00.000Z",
-      "lastReconfirmedAt": "2026-10-10T14:50:00.000Z"
+      "updatedAt": "2026-10-10T16:50:00.000Z",
+      "lastReconfirmedAt": "2026-10-10T16:50:00.000Z"
     },
     {
       "id": "A-052",
@@ -916,7 +914,7 @@
       "module": "reactivate-winner",
       "tier": "approval",
       "title": "Reactivate Retargeting_Overall -- 7.70x ROAS (last_30d), well above the reactivate threshold",
-      "reasoning": "Campaign 'Retargeting_Overall' (id 120255851467340159, ad set 'Retargeting_Overall' 120255851467360159) is PAUSED as of this 2026-10-06T18:48 UTC pass. Fresh ads_get_ad_entities pull this pass: last_30d spend Rs3,632.75 at purchase_roas 8.289657x -- comfortably above settings.reactivate_min_historic_roas (>= 3.0x). This campaign has flipped active/paused repeatedly over the last 48h (see AL-1441, AL-1444) evidently via manual Ads Manager activity, not automation or the circuit breaker (today's account spend is only Rs61.18, nowhere near the Rs6,000 ceiling). No existing pending reactivate-winner proposal covers this campaign (A-031, a prior reactivate-winner log entry for this same campaign, was closed as moot on 2026-09-29 because the campaign was ACTIVE at that time -- it is not now). The ad set already excludes Purchasers 180D and is exempt-by-design from the purchaser-exclusion audience edit (settings.purchaser_exclusion_exempt_adset_ids), so reactivating it introduces no compliance issue. A pending placement-optimization proposal (A-026, WhatsApp exclusion on this same ad set) and a pending budget-reallocation proposal (A-049, which assumes this campaign is live) both touch the same entity -- approving this reactivation first is a reasonable prerequisite for either to make sense. Reconfirmed 2026-10-07T02:51 UTC pass: Retargeting_Overall (120255851467340159) remains PAUSED. Fresh last_30d pull: purchase_roas 8.289451x on Rs3,632.84 spend -- essentially unchanged. No action taken -- approval tier. Reconfirmed 2026-10-07T12:50:00.000Z: still PAUSED; last_30d spend ₹3,632.84, purchase_roas 8.29x (was cited as 8.29x), still well above reactivate_min_historic_roas=3.0x. No change needed, numbers refreshed. Reconfirmed 2026-10-07T22:49 UTC pass: Retargeting_Overall campaign (120255851467340159) still PAUSED, last_30d purchase_roas 8.289451x on Rs3,632.84 spend -- still well above threshold. No action taken -- approval tier.\n\nReconfirmed 2026-10-08T00:48:00.000Z: campaign still PAUSED, last_30d purchase_roas now 8.289451x (previously cited 8.29x), essentially unchanged. No Meta action taken (approval tier). CLOSED AS MOOT 2026-10-08T08:54:00.000Z: fresh campaign-level fetch this pass shows Retargeting_Overall (120255851467340159) is already effective_status=ACTIVE (spend Rs2,903.84 last_14d, purchase_roas 8.05x) -- the campaign was reactivated by some means outside this proposal (not via chat/in-app approval, which would have flipped this proposal to 'executed'). Nothing left for this proposal to do. REOPENED 2026-10-09T04:47:00.000Z pass: fresh ads_get_ad_entities pull shows campaign 'Retargeting_Overall' (120255851467340159) is PAUSED again (last_30d purchase_roas 7.700397x on Rs3,910.74 spend, 22 purchases) -- continues the active/paused flip-flopping pattern noted throughout this proposal's history (manual Ads Manager activity, not this automation; today's account spend is only Rs1,144.57, nowhere near the Rs6,000 circuit-breaker ceiling, so this isn't the breaker either). Still comfortably above reactivate_min_historic_roas=3.0x. Reopening this same proposal (A-055) rather than filing a new one, per the module+entity de-dup rule -- it was closed as moot less than 24h ago when the campaign happened to already be active, not because the underlying recommendation was wrong. Reconfirmed 2026-10-09T10:48:00.000Z pass: last_30d purchase_roas now 7.70x on Rs3,910.74 spend (up from Rs3,632.75). Still PAUSED (confirms it did not flip back active since last pass). Reconfirmed 2026-10-09T12:52:00.000Z pass: last_30d purchase_roas now 7.700397x on Rs3,910.74 spend (down from 8.289657x/Rs3,632.75 recorded previously) -- still comfortably above reactivate_min_historic_roas=3.0x. Still PAUSED. Reconfirmed 2026-10-09T18:46:00.000Z pass: Retargeting_Overall (120255851467340159) still PAUSED, last_30d purchase_roas 7.700397x -- well above reactivate_min_historic_roas=3.0x. Proposal remains pending. Reconfirmed 2026-10-09T22:51:00.000Z pass: last_30d purchase_roas 7.700397x on Rs3,910.74 spend. Still PAUSED. Reconfirmed 2026-10-10T00:52:00.000Z pass: last_30d purchase_roas 7.700397x on Rs3,910.74 spend (unchanged). Still PAUSED. Reconfirmed 2026-10-10T04:47:00.000Z pass: last_30d purchase_roas unchanged at 7.700397x on Rs3,910.74 spend. Still PAUSED. Reconfirmed 2026-10-10T06:48:00.000Z pass: fresh ads_get_ad_entities pull shows last_30d spend now Rs3,910.74 at purchase_roas 7.700397x (22 purchases) -- numbers moved modestly from the 2026-10-06 figures (Rs3,632.75 / 8.29x) as more spend/results accrued, still comfortably above settings.reactivate_min_historic_roas=3.0x. Campaign remains PAUSED. Reconfirmed 2026-10-10T10:47:00.000Z pass: Retargeting_Overall (120255851467340159) still PAUSED, last_30d purchase_roas 7.700397x on Rs3,910.74 spend -- well above reactivate_min_historic_roas=3.0x.",
+      "reasoning": "Campaign 'Retargeting_Overall' (id 120255851467340159, ad set 'Retargeting_Overall' 120255851467360159) is PAUSED as of this 2026-10-06T18:48 UTC pass. Fresh ads_get_ad_entities pull this pass: last_30d spend Rs3,632.75 at purchase_roas 8.289657x -- comfortably above settings.reactivate_min_historic_roas (>= 3.0x). This campaign has flipped active/paused repeatedly over the last 48h (see AL-1441, AL-1444) evidently via manual Ads Manager activity, not automation or the circuit breaker (today's account spend is only Rs61.18, nowhere near the Rs6,000 ceiling). No existing pending reactivate-winner proposal covers this campaign (A-031, a prior reactivate-winner log entry for this same campaign, was closed as moot on 2026-09-29 because the campaign was ACTIVE at that time -- it is not now). The ad set already excludes Purchasers 180D and is exempt-by-design from the purchaser-exclusion audience edit (settings.purchaser_exclusion_exempt_adset_ids), so reactivating it introduces no compliance issue. A pending placement-optimization proposal (A-026, WhatsApp exclusion on this same ad set) and a pending budget-reallocation proposal (A-049, which assumes this campaign is live) both touch the same entity -- approving this reactivation first is a reasonable prerequisite for either to make sense. Reconfirmed 2026-10-07T02:51 UTC pass: Retargeting_Overall (120255851467340159) remains PAUSED. Fresh last_30d pull: purchase_roas 8.289451x on Rs3,632.84 spend -- essentially unchanged. No action taken -- approval tier. Reconfirmed 2026-10-07T12:50:00.000Z: still PAUSED; last_30d spend ₹3,632.84, purchase_roas 8.29x (was cited as 8.29x), still well above reactivate_min_historic_roas=3.0x. No change needed, numbers refreshed. Reconfirmed 2026-10-07T22:49 UTC pass: Retargeting_Overall campaign (120255851467340159) still PAUSED, last_30d purchase_roas 8.289451x on Rs3,632.84 spend -- still well above threshold. No action taken -- approval tier.\n\nReconfirmed 2026-10-08T00:48:00.000Z: campaign still PAUSED, last_30d purchase_roas now 8.289451x (previously cited 8.29x), essentially unchanged. No Meta action taken (approval tier). CLOSED AS MOOT 2026-10-08T08:54:00.000Z: fresh campaign-level fetch this pass shows Retargeting_Overall (120255851467340159) is already effective_status=ACTIVE (spend Rs2,903.84 last_14d, purchase_roas 8.05x) -- the campaign was reactivated by some means outside this proposal (not via chat/in-app approval, which would have flipped this proposal to 'executed'). Nothing left for this proposal to do. REOPENED 2026-10-09T04:47:00.000Z pass: fresh ads_get_ad_entities pull shows campaign 'Retargeting_Overall' (120255851467340159) is PAUSED again (last_30d purchase_roas 7.700397x on Rs3,910.74 spend, 22 purchases) -- continues the active/paused flip-flopping pattern noted throughout this proposal's history (manual Ads Manager activity, not this automation; today's account spend is only Rs1,144.57, nowhere near the Rs6,000 circuit-breaker ceiling, so this isn't the breaker either). Still comfortably above reactivate_min_historic_roas=3.0x. Reopening this same proposal (A-055) rather than filing a new one, per the module+entity de-dup rule -- it was closed as moot less than 24h ago when the campaign happened to already be active, not because the underlying recommendation was wrong. Reconfirmed 2026-10-09T10:48:00.000Z pass: last_30d purchase_roas now 7.70x on Rs3,910.74 spend (up from Rs3,632.75). Still PAUSED (confirms it did not flip back active since last pass). Reconfirmed 2026-10-09T12:52:00.000Z pass: last_30d purchase_roas now 7.700397x on Rs3,910.74 spend (down from 8.289657x/Rs3,632.75 recorded previously) -- still comfortably above reactivate_min_historic_roas=3.0x. Still PAUSED. Reconfirmed 2026-10-09T18:46:00.000Z pass: Retargeting_Overall (120255851467340159) still PAUSED, last_30d purchase_roas 7.700397x -- well above reactivate_min_historic_roas=3.0x. Proposal remains pending. Reconfirmed 2026-10-09T22:51:00.000Z pass: last_30d purchase_roas 7.700397x on Rs3,910.74 spend. Still PAUSED. Reconfirmed 2026-10-10T00:52:00.000Z pass: last_30d purchase_roas 7.700397x on Rs3,910.74 spend (unchanged). Still PAUSED. Reconfirmed 2026-10-10T04:47:00.000Z pass: last_30d purchase_roas unchanged at 7.700397x on Rs3,910.74 spend. Still PAUSED. Reconfirmed 2026-10-10T06:48:00.000Z pass: fresh ads_get_ad_entities pull shows last_30d spend now Rs3,910.74 at purchase_roas 7.700397x (22 purchases) -- numbers moved modestly from the 2026-10-06 figures (Rs3,632.75 / 8.29x) as more spend/results accrued, still comfortably above settings.reactivate_min_historic_roas=3.0x. Campaign remains PAUSED. Reconfirmed 2026-10-10T10:47:00.000Z pass: Retargeting_Overall (120255851467340159) still PAUSED, last_30d purchase_roas 7.700397x on Rs3,910.74 spend -- well above reactivate_min_historic_roas=3.0x. Reconfirmed 2026-10-10T16:50:00.000Z pass: no material change since the prior pass; numbers and recommendation stand.",
       "actionSummary": "Activates campaign 'Retargeting_Overall' (120255851467340159), keeping its current daily_budget (Rs360) unchanged -- no budget increase bundled in, unlike A-027/A-028/A-039/A-048/A-050/A-051 which raise budget on reactivation. If a larger budget is wanted, use A-049 or edit the budget directly after reactivating.",
       "metaAction": {
         "tool": "ads_activate_entity",
@@ -929,8 +927,8 @@
       "status": "pending",
       "createdAt": "2026-10-06T18:48:00.000Z",
       "reopenedAt": "2026-10-09T04:47:00.000Z",
-      "updatedAt": "2026-10-09T18:46:00.000Z",
-      "lastReconfirmedAt": "2026-10-10T14:50:00.000Z"
+      "updatedAt": "2026-10-10T16:50:00.000Z",
+      "lastReconfirmedAt": "2026-10-10T16:50:00.000Z"
     },
     {
       "id": "A-056",
@@ -963,7 +961,7 @@
       "module": "campaign-consolidation",
       "tier": "approval",
       "title": "Pause duplicate test campaigns Sora_BOF_Test_5Oct / Tsuchi_BOF_Test_5Oct",
-      "reasoning": "Flagged by campaign-consolidation-watch at the 2026-10-07T08:52 UTC pass (AL-1459): Sora_BOF_Test_5Oct (120256202021140159) and Tsuchi_BOF_Test_5Oct (120256202020640159), both launched 2026-10-05, duplicate the same BOF audience-tier structure already proven out on Sneakers_BOF_30Sep-5Oct (Hot_ATC_IC_API_30D + Warm_IG365_Engagers_Visitors ad sets, same excluded Purchasers 180D). A prior instance of this proposal was closed as moot on 2026-10-07T18:46 UTC when a direct fetch found both campaigns PAUSED outside this routine. Reconfirmed 2026-10-08T10:52:00.000Z: both campaigns are ACTIVE again -- Sora_BOF_Test_5Oct spending Rs216.48 and Tsuchi_BOF_Test_5Oct spending Rs173.41 (last_30d, effectively all since launch), both still purchase_roas=null (zero attributed purchases so far). Since they're delivering again and duplicate an already-proven structure with no purchases yet to show for the spend, the pause recommendation stands -- re-opening this proposal rather than filing a new one (same module+entity, within the 3-day de-dup window). Reconfirmed 2026-10-08T20:52:00.000Z: still ACTIVE, spend has grown to Rs477.97 (Sora_BOF_Test_5Oct) and Rs410.59 (Tsuchi_BOF_Test_5Oct) with purchase_roas still null on both (zero attributed purchases after Rs888.56 combined spend since the 2026-10-05 launch). No new information changes the recommendation. Reconfirmed 2026-10-09T00:55:00.000Z pass: Sora_BOF_Test_5Oct and Tsuchi_BOF_Test_5Oct both still ACTIVE, last_30d spend Rs477.97 / Rs410.59 respectively, purchase_roas still null on both (zero attributed purchases since the 2026-10-05 launch). Recommendation stands. No action taken -- approval tier. Reconfirmed 2026-10-09T08:47:00.000Z pass: both Sora_BOF_Test_5Oct (120256202021140159) and Tsuchi_BOF_Test_5Oct (120256202020640159) confirmed still ACTIVE via fresh campaign-level fetch (last_30d spend Rs477.97 and Rs410.59 respectively, both null purchase_roas). Duplicate-structure concern unchanged, pending approval. Reconfirmed 2026-10-09T10:48:00.000Z pass: Sora_BOF_Test_5Oct (Rs477.97 spend, last_7d) and Tsuchi_BOF_Test_5Oct (Rs410.59 spend, last_7d) both still ACTIVE, still duplicating the proven Sneakers_BOF_30Sep-5Oct BOF structure. Proposal remains pending and unchanged. Reconfirmed 2026-10-09T18:46:00.000Z pass: Sora_BOF_Test_5Oct and Tsuchi_BOF_Test_5Oct both still ACTIVE, last_30d spend Rs826.49 / Rs717.33 respectively; Sora still purchase_roas=null (0 attributed purchases), Tsuchi now at 3.48431x (1 purchase). Recommendation stands -- still pending approval. Reconfirmed 2026-10-09T22:51:00.000Z pass: both test campaigns still ACTIVE and still accumulating spend -- Sora_BOF_Test_5Oct now Rs826.49 (was lower at proposal creation), Tsuchi_BOF_Test_5Oct now Rs717.38 (1 purchase, 3.484067x roas). Still duplicates Sneakers_BOF_30Sep-5Oct's audience-tier structure; proposal still valid, unresolved. Reconfirmed 2026-10-10T00:52:00.000Z pass: both Sora_BOF_Test_5Oct (Rs826.49 last_30d spend, purchase_roas still null, 0 attributed purchases) and Tsuchi_BOF_Test_5Oct (Rs717.38 last_30d spend, purchase_roas 3.484067x, 1 purchase) remain ACTIVE and unchanged from the prior pass. Sora_BOF_Test_5Oct also separately flagged this pass by pause-kill as a zero-purchase alert (AL-1550, auto-pause disabled by settings.kill_roas_threshold) -- same underlying campaign, not a new issue. Duplicate-structure concern still stands; proposal remains pending. Reconfirmed 2026-10-10T04:47:00.000Z pass: Sora_BOF_Test_5Oct and Tsuchi_BOF_Test_5Oct both still ACTIVE, structure unchanged; pending. Reconfirmed 2026-10-10T10:47:00.000Z pass: Both Sora_BOF_Test_5Oct (120256202021140159) and Tsuchi_BOF_Test_5Oct (120256202020640159) remain ACTIVE and still structurally duplicate (same BOF/hot-retargeting setup, same JP product line). Consolidation case unchanged.",
+      "reasoning": "Flagged by campaign-consolidation-watch at the 2026-10-07T08:52 UTC pass (AL-1459): Sora_BOF_Test_5Oct (120256202021140159) and Tsuchi_BOF_Test_5Oct (120256202020640159), both launched 2026-10-05, duplicate the same BOF audience-tier structure already proven out on Sneakers_BOF_30Sep-5Oct (Hot_ATC_IC_API_30D + Warm_IG365_Engagers_Visitors ad sets, same excluded Purchasers 180D). A prior instance of this proposal was closed as moot on 2026-10-07T18:46 UTC when a direct fetch found both campaigns PAUSED outside this routine. Reconfirmed 2026-10-08T10:52:00.000Z: both campaigns are ACTIVE again -- Sora_BOF_Test_5Oct spending Rs216.48 and Tsuchi_BOF_Test_5Oct spending Rs173.41 (last_30d, effectively all since launch), both still purchase_roas=null (zero attributed purchases so far). Since they're delivering again and duplicate an already-proven structure with no purchases yet to show for the spend, the pause recommendation stands -- re-opening this proposal rather than filing a new one (same module+entity, within the 3-day de-dup window). Reconfirmed 2026-10-08T20:52:00.000Z: still ACTIVE, spend has grown to Rs477.97 (Sora_BOF_Test_5Oct) and Rs410.59 (Tsuchi_BOF_Test_5Oct) with purchase_roas still null on both (zero attributed purchases after Rs888.56 combined spend since the 2026-10-05 launch). No new information changes the recommendation. Reconfirmed 2026-10-09T00:55:00.000Z pass: Sora_BOF_Test_5Oct and Tsuchi_BOF_Test_5Oct both still ACTIVE, last_30d spend Rs477.97 / Rs410.59 respectively, purchase_roas still null on both (zero attributed purchases since the 2026-10-05 launch). Recommendation stands. No action taken -- approval tier. Reconfirmed 2026-10-09T08:47:00.000Z pass: both Sora_BOF_Test_5Oct (120256202021140159) and Tsuchi_BOF_Test_5Oct (120256202020640159) confirmed still ACTIVE via fresh campaign-level fetch (last_30d spend Rs477.97 and Rs410.59 respectively, both null purchase_roas). Duplicate-structure concern unchanged, pending approval. Reconfirmed 2026-10-09T10:48:00.000Z pass: Sora_BOF_Test_5Oct (Rs477.97 spend, last_7d) and Tsuchi_BOF_Test_5Oct (Rs410.59 spend, last_7d) both still ACTIVE, still duplicating the proven Sneakers_BOF_30Sep-5Oct BOF structure. Proposal remains pending and unchanged. Reconfirmed 2026-10-09T18:46:00.000Z pass: Sora_BOF_Test_5Oct and Tsuchi_BOF_Test_5Oct both still ACTIVE, last_30d spend Rs826.49 / Rs717.33 respectively; Sora still purchase_roas=null (0 attributed purchases), Tsuchi now at 3.48431x (1 purchase). Recommendation stands -- still pending approval. Reconfirmed 2026-10-09T22:51:00.000Z pass: both test campaigns still ACTIVE and still accumulating spend -- Sora_BOF_Test_5Oct now Rs826.49 (was lower at proposal creation), Tsuchi_BOF_Test_5Oct now Rs717.38 (1 purchase, 3.484067x roas). Still duplicates Sneakers_BOF_30Sep-5Oct's audience-tier structure; proposal still valid, unresolved. Reconfirmed 2026-10-10T00:52:00.000Z pass: both Sora_BOF_Test_5Oct (Rs826.49 last_30d spend, purchase_roas still null, 0 attributed purchases) and Tsuchi_BOF_Test_5Oct (Rs717.38 last_30d spend, purchase_roas 3.484067x, 1 purchase) remain ACTIVE and unchanged from the prior pass. Sora_BOF_Test_5Oct also separately flagged this pass by pause-kill as a zero-purchase alert (AL-1550, auto-pause disabled by settings.kill_roas_threshold) -- same underlying campaign, not a new issue. Duplicate-structure concern still stands; proposal remains pending. Reconfirmed 2026-10-10T04:47:00.000Z pass: Sora_BOF_Test_5Oct and Tsuchi_BOF_Test_5Oct both still ACTIVE, structure unchanged; pending. Reconfirmed 2026-10-10T10:47:00.000Z pass: Both Sora_BOF_Test_5Oct (120256202021140159) and Tsuchi_BOF_Test_5Oct (120256202020640159) remain ACTIVE and still structurally duplicate (same BOF/hot-retargeting setup, same JP product line). Consolidation case unchanged. Reconfirmed 2026-10-10T16:50:00.000Z pass: the hard spend circuit breaker tripped this pass (today's spend ₹6,406.69 vs ₹6,000 ceiling) and this proposal's underlying campaign/ad set was among the 5 force-paused as the emergency brake -- see circuitBreaker and AL for this pass. The recommendation itself is unchanged; it will need re-review once/if the account resumes from the circuit-breaker pause.",
       "actionSummary": "Pause Sora_BOF_Test_5Oct and Tsuchi_BOF_Test_5Oct. Does not touch Sneakers_BOF_30Sep-5Oct or any other active campaign.",
       "metaAction": {
         "tool": "ads_update_entity",
@@ -989,15 +987,15 @@
       },
       "status": "pending",
       "createdAt": "2026-10-07T12:50:00.000Z",
-      "updatedAt": "2026-10-09T18:46:00.000Z",
-      "lastReconfirmedAt": "2026-10-10T14:50:00.000Z"
+      "updatedAt": "2026-10-10T16:50:00.000Z",
+      "lastReconfirmedAt": "2026-10-10T16:50:00.000Z"
     },
     {
       "id": "A-058",
       "module": "placement-optimization",
       "tier": "approval",
       "title": "Exclude WhatsApp placement from BOF_2_Warm_IG365_Engagers_Visitors (Sneakers_BOF_30Sep-5Oct)",
-      "reasoning": "last_30d publisher_platform breakdown: WhatsApp spend ₹10.28 at CPM ₹790.77 and 0.00% CTR (13 impressions, 0 clicks, no purchases) vs Instagram ₹18,445.21 at CPM ₹57.56, 2.47% CTR, 4.26x ROAS and Facebook ₹252.74 at CPM ₹115.09, 3.32% CTR, 33.93x ROAS -- the same near-zero-engagement WhatsApp-placement pattern already flagged and pending exclusion on several other ad sets in this account (A-014, A-026, A-033, A-038, A-056). This ad set carries ₹18.7k of last-30d spend under Sneakers_BOF_30Sep-5Oct and was missed by A-056, which targeted its sibling ad set BOF_1_Hot_ATC_IC_API_30D instead. Reconfirmed 2026-10-09T00:55:00.000Z pass: fresh last_14d publisher_platform breakdown on BOF_2_Warm_IG365_Engagers_Visitors -- whatsapp spend Rs19.44 (0.00% CTR, still 0 attributed purchases/null ROAS, Rs1,080 CPM) vs facebook (Rs327.78, 26.16x ROAS) and instagram (Rs20,387.73, 4.68x ROAS). Fix remains unapplied, pending approval. Reconfirmed 2026-10-09T08:47:00.000Z pass: fresh last_30d publisher_platform breakdown on BOF_2_Warm_IG365_Engagers_Visitors -- whatsapp spend Rs19.44 (CPM Rs1,080, 0.00% CTR, 18 impressions, 0 purchases) vs instagram Rs20,387.73 (4.68x) and facebook Rs327.78 (26.16x). Same pattern, fix remains unapplied, pending approval. Reconfirmed 2026-10-09T10:48:00.000Z pass: fresh last_30d publisher_platform breakdown -- WhatsApp spend now Rs19.44 (CPM Rs1,080, 0.00% CTR, still 0 purchases) vs Instagram Rs20,387.73 (4.68x ROAS) and Facebook Rs327.78 (26.16x ROAS). Ad set still ACTIVE. Proposal remains pending. Reconfirmed 2026-10-09T18:46:00.000Z pass: fresh last_30d publisher_platform breakdown -- whatsapp spend Rs30.44 (CPM Rs1,087.14, 0.00% CTR, still 0 purchases) vs instagram (Rs22,063.86, 4.62x) and facebook (Rs375.24, 22.85x). Ad set still ACTIVE. Proposal remains pending. Reconfirmed 2026-10-10T00:52:00.000Z pass: fresh last_30d publisher_platform breakdown on BOF_2_Warm_IG365_Engagers_Visitors -- whatsapp spend Rs30.44 (CPM Rs1,087.14, 0.00% CTR, still 0 purchases) vs instagram (Rs22,064.53, 4.615241x) and facebook (Rs375.23, 22.854456x). Unchanged from the prior pass. Ad set still ACTIVE. Proposal remains pending. Reconfirmed 2026-10-10T04:47:00.000Z pass: ad set still ACTIVE; no fresh placement breakdown pulled this pass (unchanged pattern since 00:52Z); pending. Reconfirmed 2026-10-10T10:47:00.000Z pass: BOF_2_Warm_IG365_Engagers_Visitors (Sneakers_BOF_30Sep-5Oct) still ACTIVE with no explicit publisher_platforms restriction (Advantage+ placements). Fresh last_14d publisher_platform breakdown on the parent campaign: WhatsApp CPM Rs1,156.58 vs Instagram CPM Rs62.27 (18.6x), 0.00% CTR on WhatsApp -- the gap has widened since this proposal was opened. Still worth excluding. Reconfirmed 2026-10-10T14:50:00.000Z pass: Campaign-level (Sneakers_BOF_30Sep-5Oct) last_14d whatsapp spend now Rs43.95, CPM Rs1,156.58 vs Instagram CPM Rs62.27, still 0 attributed purchases -- gap persists.",
+      "reasoning": "last_30d publisher_platform breakdown: WhatsApp spend ₹10.28 at CPM ₹790.77 and 0.00% CTR (13 impressions, 0 clicks, no purchases) vs Instagram ₹18,445.21 at CPM ₹57.56, 2.47% CTR, 4.26x ROAS and Facebook ₹252.74 at CPM ₹115.09, 3.32% CTR, 33.93x ROAS -- the same near-zero-engagement WhatsApp-placement pattern already flagged and pending exclusion on several other ad sets in this account (A-014, A-026, A-033, A-038, A-056). This ad set carries ₹18.7k of last-30d spend under Sneakers_BOF_30Sep-5Oct and was missed by A-056, which targeted its sibling ad set BOF_1_Hot_ATC_IC_API_30D instead. Reconfirmed 2026-10-09T00:55:00.000Z pass: fresh last_14d publisher_platform breakdown on BOF_2_Warm_IG365_Engagers_Visitors -- whatsapp spend Rs19.44 (0.00% CTR, still 0 attributed purchases/null ROAS, Rs1,080 CPM) vs facebook (Rs327.78, 26.16x ROAS) and instagram (Rs20,387.73, 4.68x ROAS). Fix remains unapplied, pending approval. Reconfirmed 2026-10-09T08:47:00.000Z pass: fresh last_30d publisher_platform breakdown on BOF_2_Warm_IG365_Engagers_Visitors -- whatsapp spend Rs19.44 (CPM Rs1,080, 0.00% CTR, 18 impressions, 0 purchases) vs instagram Rs20,387.73 (4.68x) and facebook Rs327.78 (26.16x). Same pattern, fix remains unapplied, pending approval. Reconfirmed 2026-10-09T10:48:00.000Z pass: fresh last_30d publisher_platform breakdown -- WhatsApp spend now Rs19.44 (CPM Rs1,080, 0.00% CTR, still 0 purchases) vs Instagram Rs20,387.73 (4.68x ROAS) and Facebook Rs327.78 (26.16x ROAS). Ad set still ACTIVE. Proposal remains pending. Reconfirmed 2026-10-09T18:46:00.000Z pass: fresh last_30d publisher_platform breakdown -- whatsapp spend Rs30.44 (CPM Rs1,087.14, 0.00% CTR, still 0 purchases) vs instagram (Rs22,063.86, 4.62x) and facebook (Rs375.24, 22.85x). Ad set still ACTIVE. Proposal remains pending. Reconfirmed 2026-10-10T00:52:00.000Z pass: fresh last_30d publisher_platform breakdown on BOF_2_Warm_IG365_Engagers_Visitors -- whatsapp spend Rs30.44 (CPM Rs1,087.14, 0.00% CTR, still 0 purchases) vs instagram (Rs22,064.53, 4.615241x) and facebook (Rs375.23, 22.854456x). Unchanged from the prior pass. Ad set still ACTIVE. Proposal remains pending. Reconfirmed 2026-10-10T04:47:00.000Z pass: ad set still ACTIVE; no fresh placement breakdown pulled this pass (unchanged pattern since 00:52Z); pending. Reconfirmed 2026-10-10T10:47:00.000Z pass: BOF_2_Warm_IG365_Engagers_Visitors (Sneakers_BOF_30Sep-5Oct) still ACTIVE with no explicit publisher_platforms restriction (Advantage+ placements). Fresh last_14d publisher_platform breakdown on the parent campaign: WhatsApp CPM Rs1,156.58 vs Instagram CPM Rs62.27 (18.6x), 0.00% CTR on WhatsApp -- the gap has widened since this proposal was opened. Still worth excluding. Reconfirmed 2026-10-10T14:50:00.000Z pass: Campaign-level (Sneakers_BOF_30Sep-5Oct) last_14d whatsapp spend now Rs43.95, CPM Rs1,156.58 vs Instagram CPM Rs62.27, still 0 attributed purchases -- gap persists. Reconfirmed 2026-10-10T16:50:00.000Z pass: the hard spend circuit breaker tripped this pass (today's spend ₹6,406.69 vs ₹6,000 ceiling) and this proposal's underlying campaign/ad set was among the 5 force-paused as the emergency brake -- see circuitBreaker and AL for this pass. The recommendation itself is unchanged; it will need re-review once/if the account resumes from the circuit-breaker pause.",
       "actionSummary": "Remove 'whatsapp' from BOF_2_Warm_IG365_Engagers_Visitors' effective placements by setting an explicit targeting.publisher_platforms list covering facebook, instagram, audience_network and threads; every other targeting parameter stays unchanged.",
       "metaAction": {
         "tool": "ads_update_entity",
@@ -1011,15 +1009,15 @@
       },
       "status": "pending",
       "createdAt": "2026-10-08T04:53:00.000Z",
-      "updatedAt": "2026-10-10T14:50:00.000Z",
-      "lastReconfirmedAt": "2026-10-10T14:50:00.000Z"
+      "updatedAt": "2026-10-10T16:50:00.000Z",
+      "lastReconfirmedAt": "2026-10-10T16:50:00.000Z"
     },
     {
       "id": "A-059",
       "module": "placement-optimization",
       "tier": "approval",
       "title": "Exclude WhatsApp placement from Caps_FB-A_EngagedShoppers (Caps + Kage_26 Sept)",
-      "reasoning": "last_30d publisher_platform breakdown: WhatsApp spend ₹8.24 at CPM ₹749.09 and 0.00% CTR (11 impressions, 0 clicks) vs Instagram ₹2,730.10 at CPM ₹58.93, 1.45% CTR, 5.15x ROAS -- same account-wide WhatsApp pattern as A-014/A-026/A-033/A-038/A-056. This is a newly-active ad set (Engaged Shoppers behavior test) under Caps + Kage_26 Sept not previously covered by any placement-optimization proposal. Reconfirmed 2026-10-09T00:55:00.000Z pass: fresh last_14d publisher_platform breakdown on Caps_FB-A_EngagedShoppers -- whatsapp spend Rs10.65 (still 0 attributed purchases/null ROAS, Rs887.50 CPM on very low volume) vs facebook (Rs35.48, null ROAS on thin spend) and instagram (Rs3,306.84, 4.25x ROAS). Fix remains unapplied, pending approval. Reconfirmed 2026-10-09T10:48:00.000Z pass: fresh last_30d publisher_platform breakdown -- WhatsApp spend now Rs10.65 (CPM Rs887.50, CTR 8.33% on 1 click, still 0 purchases) vs Instagram Rs3,306.92 (4.25x ROAS). Ad set still ACTIVE. Proposal remains pending. Reconfirmed 2026-10-09T18:46:00.000Z pass: fresh last_30d publisher_platform breakdown -- whatsapp spend Rs11.26 (CPM Rs563, 5.00% CTR on 1 click, still 0 purchases) vs instagram (Rs3,581.76, 4.35x). Ad set still ACTIVE. Proposal remains pending. Reconfirmed 2026-10-10T00:52:00.000Z pass: fresh last_30d publisher_platform breakdown on Caps_FB-A_EngagedShoppers -- whatsapp spend Rs11.26 (CPM Rs563, 5.00% CTR on 1 click, still 0 purchases) vs instagram (Rs3,581.77, 4.572803x). Unchanged from the prior pass. Ad set still ACTIVE. Proposal remains pending. Reconfirmed 2026-10-10T04:47:00.000Z pass: ad set still ACTIVE; no fresh placement breakdown pulled this pass (unchanged pattern since 00:52Z); pending. Reconfirmed 2026-10-10T10:47:00.000Z pass: Caps_FB-A_EngagedShoppers (Caps + Kage_26 Sept) still ACTIVE with no explicit publisher_platforms restriction. Fresh last_14d publisher_platform breakdown on the parent campaign: WhatsApp CPM Rs195.25 vs Instagram CPM Rs66.47 (2.9x) -- gap persists. Reconfirmed 2026-10-10T14:50:00.000Z pass: Campaign-level (Caps + Kage_26 Sept) last_14d whatsapp spend now Rs90.01, CPM Rs195.25 vs Instagram CPM Rs66.47 -- gap persists.",
+      "reasoning": "last_30d publisher_platform breakdown: WhatsApp spend ₹8.24 at CPM ₹749.09 and 0.00% CTR (11 impressions, 0 clicks) vs Instagram ₹2,730.10 at CPM ₹58.93, 1.45% CTR, 5.15x ROAS -- same account-wide WhatsApp pattern as A-014/A-026/A-033/A-038/A-056. This is a newly-active ad set (Engaged Shoppers behavior test) under Caps + Kage_26 Sept not previously covered by any placement-optimization proposal. Reconfirmed 2026-10-09T00:55:00.000Z pass: fresh last_14d publisher_platform breakdown on Caps_FB-A_EngagedShoppers -- whatsapp spend Rs10.65 (still 0 attributed purchases/null ROAS, Rs887.50 CPM on very low volume) vs facebook (Rs35.48, null ROAS on thin spend) and instagram (Rs3,306.84, 4.25x ROAS). Fix remains unapplied, pending approval. Reconfirmed 2026-10-09T10:48:00.000Z pass: fresh last_30d publisher_platform breakdown -- WhatsApp spend now Rs10.65 (CPM Rs887.50, CTR 8.33% on 1 click, still 0 purchases) vs Instagram Rs3,306.92 (4.25x ROAS). Ad set still ACTIVE. Proposal remains pending. Reconfirmed 2026-10-09T18:46:00.000Z pass: fresh last_30d publisher_platform breakdown -- whatsapp spend Rs11.26 (CPM Rs563, 5.00% CTR on 1 click, still 0 purchases) vs instagram (Rs3,581.76, 4.35x). Ad set still ACTIVE. Proposal remains pending. Reconfirmed 2026-10-10T00:52:00.000Z pass: fresh last_30d publisher_platform breakdown on Caps_FB-A_EngagedShoppers -- whatsapp spend Rs11.26 (CPM Rs563, 5.00% CTR on 1 click, still 0 purchases) vs instagram (Rs3,581.77, 4.572803x). Unchanged from the prior pass. Ad set still ACTIVE. Proposal remains pending. Reconfirmed 2026-10-10T04:47:00.000Z pass: ad set still ACTIVE; no fresh placement breakdown pulled this pass (unchanged pattern since 00:52Z); pending. Reconfirmed 2026-10-10T10:47:00.000Z pass: Caps_FB-A_EngagedShoppers (Caps + Kage_26 Sept) still ACTIVE with no explicit publisher_platforms restriction. Fresh last_14d publisher_platform breakdown on the parent campaign: WhatsApp CPM Rs195.25 vs Instagram CPM Rs66.47 (2.9x) -- gap persists. Reconfirmed 2026-10-10T14:50:00.000Z pass: Campaign-level (Caps + Kage_26 Sept) last_14d whatsapp spend now Rs90.01, CPM Rs195.25 vs Instagram CPM Rs66.47 -- gap persists. Reconfirmed 2026-10-10T16:50:00.000Z pass: the hard spend circuit breaker tripped this pass (today's spend ₹6,406.69 vs ₹6,000 ceiling) and this proposal's underlying campaign/ad set was among the 5 force-paused as the emergency brake -- see circuitBreaker and AL for this pass. The recommendation itself is unchanged; it will need re-review once/if the account resumes from the circuit-breaker pause.",
       "actionSummary": "Remove 'whatsapp' from Caps_FB-A_EngagedShoppers' effective placements by setting an explicit targeting.publisher_platforms list covering facebook, instagram, audience_network and threads; every other targeting parameter stays unchanged.",
       "metaAction": {
         "tool": "ads_update_entity",
@@ -1033,15 +1031,15 @@
       },
       "status": "pending",
       "createdAt": "2026-10-08T04:53:00.000Z",
-      "updatedAt": "2026-10-10T14:50:00.000Z",
-      "lastReconfirmedAt": "2026-10-10T14:50:00.000Z"
+      "updatedAt": "2026-10-10T16:50:00.000Z",
+      "lastReconfirmedAt": "2026-10-10T16:50:00.000Z"
     },
     {
       "id": "A-060",
       "module": "placement-optimization",
       "tier": "approval",
       "title": "Exclude WhatsApp placement from Caps_FB-C_Interests (Caps + Kage_26 Sept)",
-      "reasoning": "last_30d publisher_platform breakdown: WhatsApp spend ₹4.95 at CPM ₹550.00 and 0.00% CTR (9 impressions, 0 clicks) vs Instagram ₹1,401.74 at CPM ₹63.91, 1.38% CTR, 7.81x ROAS -- same account-wide WhatsApp pattern as A-014/A-026/A-033/A-038/A-056. This is a newly-active ad set (interest test: Baseball cap / Streetwear / Fashion accessories) under Caps + Kage_26 Sept not previously covered by any placement-optimization proposal. Reconfirmed 2026-10-09T00:55:00.000Z pass: fresh last_14d publisher_platform breakdown on Caps_FB-C_Interests -- whatsapp spend Rs8.45 (still 0 attributed purchases/null ROAS, Rs768.18 CPM on very low volume) vs facebook (Rs46.33, null ROAS on thin spend) and instagram (Rs2,017.72, 5.42x ROAS). Fix remains unapplied, pending approval. Reconfirmed 2026-10-09T10:48:00.000Z pass: fresh last_30d publisher_platform breakdown -- WhatsApp spend now Rs8.45 (CPM Rs768.18, 0.00% CTR, still 0 purchases) vs Instagram Rs2,018.02 (5.42x ROAS). Ad set still ACTIVE. Proposal remains pending. Reconfirmed 2026-10-09T18:46:00.000Z pass: fresh last_30d publisher_platform breakdown -- whatsapp spend Rs11.38 (CPM Rs455.21, 0.00% CTR, still 0 purchases) vs instagram (Rs2,586.54, 6.32x). Ad set still ACTIVE. Proposal remains pending. Reconfirmed 2026-10-10T00:52:00.000Z pass: fresh last_30d publisher_platform breakdown on Caps_FB-C_Interests -- whatsapp spend Rs11.38 (CPM Rs455.20, 0.00% CTR, still 0 purchases) vs instagram (Rs2,586.56, 7.553191x). Unchanged from the prior pass. Ad set still ACTIVE. Proposal remains pending. Reconfirmed 2026-10-10T04:47:00.000Z pass: ad set still ACTIVE; no fresh placement breakdown pulled this pass (unchanged pattern since 00:52Z); pending. Reconfirmed 2026-10-10T10:47:00.000Z pass: Caps_FB-C_Interests (Caps + Kage_26 Sept) still ACTIVE with no explicit publisher_platforms restriction. Same campaign-level WhatsApp CPM gap as A-059 (Rs195.25 vs Rs66.47 on Instagram) persists. Reconfirmed 2026-10-10T14:50:00.000Z pass: Campaign-level (Caps + Kage_26 Sept) last_14d whatsapp spend now Rs90.01, CPM Rs195.25 vs Instagram CPM Rs66.47 -- gap persists.",
+      "reasoning": "last_30d publisher_platform breakdown: WhatsApp spend ₹4.95 at CPM ₹550.00 and 0.00% CTR (9 impressions, 0 clicks) vs Instagram ₹1,401.74 at CPM ₹63.91, 1.38% CTR, 7.81x ROAS -- same account-wide WhatsApp pattern as A-014/A-026/A-033/A-038/A-056. This is a newly-active ad set (interest test: Baseball cap / Streetwear / Fashion accessories) under Caps + Kage_26 Sept not previously covered by any placement-optimization proposal. Reconfirmed 2026-10-09T00:55:00.000Z pass: fresh last_14d publisher_platform breakdown on Caps_FB-C_Interests -- whatsapp spend Rs8.45 (still 0 attributed purchases/null ROAS, Rs768.18 CPM on very low volume) vs facebook (Rs46.33, null ROAS on thin spend) and instagram (Rs2,017.72, 5.42x ROAS). Fix remains unapplied, pending approval. Reconfirmed 2026-10-09T10:48:00.000Z pass: fresh last_30d publisher_platform breakdown -- WhatsApp spend now Rs8.45 (CPM Rs768.18, 0.00% CTR, still 0 purchases) vs Instagram Rs2,018.02 (5.42x ROAS). Ad set still ACTIVE. Proposal remains pending. Reconfirmed 2026-10-09T18:46:00.000Z pass: fresh last_30d publisher_platform breakdown -- whatsapp spend Rs11.38 (CPM Rs455.21, 0.00% CTR, still 0 purchases) vs instagram (Rs2,586.54, 6.32x). Ad set still ACTIVE. Proposal remains pending. Reconfirmed 2026-10-10T00:52:00.000Z pass: fresh last_30d publisher_platform breakdown on Caps_FB-C_Interests -- whatsapp spend Rs11.38 (CPM Rs455.20, 0.00% CTR, still 0 purchases) vs instagram (Rs2,586.56, 7.553191x). Unchanged from the prior pass. Ad set still ACTIVE. Proposal remains pending. Reconfirmed 2026-10-10T04:47:00.000Z pass: ad set still ACTIVE; no fresh placement breakdown pulled this pass (unchanged pattern since 00:52Z); pending. Reconfirmed 2026-10-10T10:47:00.000Z pass: Caps_FB-C_Interests (Caps + Kage_26 Sept) still ACTIVE with no explicit publisher_platforms restriction. Same campaign-level WhatsApp CPM gap as A-059 (Rs195.25 vs Rs66.47 on Instagram) persists. Reconfirmed 2026-10-10T14:50:00.000Z pass: Campaign-level (Caps + Kage_26 Sept) last_14d whatsapp spend now Rs90.01, CPM Rs195.25 vs Instagram CPM Rs66.47 -- gap persists. Reconfirmed 2026-10-10T16:50:00.000Z pass: the hard spend circuit breaker tripped this pass (today's spend ₹6,406.69 vs ₹6,000 ceiling) and this proposal's underlying campaign/ad set was among the 5 force-paused as the emergency brake -- see circuitBreaker and AL for this pass. The recommendation itself is unchanged; it will need re-review once/if the account resumes from the circuit-breaker pause.",
       "actionSummary": "Remove 'whatsapp' from Caps_FB-C_Interests' effective placements by setting an explicit targeting.publisher_platforms list covering facebook, instagram, audience_network and threads; every other targeting parameter stays unchanged.",
       "metaAction": {
         "tool": "ads_update_entity",
@@ -1055,8 +1053,8 @@
       },
       "status": "pending",
       "createdAt": "2026-10-08T04:53:00.000Z",
-      "updatedAt": "2026-10-10T14:50:00.000Z",
-      "lastReconfirmedAt": "2026-10-10T14:50:00.000Z"
+      "updatedAt": "2026-10-10T16:50:00.000Z",
+      "lastReconfirmedAt": "2026-10-10T16:50:00.000Z"
     }
   ],
   "alerts": [
@@ -15293,6 +15291,51 @@
       "severity": "low",
       "dismissed": false,
       "createdAt": "2026-10-10T14:50:00.000Z"
+    },
+    {
+      "id": "AL-1576",
+      "module": "hard-spend-circuit-breaker",
+      "title": "CIRCUIT BREAKER TRIPPED -- all 5 active campaigns paused",
+      "detail": "ads_get_ad_entities (level=ad_account, date_preset=today) at this pass showed today's account spend at ₹6,406.69, breaching settings.hard_spend_ceiling_inr (₹6,000) -- the previous pass (2026-10-10T14:50:00.000Z, AL-1573) had already flagged the account at 90.8% of the ceiling (₹5,450.13) with ~₹549.87 of headroom; delivery continued and crossed it. All 5 campaigns that were ACTIVE at breach time were paused immediately this pass: Sora_BOF_Test_5Oct (₹347.88 today), Tsuchi_BOF_Test_5Oct (₹370.18), Prospecting_JP_Purchase_5-9Oct (₹807.51), Sneakers_BOF_30Sep-5Oct (₹3,820.63), Caps + Kage_26 Sept (₹1,060.49) -- these 5 figures sum exactly to the account total of ₹6,406.69. No auto-resume; a human must review and, if appropriate, approve a resume-after-circuit-breaker proposal on a later pass once today's spend looks sane again.",
+      "severity": "high",
+      "dismissed": false,
+      "createdAt": "2026-10-10T16:50:00.000Z"
+    },
+    {
+      "id": "AL-1577",
+      "module": "pixel-health",
+      "title": "Pixel quality remains healthy -- no match-rate breach",
+      "detail": "ads_get_dataset_quality on dataset 833131719490535: composite EMQ scores range 6.1 (PageView/ViewContent/AddToCart/SubscribedButtonClick/Search) to 8.8 (Purchase/prepaid_purchase/cod_purchase), InitiateCheckout 6.9, AddPaymentInfo 8.6 -- all at/above pixel_quality_min_match_rate=0.6. ROAS-based modules not suppressed this pass (moot anyway -- all campaigns now paused by the circuit breaker trip above).",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-10-10T16:50:00.000Z"
+    },
+    {
+      "id": "AL-1578",
+      "module": "threshold-alerts / learning-phase-stuck / campaign-consolidation-watch",
+      "title": "Zero active campaigns this pass -- monitoring modules have nothing live to evaluate",
+      "detail": "All 5 previously-active campaigns were paused this pass by the hard-spend-circuit-breaker trip (see the high-severity alert above). ads_insights_anomaly_signal returned no anomaly issues prior to the pause. threshold-alerts, learning-phase-stuck and campaign-consolidation-watch (modules 1, 4, 11) have no currently-active entities to evaluate against as of this pass's end-state.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-10-10T16:50:00.000Z"
+    },
+    {
+      "id": "AL-1579",
+      "module": "self-audit-check",
+      "title": "Routine pass summary -- 2026-10-10T16:50:00.000Z",
+      "detail": "Evaluated all 35 ROUTINE.md modules. Circuit breaker check (run first, as required) found today's account spend at ₹6,406.69, breaching the ₹6,000 ceiling -- tripped this pass, all 5 active campaigns paused (see high-severity alert). Pixel/data-quality gate: healthy, EMQ 6.1-8.8, ROAS modules not suppressed. hook-angle-tagging found and tagged 15 previously-untagged creatives (297+15=313 total tagged) from real ad copy via Meta Ads MCP; no Meta mutation involved so unaffected by the breaker trip. purchaser-exclusion and lookalike-refresh mutations were skipped this pass per the breaker trip (\"skip all other auto-tier mutations this run\" per ROUTINE.md step 2); lookalike-refresh was separately still within its 24h rate-limit window regardless. All 14 pending approval-tier proposals reconfirmed against fresh account data; A-038/A-057/A-058/A-059/A-060 noted as now referencing paused-by-breaker entities (recommendation unchanged, will need re-review on resume); the other 9 unchanged. No anomaly signal fired. monthly_spend_goal_inr is null (spend-pacing skipped per module 5). weekly-digest (last 2026-10-04) and monthly-digest (last 2026-10-01) not due this pass. competitor-rescrape last ran today 06:48 UTC, under the 20% move threshold, not due for re-scrape.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-10-10T16:50:00.000Z"
+    },
+    {
+      "id": "AL-1580",
+      "module": "routine-run-notes",
+      "title": "Run summary -- 2026-10-10T16:50:00.000Z pass",
+      "detail": "HIGHEST PRIORITY: hard spend circuit breaker TRIPPED this pass -- today's account spend ₹6,406.69 breached the ₹6,000 ceiling. All 5 active campaigns paused as the emergency brake (Sora_BOF_Test_5Oct, Tsuchi_BOF_Test_5Oct, Prospecting_JP_Purchase_5-9Oct, Sneakers_BOF_30Sep-5Oct, Caps + Kage_26 Sept). circuitBreaker.tripped=true; no auto-resume -- a human must review and approve a resume-after-circuit-breaker proposal on a later pass. Auto-tier: 5 pause mutations executed (the breaker itself) + hook-angle-tagging tagged 15 new creatives (no Meta write, unaffected by the breaker). purchaser-exclusion and lookalike-refresh mutations skipped this pass (breaker trip + lookalike already rate-limited). Approval-tier: 0 new proposals, 0 status changes -- all 14 pending proposals reconfirmed, 5 of them (A-038/A-057/A-058/A-059/A-060) now reference entities paused by the breaker. 5 new alerts this pass (circuit-breaker-tripped [high], pixel-health, zero-active-campaigns monitoring note, this self-audit-check, this run-notes summary).",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-10-10T16:50:00.000Z"
     }
   ],
   "log": [
@@ -21930,6 +21973,141 @@
       },
       "tier": "auto",
       "executedAt": "2026-10-10T08:50:00.000Z"
+    },
+    {
+      "proposalId": null,
+      "action": "hard-spend-circuit-breaker: paused campaign Sora_BOF_Test_5Oct (120256202021140159) -- today's account spend ₹6,406.69 breached the ₹6,000 hard_spend_ceiling_inr (this campaign had spent ₹347.88 today). Emergency-brake pause, part of the account-wide circuit breaker trip this pass.",
+      "result": "success",
+      "previousState": {
+        "status": "ACTIVE",
+        "effective_status": "ACTIVE"
+      },
+      "detail": {
+        "success": true,
+        "entity_id": "120256202021140159",
+        "entity_type": "campaign",
+        "is_draft": false,
+        "updated_fields": {
+          "status": "PAUSED"
+        },
+        "status_forced_to_paused": false
+      },
+      "tier": "auto",
+      "executedAt": "2026-10-10T16:50:00.000Z"
+    },
+    {
+      "proposalId": null,
+      "action": "hard-spend-circuit-breaker: paused campaign Tsuchi_BOF_Test_5Oct (120256202020640159) -- today's account spend ₹6,406.69 breached the ₹6,000 hard_spend_ceiling_inr (this campaign had spent ₹370.18 today). Emergency-brake pause, part of the account-wide circuit breaker trip this pass.",
+      "result": "success",
+      "previousState": {
+        "status": "ACTIVE",
+        "effective_status": "ACTIVE"
+      },
+      "detail": {
+        "success": true,
+        "entity_id": "120256202020640159",
+        "entity_type": "campaign",
+        "is_draft": false,
+        "updated_fields": {
+          "status": "PAUSED"
+        },
+        "status_forced_to_paused": false
+      },
+      "tier": "auto",
+      "executedAt": "2026-10-10T16:50:00.000Z"
+    },
+    {
+      "proposalId": null,
+      "action": "hard-spend-circuit-breaker: paused campaign Prospecting_JP_Purchase_5-9Oct (120256186544730159) -- today's account spend ₹6,406.69 breached the ₹6,000 hard_spend_ceiling_inr (this campaign had spent ₹807.51 today). Emergency-brake pause, part of the account-wide circuit breaker trip this pass.",
+      "result": "success",
+      "previousState": {
+        "status": "ACTIVE",
+        "effective_status": "ACTIVE"
+      },
+      "detail": {
+        "success": true,
+        "entity_id": "120256186544730159",
+        "entity_type": "campaign",
+        "is_draft": false,
+        "updated_fields": {
+          "status": "PAUSED"
+        },
+        "status_forced_to_paused": true
+      },
+      "tier": "auto",
+      "executedAt": "2026-10-10T16:50:00.000Z"
+    },
+    {
+      "proposalId": null,
+      "action": "hard-spend-circuit-breaker: paused campaign Sneakers_BOF_30Sep-5Oct (120256091369160159) -- today's account spend ₹6,406.69 breached the ₹6,000 hard_spend_ceiling_inr (this campaign had spent ₹3820.63 today). Emergency-brake pause, part of the account-wide circuit breaker trip this pass.",
+      "result": "success",
+      "previousState": {
+        "status": "ACTIVE",
+        "effective_status": "ACTIVE"
+      },
+      "detail": {
+        "success": true,
+        "entity_id": "120256091369160159",
+        "entity_type": "campaign",
+        "is_draft": false,
+        "updated_fields": {
+          "status": "PAUSED"
+        },
+        "status_forced_to_paused": true
+      },
+      "tier": "auto",
+      "executedAt": "2026-10-10T16:50:00.000Z"
+    },
+    {
+      "proposalId": null,
+      "action": "hard-spend-circuit-breaker: paused campaign Caps + Kage_26 Sept (120255693970470159) -- today's account spend ₹6,406.69 breached the ₹6,000 hard_spend_ceiling_inr (this campaign had spent ₹1060.49 today). Emergency-brake pause, part of the account-wide circuit breaker trip this pass.",
+      "result": "success",
+      "previousState": {
+        "status": "ACTIVE",
+        "effective_status": "ACTIVE"
+      },
+      "detail": {
+        "success": true,
+        "entity_id": "120255693970470159",
+        "entity_type": "campaign",
+        "is_draft": false,
+        "updated_fields": {
+          "status": "PAUSED"
+        },
+        "status_forced_to_paused": true
+      },
+      "tier": "auto",
+      "executedAt": "2026-10-10T16:50:00.000Z"
+    },
+    {
+      "proposalId": null,
+      "action": "hook-angle-tagging: tagged 15 previously-untagged creatives found among the 5 just-paused campaigns' ads (angle/hook from real primary text + headline via Meta Ads MCP ads_get_creatives; vision pass skipped, Higgsfield not attached to this run). Creative IDs: 2618330118574298, 975004485662136, 2170498056865038, 1664094528613550, 1644186010743213, 983098934811764, 844138312092715, 1631158771730063, 38955285287451524, 28851301097853758, 1032712066472873, 1444486967541083, 1819149319165889, 4572263093092132, 1731735788057530.",
+      "result": "success",
+      "previousState": {
+        "creativeTags_count_before": 298
+      },
+      "detail": {
+        "tagged_creative_ids": [
+          "2618330118574298",
+          "975004485662136",
+          "2170498056865038",
+          "1664094528613550",
+          "1644186010743213",
+          "983098934811764",
+          "844138312092715",
+          "1631158771730063",
+          "38955285287451524",
+          "28851301097853758",
+          "1032712066472873",
+          "1444486967541083",
+          "1819149319165889",
+          "4572263093092132",
+          "1731735788057530"
+        ],
+        "creativeTags_count_after": 313
+      },
+      "tier": "auto",
+      "executedAt": "2026-10-10T16:50:00.000Z"
     }
   ],
   "creativeTags": {
@@ -25225,6 +25403,171 @@
       "visionPassSkipped": true,
       "note": "Higgsfield vision connection not attached to this run -- image content itself not analyzed, only real ad copy text used. No creative description invented.",
       "taggedAt": "2026-10-08T18:49:00.000Z"
+    },
+    "2618330118574298": {
+      "adName": "Caps_26Sept_Group_1",
+      "campaign": "Caps + Kage_26 Sept",
+      "format": "Static image (SHARE)",
+      "angle": "Restock announcement, surprise/hype-led, not discount-led",
+      "hook": "\"KAI ARCHIVES 2.0 Restocked - that's the line.\" (headline) / \"SURPRISE SURPRISE SURPRISE! AS YOU CAN SEE IT IS BACK!\" (primary text)",
+      "taggedFrom": "ad primary text (body) + headline (title), via Meta Ads MCP ads_get_creatives",
+      "visionPassSkipped": true,
+      "note": "Higgsfield vision connection not attached to this run -- image/video content itself not analyzed, only real ad copy text used. No creative description invented.",
+      "taggedAt": "2026-10-10T16:50:00.000Z"
+    },
+    "975004485662136": {
+      "adName": "Caps_26Sept_Group_1",
+      "campaign": "Caps + Kage_26 Sept",
+      "format": "Static image (SHARE)",
+      "angle": "Restock announcement, brand/category-led, not discount-led",
+      "hook": "\"Accessories — KAI\" (headline) / \"KAI Archives 2.0 is back\" (primary text)",
+      "taggedFrom": "ad primary text (body) + headline (title), via Meta Ads MCP ads_get_creatives",
+      "visionPassSkipped": true,
+      "note": "Higgsfield vision connection not attached to this run -- image/video content itself not analyzed, only real ad copy text used. No creative description invented.",
+      "taggedAt": "2026-10-10T16:50:00.000Z"
+    },
+    "2170498056865038": {
+      "adName": "Warm_KAIFEST_KAGE_3198_Carousel / Hot_KAIFEST_KAGE_3198_Carousel / XSell_KAIFEST_KAGE_3198_Carousel",
+      "campaign": "Sneakers_BOF_30Sep-5Oct",
+      "format": "Carousel (SHARE)",
+      "angle": "Bundle discount offer (KAGE + cap), prepaid-gated, urgency/deadline-led",
+      "hook": "\"KAI\" (headline) / \"KAI FEST IS ON 🔥 One sneaker. Every outfit. KAGE + any KAI cap for just ₹3,198 on prepaid orders (worth ₹4,098). Save ₹900... Limited time offer, till 9th October.\" (primary text)",
+      "taggedFrom": "ad primary text (body) + headline (title), via Meta Ads MCP ads_get_creatives",
+      "visionPassSkipped": true,
+      "note": "Higgsfield vision connection not attached to this run -- image/video content itself not analyzed, only real ad copy text used. No creative description invented.",
+      "taggedAt": "2026-10-10T16:50:00.000Z"
+    },
+    "1664094528613550": {
+      "adName": "Warm_KAIFEST_SORA_3198_v2",
+      "campaign": "Sneakers_BOF_30Sep-5Oct",
+      "format": "Static image/video (SHARE)",
+      "angle": "Bundle discount offer (SORA + cap), prepaid-gated, urgency/deadline-led",
+      "hook": "\"KAI FEST: SORA + Cap @ ₹3,198\" (headline) / \"KAI FEST IS ON 🔥 SORA sneakers + any KAI cap for just ₹3,198 on prepaid orders (worth ₹4,098). Save ₹900... Limited time offer, till 5th October.\" (primary text)",
+      "taggedFrom": "ad primary text (body) + headline (title), via Meta Ads MCP ads_get_creatives",
+      "visionPassSkipped": true,
+      "note": "Higgsfield vision connection not attached to this run -- image/video content itself not analyzed, only real ad copy text used. No creative description invented.",
+      "taggedAt": "2026-10-10T16:50:00.000Z"
+    },
+    "1644186010743213": {
+      "adName": "Warm_TSUCHI_2499_9Oct",
+      "campaign": "Sneakers_BOF_30Sep-5Oct",
+      "format": "Static image/video (SHARE)",
+      "angle": "Bestseller-restock discount offer, prepaid-gated, urgency/deadline-led",
+      "hook": "\"TSUCHI at ₹2,499 — Prepaid\" (headline) / \"OUR BESTSELLER IS BACK — KAI TSUCHI 👟 Now ₹2,499 on prepaid orders (was ₹3,299) + FREE SHIPPING. Save ₹800 — only till 9th October.\" (primary text)",
+      "taggedFrom": "ad primary text (body) + headline (title), via Meta Ads MCP ads_get_creatives",
+      "visionPassSkipped": true,
+      "note": "Higgsfield vision connection not attached to this run -- image/video content itself not analyzed, only real ad copy text used. No creative description invented.",
+      "taggedAt": "2026-10-10T16:50:00.000Z"
+    },
+    "983098934811764": {
+      "adName": "Warm_SORA_2499",
+      "campaign": "Sneakers_BOF_30Sep-5Oct",
+      "format": "Static image/video (SHARE)",
+      "angle": "Discount offer + lifestyle/versatility story",
+      "hook": "\"SORA at ₹2,499 — Prepaid\" (headline) / \"You've seen SORA. Now make it yours. 👟 Premium everyday style, made to go with everything. Now ₹2,499 on prepaid orders (was ₹3,299) + FREE SHIPPING.\" (primary text)",
+      "taggedFrom": "ad primary text (body) + headline (title), via Meta Ads MCP ads_get_creatives",
+      "visionPassSkipped": true,
+      "note": "Higgsfield vision connection not attached to this run -- image/video content itself not analyzed, only real ad copy text used. No creative description invented.",
+      "taggedAt": "2026-10-10T16:50:00.000Z"
+    },
+    "844138312092715": {
+      "adName": "Warm_YINYANG_2499",
+      "campaign": "Sneakers_BOF_30Sep-5Oct",
+      "format": "Static image/video (SHARE)",
+      "angle": "New silhouette introduction + discount offer",
+      "hook": "\"Yin Yang at ₹2,499 — Prepaid\" (headline) / \"Meet Yin Yang — the new KAI sneaker. Now ₹2,499 on prepaid orders (was ₹3,299) + FREE SHIPPING. Save ₹800 — only till 9th October.\" (primary text)",
+      "taggedFrom": "ad primary text (body) + headline (title), via Meta Ads MCP ads_get_creatives",
+      "visionPassSkipped": true,
+      "note": "Higgsfield vision connection not attached to this run -- image/video content itself not analyzed, only real ad copy text used. No creative description invented.",
+      "taggedAt": "2026-10-10T16:50:00.000Z"
+    },
+    "1631158771730063": {
+      "adName": "Warm_KAGE_Lifestyle_2499",
+      "campaign": "Sneakers_BOF_30Sep-5Oct",
+      "format": "Static image/video (SHARE)",
+      "angle": "Brand/product story (versatility, construction) + discount offer",
+      "hook": "\"KAGE at ₹2,499 — Prepaid\" (headline) / \"One sneaker. Every outfit. Designed for everyday wear with premium detailing, durable construction, and a clean all-black aesthetic. Meet KAGE. Now ₹2,499 on prepaid orders (was ₹3,299) + FREE SHIPPING.\" (primary text)",
+      "taggedFrom": "ad primary text (body) + headline (title), via Meta Ads MCP ads_get_creatives",
+      "visionPassSkipped": true,
+      "note": "Higgsfield vision connection not attached to this run -- image/video content itself not analyzed, only real ad copy text used. No creative description invented.",
+      "taggedAt": "2026-10-10T16:50:00.000Z"
+    },
+    "38955285287451524": {
+      "adName": "Warm_KAGE_Hero_2499_9Oct",
+      "campaign": "Sneakers_BOF_30Sep-5Oct",
+      "format": "Static image/video (SHARE)",
+      "angle": "Retargeting/reconsideration hook (\"still thinking?\") + discount offer",
+      "hook": "\"KAGE at ₹2,499 — Prepaid\" (headline) / \"Still thinking about KAGE? The cleanest black sneaker — now ₹2,499 on prepaid orders (was ₹3,299) + FREE SHIPPING. Save ₹800. Offer ends 9th October.\" (primary text)",
+      "taggedFrom": "ad primary text (body) + headline (title), via Meta Ads MCP ads_get_creatives",
+      "visionPassSkipped": true,
+      "note": "Higgsfield vision connection not attached to this run -- image/video content itself not analyzed, only real ad copy text used. No creative description invented.",
+      "taggedAt": "2026-10-10T16:50:00.000Z"
+    },
+    "28851301097853758": {
+      "adName": "XSell_TSUCHI_2499_9Oct",
+      "campaign": "Sneakers_BOF_30Sep-5Oct",
+      "format": "Static image/video (SHARE)",
+      "angle": "Bestseller-restock discount offer, prepaid-gated, urgency/deadline-led",
+      "hook": "\"TSUCHI at ₹2,499 — Prepaid\" (headline) / \"OUR BESTSELLER IS BACK — KAI TSUCHI 👟 Now ₹2,499 on prepaid orders (was ₹3,299) + FREE SHIPPING. Save ₹800 — only till 9th October.\" (primary text)",
+      "taggedFrom": "ad primary text (body) + headline (title), via Meta Ads MCP ads_get_creatives",
+      "visionPassSkipped": true,
+      "note": "Higgsfield vision connection not attached to this run -- image/video content itself not analyzed, only real ad copy text used. No creative description invented.",
+      "taggedAt": "2026-10-10T16:50:00.000Z"
+    },
+    "1032712066472873": {
+      "adName": "Hot_TSUCHI_2499_9Oct",
+      "campaign": "Sneakers_BOF_30Sep-5Oct",
+      "format": "Static image/video (SHARE)",
+      "angle": "Bestseller-restock discount offer, prepaid-gated, urgency/deadline-led",
+      "hook": "\"TSUCHI at ₹2,499 — Prepaid\" (headline) / \"OUR BESTSELLER IS BACK — KAI TSUCHI 👟 Now ₹2,499 on prepaid orders (was ₹3,299) + FREE SHIPPING. Save ₹800 — only till 9th October.\" (primary text)",
+      "taggedFrom": "ad primary text (body) + headline (title), via Meta Ads MCP ads_get_creatives",
+      "visionPassSkipped": true,
+      "note": "Higgsfield vision connection not attached to this run -- image/video content itself not analyzed, only real ad copy text used. No creative description invented.",
+      "taggedAt": "2026-10-10T16:50:00.000Z"
+    },
+    "1444486967541083": {
+      "adName": "XSell_KAGE_Hero_2499_9Oct",
+      "campaign": "Sneakers_BOF_30Sep-5Oct",
+      "format": "Static image/video (SHARE)",
+      "angle": "Retargeting/reconsideration hook (\"still thinking?\") + discount offer",
+      "hook": "\"KAGE at ₹2,499 — Prepaid\" (headline) / \"Still thinking about KAGE? The cleanest black sneaker — now ₹2,499 on prepaid orders (was ₹3,299) + FREE SHIPPING. Save ₹800. Offer ends 9th October.\" (primary text)",
+      "taggedFrom": "ad primary text (body) + headline (title), via Meta Ads MCP ads_get_creatives",
+      "visionPassSkipped": true,
+      "note": "Higgsfield vision connection not attached to this run -- image/video content itself not analyzed, only real ad copy text used. No creative description invented.",
+      "taggedAt": "2026-10-10T16:50:00.000Z"
+    },
+    "1819149319165889": {
+      "adName": "Hot_KAGE_Hero_2499_9Oct",
+      "campaign": "Sneakers_BOF_30Sep-5Oct",
+      "format": "Static image/video (SHARE)",
+      "angle": "Retargeting/reconsideration hook (\"still thinking?\") + discount offer",
+      "hook": "\"KAGE at ₹2,499 — Prepaid\" (headline) / \"Still thinking about KAGE? The cleanest black sneaker — now ₹2,499 on prepaid orders (was ₹3,299) + FREE SHIPPING. Save ₹800. Offer ends 9th October.\" (primary text)",
+      "taggedFrom": "ad primary text (body) + headline (title), via Meta Ads MCP ads_get_creatives",
+      "visionPassSkipped": true,
+      "note": "Higgsfield vision connection not attached to this run -- image/video content itself not analyzed, only real ad copy text used. No creative description invented.",
+      "taggedAt": "2026-10-10T16:50:00.000Z"
+    },
+    "4572263093092132": {
+      "adName": "Yin Yang_TOF_2499 / XSell_YINYANG_2499 / Hot_YINYANG_2499",
+      "campaign": "Yin Yang_TOF / Sneakers_BOF_30Sep-5Oct",
+      "format": "Static image/video (SHARE)",
+      "angle": "New silhouette introduction + discount offer",
+      "hook": "\"Yin Yang at ₹2,499 — Prepaid\" (headline) / \"Meet Yin Yang — the new KAI sneaker. Now ₹2,499 on prepaid orders (was ₹3,299) + FREE SHIPPING. Save ₹800 — only till 9th October.\" (primary text)",
+      "taggedFrom": "ad primary text (body) + headline (title), via Meta Ads MCP ads_get_creatives",
+      "visionPassSkipped": true,
+      "note": "Higgsfield vision connection not attached to this run -- image/video content itself not analyzed, only real ad copy text used. No creative description invented.",
+      "taggedAt": "2026-10-10T16:50:00.000Z"
+    },
+    "1731735788057530": {
+      "adName": "Sneakers_Catalog_Carousel_v1_IG",
+      "campaign": "Sneakers_Catalog_Retargeting",
+      "format": "Carousel (SHARE, DPA/catalog-style)",
+      "angle": "Catalog-retargeting reconsideration hook (\"still thinking?\"), dynamic product name",
+      "hook": "\"{{product.name}}\" (headline, dynamic) / \"Still thinking about the {{product.name}}? 👟 Your pair is still here — built for everyday wear, made to go with everything. 7-day returns. Grab it before your size is gone.\" (primary text)",
+      "taggedFrom": "ad primary text (body) + headline (title), via Meta Ads MCP ads_get_creatives",
+      "visionPassSkipped": true,
+      "note": "Higgsfield vision connection not attached to this run -- image/video content itself not analyzed, only real ad copy text used. No creative description invented.",
+      "taggedAt": "2026-10-10T16:50:00.000Z"
     }
   }
 }
