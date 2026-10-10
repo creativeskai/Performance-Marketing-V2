@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-10T18:50:00.000Z",
+  "generatedAt": "2026-10-10T20:50:00.000Z",
   "settings": {
     "kill_roas_threshold": "DISABLED 2026-10-05 by user instruction: the ROAS pause-kill is OFF. Module 16 (pause-kill) must NOT auto-pause any campaign for low ROAS; surface low-ROAS campaigns as alerts only. The hard spend circuit breaker is a separate mechanism and stays ON. Former rule, for reference: pause if ROAS < 1.0x after ₹500 spend on a sales-objective campaign. EXCEPTION until 2026-10-05T23:59+05:30 (user-approved 2026-09-29): for the sneaker-push campaigns 120256091369160159 (Sneakers_BOF_30Sep-5Oct), 120256091370110159 (Sneakers_Prospecting_30Sep-5Oct) and 120256088882780159 (Sneakers_Catalog_Retargeting) the spend floor is ₹1,500, not ₹500.",
     "reactivate_min_historic_roas": "surface for reactivation if a paused campaign's last active-period ROAS >= 3.0x",
@@ -15404,6 +15404,24 @@
       "severity": "low",
       "dismissed": false,
       "createdAt": "2026-10-10T18:50:00.000Z"
+    },
+    {
+      "id": "AL-1583",
+      "module": "self-audit-check",
+      "title": "Routine pass summary -- 2026-10-10T20:50:00.000Z",
+      "detail": "No change since the 2026-10-10T18:50:00.000Z pass. Circuit breaker remains TRIPPED (tripped 2026-10-10T16:50:00.000Z, not auto-resumed per policy) -- all 5 campaigns it paused stay paused; resume-after-circuit-breaker proposal A-061 still pending human review, unchanged. Fresh ads_get_ad_entities confirms zero campaigns of any kind are ACTIVE account-wide -- today's account spend is Rs0. ads_insights_anomaly_signal: no anomaly issues found. ads_get_dataset_quality on dataset 833131719490535: composite EMQ scores still 6.1-8.8, at/above pixel_quality_min_match_rate=0.6 -- ROAS-based modules not suppressed, though moot with nothing delivering. lookalike-refresh: still rate-limited (last attempt 2026-10-10T08:50:00.000Z, ~12h elapsed, max_auto_actions_per_entity_per_day=1); source Purchasers 180D lookalikes (built 2026-09-15) unchanged. purchaser-exclusion: zero active ad sets, nothing to evaluate. hook-angle-tagging: no new ads/creatives created since the last pass, nothing new to tag. All delivery-dependent approval modules (pause-kill, age-gender-auto-shift, geo-scaling/suppression/new-geo-testing, placement-optimization, device-targeting, frequency-capping, creative-fatigue, engagement-tier-segmentation, dayparting, bid-strategy-adjustment, budget-reallocation, threshold-alerts, learning-phase-stuck, campaign-consolidation-watch) have nothing new to evaluate with zero active delivery. The 15 other pending proposals (A-002, A-003, A-027, A-028, A-038, A-039, A-048, A-050, A-051, A-055, A-057, A-058, A-059, A-060, A-061) rest on historical/paused-campaign data that hasn't moved -- left unchanged, no re-derivation needed this pass. Weekly-digest not due (today is Saturday, last digest covered week ending 2026-10-04); monthly-digest not due (already ran for September on 2026-10-01); competitor-rescrape not due (last scrape 2h ago at 18:50, no 20%+ move expected this soon).",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-10-10T20:50:00.000Z"
+    },
+    {
+      "id": "AL-1584",
+      "module": "routine-run-notes",
+      "title": "Run summary -- 2026-10-10T20:50:00.000Z pass",
+      "detail": "0 auto-executed actions, 0 new proposals, 0 new standalone alerts beyond this run-summary pair -- a quiet pass, nothing changed since 18:50 UTC. Highest priority item: circuit breaker still tripped since 2026-10-10T16:50:00.000Z, resume-after-circuit-breaker proposal A-061 still awaiting human approval.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-10-10T20:50:00.000Z"
     }
   ],
   "log": [
