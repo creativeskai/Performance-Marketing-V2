@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-10T00:52:00.000Z",
+  "generatedAt": "2026-10-10T02:52:00.000Z",
   "settings": {
     "kill_roas_threshold": "DISABLED 2026-10-05 by user instruction: the ROAS pause-kill is OFF. Module 16 (pause-kill) must NOT auto-pause any campaign for low ROAS; surface low-ROAS campaigns as alerts only. The hard spend circuit breaker is a separate mechanism and stays ON. Former rule, for reference: pause if ROAS < 1.0x after ₹500 spend on a sales-objective campaign. EXCEPTION until 2026-10-05T23:59+05:30 (user-approved 2026-09-29): for the sneaker-push campaigns 120256091369160159 (Sneakers_BOF_30Sep-5Oct), 120256091370110159 (Sneakers_Prospecting_30Sep-5Oct) and 120256088882780159 (Sneakers_Catalog_Retargeting) the spend floor is ₹1,500, not ₹500.",
     "reactivate_min_historic_roas": "surface for reactivation if a paused campaign's last active-period ROAS >= 3.0x",
@@ -29,10 +29,10 @@
       }
     },
     "competitor_last_scrape": {
-      "gully_labs_active_ads": 194,
-      "lotto_sport_india_active_ads": 342,
-      "scraped_at": "2026-10-09T18:46:00.000Z",
-      "note": "2026-10-09T18:46:00.000Z pass: Gully Labs 194 (unchanged vs last recorded 194), Lotto Sport India 342 (unchanged vs last recorded 342) -- both under the 20% mechanical alert threshold, no alert written this pass."
+      "gully_labs_active_ads": 195,
+      "lotto_sport_india_active_ads": 314,
+      "scraped_at": "2026-10-10T02:52:00.000Z",
+      "note": "2026-10-10T02:52:00.000Z pass: Gully Labs 195 (vs last recorded 194, +0.5%), Lotto Sport India 314 (vs last recorded 342, -8.2%) -- both under the 20% mechanical alert threshold, no alert written this pass."
     },
     "audience_label_corrections": {
       "120249907176770159": "ATC_180D -- NOT a purchaser audience (cart-adders, event=AddToCart, retention 180 days). Verified 2026-09-14, reconfirmed 2026-09-20. Superseded note: earlier passes said the account had NO purchaser audience at all -- that's now out of date. See the 120255823280550159 (Purchasers 180D) entry above, created 2026-09-15, which IS a genuine purchaser audience and is already in use for exclusion + lookalike.",
@@ -15042,7 +15042,7 @@
       "id": "AL-1548",
       "module": "lookalike-refresh",
       "title": "Lookalike rebuild skipped this pass -- rate-limited",
-      "detail": "Last rebuild attempt for the 1% laddered lookalike off Purchasers 180D (120255823280550159) was 2026-10-09T06:52:00.000Z (failed, Meta duplicate-lookalike error 2654/1713007) -- under 24h elapsed, so skipped under max_auto_actions_per_entity_per_day=1 rather than re-attempted. Source audience size still ~20, unchanged since 2026-09-15. The 3 existing laddered lookalikes (120255832535210159/610159/780159) remain ACTIVE and serving. Reconfirmed 2026-10-10T00:52:00.000Z pass: last rebuild attempt still 2026-10-09T06:52:00.000Z (failed, Meta duplicate-lookalike error 2654/1713007) -- under 24h elapsed (~18h), still skipped under max_auto_actions_per_entity_per_day=1. Source audience (Purchasers 180D, 120255823280550159) size still ~20, unchanged. The 3 existing laddered lookalikes remain ACTIVE and serving. This is the same real Meta API constraint (duplicate-lookalike rejection) seen on every qualifying pass since 2026-09-29, not a new issue.",
+      "detail": "Last rebuild attempt for the 1% laddered lookalike off Purchasers 180D (120255823280550159) was 2026-10-09T06:52:00.000Z (failed, Meta duplicate-lookalike error 2654/1713007) -- under 24h elapsed, so skipped under max_auto_actions_per_entity_per_day=1 rather than re-attempted. Source audience size still ~20, unchanged since 2026-09-15. The 3 existing laddered lookalikes (120255832535210159/610159/780159) remain ACTIVE and serving. Reconfirmed 2026-10-10T00:52:00.000Z pass: last rebuild attempt still 2026-10-09T06:52:00.000Z (failed, Meta duplicate-lookalike error 2654/1713007) -- under 24h elapsed (~18h), still skipped under max_auto_actions_per_entity_per_day=1. Source audience (Purchasers 180D, 120255823280550159) size still ~20, unchanged. The 3 existing laddered lookalikes remain ACTIVE and serving. This is the same real Meta API constraint (duplicate-lookalike rejection) seen on every qualifying pass since 2026-09-29, not a new issue. Reconfirmed 2026-10-10T02:52:00.000Z pass: last rebuild attempt still 2026-10-09T06:52:00.000Z (failed, Meta duplicate-lookalike error 2654/1713007) -- ~19h54m elapsed at pass time, still under 24h so skipped under max_auto_actions_per_entity_per_day=1 (next eligible ~2026-10-10T06:52 UTC). Source audience (Purchasers 180D, 120255823280550159) size still ~20, unchanged. The 3 existing laddered lookalikes (120255832535210159/610159/780159) remain ACTIVE and serving.",
       "severity": "low",
       "dismissed": false,
       "createdAt": "2026-10-09T22:51:00.000Z",
@@ -15052,7 +15052,7 @@
       "id": "AL-1549",
       "module": "pixel-health",
       "title": "Pixel quality remains healthy -- no match-rate breach",
-      "detail": "ads_get_dataset_quality on dataset 833131719490535: composite EMQ scores 6.1-8.8 across all tracked events (PageView, ViewContent, AddToCart, InitiateCheckout, Purchase, prepaid_purchase, cod_purchase, etc.), all at/above pixel_quality_min_match_rate=0.6. ROAS-based modules not suppressed this pass. Reconfirmed 2026-10-10T00:52:00.000Z pass: ads_get_dataset_quality on dataset 833131719490535 this pass returned composite EMQ scores for ViewContent (6.1) and AddPaymentInfo (9.0), both at/above pixel_quality_min_match_rate=0.6 (interpreted as 6.0 on the 0-10 EMQ scale, consistent with prior passes); other tracked web events (PageView/AddToCart/InitiateCheckout/Purchase/prepaid_purchase/cod_purchase/Search/SubscribedButtonClick) reported only data_freshness this pass, no new EMQ score, which is not itself a breach. ROAS-based modules not suppressed this pass.",
+      "detail": "ads_get_dataset_quality on dataset 833131719490535: composite EMQ scores 6.1-8.8 across all tracked events (PageView, ViewContent, AddToCart, InitiateCheckout, Purchase, prepaid_purchase, cod_purchase, etc.), all at/above pixel_quality_min_match_rate=0.6. ROAS-based modules not suppressed this pass. Reconfirmed 2026-10-10T00:52:00.000Z pass: ads_get_dataset_quality on dataset 833131719490535 this pass returned composite EMQ scores for ViewContent (6.1) and AddPaymentInfo (9.0), both at/above pixel_quality_min_match_rate=0.6 (interpreted as 6.0 on the 0-10 EMQ scale, consistent with prior passes); other tracked web events (PageView/AddToCart/InitiateCheckout/Purchase/prepaid_purchase/cod_purchase/Search/SubscribedButtonClick) reported only data_freshness this pass, no new EMQ score, which is not itself a breach. ROAS-based modules not suppressed this pass. Reconfirmed 2026-10-10T02:52:00.000Z pass: ads_get_dataset_quality on dataset 833131719490535 returned composite EMQ scores 6.1-9.0 across all tracked web events (AddPaymentInfo 9.0, Purchase/prepaid_purchase 8.8, cod_purchase 8.7, AddToCart/InitiateCheckout/Search/SubscribedButtonClick/PageView/ViewContent 6.1-6.8), all at/above pixel_quality_min_match_rate=0.6 (interpreted as 6.0 on the 0-10 EMQ scale). ROAS-based modules not suppressed this pass.",
       "severity": "low",
       "dismissed": false,
       "createdAt": "2026-10-09T22:51:00.000Z",
@@ -15102,6 +15102,24 @@
       "severity": "low",
       "dismissed": false,
       "createdAt": "2026-10-10T00:52:00.000Z"
+    },
+    {
+      "id": "AL-1555",
+      "module": "self-audit-check",
+      "title": "Routine pass summary -- 2026-10-10T02:52:00.000Z",
+      "detail": "Circuit breaker: not tripped (today's account spend Rs533.66 vs Rs6,000 ceiling). Pixel quality: healthy (EMQ 6.1-9.0 across tracked events), ROAS modules not suppressed. No anomaly signal fired. purchaser-exclusion: compliant across all 10 active ad sets -- all exclude Purchasers 180D (120255823280550159) in excluded_custom_audiences (verified via fresh targeting fetch this pass). lookalike-refresh: rate-limited skip, last real attempt 2026-10-09T06:52:00.000Z, ~19h54m elapsed, <24h (see AL-1548). hook-angle-tagging: all 21 active ads' creative_ids already present in queue.json.creativeTags, nothing new to tag this pass. hard-spend-circuit-breaker: not triggered. 5 campaigns / 10 ad sets ACTIVE: Sora_BOF_Test_5Oct, Tsuchi_BOF_Test_5Oct, Prospecting_JP_Purchase_5-9Oct, Sneakers_BOF_30Sep-5Oct, Caps + Kage_26 Sept (last_14d purchase_roas 3.48x/24.6x/5.03x/6.99x respectively; Sora_BOF_Test_5Oct still zero purchases on Rs826.49 spend, unchanged from AL-1551, not re-alerted). Reconfirmed all 14 pending proposals (A-002/003/027/028/038/039/048/050/051/055/057/058/059/060) against fresh entity status -- all still valid (targets unchanged: reactivate-winner campaigns still PAUSED, placement/consolidation targets still ACTIVE), no status changes, no new proposals created. Competitor rescrape run this pass: Gully Labs 195 (+0.5%), Lotto Sport India 314 (-8.2%) -- both under 20% threshold, no alert. Weekly digest not due (last 2026-10-04, not Monday); monthly digest not due until November.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-10-10T02:52:00.000Z"
+    },
+    {
+      "id": "AL-1556",
+      "module": "routine-run-notes",
+      "title": "Run summary -- 2026-10-10T02:52:00.000Z pass",
+      "detail": "No auto-executed Meta API mutations this pass (purchaser-exclusion already compliant account-wide; lookalike rebuild still rate-limited; hook-angle-tagging had nothing new to tag; hard-spend circuit breaker not triggered, today's spend Rs533.66 vs Rs6,000 ceiling). No new proposals created; all 14 pending proposals reconfirmed still valid with no status changes. 2 alerts updated in place (AL-1548 lookalike-refresh, AL-1549 pixel-health) rather than creating new duplicate entries, per the de-duplication rule. 2 new alerts written (this self-audit-check and routine-run-notes pair).",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-10-10T02:52:00.000Z"
     }
   ],
   "log": [
