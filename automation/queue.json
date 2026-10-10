@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-10T20:50:00.000Z",
+  "generatedAt": "2026-10-10T22:51:00.000Z",
   "settings": {
     "kill_roas_threshold": "DISABLED 2026-10-05 by user instruction: the ROAS pause-kill is OFF. Module 16 (pause-kill) must NOT auto-pause any campaign for low ROAS; surface low-ROAS campaigns as alerts only. The hard spend circuit breaker is a separate mechanism and stays ON. Former rule, for reference: pause if ROAS < 1.0x after ₹500 spend on a sales-objective campaign. EXCEPTION until 2026-10-05T23:59+05:30 (user-approved 2026-09-29): for the sneaker-push campaigns 120256091369160159 (Sneakers_BOF_30Sep-5Oct), 120256091370110159 (Sneakers_Prospecting_30Sep-5Oct) and 120256088882780159 (Sneakers_Catalog_Retargeting) the spend floor is ₹1,500, not ₹500.",
     "reactivate_min_historic_roas": "surface for reactivation if a paused campaign's last active-period ROAS >= 3.0x",
@@ -29,10 +29,10 @@
       }
     },
     "competitor_last_scrape": {
-      "gully_labs_active_ads": 208,
+      "gully_labs_active_ads": 163,
       "lotto_sport_india_active_ads": 265,
-      "scraped_at": "2026-10-10T18:50:00.000Z",
-      "note": "2026-10-10T18:50:00.000Z pass: Gully Labs 208 (vs last recorded 196, +6.1%), Lotto Sport India 265 (vs last recorded 312, -15.1%) -- both under the 20% mechanical alert threshold, no alert written this pass."
+      "scraped_at": "2026-10-10T22:51:00.000Z",
+      "note": "2026-10-10T22:51:00.000Z pass: Gully Labs 163 (vs last recorded 208, -21.6%, over threshold), Lotto Sport India 265 (vs last recorded 265, 0.0%, under threshold)."
     },
     "audience_label_corrections": {
       "120249907176770159": "ATC_180D -- NOT a purchaser audience (cart-adders, event=AddToCart, retention 180 days). Verified 2026-09-14, reconfirmed 2026-09-20. Superseded note: earlier passes said the account had NO purchaser audience at all -- that's now out of date. See the 120255823280550159 (Purchasers 180D) entry above, created 2026-09-15, which IS a genuine purchaser audience and is already in use for exclusion + lookalike.",
@@ -15422,6 +15422,42 @@
       "severity": "low",
       "dismissed": false,
       "createdAt": "2026-10-10T20:50:00.000Z"
+    },
+    {
+      "id": "AL-1585",
+      "module": "competitor-rescrape",
+      "title": "Competitor spike -- Gully Labs active ads down 21.6%",
+      "detail": "ads_library_search (page_id 107479854297817, country IN, ad_active_status=ACTIVE) this pass: Gully Labs estimated_total_count=163, vs last recorded 208 at the 2026-10-10T18:50:00.000Z scrape -- a -21.6% move, crossing the module's >=20% alert threshold. Lotto Sport India (page_id 426015150606378) unchanged at 265 (0.0% move vs last recorded 265), no alert for that page. Consistent with the already-diagnosed noisy raw Ad Library text-match count seen across many prior passes (e.g. AL-1464, AL-1475, AL-1478, AL-1489, AL-1518) -- informational only, no account action implied.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-10-10T22:51:00.000Z"
+    },
+    {
+      "id": "AL-1586",
+      "module": "lookalike-refresh",
+      "title": "Lookalike rebuild skipped this pass -- rate-limited",
+      "detail": "Last rebuild attempt for the laddered 1%/2%/5% lookalike off 'Purchasers 180D' (120255823280550159, still ~20 members, unchanged since 2026-09-15) was 2026-10-10T08:50:00.000Z (failed with Meta's duplicate-lookalike error 2654/1713007). ~14h elapsed since then, within max_auto_actions_per_entity_per_day=1 (24h window) -- not re-attempted this pass. Next eligible ~2026-10-11T08:50 UTC. The 3 existing laddered lookalikes (120255832535210159/610159/780159) remain ACTIVE and serving.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-10-10T22:51:00.000Z"
+    },
+    {
+      "id": "AL-1587",
+      "module": "self-audit-check",
+      "title": "Routine pass summary -- 2026-10-10T22:51:00.000Z",
+      "detail": "No material change since the 2026-10-10T20:50:00.000Z pass. Circuit breaker remains TRIPPED (tripped 2026-10-10T16:50:00.000Z, not auto-resumed per policy) -- all 5 campaigns it paused (Sora_BOF_Test_5Oct, Tsuchi_BOF_Test_5Oct, Prospecting_JP_Purchase_5-9Oct, Sneakers_BOF_30Sep-5Oct, Caps + Kage_26 Sept) reconfirmed PAUSED via fresh ads_get_ad_entities; resume-after-circuit-breaker proposal A-061 still pending human review, unchanged. Fresh ads_get_ad_entities (level=ad_account, date_preset=today, filtering effective_status=ACTIVE at campaign level) confirms zero campaigns are ACTIVE account-wide. ads_insights_anomaly_signal: no anomaly issues found (checked auction overlap, creative fatigue, narrow audience). ads_get_dataset_quality on dataset 833131719490535: composite EMQ scores still 6.1-8.8 across all tracked events, unchanged from prior passes -- ROAS-based modules not suppressed, though moot with nothing delivering. lookalike-refresh: still rate-limited (last attempt 2026-10-10T08:50:00.000Z, ~14h elapsed, max_auto_actions_per_entity_per_day=1); source Purchasers 180D (~20 members, built 2026-09-15) unchanged -- see this pass's lookalike-refresh alert. purchaser-exclusion: zero active ad sets, nothing to evaluate. hook-angle-tagging: fetched all 67 unique creatives under the 5 paused campaigns' ads and confirmed all already have creativeTags entries from prior passes -- nothing new to tag this pass (vision pass still skipped, Higgsfield not attached). competitor-rescrape: Gully Labs moved -21.6% (208->163), over threshold -- see this pass's competitor-spike alert; Lotto Sport India unchanged at 265. All delivery-dependent approval modules (pause-kill, age-gender-auto-shift, geo-scaling/suppression/new-geo-testing, placement-optimization, device-targeting, frequency-capping, creative-fatigue, engagement-tier-segmentation, dayparting, bid-strategy-adjustment, budget-reallocation, threshold-alerts, learning-phase-stuck, campaign-consolidation-watch) have nothing new to evaluate with zero active delivery. The 15 other pending proposals (A-002, A-003, A-027, A-028, A-038, A-039, A-048, A-050, A-051, A-055, A-057, A-058, A-059, A-060, A-061) rest on historical/paused-campaign data that hasn't moved -- left unchanged, no re-derivation needed this pass. Weekly-digest not due (today is Saturday, last digest covered week ending 2026-10-04); monthly-digest not due (already ran for September on 2026-10-01).",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-10-10T22:51:00.000Z"
+    },
+    {
+      "id": "AL-1588",
+      "module": "routine-run-notes",
+      "title": "Run summary -- 2026-10-10T22:51:00.000Z pass",
+      "detail": "0 auto-executed actions, 0 new proposals, 2 new standalone alerts (competitor-spike on Gully Labs -21.6%, lookalike-refresh rate-limited) beyond this run-summary pair -- a quiet pass, circuit breaker unchanged since 16:50 UTC. Highest priority item: circuit breaker still tripped since 2026-10-10T16:50:00.000Z, resume-after-circuit-breaker proposal A-061 still awaiting human approval.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-10-10T22:51:00.000Z"
     }
   ],
   "log": [
