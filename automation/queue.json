@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-10T16:50:00.000Z",
+  "generatedAt": "2026-10-10T18:50:00.000Z",
   "settings": {
     "kill_roas_threshold": "DISABLED 2026-10-05 by user instruction: the ROAS pause-kill is OFF. Module 16 (pause-kill) must NOT auto-pause any campaign for low ROAS; surface low-ROAS campaigns as alerts only. The hard spend circuit breaker is a separate mechanism and stays ON. Former rule, for reference: pause if ROAS < 1.0x after ₹500 spend on a sales-objective campaign. EXCEPTION until 2026-10-05T23:59+05:30 (user-approved 2026-09-29): for the sneaker-push campaigns 120256091369160159 (Sneakers_BOF_30Sep-5Oct), 120256091370110159 (Sneakers_Prospecting_30Sep-5Oct) and 120256088882780159 (Sneakers_Catalog_Retargeting) the spend floor is ₹1,500, not ₹500.",
     "reactivate_min_historic_roas": "surface for reactivation if a paused campaign's last active-period ROAS >= 3.0x",
@@ -29,10 +29,10 @@
       }
     },
     "competitor_last_scrape": {
-      "gully_labs_active_ads": 196,
-      "lotto_sport_india_active_ads": 312,
-      "scraped_at": "2026-10-10T06:48:00.000Z",
-      "note": "2026-10-10T06:48:00.000Z pass: Gully Labs 196 (vs last recorded 195, +0.5%), Lotto Sport India 312 (vs last recorded 314, -0.6%) -- both under the 20% mechanical alert threshold, no alert written this pass."
+      "gully_labs_active_ads": 208,
+      "lotto_sport_india_active_ads": 265,
+      "scraped_at": "2026-10-10T18:50:00.000Z",
+      "note": "2026-10-10T18:50:00.000Z pass: Gully Labs 208 (vs last recorded 196, +6.1%), Lotto Sport India 265 (vs last recorded 312, -15.1%) -- both under the 20% mechanical alert threshold, no alert written this pass."
     },
     "audience_label_corrections": {
       "120249907176770159": "ATC_180D -- NOT a purchaser audience (cart-adders, event=AddToCart, retention 180 days). Verified 2026-09-14, reconfirmed 2026-09-20. Superseded note: earlier passes said the account had NO purchaser audience at all -- that's now out of date. See the 120255823280550159 (Purchasers 180D) entry above, created 2026-09-15, which IS a genuine purchaser audience and is already in use for exclusion + lookalike.",
@@ -1055,6 +1055,56 @@
       "createdAt": "2026-10-08T04:53:00.000Z",
       "updatedAt": "2026-10-10T16:50:00.000Z",
       "lastReconfirmedAt": "2026-10-10T16:50:00.000Z"
+    },
+    {
+      "id": "A-061",
+      "module": "resume-after-circuit-breaker",
+      "tier": "approval",
+      "title": "Resume the 5 campaigns paused by the hard spend circuit breaker trip",
+      "reasoning": "The hard spend circuit breaker tripped at 2026-10-10T16:50:00.000Z when today's account spend (₹6,406.69) breached settings.hard_spend_ceiling_inr (₹6,000), pausing all 5 campaigns that were active at that moment: Sora_BOF_Test_5Oct, Tsuchi_BOF_Test_5Oct, Prospecting_JP_Purchase_5-9Oct, Sneakers_BOF_30Sep-5Oct, and Caps + Kage_26 Sept. Reconfirmed at this pass (2026-10-10T18:50:00.000Z): account-wide spend today is ₹0 (fresh day / all delivery stopped since the pause), zero active campaigns remain, no anomaly signal fired, and pixel quality is healthy (all tracked event composite EMQ scores 6.1-8.8). Data looks sane again, but per ROUTINE.md the breaker never auto-resumes -- a human must review and approve resuming these 5 campaigns (or a subset of them).",
+      "actionSummary": "Reactivates all 5 campaigns that the circuit breaker paused (Sora_BOF_Test_5Oct, Tsuchi_BOF_Test_5Oct, Prospecting_JP_Purchase_5-9Oct, Sneakers_BOF_30Sep-5Oct, Caps + Kage_26 Sept), changing each from PAUSED back to ACTIVE via ads_activate_entity. Does not change the circuitBreaker.tripped flag -- clear that separately once you're satisfied spend is under control, or simply note it resolved.",
+      "metaAction": {
+        "tool": "ads_activate_entity",
+        "params": {
+          "ad_account_id": "704523148804803",
+          "entity_id": "120256202021140159",
+          "entity_type": "campaign"
+        },
+        "followUp": {
+          "tool": "ads_activate_entity",
+          "params": {
+            "ad_account_id": "704523148804803",
+            "entity_id": "120256202020640159",
+            "entity_type": "campaign"
+          },
+          "followUp": {
+            "tool": "ads_activate_entity",
+            "params": {
+              "ad_account_id": "704523148804803",
+              "entity_id": "120256186544730159",
+              "entity_type": "campaign"
+            },
+            "followUp": {
+              "tool": "ads_activate_entity",
+              "params": {
+                "ad_account_id": "704523148804803",
+                "entity_id": "120256091369160159",
+                "entity_type": "campaign"
+              },
+              "followUp": {
+                "tool": "ads_activate_entity",
+                "params": {
+                  "ad_account_id": "704523148804803",
+                  "entity_id": "120255693970470159",
+                  "entity_type": "campaign"
+                }
+              }
+            }
+          }
+        }
+      },
+      "status": "pending",
+      "createdAt": "2026-10-10T18:50:00.000Z"
     }
   ],
   "alerts": [
@@ -15336,6 +15386,24 @@
       "severity": "low",
       "dismissed": false,
       "createdAt": "2026-10-10T16:50:00.000Z"
+    },
+    {
+      "id": "AL-1581",
+      "module": "self-audit-check",
+      "title": "Routine pass summary -- 2026-10-10T18:50:00.000Z",
+      "detail": "Circuit breaker remains TRIPPED (tripped at 2026-10-10T16:50:00.000Z, not auto-resumed per policy) -- all 5 campaigns it paused stay paused; a resume-after-circuit-breaker proposal (A-061) was written this pass for human review. Zero campaigns of any kind are ACTIVE account-wide at this pass (confirmed via fresh ads_get_ad_entities campaign/adset pulls) -- today's account spend is ₹0. No anomaly signal fired (ads_insights_anomaly_signal). Pixel/dataset quality healthy -- all tracked event composite EMQ scores remain 6.1-8.8, at/above the pixel_quality_min_match_rate=0.6 gate; ROAS-based modules not suppressed, though moot this pass since nothing is delivering. Catalog diagnostics (1149969713295773): 13 items out-of-stock (must_fix, DPA channel only), 42 items missing a second image (opportunity) -- does not block the pending catalog-dpa-launch proposal (A-003). Competitor rescrape: Gully Labs 208 active ads (was 196, +6.1%), Lotto Sport India 265 (was 312, -15.1%) -- both under the 20% alert threshold. All delivery-dependent approval modules (pause-kill, reactivate-winner re-check, age-gender-auto-shift, geo-scaling/suppression/new-geo-testing, placement-optimization, device-targeting, frequency-capping, creative-fatigue, engagement-tier-segmentation, dayparting, bid-strategy-adjustment, budget-reallocation, threshold-alerts, learning-phase-stuck, campaign-consolidation-watch) have nothing to evaluate with zero active delivery -- no change since the ~16:50 UTC pass's 'zero active campaigns' note. The 14 other pending proposals (A-002, A-003, A-027, A-028, A-038, A-039, A-048, A-050, A-051, A-055, A-057, A-058, A-059, A-060) are based on historical/paused-campaign data that hasn't moved since paused campaigns generate no new delivery -- left unchanged, no re-derivation needed. hook-angle-tagging: no new untagged creatives this pass (the 15 found among the just-paused campaigns were already tagged at the 16:50 pass; no new ads created since). purchaser-exclusion / lookalike-refresh: nothing to evaluate / still rate-limited (last attempt 2026-10-10T08:50:00.000Z, <24h elapsed).",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-10-10T18:50:00.000Z"
+    },
+    {
+      "id": "AL-1582",
+      "module": "routine-run-notes",
+      "title": "Run summary -- 2026-10-10T18:50:00.000Z pass",
+      "detail": "0 auto-executed actions, 1 new proposal (A-061 resume-after-circuit-breaker), 0 new standalone alerts beyond this run-summary pair. Highest priority item: circuit breaker still tripped since 16:50 UTC, now with a resume proposal awaiting human approval.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-10-10T18:50:00.000Z"
     }
   ],
   "log": [
