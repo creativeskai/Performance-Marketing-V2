@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-10T10:47:00.000Z",
+  "generatedAt": "2026-10-10T12:47:00.000Z",
   "settings": {
     "kill_roas_threshold": "DISABLED 2026-10-05 by user instruction: the ROAS pause-kill is OFF. Module 16 (pause-kill) must NOT auto-pause any campaign for low ROAS; surface low-ROAS campaigns as alerts only. The hard spend circuit breaker is a separate mechanism and stays ON. Former rule, for reference: pause if ROAS < 1.0x after ₹500 spend on a sales-objective campaign. EXCEPTION until 2026-10-05T23:59+05:30 (user-approved 2026-09-29): for the sneaker-push campaigns 120256091369160159 (Sneakers_BOF_30Sep-5Oct), 120256091370110159 (Sneakers_Prospecting_30Sep-5Oct) and 120256088882780159 (Sneakers_Catalog_Retargeting) the spend floor is ₹1,500, not ₹500.",
     "reactivate_min_historic_roas": "surface for reactivation if a paused campaign's last active-period ROAS >= 3.0x",
@@ -15210,6 +15210,42 @@
       "severity": "low",
       "dismissed": false,
       "createdAt": "2026-10-10T10:47:00.000Z"
+    },
+    {
+      "id": "AL-1567",
+      "module": "lookalike-refresh",
+      "title": "Lookalike rebuild rate-limited -- last attempt <24h ago",
+      "detail": "The laddered 1%/2%/5% lookalikes off 'Purchasers 180D' (120255823280550159, still ~20 members, unchanged since 2026-09-15) are past the 14-day lookalike_refresh_days threshold. Last rebuild attempt was 2026-10-10T08:50:00.000Z (failed with Meta's duplicate-lookalike error 2654/1713007, source audience hasn't grown). This pass (2026-10-10T12:47Z) is ~3h57m after that attempt, within max_auto_actions_per_entity_per_day=1 (24h), so no rebuild was attempted -- would have acted, rate-limited. The 3 existing lookalikes (120255832535210159/610159/780159) remain ACTIVE and serving. Next eligible attempt ~2026-10-11T08:50 UTC.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-10-10T12:47:00.000Z"
+    },
+    {
+      "id": "AL-1568",
+      "module": "pixel-health",
+      "title": "Pixel quality remains healthy -- no match-rate breach",
+      "detail": "ads_get_dataset_quality on dataset 833131719490535: composite EMQ scores range 6.1 (PageView/ViewContent/AddToCart/SubscribedButtonClick/Search) to 8.8 (Purchase/prepaid_purchase/cod_purchase), with InitiateCheckout at 6.8 and AddPaymentInfo at 8.7. All at/above the pixel_quality_min_match_rate=0.6 threshold (interpreted as composite_score>=6.0 on Meta's 0-10 scale, per established practice) -- ROAS-based modules not suppressed this pass. Upload frequency hourly (real_time for Search/cod_purchase).",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-10-10T12:47:00.000Z"
+    },
+    {
+      "id": "AL-1569",
+      "module": "self-audit-check",
+      "title": "Routine pass summary -- 2026-10-10T12:47:00.000Z",
+      "detail": "Circuit breaker: today's account spend Rs4,562.60 vs Rs6,000 ceiling (76%) -- not tripped. Pixel gate: healthy, ROAS modules active. purchaser-exclusion: all 10 active ad sets (Sora_Hot_ATC_IC_API_30D, Sora_Warm_IG365_Engagers_Visitors, Tsuchi_Hot_ATC_IC_API_30D, Tsuchi_Warm_IG365_Engagers_Visitors, Prosp_Men_25-44_Purchase_JP, Caps_FB-A/B/C, Caps + Kage_26Sept, BOF_2_Warm_IG365_Engagers_Visitors) confirmed excluding Purchasers 180D (120255823280550159) via direct targeting fetch -- compliant account-wide. hook-angle-tagging: all 21 distinct active ad creatives already have creativeTags entries -- nothing new. No anomaly signal fired (ads_insights_anomaly_signal). Placement/device/age-gender/region breakdowns pulled for all 5 active campaigns (Sora_BOF_Test_5Oct, Tsuchi_BOF_Test_5Oct, Prospecting_JP_Purchase_5-9Oct, Sneakers_BOF_30Sep-5Oct, Caps + Kage_26 Sept) -- no new material gaps found beyond what's already covered by pending proposals A-038/A-058/A-059/A-060 (WhatsApp placement); device ROAS gaps (Android vs iPhone) all under ~1.65x, below materiality bar; age/gender skews consistent with account norm; region-level purchase_roas came back null for this breakdown combination (Meta API limitation), so geo-scaling/suppression/new-geo-testing could not be evaluated this pass. learning_stage_info empty for all 10 active ad sets -- none stuck in learning. Competitor rescrape not due (last scrape 2026-10-10T06:48Z, <24h ago). No KPI-to-dashboard drift identified. 15 proposals remain pending, untouched per execution policy (human-approval only).",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-10-10T12:47:00.000Z"
+    },
+    {
+      "id": "AL-1570",
+      "module": "routine-run-notes",
+      "title": "Run summary -- 2026-10-10T12:47:00.000Z pass",
+      "detail": "No circuit-breaker trip, no auto-mutations executed this pass (lookalike-refresh rate-limited, purchaser-exclusion already compliant, hook-angle-tagging had nothing new, hard-spend-circuit-breaker not triggered). 0 new proposals, 4 new alerts. 15 proposals remain pending for human approval (A-002, A-003, A-027, A-028, A-038, A-039, A-048, A-050, A-051, A-055, A-057, A-058, A-059, A-060). Today's spend Rs4,562.60 of Rs6,000 ceiling.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-10-10T12:47:00.000Z"
     }
   ],
   "log": [
