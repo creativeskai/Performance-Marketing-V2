@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-11T08:52:00.000Z",
+  "generatedAt": "2026-10-11T12:50:00.000Z",
   "settings": {
     "kill_roas_threshold": "DISABLED 2026-10-05 by user instruction: the ROAS pause-kill is OFF. Module 16 (pause-kill) must NOT auto-pause any campaign for low ROAS; surface low-ROAS campaigns as alerts only. The hard spend circuit breaker is a separate mechanism and stays ON. Former rule, for reference: pause if ROAS < 1.0x after ₹500 spend on a sales-objective campaign. EXCEPTION until 2026-10-05T23:59+05:30 (user-approved 2026-09-29): for the sneaker-push campaigns 120256091369160159 (Sneakers_BOF_30Sep-5Oct), 120256091370110159 (Sneakers_Prospecting_30Sep-5Oct) and 120256088882780159 (Sneakers_Catalog_Retargeting) the spend floor is ₹1,500, not ₹500.",
     "reactivate_min_historic_roas": "surface for reactivation if a paused campaign's last active-period ROAS >= 3.0x",
@@ -1139,6 +1139,24 @@
       },
       "status": "pending",
       "createdAt": "2026-10-11T06:51:00.000Z"
+    },
+    {
+      "id": "A-063",
+      "module": "resume-after-circuit-breaker",
+      "tier": "approval",
+      "title": "Resume 'Caps + Kage_26 Sept' -- the one campaign still down from the 2026-10-10 circuit breaker trip",
+      "reasoning": "The hard spend circuit breaker tripped 2026-10-10T16:50:00.000Z (today's spend Rs6,406.69 vs the Rs6,000 ceiling) and paused all 5 then-active campaigns: Sora_BOF_Test_5Oct, Tsuchi_BOF_Test_5Oct, Prospecting_JP_Purchase_5-9Oct, Sneakers_BOF_30Sep-5Oct and Caps + Kage_26 Sept. A-061 (covering all 5) was rejected by the human reviewer at 2026-10-11T02:51:00.000Z. Since then, 4 of the 5 -- Sora_BOF_Test_5Oct, Tsuchi_BOF_Test_5Oct, Prospecting_JP_Purchase_5-9Oct and Sneakers_BOF_30Sep-5Oct -- have been resumed directly in Meta Ads Manager, outside this routine's approval flow (first observed at the 2026-10-11T02:51 pass, reconfirmed every pass since, and reconfirmed again live this pass). 'Caps + Kage_26 Sept' (120255693970470159) is the only one of the original 5 still PAUSED -- confirmed via a fresh ads_get_ad_entities pull this pass (2026-10-11T12:50 UTC). Today's account-wide spend at this pass is Rs2,125.12 against the Rs6,000 ceiling (16 purchases, Rs29,568.75 revenue) -- comfortably under, no fresh breach, no new anomaly signal, pixel quality healthy (EMQ composite scores 6.1-8.8, at/above pixel_quality_min_match_rate=0.6). This campaign had last_14d ROAS around 9x before the trip (per its own placement/age-gender reconfirmation history in A-038/A-059/A-060) and was paused only as the emergency brake, not for a performance reason. circuitBreaker.tripped stays true regardless of this proposal's outcome per ROUTINE.md -- clearing that flag is a separate, explicit human action.",
+      "actionSummary": "Reactivates the single remaining circuit-breaker casualty, campaign 'Caps + Kage_26 Sept' (120255693970470159), changing it from PAUSED back to ACTIVE via ads_activate_entity. Does not touch circuitBreaker.tripped or any other campaign.",
+      "metaAction": {
+        "tool": "ads_activate_entity",
+        "params": {
+          "ad_account_id": "704523148804803",
+          "entity_id": "120255693970470159",
+          "entity_type": "campaign"
+        }
+      },
+      "status": "pending",
+      "createdAt": "2026-10-11T12:50:00.000Z"
     }
   ],
   "alerts": [
@@ -15681,6 +15699,69 @@
       "severity": "low",
       "dismissed": false,
       "createdAt": "2026-10-11T08:52:00.000Z"
+    },
+    {
+      "id": "AL-1610",
+      "module": "hard-spend-circuit-breaker",
+      "title": "circuitBreaker still tripped -- only 1 of the 5 originally-paused campaigns remains down",
+      "detail": "Reconfirmed this pass (2026-10-11T12:50 UTC): today's account spend is Rs2,125.12 against the Rs6,000 hard_spend_ceiling_inr -- no fresh breach (16 purchases, Rs29,568.75 revenue, 27,038 impressions, 448 clicks). circuitBreaker.tripped remains true from the 2026-10-10T16:50 trip. Of the 5 campaigns that trip paused, 4 (Sora_BOF_Test_5Oct, Tsuchi_BOF_Test_5Oct, Prospecting_JP_Purchase_5-9Oct, Sneakers_BOF_30Sep-5Oct) are confirmed ACTIVE again -- resumed directly in Meta Ads Manager, outside this routine's approval flow (A-061, which would have resumed all 5, was rejected 2026-10-11T02:51). Only 'Caps + Kage_26 Sept' (120255693970470159) is still PAUSED. A new, narrower proposal (A-063) has been written for just that one campaign. This routine will not clear circuitBreaker.tripped itself -- a human should either approve A-063 and then explicitly clear the flag, or clear it directly in the Automation tab now that spend is confirmed well under ceiling.",
+      "severity": "high",
+      "dismissed": false,
+      "createdAt": "2026-10-11T12:50:00.000Z"
+    },
+    {
+      "id": "AL-1611",
+      "module": "pixel-health",
+      "title": "Pixel quality remains healthy -- no match-rate breach",
+      "detail": "ads_get_dataset_quality on dataset 833131719490535 (Shopify Meta Pixel): composite EMQ scores range 6.1 (Search/PageView/ViewContent/AddToCart/SubscribedButtonClick) to 8.8 (prepaid_purchase), all at or above pixel_quality_min_match_rate=0.6. ROAS-driven modules are NOT suppressed this pass.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-10-11T12:50:00.000Z"
+    },
+    {
+      "id": "AL-1612",
+      "module": "purchaser-exclusion",
+      "title": "All 9 active ad sets reconfirmed purchaser-exclusion compliant",
+      "detail": "Fresh ads_get_ad_entities pull (level=adset, effective_status=ACTIVE) this pass: all 9 currently-active ad sets (RT_Tees_NoBuyers_v1_11Oct, RT_Sneakers_Caps_NoBuyers_v2_11Oct, Sora_Warm_IG365_Engagers_Visitors_v2_20Oct, Sora_Hot_ATC_IC_API_30D, Tsuchi_Hot_ATC_IC_API_30D, Tsuchi_Warm_IG365_Engagers_Visitors, Caps_Only_11Oct, Prosp_Men_25-44_Purchase_JP, BOF_2_Warm_IG365_Engagers_Visitors) already have Purchasers 180D (120255823280550159) in targeting.excluded_custom_audiences. No action needed. The 2 exempt ad sets (120256091378350159, 120255851467360159, settings.purchaser_exclusion_exempt_adset_ids) are currently not active and were correctly left untouched regardless.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-10-11T12:50:00.000Z"
+    },
+    {
+      "id": "AL-1613",
+      "module": "lookalike-refresh",
+      "title": "Lookalike rebuild skipped this pass -- rate-limited",
+      "detail": "settings.max_auto_actions_per_entity_per_day=1 already used for lookalike-refresh on the Purchasers 180D source audience (120255823280550159) at the 2026-10-11T08:52:00.000Z pass (<24h ago) -- that attempt also failed again with Meta's duplicate-lookalike error (2654/1713007), source audience still ~20, unchanged since 2026-09-15. Would have attempted again this pass; skipped per rate limiting. The 3 existing laddered 1%/2%/5% lookalikes remain live and serving.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-10-11T12:50:00.000Z"
+    },
+    {
+      "id": "AL-1614",
+      "module": "learning-phase-stuck",
+      "title": "No ad sets stuck in learning",
+      "detail": "Fresh pull this pass: none of the 9 active ad sets show a learning_stage_info value indicating an active, prolonged learning phase.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-10-11T12:50:00.000Z"
+    },
+    {
+      "id": "AL-1615",
+      "module": "self-audit-check",
+      "title": "Routine pass summary -- 2026-10-11T12:50:00.000Z",
+      "detail": "Circuit breaker: NOT breached this pass (today's account spend Rs2,125.12 vs Rs6,000 ceiling, 16 purchases, Rs29,568.75 revenue). circuitBreaker.tripped remains true from the 2026-10-10T16:50 trip -- 4 of the 5 originally-paused campaigns are confirmed ACTIVE again (resumed outside the approval flow); only 'Caps + Kage_26 Sept' is still PAUSED -- new proposal A-063 written for it alone (see AL-1610). Pixel quality: healthy, EMQ composite scores 6.1-8.8, ROAS modules not suppressed. Purchaser-exclusion: all 9 active ad sets reconfirmed compliant, no action needed. Lookalike-refresh: rate-limited (last attempt <24h ago at 08:52, also failed on the same duplicate-lookalike constraint). Hook-angle-tagging: found and tagged 4 previously-untagged creatives (the new 'Caps_Only_11Oct' ad set's 4 image variants -- Indigo, Indigo_Jap, Maroon x2) from their real primary-text/headline via Meta Ads MCP; Higgsfield vision pass skipped (not attached this run). Anomaly signal: clean this pass -- no issues found account-wide (the narrow-audience flag on RT_Sneakers_Caps_NoBuyers_v2_11Oct / RT_Tees_NoBuyers_v1_11Oct from the prior pass, AL-1608, did not recur). Learning-phase-stuck: none. Competitor-rescrape: last scraped today 2026-10-11T04:47 UTC (AL-1602), not due again yet this pass. Weekly-digest: already produced this week (AL-1590, week ending 2026-10-11); monthly-digest not due (not the first run of a new month). Pending reactivate-winner (A-027/028/039/048/050/051) and campaign-consolidation/placement/ab-test proposals (A-057/058/059/060/062) re-checked against fresh campaign-level last_30d/last_14d pulls this pass -- every figure matched the immediately-prior pass's recorded numbers exactly (no movement since 08:52), so none were edited; A-028 and A-050's previously-flagged caveats (ROAS below threshold / sneaker-push window closed, respectively) still stand unchanged. No new approval-tier triggers found this pass. All pending proposals left untouched/unexecuted per this run's policy.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-10-11T12:50:00.000Z"
+    },
+    {
+      "id": "AL-1616",
+      "module": "routine-run-notes",
+      "title": "Run summary -- 2026-10-11T12:50:00.000Z pass",
+      "detail": "Auto-executed: 4 hook-angle-tagging creative tags (Caps_Only_11Oct's 4 image ads). Rate-limited skip: lookalike-refresh (1). New proposals: 1 (A-063, resume-after-circuit-breaker for Caps + Kage_26 Sept). New alerts: 7 (1 high -- circuitBreaker/resume gap; 6 low). No failed Meta API write calls this pass. Highest-priority item: circuitBreaker.tripped is still true in queue.json even though spend is well under ceiling and 4 of 5 paused campaigns are already running again outside the approval flow -- a human should approve A-063 and/or explicitly clear the circuit breaker flag.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-10-11T12:50:00.000Z"
     }
   ],
   "log": [
@@ -22815,6 +22896,66 @@
       },
       "tier": "auto",
       "executedAt": "2026-10-11T08:52:00.000Z"
+    },
+    {
+      "proposalId": null,
+      "action": "hook-angle-tagging auto-module: tagged creative 1623892302771039 (ad 'Caps_Only_Creatives -Indigo_Jap', ad set 'Caps_Only_11Oct', campaign 'Caps_Only', created today ~12:36 IST) -- no prior creativeTags entry. Tagged from its real primary text/headline via Meta Ads MCP ads_get_creatives.",
+      "result": "success",
+      "previousState": {
+        "creativeTags_entry": null
+      },
+      "detail": {
+        "creative_id": "1623892302771039",
+        "title": "Timeless by Design. Indigo by Nature.",
+        "body": "Some designs don't chase time. They outlast it.\n\n Meet KAI Archives 2.0 in Indigo — timeless character, built into every detail.\n\n Few pieces left. Get 5% off when you pay online."
+      },
+      "tier": "auto",
+      "executedAt": "2026-10-11T12:50:00.000Z"
+    },
+    {
+      "proposalId": null,
+      "action": "hook-angle-tagging auto-module: tagged creative 1809060246943839 (ad 'Caps_Only_Creatives -Maroon_Jap', ad set 'Caps_Only_11Oct', campaign 'Caps_Only', created today ~12:36 IST) -- no prior creativeTags entry. Tagged from its real primary text/headline via Meta Ads MCP ads_get_creatives.",
+      "result": "success",
+      "previousState": {
+        "creativeTags_entry": null
+      },
+      "detail": {
+        "creative_id": "1809060246943839",
+        "title": "Our bestseller. Limited by Design.",
+        "body": "Deep in colour. Distinct by nature. \n\n KAI Archives 2.0 in Maroon — a statement that doesn't need to be loud.\n\n Only 30 pieces left. Get 5% off when you pay online."
+      },
+      "tier": "auto",
+      "executedAt": "2026-10-11T12:50:00.000Z"
+    },
+    {
+      "proposalId": null,
+      "action": "hook-angle-tagging auto-module: tagged creative 1931276104508293 (ad 'Caps_Only_Creatives -Maroon', ad set 'Caps_Only_11Oct', campaign 'Caps_Only', created today ~12:36 IST) -- no prior creativeTags entry. Tagged from its real primary text/headline via Meta Ads MCP ads_get_creatives.",
+      "result": "success",
+      "previousState": {
+        "creativeTags_entry": null
+      },
+      "detail": {
+        "creative_id": "1931276104508293",
+        "title": "Our bestseller. Limited by Design.",
+        "body": "Deep in colour. Distinct by nature. \n\n KAI Archives 2.0 in Maroon — a statement that doesn't need to be loud.\n\n Only 30 pieces left. Get 5% off when you pay online."
+      },
+      "tier": "auto",
+      "executedAt": "2026-10-11T12:50:00.000Z"
+    },
+    {
+      "proposalId": null,
+      "action": "hook-angle-tagging auto-module: tagged creative 1788061175773607 (ad 'Caps_Only_Creatives -Indigo', ad set 'Caps_Only_11Oct', campaign 'Caps_Only', created today ~12:36 IST) -- no prior creativeTags entry. Tagged from its real primary text/headline via Meta Ads MCP ads_get_creatives.",
+      "result": "success",
+      "previousState": {
+        "creativeTags_entry": null
+      },
+      "detail": {
+        "creative_id": "1788061175773607",
+        "title": "Timeless by Design. Indigo by Nature.",
+        "body": "Some designs don't chase time. They outlast it.\n\n Meet KAI Archives 2.0 in Indigo — timeless character, built into every detail.\n\n Few pieces left. Get 5% off when you pay online."
+      },
+      "tier": "auto",
+      "executedAt": "2026-10-11T12:50:00.000Z"
     }
   ],
   "creativeTags": {
@@ -26517,6 +26658,50 @@
       "visionPassSkipped": true,
       "note": "Higgsfield vision connection not attached to this run -- image/carousel-card imagery itself not analyzed, only real ad copy text used. No creative description invented.",
       "taggedAt": "2026-10-11T08:52:00.000Z"
+    },
+    "1623892302771039": {
+      "adName": "Caps_Only_Creatives -Indigo_Jap",
+      "campaign": "Caps_Only",
+      "format": "Static image (SHARE)",
+      "angle": "Brand/product story positioning (timeless design language) + scarcity, prepaid discount nudge",
+      "hook": "\"Timeless by Design. Indigo by Nature.\" (headline) / \"Some designs don't chase time. They outlast it.\n\n Meet KAI Archives 2.0 in Indigo — timeless character, built into every detail.\n\n Few pieces left. Get 5% off when you pay online.\" (primary text)",
+      "taggedFrom": "ad primary text (body) + headline (title), via Meta Ads MCP ads_get_creatives",
+      "visionPassSkipped": true,
+      "note": "Higgsfield vision connection not attached to this run -- image content itself not analyzed, only real ad copy text used. No creative description invented.",
+      "taggedAt": "2026-10-11T12:50:00.000Z"
+    },
+    "1809060246943839": {
+      "adName": "Caps_Only_Creatives -Maroon_Jap",
+      "campaign": "Caps_Only",
+      "format": "Static image (SHARE)",
+      "angle": "Bestseller/social-proof framing + scarcity (30 pieces left) + prepaid discount nudge",
+      "hook": "\"Our bestseller. Limited by Design.\" (headline) / \"Deep in colour. Distinct by nature. \n\n KAI Archives 2.0 in Maroon — a statement that doesn't need to be loud.\n\n Only 30 pieces left. Get 5% off when you pay online.\" (primary text)",
+      "taggedFrom": "ad primary text (body) + headline (title), via Meta Ads MCP ads_get_creatives",
+      "visionPassSkipped": true,
+      "note": "Higgsfield vision connection not attached to this run -- image content itself not analyzed, only real ad copy text used. No creative description invented.",
+      "taggedAt": "2026-10-11T12:50:00.000Z"
+    },
+    "1931276104508293": {
+      "adName": "Caps_Only_Creatives -Maroon",
+      "campaign": "Caps_Only",
+      "format": "Static image (SHARE)",
+      "angle": "Bestseller/social-proof framing + scarcity (30 pieces left) + prepaid discount nudge",
+      "hook": "\"Our bestseller. Limited by Design.\" (headline) / \"Deep in colour. Distinct by nature. \n\n KAI Archives 2.0 in Maroon — a statement that doesn't need to be loud.\n\n Only 30 pieces left. Get 5% off when you pay online.\" (primary text)",
+      "taggedFrom": "ad primary text (body) + headline (title), via Meta Ads MCP ads_get_creatives",
+      "visionPassSkipped": true,
+      "note": "Higgsfield vision connection not attached to this run -- image content itself not analyzed, only real ad copy text used. No creative description invented.",
+      "taggedAt": "2026-10-11T12:50:00.000Z"
+    },
+    "1788061175773607": {
+      "adName": "Caps_Only_Creatives -Indigo",
+      "campaign": "Caps_Only",
+      "format": "Static image (SHARE)",
+      "angle": "Brand/product story positioning (timeless design language) + scarcity, prepaid discount nudge",
+      "hook": "\"Timeless by Design. Indigo by Nature.\" (headline) / \"Some designs don't chase time. They outlast it.\n\n Meet KAI Archives 2.0 in Indigo — timeless character, built into every detail.\n\n Few pieces left. Get 5% off when you pay online.\" (primary text)",
+      "taggedFrom": "ad primary text (body) + headline (title), via Meta Ads MCP ads_get_creatives",
+      "visionPassSkipped": true,
+      "note": "Higgsfield vision connection not attached to this run -- image content itself not analyzed, only real ad copy text used. No creative description invented.",
+      "taggedAt": "2026-10-11T12:50:00.000Z"
     }
   }
 }
