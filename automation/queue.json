@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-11T02:51:00.000Z",
+  "generatedAt": "2026-10-11T04:47:00.000Z",
   "settings": {
     "kill_roas_threshold": "DISABLED 2026-10-05 by user instruction: the ROAS pause-kill is OFF. Module 16 (pause-kill) must NOT auto-pause any campaign for low ROAS; surface low-ROAS campaigns as alerts only. The hard spend circuit breaker is a separate mechanism and stays ON. Former rule, for reference: pause if ROAS < 1.0x after ₹500 spend on a sales-objective campaign. EXCEPTION until 2026-10-05T23:59+05:30 (user-approved 2026-09-29): for the sneaker-push campaigns 120256091369160159 (Sneakers_BOF_30Sep-5Oct), 120256091370110159 (Sneakers_Prospecting_30Sep-5Oct) and 120256088882780159 (Sneakers_Catalog_Retargeting) the spend floor is ₹1,500, not ₹500.",
     "reactivate_min_historic_roas": "surface for reactivation if a paused campaign's last active-period ROAS >= 3.0x",
@@ -31,8 +31,8 @@
     "competitor_last_scrape": {
       "gully_labs_active_ads": 163,
       "lotto_sport_india_active_ads": 265,
-      "scraped_at": "2026-10-11T02:51:00.000Z",
-      "note": "2026-10-11T02:51:00.000Z pass: Gully Labs 163 (unchanged vs last recorded 163, 0.0%), Lotto Sport India 265 (unchanged vs last recorded 265, 0.0%) -- both under the 20% alert threshold, no spike alert."
+      "scraped_at": "2026-10-11T04:47:00.000Z",
+      "note": "2026-10-11T04:47:00.000Z pass: Gully Labs 163 (unchanged vs last recorded 163, 0.0%), Lotto Sport India 265 (unchanged vs last recorded 265, 0.0%) -- both under the 20% alert threshold, no spike alert."
     },
     "audience_label_corrections": {
       "120249907176770159": "ATC_180D -- NOT a purchaser audience (cart-adders, event=AddToCart, retention 180 days). Verified 2026-09-14, reconfirmed 2026-09-20. Superseded note: earlier passes said the account had NO purchaser audience at all -- that's now out of date. See the 120255823280550159 (Purchasers 180D) entry above, created 2026-09-15, which IS a genuine purchaser audience and is already in use for exclusion + lookalike.",
@@ -15113,8 +15113,8 @@
     {
       "id": "AL-1550",
       "module": "pause-kill",
-      "title": "Sora_BOF_Test_5Oct -- zero purchases on Rs826.49 spend (alert-only, auto-pause disabled)",
-      "detail": "Sora_BOF_Test_5Oct (120256202021140159, OUTCOME_SALES) has spent Rs826.49 across its 2 ad sets (Sora_Hot_ATC_IC_API_30D Rs66.04, Sora_Warm_IG365_Engagers_Visitors Rs760.45) since launching 2026-10-05 with 0 attributed purchases (purchase_roas null) -- above the former Rs500 kill-floor. Per settings.kill_roas_threshold, the pause-kill auto-action is DISABLED by user instruction (2026-10-05) -- surfacing as an alert only, no campaign was paused. Note this campaign is also flagged as a duplicate under pending proposal A-057 (campaign-consolidation).",
+      "title": "Sora_BOF_Test_5Oct -- zero purchases on Rs1,178.31 spend (last_14d, alert-only, auto-pause disabled)",
+      "detail": "Updated 2026-10-11T04:47:00.000Z pass: Sora_BOF_Test_5Oct (120256202021140159, OUTCOME_SALES) last_14d spend is now Rs1,178.31 (up from Rs826.49 recorded 2026-10-09T22:51, campaign was paused by the hard-spend circuit breaker trip on 2026-10-10T16:50 and resumed outside the routine's flow per the 2026-10-11T02:51 mismatch alert) with purchase_roas still null -- 0 attributed purchases across both ad sets (Sora_Hot_ATC_IC_API_30D, Sora_Warm_IG365_Engagers_Visitors). Still above the former Rs500 kill-floor. Per settings.kill_roas_threshold, the pause-kill auto-action remains DISABLED by user instruction (2026-10-05) -- surfacing as an alert only, no campaign was paused. Also still flagged as a duplicate test campaign under pending proposal A-057 (campaign-consolidation).",
       "severity": "medium",
       "dismissed": false,
       "createdAt": "2026-10-09T22:51:00.000Z"
@@ -15541,6 +15541,69 @@
       "severity": "low",
       "dismissed": false,
       "createdAt": "2026-10-11T02:51:00.000Z"
+    },
+    {
+      "id": "AL-1598",
+      "module": "purchaser-exclusion",
+      "title": "All 12 active ad sets reconfirmed purchaser-exclusion compliant",
+      "detail": "Fresh ads_get_ad_entities targeting pull on all 12 currently ACTIVE ad sets: 11 already exclude Purchasers 180D (120255823280550159); the 12th, Retargeting_Overall's base ad set (120255851467360159), is on the settings.purchaser_exclusion_exempt_adset_ids allowlist (deliberately targets past purchasers by design, user-approved 2026-09-29) and was correctly skipped. No new purchaser-exclusion action needed this pass.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-10-11T04:47:00.000Z"
+    },
+    {
+      "id": "AL-1599",
+      "module": "learning-phase-stuck",
+      "title": "No ad sets stuck in learning",
+      "detail": "learning_stage_info came back null/empty for all 12 currently ACTIVE ad sets (all have been delivering for multiple days) -- no ad set is currently showing a learning-phase delivery status. Nothing flagged this pass.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-10-11T04:47:00.000Z"
+    },
+    {
+      "id": "AL-1600",
+      "module": "pixel-health",
+      "title": "Pixel quality remains healthy -- no match-rate breach",
+      "detail": "ads_get_dataset_quality on pixel 833131719490535 this pass: composite EMQ scores across all 10 tracked web events range 6.1 (AddToCart/PageView/ViewContent/SubscribedButtonClick/Search) to 8.8 (AddPaymentInfo/Purchase/prepaid_purchase/cod_purchase), all effectively at/above the pixel_quality_min_match_rate=0.6 gate (treating the 0-10 composite score as a /10 match-rate proxy, consistent with every prior pass). ROAS-based modules not suppressed this pass.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-10-11T04:47:00.000Z"
+    },
+    {
+      "id": "AL-1601",
+      "module": "lookalike-refresh",
+      "title": "Lookalike rebuild skipped this pass -- rate-limited",
+      "detail": "Last attempt was 2026-10-10T08:50:00.000Z (failed with Meta's duplicate-lookalike error, source audience 'Purchasers 180D' unchanged since 2026-09-15). Less than 24h have elapsed as of this pass (2026-10-11T04:47:00.000Z) -- settings.max_auto_actions_per_entity_per_day=1 not yet cleared. Skipped without a new attempt per the rate-limiting rule; would have acted otherwise.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-10-11T04:47:00.000Z"
+    },
+    {
+      "id": "AL-1602",
+      "module": "competitor-rescrape",
+      "title": "Gully Labs / Lotto Sport India active-ad counts unchanged",
+      "detail": "ads_library_search (page_id 107479854297817, country IN, ad_active_status=ACTIVE) this pass: Gully Labs estimated_total_count=163, unchanged vs last recorded 163 (0.0% move). Lotto Sport India (page_id 426015150606378, country IN): estimated_total_count=265, unchanged vs last recorded 265 (0.0% move). Both well under the >=20% competitor-spike alert threshold -- no spike alert.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-10-11T04:47:00.000Z"
+    },
+    {
+      "id": "AL-1603",
+      "module": "self-audit-check",
+      "title": "Routine pass summary -- 2026-10-11T04:47:00.000Z",
+      "detail": "Circuit breaker: not tripped this pass (today's account spend Rs351.25, well under the Rs6,000 ceiling); stored circuitBreaker.tripped=true record from the 2026-10-10T16:50 trip is left unchanged per the standing human-review-only reset rule -- see the 2026-10-11T02:51 high-severity mismatch alert, still unresolved and not re-alerted this pass (no new information). Pixel quality: healthy. Purchaser-exclusion: all active ad sets compliant. Lookalike-refresh: rate-limited, skipped. Hook-angle-tagging: all 27 distinct creatives on currently active ads already have creativeTags entries -- nothing new to tag. Native anomaly signal: narrow-audience warning on Retargeting_NoBuyers_JP persists (previously flagged AL-1488 2026-10-08, within the 3-day dedup window -- not re-alerted). Pause-kill (alert-only): Sora_BOF_Test_5Oct still showing 0 purchases, now Rs1,178.31 last_14d spend -- existing alert AL-1550 updated in place. Reactivate-winner proposals (A-027, A-028, A-039, A-048, A-050, A-051): fresh last_30d pulls match previously recorded figures exactly, no material drift -- no reasoning updates needed. Competitor rescrape: both tracked pages unchanged. No new proposals or alerts beyond the items listed above.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-10-11T04:47:00.000Z"
+    },
+    {
+      "id": "AL-1604",
+      "module": "routine-run-notes",
+      "title": "Run summary -- 2026-10-11T04:47:00.000Z pass",
+      "detail": "0 auto-executed actions this pass (purchaser-exclusion, lookalike-refresh rate-limited, hook-angle-tagging had nothing new, hard-spend-circuit-breaker not triggered). 0 new proposals. 6 new status alerts written (purchaser-exclusion compliant, learning-phase-stuck none, pixel-health healthy, lookalike-refresh rate-limited, competitor-rescrape unchanged, self-audit-check) plus this run summary; 1 existing alert (AL-1550, pause-kill on Sora_BOF_Test_5Oct) updated in place with fresh numbers. No material change to any pending proposal's underlying numbers. circuitBreaker record remains tripped=true pending human review/reset (see 2026-10-11T02:51 mismatch alert) even though live delivery has been back to normal since before that pass.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-10-11T04:47:00.000Z"
     }
   ],
   "log": [
