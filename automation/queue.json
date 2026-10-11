@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-11T04:47:00.000Z",
+  "generatedAt": "2026-10-11T06:51:00.000Z",
   "settings": {
     "kill_roas_threshold": "DISABLED 2026-10-05 by user instruction: the ROAS pause-kill is OFF. Module 16 (pause-kill) must NOT auto-pause any campaign for low ROAS; surface low-ROAS campaigns as alerts only. The hard spend circuit breaker is a separate mechanism and stays ON. Former rule, for reference: pause if ROAS < 1.0x after ₹500 spend on a sales-objective campaign. EXCEPTION until 2026-10-05T23:59+05:30 (user-approved 2026-09-29): for the sneaker-push campaigns 120256091369160159 (Sneakers_BOF_30Sep-5Oct), 120256091370110159 (Sneakers_Prospecting_30Sep-5Oct) and 120256088882780159 (Sneakers_Catalog_Retargeting) the spend floor is ₹1,500, not ₹500.",
     "reactivate_min_historic_roas": "surface for reactivation if a paused campaign's last active-period ROAS >= 3.0x",
@@ -1107,6 +1107,38 @@
       "status": "rejected",
       "createdAt": "2026-10-10T18:50:00.000Z",
       "resolvedAt": "2026-10-11T02:51:00.000Z"
+    },
+    {
+      "id": "A-062",
+      "module": "ab-test",
+      "tier": "approval",
+      "title": "Structured A/B test: Caps_Maroon_Hero vs Caps_Indigo_Hero (Caps + Kage_26 Sept)",
+      "reasoning": "Caps + Kage_26 Sept runs 3 cap-color creative variants (Caps_Maroon_Hero, Caps_Grey_Hero, Caps_Indigo_Hero) duplicated across its 4 active ad sets, with no structured test running (confirmed via ads_experiment_list_tests -- has_active_study=false for this campaign). last_14d per-ad performance aggregated across all 4 ad sets: Maroon ~Rs1,532 spend with strong attributed ROAS (12.6x-30.0x in the 2 ad sets with real purchase volume); Grey ~Rs320 spend, 10.1x ROAS in its one ad set with purchase data; Indigo ~Rs441 spend across all 4 ad sets with purchase_roas null in every single one -- zero attributed purchases despite comparable CTR (1.0%-1.9%) to the other two colors. This is a real, previously-unflagged signal (no existing ab-test proposal/alert for this campaign) that Indigo may be underperforming on conversion specifically, not just impressions/clicks. Proposing a formal Meta split test (ad-level, cost_per_action_type:omni_purchase as primary KPI) between the clearest head-to-head pair within the same ad set (Caps + Kage_26Sept ad set, 120255693970460159) -- Maroon (30.05x historical ROAS there) vs Indigo (0 purchases there) -- to get a statistically rigorous read before permanently deprioritizing Indigo.",
+      "actionSummary": "Creates a 7-day Meta A/B split test (ads_experiment_abtest_create_test) comparing ad 'Caps_Maroon_Hero' (120256259391980159) vs ad 'Caps_Indigo_Hero' (120256259391630159), both within ad set 120255693970460159 (Caps + Kage_26Sept). Primary KPI: cost per purchase. Does not pause or change any existing ad -- Meta runs the test as an overlay. Starts the day after approval, runs 7 days.",
+      "metaAction": {
+        "tool": "ads_experiment_abtest_create_test",
+        "params": {
+          "ad_account_id": "act_704523148804803",
+          "cells": [
+            {
+              "name": "Maroon",
+              "ad_entity_ids": [
+                "120256259391980159"
+              ]
+            },
+            {
+              "name": "Indigo",
+              "ad_entity_ids": [
+                "120256259391630159"
+              ]
+            }
+          ],
+          "primary_kpi": "cost_per_action_type:omni_purchase",
+          "test_name": "Caps Hero Color Test: Maroon vs Indigo"
+        }
+      },
+      "status": "pending",
+      "createdAt": "2026-10-11T06:51:00.000Z"
     }
   ],
   "alerts": [
@@ -14598,7 +14630,7 @@
       "id": "AL-1493",
       "module": "creative-fatigue",
       "title": "Retargeting_Overall ad set frequency continues above fatigue threshold (4.29 vs 3.0)",
-      "detail": "Ad set Retargeting_Overall (120255851467360159, exempt from purchaser-exclusion by design -- deliberately includes Purchasers 180D) shows frequency 4.29 (last_14d), up from 3.28 at the 2026-10-06T06:54 UTC pass (AL-1436). ROAS remains healthy at 8.05x-8.13x and spend is modest (~Rs2,900-3,600 last_14d), consistent with a small, niche all-product retargeting audience that naturally re-serves the same people. Informational only -- pause-kill is disabled by user instruction and no frequency-cap/fatigue action is being auto-applied here.",
+      "detail": "Ad set Retargeting_Overall (120255851467360159, exempt from purchaser-exclusion by design -- deliberately includes Purchasers 180D) shows frequency 4.29 (last_14d), up from 3.28 at the 2026-10-06T06:54 UTC pass (AL-1436). ROAS remains healthy at 8.05x-8.13x and spend is modest (~Rs2,900-3,600 last_14d), consistent with a small, niche all-product retargeting audience that naturally re-serves the same people. Informational only -- pause-kill is disabled by user instruction and no frequency-cap/fatigue action is being auto-applied here. Reconfirmed 2026-10-11T06:51:00.000Z pass: campaign-level frequency now 4.392195 (last_14d), up slightly from 4.29. purchase_roas remains healthy (7.35x this pass). Still informational only -- pause-kill disabled, no frequency-cap action taken.",
       "severity": "low",
       "dismissed": false,
       "createdAt": "2026-10-08T12:49:00.000Z"
@@ -14634,7 +14666,7 @@
       "id": "AL-1497",
       "module": "budget-reallocation",
       "title": "Prospecting_JP_Purchase_5-9Oct showing 24.62x ROAS vs Sneakers_BOF's 5.03x -- sample still thin, watching",
-      "detail": "Prospecting_JP_Purchase_5-9Oct now showing 24.618432x purchase_roas (last_30d == lifetime, spend Rs2,212.19, 19 attributed purchases) vs Sneakers_BOF_30Sep-5Oct's 5.032987x (last_30d, spend Rs24,611.12) -- gap has held in the mid-20s since 2026-10-08 (was 26.31x/5.14x at the 2026-10-09T16:50 pass, 17.84x/4.87x when first written 2026-10-08T14:52). Campaign is now ~4.75 days old (launched 2026-10-05T00:29 IST) with 19 purchases -- a larger sample than when this alert was opened, but still thin in absolute terms and the daily_budget (Rs605) is small relative to Sneakers_BOF's Rs2,700. Continuing to treat as informational-only pending more data rather than opening a budget-reallocation proposal this pass; reconsider once purchase count clears ~30-40 or spend clears ~Rs4,000, whichever first makes the sample defensible for a budget move.",
+      "detail": "Prospecting_JP_Purchase_5-9Oct now showing 24.618432x purchase_roas (last_30d == lifetime, spend Rs2,212.19, 19 attributed purchases) vs Sneakers_BOF_30Sep-5Oct's 5.032987x (last_30d, spend Rs24,611.12) -- gap has held in the mid-20s since 2026-10-08 (was 26.31x/5.14x at the 2026-10-09T16:50 pass, 17.84x/4.87x when first written 2026-10-08T14:52). Campaign is now ~4.75 days old (launched 2026-10-05T00:29 IST) with 19 purchases -- a larger sample than when this alert was opened, but still thin in absolute terms and the daily_budget (Rs605) is small relative to Sneakers_BOF's Rs2,700. Continuing to treat as informational-only pending more data rather than opening a budget-reallocation proposal this pass; reconsider once purchase count clears ~30-40 or spend clears ~Rs4,000, whichever first makes the sample defensible for a budget move. Reconfirmed 2026-10-11T06:51:00.000Z pass: Prospecting_JP_Purchase_5-9Oct last_14d purchase_roas 19.757818x on Rs3,022.73 spend (21 purchases) vs Sneakers_BOF_30Sep-5Oct's 4.705794x on Rs28,446.86 spend (54 purchases) -- gap has narrowed somewhat from the mid-20s as Prospecting_JP's window ages and Sneakers_BOF's prior strong days roll out of last_14d, but still a ~4.2x spread. A formal budget-reallocation proposal for a similar gap (A-049) was already rejected by the human reviewer on 2026-10-02 -- treating this as the same watch-only pattern rather than reopening a new proposal. Sneakers_BOF_30Sep-5Oct's push window (30Sep-5Oct) has also technically closed; worth reviewing whether it should be wound down independent of the reallocation question.",
       "severity": "low",
       "dismissed": false,
       "createdAt": "2026-10-08T14:52:00.000Z",
@@ -15604,6 +15636,33 @@
       "severity": "low",
       "dismissed": false,
       "createdAt": "2026-10-11T04:47:00.000Z"
+    },
+    {
+      "id": "AL-1605",
+      "module": "anomaly",
+      "title": "Retargeting_NoBuyers_JP (Retargeting_Overall) flagged narrow audience by native anomaly signal",
+      "detail": "ads_insights_anomaly_signal fired active_delivery_narrow_audience for ad set Retargeting_NoBuyers_JP (120256186551550159, campaign Retargeting_Overall): estimated audience size 29,300-34,400, categorized narrow in Ads Manager, while actively delivering. Recommendation from the signal is to evaluate expanding the audience or A/B testing an Advantage+ audience. Informational only this pass -- no action taken (this ad set already excludes Purchasers 180D plus two other exclusions per purchaser-exclusion compliance, which is a likely contributor to the narrow size; its last_14d spend/ROAS were not pulled this pass). First time this specific ad set has been flagged for this symptom.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-10-11T06:51:00.000Z"
+    },
+    {
+      "id": "AL-1606",
+      "module": "self-audit-check",
+      "title": "Routine pass summary -- 2026-10-11T06:51:00.000Z",
+      "detail": "Circuit breaker: today's account spend Rs1,502.61 vs Rs6,000 ceiling -- no new breach. circuitBreaker.tripped remains true (stale from the 2026-10-10T16:50 trip; campaigns were resumed outside the proposal flow per A-061/AL-1593, already alerted, unchanged this pass -- not re-alerted). Pixel quality: all tracked event composite EMQ scores 6.1-8.7, healthy -- ROAS-based modules not suppressed. purchaser-exclusion: all 12 active ad sets compliant (11 excluding Purchasers 180D directly, Retargeting_Overall exempt by design) -- no action needed. lookalike-refresh: still rate-limited (last attempt 2026-10-10T08:50:00.000Z, <24h elapsed), skipped. hook-angle-tagging: found and tagged 3 previously-untagged active creatives (1901979887902715, 2281511572637750, 1593090145929733) from real ad copy; vision pass skipped as usual. anomaly: new active_delivery_narrow_audience signal on Retargeting_NoBuyers_JP (AL-1605). Reviewed age/gender, geography, device, and hourly breakdowns for all 6 active campaigns -- no cell at meaningful spend showed a clear enough, consistent enough signal to justify a new geo/device/age-gender/dayparting proposal this pass (geo breakdown's purchase_roas came back null at the region grain across the board -- likely an attribution/breakdown-granularity limitation, not a true zero; noting as a data gap rather than a finding). budget-reallocation and creative-fatigue watches (AL-1497, AL-1493) refreshed with current numbers, no status change. New finding: Caps + Kage_26 Sept runs 3 cap-color variants with no structured test; Indigo shows 0 attributed purchases on ~Rs441 spend vs Maroon's strong ROAS -- new proposal A-062 (ab-test) opened. All 13 pre-existing pending proposals reviewed against fresh data; all remain valid (no numbers moved enough to change their conclusions), none closed as moot this pass.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-10-11T06:51:00.000Z"
+    },
+    {
+      "id": "AL-1607",
+      "module": "routine-run-notes",
+      "title": "Run summary -- 2026-10-11T06:51:00.000Z pass",
+      "detail": "0 auto-executed Meta API mutations this pass (purchaser-exclusion and hard-spend-circuit-breaker both evaluated clean/no-breach; lookalike-refresh rate-limited). 3 auto hook-angle-tagging writes (queue.json only, no Meta mutation). 1 new proposal opened (A-062, ab-test). 1 new alert opened (AL-1605, anomaly/narrow-audience). 2 existing watch-alerts refreshed with current numbers (AL-1497 budget-reallocation, AL-1493 creative-fatigue). competitor-rescrape skipped (last scraped this cycle at 2026-10-11T04:47:00.000Z, ~2h ago, unchanged). weekly/monthly digest not due. Highest-priority open item remains the circuitBreaker.tripped=true / resumed-outside-flow mismatch (AL-1593, unchanged, already surfaced) -- no new circuit-breaker trip this pass.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-10-11T06:51:00.000Z"
     }
   ],
   "log": [
@@ -22476,6 +22535,48 @@
       },
       "tier": "approval",
       "executedAt": "2026-10-11T02:51:00.000Z"
+    },
+    {
+      "proposalId": null,
+      "action": "hook-angle-tagging: tagged creative 1901979887902715 (ad 'Warm_YINYANG_2499_JP', campaign 'Sneakers_BOF_30Sep-5Oct') -- previously had no creativeTags entry. Tagged from real ad primary text/headline via Meta Ads MCP ads_get_creatives; Higgsfield vision pass skipped (not attached to this run), no creative description invented.",
+      "result": "success",
+      "previousState": {
+        "creativeTags_entry": "none (untagged)"
+      },
+      "detail": {
+        "written_to": "queue.json.creativeTags",
+        "no_meta_api_mutation": true
+      },
+      "tier": "auto",
+      "executedAt": "2026-10-11T06:51:00.000Z"
+    },
+    {
+      "proposalId": null,
+      "action": "hook-angle-tagging: tagged creative 2281511572637750 (ad 'Warm_SORA_NewImages_2499_20Oct', campaign 'Sora_BOF_Test_5Oct') -- previously had no creativeTags entry. Tagged from real ad primary text/headline via Meta Ads MCP ads_get_creatives; Higgsfield vision pass skipped (not attached to this run), no creative description invented.",
+      "result": "success",
+      "previousState": {
+        "creativeTags_entry": "none (untagged)"
+      },
+      "detail": {
+        "written_to": "queue.json.creativeTags",
+        "no_meta_api_mutation": true
+      },
+      "tier": "auto",
+      "executedAt": "2026-10-11T06:51:00.000Z"
+    },
+    {
+      "proposalId": null,
+      "action": "hook-angle-tagging: tagged creative 1593090145929733 (ad 'Warm_KAIFEST_SORA_3198_Carousel', campaign 'Sneakers_BOF_30Sep-5Oct') -- previously had no creativeTags entry. Tagged from real ad primary text/headline via Meta Ads MCP ads_get_creatives; Higgsfield vision pass skipped (not attached to this run), no creative description invented.",
+      "result": "success",
+      "previousState": {
+        "creativeTags_entry": "none (untagged)"
+      },
+      "detail": {
+        "written_to": "queue.json.creativeTags",
+        "no_meta_api_mutation": true
+      },
+      "tier": "auto",
+      "executedAt": "2026-10-11T06:51:00.000Z"
     }
   ],
   "creativeTags": {
@@ -25980,6 +26081,39 @@
       "visionPassSkipped": true,
       "note": "Higgsfield vision connection not attached to this run -- image content itself not analyzed, only real ad copy text used. No creative description invented.",
       "taggedAt": "2026-10-11T02:51:00.000Z"
+    },
+    "1901979887902715": {
+      "adName": "Warm_YINYANG_2499_JP",
+      "campaign": "Sneakers_BOF_30Sep-5Oct",
+      "format": "Static image",
+      "angle": "Prepaid discount offer with urgency deadline (new silhouette push)",
+      "hook": "\"Meet Yin Yang -- the new KAI sneaker.\" / \"Now ₹2,499 on prepaid orders (was ₹3,299) + FREE SHIPPING. Save ₹800 -- only till 9th October. Limited stock.\" (primary text) / \"Yin Yang at ₹2,499 -- Prepaid\" (headline)",
+      "taggedFrom": "ad primary text (body) + headline (title), via Meta Ads MCP ads_get_creatives",
+      "visionPassSkipped": true,
+      "note": "Higgsfield vision connection not attached to this run -- image content itself not analyzed, only real ad copy text used. No creative description invented.",
+      "taggedAt": "2026-10-11T06:51:00.000Z"
+    },
+    "2281511572637750": {
+      "adName": "Warm_SORA_NewImages_2499_20Oct",
+      "campaign": "Sora_BOF_Test_5Oct",
+      "format": "Static image",
+      "angle": "Prepaid discount offer with urgency deadline, brand-voice product intro",
+      "hook": "\"空 SORA -- light on its feet.\" / \"Now ₹2,499 on prepaid orders (was ₹3,299) + FREE SHIPPING. Save ₹800 -- only till 20th October. Limited stock.\" (primary text) / \"SORA at ₹2,499 -- Prepaid\" (headline)",
+      "taggedFrom": "ad primary text (body) + headline (title), via Meta Ads MCP ads_get_creatives",
+      "visionPassSkipped": true,
+      "note": "Higgsfield vision connection not attached to this run -- image content itself not analyzed, only real ad copy text used. No creative description invented.",
+      "taggedAt": "2026-10-11T06:51:00.000Z"
+    },
+    "1593090145929733": {
+      "adName": "Warm_KAIFEST_SORA_3198_Carousel",
+      "campaign": "Sneakers_BOF_30Sep-5Oct",
+      "format": "Not determined -- ad name suggests carousel, but this pass only fetched body/title (child_attachments not requested); vision pass skipped",
+      "angle": "Bundle/combo discount (cart-based KAI FEST promo, sneaker + cap bundle)",
+      "hook": "\"KAI FEST IS ON 🔥\" / \"SORA sneakers + any KAI cap for just ₹3,198 on prepaid orders (worth ₹4,098). Save ₹900. Add SORA + a cap to your cart -- the price drops at checkout. Limited time offer, till 9th October.\" (primary text) / \"KAI\" (headline)",
+      "taggedFrom": "ad primary text (body) + headline (title), via Meta Ads MCP ads_get_creatives",
+      "visionPassSkipped": true,
+      "note": "Higgsfield vision connection not attached to this run -- image/video content itself not analyzed, only real ad copy text used. No creative description invented.",
+      "taggedAt": "2026-10-11T06:51:00.000Z"
     }
   }
 }
