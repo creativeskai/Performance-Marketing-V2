@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-11T20:50:00.000Z",
+  "generatedAt": "2026-10-11T22:52:00.000Z",
   "settings": {
     "kill_roas_threshold": "DISABLED 2026-10-05 by user instruction: the ROAS pause-kill is OFF. Module 16 (pause-kill) must NOT auto-pause any campaign for low ROAS; surface low-ROAS campaigns as alerts only. The hard spend circuit breaker is a separate mechanism and stays ON. Former rule, for reference: pause if ROAS < 1.0x after ₹500 spend on a sales-objective campaign. EXCEPTION until 2026-10-05T23:59+05:30 (user-approved 2026-09-29): for the sneaker-push campaigns 120256091369160159 (Sneakers_BOF_30Sep-5Oct), 120256091370110159 (Sneakers_Prospecting_30Sep-5Oct) and 120256088882780159 (Sneakers_Catalog_Retargeting) the spend floor is ₹1,500, not ₹500.",
     "reactivate_min_historic_roas": "surface for reactivation if a paused campaign's last active-period ROAS >= 3.0x",
@@ -536,7 +536,7 @@
       "module": "reactivate-winner",
       "tier": "approval",
       "title": "Reactivate TSUCHI BOF based on CAPS -- 3.8x ROAS, paused since a purchaser-exclusion side effect on 2026-09-15",
-      "reasoning": "TSUCHI BOF based on CAPS (120255774257000159) last_30d purchase_roas is now 5.66x (up from 3.8x when this proposal was created 2026-09-20), spend to date Rs3,747.38 -- well above reactivate_min_historic_roas=3.0x. Paused since a purchaser-exclusion side-effect edit on 2026-09-15. Reconfirmed via fresh ads_get_ad_entities pull on this pass. Reconfirmed 2026-10-09T10:48:00.000Z pass: last_30d purchase_roas unchanged at 5.66x on Rs3,747.38 spend (still PAUSED). Reconfirmed 2026-10-09T18:46:00.000Z pass: TSUCHI BOF based on CAPS (120255774257000159) still PAUSED, last_30d purchase_roas 5.662743x -- well above reactivate_min_historic_roas=3.0x. Proposal remains pending. Reconfirmed 2026-10-09T22:51:00.000Z pass: last_30d purchase_roas unchanged at 5.662743x on Rs3,747.38 spend. Still PAUSED. Reconfirmed 2026-10-10T00:52:00.000Z pass: last_30d purchase_roas unchanged at 5.662743x on Rs3,747.38 spend. Still PAUSED. Reconfirmed 2026-10-10T04:47:00.000Z pass: last_30d purchase_roas unchanged at 5.662743x on Rs3,747.38 spend. Still PAUSED. Reconfirmed 2026-10-10T10:47:00.000Z pass: TSUCHI BOF based on CAPS (120255774257000159) still PAUSED, last_30d purchase_roas 5.662743x on Rs3,747.38 spend -- above reactivate_min_historic_roas=3.0x. Reconfirmed 2026-10-10T16:50:00.000Z pass: no material change since the prior pass; numbers and recommendation stand. Reconfirmed 2026-10-11T02:51 UTC pass: last_30d purchase_roas unchanged at 5.66x on Rs3,747.38 spend. Still PAUSED, still well above the 3.0x reactivate threshold. RECONFIRMED 2026-10-11T08:52Z pass: fresh last_30d pull shows purchase_roas now 5.66x (up from 3.8x), amount_spent Rs3,747.38 -- still well above the 3.0x reactivate threshold.",
+      "reasoning": "TSUCHI BOF based on CAPS (120255774257000159), paused since a purchaser-exclusion side effect on 2026-09-15, shows last_30d ROAS of 5.66x (Rs3,747.38 spend, 10 purchases, cost/result Rs374.74) as of this pass -- up from 3.8x at proposal creation (2026-09-20) -- well above reactivate_min_historic_roas=3.0x. Numbers reconfirmed/updated 2026-10-11T22:52:00.000Z pass.",
       "actionSummary": "Activates campaign 'TSUCHI BOF based on CAPS' (id 120255774257000159) and reconfirms its daily budget at its existing ₹650/day (65000 minor units, unchanged) so it resumes delivering at the same pace it was paused at.",
       "metaAction": {
         "tool": "ads_activate_entity",
@@ -813,7 +813,7 @@
       "module": "reactivate-winner",
       "tier": "approval",
       "title": "Reactivate New Caps Part 3 STP -- 3.54x ROAS, above the reactivate threshold",
-      "reasoning": "New Caps Part 3 STP (120245697720960159) last_30d purchase_roas is now 4.89x (up from 3.54x when this proposal was created 2026-10-03), spend to date Rs1,781.30 -- well above reactivate_min_historic_roas=3.0x. Reconfirmed via fresh ads_get_ad_entities pull on this pass. Reconfirmed 2026-10-09T10:48:00.000Z pass: last_30d purchase_roas unchanged at 4.89x on Rs1,781.30 spend. Still PAUSED. Reconfirmed 2026-10-09T18:46:00.000Z pass: New Caps Part 3 STP (120245697720960159) still PAUSED, last_30d purchase_roas 4.890866x -- above reactivate_min_historic_roas=3.0x. Proposal remains pending. Reconfirmed 2026-10-09T22:51:00.000Z pass: last_30d purchase_roas unchanged at 4.890866x on Rs1,781.30 spend. Still PAUSED. Reconfirmed 2026-10-10T00:52:00.000Z pass: last_30d purchase_roas unchanged at 4.890866x on Rs1,781.30 spend. Still PAUSED. Reconfirmed 2026-10-10T04:47:00.000Z pass: last_30d purchase_roas unchanged at 4.890866x on Rs1,781.30 spend. Still PAUSED. Reconfirmed 2026-10-10T10:47:00.000Z pass: last_30d purchase_roas unchanged at 4.890866x on Rs1,781.30 spend. Still PAUSED. Reconfirmed 2026-10-10T16:50:00.000Z pass: no material change since the prior pass; numbers and recommendation stand. Reconfirmed 2026-10-11T02:51 UTC pass: last_30d purchase_roas unchanged at 4.89x on Rs1,781.30 spend. Still PAUSED, comfortably above threshold. RECONFIRMED 2026-10-11T08:52Z pass: fresh last_30d pull shows purchase_roas now 4.89x (amount_spent Rs1,781.30) -- up from 3.54x cited, still above the 3.0x threshold.",
+      "reasoning": "New Caps Part 3 STP (120245697720960159) shows last_30d ROAS of 4.89x (Rs1,781.30 spend, 5 purchases, cost/result Rs356.26) as of this pass -- up from 3.54x at proposal creation (2026-10-03) -- above reactivate_min_historic_roas=3.0x. Numbers reconfirmed/updated 2026-10-11T22:52:00.000Z pass.",
       "actionSummary": "Reactivates the campaign and its one ad set ('New STP 3'), keeping the daily budget unchanged at Rs500/day.",
       "metaAction": {
         "tool": "ads_activate_entity",
@@ -15933,6 +15933,69 @@
       "severity": "low",
       "dismissed": false,
       "createdAt": "2026-10-11T20:50:00.000Z"
+    },
+    {
+      "id": "AL-1636",
+      "module": "hard-spend-circuit-breaker",
+      "title": "No new breach this pass -- circuitBreaker.tripped still true (stale), only Caps + Kage_26 Sept remains down",
+      "detail": "ads_get_ad_entities (account, today) this pass: today's spend Rs926.90 vs Rs6,000 ceiling (15.4%), well clear -- no new breach. circuitBreaker record (tripped 2026-10-10T16:50:00.000Z) remains stale vs. live state: 6 campaigns are back ACTIVE (Caps_Only, Sora_BOF_Test_5Oct, Tsuchi_BOF_Test_5Oct, Prospecting_JP_Purchase_5-9Oct, Sneakers_BOF_30Sep-5Oct, Retargeting_Overall), only 'Caps + Kage_26 Sept' remains paused from the original trip, pending human review via A-063 (resume-after-circuit-breaker, still pending). No auto-resume performed, per policy.",
+      "severity": "high",
+      "dismissed": false,
+      "createdAt": "2026-10-11T22:52:00.000Z"
+    },
+    {
+      "id": "AL-1637",
+      "module": "pixel-health",
+      "title": "Pixel quality remains healthy -- no match-rate breach",
+      "detail": "ads_get_dataset_quality (dataset 833131719490535) this pass: composite EMQ scores range 6.1 (PageView/ViewContent/AddToCart/SubscribedButtonClick/Search) to 8.7 (Purchase/cod_purchase/prepaid_purchase), InitiateCheckout 6.9, AddPaymentInfo 8.6 -- all at/above pixel_quality_min_match_rate=0.6 (interpreting composite_score/10, consistent with every prior pass). ROAS-based modules not suppressed this pass.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-10-11T22:52:00.000Z"
+    },
+    {
+      "id": "AL-1638",
+      "module": "purchaser-exclusion",
+      "title": "All 9 active ad sets reconfirmed purchaser-exclusion compliant",
+      "detail": "ads_get_ad_entities (adset, targeting) this pass: all 9 currently ACTIVE ad sets (RT_Tees_NoBuyers_v1_11Oct, RT_Sneakers_Caps_NoBuyers_v2_11Oct, Sora_Warm_IG365_Engagers_Visitors_v2_20Oct, Sora_Hot_ATC_IC_API_30D, Tsuchi_Hot_ATC_IC_API_30D, Caps_Only_11Oct, Tsuchi_Warm_IG365_Engagers_Visitors, Prosp_Men_25-44_Purchase_JP, BOF_2_Warm_IG365_Engagers_Visitors) already carry Purchasers 180D (120255823280550159) in targeting.excluded_custom_audiences. No edits needed, no new mutations this pass. Neither purchaser_exclusion_exempt_adset_ids entry is currently active.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-10-11T22:52:00.000Z"
+    },
+    {
+      "id": "AL-1639",
+      "module": "lookalike-refresh",
+      "title": "Lookalike rebuild skipped this pass -- rate-limited",
+      "detail": "max_auto_actions_per_entity_per_day=1 already reached for the Purchasers-180D-sourced lookalike today (last attempt 2026-10-11T08:52:00.000Z, which itself failed on Meta's duplicate-lookalike constraint 2654/1713007 -- source audience still unchanged at ~20 since 2026-09-15). Skipping a repeat attempt this pass per rate limiting; would have acted (or re-attempted) but rate-limited. The 3 existing laddered 1%/2%/5% lookalikes remain live and serving.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-10-11T22:52:00.000Z"
+    },
+    {
+      "id": "AL-1640",
+      "module": "learning-phase-stuck",
+      "title": "No ad sets stuck in learning",
+      "detail": "ads_get_ad_entities (adset, learning_stage_info) this pass: all 9 ACTIVE ad sets show no active learning-phase data (none flagged as still in or stuck in the Facebook learning phase beyond 7 days).",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-10-11T22:52:00.000Z"
+    },
+    {
+      "id": "AL-1641",
+      "module": "self-audit-check",
+      "title": "Routine pass summary -- 2026-10-11T22:52:00.000Z",
+      "detail": "Live pull this pass: account today spend Rs926.90 vs Rs6,000 ceiling, well clear. 6 campaigns ACTIVE (Caps_Only, Sora_BOF_Test_5Oct, Tsuchi_BOF_Test_5Oct, Prospecting_JP_Purchase_5-9Oct, Sneakers_BOF_30Sep-5Oct, Retargeting_Overall) / 9 ad sets ACTIVE, 1 campaign (Caps + Kage_26 Sept) still down from the 2026-10-10 circuit breaker trip pending A-063. All active ad sets purchaser-exclusion compliant. All active ads' creatives (26 unique creative_ids across the 9 active ad sets) already carry creativeTags entries -- nothing new to tag this pass. Pixel quality healthy (EMQ 6.1-8.7), ROAS modules not suppressed. Anomaly signal re-fired the same active_delivery_narrow_audience symptom for RT_Tees_NoBuyers_v1_11Oct / RT_Sneakers_Caps_NoBuyers_v2_11Oct, identical to AL-1620 earlier today -- no new alert written (duplicate of same-day entry). pause-kill alert-only candidate Sora_BOF_Test_5Oct unchanged at exactly Rs1,448.12 spend / 0 purchases (last_14d), identical to AL-1550 -- no update needed (kill-switch itself stays disabled per user instruction). Reactivate-winner candidates re-pulled on last_30d: TSUCHI BOF based on CAPS now 5.66x ROAS (was 3.8x at A-027's creation -- improved, reasoning text updated), New Caps Part 3 STP now 4.89x (was 3.54x at A-051's creation -- improved, reasoning text updated), Mori + Tee_Sales_0609 3.10x, Sora_BOF_Based on Mori_Tee 6.65x, Sora Retargeting 4.33x, Sneakers_Prospecting_30Sep-5Oct 6.32x -- all still at/above reactivate_min_historic_roas=3.0x, all other pending reactivate proposals' numbers essentially unchanged. Competitor rescrape (Gully Labs/Lotto Sport India) not repeated this pass -- last scrape was only ~4h ago (2026-10-11T18:50, AL-1626) and counts move slowly; deferred again. No KPI-to-trigger gaps identified beyond what's already tracked in this table.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-10-11T22:52:00.000Z"
+    },
+    {
+      "id": "AL-1642",
+      "module": "routine-run-notes",
+      "title": "Run summary -- 2026-10-11T22:52:00.000Z pass",
+      "detail": "0 auto-executed Meta API mutations this pass (purchaser-exclusion compliant account-wide, no edits needed; lookalike-refresh rate-limited/skipped; hook-angle-tagging had nothing new to tag; hard-spend-circuit-breaker not triggered -- today's spend Rs926.90 well under the Rs6,000 ceiling). 0 new proposals. 6 new standalone alerts (hard-spend-circuit-breaker stale-trip reconfirmation, pixel-health, purchaser-exclusion, lookalike-refresh rate-limit, learning-phase-stuck, self-audit-check) plus this run-summary note. Highest-priority item: circuitBreaker.tripped remains true (stale, from the 2026-10-10 trip) -- 'Caps + Kage_26 Sept' is still paused pending a human decision on A-063 (resume-after-circuit-breaker). Two pending reactivate-winner proposals (A-027, A-051) had their reasoning text refreshed with improved last_30d ROAS numbers; all other pending proposals reviewed with no material change.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-10-11T22:52:00.000Z"
     }
   ],
   "log": [
