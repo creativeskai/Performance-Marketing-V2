@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-12T08:50:00.000Z",
+  "generatedAt": "2026-10-12T10:47:00.000Z",
   "settings": {
     "kill_roas_threshold": "DISABLED 2026-10-05 by user instruction: the ROAS pause-kill is OFF. Module 16 (pause-kill) must NOT auto-pause any campaign for low ROAS; surface low-ROAS campaigns as alerts only. The hard spend circuit breaker is a separate mechanism and stays ON. Former rule, for reference: pause if ROAS < 1.0x after ₹500 spend on a sales-objective campaign. EXCEPTION until 2026-10-05T23:59+05:30 (user-approved 2026-09-29): for the sneaker-push campaigns 120256091369160159 (Sneakers_BOF_30Sep-5Oct), 120256091370110159 (Sneakers_Prospecting_30Sep-5Oct) and 120256088882780159 (Sneakers_Catalog_Retargeting) the spend floor is ₹1,500, not ₹500.",
     "reactivate_min_historic_roas": "surface for reactivation if a paused campaign's last active-period ROAS >= 3.0x",
@@ -29,10 +29,10 @@
       }
     },
     "competitor_last_scrape": {
-      "gully_labs_active_ads": 199,
-      "lotto_sport_india_active_ads": 245,
-      "scraped_at": "2026-10-12T06:53:00.000Z",
-      "note": "2026-10-12T06:53:00.000Z pass: Gully Labs 199 (unchanged). Lotto Sport India 245, down from 263 last recorded (-6.8%) -- below the 20% move threshold, not alert-worthy."
+      "gully_labs_active_ads": 209,
+      "lotto_sport_india_active_ads": 248,
+      "scraped_at": "2026-10-12T10:47:00.000Z",
+      "note": "2026-10-12T10:47:00.000Z pass: Gully Labs 209 (up from 199, +5.0%). Lotto Sport India 248 (up from 245, +1.2%). Both moves well below the 20% alert threshold, not alert-worthy."
     },
     "audience_label_corrections": {
       "120249907176770159": "ATC_180D -- NOT a purchaser audience (cart-adders, event=AddToCart, retention 180 days). Verified 2026-09-14, reconfirmed 2026-09-20. Superseded note: earlier passes said the account had NO purchaser audience at all -- that's now out of date. See the 120255823280550159 (Purchasers 180D) entry above, created 2026-09-15, which IS a genuine purchaser audience and is already in use for exclusion + lookalike.",
@@ -1145,15 +1145,31 @@
       "id": "A-063",
       "module": "resume-after-circuit-breaker",
       "tier": "approval",
-      "title": "Resume 'Caps + Kage_26 Sept' -- the one campaign still down from the 2026-10-10 circuit breaker trip",
-      "reasoning": "The hard spend circuit breaker tripped 2026-10-10T16:50:00.000Z (today's spend Rs6,406.69 vs the Rs6,000 ceiling) and paused all 5 then-active campaigns: Sora_BOF_Test_5Oct, Tsuchi_BOF_Test_5Oct, Prospecting_JP_Purchase_5-9Oct, Sneakers_BOF_30Sep-5Oct and Caps + Kage_26 Sept. A-061 (covering all 5) was rejected by the human reviewer at 2026-10-11T02:51:00.000Z. Since then, 4 of the 5 -- Sora_BOF_Test_5Oct, Tsuchi_BOF_Test_5Oct, Prospecting_JP_Purchase_5-9Oct and Sneakers_BOF_30Sep-5Oct -- have been resumed directly in Meta Ads Manager, outside this routine's approval flow (first observed at the 2026-10-11T02:51 pass, reconfirmed every pass since, and reconfirmed again live this pass). 'Caps + Kage_26 Sept' (120255693970470159) is the only one of the original 5 still PAUSED -- confirmed via a fresh ads_get_ad_entities pull this pass (2026-10-11T12:50 UTC). Reconfirmed 2026-10-12T08:50 UTC pass: 'Caps + Kage_26 Sept' remains the only one of the original 5 still PAUSED (fresh ads_get_ad_entities pull). Today's account-wide spend at this pass is Rs2,820.50 against the Rs6,000 ceiling -- comfortably under, no fresh breach. Pixel quality healthy (EMQ composite scores 6.1-8.9, at/above pixel_quality_min_match_rate=0.6). The only anomaly signal this pass is unrelated (active_delivery_narrow_audience on two Retargeting_Overall ad sets, already tracked by AL-1658). This campaign had last_14d ROAS around 9x before the trip (per its own placement/age-gender reconfirmation history in A-038/A-059/A-060) and was paused only as the emergency brake, not for a performance reason. circuitBreaker.tripped stays true regardless of this proposal's outcome per ROUTINE.md -- clearing that flag is a separate, explicit human action.",
-      "actionSummary": "Reactivates the single remaining circuit-breaker casualty, campaign 'Caps + Kage_26 Sept' (120255693970470159), changing it from PAUSED back to ACTIVE via ads_activate_entity. Does not touch circuitBreaker.tripped or any other campaign.",
+      "title": "Resume the 3 campaigns still down from the 2026-10-10 circuit breaker trip",
+      "reasoning": "The hard spend circuit breaker tripped 2026-10-10T16:50:00.000Z (today's spend Rs6,406.69 vs the Rs6,000 ceiling) and paused all 5 then-active campaigns: Sora_BOF_Test_5Oct, Tsuchi_BOF_Test_5Oct, Prospecting_JP_Purchase_5-9Oct, Sneakers_BOF_30Sep-5Oct and Caps + Kage_26 Sept. A-061 (covering all 5) was rejected by the human reviewer at 2026-10-11T02:51:00.000Z. Since then, 4 of the 5 -- Sora_BOF_Test_5Oct, Tsuchi_BOF_Test_5Oct, Prospecting_JP_Purchase_5-9Oct and Sneakers_BOF_30Sep-5Oct -- have been resumed directly in Meta Ads Manager, outside this routine's approval flow (first observed at the 2026-10-11T02:51 pass, reconfirmed every pass since, and reconfirmed again live this pass). 'Caps + Kage_26 Sept' (120255693970470159) is the only one of the original 5 still PAUSED -- confirmed via a fresh ads_get_ad_entities pull this pass (2026-10-11T12:50 UTC). Reconfirmed 2026-10-12T08:50 UTC pass: 'Caps + Kage_26 Sept' remains the only one of the original 5 still PAUSED (fresh ads_get_ad_entities pull). Today's account-wide spend at this pass is Rs2,820.50 against the Rs6,000 ceiling -- comfortably under, no fresh breach. Pixel quality healthy (EMQ composite scores 6.1-8.9, at/above pixel_quality_min_match_rate=0.6). The only anomaly signal this pass is unrelated (active_delivery_narrow_audience on two Retargeting_Overall ad sets, already tracked by AL-1658). This campaign had last_14d ROAS around 9x before the trip (per its own placement/age-gender reconfirmation history in A-038/A-059/A-060) and was paused only as the emergency brake, not for a performance reason. circuitBreaker.tripped stays true regardless of this proposal's outcome per ROUTINE.md -- clearing that flag is a separate, explicit human action. RECONFIRMED 2026-10-12T10:47 UTC pass (correction to the prior pass's count): a fresh ads_get_ad_entities pull shows only 2 of the original 5 -- Prospecting_JP_Purchase_5-9Oct and Sneakers_BOF_30Sep-5Oct -- have actually been resumed directly in Meta Ads Manager, not 4 as the 2026-10-11/2026-10-12T08:50 passes stated. The other 3 -- Sora_BOF_Test_5Oct (120256202021140159, last_30d purchase_roas null -- no attributed purchases, ₹1,448.19 spend), Tsuchi_BOF_Test_5Oct (120256202020640159, last_30d purchase_roas 9.38x, ₹1,360.27 spend) and Caps + Kage_26 Sept (120255693970470159, last_30d purchase_roas 7.62x, ₹19,851.06 spend) -- remain PAUSED. This proposal's scope has been widened accordingly to cover all 3 remaining campaigns instead of just Caps + Kage_26 Sept. Today's account-wide spend at this pass is ₹3,278.96 against the ₹6,000 ceiling -- comfortably under, no fresh breach. circuitBreaker.tripped stays true regardless of this proposal's outcome per ROUTINE.md -- clearing that flag is a separate, explicit human action.",
+      "actionSummary": "Reactivates the 3 remaining circuit-breaker casualties -- Sora_BOF_Test_5Oct (120256202021140159), Tsuchi_BOF_Test_5Oct (120256202020640159) and Caps + Kage_26 Sept (120255693970470159) -- changing each from PAUSED back to ACTIVE via ads_activate_entity. Does not touch circuitBreaker.tripped or any other campaign. Note: Sora_BOF_Test_5Oct has no attributed purchases (purchase_roas null) over its last_30d spend -- review before activating it specifically.",
       "metaAction": {
         "tool": "ads_activate_entity",
         "params": {
           "ad_account_id": "704523148804803",
-          "entity_id": "120255693970470159",
+          "entity_id": "120256202021140159",
           "entity_type": "campaign"
+        },
+        "followUp": {
+          "tool": "ads_activate_entity",
+          "params": {
+            "ad_account_id": "704523148804803",
+            "entity_id": "120256202020640159",
+            "entity_type": "campaign"
+          },
+          "followUp": {
+            "tool": "ads_activate_entity",
+            "params": {
+              "ad_account_id": "704523148804803",
+              "entity_id": "120255693970470159",
+              "entity_type": "campaign"
+            }
+          }
         }
       },
       "status": "pending",
@@ -16268,6 +16284,78 @@
       "severity": "low",
       "dismissed": false,
       "createdAt": "2026-10-12T08:50:00.000Z"
+    },
+    {
+      "id": "AL-1670",
+      "module": "purchaser-exclusion",
+      "title": "All 7 active ad sets reconfirmed purchaser-exclusion compliant",
+      "detail": "Fresh ads_get_ad_entities (adset level, targeting) pull this pass confirms all 7 currently-ACTIVE ad sets -- PROSP_C_Tees, PROSP_A_Proven_Sora_Mori (Sneakers_PROSP_5Line_Oct), RT_Tees_NoBuyers_v1_11Oct, RT_Sneakers_Caps_NoBuyers_v2_11Oct (Retargeting_Overall), Caps_Only_11Oct (Caps_Only), Prosp_Men_25-44_Purchase_JP (Prospecting_JP_Purchase_5-9Oct), BOF_2_Warm_IG365_Engagers_Visitors (Sneakers_BOF_30Sep-5Oct) -- already have Purchasers 180D (120255823280550159) in excluded_custom_audiences. No action needed; none of these are in settings.purchaser_exclusion_exempt_adset_ids.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-10-12T10:47:00.000Z"
+    },
+    {
+      "id": "AL-1671",
+      "module": "lookalike-refresh",
+      "title": "Lookalike rebuild skipped this pass -- rate-limited",
+      "detail": "Last attempt was 2026-10-12T08:52:00.000Z (<24h ago, within settings.max_auto_actions_per_entity_per_day=1 rate limit for module=lookalike-refresh, entity=Purchasers 180D source audience 120255823280550159). Skipping this pass rather than re-attempting. Source audience (Purchasers 180D, ~20 people) remains unchanged since its 2026-09-15 creation and every rebuild attempt since has failed with Meta's duplicate-lookalike error (2654/1713007) -- not a bug, a real API constraint until the source audience grows.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-10-12T10:47:00.000Z"
+    },
+    {
+      "id": "AL-1672",
+      "module": "learning-phase-stuck",
+      "title": "No ad sets stuck in learning",
+      "detail": "All 7 active ad sets returned learning_stage_info=null this pass (no ad set currently flagged as in an active learning phase) -- nothing stuck >7 days.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-10-12T10:47:00.000Z"
+    },
+    {
+      "id": "AL-1673",
+      "module": "threshold-alerts",
+      "title": "No active campaign has a recorded CPM/CTR/CPC baseline this pass",
+      "detail": "settings.metric_baselines only has entries for Kage_sales_1908 and Kage_TOF, neither of which is among the 5 currently-ACTIVE campaigns (Sneakers_PROSP_5Line_Oct, Caps_Only, Prospecting_JP_Purchase_5-9Oct, Sneakers_BOF_30Sep-5Oct, Retargeting_Overall). No baseline comparison possible this pass.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-10-12T10:47:00.000Z"
+    },
+    {
+      "id": "AL-1674",
+      "module": "campaign-consolidation-watch",
+      "title": "No new duplicate-campaign pairs found this pass",
+      "detail": "Reviewed the 5 currently-ACTIVE campaigns' ad-set targeting (product + audience). Sneakers_PROSP_5Line_Oct (Tees/Sora/Mori prospecting), Caps_Only (caps prospecting), Prospecting_JP_Purchase_5-9Oct (men 25-44 purchase-intent JP), Sneakers_BOF_30Sep-5Oct (warm IG/website retargeting), and Retargeting_Overall (no-buyer retargeting) target distinct product/audience combinations -- no overlapping pair found.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-10-12T10:47:00.000Z"
+    },
+    {
+      "id": "AL-1675",
+      "module": "competitor-rescrape",
+      "title": "Gully Labs / Lotto Sport India active-ad counts moved, both below alert threshold",
+      "detail": "Gully Labs: 209 active ads, up from 199 last recorded (+5.0%). Lotto Sport India: 248 active ads, up from 245 last recorded (+1.2%). Both moves are well under the 20% move threshold -- not alert-worthy. settings.competitor_last_scrape updated with these counts.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-10-12T10:47:00.000Z"
+    },
+    {
+      "id": "AL-1676",
+      "module": "resume-after-circuit-breaker",
+      "title": "circuitBreaker flag is stale -- A-063's scope was outdated (now corrected)",
+      "detail": "circuitBreaker.tripped has been true since 2026-10-10T16:50 UTC and stays true per ROUTINE.md until a human approves a resume-after-circuit-breaker proposal. In practice, 2 of the 5 originally-paused campaigns (Prospecting_JP_Purchase_5-9Oct, Sneakers_BOF_30Sep-5Oct) were already reactivated directly in Meta Ads Manager, outside this routine's approval flow, and have been delivering normally for ~1-2 days with no fresh breach (today's spend ₹3,278.96 vs the ₹6,000 ceiling). The prior pass's A-063 text incorrectly said 4 of 5 were resumed -- it was actually 2. A-063 has been corrected this pass: it now proposes reactivating all 3 still-paused campaigns (Sora_BOF_Test_5Oct, Tsuchi_BOF_Test_5Oct, Caps + Kage_26 Sept) instead of just one. Recommend a human either approve A-063 (or a subset of it) to formally resolve the remaining 3, or explicitly decide to leave them paused and consider whether circuitBreaker.tripped should be cleared given 2 days of clean delivery since the trip.",
+      "severity": "medium",
+      "dismissed": false,
+      "createdAt": "2026-10-12T10:47:00.000Z"
+    },
+    {
+      "id": "AL-1677",
+      "module": "self-audit-check",
+      "title": "Routine pass summary -- 2026-10-12T10:47:00.000Z",
+      "detail": "Account-wide spend today ₹3,278.96 vs ₹6,000 ceiling (no breach). 5 active campaigns, all with healthy ROAS (Caps_Only 9.27x, Prospecting_JP_Purchase_5-9Oct 23.37x, Sneakers_BOF_30Sep-5Oct 4.76x, Retargeting_Overall 7.20x last_14d; Sneakers_PROSP_5Line_Oct brand-new today, no spend yet). Pixel quality healthy (EMQ composite 6.1-8.7). Only open anomaly is the already-tracked narrow-audience warning on 2 Retargeting_Overall ad sets. All active-ad creatives already tagged (hook-angle-tagging). Lookalike rebuild rate-limited (unchanged source audience). Purchaser exclusion compliant across all 7 active ad sets. No new duplicate campaigns. Competitor counts moved slightly, below threshold. Main open item: circuitBreaker flag still shows tripped from the 2026-10-10 trip; A-063 (resume proposal) corrected this pass to cover the 3 campaigns still actually paused.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-10-12T10:47:00.000Z"
     }
   ],
   "log": [
