@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-14T04:52:48.000Z",
+  "generatedAt": "2026-10-14T06:51:03.000Z",
   "settings": {
     "kill_roas_threshold": "DISABLED 2026-10-05 by user instruction: the ROAS pause-kill is OFF. Module 16 (pause-kill) must NOT auto-pause any campaign for low ROAS; surface low-ROAS campaigns as alerts only. The hard spend circuit breaker is a separate mechanism and stays ON. Former rule, for reference: pause if ROAS < 1.0x after ₹500 spend on a sales-objective campaign. EXCEPTION until 2026-10-05T23:59+05:30 (user-approved 2026-09-29): for the sneaker-push campaigns 120256091369160159 (Sneakers_BOF_30Sep-5Oct), 120256091370110159 (Sneakers_Prospecting_30Sep-5Oct) and 120256088882780159 (Sneakers_Catalog_Retargeting) the spend floor is ₹1,500, not ₹500.",
     "reactivate_min_historic_roas": "surface for reactivation if a paused campaign's last active-period ROAS >= 3.0x",
@@ -30,9 +30,9 @@
     },
     "competitor_last_scrape": {
       "gully_labs_active_ads": 225,
-      "lotto_sport_india_active_ads": 255,
-      "scraped_at": "2026-10-14T00:50:04.000Z",
-      "note": "2026-10-14T00:50:04.000Z pass: Gully Labs 225 (unchanged vs last recorded 225). Lotto Sport India 255 (down from 256, -0.4% -- well under the 20% alert threshold either direction). No competitor-spike alert this pass."
+      "lotto_sport_india_active_ads": 248,
+      "scraped_at": "2026-10-14T06:51:03.000Z",
+      "note": "2026-10-14T06:51:03.000Z pass: Gully Labs 225 (unchanged vs last recorded 225). Lotto Sport India 248 (down from 255, -2.7% -- well under the 20% alert threshold either direction). No competitor-spike alert this pass."
     },
     "audience_label_corrections": {
       "120249907176770159": "ATC_180D -- NOT a purchaser audience (cart-adders, event=AddToCart, retention 180 days). Verified 2026-09-14, reconfirmed 2026-09-20. Superseded note: earlier passes said the account had NO purchaser audience at all -- that's now out of date. See the 120255823280550159 (Purchasers 180D) entry above, created 2026-09-15, which IS a genuine purchaser audience and is already in use for exclusion + lookalike.",
@@ -16124,10 +16124,10 @@
       "id": "AL-1647",
       "module": "anomaly",
       "title": "RT_Sneakers_Caps_NoBuyers_v2_11Oct (Retargeting_Overall) still flagged narrow audience",
-      "detail": "ads_insights_anomaly_signal this pass: active_delivery_narrow_audience still firing for RT_Sneakers_Caps_NoBuyers_v2_11Oct (120256301241950159, estimated audience 30,100-35,500). No other anomaly signals fired this pass. Same underlying condition as the last several passes -- updated in place per ROUTINE.md de-dup rule, not re-cloned.",
+      "detail": "ads_insights_anomaly_signal this pass: active_delivery_narrow_audience still firing for RT_Sneakers_Caps_NoBuyers_v2_11Oct (120256301241950159, estimated audience 30,000-35,300). No other anomaly signals fired this pass. Same underlying condition as the last several passes -- updated in place per ROUTINE.md de-dup rule, not re-cloned.",
       "severity": "medium",
       "dismissed": false,
-      "createdAt": "2026-10-14T02:46:04.000Z"
+      "createdAt": "2026-10-14T06:51:03.000Z"
     },
     {
       "id": "AL-1648",
@@ -16610,10 +16610,10 @@
       "id": "AL-1703",
       "module": "hard-spend-circuit-breaker",
       "title": "circuitBreaker still tripped -- 2 of 5 originally-paused campaigns remain ACTIVE, no resume approval recorded",
-      "detail": "Reconfirmed this pass (2026-10-14T04:52:48.000Z): ads_get_ad_entities (level=ad_account, date_preset=today) shows today's account spend at ₹1,315.16 against the ₹7,000 hard_spend_ceiling_inr -- no breach. circuitBreaker.tripped remains true from the 2026-10-10T16:50 UTC trip; no auto-resume performed, per ROUTINE.md. Fresh campaign-level pull (10 campaigns ACTIVE account-wide) confirms the same unresolved drift as the last several passes: Prospecting_JP_Purchase_5-9Oct (120256186544730159) and Sneakers_BOF_30Sep-5Oct (120256091369160159) -- 2 of the 5 campaigns the breaker paused on 2026-10-10 -- remain ACTIVE and delivering normally (last_14d purchase_roas 18.49x and 4.51x respectively); Sora_BOF_Test_5Oct, Tsuchi_BOF_Test_5Oct and Caps + Kage_26 Sept remain PAUSED/retired, matching A-063's scope. A-063 (resume-after-circuit-breaker) remains status:pending since 2026-10-11, now 4 days unactioned. This routine will not flip circuitBreaker.tripped or touch A-063 itself. Recommend the user either approve/reject A-063 to formally reconcile the ledger with reality, or tell Claude to close it out, since the account has clearly been operating normally (strong ROAS, no re-breach) for 4+ days.",
+      "detail": "Reconfirmed this pass (2026-10-14T06:51:03.000Z): ads_get_ad_entities (level=ad_account, date_preset=today) shows today's account spend at ₹1,692.86 against the ₹7,000 hard_spend_ceiling_inr -- no breach. circuitBreaker.tripped remains true from the 2026-10-10T16:50 UTC trip; no auto-resume performed, per ROUTINE.md. Fresh campaign-level pull (10 campaigns ACTIVE account-wide) confirms the same unresolved drift as the last several passes: Prospecting_JP_Purchase_5-9Oct (120256186544730159, ₹184.60 spent so far today) and Sneakers_BOF_30Sep-5Oct (120256091369160159, ₹492.45 spent so far today) -- 2 of the 5 campaigns the breaker paused on 2026-10-10 -- remain ACTIVE and delivering normally; Sora_BOF_Test_5Oct, Tsuchi_BOF_Test_5Oct and Caps + Kage_26 Sept remain PAUSED/retired, matching A-063's scope. A-063 (resume-after-circuit-breaker) remains status:pending since 2026-10-11, now 4+ days unactioned. This routine will not flip circuitBreaker.tripped or touch A-063 itself (approval-tier, human/chat only). Recommend the user either approve/reject A-063 to formally reconcile the ledger with reality, or tell Claude to close it out, since the account has been operating normally (no re-breach) for 4+ days with 2 of the 5 paused campaigns already back on regardless of the open breaker.",
       "severity": "high",
       "dismissed": false,
-      "createdAt": "2026-10-14T04:52:48.000Z"
+      "createdAt": "2026-10-14T06:51:03.000Z"
     },
     {
       "id": "AL-1704",
@@ -16628,10 +16628,10 @@
       "id": "AL-1705",
       "module": "lookalike-refresh",
       "title": "Lookalike rebuild skipped this pass -- rate-limited",
-      "detail": "Reconfirmed this pass: the laddered 1%/2%/5% lookalikes off Purchasers 180D (120255823280550159, source audience still exactly 20 members, unchanged since creation 2026-09-15, now ~29 days old) remain past the 14-day lookalike_refresh_days threshold. Last rebuild attempt was 2026-10-13T10:48:00.000Z (failed, Meta's duplicate-lookalike error 2654/1713007 -- the source audience hasn't grown, a real API constraint, not a bug), ~16h elapsed this pass -- still within the 24h max_auto_actions_per_entity_per_day=1 window, so this pass again skips re-attempting (next eligible ~2026-10-14T10:48 UTC). The 3 existing lookalikes remain live and serving. Updated in place per ROUTINE.md de-dup rule.",
+      "detail": "Reconfirmed this pass: the laddered 1%/2%/5% lookalikes off Purchasers 180D (120255823280550159, source audience still exactly 20 members, unchanged since creation 2026-09-15, now ~29 days old) remain past the 14-day lookalike_refresh_days threshold. Last rebuild attempt was 2026-10-13T10:48:00.000Z (failed, Meta's duplicate-lookalike error 2654/1713007 -- the source audience hasn't grown, a real API constraint, not a bug), ~20h elapsed this pass -- still within the 24h max_auto_actions_per_entity_per_day=1 window, so this pass again skips re-attempting (next eligible ~2026-10-14T10:48 UTC). The 3 existing lookalikes remain live and serving. Updated in place per ROUTINE.md de-dup rule.",
       "severity": "low",
       "dismissed": false,
-      "createdAt": "2026-10-14T02:46:04.000Z"
+      "createdAt": "2026-10-14T06:51:03.000Z"
     },
     {
       "id": "AL-1706",
@@ -16668,6 +16668,15 @@
       "severity": "low",
       "dismissed": false,
       "createdAt": "2026-10-14T02:46:04.000Z"
+    },
+    {
+      "id": "AL-1710",
+      "module": "self-audit-check",
+      "title": "Routine pass summary -- 2026-10-14T06:51:03.000Z",
+      "detail": "Circuit breaker: not freshly tripped this pass (today's spend ₹1,692.86 vs ₹7,000 ceiling); remains tripped from 2026-10-10, unresolved -- see AL-1703 (updated this pass). Pixel quality: healthy, all tracked web events 6.1-9.0 composite EMQ -- ROAS modules not suppressed. purchaser-exclusion: all 15 active ad sets across the 10 truly-ACTIVE campaigns confirmed excluding Purchasers 180D (fresh targeting fetch this pass) -- compliant account-wide, no action. lookalike-refresh: still rate-limited (AL-1705, updated), source audience unchanged at exactly 20. hook-angle-tagging: 0 gaps -- every one of the 56 distinct active-ad creative ids already tagged (fresh diff against the account's full active-ad list this pass). hard-spend-circuit-breaker: no breach this pass, no auto-pause. anomaly: narrow-audience warning persists on RT_Sneakers_Caps_NoBuyers_v2_11Oct (AL-1647, updated), not re-alerted. competitor-rescrape: fresh scrape this pass -- Gully Labs 225 (unchanged vs last recorded 225), Lotto Sport India 248 (down from 255, -2.7%, well under the 20% alert threshold either direction); settings.competitor_last_scrape updated, no competitor-spike alert. spend-pacing: monthly_spend_goal_inr is null, module skipped per its own trigger condition. approval-tier proposals (A-002 onward, 19 pending): no new triggers found this pass and nothing observed that invalidates an existing pending proposal's numbers; left untouched rather than refetching 14d/30d performance for all 19 to re-verify reasoning, since no auto-tier finding this pass suggested the account state underlying them had moved materially.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-10-14T06:51:03.000Z"
     }
   ],
   "log": [
