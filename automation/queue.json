@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-15T12:48:00.000Z",
+  "generatedAt": "2026-10-15T14:50:00.000Z",
   "settings": {
     "kill_roas_threshold": "DISABLED 2026-10-05 by user instruction: the ROAS pause-kill is OFF. Module 16 (pause-kill) must NOT auto-pause any campaign for low ROAS; surface low-ROAS campaigns as alerts only. The hard spend circuit breaker is a separate mechanism and stays ON. Former rule, for reference: pause if ROAS < 1.0x after ₹500 spend on a sales-objective campaign. EXCEPTION until 2026-10-05T23:59+05:30 (user-approved 2026-09-29): for the sneaker-push campaigns 120256091369160159 (Sneakers_BOF_30Sep-5Oct), 120256091370110159 (Sneakers_Prospecting_30Sep-5Oct) and 120256088882780159 (Sneakers_Catalog_Retargeting) the spend floor is ₹1,500, not ₹500.",
     "reactivate_min_historic_roas": "surface for reactivation if a paused campaign's last active-period ROAS >= 3.0x",
@@ -16709,10 +16709,10 @@
       "id": "AL-1714",
       "module": "lookalike-refresh",
       "title": "Lookalike rebuild attempted this pass -- failed again (duplicate audience, source unchanged)",
-      "detail": "2026-10-15T12:48:00.000Z pass: rate limit cleared (last attempt 2026-10-14T10:51:00.000Z, ~26h elapsed) -- a rebuild of the 1% lookalike off 'Purchasers 180D' (120255823280550159) was attempted this pass via ads_create_custom_audience. Failed again with Meta's duplicate-lookalike error (2654/1713007); source audience size still unchanged (~20, since 2026-09-15). The 3 existing laddered 1%/2%/5% lookalikes remain live and serving. Will keep failing on each rate-limit-cleared pass until the source audience actually grows.",
+      "detail": "2026-10-15T12:48:00.000Z pass: rate limit cleared (last attempt 2026-10-14T10:51:00.000Z, ~26h elapsed) -- a rebuild of the 1% lookalike off 'Purchasers 180D' (120255823280550159) was attempted this pass via ads_create_custom_audience. Failed again with Meta's duplicate-lookalike error (2654/1713007); source audience size still unchanged (~20, since 2026-09-15). The 3 existing laddered 1%/2%/5% lookalikes remain live and serving. Will keep failing on each rate-limit-cleared pass until the source audience actually grows. Reconfirmed 2026-10-15T14:50:00.000Z pass: rate limit NOT yet cleared (last attempt 2026-10-15T12:48:00.000Z, ~2h elapsed, within max_auto_actions_per_entity_per_day=1) -- rebuild skipped this pass rather than re-attempted. Source audience (Purchasers 180D) still ~20 members, unchanged since 2026-09-15. The 3 existing laddered lookalikes remain live and serving.",
       "severity": "low",
       "dismissed": false,
-      "createdAt": "2026-10-15T12:48:00.000Z"
+      "createdAt": "2026-10-15T14:50:00.000Z"
     },
     {
       "id": "AL-1715",
@@ -16749,6 +16749,15 @@
       "severity": "low",
       "dismissed": true,
       "createdAt": "2026-10-14T18:50:00.000Z"
+    },
+    {
+      "id": "AL-1719",
+      "module": "self-audit-check",
+      "title": "Routine pass summary -- 2026-10-15T14:50:00.000Z",
+      "detail": "Circuit breaker: not freshly tripped this pass (today's account spend Rs5,061.91 vs Rs7,000 hard_spend_ceiling_inr via ads_get_ad_entities account/today, 72.3%, no breach); circuitBreaker.tripped remains true from the 2026-10-10T16:50 UTC trip, unresolved pending A-063 (resume-after-circuit-breaker). Pixel/dataset quality gate (ads_get_dataset_quality, dataset 833131719490535): composite EMQ scores 6.1-8.8 across all tracked web events, unchanged from the last reading, at/above pixel_quality_min_match_rate=0.6 -- ROAS-based modules not suppressed. purchaser-exclusion: fresh targeting fetch on all 12 active ad sets confirms every one excludes Purchasers 180D (120255823280550159) directly in excluded_custom_audiences -- compliant account-wide, no edits made. lookalike-refresh: rate-limited this pass, skipped (last real attempt 2026-10-15T12:48:00.000Z, <24h elapsed) -- see AL-1714, updated rather than re-attempted; source audience still ~20. hook-angle-tagging: diffed all 50 distinct active-ad creative ids against queue.json.creativeTags -- zero gaps, nothing new to tag this pass (vision pass skipped, Higgsfield MCP not attached to this run). anomaly: unchanged, only the already-tracked active_delivery_narrow_audience warning on RT_Sneakers_Caps_NoBuyers_v2_11Oct (audience size 32,000-37,600), already root-caused at AL-1658, not re-alerted per the de-dup rule. learning-phase-stuck: none of the 12 active ad sets returned a learning_stage_info flag -- none stuck. 10 campaigns ACTIVE this pass (KAGE_TOF_Traffic_13Oct, Sneakers_BOF_v2_Placement_Split_12Oct, Prospecting_JP2_Placement_Split_12Oct, Caps_Only, Prospecting_JP_Purchase_5-9Oct, Sneakers_BOF_30Sep-5Oct, Retargeting_Overall, Yin Yang_TOF, SORA_TOF, Prospecting_LAL1_Purchasers_14Oct), unchanged from the 12:48 UTC pass -- campaign-consolidation-watch found no new duplicate pairs. Competitor rescrape skipped this pass (last real scrape only ~2h ago at 12:48 UTC, already recorded as flat/reverted in settings.competitor_last_scrape -- re-scraping this soon would add noise). Reconfirmed all 16 pending approval-tier proposals with fresh pulls: reactivate-winner (A-027/028/039/048/050/051) and resume-after-circuit-breaker (A-063)'s 3 still-paused campaigns (Sora_BOF_Test_5Oct roas null, Tsuchi_BOF_Test_5Oct 8.574x, Caps + Kage_26 Sept 7.786x/152 purchases) all came back byte-identical to the 12:48 UTC pass's recorded numbers; budget-reallocation (A-064) last_14d ROAS gap (Sneakers_BOF_30Sep-5Oct 4.848x vs Prospecting_JP_Purchase_5-9Oct 15.829x) also unchanged, well above the 1.5x threshold. No proposal reasoning edited since nothing moved. placement-optimization (A-038/058/059/060/065) and ab-test (A-062) left as last reconfirmed -- no fresh placement/creative breakdown pulled this pass (no material delivery change expected within a ~2h window). high-intent-retargeting (A-002) and catalog-dpa-launch (A-003) remain structurally unchanged. spend-pacing skipped (monthly_spend_goal_inr is null). weekly-digest not due (last written for week ending 2026-10-11, next due ~2026-10-18); monthly-digest not due (mid-month, last run 2026-10-01). No KPI-to-trigger gaps newly identified. Note on file size: this pass's summary was written only to this alert, not appended to settings.note, per the 2026-10-13T14:52 UTC anti-bloat policy -- settings.note was left unchanged this pass. No auto-tier Meta writes occurred this pass (purchaser-exclusion already compliant, lookalike-refresh rate-limited, hook-angle-tagging had nothing new, circuit breaker not re-breached); no new proposals.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-10-15T14:50:00.000Z"
     }
   ],
   "log": [
