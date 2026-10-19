@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-19T06:47:19.000Z",
+  "generatedAt": "2026-10-19T08:53:14.000Z",
   "settings": {
     "kill_roas_threshold": "DISABLED 2026-10-05 by user instruction: the ROAS pause-kill is OFF. Module 16 (pause-kill) must NOT auto-pause any campaign for low ROAS; surface low-ROAS campaigns as alerts only. The hard spend circuit breaker is a separate mechanism and stays ON. Former rule, for reference: pause if ROAS < 1.0x after ₹500 spend on a sales-objective campaign. EXCEPTION until 2026-10-05T23:59+05:30 (user-approved 2026-09-29): for the sneaker-push campaigns 120256091369160159 (Sneakers_BOF_30Sep-5Oct), 120256091370110159 (Sneakers_Prospecting_30Sep-5Oct) and 120256088882780159 (Sneakers_Catalog_Retargeting) the spend floor is ₹1,500, not ₹500.",
     "reactivate_min_historic_roas": "surface for reactivation if a paused campaign's last active-period ROAS >= 3.0x",
@@ -1152,7 +1152,7 @@
       "module": "resume-after-circuit-breaker",
       "tier": "approval",
       "title": "Resume the 5 campaigns down from the 2026-10-10 circuit breaker trip",
-      "reasoning": "Updated 2026-10-18T14:52 pass: of the 5 campaigns paused by the 2026-10-10T16:50 circuit breaker trip, a fresh ads_get_ad_entities pull this pass shows 2 are already ACTIVE again -- Sneakers_BOF_30Sep-5Oct (120256091369160159, spent Rs1,279.43 today) and Prospecting_JP_Purchase_5-9Oct (120256186544730159, spent Rs525.46 today) -- resumed outside this automation's approval flow (i.e. directly in Ads Manager or via chat approval of a different action), so approving this proposal's activation step for those two would be a no-op. The other 3 remain PAUSED and genuinely need this approval to resume: Sora_BOF_Test_5Oct (120256202021140159), Tsuchi_BOF_Test_5Oct (120256202020640159), and Caps + Kage_26 Sept (120255693970470159). circuitBreaker.tripped is still true pending this human decision -- no auto-resume has occurred or will occur. metaAction narrowed below to only the 3 still-paused campaigns. | Reconfirmed 2026-10-19T00:50:51.000Z: Fresh pull on the 3 remaining paused casualties: Sora_BOF_Test_5Oct (roas null, no purchases, still PAUSED), Tsuchi_BOF_Test_5Oct (8.574x, 5 purchases, still PAUSED), Caps + Kage_26 Sept (7.987x, 155 purchases, up from 152 -- still PAUSED, still the strongest candidate). Sneakers_BOF_30Sep-5Oct and Prospecting_JP_Purchase_5-9Oct remain ACTIVE (resumed outside this flow).",
+      "reasoning": "Updated 2026-10-18T14:52 pass: of the 5 campaigns paused by the 2026-10-10T16:50 circuit breaker trip, a fresh ads_get_ad_entities pull this pass shows 2 are already ACTIVE again -- Sneakers_BOF_30Sep-5Oct (120256091369160159, spent Rs1,279.43 today) and Prospecting_JP_Purchase_5-9Oct (120256186544730159, spent Rs525.46 today) -- resumed outside this automation's approval flow (i.e. directly in Ads Manager or via chat approval of a different action), so approving this proposal's activation step for those two would be a no-op. The other 3 remain PAUSED and genuinely need this approval to resume: Sora_BOF_Test_5Oct (120256202021140159), Tsuchi_BOF_Test_5Oct (120256202020640159), and Caps + Kage_26 Sept (120255693970470159). circuitBreaker.tripped is still true pending this human decision -- no auto-resume has occurred or will occur. metaAction narrowed below to only the 3 still-paused campaigns. | Reconfirmed 2026-10-19T00:50:51.000Z: Fresh pull on the 3 remaining paused casualties: Sora_BOF_Test_5Oct (roas null, no purchases, still PAUSED), Tsuchi_BOF_Test_5Oct (8.574x, 5 purchases, still PAUSED), Caps + Kage_26 Sept (7.987x, 155 purchases, up from 152 -- still PAUSED, still the strongest candidate). Sneakers_BOF_30Sep-5Oct and Prospecting_JP_Purchase_5-9Oct remain ACTIVE (resumed outside this flow). | Reconfirmed 2026-10-19T08:53:14.000Z pass: Sora_BOF_Test_5Oct, Tsuchi_BOF_Test_5Oct, and Caps + Kage_26 Sept are all still PAUSED (unchanged from the 2026-10-19T00:50:51 reconfirmation). Sneakers_BOF_30Sep-5Oct (last_7d ROAS 3.81x, CPM/CPC elevated per AL-1756 but still profitable) and Prospecting_JP_Purchase_5-9Oct (last_7d ROAS 4.82x) remain ACTIVE, resumed outside this flow. Today's account-wide spend is Rs2,386.40 against the Rs7,000 hard_spend_ceiling_inr -- no new trip. circuitBreaker.tripped is still left at its stored value pending human action, per established precedent.",
       "actionSummary": "Activates the 3 campaigns still paused from the 2026-10-10 circuit breaker trip (Sora_BOF_Test_5Oct, Tsuchi_BOF_Test_5Oct, Caps + Kage_26 Sept) via ads_activate_entity. The other 2 originally-paused campaigns (Sneakers_BOF_30Sep-5Oct, Prospecting_JP_Purchase_5-9Oct) are already active again outside this proposal and are left untouched.",
       "metaAction": {
         "tool": "ads_activate_entity",
@@ -1199,7 +1199,7 @@
       },
       "status": "pending",
       "createdAt": "2026-10-11T12:50:00.000Z",
-      "lastReconfirmedAt": "2026-10-18T02:49:00.000Z"
+      "lastReconfirmedAt": "2026-10-19T08:53:14.000Z"
     },
     {
       "id": "A-064",
@@ -17142,28 +17142,31 @@
       "id": "AL-1752",
       "module": "lookalike-refresh",
       "title": "Lookalike refresh rate-limited this pass (would have attempted rebuild again)",
-      "detail": "Last attempt was 2026-10-18T14:52:00.000Z (failed with Meta's duplicate-lookalike error, source audience 'Purchasers 180D' id 120255823280550159 still only ~20 members, unchanged since 2026-09-15). That's under 24h before this pass (2026-10-19T02:54:16.000Z), so settings.max_auto_actions_per_entity_per_day=1 blocks another attempt this pass -- skipping execution rather than retrying early. The 3 existing laddered 1%/2%/5% lookalikes built 2026-09-15 remain ACTIVE and serving, unaffected.",
+      "detail": "Last attempt was 2026-10-18T14:52:00.000Z (failed with Meta's duplicate-lookalike error, source audience 'Purchasers 180D' id 120255823280550159 still only ~20 members, unchanged since 2026-09-15). That's under 24h before this pass (2026-10-19T02:54:16.000Z), so settings.max_auto_actions_per_entity_per_day=1 blocks another attempt this pass -- skipping execution rather than retrying early. The 3 existing laddered 1%/2%/5% lookalikes built 2026-09-15 remain ACTIVE and serving, unaffected. | Reconfirmed 2026-10-19T08:53:14.000Z pass: Last attempt remains 2026-10-18T14:52:00.000Z (failed, duplicate-lookalike error), which is <24h before this pass (2026-10-19T08:53:14.000Z) -- settings.max_auto_actions_per_entity_per_day=1 still blocks another attempt. Source audience 'Purchasers 180D' (120255823280550159) unchanged at ~20 members. Skipping execution again this pass rather than retrying early. Note: every attempt since the source audience plateaued has failed with the same structural Meta duplicate-lookalike error (2654/1713007), not a transient fault -- the 3 existing laddered 1%/2%/5% lookalikes from 2026-09-15 remain the live, serving output of this build.",
       "severity": "low",
       "dismissed": false,
-      "createdAt": "2026-10-19T02:54:16.000Z"
+      "createdAt": "2026-10-19T02:54:16.000Z",
+      "lastReconfirmedAt": "2026-10-19T08:53:14.000Z"
     },
     {
       "id": "AL-1753",
       "module": "pixel-health",
       "title": "Pixel/data-quality gate -- 2026-10-19T02:54:16.000Z",
-      "detail": "ads_get_dataset_quality on dataset 833131719490535 (Shopify Meta Pixel) this pass: composite EMQ scores range 6.1 (PageView/ViewContent/AddToCart/SubscribedButtonClick/Search) to 9.0 (AddPaymentInfo), InitiateCheckout 6.9, Purchase 8.7, cod_purchase 8.7, prepaid_purchase 8.8 -- all at/above settings.pixel_quality_min_match_rate=0.6 (composite_score/10 proxy), essentially unchanged from the prior pass. ROAS-based modules NOT suppressed this pass.",
+      "detail": "ads_get_dataset_quality on dataset 833131719490535 (Shopify Meta Pixel) this pass: composite EMQ scores range 6.1 (PageView/ViewContent/AddToCart/SubscribedButtonClick/Search) to 9.0 (AddPaymentInfo), InitiateCheckout 6.9, Purchase 8.7, cod_purchase 8.7, prepaid_purchase 8.8 -- all at/above settings.pixel_quality_min_match_rate=0.6 (composite_score/10 proxy), essentially unchanged from the prior pass. ROAS-based modules NOT suppressed this pass. | Reconfirmed 2026-10-19T08:53:14.000Z pass: ads_get_dataset_quality on dataset 833131719490535 still shows composite EMQ scores 6.1-9.0 across all tracked web events, all at/above settings.pixel_quality_min_match_rate=0.6 (composite_score/10 proxy). ROAS-based modules NOT suppressed this pass.",
       "severity": "low",
       "dismissed": false,
-      "createdAt": "2026-10-19T02:54:16.000Z"
+      "createdAt": "2026-10-19T02:54:16.000Z",
+      "lastReconfirmedAt": "2026-10-19T08:53:14.000Z"
     },
     {
       "id": "AL-1754",
       "module": "anomaly",
       "title": "Narrow audience warning on RT_Sneakers_Caps_NoBuyers_v2_11Oct (Retargeting_Overall) persists",
-      "detail": "ads_insights_anomaly_signal this pass still flags ad set RT_Sneakers_Caps_NoBuyers_v2_11Oct (120256301241950159, under active campaign Retargeting_Overall) with active_delivery_narrow_audience -- estimated audience size 34,500-40,600. First flagged 2026-09-xx, most recently alerted 2026-10-15T20:51:00.000Z (AL-1721); no alert raised on this specific entity in the 3 days since, so re-flagging now with current numbers rather than suppressing as a dup.",
+      "detail": "ads_insights_anomaly_signal this pass still flags ad set RT_Sneakers_Caps_NoBuyers_v2_11Oct (120256301241950159, under active campaign Retargeting_Overall) with active_delivery_narrow_audience -- estimated audience size 34,500-40,600. First flagged 2026-09-xx, most recently alerted 2026-10-15T20:51:00.000Z (AL-1721); no alert raised on this specific entity in the 3 days since, so re-flagging now with current numbers rather than suppressing as a dup. | Reconfirmed 2026-10-19T08:53:14.000Z pass: ads_insights_anomaly_signal still flags ad set RT_Sneakers_Caps_NoBuyers_v2_11Oct (120256301241950159, campaign Retargeting_Overall) with active_delivery_narrow_audience -- estimated audience size now 35,000-41,200 (previously 34,500-40,600). Same root cause as before (purchaser/payment exclusions narrowing an already-small retargeting pool); no new action warranted beyond this reconfirmation.",
       "severity": "low",
       "dismissed": false,
-      "createdAt": "2026-10-19T02:54:16.000Z"
+      "createdAt": "2026-10-19T02:54:16.000Z",
+      "lastReconfirmedAt": "2026-10-19T08:53:14.000Z"
     },
     {
       "id": "AL-1755",
@@ -17178,10 +17181,11 @@
       "id": "AL-1756",
       "module": "threshold-alerts",
       "title": "CPM/CPC remain elevated on Sneakers_BOF_30Sep-5Oct and Prospecting_JP_Purchase_5-9Oct vs trailing 30d baseline",
-      "detail": "last_7d vs last_30d campaign comparison this pass: Prospecting_JP_Purchase_5-9Oct CPM Rs114.31 (7d) vs Rs66.57 (30d), +71.6%; CPC Rs4.84 vs Rs2.97, +63.0%. Sneakers_BOF_30Sep-5Oct CPM Rs105.70 (7d) vs Rs73.80 (30d), +43.2%; CPC Rs5.52 vs Rs3.30, +67.3%. Continuing from AL-1724 (2026-10-16), still elevated with updated numbers. ROAS on both campaigns remains healthy (4.82x and 3.81x respectively, last_7d) so this is a cost-efficiency watch item, not a performance failure -- no pause-kill action (module 16 is alert-only per settings.kill_roas_threshold).",
+      "detail": "last_7d vs last_30d campaign comparison this pass: Prospecting_JP_Purchase_5-9Oct CPM Rs114.31 (7d) vs Rs66.57 (30d), +71.6%; CPC Rs4.84 vs Rs2.97, +63.0%. Sneakers_BOF_30Sep-5Oct CPM Rs105.70 (7d) vs Rs73.80 (30d), +43.2%; CPC Rs5.52 vs Rs3.30, +67.3%. Continuing from AL-1724 (2026-10-16), still elevated with updated numbers. ROAS on both campaigns remains healthy (4.82x and 3.81x respectively, last_7d) so this is a cost-efficiency watch item, not a performance failure -- no pause-kill action (module 16 is alert-only per settings.kill_roas_threshold). | Reconfirmed 2026-10-19T08:53:14.000Z pass: last_7d vs last_30d campaign comparison essentially unchanged: Prospecting_JP_Purchase_5-9Oct CPM Rs114.29 (7d) vs Rs66.56 (30d), +71.5%; CPC Rs4.84 vs Rs2.97, +63.0%. Sneakers_BOF_30Sep-5Oct CPM Rs105.70 (7d) vs Rs73.80 (30d), +43.2%; CPC Rs5.52 vs Rs3.30, +67.3%. ROAS on both remains healthy (4.82x and 3.81x respectively, last_7d) -- still treating this as a cost-efficiency watch item, not a pause trigger (kill_roas_threshold is disabled by user instruction anyway).",
       "severity": "medium",
       "dismissed": false,
-      "createdAt": "2026-10-19T02:54:16.000Z"
+      "createdAt": "2026-10-19T02:54:16.000Z",
+      "lastReconfirmedAt": "2026-10-19T08:53:14.000Z"
     },
     {
       "id": "AL-1757",
@@ -17214,10 +17218,11 @@
       "id": "AL-1760",
       "module": "learning-phase-stuck",
       "title": "Prospecting_LAL1_Purchasers_14Oct's sole active ad stuck in delivery 'preparing' for 5 days -- still zero spend",
-      "detail": "Campaign Prospecting_LAL1_Purchasers_14Oct (120256355048910159) and its only ad set LAL1_Purchasers180D_FB_IG (120256355085920159) remain effective_status ACTIVE with Rs0 spend / 0 impressions since launch (created 2026-10-14T13:20 IST, now 5 days). Of its 2 ads, Prosp_KAGE_Lifestyle_2499 (120256355088360159) is now status/effective_status ACTIVE (it was PAUSED when AL-1723 first flagged this on 2026-10-16) but ads_get_ad_entities reports its delivery field as status='pending', substatuses=['preparing'] -- stuck in Meta's ad-review/preparation pipeline, not actually delivering. The other ad, Caps_Only_Indigo_Jap (120256355089640159), remains PAUSED. Both ads' updated_time is 2026-10-18T23:36, the same window the 2 circuit-breaker-paused campaigns were manually resumed outside this automation -- consistent with a manual troubleshooting attempt that has not yet resolved delivery. No Meta Ads MCP write tool can force an ad out of 'preparing' review; this needs human attention in Ads Manager (check ad review/compliance status, or re-save the ad to retrigger review).",
+      "detail": "Campaign Prospecting_LAL1_Purchasers_14Oct (120256355048910159) and its only ad set LAL1_Purchasers180D_FB_IG (120256355085920159) remain effective_status ACTIVE with Rs0 spend / 0 impressions since launch (created 2026-10-14T13:20 IST, now 5 days). Of its 2 ads, Prosp_KAGE_Lifestyle_2499 (120256355088360159) is now status/effective_status ACTIVE (it was PAUSED when AL-1723 first flagged this on 2026-10-16) but ads_get_ad_entities reports its delivery field as status='pending', substatuses=['preparing'] -- stuck in Meta's ad-review/preparation pipeline, not actually delivering. The other ad, Caps_Only_Indigo_Jap (120256355089640159), remains PAUSED. Both ads' updated_time is 2026-10-18T23:36, the same window the 2 circuit-breaker-paused campaigns were manually resumed outside this automation -- consistent with a manual troubleshooting attempt that has not yet resolved delivery. No Meta Ads MCP write tool can force an ad out of 'preparing' review; this needs human attention in Ads Manager (check ad review/compliance status, or re-save the ad to retrigger review). | Reconfirmed 2026-10-19T08:53:14.000Z pass: Campaign Prospecting_LAL1_Purchasers_14Oct (120256355048910159) and its sole ad set LAL1_Purchasers180D_FB_IG (120256355085920159) remain effective_status ACTIVE with Rs0 spend / 0 impressions, now ~5.5 days since creation (2026-10-14T13:20 IST). Ad Prosp_KAGE_Lifestyle_2499 (120256355088360159) is effective_status ACTIVE but still shows frequency 0 / null CTR / null CPM this pass -- delivery has not actually started. Continuing to flag rather than act (no auto-tier module covers un-stalling delivery; this needs human review of the ad's approval/review status in Ads Manager).",
       "severity": "medium",
       "dismissed": false,
-      "createdAt": "2026-10-19T04:49:27.000Z"
+      "createdAt": "2026-10-19T04:49:27.000Z",
+      "lastReconfirmedAt": "2026-10-19T08:53:14.000Z"
     },
     {
       "id": "AL-1761",
@@ -17245,6 +17250,15 @@
       "severity": "medium",
       "dismissed": false,
       "createdAt": "2026-10-19T06:47:19.000Z"
+    },
+    {
+      "id": "AL-1764",
+      "module": "self-audit-check",
+      "title": "Routine pass summary -- 2026-10-19T08:53:14.000Z (no new auto-mutations, no new proposals)",
+      "detail": "Circuit breaker: not tripped this pass -- today's account spend Rs2,386.40 vs Rs7,000 hard_spend_ceiling_inr. circuitBreaker.tripped remains true (stale bookkeeping from the 2026-10-10 trip); Sora_BOF_Test_5Oct, Tsuchi_BOF_Test_5Oct and Caps + Kage_26 Sept remain PAUSED pending human approval of A-063 (resume-after-circuit-breaker); Sneakers_BOF_30Sep-5Oct and Prospecting_JP_Purchase_5-9Oct were already resumed outside this automation and are ACTIVE and healthy. Pixel quality gate: healthy (EMQ composite scores 6.1-9.0, all above the 0.6 threshold) -- ROAS modules not suppressed. Auto-tier modules: purchaser-exclusion -- all 9 currently-active ad sets already exclude Purchasers 180D, no action needed. lookalike-refresh -- rate-limited (last attempt <24h ago, see AL-1752). hook-angle-tagging -- all 38 distinct creatives on currently-active ads already tagged, nothing new. hard-spend-circuit-breaker -- did not trip. 0 Meta API mutations executed this pass. 0 new proposals. 9 existing alerts reconfirmed in place with fresh numbers (pixel-health AL-1753, lookalike-refresh AL-1752, anomaly AL-1754, threshold-alerts AL-1756, learning-phase-stuck AL-1760) rather than creating new duplicate entries, and proposal A-063 reasoning refreshed. Data-quality note for whoever reviews this queue next: automation/queue.json has grown to 1,763 alerts (now 1,764) and 498 log entries. The two largest contributors are 'routine-run-notes' (451 entries, NOT a module defined in ROUTINE.md -- it appears to have been invented ad hoc by an earlier pass) and 'self-audit-check' 'Routine pass summary' entries (272, now 273), which together write near-duplicate per-pass status notes instead of updating one running entry. This pass did not add a 'routine-run-notes' entry (that module isn't in ROUTINE.md's table) and updated several genuinely-recurring alerts in place per the de-dup rule instead of appending new ones. Recommend a human session prune or archive the historical backlog of dismissed/resolved alerts older than a few days; that's outside this run's mandate to do unprompted.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-10-19T08:53:14.000Z"
     }
   ],
   "log": [
