@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-19T16:47:00.000Z",
+  "generatedAt": "2026-10-19T18:47:17.000Z",
   "settings": {
     "kill_roas_threshold": "DISABLED 2026-10-05 by user instruction: the ROAS pause-kill is OFF. Module 16 (pause-kill) must NOT auto-pause any campaign for low ROAS; surface low-ROAS campaigns as alerts only. The hard spend circuit breaker is a separate mechanism and stays ON. Former rule, for reference: pause if ROAS < 1.0x after ₹500 spend on a sales-objective campaign. EXCEPTION until 2026-10-05T23:59+05:30 (user-approved 2026-09-29): for the sneaker-push campaigns 120256091369160159 (Sneakers_BOF_30Sep-5Oct), 120256091370110159 (Sneakers_Prospecting_30Sep-5Oct) and 120256088882780159 (Sneakers_Catalog_Retargeting) the spend floor is ₹1,500, not ₹500.",
     "reactivate_min_historic_roas": "surface for reactivation if a paused campaign's last active-period ROAS >= 3.0x",
@@ -17313,6 +17313,33 @@
       "severity": "low",
       "dismissed": false,
       "createdAt": "2026-10-19T16:47:00.000Z"
+    },
+    {
+      "id": "AL-1771",
+      "module": "pixel-health",
+      "title": "Pixel/data-quality gate -- 2026-10-19T18:47:17.000Z",
+      "detail": "ads_get_dataset_quality on dataset 833131719490535: Purchase 8.8/10, prepaid_purchase 8.8/10, cod_purchase 8.7/10, AddPaymentInfo 8.7/10 -- all well above settings.pixel_quality_min_match_rate (0.6). PageView/ViewContent/AddToCart/Search steady at 6.1/10, InitiateCheckout 7.0/10. Gate cleared; ROAS-driven modules evaluated normally this pass (not suppressed).",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-10-19T18:47:17.000Z"
+    },
+    {
+      "id": "AL-1772",
+      "module": "lookalike-refresh",
+      "title": "Lookalike refresh rate-limited this pass (would have attempted rebuild) -- 2026-10-19T18:47:17.000Z",
+      "detail": "Source audience (Purchasers 180D, 120255823280550159) laddered 1%/2%/5% lookalikes remain past the 14-day lookalike_refresh_days threshold. Last rebuild attempt was 2026-10-19T16:47:00.000Z (failed again with Meta's duplicate-lookalike error 2654/1713007 -- source audience size unchanged at ~20), only ~2h elapsed since then, within max_auto_actions_per_entity_per_day=1 (24h window). Skipped this pass under rate limiting rather than re-attempted; next eligible ~2026-10-20T16:47 UTC. The 3 existing lookalikes remain live and serving.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-10-19T18:47:17.000Z"
+    },
+    {
+      "id": "AL-1773",
+      "module": "self-audit-check",
+      "title": "Routine pass summary -- 2026-10-19T18:47:17.000Z (no new proposals/alerts requiring action, 0 auto-mutations)",
+      "detail": "Circuit breaker: still tripped (since 2026-10-10T16:50), never auto-resumed per policy -- unchanged this pass. IST day rolled over since the 16:47 UTC pass -- today's live account spend reset to Rs2.29 of the Rs7,000 hard_spend_ceiling_inr across 9 active campaigns; no breach, no new trip. Of the original 5 breaker-paused campaigns: 2 (Sneakers_BOF_30Sep-5Oct, Prospecting_JP_Purchase_5-9Oct) remain manually resumed outside this automation and are delivering normally (last_14d ROAS 4.07x and 13.28x respectively); the other 3 (Sora_BOF_Test_5Oct, Tsuchi_BOF_Test_5Oct, Caps + Kage_26 Sept) remain PAUSED, still covered by pending proposal A-063 -- no change. Pixel quality gate: healthy (see AL-1771), ROAS modules not suppressed. Auto-tier modules this pass: purchaser-exclusion -- fresh targeting fetch on all 9 active ad sets confirms every one already excludes the purchaser audience (120255823280550159); no exempt-adset edge cases hit; no action needed. hook-angle-tagging -- all 37 distinct active/recently-active creative ids already present in creativeTags (413 total); nothing new to tag, vision pass still not attached per execution policy. lookalike-refresh -- rate-limited this pass, skipped (see AL-1772). hard-spend-circuit-breaker -- did not trip (spend far under ceiling, and the day just rolled over). Reviewed 6 pending reactivate-winner proposals (A-027 TSUCHI BOF based on CAPS 5.29x/Rs530, A-028 Mori + Tee_Sales_0609 10.26x/Rs585, A-039 Sora_BOF_Based on Mori_Tee 6.65x/Rs5,171, A-048 Sora Retargeting 4.33x/Rs1,516, A-050 Sneakers_Prospecting_30Sep-5Oct 6.32x/Rs3,249, A-051 New Caps Part 3 STP 4.89x/Rs1,781, all last_30d) -- all 6 campaigns confirmed still PAUSED (not deleted/archived) and still above reactivate_min_historic_roas (3.0x); none moot, left pending as-is. Reviewed 2 pending placement-optimization proposals -- A-065 (Caps_Only_11Oct ad set) still valid: whatsapp remains in publisher_platforms, not yet excluded. A-058 (BOF_2_Warm_IG365_Engagers_Visitors ad set) target now shows no explicit publisher_platforms list (Advantage+ automatic placements) -- flagging for a closer look next pass rather than closing outright. No new proposals or alerts needed beyond this summary; no Meta write calls made this pass.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-10-19T18:47:17.000Z"
     }
   ],
   "log": [
