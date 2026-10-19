@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-19T10:51:54.000Z",
+  "generatedAt": "2026-10-19T12:49:00.000Z",
   "settings": {
     "kill_roas_threshold": "DISABLED 2026-10-05 by user instruction: the ROAS pause-kill is OFF. Module 16 (pause-kill) must NOT auto-pause any campaign for low ROAS; surface low-ROAS campaigns as alerts only. The hard spend circuit breaker is a separate mechanism and stays ON. Former rule, for reference: pause if ROAS < 1.0x after ₹500 spend on a sales-objective campaign. EXCEPTION until 2026-10-05T23:59+05:30 (user-approved 2026-09-29): for the sneaker-push campaigns 120256091369160159 (Sneakers_BOF_30Sep-5Oct), 120256091370110159 (Sneakers_Prospecting_30Sep-5Oct) and 120256088882780159 (Sneakers_Catalog_Retargeting) the spend floor is ₹1,500, not ₹500.",
     "reactivate_min_historic_roas": "surface for reactivation if a paused campaign's last active-period ROAS >= 3.0x",
@@ -17268,6 +17268,33 @@
       "severity": "low",
       "dismissed": false,
       "createdAt": "2026-10-19T10:51:54.000Z"
+    },
+    {
+      "id": "AL-1766",
+      "module": "lookalike-refresh",
+      "title": "Lookalike refresh rate-limited this pass (would have attempted rebuild again)",
+      "detail": "Last actual rebuild attempt for the 1% lookalike off 'Purchasers 180D' (id 120255823280550159) was 2026-10-18T14:52:00.000Z (failed with Meta's duplicate-lookalike error 2654/1713007, source audience unchanged at ~20 since 2026-09-15). Less than 24h have elapsed since that attempt (settings.max_auto_actions_per_entity_per_day = 1), so this pass skipped a new attempt rather than retrying. The 3 existing laddered 1%/2%/5% lookalikes (built 2026-09-15) remain ACTIVE and serving, unaffected.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-10-19T12:49:00.000Z"
+    },
+    {
+      "id": "AL-1767",
+      "module": "pixel-health",
+      "title": "Pixel/data-quality gate -- 2026-10-19T12:49:00.000Z",
+      "detail": "ads_get_dataset_quality on dataset 833131719490535: Purchase event composite EMQ 8.8/10, prepaid_purchase 8.8/10, cod_purchase 8.7/10, AddPaymentInfo 8.7/10 -- all well above settings.pixel_quality_min_match_rate (0.6). PageView/ViewContent/AddToCart/Search steady at 6.1/10, InitiateCheckout 6.9/10. Gate cleared; ROAS-driven modules evaluated normally this pass (not suppressed).",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-10-19T12:49:00.000Z"
+    },
+    {
+      "id": "AL-1768",
+      "module": "self-audit-check",
+      "title": "Routine pass summary -- 2026-10-19T12:49:00.000Z (no new auto-mutations, no new proposals)",
+      "detail": "Hard spend circuit breaker check: today's account spend Rs3,293.94 vs Rs7,000 ceiling -- not breached, no new trip. Breaker remains tripped from 2026-10-10 (never auto-resumes); A-063 (resume-after-circuit-breaker) stays pending for human review. Known stale bookkeeping persists unchanged: 2 of the 5 breaker-paused campaigns (Prospecting_JP_Purchase_5-9Oct, Sneakers_BOF_30Sep-5Oct) are ACTIVE again outside automation, already flagged in the 2026-10-18T14:52 and 2026-10-19T06:47 passes -- not re-alerted this pass (no change). purchaser-exclusion: all 9 currently-active ad sets already exclude Purchasers 180D (120255823280550159); fully compliant, no action needed. hook-angle-tagging: all 40 distinct creative IDs across active ads already have creativeTags entries; no gaps found. lookalike-refresh: rate-limited (see separate alert). Anomaly signal unchanged (RT_Sneakers_Caps_NoBuyers_v2_11Oct narrow-audience warning persists, already alerted). Pending proposal A-064 (budget-reallocation) reconfirmed against fresh last_7d data: Sneakers_BOF_30Sep-5Oct 3.81x vs Prospecting_JP_Purchase_5-9Oct 4.82x (~1.27x gap, still below the 1.5x trigger on a 7d view even though the 30d view remains wide at ~3.05x) -- matches the 2026-10-19T06:47 reconfirmation exactly, no change, left pending for human judgment. No other pending proposals' underlying numbers changed materially since the prior pass ~2h ago. Weekly digest and competitor rescrape already fresh from earlier passes today; not repeated.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-10-19T12:49:00.000Z"
     }
   ],
   "log": [
