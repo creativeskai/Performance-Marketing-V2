@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-19T02:54:16.000Z",
+  "generatedAt": "2026-10-19T04:49:27.000Z",
   "settings": {
     "kill_roas_threshold": "DISABLED 2026-10-05 by user instruction: the ROAS pause-kill is OFF. Module 16 (pause-kill) must NOT auto-pause any campaign for low ROAS; surface low-ROAS campaigns as alerts only. The hard spend circuit breaker is a separate mechanism and stays ON. Former rule, for reference: pause if ROAS < 1.0x after ₹500 spend on a sales-objective campaign. EXCEPTION until 2026-10-05T23:59+05:30 (user-approved 2026-09-29): for the sneaker-push campaigns 120256091369160159 (Sneakers_BOF_30Sep-5Oct), 120256091370110159 (Sneakers_Prospecting_30Sep-5Oct) and 120256088882780159 (Sneakers_Catalog_Retargeting) the spend floor is ₹1,500, not ₹500.",
     "reactivate_min_historic_roas": "surface for reactivation if a paused campaign's last active-period ROAS >= 3.0x",
@@ -31,8 +31,8 @@
     "competitor_last_scrape": {
       "gully_labs_active_ads": 157,
       "lotto_sport_india_active_ads": 219,
-      "scraped_at": "2026-10-19T02:54:16.000Z",
-      "note": "2026-10-19T02:54:16.000Z pass: Gully Labs 157 (unchanged from 157, +0.0%). Lotto Sport India 219 (unchanged from 219, +0.0%) -- the Stroma launch spike has fully settled. Both page-ID-scoped via ads_library_search (page_id=107479854297817 Gully Labs / 426015150606378 Lotto Sport India, country IN, ACTIVE)."
+      "scraped_at": "2026-10-19T04:49:27.000Z",
+      "note": "2026-10-19T04:49:27.000Z pass: Gully Labs 157 (unchanged from 157, +0.0%). Lotto Sport India 219 (unchanged from 219, +0.0%) -- still settled post-Stroma-launch. Both page-ID-scoped via ads_library_search (page_id=107479854297817 Gully Labs / 426015150606378 Lotto Sport India, country IN, ACTIVE)."
     },
     "audience_label_corrections": {
       "120249907176770159": "ATC_180D -- NOT a purchaser audience (cart-adders, event=AddToCart, retention 180 days). Verified 2026-09-14, reconfirmed 2026-09-20. Superseded note: earlier passes said the account had NO purchaser audience at all -- that's now out of date. See the 120255823280550159 (Purchasers 180D) entry above, created 2026-09-15, which IS a genuine purchaser audience and is already in use for exclusion + lookalike.",
@@ -17205,6 +17205,33 @@
       "severity": "low",
       "dismissed": false,
       "createdAt": "2026-10-19T02:54:16.000Z"
+    },
+    {
+      "id": "AL-1760",
+      "module": "learning-phase-stuck",
+      "title": "Prospecting_LAL1_Purchasers_14Oct's sole active ad stuck in delivery 'preparing' for 5 days -- still zero spend",
+      "detail": "Campaign Prospecting_LAL1_Purchasers_14Oct (120256355048910159) and its only ad set LAL1_Purchasers180D_FB_IG (120256355085920159) remain effective_status ACTIVE with Rs0 spend / 0 impressions since launch (created 2026-10-14T13:20 IST, now 5 days). Of its 2 ads, Prosp_KAGE_Lifestyle_2499 (120256355088360159) is now status/effective_status ACTIVE (it was PAUSED when AL-1723 first flagged this on 2026-10-16) but ads_get_ad_entities reports its delivery field as status='pending', substatuses=['preparing'] -- stuck in Meta's ad-review/preparation pipeline, not actually delivering. The other ad, Caps_Only_Indigo_Jap (120256355089640159), remains PAUSED. Both ads' updated_time is 2026-10-18T23:36, the same window the 2 circuit-breaker-paused campaigns were manually resumed outside this automation -- consistent with a manual troubleshooting attempt that has not yet resolved delivery. No Meta Ads MCP write tool can force an ad out of 'preparing' review; this needs human attention in Ads Manager (check ad review/compliance status, or re-save the ad to retrigger review).",
+      "severity": "medium",
+      "dismissed": false,
+      "createdAt": "2026-10-19T04:49:27.000Z"
+    },
+    {
+      "id": "AL-1761",
+      "module": "weekly-digest",
+      "title": "Weekly digest -- week ending 2026-10-19T04:49:27.000Z",
+      "detail": "Last 7 days (account-level, ads_get_ad_entities date_preset=last_7d): spend Rs41,908.97, 585,734 impressions, 13,713 clicks, 162 purchases, Rs295,471.36 revenue -> blended ROAS ~7.05x. Today so far: Rs1,416.25 spent (12.1% -> 20.2% of the Rs7,000 hard_spend_ceiling_inr as the day progresses), well clear of the breaker. 9 campaigns effective_status ACTIVE: Prospecting_LAL1_Purchasers_14Oct (Rs0, stuck -- see AL-1760), KAGE_TOF_Traffic_13Oct, Sneakers_BOF_v2_Placement_Split_12Oct, Prospecting_JP2_Placement_Split_12Oct, Caps_Only, Prospecting_JP_Purchase_5-9Oct, Sneakers_BOF_30Sep-5Oct, Retargeting_Overall, Yin Yang_TOF -- the last 2 of these (Sneakers_BOF_30Sep-5Oct, Prospecting_JP_Purchase_5-9Oct) are circuit-breaker casualties resumed outside the automation on 2026-10-18, both delivering at strong ROAS since (4.1x and 13.6x respectively over last_14d). 3 campaigns remain down from the 2026-10-10 breaker trip awaiting human approval of A-063 (Sora_BOF_Test_5Oct, Tsuchi_BOF_Test_5Oct, Caps + Kage_26 Sept). 16 proposals pending (A-002, A-003, A-027, A-028, A-039, A-048, A-050, A-051, A-058, A-062, A-063, A-064, A-065, A-066, A-067, A-068); no new ones raised this pass. Open anomaly: narrow-audience warning on RT_Sneakers_Caps_NoBuyers_v2_11Oct (Retargeting_Overall), unchanged.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-10-19T04:49:27.000Z"
+    },
+    {
+      "id": "AL-1762",
+      "module": "self-audit-check",
+      "title": "Routine pass summary -- 2026-10-19T04:49:27.000Z",
+      "detail": "Circuit breaker: still tripped (since 2026-10-10T16:50), never auto-resumed. Of the 5 campaigns it originally paused, 2 (Sneakers_BOF_30Sep-5Oct, Prospecting_JP_Purchase_5-9Oct) remain ACTIVE again outside this automation (unchanged since 2026-10-18T14:52); the other 3 remain PAUSED, still covered by pending proposal A-063 (reasoning already current as of 2026-10-19T00:50:51). Today's live account spend: Rs1,416.25 of the Rs7,000 hard_spend_ceiling_inr (20.2%) -- no new breach. Pixel quality gate: healthy, composite EMQ 0.61-0.90 across tracked events (Purchase 0.87, cod_purchase 0.87, prepaid_purchase 0.88, AddPaymentInfo 0.90; upper-funnel events PageView/ViewContent/AddToCart/Search all 0.61, InitiateCheckout 0.69) -- all at or above pixel_quality_min_match_rate (0.6); ROAS modules not suppressed. Auto-tier modules this pass: purchaser-exclusion found all 9 active ad sets already excluding the purchaser audience (120255823280550159) -- no action needed; hook-angle-tagging found all 38 distinct active-ad creative ids already present in creativeTags -- no action needed; lookalike-refresh rate-limited (last real attempt 2026-10-18T14:52, <24h elapsed, already alerted this same day -- not re-alerted); hard-spend-circuit-breaker did not trip (spend well under ceiling). New this pass: AL-1760 (Prospecting_LAL1_Purchasers_14Oct's active ad stuck in Meta's 'preparing' review queue, still Rs0 delivery after 5 days) and AL-1761 (weekly digest, today being Monday). No pending proposal (A-002 onward) was executed, approved, or rejected. Competitor scrape (Gully Labs 157, Lotto Sport India 219) both unchanged, below the 20% alert threshold. No new campaign-consolidation duplicate pairs found. KPI-to-trigger completeness: no dashboard-surfaced metric was found without a corresponding module this pass.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-10-19T04:49:27.000Z"
     }
   ],
   "log": [
