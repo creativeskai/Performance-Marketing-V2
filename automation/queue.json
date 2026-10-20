@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-20T06:54:00.000Z",
+  "generatedAt": "2026-10-20T08:54:00.000Z",
   "settings": {
     "kill_roas_threshold": "DISABLED 2026-10-05 by user instruction: the ROAS pause-kill is OFF. Module 16 (pause-kill) must NOT auto-pause any campaign for low ROAS; surface low-ROAS campaigns as alerts only. The hard spend circuit breaker is a separate mechanism and stays ON. Former rule, for reference: pause if ROAS < 1.0x after ₹500 spend on a sales-objective campaign. EXCEPTION until 2026-10-05T23:59+05:30 (user-approved 2026-09-29): for the sneaker-push campaigns 120256091369160159 (Sneakers_BOF_30Sep-5Oct), 120256091370110159 (Sneakers_Prospecting_30Sep-5Oct) and 120256088882780159 (Sneakers_Catalog_Retargeting) the spend floor is ₹1,500, not ₹500.",
     "reactivate_min_historic_roas": "surface for reactivation if a paused campaign's last active-period ROAS >= 3.0x",
@@ -17480,12 +17480,12 @@
     {
       "module": "pixel-health",
       "title": "Pixel/data-quality gate -- 2026-10-20T02:56:00.000Z",
-      "detail": "ads_get_dataset_quality on dataset 833131719490535 this pass: Purchase composite EMQ 8.8/10, prepaid_purchase 8.8/10, cod_purchase 8.8/10, AddPaymentInfo 9.1/10 -- all well above settings.pixel_quality_min_match_rate (0.6) on the account's established 0-10 composite-score convention. PageView/ViewContent/Search/AddToCart all 6.1/10, stable. ROAS-based modules proceed normally this pass. | Reconfirmed 2026-10-20T06:54:00.000Z: composite EMQ unchanged -- Purchase 8.8/10, prepaid_purchase 8.8/10, cod_purchase 8.8/10, AddPaymentInfo 9.1/10, PageView/ViewContent/AddToCart 6.1/10, InitiateCheckout 7.0/10, Search 6.1/10 -- all well above the 0.6 threshold on the account's 0-10 composite-score convention. Gate CLEAR, ROAS modules evaluated normally this pass.",
+      "detail": "ads_get_dataset_quality on dataset 833131719490535 this pass: Purchase composite EMQ 8.8/10, prepaid_purchase 8.8/10, cod_purchase 8.8/10, AddPaymentInfo 9.1/10 -- all well above settings.pixel_quality_min_match_rate (0.6) on the account's established 0-10 composite-score convention. PageView/ViewContent/Search/AddToCart all 6.1/10, stable. ROAS-based modules proceed normally this pass. | Reconfirmed 2026-10-20T06:54:00.000Z: composite EMQ unchanged -- Purchase 8.8/10, prepaid_purchase 8.8/10, cod_purchase 8.8/10, AddPaymentInfo 9.1/10, PageView/ViewContent/AddToCart 6.1/10, InitiateCheckout 7.0/10, Search 6.1/10 -- all well above the 0.6 threshold on the account's 0-10 composite-score convention. Gate CLEAR, ROAS modules evaluated normally this pass. | Reconfirmed 2026-10-20T08:54:00.000Z: ads_get_dataset_quality on dataset 833131719490535 unchanged -- Purchase 8.8/10, prepaid_purchase 8.8/10, cod_purchase 8.8/10, AddPaymentInfo 9.0/10, PageView/ViewContent/AddToCart/Search 6.1/10, InitiateCheckout 6.9/10 -- all well above the 0.6 threshold on the account's 0-10 composite-score convention. Gate CLEAR, ROAS modules evaluated normally this pass.",
       "severity": "low",
       "id": "AL-1788",
       "dismissed": false,
       "createdAt": "2026-10-20T02:56:00.000Z",
-      "updatedAt": "2026-10-20T06:54:00.000Z"
+      "updatedAt": "2026-10-20T08:54:00.000Z"
     },
     {
       "module": "anomaly",
@@ -17608,11 +17608,12 @@
     {
       "id": "AL-1802",
       "module": "anomaly",
-      "title": "Narrow-audience warning on RT_Sneakers_Caps_NoBuyers_v2_11Oct resolved again",
-      "detail": "ads_insights_anomaly_signal at this pass (2026-10-20T06:54:00.000Z) returned clean -- no anomaly signal issues found (checked auction overlap, creative fatigue, narrow audience). This clears the active_delivery_narrow_audience flag that AL-1800 (04:52 pass) had reported as reappeared. The flag has now flip-flopped across 7+ passes -- the audience size is likely sitting right at Meta's narrow-audience boundary. Ad set remains healthy (16.77x ROAS last_14d per the 02:56 pull); informational only.",
+      "title": "Narrow-audience warning on RT_Sneakers_Caps_NoBuyers_v2_11Oct reappeared again",
+      "detail": "ads_insights_anomaly_signal at this pass (2026-10-20T06:54:00.000Z) returned clean -- no anomaly signal issues found (checked auction overlap, creative fatigue, narrow audience). This clears the active_delivery_narrow_audience flag that AL-1800 (04:52 pass) had reported as reappeared. The flag has now flip-flopped across 7+ passes -- the audience size is likely sitting right at Meta's narrow-audience boundary. Ad set remains healthy (16.77x ROAS last_14d per the 02:56 pull); informational only. | UPDATE 2026-10-20T08:54:00.000Z: ads_insights_anomaly_signal this pass flagged active_delivery_narrow_audience AGAIN for ad set RT_Sneakers_Caps_NoBuyers_v2_11Oct (120256301241950159, campaign Retargeting_Overall), estimated audience size 34,800-41,000. This flag has now flip-flopped across 8+ passes -- consistent with the audience size sitting right at Meta's narrow-audience estimation boundary. No action taken; campaign ROAS (13.77x, last_14d) remains excellent despite the warning, so this is treated as a cosmetic Ads Manager signal, not a real delivery problem.",
       "severity": "low",
       "dismissed": false,
-      "createdAt": "2026-10-20T06:54:00.000Z"
+      "createdAt": "2026-10-20T06:54:00.000Z",
+      "updatedAt": "2026-10-20T08:54:00.000Z"
     },
     {
       "id": "AL-1803",
@@ -17627,19 +17628,21 @@
       "id": "AL-1804",
       "module": "lookalike-refresh",
       "title": "Lookalike refresh rate-limited this pass (would have attempted rebuild)",
-      "detail": "Last attempt was 2026-10-19T16:47:00.000Z (failed, Meta duplicate-lookalike error 2654/1713007 -- source audience 'Purchasers 180D' still ~20 people, unchanged since 2026-09-15, now ~35 days old). That is <24h before this pass (2026-10-20T06:54:00.000Z), so settings.max_auto_actions_per_entity_per_day (1) has already been reached for this module+entity -- skipping execution this pass rather than attempting again. The 3 existing laddered lookalikes (1%/2%/5%, built 2026-09-15) remain live and serving, unaffected.",
+      "detail": "Last attempt was 2026-10-19T16:47:00.000Z (failed, Meta duplicate-lookalike error 2654/1713007 -- source audience 'Purchasers 180D' still ~20 people, unchanged since 2026-09-15, now ~35 days old). That is <24h before this pass (2026-10-20T06:54:00.000Z), so settings.max_auto_actions_per_entity_per_day (1) has already been reached for this module+entity -- skipping execution this pass rather than attempting again. The 3 existing laddered lookalikes (1%/2%/5%, built 2026-09-15) remain live and serving, unaffected. | Reconfirmed 2026-10-20T08:54:00.000Z: last attempt still 2026-10-19T16:47:00.000Z (failed, duplicate-lookalike Meta error 2654/1713007), ~16h elapsed as of this pass -- settings.max_auto_actions_per_entity_per_day (1) still within the last 24h for this entity (source audience 'Purchasers 180D', 120255823280550159, approximate_count_lower_bound/upper_bound still exactly 20, unchanged since 2026-09-15). Skipped execution again this pass per rate-limiting safety rule; will be eligible to retry after 2026-10-20T16:47 UTC.",
       "severity": "low",
       "dismissed": false,
-      "createdAt": "2026-10-20T06:54:00.000Z"
+      "createdAt": "2026-10-20T06:54:00.000Z",
+      "updatedAt": "2026-10-20T08:54:00.000Z"
     },
     {
       "id": "AL-1805",
       "module": "learning-phase-stuck",
       "title": "No ad sets stuck in learning this pass",
-      "detail": "Fresh ads_get_ad_entities (adset, ACTIVE, learning_stage_info) on all 9 active ad sets this pass returned no learning_stage_info for any of them, meaning none are currently flagged as still in the learning phase. No action needed.",
+      "detail": "Fresh ads_get_ad_entities (adset, ACTIVE, learning_stage_info) on all 9 active ad sets this pass returned no learning_stage_info for any of them, meaning none are currently flagged as still in the learning phase. No action needed. | Reconfirmed 2026-10-20T08:54:00.000Z: fresh ads_get_ad_entities (adset, ACTIVE, learning_stage_info) on all 9 active ad sets again returned no learning_stage_info for any of them -- none stuck in learning.",
       "severity": "low",
       "dismissed": false,
-      "createdAt": "2026-10-20T06:54:00.000Z"
+      "createdAt": "2026-10-20T06:54:00.000Z",
+      "updatedAt": "2026-10-20T08:54:00.000Z"
     },
     {
       "id": "AL-1806",
@@ -17654,19 +17657,30 @@
       "id": "AL-1807",
       "module": "campaign-consolidation-watch",
       "title": "No new duplicate-campaign pairs found this pass",
-      "detail": "Reviewed the 9 active campaigns this pass: Sneakers_BOF_v2_Placement_Split_12Oct and Sneakers_BOF_30Sep-5Oct both target sneaker BOF audiences but are the known, user-approved placement-split test pair (not a duplicate to consolidate). No other same-product+audience overlaps identified among active campaigns.",
+      "detail": "Reviewed the 9 active campaigns this pass: Sneakers_BOF_v2_Placement_Split_12Oct and Sneakers_BOF_30Sep-5Oct both target sneaker BOF audiences but are the known, user-approved placement-split test pair (not a duplicate to consolidate). No other same-product+audience overlaps identified among active campaigns. | Reconfirmed 2026-10-20T08:54:00.000Z: same 9 active campaigns reviewed, no new same-product+audience duplicate pairs found. Sneakers_BOF_v2_Placement_Split_12Oct / Sneakers_BOF_30Sep-5Oct remain the known, user-approved placement-split test pair.",
       "severity": "low",
       "dismissed": false,
-      "createdAt": "2026-10-20T06:54:00.000Z"
+      "createdAt": "2026-10-20T06:54:00.000Z",
+      "updatedAt": "2026-10-20T08:54:00.000Z"
     },
     {
       "id": "AL-1808",
       "module": "self-audit-check",
-      "title": "Routine pass summary -- 2026-10-20T06:54:00.000Z (0 auto-mutations, 0 new proposals, 13 reconfirmations)",
-      "detail": "Pass 2026-10-20T06:54:00.000Z: circuit breaker checked first (today's account spend Rs1,161.31 vs Rs7,000 ceiling -- not breached; circuitBreaker.tripped left at its stored 2026-10-10 value, no auto-resume per ROUTINE.md). Pixel quality gate clear (EMQ 6.1-9.1/10, all above 0.6 threshold) -- ROAS modules evaluated normally. All 4 auto-tier modules evaluated: purchaser-exclusion compliant (no edits needed), lookalike-refresh rate-limited (skipped, alert written), hook-angle-tagging found no untagged creatives among active ads (all 37 unique creative IDs already in creativeTags), hard-spend-circuit-breaker did not trip. All 13 pending approval-tier proposals (A-002, A-003, A-027, A-028, A-039, A-048, A-050, A-051, A-058, A-063, A-065, A-067, A-068) reconfirmed with fresh numbers where pulled this pass; none closed as moot, none newly created. Anomaly signal flipped clear again (narrow-audience warning on RT_Sneakers_Caps_NoBuyers_v2_11Oct). Competitor counts moved slightly, both below the 20% spike threshold. No KPI-to-trigger gaps identified.",
+      "title": "Routine pass summary -- 2026-10-20T06:54:00.000Z + 2026-10-20T08:54:00.000Z",
+      "detail": "Pass 2026-10-20T06:54:00.000Z: circuit breaker checked first (today's account spend Rs1,161.31 vs Rs7,000 ceiling -- not breached; circuitBreaker.tripped left at its stored 2026-10-10 value, no auto-resume per ROUTINE.md). Pixel quality gate clear (EMQ 6.1-9.1/10, all above 0.6 threshold) -- ROAS modules evaluated normally. All 4 auto-tier modules evaluated: purchaser-exclusion compliant (no edits needed), lookalike-refresh rate-limited (skipped, alert written), hook-angle-tagging found no untagged creatives among active ads (all 37 unique creative IDs already in creativeTags), hard-spend-circuit-breaker did not trip. All 13 pending approval-tier proposals (A-002, A-003, A-027, A-028, A-039, A-048, A-050, A-051, A-058, A-063, A-065, A-067, A-068) reconfirmed with fresh numbers where pulled this pass; none closed as moot, none newly created. Anomaly signal flipped clear again (narrow-audience warning on RT_Sneakers_Caps_NoBuyers_v2_11Oct). Competitor counts moved slightly, both below the 20% spike threshold. No KPI-to-trigger gaps identified. | PASS 2026-10-20T08:54:00.000Z: circuit breaker re-checked first (today's account spend Rs2,176.01 vs Rs7,000 ceiling -- not breached; circuitBreaker.tripped left at its stored 2026-10-10 value, no auto-resume per ROUTINE.md -- see new alert AL-1809 flagging that A-063 is now stale against live campaign state). Pixel quality gate re-confirmed clear (EMQ 6.1-9.0/10, all above the 0.6 threshold) -- ROAS modules evaluated normally. All 4 auto-tier modules re-evaluated: purchaser-exclusion compliant on all 9 active ad sets (Purchasers 180D already excluded everywhere it should be, 2 exempt ad sets correctly skipped) -- no edits made; lookalike-refresh rate-limited again (last attempt 2026-10-19T16:47, source audience still 20, unchanged since 2026-09-15) -- skipped, alert updated; hook-angle-tagging found all 40 active ads' creative IDs already present in creativeTags -- no new tags needed; hard-spend-circuit-breaker not triggered. Zero Meta Ads write calls made this pass (nothing needed one). Approval-tier modules evaluated against fresh campaign/adset/geo/anomaly data: all active sales campaigns show strong ROAS (4.07x-13.77x, last_14d), no pause-kill candidates below floor; budget-reallocation's obvious gap (Sneakers_BOF_30Sep-5Oct 4.07x vs Prospecting_JP_Purchase_5-9Oct 13.28x) was NOT re-proposed because the user rejected the equivalent A-064 proposal only ~6h earlier (02:56 pass) -- deduped per ROUTINE.md; geo (region) breakdown returned null purchase_roas per-region (not supported at that breakdown by the API), so geo-scaling/geo-suppression/new-geo-testing could not be freshly evaluated on ROAS this pass -- left as-is (existing geo-scaling alerts from the 02:56 pass stand); frequency-capping and creative-fatigue both clear (all active-campaign frequencies 1.0-1.7, nowhere near the 3.0 fatigue threshold); auto-creative-generation-launch and the vision half of hook-angle-tagging remain skipped (Higgsfield not attached this pass). All 13 other pending proposals (A-002, A-003, A-027, A-028, A-039, A-048, A-050, A-051, A-058, A-063, A-065, A-067, A-068) left untouched -- no material number drift found that would warrant a reasoning update. No new proposals, no auto-executed mutations, 1 new alert (AL-1809), 5 existing alerts reconfirmed/updated in place.",
       "severity": "low",
       "dismissed": false,
-      "createdAt": "2026-10-20T06:54:00.000Z"
+      "createdAt": "2026-10-20T06:54:00.000Z",
+      "updatedAt": "2026-10-20T08:54:00.000Z"
+    },
+    {
+      "id": "AL-1809",
+      "module": "self-audit-check",
+      "title": "A-063 (resume-after-circuit-breaker) is stale -- 2 of the 5 paused campaigns are already ACTIVE again",
+      "detail": "This pass's fresh ads_get_ad_entities (campaign, today) pull shows Prospecting_JP_Purchase_5-9Oct (120256186544730159) and Sneakers_BOF_30Sep-5Oct (120256091369160159) are now effective_status=ACTIVE, even though circuitBreaker.tripped is still true (from the 2026-10-10 trip) and pending proposal A-063 (which would resume all 5 originally-paused campaigns: Sora_BOF_Test_5Oct, Tsuchi_BOF_Test_5Oct, Prospecting_JP_Purchase_5-9Oct, Sneakers_BOF_30Sep-5Oct, Caps + Kage_26 Sept) has not been approved or executed -- status is still 'pending'. Only 3 of the 5 (Sora_BOF_Test_5Oct, Tsuchi_BOF_Test_5Oct, Caps + Kage_26 Sept) remain PAUSED. This means the two reactivated campaigns were turned back on through some path outside this routine (manual Ads Manager action, or an in-app/chat activation not recorded against A-063), and A-063's stored metaAction (resume all 5) is now out of step with live reality -- approving it as-written would be a no-op for 2 of its 5 targets. Both reactivated campaigns are currently healthy (Prospecting_JP_Purchase_5-9Oct 13.28x ROAS, Sneakers_BOF_30Sep-5Oct 4.07x ROAS, last_14d, today's combined spend for the two ~Rs1,119 well inside the Rs7,000 ceiling), so there is no immediate safety concern -- but the human reviewing A-063 should know it no longer matches the account's real state before approving or rejecting it. No automatic action taken; this is informational only, per ROUTINE.md's self-audit-check / KPI-to-trigger completeness module.",
+      "severity": "medium",
+      "dismissed": false,
+      "createdAt": "2026-10-20T08:54:00.000Z"
     }
   ],
   "log": [
