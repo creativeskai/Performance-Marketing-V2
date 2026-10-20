@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-20T19:45:00.000Z",
+  "generatedAt": "2026-10-20T22:51:00.000Z",
   "settings": {
     "kill_roas_threshold": "DISABLED 2026-10-05 by user instruction: the ROAS pause-kill is OFF. Module 16 (pause-kill) must NOT auto-pause any campaign for low ROAS; surface low-ROAS campaigns as alerts only. The hard spend circuit breaker is a separate mechanism and stays ON. Former rule, for reference: pause if ROAS < 1.0x after ₹500 spend on a sales-objective campaign. EXCEPTION until 2026-10-05T23:59+05:30 (user-approved 2026-09-29): for the sneaker-push campaigns 120256091369160159 (Sneakers_BOF_30Sep-5Oct), 120256091370110159 (Sneakers_Prospecting_30Sep-5Oct) and 120256088882780159 (Sneakers_Catalog_Retargeting) the spend floor is ₹1,500, not ₹500.",
     "reactivate_min_historic_roas": "surface for reactivation if a paused campaign's last active-period ROAS >= 3.0x",
@@ -193,7 +193,7 @@
       "status": "pending",
       "createdAt": "2026-08-29T12:15:00.000Z",
       "updatedAt": "2026-10-10T16:50:00.000Z",
-      "lastReconfirmedAt": "2026-10-20T12:51:00.000Z"
+      "lastReconfirmedAt": "2026-10-20T22:51:00.000Z"
     },
     {
       "id": "A-003",
@@ -252,7 +252,7 @@
       "status": "pending",
       "createdAt": "2026-08-27T00:00:00.000Z",
       "updatedAt": "2026-10-10T16:50:00.000Z",
-      "lastReconfirmedAt": "2026-10-20T12:51:00.000Z"
+      "lastReconfirmedAt": "2026-10-20T22:51:00.000Z"
     },
     {
       "id": "A-005",
@@ -725,7 +725,7 @@
       "status": "pending",
       "createdAt": "2026-09-25T16:46:00.000Z",
       "updatedAt": "2026-10-10T16:50:00.000Z",
-      "lastReconfirmedAt": "2026-10-20T14:48:00.000Z"
+      "lastReconfirmedAt": "2026-10-20T22:51:00.000Z"
     },
     {
       "id": "A-048",
@@ -754,7 +754,7 @@
       "status": "pending",
       "createdAt": "2026-09-30T04:50:00.000Z",
       "updatedAt": "2026-10-10T16:50:00.000Z",
-      "lastReconfirmedAt": "2026-10-20T14:48:00.000Z"
+      "lastReconfirmedAt": "2026-10-20T22:51:00.000Z"
     },
     {
       "id": "A-049",
@@ -809,7 +809,7 @@
       "status": "pending",
       "createdAt": "2026-10-02T20:49:00.000Z",
       "updatedAt": "2026-10-10T16:50:00.000Z",
-      "lastReconfirmedAt": "2026-10-20T14:48:00.000Z"
+      "lastReconfirmedAt": "2026-10-20T22:51:00.000Z"
     },
     {
       "id": "A-051",
@@ -840,7 +840,7 @@
       "status": "pending",
       "createdAt": "2026-10-03T00:52:37.000Z",
       "updatedAt": "2026-10-10T16:50:00.000Z",
-      "lastReconfirmedAt": "2026-10-20T14:48:00.000Z"
+      "lastReconfirmedAt": "2026-10-20T22:51:00.000Z"
     },
     {
       "id": "A-052",
@@ -1017,7 +1017,7 @@
       "status": "pending",
       "createdAt": "2026-10-08T04:53:00.000Z",
       "updatedAt": "2026-10-13T04:50:00.000Z",
-      "lastReconfirmedAt": "2026-10-20T14:48:00.000Z"
+      "lastReconfirmedAt": "2026-10-20T22:51:00.000Z"
     },
     {
       "id": "A-059",
@@ -1154,7 +1154,7 @@
       "module": "resume-after-circuit-breaker",
       "tier": "approval",
       "title": "Resume the 5 campaigns down from the 2026-10-10 circuit breaker trip",
-      "reasoning": "Circuit breaker tripped 2026-10-10 on a Rs6,406.69 account-spend breach of the then-ceiling (Rs6,000; ceiling has since been raised to Rs7,000). As of this pass (2026-10-20T19:10 UTC), the account has in fact resumed full delivery outside this automation's resume path: 9 campaigns are ACTIVE (several brand-new since the trip, plus 2 of the originally-paused campaigns reactivated), spending normally and profitably on the new IST day (Rs715.62 of Rs7,000 ceiling so far). circuitBreaker.tripped in queue.json still reads true and has not been reconciled with this reality for 10 days. Approving this clears the stale tripped flag (no further Meta action needed since campaigns are already running); rejecting it also clears attention but leaves tripped:true as a deliberate record. Either way, a human decision is needed to reconcile the bookkeeping -- the automation will not do this on its own.",
+      "reasoning": "The hard spend circuit breaker tripped at 2026-10-10T16:50:00.000Z when today's account spend (Rs6,406.69) breached settings.hard_spend_ceiling_inr (then Rs6,000; since raised to Rs7,000), pausing all 5 campaigns active at that moment: Sora_BOF_Test_5Oct, Tsuchi_BOF_Test_5Oct, Prospecting_JP_Purchase_5-9Oct, Sneakers_BOF_30Sep-5Oct, and Caps + Kage_26 Sept. Reconfirmed again at this pass (2026-10-20T22:51 UTC): the account has continued normal, profitable delivery outside this automation's resume path -- 9 campaigns ACTIVE (todays spend Rs992.04 of the Rs7,000 ceiling, 14,216 impressions), including 2 of the originally-paused campaigns (Sneakers_BOF_30Sep-5Oct, Prospecting_JP_Purchase_5-9Oct) already reactivated manually. circuitBreaker.tripped in queue.json still reads true and has not been reconciled with this reality for 10 days running. Approving this clears the stale tripped flag (no further Meta action needed for those 2 since already active); rejecting it also clears attention but leaves tripped:true as a deliberate record. A human decision is still needed.",
       "actionSummary": "Activates the 3 campaigns still paused from the 2026-10-10 circuit breaker trip (Sora_BOF_Test_5Oct, Tsuchi_BOF_Test_5Oct, Caps + Kage_26 Sept) via ads_activate_entity. The other 2 originally-paused campaigns (Sneakers_BOF_30Sep-5Oct, Prospecting_JP_Purchase_5-9Oct) are already active again outside this proposal and are left untouched.",
       "metaAction": {
         "tool": "ads_activate_entity",
@@ -1201,7 +1201,7 @@
       },
       "status": "pending",
       "createdAt": "2026-10-11T12:50:00.000Z",
-      "lastReconfirmedAt": "2026-10-20T18:49:00.000Z"
+      "lastReconfirmedAt": "2026-10-20T22:51:00.000Z"
     },
     {
       "id": "A-064",
@@ -1258,7 +1258,7 @@
       },
       "status": "pending",
       "createdAt": "2026-10-13T04:50:00.000Z",
-      "lastReconfirmedAt": "2026-10-20T14:48:00.000Z"
+      "lastReconfirmedAt": "2026-10-20T22:51:00.000Z"
     },
     {
       "id": "A-066",
@@ -1307,7 +1307,7 @@
       },
       "status": "pending",
       "createdAt": "2026-10-18T00:48:27.000Z",
-      "lastReconfirmedAt": "2026-10-20T12:51:00.000Z"
+      "lastReconfirmedAt": "2026-10-20T22:51:00.000Z"
     },
     {
       "id": "A-068",
@@ -1325,7 +1325,7 @@
       },
       "status": "pending",
       "createdAt": "2026-10-18T00:48:27.000Z",
-      "lastReconfirmedAt": "2026-10-20T12:51:00.000Z"
+      "lastReconfirmedAt": "2026-10-20T22:51:00.000Z"
     },
     {
       "id": "A-069",
@@ -1354,7 +1354,7 @@
       },
       "status": "pending",
       "createdAt": "2026-10-20T10:58:00.000Z",
-      "lastReconfirmedAt": "2026-10-20T14:48:00.000Z"
+      "lastReconfirmedAt": "2026-10-20T22:51:00.000Z"
     },
     {
       "id": "A-070",
@@ -1378,7 +1378,8 @@
         "user_os": [
           "iOS"
         ]
-      }
+      },
+      "lastReconfirmedAt": "2026-10-20T22:51:00.000Z"
     },
     {
       "id": "A-071",
@@ -1401,7 +1402,8 @@
         }
       },
       "status": "pending",
-      "createdAt": "2026-10-20T19:40:00.000Z"
+      "createdAt": "2026-10-20T19:40:00.000Z",
+      "lastReconfirmedAt": "2026-10-20T22:51:00.000Z"
     }
   ],
   "alerts": [
@@ -17896,6 +17898,96 @@
       "severity": "low",
       "dismissed": false,
       "createdAt": "2026-10-20T19:40:00.000Z"
+    },
+    {
+      "id": "AL-1825",
+      "module": "pixel-health",
+      "title": "Pixel/data-quality gate -- 2026-10-20T22:51:00.000Z",
+      "detail": "Dataset 833131719490535 composite EMQ scores: Purchase 8.8, prepaid_purchase 8.8, cod_purchase 8.8, AddPaymentInfo 9.0, InitiateCheckout 6.9, AddToCart 6.1, PageView 6.1, ViewContent 6.1, Search 6.1. All at/above settings.pixel_quality_min_match_rate (0.6, i.e. 6.0/10) -- ROAS-driven modules not suppressed this pass.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-10-20T22:51:00.000Z"
+    },
+    {
+      "id": "AL-1826",
+      "module": "anomaly",
+      "title": "Narrow-audience warning persists on RT_Sneakers_Caps_NoBuyers_v2_11Oct",
+      "detail": "ads_insights_anomaly_signal still flags adset 120256301241950159 (RT_Sneakers_Caps_NoBuyers_v2_11Oct, campaign Retargeting_Overall) as active_delivery_narrow_audience -- estimated audience size 35,400-41,700. Same root cause as prior passes: stacked custom-audience exclusions on an inherently small warm retargeting pool. No change in severity.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-10-20T22:51:00.000Z"
+    },
+    {
+      "id": "AL-1827",
+      "module": "threshold-alerts",
+      "title": "CPM/CPC remain elevated on Sneakers_BOF_30Sep-5Oct and Prospecting_JP_Purchase_5-9Oct vs trailing 30d baseline",
+      "detail": "last_7d vs last_30d: Sneakers_BOF_30Sep-5Oct CPM Rs114.45 vs Rs76.01 (+50.6%), CPC Rs5.73 vs Rs3.38 (+69.5%). Prospecting_JP_Purchase_5-9Oct CPM Rs133.55 vs Rs73.63 (+81.4%), CPC Rs4.53 vs Rs3.14 (+44.3%). Both still ROAS-positive (3.89x and 6.35x respectively on last_7d) so no pause-kill trigger, but efficiency has degraded -- same two campaigns flagged in the last several passes, trend unchanged.",
+      "severity": "medium",
+      "dismissed": false,
+      "createdAt": "2026-10-20T22:51:00.000Z"
+    },
+    {
+      "id": "AL-1828",
+      "module": "learning-phase-stuck",
+      "title": "No ad sets stuck in learning this pass",
+      "detail": "learning_stage_info/delivery_sub_status empty across all 9 active ad sets -- none currently in or stuck in Meta's learning phase.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-10-20T22:51:00.000Z"
+    },
+    {
+      "id": "AL-1829",
+      "module": "competitor-rescrape",
+      "title": "Gully Labs and Lotto Sport India active-ad counts both unchanged",
+      "detail": "ads_library_search (country IN, ACTIVE): Gully Labs (page 107479854297817) 167 active ads (unchanged). Lotto Sport India (page 426015150606378) 234 active ads (unchanged). Neither moved >=20% since the last recorded scrape (2026-10-20T19:10:00.000Z) -- no competitor-spike alert this pass.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-10-20T22:51:00.000Z"
+    },
+    {
+      "id": "AL-1830",
+      "module": "campaign-consolidation-watch",
+      "title": "No new duplicate-targeting campaigns identified",
+      "detail": "9 active campaigns reviewed by name/objective/targeting -- no two currently target the same product+audience combination closely enough to flag as a consolidation candidate.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-10-20T22:51:00.000Z"
+    },
+    {
+      "id": "AL-1831",
+      "module": "purchaser-exclusion",
+      "title": "Purchaser-exclusion compliant across all active ad sets this pass",
+      "detail": "All 9 active ad sets' targeting.excluded_custom_audiences include Purchasers 180D (120255823280550159), except the 2 user-approved exempt ad sets which by design target purchasers (neither is currently active). No ads_update_entity call needed.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-10-20T22:51:00.000Z"
+    },
+    {
+      "id": "AL-1832",
+      "module": "lookalike-refresh",
+      "title": "Rate-limited this pass; last rebuild attempt <24h ago",
+      "detail": "Last auto attempt was 2026-10-20T16:52:00.000Z (failed with Meta duplicate-lookalike error 2654/1713007 -- source audience 'Purchasers 180D' hasn't grown past its existing lookalikes' build size). settings.max_auto_actions_per_entity_per_day (1) already reached for this module+entity within 24h -- skipped execution this pass per the rate-limit safety rule.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-10-20T22:51:00.000Z"
+    },
+    {
+      "id": "AL-1833",
+      "module": "hook-angle-tagging",
+      "title": "No untagged active creatives this pass",
+      "detail": "All 34 distinct creative_ids across the 39 currently-ACTIVE ads already have a creativeTags entry. No new tagging work this pass; Higgsfield vision pass remains skipped (not attached to this run) -- tags are text-only (primary text/headline) where previously applied.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-10-20T22:51:00.000Z"
+    },
+    {
+      "id": "AL-1834",
+      "module": "self-audit-check",
+      "title": "Routine pass summary -- 2026-10-20T22:51:00.000Z (0 auto-mutations, 0 new proposals, 14 reconfirmations)",
+      "detail": "Circuit breaker: no new breach (today's account spend Rs992.04 vs Rs7,000 ceiling, 9 campaigns ACTIVE) -- circuitBreaker.tripped stays true (stale, from the 2026-10-10 trip) pending human decision on pending proposal A-063. Pixel quality healthy, ROAS modules not suppressed. 14 pending proposals reconfirmed against fresh data (A-002, A-003, A-039, A-048, A-050, A-051, A-058, A-063, A-065, A-067, A-068, A-069, A-070, A-071) -- none closed as moot this pass. No new proposals: existing pending proposals already cover placement/device/dayparting/budget-reallocation/age-gender/engagement-tier/reactivate-winner/catalog-dpa/high-intent-retargeting, geo modules remain unevaluable (region breakdown lacks purchase_roas attribution, same as prior passes), campaign-level frequency (max 1.67) is well below the fatigue_frequency_threshold (3) so no creative-fatigue/frequency-capping trigger. 0 auto-tier mutations: lookalike-refresh rate-limited, purchaser-exclusion already compliant, hook-angle-tagging had nothing new to tag, circuit breaker did not trip.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-10-20T22:51:00.000Z"
     }
   ],
   "log": [
