@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-21T02:51:00.000Z",
+  "generatedAt": "2026-10-21T04:48:07.000Z",
   "settings": {
     "kill_roas_threshold": "DISABLED 2026-10-05 by user instruction: the ROAS pause-kill is OFF. Module 16 (pause-kill) must NOT auto-pause any campaign for low ROAS; surface low-ROAS campaigns as alerts only. The hard spend circuit breaker is a separate mechanism and stays ON. Former rule, for reference: pause if ROAS < 1.0x after ₹500 spend on a sales-objective campaign. EXCEPTION until 2026-10-05T23:59+05:30 (user-approved 2026-09-29): for the sneaker-push campaigns 120256091369160159 (Sneakers_BOF_30Sep-5Oct), 120256091370110159 (Sneakers_Prospecting_30Sep-5Oct) and 120256088882780159 (Sneakers_Catalog_Retargeting) the spend floor is ₹1,500, not ₹500.",
     "reactivate_min_historic_roas": "surface for reactivation if a paused campaign's last active-period ROAS >= 3.0x",
@@ -18150,6 +18150,96 @@
       "severity": "low",
       "dismissed": false,
       "createdAt": "2026-10-21T02:51:00.000Z"
+    },
+    {
+      "id": "AL-1853",
+      "module": "pixel-health",
+      "title": "Pixel/data-quality gate -- 2026-10-21T04:48:07.000Z",
+      "detail": "Dataset 833131719490535 composite EMQ scores: Purchase 8.7, prepaid_purchase 8.8, cod_purchase 8.6, AddPaymentInfo 8.9, InitiateCheckout 6.9, AddToCart 6.1, PageView 6.1, ViewContent 6.1, Search 6.1. All at/above settings.pixel_quality_min_match_rate (0.6, i.e. 6.0/10) -- ROAS-driven modules not suppressed this pass.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-10-21T04:48:07.000Z"
+    },
+    {
+      "id": "AL-1854",
+      "module": "threshold-alerts",
+      "title": "CPM/CPC remain elevated on Sneakers_BOF_30Sep-5Oct and Prospecting_JP_Purchase_5-9Oct vs trailing-30d baseline",
+      "detail": "last_7d vs last_30d campaign-level: Sneakers_BOF_30Sep-5Oct CPM Rs114.45 vs Rs76.01 baseline (+51%), CPC Rs5.73 vs Rs3.38 (+70%); Prospecting_JP_Purchase_5-9Oct CPM Rs133.54 vs Rs73.62 baseline (+81%), CPC Rs4.53 vs Rs3.14 (+44%). Both already covered by pending proposals (A-069 budget-reallocation off Sneakers_BOF_30Sep-5Oct, A-058 placement-optimization on its BOF_2_Warm_IG365_Engagers_Visitors ad set); kill_roas_threshold pause-kill remains user-disabled (alert-only per settings). No new action taken this pass.",
+      "severity": "medium",
+      "dismissed": false,
+      "createdAt": "2026-10-21T04:48:07.000Z"
+    },
+    {
+      "id": "AL-1855",
+      "module": "anomaly",
+      "title": "Narrow-audience warning persists on RT_Sneakers_Caps_NoBuyers_v2_11Oct",
+      "detail": "ads_insights_anomaly_signal: active_delivery_narrow_audience on ad set 120256301241950159 (estimated audience 35,800-42,100). Already tracked via pending proposal A-071 (engagement-tier-segmentation). No other anomalies this pass.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-10-21T04:48:07.000Z"
+    },
+    {
+      "id": "AL-1856",
+      "module": "learning-phase-stuck",
+      "title": "No ad sets stuck in learning this pass",
+      "detail": "9 active ad sets checked via learning_stage_info/delivery_sub_status -- none report a learning-limited or stuck-in-learning status.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-10-21T04:48:07.000Z"
+    },
+    {
+      "id": "AL-1857",
+      "module": "competitor-rescrape",
+      "title": "Gully Labs and Lotto Sport India active-ad counts both unchanged",
+      "detail": "ads_library_search (page-scoped, country IN, ACTIVE): Gully Labs 167 (unchanged since 2026-10-20T19:10 scrape), Lotto Sport India 234 (unchanged since 2026-10-20T19:10 scrape). No >=20% move -- no competitor-spike alert.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-10-21T04:48:07.000Z"
+    },
+    {
+      "id": "AL-1858",
+      "module": "purchaser-exclusion",
+      "title": "Purchaser-exclusion compliant across all active ad sets this pass",
+      "detail": "All 9 active ad sets' excluded_custom_audiences include 120255823280550159 (Purchasers 180D): LAL1_Purchasers180D_FB_IG, KAGE_LAL3_ATC180D_LPV, RT_Sneakers_Caps_NoBuyers_v2_11Oct, Yin Yang_TOF, BOF2_FeedStories, PROSP_Reels_Capped, Caps_Only_11Oct, Prosp_Men_25-44_Purchase_JP, BOF_2_Warm_IG365_Engagers_Visitors. None are in settings.purchaser_exclusion_exempt_adset_ids. No targeting update needed.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-10-21T04:48:07.000Z"
+    },
+    {
+      "id": "AL-1859",
+      "module": "lookalike-refresh",
+      "title": "Rate-limited this pass; last rebuild attempt <24h ago",
+      "detail": "Last attempt 2026-10-21T02:51:00.000Z (~2h ago), under max_auto_actions_per_entity_per_day's 24h window for the 'Purchasers 180D' lookalike family. Skipped execution this pass per rate limiting; next eligible attempt ~2026-10-22T02:51.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-10-21T04:48:07.000Z"
+    },
+    {
+      "id": "AL-1860",
+      "module": "hook-angle-tagging",
+      "title": "No untagged active creatives this pass",
+      "detail": "All 35 distinct active creative ids (across 9 active campaigns / 43 active ads) already present in queue.json.creativeTags. No Higgsfield vision connection attached this run -- tagging remains text-only (primary text/headline via Meta Ads MCP) per Phase 3 scope note; vision pass skipped.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-10-21T04:48:07.000Z"
+    },
+    {
+      "id": "AL-1861",
+      "module": "campaign-consolidation-watch",
+      "title": "No new duplicate-targeting campaigns identified",
+      "detail": "9 active campaigns checked by product+audience overlap -- no duplicates beyond the already-resolved shells (A-054, A-057). Active campaign set unchanged from prior pass.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-10-21T04:48:07.000Z"
+    },
+    {
+      "id": "AL-1862",
+      "module": "self-audit-check",
+      "title": "Routine pass summary -- 2026-10-21T04:48:07.000Z (0 auto-mutations, 0 new proposals, 14 reconfirmations)",
+      "detail": "Circuit breaker: no new breach (today's account spend Rs2,025.50 vs Rs7,000 ceiling, 28.9%, 9 campaigns ACTIVE); circuitBreaker.tripped stays true (stale, from the 2026-10-10 trip) pending human decision on pending proposal A-063 -- no auto-resume performed. Pixel quality healthy (EMQ scores unchanged from prior pass), ROAS modules not suppressed. Purchaser-exclusion compliant on all active ad sets (no write needed). Lookalike-refresh: rate-limited this pass (last attempt 2026-10-21T02:51:00.000Z, <24h elapsed) -- not attempted, no log entry. Hook-angle-tagging: 0 untagged active creatives (all 35 active creative ids already present in creativeTags). Learning-phase: none stuck. Anomaly: narrow-audience warning persists on RT_Sneakers_Caps_NoBuyers_v2_11Oct (already tracked via proposal A-071). Threshold-alerts: CPM/CPC remain elevated on Sneakers_BOF_30Sep-5Oct and Prospecting_JP_Purchase_5-9Oct, consistent with prior passes. Competitor counts unchanged (Gully Labs 167, Lotto Sport India 234). All 14 pending proposals (A-002, A-003, A-039, A-048, A-050, A-051, A-058, A-063, A-065, A-067, A-068, A-069, A-070, A-071) reconfirmed against fresh live data -- the active campaign set (9 campaigns) and paused-campaign set are both identical to the prior pass (Sora_BOF_Based on Mori_Tee, Sora Retargeting, Sneakers_Prospecting_30Sep-5Oct and New Caps Part 3 STP all still PAUSED, so their reactivate-winner proposals A-039/A-048/A-050/A-051 remain live, not moot); no new placement/device/dayparting/budget-reallocation/age-gender/engagement-tier findings emerged. geo-scaling/geo-suppression/new-geo-testing remain un-evaluatable (purchase_roas unavailable on region breakdowns, a pre-existing data limitation). 0 auto-tier mutations attempted this pass (lookalike-refresh skipped by rate limit rather than attempted-and-failed). No ads_update_entity, ads_create_custom_audience, or campaign-pause calls were made this pass.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-10-21T04:48:07.000Z"
     }
   ],
   "log": [
