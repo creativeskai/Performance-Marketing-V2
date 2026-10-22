@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-22T18:54:11.000Z",
+  "generatedAt": "2026-10-22T20:50:29.000Z",
   "settings": {
     "kill_roas_threshold": "DISABLED 2026-10-05 by user instruction: the ROAS pause-kill is OFF. Module 16 (pause-kill) must NOT auto-pause any campaign for low ROAS; surface low-ROAS campaigns as alerts only. The hard spend circuit breaker is a separate mechanism and stays ON. Former rule, for reference: pause if ROAS < 1.0x after ₹500 spend on a sales-objective campaign. EXCEPTION until 2026-10-05T23:59+05:30 (user-approved 2026-09-29): for the sneaker-push campaigns 120256091369160159 (Sneakers_BOF_30Sep-5Oct), 120256091370110159 (Sneakers_Prospecting_30Sep-5Oct) and 120256088882780159 (Sneakers_Catalog_Retargeting) the spend floor is ₹1,500, not ₹500.",
     "reactivate_min_historic_roas": "surface for reactivation if a paused campaign's last active-period ROAS >= 3.0x",
@@ -18885,20 +18885,21 @@
       "id": "AL-1934",
       "module": "anomaly",
       "title": "Narrow-audience warning persists on RT_Sneakers_Caps_NoBuyers_v2_11Oct",
-      "detail": "ads_insights_anomaly_signal (entity-scoped, since the account-wide scan this pass did not surface it): active_delivery_narrow_audience on ad set RT_Sneakers_Caps_NoBuyers_v2_11Oct (120256301241950159, campaign Retargeting_Overall) -- estimated audience size now 36,700-43,200, essentially unchanged from the prior pass (36,700-43,100). Recommendation: expand audience or A/B test with Advantage+ audience. No action taken (informational, already root-caused at AL-1658/AL-1824). | Reconfirmed 2026-10-22T18:54:11.000Z: ads_insights_anomaly_signal still surfaces active_delivery_narrow_audience on RT_Sneakers_Caps_NoBuyers_v2_11Oct (120256301241950159), audience size now 36,800-43,400, essentially unchanged. No action taken.",
+      "detail": "ads_insights_anomaly_signal (entity-scoped, since the account-wide scan this pass did not surface it): active_delivery_narrow_audience on ad set RT_Sneakers_Caps_NoBuyers_v2_11Oct (120256301241950159, campaign Retargeting_Overall) -- estimated audience size now 36,700-43,200, essentially unchanged from the prior pass (36,700-43,100). Recommendation: expand audience or A/B test with Advantage+ audience. No action taken (informational, already root-caused at AL-1658/AL-1824). | Reconfirmed 2026-10-22T18:54:11.000Z: ads_insights_anomaly_signal still surfaces active_delivery_narrow_audience on RT_Sneakers_Caps_NoBuyers_v2_11Oct (120256301241950159), audience size now 36,800-43,400, essentially unchanged. No action taken. | Reconfirmed 2026-10-22T20:50:29.000Z: ads_insights_anomaly_signal returns the same single warning -- active_delivery_narrow_audience on RT_Sneakers_Caps_NoBuyers_v2_11Oct (120256301241950159), estimated audience 37,400-43,900. Already root-caused at AL-1658, no new anomaly this pass.",
       "severity": "low",
       "dismissed": false,
       "createdAt": "2026-10-22T12:50:00.000Z",
-      "updatedAt": "2026-10-22T18:54:11.000Z"
+      "updatedAt": "2026-10-22T20:50:29.000Z"
     },
     {
       "id": "AL-1935",
       "module": "threshold-alerts",
       "title": "CPM/CPC remain elevated on Sneakers_BOF_30Sep-5Oct and Prospecting_JP_Purchase_5-9Oct",
-      "detail": "last_7d vs last_30d baseline, unchanged from the prior pass (same trailing windows, no new composition shift): Sneakers_BOF_30Sep-5Oct cpm Rs119.69 (30d ~Rs76.95, +55.6%), cpc Rs5.97, ctr 2.00%, purchase_roas 2.51x on Rs10,977.78 7d spend; Prospecting_JP_Purchase_5-9Oct cpm Rs142.69 (30d ~Rs75.49, +89.0%), cpc Rs4.38, ctr 3.26%, purchase_roas 6.68x on Rs4,506.39 7d spend. pause-kill remains disabled per settings (alert-only); no auto-pause taken.",
+      "detail": "last_7d vs last_30d baseline, unchanged from the prior pass (same trailing windows, no new composition shift): Sneakers_BOF_30Sep-5Oct cpm Rs119.69 (30d ~Rs76.95, +55.6%), cpc Rs5.97, ctr 2.00%, purchase_roas 2.51x on Rs10,977.78 7d spend; Prospecting_JP_Purchase_5-9Oct cpm Rs142.69 (30d ~Rs75.49, +89.0%), cpc Rs4.38, ctr 3.26%, purchase_roas 6.68x on Rs4,506.39 7d spend. pause-kill remains disabled per settings (alert-only); no auto-pause taken. | Reconfirmed 2026-10-22T20:50:29.000Z: Sneakers_BOF_30Sep-5Oct last_7d CPM ₹125.50 / CPC ₹6.06 vs last_30d baseline CPM ₹78.22 / CPC ₹3.48 (CPM +60%, CPC +74%); Prospecting_JP_Purchase_5-9Oct last_7d CPM ₹141.97 / CPC ₹4.37 vs last_30d baseline CPM ₹77.11 / CPC ₹3.25 (CPM +84%, CPC +34%) -- both still materially above their 30d baseline. CTR on both campaigns is stable/up (not degrading), so this reads as rising auction cost, not creative or targeting breakdown. Alert-only, no action -- kill-switch is user-disabled (see settings.kill_roas_threshold).",
       "severity": "low",
       "dismissed": false,
-      "createdAt": "2026-10-22T12:50:00.000Z"
+      "createdAt": "2026-10-22T12:50:00.000Z",
+      "updatedAt": "2026-10-22T20:50:29.000Z"
     },
     {
       "id": "AL-1936",
@@ -18942,38 +18943,41 @@
       "id": "AL-1940",
       "module": "hook-angle-tagging",
       "title": "5 active creatives have no accessible primary text/headline via the API -- left untagged",
-      "detail": "Creatives 962355770276778, 4574837136138399, 1985521318783097, 1415590143574095, 4091541181147969 (ads such as Warm_SORA_RootsV3_2499_9Nov, Warm_YINYANG_RootsV3_2499_9Nov, Prosp_KAGE_Lifestyle_Kage2_PAC_22Oct, Prosp_YINYANG_RootsV3_2499_22Oct, Warm_KAGE_Kage2_2499_22Oct) returned no body, title, or image_url from ads_get_creatives (object_type SHARE but no content fields) -- likely a video/dynamic-asset creative whose copy lives outside the fields this tool exposes. Per ROUTINE.md, no creative description was invented; these remain untagged pending either a Higgsfield vision pass (not attached to this run) or a direct look at the asset in Ads Manager.",
+      "detail": "Creatives 962355770276778, 4574837136138399, 1985521318783097, 1415590143574095, 4091541181147969 (ads such as Warm_SORA_RootsV3_2499_9Nov, Warm_YINYANG_RootsV3_2499_9Nov, Prosp_KAGE_Lifestyle_Kage2_PAC_22Oct, Prosp_YINYANG_RootsV3_2499_22Oct, Warm_KAGE_Kage2_2499_22Oct) returned no body, title, or image_url from ads_get_creatives (object_type SHARE but no content fields) -- likely a video/dynamic-asset creative whose copy lives outside the fields this tool exposes. Per ROUTINE.md, no creative description was invented; these remain untagged pending either a Higgsfield vision pass (not attached to this run) or a direct look at the asset in Ads Manager. | RESOLVED 2026-10-22T20:50:29.000Z: all 5 named creatives (962355770276778, 4574837136138399, 1985521318783097, 1415590143574095, 4091541181147969) were tagged in intervening passes (2026-10-22T16:50/18:54) using their description field as a fallback once it was checked directly rather than only body/title -- see creativeTags and the corresponding log entries. No longer an open issue; dismissing.",
       "severity": "low",
-      "dismissed": false,
-      "createdAt": "2026-10-22T14:48:22.000Z"
+      "dismissed": true,
+      "createdAt": "2026-10-22T14:48:22.000Z",
+      "resolvedAt": "2026-10-22T20:50:29.000Z"
     },
     {
       "id": "AL-1941",
       "module": "pixel-health",
       "title": "Pixel/data-quality gate -- 2026-10-22T16:50:00.000Z",
-      "detail": "ads_get_dataset_quality on dataset 833131719490535: composite EMQ scores all at or above 6.1/10 (Purchase 8.1, cod_purchase 8.7, prepaid_purchase 8.8, AddPaymentInfo 8.7, InitiateCheckout 7.0, AddToCart/Search/PageView/ViewContent 6.1). Read as a match-rate proxy (score/10), every event clears settings.pixel_quality_min_match_rate (0.6) -- gate passes, ROAS-driven modules (pause-kill, reactivate-winner, budget-reallocation, lookalike-refresh, etc.) are NOT suppressed this pass. AddToCart/Search/PageView/ViewContent remain closest to the floor at 6.1.",
+      "detail": "ads_get_dataset_quality on dataset 833131719490535: composite EMQ scores all at or above 6.1/10 (Purchase 8.1, cod_purchase 8.7, prepaid_purchase 8.8, AddPaymentInfo 8.7, InitiateCheckout 7.0, AddToCart/Search/PageView/ViewContent 6.1). Read as a match-rate proxy (score/10), every event clears settings.pixel_quality_min_match_rate (0.6) -- gate passes, ROAS-driven modules (pause-kill, reactivate-winner, budget-reallocation, lookalike-refresh, etc.) are NOT suppressed this pass. AddToCart/Search/PageView/ViewContent remain closest to the floor at 6.1. | Reconfirmed 2026-10-22T20:50:29.000Z: ads_get_dataset_quality on dataset 833131719490535 still shows every tracked web event at or above the 6.1/10 floor (Purchase 8.1, cod_purchase 8.7, prepaid_purchase 8.8, AddPaymentInfo 8.8, InitiateCheckout 7.0, AddToCart/Search/PageView/ViewContent 6.1) -- gate still passes, ROAS-driven modules not suppressed this pass.",
       "severity": "low",
       "dismissed": false,
-      "createdAt": "2026-10-22T16:50:00.000Z"
+      "createdAt": "2026-10-22T16:50:00.000Z",
+      "updatedAt": "2026-10-22T20:50:29.000Z"
     },
     {
       "id": "AL-1942",
       "module": "lookalike-refresh",
       "title": "Lookalike-refresh rate-limited -- 2026-10-22T16:50:00.000Z",
-      "detail": "Last lookalike-refresh attempt on 'Purchasers 180D' (120255823280550159) was 2026-10-22T02:51:44.000Z (~13h58m ago), still inside the max_auto_actions_per_entity_per_day=1 window, so execution was skipped this pass rather than retried. Source audience remains ~20 (unchanged since creation 2026-09-15). The three purchaser-based LALs (1%/2%/5%, built 2026-09-15) and the three Purchase Pixel LALs (built 2026-08-29) are all well past the 14-day lookalike_refresh_days threshold; refresh attempts have been failing on this tiny source size on prior passes. | Reconfirmed 2026-10-22T18:54:11.000Z: last attempt still 2026-10-22T02:51:44.000Z (~16h02m ago), still inside the max_auto_actions_per_entity_per_day=1 window -- execution skipped again this pass. Source audience 'Purchasers 180D' still ~20 (unchanged). No write attempted.",
+      "detail": "Last lookalike-refresh attempt on 'Purchasers 180D' (120255823280550159) was 2026-10-22T02:51:44.000Z (~13h58m ago), still inside the max_auto_actions_per_entity_per_day=1 window, so execution was skipped this pass rather than retried. Source audience remains ~20 (unchanged since creation 2026-09-15). The three purchaser-based LALs (1%/2%/5%, built 2026-09-15) and the three Purchase Pixel LALs (built 2026-08-29) are all well past the 14-day lookalike_refresh_days threshold; refresh attempts have been failing on this tiny source size on prior passes. | Reconfirmed 2026-10-22T18:54:11.000Z: last attempt still 2026-10-22T02:51:44.000Z (~16h02m ago), still inside the max_auto_actions_per_entity_per_day=1 window -- execution skipped again this pass. Source audience 'Purchasers 180D' still ~20 (unchanged). No write attempted. | Reconfirmed 2026-10-22T20:50:29.000Z: last lookalike-refresh attempt on 'Purchasers 180D' (120255823280550159) still 2026-10-22T02:51:44.000Z (~17h59m ago), still inside the max_auto_actions_per_entity_per_day=1 24h window -- execution skipped again this pass. Source audience still ~20. No write attempted.",
       "severity": "low",
       "dismissed": false,
       "createdAt": "2026-10-22T16:50:00.000Z",
-      "updatedAt": "2026-10-22T18:54:11.000Z"
+      "updatedAt": "2026-10-22T20:50:29.000Z"
     },
     {
       "id": "AL-1943",
       "module": "hard-spend-circuit-breaker",
       "title": "circuitBreaker.tripped=true but 10 campaigns are ACTIVE -- state discrepancy -- 2026-10-22T16:50:00.000Z",
-      "detail": "Re-verification this pass: today's account spend is ₹5,236.79 vs hard_spend_ceiling_inr=7000 -- NOT breached today, so no fresh trip. However circuitBreaker.tripped has been true since 2026-10-10T16:50:00.000Z and was never resolved by an approved resume-after-circuit-breaker proposal (A-061 rejected 2026-10-11; A-063 still pending since 2026-10-11T12:50, never approved/rejected). Despite that, a live ads_get_ad_entities pull shows 10 campaigns with effective_status=ACTIVE right now: Prospecting_YinYang_Purchase_22Oct, Prospecting_LAL1_Purchasers_14Oct, KAGE_TOF_Traffic_13Oct, Sneakers_BOF_v2_Placement_Split_12Oct, Prospecting_JP2_Placement_Split_12Oct, Caps_Only, Prospecting_JP_Purchase_5-9Oct, Sneakers_BOF_30Sep-5Oct, Retargeting_Overall, and Yin Yang_TOF. Sneakers_BOF_30Sep-5Oct (120256091369160159) is one of the 5 campaigns this routine itself paused at the original 2026-10-10 trip -- it is now active again, as are several campaigns created well after the trip (Oct 11-22), so the account was evidently resumed manually (outside the in-app/chat approval flow this routine tracks) without ever clearing circuitBreaker.tripped or resolving A-063. This routine did NOT auto-resume or re-pause anything this pass -- resuming requires a human-approved resume-after-circuit-breaker proposal per spec, and re-pausing live campaigns that have been running normally for up to 12 days on a stale flag risks a disruptive, unwanted action. Flagging for a human decision: either approve/update A-063 to formally clear the breaker (matching reality), or confirm these campaigns should in fact be paused.",
+      "detail": "Re-verification this pass: today's account spend is ₹5,236.79 vs hard_spend_ceiling_inr=7000 -- NOT breached today, so no fresh trip. However circuitBreaker.tripped has been true since 2026-10-10T16:50:00.000Z and was never resolved by an approved resume-after-circuit-breaker proposal (A-061 rejected 2026-10-11; A-063 still pending since 2026-10-11T12:50, never approved/rejected). Despite that, a live ads_get_ad_entities pull shows 10 campaigns with effective_status=ACTIVE right now: Prospecting_YinYang_Purchase_22Oct, Prospecting_LAL1_Purchasers_14Oct, KAGE_TOF_Traffic_13Oct, Sneakers_BOF_v2_Placement_Split_12Oct, Prospecting_JP2_Placement_Split_12Oct, Caps_Only, Prospecting_JP_Purchase_5-9Oct, Sneakers_BOF_30Sep-5Oct, Retargeting_Overall, and Yin Yang_TOF. Sneakers_BOF_30Sep-5Oct (120256091369160159) is one of the 5 campaigns this routine itself paused at the original 2026-10-10 trip -- it is now active again, as are several campaigns created well after the trip (Oct 11-22), so the account was evidently resumed manually (outside the in-app/chat approval flow this routine tracks) without ever clearing circuitBreaker.tripped or resolving A-063. This routine did NOT auto-resume or re-pause anything this pass -- resuming requires a human-approved resume-after-circuit-breaker proposal per spec, and re-pausing live campaigns that have been running normally for up to 12 days on a stale flag risks a disruptive, unwanted action. Flagging for a human decision: either approve/update A-063 to formally clear the breaker (matching reality), or confirm these campaigns should in fact be paused. | Reconfirmed 2026-10-22T20:50:29.000Z: today's account spend is ₹360.08 vs hard_spend_ceiling_inr=7000 (5.1%, new account-timezone day) -- not breached, no fresh trip. circuitBreaker.tripped is still true from 2026-10-10T16:50:00.000Z and A-063 (resume-after-circuit-breaker) is still pending, unresolved. The same 10 campaigns remain ACTIVE (manually resumed outside this routine's approval flow at some point after the trip). Still flagged for a human decision: approve/update A-063 to formally clear the breaker, or confirm these campaigns should be paused.",
       "severity": "high",
       "dismissed": false,
-      "createdAt": "2026-10-22T16:50:00.000Z"
+      "createdAt": "2026-10-22T16:50:00.000Z",
+      "updatedAt": "2026-10-22T20:50:29.000Z"
     },
     {
       "id": "AL-1944",
@@ -18983,6 +18987,15 @@
       "severity": "low",
       "dismissed": false,
       "createdAt": "2026-10-22T18:54:11.000Z"
+    },
+    {
+      "id": "AL-1945",
+      "module": "self-audit-check",
+      "title": "Routine pass summary -- 2026-10-22T20:50:29.000Z (0 auto-mutations to Meta, 22 creatives tagged, 0 new proposals, 1 alert dismissed, 5 alerts reconfirmed)",
+      "detail": "Circuit breaker: not tripped this pass (today's account spend ₹360.08 of ₹7,000 ceiling, 5.1% -- new account-timezone day). circuitBreaker.tripped remains true from 2026-10-10 (never auto-resumed); A-063 still pending -- see AL-1943 (reconfirmed). Pixel gate: passed, EMQ scores 6.1-8.8 across all tracked web events, unchanged from the 16:50 pass -- ROAS modules not suppressed (AL-1941 reconfirmed). Auto modules: purchaser-exclusion compliant -- fresh targeting pull on all 10 active ad sets (including the new Prosp_YinYang_Men_25-44_Purchase ad set under today's Prospecting_YinYang_Purchase_22Oct campaign) confirms every one excludes 'Purchasers 180D' (120255823280550159), no write needed. lookalike-refresh: still rate-limited (last attempt ~18h ago, inside the 24h window) -- AL-1942 reconfirmed, no write. hook-angle-tagging: found and tagged 22 newly-active creatives with no prior creativeTags entry -- the KAI FEST / '9Nov' creative refresh (KAGE/SORA/TSUCHI/Yin Yang prepaid offers, KAI Archives 2.0 caps, and the KAGE+cap / SORA+cap bundle creatives) -- all tagged from real primary text/headline via Meta Ads MCP ads_get_creatives, Higgsfield vision pass skipped (not attached to this run), no copy invented. Also dismissed AL-1940 as resolved: the 5 creatives it named as untaggable were in fact tagged in the two intervening passes via their description field. hard-spend-circuit-breaker: no breach. Anomaly: unchanged, only the RT_Sneakers_Caps_NoBuyers_v2_11Oct narrow-audience warning persists (AL-1934 reconfirmed, already root-caused at AL-1658). threshold-alerts: Sneakers_BOF_30Sep-5Oct and Prospecting_JP_Purchase_5-9Oct CPM/CPC remain materially elevated vs their 30d baseline (fresh numbers pulled this pass, AL-1935 reconfirmed) -- alert-only, kill-switch disabled by user instruction. learning-phase-stuck: none (no active ad set shows a learning_stage_info this pass). campaign-consolidation-watch: still 10 active campaigns, no new duplicate product+audience targeting identified. Approval-tier: reconfirmed byte-identical with fresh pulls -- A-039/048/050/051 (reactivate-winner, 7.969x/4.326x/6.316x/4.891x last_30d ROAS, unchanged from the prior pass); A-069 (budget-reallocation) and A-070 (device-targeting) not re-pulled this pass (no material change expected over a ~2h gap, per prior-pass convention); A-058/A-065 (placement-optimization), A-067 (age-gender-auto-shift), A-071 (engagement-tier-segmentation), A-002/A-003 (structural, Higgsfield/catalog-dependent) likewise not re-pulled. competitor-rescrape skipped (last real scrape ~10h ago, already flagged, no new 20%+ move check run this pass). 0 Meta API write/mutation calls this pass -- purchaser-exclusion already compliant, lookalike-refresh rate-limited, circuit breaker not tripped; only queue.json writes (22 new creativeTags + 22 log entries + 5 alert reconfirmations + 1 alert dismissal).",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-10-22T20:50:29.000Z"
     }
   ],
   "log": [
@@ -28019,6 +28032,424 @@
       },
       "tier": "auto",
       "executedAt": "2026-10-22T18:54:11.000Z"
+    },
+    {
+      "proposalId": null,
+      "action": "hook-angle-tagging auto-module: tagged creative 28888618740787288 (ad 'RT_Cap_Maroon_Hero_9Nov', campaign Retargeting_Overall) from its real primary text/headline via Meta Ads MCP ads_get_creatives. Higgsfield vision pass skipped (not attached to this run) -- no creative description invented.",
+      "result": "success",
+      "previousState": {
+        "creativeTags[28888618740787288]": null
+      },
+      "detail": {
+        "ads_get_creatives": {
+          "id": "28888618740787288",
+          "name": "RT_Cap_Maroon_Hero_9Nov",
+          "body": "KAI Archives 2.0 — Season 26.\nMicro-suede, 5-panel, ₹799.\nFree shipping on prepaid orders. Offer till 9th November.",
+          "title": "KAI Archives 2.0 — Maroon",
+          "object_type": "SHARE"
+        }
+      },
+      "tier": "auto",
+      "executedAt": "2026-10-22T20:50:29.000Z"
+    },
+    {
+      "proposalId": null,
+      "action": "hook-angle-tagging auto-module: tagged creative 2262714374522459 (ad 'Warm_KAIFEST_SORA_Carousel_RootsV3_9Nov', campaign Sneakers_BOF_30Sep-5Oct) from its real primary text/headline via Meta Ads MCP ads_get_creatives. Higgsfield vision pass skipped (not attached to this run) -- no creative description invented.",
+      "result": "success",
+      "previousState": {
+        "creativeTags[2262714374522459]": null
+      },
+      "detail": {
+        "ads_get_creatives": {
+          "id": "2262714374522459",
+          "name": "Warm_KAIFEST_SORA_Carousel_RootsV3_9Nov",
+          "body": "KAI FEST IS ON 🔥\nSORA sneakers + any KAI cap for just ₹3,198 on prepaid orders (worth ₹4,098).\nSave ₹900. Add SORA + a cap to your cart — the price drops at checkout.\nLimited time offer, till 9th November.",
+          "title": "KAI",
+          "object_type": "SHARE"
+        }
+      },
+      "tier": "auto",
+      "executedAt": "2026-10-22T20:50:29.000Z"
+    },
+    {
+      "proposalId": null,
+      "action": "hook-angle-tagging auto-module: tagged creative 1656705339568241 (ad 'JP2_Reels_KAGE_Lifestyle_2499_9Nov', campaign Prospecting_JP2_Placement_Split_12Oct) from its real primary text/headline via Meta Ads MCP ads_get_creatives. Higgsfield vision pass skipped (not attached to this run) -- no creative description invented.",
+      "result": "success",
+      "previousState": {
+        "creativeTags[1656705339568241]": null
+      },
+      "detail": {
+        "ads_get_creatives": {
+          "id": "1656705339568241",
+          "name": "JP2_Reels_KAGE_Lifestyle_2499_9Nov",
+          "body": "One sneaker. Every outfit.\nDesigned for everyday wear with premium detailing, durable construction, and a clean all-black aesthetic. Meet KAGE.\nNow ₹2,499 on prepaid orders (was ₹3,299) + FREE SHIPPING. Offer ends 9th November.",
+          "title": "KAGE at ₹2,499 — Prepaid",
+          "object_type": "SHARE"
+        }
+      },
+      "tier": "auto",
+      "executedAt": "2026-10-22T20:50:29.000Z"
+    },
+    {
+      "proposalId": null,
+      "action": "hook-angle-tagging auto-module: tagged creative 4698281003762860 (ad 'Prosp_KAGE_Lifestyle_2499_9Nov', campaign Prospecting_JP_Purchase_5-9Oct) from its real primary text/headline via Meta Ads MCP ads_get_creatives. Higgsfield vision pass skipped (not attached to this run) -- no creative description invented.",
+      "result": "success",
+      "previousState": {
+        "creativeTags[4698281003762860]": null
+      },
+      "detail": {
+        "ads_get_creatives": {
+          "id": "4698281003762860",
+          "name": "Prosp_KAGE_Lifestyle_2499_9Nov",
+          "body": "One sneaker. Every outfit.\nDesigned for everyday wear with premium detailing, durable construction, and a clean all-black aesthetic. Meet KAGE.\nNow ₹2,499 on prepaid orders (was ₹3,299) + FREE SHIPPING. Offer ends 9th November.",
+          "title": "KAGE at ₹2,499 — Prepaid",
+          "object_type": "SHARE"
+        }
+      },
+      "tier": "auto",
+      "executedAt": "2026-10-22T20:50:29.000Z"
+    },
+    {
+      "proposalId": null,
+      "action": "hook-angle-tagging auto-module: tagged creative 1611791009997284 (ad 'Warm_KAIFEST_KAGE_3198_Kage2_22Oct', campaign Sneakers_BOF_30Sep-5Oct) from its real primary text/headline via Meta Ads MCP ads_get_creatives. Higgsfield vision pass skipped (not attached to this run) -- no creative description invented.",
+      "result": "success",
+      "previousState": {
+        "creativeTags[1611791009997284]": null
+      },
+      "detail": {
+        "ads_get_creatives": {
+          "id": "1611791009997284",
+          "name": "Warm_KAIFEST_KAGE_3198_Kage2_22Oct",
+          "body": "KAI FEST IS ON 🔥\nOne sneaker. Every outfit. KAGE + any KAI cap for just ₹3,198 on prepaid orders (worth ₹4,098).\nSave ₹900. Add KAGE + a cap to your cart — the price drops at checkout.",
+          "title": "KAI FEST: KAGE + Cap @ ₹3,198",
+          "object_type": "SHARE"
+        }
+      },
+      "tier": "auto",
+      "executedAt": "2026-10-22T20:50:29.000Z"
+    },
+    {
+      "proposalId": null,
+      "action": "hook-angle-tagging auto-module: tagged creative 1069031719425034 (ad 'F_Warm_KAIFEST_KAGE_3198_Kage2_22Oct', campaign Sneakers_BOF_v2_Placement_Split_12Oct) from its real primary text/headline via Meta Ads MCP ads_get_creatives. Higgsfield vision pass skipped (not attached to this run) -- no creative description invented.",
+      "result": "success",
+      "previousState": {
+        "creativeTags[1069031719425034]": null
+      },
+      "detail": {
+        "ads_get_creatives": {
+          "id": "1069031719425034",
+          "name": "F_Warm_KAIFEST_KAGE_3198_Kage2_22Oct",
+          "body": "KAI FEST IS ON 🔥\nOne sneaker. Every outfit. KAGE + any KAI cap for just ₹3,198 on prepaid orders (worth ₹4,098).\nSave ₹900. Add KAGE + a cap to your cart — the price drops at checkout.",
+          "title": "KAI FEST: KAGE + Cap @ ₹3,198",
+          "object_type": "SHARE"
+        }
+      },
+      "tier": "auto",
+      "executedAt": "2026-10-22T20:50:29.000Z"
+    },
+    {
+      "proposalId": null,
+      "action": "hook-angle-tagging auto-module: tagged creative 3360804384099110 (ad 'Prosp_YINYANG_JP_2499_9Nov', campaign Prospecting_JP_Purchase_5-9Oct) from its real primary text/headline via Meta Ads MCP ads_get_creatives. Higgsfield vision pass skipped (not attached to this run) -- no creative description invented.",
+      "result": "success",
+      "previousState": {
+        "creativeTags[3360804384099110]": null
+      },
+      "detail": {
+        "ads_get_creatives": {
+          "id": "3360804384099110",
+          "name": "Prosp_YINYANG_JP_2499_9Nov",
+          "body": "Meet Yin Yang — the new KAI sneaker.\nNow ₹2,499 on prepaid orders (was ₹3,299) + FREE SHIPPING.\nSave ₹800 — offer ends 9th November. Limited stock.",
+          "title": "Yin Yang at ₹2,499 — Prepaid",
+          "object_type": "SHARE"
+        }
+      },
+      "tier": "auto",
+      "executedAt": "2026-10-22T20:50:29.000Z"
+    },
+    {
+      "proposalId": null,
+      "action": "hook-angle-tagging auto-module: tagged creative 1004901049284717 (ad 'RT_Cap_Black_Hero_9Nov', campaign Retargeting_Overall) from its real primary text/headline via Meta Ads MCP ads_get_creatives. Higgsfield vision pass skipped (not attached to this run) -- no creative description invented.",
+      "result": "success",
+      "previousState": {
+        "creativeTags[1004901049284717]": null
+      },
+      "detail": {
+        "ads_get_creatives": {
+          "id": "1004901049284717",
+          "name": "RT_Cap_Black_Hero_9Nov",
+          "body": "KAI Archives 2.0 — Season 26.\nMicro-suede, 5-panel, ₹799.\nFree shipping on prepaid orders. Offer till 9th November.",
+          "title": "KAI Archives 2.0 — Black",
+          "object_type": "SHARE"
+        }
+      },
+      "tier": "auto",
+      "executedAt": "2026-10-22T20:50:29.000Z"
+    },
+    {
+      "proposalId": null,
+      "action": "hook-angle-tagging auto-module: tagged creative 1103052292713954 (ad 'Warm_KAIFEST_KAGE_3198_NewImage_9Nov', campaign Sneakers_BOF_30Sep-5Oct) from its real primary text/headline via Meta Ads MCP ads_get_creatives. Higgsfield vision pass skipped (not attached to this run) -- no creative description invented.",
+      "result": "success",
+      "previousState": {
+        "creativeTags[1103052292713954]": null
+      },
+      "detail": {
+        "ads_get_creatives": {
+          "id": "1103052292713954",
+          "name": "Warm_KAIFEST_KAGE_3198_NewImage_9Nov",
+          "body": "KAI FEST IS ON 🔥\nOne sneaker. Every outfit. KAGE + any KAI cap for just ₹3,198 on prepaid orders (worth ₹4,098).\nSave ₹900. Add KAGE + a cap to your cart — the price drops at checkout.\nLimited time offer, till 9th November.",
+          "title": "KAI FEST: KAGE + Cap @ ₹3,198",
+          "object_type": "SHARE"
+        }
+      },
+      "tier": "auto",
+      "executedAt": "2026-10-22T20:50:29.000Z"
+    },
+    {
+      "proposalId": null,
+      "action": "hook-angle-tagging auto-module: tagged creative 1125570350501558 (ad 'RT_YINYANG_NewImages_2499_9Nov', campaign Retargeting_Overall) from its real primary text/headline via Meta Ads MCP ads_get_creatives. Higgsfield vision pass skipped (not attached to this run) -- no creative description invented.",
+      "result": "success",
+      "previousState": {
+        "creativeTags[1125570350501558]": null
+      },
+      "detail": {
+        "ads_get_creatives": {
+          "id": "1125570350501558",
+          "name": "RT_YINYANG_NewImages_2499_9Nov",
+          "body": "Meet Yin Yang — the new KAI sneaker.\nNow ₹2,499 on prepaid orders (was ₹3,299) + FREE SHIPPING.\nSave ₹800 — offer ends 9th November. Limited stock.",
+          "title": "Yin Yang at ₹2,499 — Prepaid",
+          "object_type": "SHARE"
+        }
+      },
+      "tier": "auto",
+      "executedAt": "2026-10-22T20:50:29.000Z"
+    },
+    {
+      "proposalId": null,
+      "action": "hook-angle-tagging auto-module: tagged creative 1609987910372773 (ad 'Prosp_YINYANG_NewImages_2499_9Nov', campaign Prospecting_JP_Purchase_5-9Oct) from its real primary text/headline via Meta Ads MCP ads_get_creatives. Higgsfield vision pass skipped (not attached to this run) -- no creative description invented.",
+      "result": "success",
+      "previousState": {
+        "creativeTags[1609987910372773]": null
+      },
+      "detail": {
+        "ads_get_creatives": {
+          "id": "1609987910372773",
+          "name": "Prosp_YINYANG_NewImages_2499_9Nov",
+          "body": "Meet Yin Yang — the new KAI sneaker.\nNow ₹2,499 on prepaid orders (was ₹3,299) + FREE SHIPPING.\nSave ₹800 — offer ends 9th November. Limited stock.",
+          "title": "Yin Yang at ₹2,499 — Prepaid",
+          "object_type": "SHARE"
+        }
+      },
+      "tier": "auto",
+      "executedAt": "2026-10-22T20:50:29.000Z"
+    },
+    {
+      "proposalId": null,
+      "action": "hook-angle-tagging auto-module: tagged creative 2183047442260002 (ad 'PROSP_RL_KAIFEST_KAGE_Cap_3198_9Nov', campaign Prospecting_JP2_Placement_Split_12Oct) from its real primary text/headline via Meta Ads MCP ads_get_creatives. Higgsfield vision pass skipped (not attached to this run) -- no creative description invented.",
+      "result": "success",
+      "previousState": {
+        "creativeTags[2183047442260002]": null
+      },
+      "detail": {
+        "ads_get_creatives": {
+          "id": "2183047442260002",
+          "name": "PROSP_RL_KAIFEST_KAGE_Cap_3198_9Nov",
+          "body": "KAI FEST IS ON 🔥\nOne sneaker. Every outfit. KAGE + any KAI cap for just ₹3,198 on prepaid orders (worth ₹4,098).\nSave ₹900. Add KAGE + a cap to your cart — the price drops at checkout.\nLimited time offer, till 9th November.",
+          "title": "KAI FEST: KAGE + Cap @ ₹3,198",
+          "object_type": "SHARE"
+        }
+      },
+      "tier": "auto",
+      "executedAt": "2026-10-22T20:50:29.000Z"
+    },
+    {
+      "proposalId": null,
+      "action": "hook-angle-tagging auto-module: tagged creative 1430264198584920 (ad 'F_Warm_TSUCHI_JP_2499_9Nov', campaign Sneakers_BOF_v2_Placement_Split_12Oct) from its real primary text/headline via Meta Ads MCP ads_get_creatives. Higgsfield vision pass skipped (not attached to this run) -- no creative description invented.",
+      "result": "success",
+      "previousState": {
+        "creativeTags[1430264198584920]": null
+      },
+      "detail": {
+        "ads_get_creatives": {
+          "id": "1430264198584920",
+          "name": "F_Warm_TSUCHI_JP_2499_9Nov",
+          "body": "土 TSUCHI — rooted in earth. Our bestseller is back 👟\nNow ₹2,499 on prepaid orders (was ₹3,299) + FREE SHIPPING.\nSave ₹800 — offer ends 9th November. Limited stock.",
+          "title": "TSUCHI at ₹2,499 — Prepaid",
+          "object_type": "SHARE"
+        }
+      },
+      "tier": "auto",
+      "executedAt": "2026-10-22T20:50:29.000Z"
+    },
+    {
+      "proposalId": null,
+      "action": "hook-angle-tagging auto-module: tagged creative 1104320232316333 (ad 'F_Warm_KAIFEST_KAGE_3198_NewImage_9Nov', campaign Sneakers_BOF_v2_Placement_Split_12Oct) from its real primary text/headline via Meta Ads MCP ads_get_creatives. Higgsfield vision pass skipped (not attached to this run) -- no creative description invented.",
+      "result": "success",
+      "previousState": {
+        "creativeTags[1104320232316333]": null
+      },
+      "detail": {
+        "ads_get_creatives": {
+          "id": "1104320232316333",
+          "name": "F_Warm_KAIFEST_KAGE_3198_NewImage_9Nov",
+          "body": "KAI FEST IS ON 🔥\nOne sneaker. Every outfit. KAGE + any KAI cap for just ₹3,198 on prepaid orders (worth ₹4,098).\nSave ₹900. Add KAGE + a cap to your cart — the price drops at checkout.\nLimited time offer, till 9th November.",
+          "title": "KAI FEST: KAGE + Cap @ ₹3,198",
+          "object_type": "SHARE"
+        }
+      },
+      "tier": "auto",
+      "executedAt": "2026-10-22T20:50:29.000Z"
+    },
+    {
+      "proposalId": null,
+      "action": "hook-angle-tagging auto-module: tagged creative 1056450750782703 (ad 'RT_SORA_NewImages_2499_9Nov', campaign Retargeting_Overall) from its real primary text/headline via Meta Ads MCP ads_get_creatives. Higgsfield vision pass skipped (not attached to this run) -- no creative description invented.",
+      "result": "success",
+      "previousState": {
+        "creativeTags[1056450750782703]": null
+      },
+      "detail": {
+        "ads_get_creatives": {
+          "id": "1056450750782703",
+          "name": "RT_SORA_NewImages_2499_9Nov",
+          "body": "空 SORA — light on its feet.\nNow ₹2,499 on prepaid orders (was ₹3,299) + FREE SHIPPING.\nSave ₹800 — offer ends 9th November. Limited stock.",
+          "title": "SORA at ₹2,499 — Prepaid",
+          "object_type": "SHARE"
+        }
+      },
+      "tier": "auto",
+      "executedAt": "2026-10-22T20:50:29.000Z"
+    },
+    {
+      "proposalId": null,
+      "action": "hook-angle-tagging auto-module: tagged creative 1770867957517132 (ad 'F_Warm_YINYANG_NewImages_2499_9Nov', campaign Sneakers_BOF_v2_Placement_Split_12Oct) from its real primary text/headline via Meta Ads MCP ads_get_creatives. Higgsfield vision pass skipped (not attached to this run) -- no creative description invented.",
+      "result": "success",
+      "previousState": {
+        "creativeTags[1770867957517132]": null
+      },
+      "detail": {
+        "ads_get_creatives": {
+          "id": "1770867957517132",
+          "name": "F_Warm_YINYANG_NewImages_2499_9Nov",
+          "body": "Meet Yin Yang — the new KAI sneaker.\nNow ₹2,499 on prepaid orders (was ₹3,299) + FREE SHIPPING.\nSave ₹800 — offer ends 9th November. Limited stock.",
+          "title": "Yin Yang at ₹2,499 — Prepaid",
+          "object_type": "SHARE"
+        }
+      },
+      "tier": "auto",
+      "executedAt": "2026-10-22T20:50:29.000Z"
+    },
+    {
+      "proposalId": null,
+      "action": "hook-angle-tagging auto-module: tagged creative 2156286965101690 (ad 'RT_Cap_Indigo_Hero_9Nov', campaign Retargeting_Overall) from its real primary text/headline via Meta Ads MCP ads_get_creatives. Higgsfield vision pass skipped (not attached to this run) -- no creative description invented.",
+      "result": "success",
+      "previousState": {
+        "creativeTags[2156286965101690]": null
+      },
+      "detail": {
+        "ads_get_creatives": {
+          "id": "2156286965101690",
+          "name": "RT_Cap_Indigo_Hero_9Nov",
+          "body": "KAI Archives 2.0 — Season 26.\nMicro-suede, 5-panel, ₹799.\nFree shipping on prepaid orders. Offer till 9th November.",
+          "title": "KAI Archives 2.0 — Indigo",
+          "object_type": "SHARE"
+        }
+      },
+      "tier": "auto",
+      "executedAt": "2026-10-22T20:50:29.000Z"
+    },
+    {
+      "proposalId": null,
+      "action": "hook-angle-tagging auto-module: tagged creative 1809162873661499 (ad 'F_PROVEN_KAIFEST_KAGE_Cap_3198_9Nov', campaign Sneakers_BOF_v2_Placement_Split_12Oct) from its real primary text/headline via Meta Ads MCP ads_get_creatives. Higgsfield vision pass skipped (not attached to this run) -- no creative description invented.",
+      "result": "success",
+      "previousState": {
+        "creativeTags[1809162873661499]": null
+      },
+      "detail": {
+        "ads_get_creatives": {
+          "id": "1809162873661499",
+          "name": "F_PROVEN_KAIFEST_KAGE_Cap_3198_9Nov",
+          "body": "KAI FEST IS ON 🔥\nOne sneaker. Every outfit. KAGE + any KAI cap for just ₹3,198 on prepaid orders (worth ₹4,098).\nSave ₹900. Add KAGE + a cap to your cart — the price drops at checkout.\nLimited time offer, till 9th November.",
+          "title": "KAI FEST: KAGE + Cap @ ₹3,198",
+          "object_type": "SHARE"
+        }
+      },
+      "tier": "auto",
+      "executedAt": "2026-10-22T20:50:29.000Z"
+    },
+    {
+      "proposalId": null,
+      "action": "hook-angle-tagging auto-module: tagged creative 1771111954144010 (ad 'Prosp_TSUCHI_JP_2499_9Nov', campaign Prospecting_JP_Purchase_5-9Oct) from its real primary text/headline via Meta Ads MCP ads_get_creatives. Higgsfield vision pass skipped (not attached to this run) -- no creative description invented.",
+      "result": "success",
+      "previousState": {
+        "creativeTags[1771111954144010]": null
+      },
+      "detail": {
+        "ads_get_creatives": {
+          "id": "1771111954144010",
+          "name": "Prosp_TSUCHI_JP_2499_9Nov",
+          "body": "土 TSUCHI — rooted in earth. Our bestseller is back 👟\nNow ₹2,499 on prepaid orders (was ₹3,299) + FREE SHIPPING.\nSave ₹800 — offer ends 9th November. Limited stock.",
+          "title": "TSUCHI at ₹2,499 — Prepaid",
+          "object_type": "SHARE"
+        }
+      },
+      "tier": "auto",
+      "executedAt": "2026-10-22T20:50:29.000Z"
+    },
+    {
+      "proposalId": null,
+      "action": "hook-angle-tagging auto-module: tagged creative 2968082496918163 (ad 'F_PROVEN_KAGE_Lifestyle_2499_9Nov', campaign Sneakers_BOF_v2_Placement_Split_12Oct) from its real primary text/headline via Meta Ads MCP ads_get_creatives. Higgsfield vision pass skipped (not attached to this run) -- no creative description invented.",
+      "result": "success",
+      "previousState": {
+        "creativeTags[2968082496918163]": null
+      },
+      "detail": {
+        "ads_get_creatives": {
+          "id": "2968082496918163",
+          "name": "F_PROVEN_KAGE_Lifestyle_2499_9Nov",
+          "body": "One sneaker. Every outfit.\nDesigned for everyday wear with premium detailing, durable construction, and a clean all-black aesthetic. Meet KAGE.\nNow ₹2,499 on prepaid orders (was ₹3,299) + FREE SHIPPING. Offer ends 9th November.",
+          "title": "KAGE at ₹2,499 — Prepaid",
+          "object_type": "SHARE"
+        }
+      },
+      "tier": "auto",
+      "executedAt": "2026-10-22T20:50:29.000Z"
+    },
+    {
+      "proposalId": null,
+      "action": "hook-angle-tagging auto-module: tagged creative 2575959769553557 (ad 'RT_Cap_Grey_Hero_9Nov', campaign Retargeting_Overall) from its real primary text/headline via Meta Ads MCP ads_get_creatives. Higgsfield vision pass skipped (not attached to this run) -- no creative description invented.",
+      "result": "success",
+      "previousState": {
+        "creativeTags[2575959769553557]": null
+      },
+      "detail": {
+        "ads_get_creatives": {
+          "id": "2575959769553557",
+          "name": "RT_Cap_Grey_Hero_9Nov",
+          "body": "KAI Archives 2.0 — Season 26.\nMicro-suede, 5-panel, ₹799.\nFree shipping on prepaid orders. Offer till 9th November.",
+          "title": "KAI Archives 2.0 — Grey",
+          "object_type": "SHARE"
+        }
+      },
+      "tier": "auto",
+      "executedAt": "2026-10-22T20:50:29.000Z"
+    },
+    {
+      "proposalId": null,
+      "action": "hook-angle-tagging auto-module: tagged creative 1860491192069581 (ad 'LAL1_Prosp_KAGE_Lifestyle_2499_9Nov', campaign Prospecting_LAL1_Purchasers_14Oct) from its real primary text/headline via Meta Ads MCP ads_get_creatives. Higgsfield vision pass skipped (not attached to this run) -- no creative description invented.",
+      "result": "success",
+      "previousState": {
+        "creativeTags[1860491192069581]": null
+      },
+      "detail": {
+        "ads_get_creatives": {
+          "id": "1860491192069581",
+          "name": "LAL1_Prosp_KAGE_Lifestyle_2499_9Nov",
+          "body": "One sneaker. Every outfit.\nDesigned for everyday wear with premium detailing, durable construction, and a clean all-black aesthetic. Meet KAGE.\nNow ₹2,499 on prepaid orders (was ₹3,299) + FREE SHIPPING. Offer ends 9th November.",
+          "title": "KAGE at ₹2,499 — Prepaid",
+          "object_type": "SHARE"
+        }
+      },
+      "tier": "auto",
+      "executedAt": "2026-10-22T20:50:29.000Z"
     }
   ],
   "creativeTags": {
@@ -32799,6 +33230,248 @@
       "visionPassSkipped": true,
       "note": "Higgsfield vision connection not attached to this run -- image content itself not analyzed, only real ad copy text used. No creative description invented.",
       "taggedAt": "2026-10-22T18:54:11.000Z"
+    },
+    "28888618740787288": {
+      "adName": "RT_Cap_Maroon_Hero_9Nov",
+      "campaign": "Retargeting_Overall",
+      "format": "Share (static image)",
+      "angle": "Archives 2.0 product launch, flat-price-led (₹799) with free shipping + deadline urgency, not a percentage discount",
+      "hook": "\"KAI Archives 2.0 — Season 26.\nMicro-suede, 5-panel, ₹799.\nFree shipping on prepaid orders. Offer till 9th November.\" (primary text) / \"KAI Archives 2.0 — Maroon\" (headline)",
+      "taggedFrom": "ad primary text (body) + headline (title), via Meta Ads MCP ads_get_creatives",
+      "visionPassSkipped": true,
+      "note": "Higgsfield vision connection not attached to this run -- image content itself not analyzed, only real ad copy text used. No creative description invented. Part of the 9Nov/KAI FEST creative refresh launched 2026-10-22.",
+      "taggedAt": "2026-10-22T20:50:29.000Z"
+    },
+    "2262714374522459": {
+      "adName": "Warm_KAIFEST_SORA_Carousel_RootsV3_9Nov",
+      "campaign": "Sneakers_BOF_30Sep-5Oct",
+      "format": "Share (static image)",
+      "angle": "KAI FEST bundle cross-sell (SORA + any cap) at a fixed ₹3,198 bundle price, cart-value/savings framing",
+      "hook": "\"KAI FEST IS ON 🔥\nSORA sneakers + any KAI cap for just ₹3,198 on prepaid orders (worth ₹4,098).\nSave ₹900. Add SORA + a cap to your cart — the price drops at checkout.\nLimited time offer, till 9th November.\" (primary text) / \"KAI\" (headline)",
+      "taggedFrom": "ad primary text (body) + headline (title), via Meta Ads MCP ads_get_creatives",
+      "visionPassSkipped": true,
+      "note": "Higgsfield vision connection not attached to this run -- image content itself not analyzed, only real ad copy text used. No creative description invented. Part of the 9Nov/KAI FEST creative refresh launched 2026-10-22.",
+      "taggedAt": "2026-10-22T20:50:29.000Z"
+    },
+    "1656705339568241": {
+      "adName": "JP2_Reels_KAGE_Lifestyle_2499_9Nov",
+      "campaign": "Prospecting_JP2_Placement_Split_12Oct",
+      "format": "Share (static image)",
+      "angle": "Prepaid discount offer on the KAGE silhouette, price-led (was/now framing)",
+      "hook": "\"One sneaker. Every outfit.\nDesigned for everyday wear with premium detailing, durable construction, and a clean all-black aesthetic. Meet KAGE.\nNow ₹2,499 on prepaid orders (was ₹3,299) + FREE SHIPPING. Offer ends 9th November.\" (primary text) / \"KAGE at ₹2,499 — Prepaid\" (headline)",
+      "taggedFrom": "ad primary text (body) + headline (title), via Meta Ads MCP ads_get_creatives",
+      "visionPassSkipped": true,
+      "note": "Higgsfield vision connection not attached to this run -- image content itself not analyzed, only real ad copy text used. No creative description invented. Part of the 9Nov/KAI FEST creative refresh launched 2026-10-22.",
+      "taggedAt": "2026-10-22T20:50:29.000Z"
+    },
+    "4698281003762860": {
+      "adName": "Prosp_KAGE_Lifestyle_2499_9Nov",
+      "campaign": "Prospecting_JP_Purchase_5-9Oct",
+      "format": "Share (static image)",
+      "angle": "Prepaid discount offer on the KAGE silhouette, price-led (was/now framing)",
+      "hook": "\"One sneaker. Every outfit.\nDesigned for everyday wear with premium detailing, durable construction, and a clean all-black aesthetic. Meet KAGE.\nNow ₹2,499 on prepaid orders (was ₹3,299) + FREE SHIPPING. Offer ends 9th November.\" (primary text) / \"KAGE at ₹2,499 — Prepaid\" (headline)",
+      "taggedFrom": "ad primary text (body) + headline (title), via Meta Ads MCP ads_get_creatives",
+      "visionPassSkipped": true,
+      "note": "Higgsfield vision connection not attached to this run -- image content itself not analyzed, only real ad copy text used. No creative description invented. Part of the 9Nov/KAI FEST creative refresh launched 2026-10-22.",
+      "taggedAt": "2026-10-22T20:50:29.000Z"
+    },
+    "1611791009997284": {
+      "adName": "Warm_KAIFEST_KAGE_3198_Kage2_22Oct",
+      "campaign": "Sneakers_BOF_30Sep-5Oct",
+      "format": "Share (static image)",
+      "angle": "KAI FEST bundle cross-sell (KAGE + any cap) at a fixed ₹3,198 bundle price, cart-value/savings framing",
+      "hook": "\"KAI FEST IS ON 🔥\nOne sneaker. Every outfit. KAGE + any KAI cap for just ₹3,198 on prepaid orders (worth ₹4,098).\nSave ₹900. Add KAGE + a cap to your cart — the price drops at checkout.\" (primary text) / \"KAI FEST: KAGE + Cap @ ₹3,198\" (headline)",
+      "taggedFrom": "ad primary text (body) + headline (title), via Meta Ads MCP ads_get_creatives",
+      "visionPassSkipped": true,
+      "note": "Higgsfield vision connection not attached to this run -- image content itself not analyzed, only real ad copy text used. No creative description invented. Part of the 9Nov/KAI FEST creative refresh launched 2026-10-22.",
+      "taggedAt": "2026-10-22T20:50:29.000Z"
+    },
+    "1069031719425034": {
+      "adName": "F_Warm_KAIFEST_KAGE_3198_Kage2_22Oct",
+      "campaign": "Sneakers_BOF_v2_Placement_Split_12Oct",
+      "format": "Share (static image)",
+      "angle": "KAI FEST bundle cross-sell (KAGE + any cap) at a fixed ₹3,198 bundle price, cart-value/savings framing",
+      "hook": "\"KAI FEST IS ON 🔥\nOne sneaker. Every outfit. KAGE + any KAI cap for just ₹3,198 on prepaid orders (worth ₹4,098).\nSave ₹900. Add KAGE + a cap to your cart — the price drops at checkout.\" (primary text) / \"KAI FEST: KAGE + Cap @ ₹3,198\" (headline)",
+      "taggedFrom": "ad primary text (body) + headline (title), via Meta Ads MCP ads_get_creatives",
+      "visionPassSkipped": true,
+      "note": "Higgsfield vision connection not attached to this run -- image content itself not analyzed, only real ad copy text used. No creative description invented. Part of the 9Nov/KAI FEST creative refresh launched 2026-10-22.",
+      "taggedAt": "2026-10-22T20:50:29.000Z"
+    },
+    "3360804384099110": {
+      "adName": "Prosp_YINYANG_JP_2499_9Nov",
+      "campaign": "Prospecting_JP_Purchase_5-9Oct",
+      "format": "Share (static image)",
+      "angle": "Prepaid discount offer on the Yin Yang silhouette, price-led (was/now framing) + limited-stock urgency",
+      "hook": "\"Meet Yin Yang — the new KAI sneaker.\nNow ₹2,499 on prepaid orders (was ₹3,299) + FREE SHIPPING.\nSave ₹800 — offer ends 9th November. Limited stock.\" (primary text) / \"Yin Yang at ₹2,499 — Prepaid\" (headline)",
+      "taggedFrom": "ad primary text (body) + headline (title), via Meta Ads MCP ads_get_creatives",
+      "visionPassSkipped": true,
+      "note": "Higgsfield vision connection not attached to this run -- image content itself not analyzed, only real ad copy text used. No creative description invented. Part of the 9Nov/KAI FEST creative refresh launched 2026-10-22.",
+      "taggedAt": "2026-10-22T20:50:29.000Z"
+    },
+    "1004901049284717": {
+      "adName": "RT_Cap_Black_Hero_9Nov",
+      "campaign": "Retargeting_Overall",
+      "format": "Share (static image)",
+      "angle": "Archives 2.0 product launch, flat-price-led (₹799) with free shipping + deadline urgency, not a percentage discount",
+      "hook": "\"KAI Archives 2.0 — Season 26.\nMicro-suede, 5-panel, ₹799.\nFree shipping on prepaid orders. Offer till 9th November.\" (primary text) / \"KAI Archives 2.0 — Black\" (headline)",
+      "taggedFrom": "ad primary text (body) + headline (title), via Meta Ads MCP ads_get_creatives",
+      "visionPassSkipped": true,
+      "note": "Higgsfield vision connection not attached to this run -- image content itself not analyzed, only real ad copy text used. No creative description invented. Part of the 9Nov/KAI FEST creative refresh launched 2026-10-22.",
+      "taggedAt": "2026-10-22T20:50:29.000Z"
+    },
+    "1103052292713954": {
+      "adName": "Warm_KAIFEST_KAGE_3198_NewImage_9Nov",
+      "campaign": "Sneakers_BOF_30Sep-5Oct",
+      "format": "Share (static image)",
+      "angle": "KAI FEST bundle cross-sell (KAGE + any cap) at a fixed ₹3,198 bundle price, cart-value/savings framing",
+      "hook": "\"KAI FEST IS ON 🔥\nOne sneaker. Every outfit. KAGE + any KAI cap for just ₹3,198 on prepaid orders (worth ₹4,098).\nSave ₹900. Add KAGE + a cap to your cart — the price drops at checkout.\nLimited time offer, till 9th November.\" (primary text) / \"KAI FEST: KAGE + Cap @ ₹3,198\" (headline)",
+      "taggedFrom": "ad primary text (body) + headline (title), via Meta Ads MCP ads_get_creatives",
+      "visionPassSkipped": true,
+      "note": "Higgsfield vision connection not attached to this run -- image content itself not analyzed, only real ad copy text used. No creative description invented. Part of the 9Nov/KAI FEST creative refresh launched 2026-10-22.",
+      "taggedAt": "2026-10-22T20:50:29.000Z"
+    },
+    "1125570350501558": {
+      "adName": "RT_YINYANG_NewImages_2499_9Nov",
+      "campaign": "Retargeting_Overall",
+      "format": "Share (static image)",
+      "angle": "Prepaid discount offer on the Yin Yang silhouette, price-led (was/now framing) + limited-stock urgency",
+      "hook": "\"Meet Yin Yang — the new KAI sneaker.\nNow ₹2,499 on prepaid orders (was ₹3,299) + FREE SHIPPING.\nSave ₹800 — offer ends 9th November. Limited stock.\" (primary text) / \"Yin Yang at ₹2,499 — Prepaid\" (headline)",
+      "taggedFrom": "ad primary text (body) + headline (title), via Meta Ads MCP ads_get_creatives",
+      "visionPassSkipped": true,
+      "note": "Higgsfield vision connection not attached to this run -- image content itself not analyzed, only real ad copy text used. No creative description invented. Part of the 9Nov/KAI FEST creative refresh launched 2026-10-22.",
+      "taggedAt": "2026-10-22T20:50:29.000Z"
+    },
+    "1609987910372773": {
+      "adName": "Prosp_YINYANG_NewImages_2499_9Nov",
+      "campaign": "Prospecting_JP_Purchase_5-9Oct",
+      "format": "Share (static image)",
+      "angle": "Prepaid discount offer on the Yin Yang silhouette, price-led (was/now framing) + limited-stock urgency",
+      "hook": "\"Meet Yin Yang — the new KAI sneaker.\nNow ₹2,499 on prepaid orders (was ₹3,299) + FREE SHIPPING.\nSave ₹800 — offer ends 9th November. Limited stock.\" (primary text) / \"Yin Yang at ₹2,499 — Prepaid\" (headline)",
+      "taggedFrom": "ad primary text (body) + headline (title), via Meta Ads MCP ads_get_creatives",
+      "visionPassSkipped": true,
+      "note": "Higgsfield vision connection not attached to this run -- image content itself not analyzed, only real ad copy text used. No creative description invented. Part of the 9Nov/KAI FEST creative refresh launched 2026-10-22.",
+      "taggedAt": "2026-10-22T20:50:29.000Z"
+    },
+    "2183047442260002": {
+      "adName": "PROSP_RL_KAIFEST_KAGE_Cap_3198_9Nov",
+      "campaign": "Prospecting_JP2_Placement_Split_12Oct",
+      "format": "Share (static image)",
+      "angle": "KAI FEST bundle cross-sell (KAGE + any cap) at a fixed ₹3,198 bundle price, cart-value/savings framing",
+      "hook": "\"KAI FEST IS ON 🔥\nOne sneaker. Every outfit. KAGE + any KAI cap for just ₹3,198 on prepaid orders (worth ₹4,098).\nSave ₹900. Add KAGE + a cap to your cart — the price drops at checkout.\nLimited time offer, till 9th November.\" (primary text) / \"KAI FEST: KAGE + Cap @ ₹3,198\" (headline)",
+      "taggedFrom": "ad primary text (body) + headline (title), via Meta Ads MCP ads_get_creatives",
+      "visionPassSkipped": true,
+      "note": "Higgsfield vision connection not attached to this run -- image content itself not analyzed, only real ad copy text used. No creative description invented. Part of the 9Nov/KAI FEST creative refresh launched 2026-10-22.",
+      "taggedAt": "2026-10-22T20:50:29.000Z"
+    },
+    "1430264198584920": {
+      "adName": "F_Warm_TSUCHI_JP_2499_9Nov",
+      "campaign": "Sneakers_BOF_v2_Placement_Split_12Oct",
+      "format": "Share (static image)",
+      "angle": "Prepaid discount offer on the TSUCHI silhouette, price-led, with a returning-bestseller callback ('Our bestseller is back')",
+      "hook": "\"土 TSUCHI — rooted in earth. Our bestseller is back 👟\nNow ₹2,499 on prepaid orders (was ₹3,299) + FREE SHIPPING.\nSave ₹800 — offer ends 9th November. Limited stock.\" (primary text) / \"TSUCHI at ₹2,499 — Prepaid\" (headline)",
+      "taggedFrom": "ad primary text (body) + headline (title), via Meta Ads MCP ads_get_creatives",
+      "visionPassSkipped": true,
+      "note": "Higgsfield vision connection not attached to this run -- image content itself not analyzed, only real ad copy text used. No creative description invented. Part of the 9Nov/KAI FEST creative refresh launched 2026-10-22.",
+      "taggedAt": "2026-10-22T20:50:29.000Z"
+    },
+    "1104320232316333": {
+      "adName": "F_Warm_KAIFEST_KAGE_3198_NewImage_9Nov",
+      "campaign": "Sneakers_BOF_v2_Placement_Split_12Oct",
+      "format": "Share (static image)",
+      "angle": "KAI FEST bundle cross-sell (KAGE + any cap) at a fixed ₹3,198 bundle price, cart-value/savings framing",
+      "hook": "\"KAI FEST IS ON 🔥\nOne sneaker. Every outfit. KAGE + any KAI cap for just ₹3,198 on prepaid orders (worth ₹4,098).\nSave ₹900. Add KAGE + a cap to your cart — the price drops at checkout.\nLimited time offer, till 9th November.\" (primary text) / \"KAI FEST: KAGE + Cap @ ₹3,198\" (headline)",
+      "taggedFrom": "ad primary text (body) + headline (title), via Meta Ads MCP ads_get_creatives",
+      "visionPassSkipped": true,
+      "note": "Higgsfield vision connection not attached to this run -- image content itself not analyzed, only real ad copy text used. No creative description invented. Part of the 9Nov/KAI FEST creative refresh launched 2026-10-22.",
+      "taggedAt": "2026-10-22T20:50:29.000Z"
+    },
+    "1056450750782703": {
+      "adName": "RT_SORA_NewImages_2499_9Nov",
+      "campaign": "Retargeting_Overall",
+      "format": "Share (static image)",
+      "angle": "Prepaid discount offer on the SORA silhouette, price-led (was/now framing) + limited-stock urgency",
+      "hook": "\"空 SORA — light on its feet.\nNow ₹2,499 on prepaid orders (was ₹3,299) + FREE SHIPPING.\nSave ₹800 — offer ends 9th November. Limited stock.\" (primary text) / \"SORA at ₹2,499 — Prepaid\" (headline)",
+      "taggedFrom": "ad primary text (body) + headline (title), via Meta Ads MCP ads_get_creatives",
+      "visionPassSkipped": true,
+      "note": "Higgsfield vision connection not attached to this run -- image content itself not analyzed, only real ad copy text used. No creative description invented. Part of the 9Nov/KAI FEST creative refresh launched 2026-10-22.",
+      "taggedAt": "2026-10-22T20:50:29.000Z"
+    },
+    "1770867957517132": {
+      "adName": "F_Warm_YINYANG_NewImages_2499_9Nov",
+      "campaign": "Sneakers_BOF_v2_Placement_Split_12Oct",
+      "format": "Share (static image)",
+      "angle": "Prepaid discount offer on the Yin Yang silhouette, price-led (was/now framing) + limited-stock urgency",
+      "hook": "\"Meet Yin Yang — the new KAI sneaker.\nNow ₹2,499 on prepaid orders (was ₹3,299) + FREE SHIPPING.\nSave ₹800 — offer ends 9th November. Limited stock.\" (primary text) / \"Yin Yang at ₹2,499 — Prepaid\" (headline)",
+      "taggedFrom": "ad primary text (body) + headline (title), via Meta Ads MCP ads_get_creatives",
+      "visionPassSkipped": true,
+      "note": "Higgsfield vision connection not attached to this run -- image content itself not analyzed, only real ad copy text used. No creative description invented. Part of the 9Nov/KAI FEST creative refresh launched 2026-10-22.",
+      "taggedAt": "2026-10-22T20:50:29.000Z"
+    },
+    "2156286965101690": {
+      "adName": "RT_Cap_Indigo_Hero_9Nov",
+      "campaign": "Retargeting_Overall",
+      "format": "Share (static image)",
+      "angle": "Archives 2.0 product launch, flat-price-led (₹799) with free shipping + deadline urgency, not a percentage discount",
+      "hook": "\"KAI Archives 2.0 — Season 26.\nMicro-suede, 5-panel, ₹799.\nFree shipping on prepaid orders. Offer till 9th November.\" (primary text) / \"KAI Archives 2.0 — Indigo\" (headline)",
+      "taggedFrom": "ad primary text (body) + headline (title), via Meta Ads MCP ads_get_creatives",
+      "visionPassSkipped": true,
+      "note": "Higgsfield vision connection not attached to this run -- image content itself not analyzed, only real ad copy text used. No creative description invented. Part of the 9Nov/KAI FEST creative refresh launched 2026-10-22.",
+      "taggedAt": "2026-10-22T20:50:29.000Z"
+    },
+    "1809162873661499": {
+      "adName": "F_PROVEN_KAIFEST_KAGE_Cap_3198_9Nov",
+      "campaign": "Sneakers_BOF_v2_Placement_Split_12Oct",
+      "format": "Share (static image)",
+      "angle": "KAI FEST bundle cross-sell (KAGE + any cap) at a fixed ₹3,198 bundle price, cart-value/savings framing",
+      "hook": "\"KAI FEST IS ON 🔥\nOne sneaker. Every outfit. KAGE + any KAI cap for just ₹3,198 on prepaid orders (worth ₹4,098).\nSave ₹900. Add KAGE + a cap to your cart — the price drops at checkout.\nLimited time offer, till 9th November.\" (primary text) / \"KAI FEST: KAGE + Cap @ ₹3,198\" (headline)",
+      "taggedFrom": "ad primary text (body) + headline (title), via Meta Ads MCP ads_get_creatives",
+      "visionPassSkipped": true,
+      "note": "Higgsfield vision connection not attached to this run -- image content itself not analyzed, only real ad copy text used. No creative description invented. Part of the 9Nov/KAI FEST creative refresh launched 2026-10-22.",
+      "taggedAt": "2026-10-22T20:50:29.000Z"
+    },
+    "1771111954144010": {
+      "adName": "Prosp_TSUCHI_JP_2499_9Nov",
+      "campaign": "Prospecting_JP_Purchase_5-9Oct",
+      "format": "Share (static image)",
+      "angle": "Prepaid discount offer on the TSUCHI silhouette, price-led, with a returning-bestseller callback ('Our bestseller is back')",
+      "hook": "\"土 TSUCHI — rooted in earth. Our bestseller is back 👟\nNow ₹2,499 on prepaid orders (was ₹3,299) + FREE SHIPPING.\nSave ₹800 — offer ends 9th November. Limited stock.\" (primary text) / \"TSUCHI at ₹2,499 — Prepaid\" (headline)",
+      "taggedFrom": "ad primary text (body) + headline (title), via Meta Ads MCP ads_get_creatives",
+      "visionPassSkipped": true,
+      "note": "Higgsfield vision connection not attached to this run -- image content itself not analyzed, only real ad copy text used. No creative description invented. Part of the 9Nov/KAI FEST creative refresh launched 2026-10-22.",
+      "taggedAt": "2026-10-22T20:50:29.000Z"
+    },
+    "2968082496918163": {
+      "adName": "F_PROVEN_KAGE_Lifestyle_2499_9Nov",
+      "campaign": "Sneakers_BOF_v2_Placement_Split_12Oct",
+      "format": "Share (static image)",
+      "angle": "Prepaid discount offer on the KAGE silhouette, price-led (was/now framing)",
+      "hook": "\"One sneaker. Every outfit.\nDesigned for everyday wear with premium detailing, durable construction, and a clean all-black aesthetic. Meet KAGE.\nNow ₹2,499 on prepaid orders (was ₹3,299) + FREE SHIPPING. Offer ends 9th November.\" (primary text) / \"KAGE at ₹2,499 — Prepaid\" (headline)",
+      "taggedFrom": "ad primary text (body) + headline (title), via Meta Ads MCP ads_get_creatives",
+      "visionPassSkipped": true,
+      "note": "Higgsfield vision connection not attached to this run -- image content itself not analyzed, only real ad copy text used. No creative description invented. Part of the 9Nov/KAI FEST creative refresh launched 2026-10-22.",
+      "taggedAt": "2026-10-22T20:50:29.000Z"
+    },
+    "2575959769553557": {
+      "adName": "RT_Cap_Grey_Hero_9Nov",
+      "campaign": "Retargeting_Overall",
+      "format": "Share (static image)",
+      "angle": "Archives 2.0 product launch, flat-price-led (₹799) with free shipping + deadline urgency, not a percentage discount",
+      "hook": "\"KAI Archives 2.0 — Season 26.\nMicro-suede, 5-panel, ₹799.\nFree shipping on prepaid orders. Offer till 9th November.\" (primary text) / \"KAI Archives 2.0 — Grey\" (headline)",
+      "taggedFrom": "ad primary text (body) + headline (title), via Meta Ads MCP ads_get_creatives",
+      "visionPassSkipped": true,
+      "note": "Higgsfield vision connection not attached to this run -- image content itself not analyzed, only real ad copy text used. No creative description invented. Part of the 9Nov/KAI FEST creative refresh launched 2026-10-22.",
+      "taggedAt": "2026-10-22T20:50:29.000Z"
+    },
+    "1860491192069581": {
+      "adName": "LAL1_Prosp_KAGE_Lifestyle_2499_9Nov",
+      "campaign": "Prospecting_LAL1_Purchasers_14Oct",
+      "format": "Share (static image)",
+      "angle": "Prepaid discount offer on the KAGE silhouette, price-led (was/now framing)",
+      "hook": "\"One sneaker. Every outfit.\nDesigned for everyday wear with premium detailing, durable construction, and a clean all-black aesthetic. Meet KAGE.\nNow ₹2,499 on prepaid orders (was ₹3,299) + FREE SHIPPING. Offer ends 9th November.\" (primary text) / \"KAGE at ₹2,499 — Prepaid\" (headline)",
+      "taggedFrom": "ad primary text (body) + headline (title), via Meta Ads MCP ads_get_creatives",
+      "visionPassSkipped": true,
+      "note": "Higgsfield vision connection not attached to this run -- image content itself not analyzed, only real ad copy text used. No creative description invented. Part of the 9Nov/KAI FEST creative refresh launched 2026-10-22.",
+      "taggedAt": "2026-10-22T20:50:29.000Z"
     }
   }
 }
