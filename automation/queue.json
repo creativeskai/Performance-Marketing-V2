@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-22T16:50:00.000Z",
+  "generatedAt": "2026-10-22T18:54:11.000Z",
   "settings": {
     "kill_roas_threshold": "DISABLED 2026-10-05 by user instruction: the ROAS pause-kill is OFF. Module 16 (pause-kill) must NOT auto-pause any campaign for low ROAS; surface low-ROAS campaigns as alerts only. The hard spend circuit breaker is a separate mechanism and stays ON. Former rule, for reference: pause if ROAS < 1.0x after ₹500 spend on a sales-objective campaign. EXCEPTION until 2026-10-05T23:59+05:30 (user-approved 2026-09-29): for the sneaker-push campaigns 120256091369160159 (Sneakers_BOF_30Sep-5Oct), 120256091370110159 (Sneakers_Prospecting_30Sep-5Oct) and 120256088882780159 (Sneakers_Catalog_Retargeting) the spend floor is ₹1,500, not ₹500.",
     "reactivate_min_historic_roas": "surface for reactivation if a paused campaign's last active-period ROAS >= 3.0x",
@@ -29,10 +29,10 @@
       }
     },
     "competitor_last_scrape": {
-      "gully_labs_active_ads": 147,
-      "lotto_sport_india_active_ads": 212,
-      "scraped_at": "2026-10-22T10:48:00.000Z",
-      "note": "2026-10-22T10:48 pass: Gully Labs 147 (page_id-scoped query on 107479854297817), down from 227 at the 08:49 pass -- a real -35.2% move, over the module's 20% threshold. Lotto Sport India 212 (page_id-scoped query on 426015150606378), down from 275 -- -22.9%, also over threshold; this count matched both a page_id-scoped and a plain keyword query this pass. Both drops exceed competitor-rescrape/competitor-spike's 20%-move trigger -- see AL-1938 (updated, severity raised to medium). Meta Ad Library's estimated_total_count has known query-time sampling variance (the AL-1938 note from the 08:49 pass documents a keyword-only query returning noisy 173/212 vs a clean page_id-scoped 227/275) -- flagging this as a real signal per spec but recommending reconfirmation on the next 1-2 passes before concluding either competitor actually pulled back spend, rather than treating a single reading as certain."
+      "gully_labs_active_ads": 136,
+      "lotto_sport_india_active_ads": 214,
+      "scraped_at": "2026-10-22T18:54:11.000Z",
+      "note": "2026-10-22T18:54 pass: Gully Labs 136 (page_id-scoped on 107479854297817), up from 147 at 10:48 (actually a further -7.5% vs that reading, but +back toward the 227 original baseline range is not being claimed -- both counts have simply stabilized well off their 08:49-10:48 lows). Lotto Sport India 214 (page_id-scoped on 426015150606378), essentially flat vs 212 at 10:48 (+0.9%). Neither move clears the 20% threshold vs the immediately-prior reading -- see AL-1938 (reconfirmed, severity lowered back to low)."
     },
     "audience_label_corrections": {
       "120249907176770159": "ATC_180D -- NOT a purchaser audience (cart-adders, event=AddToCart, retention 180 days). Verified 2026-09-14, reconfirmed 2026-09-20. Superseded note: earlier passes said the account had NO purchaser audience at all -- that's now out of date. See the 120255823280550159 (Purchasers 180D) entry above, created 2026-09-15, which IS a genuine purchaser audience and is already in use for exclusion + lookalike.",
@@ -703,7 +703,7 @@
       "module": "reactivate-winner",
       "tier": "approval",
       "title": "Reactivate Sora_BOF_Based on Mori_Tee -- 6.3x ROAS (last_30d), well above the reactivate threshold",
-      "reasoning": "Reactivate Sora_BOF_Based on Mori_Tee -- last_30d ROAS now 7.146x (up from 6.653x at last reconfirmation), Rs4,030.18 spend, 12 purchases, well above reactivate_min_historic_roas (3.0x). Reconfirmed 2026-10-21T22:48:00.000Z. Reconfirmed 2026-10-22T10:48:00.000Z: unchanged. Reconfirmed 2026-10-22T12:50:00.000Z: unchanged, last_30d ROAS still 7.146x on Rs4,030.18 spend, campaign still PAUSED. Reconfirmed 2026-10-22T14:48:22.000Z: numbers byte-identical to the last recorded pull, no change.",
+      "reasoning": "Reactivate Sora_BOF_Based on Mori_Tee -- last_30d ROAS now 7.146x (up from 6.653x at last reconfirmation), Rs4,030.18 spend, 12 purchases, well above reactivate_min_historic_roas (3.0x). Reconfirmed 2026-10-21T22:48:00.000Z. Reconfirmed 2026-10-22T10:48:00.000Z: unchanged. Reconfirmed 2026-10-22T12:50:00.000Z: unchanged, last_30d ROAS still 7.146x on Rs4,030.18 spend, campaign still PAUSED. Reconfirmed 2026-10-22T14:48:22.000Z: numbers byte-identical to the last recorded pull, no change. Reconfirmed 2026-10-22T18:54:11.000Z: last_30d ROAS now 7.969x (up from 7.146x), Rs2,910.06 spend, campaign still PAUSED, still well above reactivate_min_historic_roas (3.0x).",
       "actionSummary": "Activates campaign 'Sora_BOF_Based on Mori_Tee' (id 120255928784210159) and reconfirms its daily budget at its existing ₹1,080/day (108000 minor units, unchanged) so it resumes delivering at the same pace it was paused at. Its ad set was force-paused by Meta as a side effect of the 2026-09-20 targeting edit; reactivating the campaign does not by itself reactivate a PAUSED ad set beneath it -- the ad set ('Sora_Sales', id 120255928784230159) may also need a manual/separate ACTIVE status change if it does not resume automatically.",
       "metaAction": {
         "tool": "ads_activate_entity",
@@ -17759,11 +17759,11 @@
       "id": "AL-1809",
       "module": "self-audit-check",
       "title": "A-063 (resume-after-circuit-breaker) is stale -- 2 of the 5 paused campaigns are already ACTIVE again",
-      "detail": "This pass's fresh ads_get_ad_entities (campaign, today) pull shows Prospecting_JP_Purchase_5-9Oct (120256186544730159) and Sneakers_BOF_30Sep-5Oct (120256091369160159) are now effective_status=ACTIVE, even though circuitBreaker.tripped is still true (from the 2026-10-10 trip) and pending proposal A-063 (which would resume all 5 originally-paused campaigns: Sora_BOF_Test_5Oct, Tsuchi_BOF_Test_5Oct, Prospecting_JP_Purchase_5-9Oct, Sneakers_BOF_30Sep-5Oct, Caps + Kage_26 Sept) has not been approved or executed -- status is still 'pending'. Only 3 of the 5 (Sora_BOF_Test_5Oct, Tsuchi_BOF_Test_5Oct, Caps + Kage_26 Sept) remain PAUSED. This means the two reactivated campaigns were turned back on through some path outside this routine (manual Ads Manager action, or an in-app/chat activation not recorded against A-063), and A-063's stored metaAction (resume all 5) is now out of step with live reality -- approving it as-written would be a no-op for 2 of its 5 targets. Both reactivated campaigns are currently healthy (Prospecting_JP_Purchase_5-9Oct 13.28x ROAS, Sneakers_BOF_30Sep-5Oct 4.07x ROAS, last_14d, today's combined spend for the two ~Rs1,119 well inside the Rs7,000 ceiling), so there is no immediate safety concern -- but the human reviewing A-063 should know it no longer matches the account's real state before approving or rejecting it. No automatic action taken; this is informational only, per ROUTINE.md's self-audit-check / KPI-to-trigger completeness module. | Reconfirmed 2026-10-20T10:58:00.000Z: fresh ads_get_ad_entities (campaign, today) pull confirms the same divergence persists unchanged -- Prospecting_JP_Purchase_5-9Oct (120256186544730159, today's spend Rs531.81, last_30d ROAS 12.51x) and Sneakers_BOF_30Sep-5Oct (120256091369160159, today's spend Rs775.96, last_30d ROAS 4.35x) remain effective_status=ACTIVE while circuitBreaker.tripped is still true and A-063 is still pending. The other 3 originally-paused campaigns (Sora_BOF_Test_5Oct, Tsuchi_BOF_Test_5Oct, Caps + Kage_26 Sept) remain PAUSED, confirmed via fresh effective_status pull this pass. Today's account-wide spend is Rs3,240.97 against the Rs7,000 ceiling (46%), well within bounds. No automatic action taken -- circuitBreaker state is never auto-resumed; a human must reconcile A-063 against live reality.",
+      "detail": "This pass's fresh ads_get_ad_entities (campaign, today) pull shows Prospecting_JP_Purchase_5-9Oct (120256186544730159) and Sneakers_BOF_30Sep-5Oct (120256091369160159) are now effective_status=ACTIVE, even though circuitBreaker.tripped is still true (from the 2026-10-10 trip) and pending proposal A-063 (which would resume all 5 originally-paused campaigns: Sora_BOF_Test_5Oct, Tsuchi_BOF_Test_5Oct, Prospecting_JP_Purchase_5-9Oct, Sneakers_BOF_30Sep-5Oct, Caps + Kage_26 Sept) has not been approved or executed -- status is still 'pending'. Only 3 of the 5 (Sora_BOF_Test_5Oct, Tsuchi_BOF_Test_5Oct, Caps + Kage_26 Sept) remain PAUSED. This means the two reactivated campaigns were turned back on through some path outside this routine (manual Ads Manager action, or an in-app/chat activation not recorded against A-063), and A-063's stored metaAction (resume all 5) is now out of step with live reality -- approving it as-written would be a no-op for 2 of its 5 targets. Both reactivated campaigns are currently healthy (Prospecting_JP_Purchase_5-9Oct 13.28x ROAS, Sneakers_BOF_30Sep-5Oct 4.07x ROAS, last_14d, today's combined spend for the two ~Rs1,119 well inside the Rs7,000 ceiling), so there is no immediate safety concern -- but the human reviewing A-063 should know it no longer matches the account's real state before approving or rejecting it. No automatic action taken; this is informational only, per ROUTINE.md's self-audit-check / KPI-to-trigger completeness module. | Reconfirmed 2026-10-20T10:58:00.000Z: fresh ads_get_ad_entities (campaign, today) pull confirms the same divergence persists unchanged -- Prospecting_JP_Purchase_5-9Oct (120256186544730159, today's spend Rs531.81, last_30d ROAS 12.51x) and Sneakers_BOF_30Sep-5Oct (120256091369160159, today's spend Rs775.96, last_30d ROAS 4.35x) remain effective_status=ACTIVE while circuitBreaker.tripped is still true and A-063 is still pending. The other 3 originally-paused campaigns (Sora_BOF_Test_5Oct, Tsuchi_BOF_Test_5Oct, Caps + Kage_26 Sept) remain PAUSED, confirmed via fresh effective_status pull this pass. Today's account-wide spend is Rs3,240.97 against the Rs7,000 ceiling (46%), well within bounds. No automatic action taken -- circuitBreaker state is never auto-resumed; a human must reconcile A-063 against live reality. | Reconfirmed 2026-10-22T18:54:11.000Z: Prospecting_JP_Purchase_5-9Oct (120256186544730159) and Sneakers_BOF_30Sep-5Oct (120256091369160159) remain effective_status=ACTIVE while circuitBreaker.tripped is still true and A-063 is still pending. The other 3 originally-paused campaigns (Sora_BOF_Test_5Oct, Tsuchi_BOF_Test_5Oct, Caps + Kage_26 Sept) remain PAUSED, confirmed via fresh effective_status pull. Today is a new account-timezone day (today's spend Rs0 account-wide as of this pass) so the day-over-day spend comparison resets, but the structural divergence (A-063 stale vs live reality) persists unchanged. last_30d ROAS: Prospecting_JP_Purchase_5-9Oct 11.67x, Sneakers_BOF_30Sep-5Oct 4.18x -- both healthy. No automatic action taken.",
       "severity": "medium",
       "dismissed": false,
       "createdAt": "2026-10-20T08:54:00.000Z",
-      "updatedAt": "2026-10-20T10:58:00.000Z"
+      "updatedAt": "2026-10-22T18:54:11.000Z"
     },
     {
       "id": "AL-1810",
@@ -18885,10 +18885,11 @@
       "id": "AL-1934",
       "module": "anomaly",
       "title": "Narrow-audience warning persists on RT_Sneakers_Caps_NoBuyers_v2_11Oct",
-      "detail": "ads_insights_anomaly_signal (entity-scoped, since the account-wide scan this pass did not surface it): active_delivery_narrow_audience on ad set RT_Sneakers_Caps_NoBuyers_v2_11Oct (120256301241950159, campaign Retargeting_Overall) -- estimated audience size now 36,700-43,200, essentially unchanged from the prior pass (36,700-43,100). Recommendation: expand audience or A/B test with Advantage+ audience. No action taken (informational, already root-caused at AL-1658/AL-1824).",
+      "detail": "ads_insights_anomaly_signal (entity-scoped, since the account-wide scan this pass did not surface it): active_delivery_narrow_audience on ad set RT_Sneakers_Caps_NoBuyers_v2_11Oct (120256301241950159, campaign Retargeting_Overall) -- estimated audience size now 36,700-43,200, essentially unchanged from the prior pass (36,700-43,100). Recommendation: expand audience or A/B test with Advantage+ audience. No action taken (informational, already root-caused at AL-1658/AL-1824). | Reconfirmed 2026-10-22T18:54:11.000Z: ads_insights_anomaly_signal still surfaces active_delivery_narrow_audience on RT_Sneakers_Caps_NoBuyers_v2_11Oct (120256301241950159), audience size now 36,800-43,400, essentially unchanged. No action taken.",
       "severity": "low",
       "dismissed": false,
-      "createdAt": "2026-10-22T12:50:00.000Z"
+      "createdAt": "2026-10-22T12:50:00.000Z",
+      "updatedAt": "2026-10-22T18:54:11.000Z"
     },
     {
       "id": "AL-1935",
@@ -18912,19 +18913,21 @@
       "id": "AL-1937",
       "module": "campaign-consolidation-watch",
       "title": "No new duplicate-targeting campaigns identified",
-      "detail": "Same 9 active campaigns as prior passes (Prospecting_LAL1_Purchasers_14Oct, KAGE_TOF_Traffic_13Oct, Sneakers_BOF_v2_Placement_Split_12Oct, Prospecting_JP2_Placement_Split_12Oct, Caps_Only, Prospecting_JP_Purchase_5-9Oct, Sneakers_BOF_30Sep-5Oct, Retargeting_Overall, Yin Yang_TOF) -- no two target the same product+audience combination newly this pass.",
+      "detail": "10 active campaigns this pass (added since last check: Prospecting_YinYang_Purchase_22Oct, launched 2026-10-22) -- Prospecting_LAL1_Purchasers_14Oct, KAGE_TOF_Traffic_13Oct, Sneakers_BOF_v2_Placement_Split_12Oct, Prospecting_JP2_Placement_Split_12Oct, Caps_Only, Prospecting_JP_Purchase_5-9Oct, Sneakers_BOF_30Sep-5Oct, Retargeting_Overall, Yin Yang_TOF, Prospecting_YinYang_Purchase_22Oct -- no two target the same product+audience combination; the new campaign is a distinct YinYang-silhouette prospecting push, not a duplicate of an existing one. Reconfirmed 2026-10-22T18:54:11.000Z.",
       "severity": "low",
       "dismissed": false,
-      "createdAt": "2026-10-22T12:50:00.000Z"
+      "createdAt": "2026-10-22T12:50:00.000Z",
+      "updatedAt": "2026-10-22T18:54:11.000Z"
     },
     {
       "id": "AL-1938",
       "module": "competitor-rescrape",
       "title": "Gully Labs and Lotto Sport India active-ad counts both dropped >=20% this pass",
-      "detail": "ads_library_search (ad_active_status=ACTIVE, page_id-scoped): Gully Labs (page 107479854297817) estimated_total_count 147, down from 227 at the 08:49 pass (-35.2%). Lotto Sport India (page 426015150606378) estimated_total_count 212, down from 275 (-22.9%); this Lotto figure matched both the page_id-scoped query and a plain keyword query this pass, unlike Gully Labs where the two methods diverged (147 page-scoped vs 173 keyword-only), so the Lotto reading is the more trustworthy of the two. Both moves clear the module's 20% threshold -- the first real movement recorded since tracking began (prior passes showed Gully flat-to-slightly-down at 227-229, Lotto unchanged at 275). Meta Ad Library's estimated_total_count has known query-time sampling variance (see the 08:49 pass's note on a noisy keyword-only reading) -- raising severity to medium and recommending reconfirmation over the next 1-2 passes before concluding either competitor meaningfully cut ad volume, rather than acting on a single reading.",
-      "severity": "medium",
+      "detail": "ads_library_search (ad_active_status=ACTIVE, page_id-scoped): Gully Labs (page 107479854297817) estimated_total_count 147, down from 227 at the 08:49 pass (-35.2%). Lotto Sport India (page 426015150606378) estimated_total_count 212, down from 275 (-22.9%); this Lotto figure matched both the page_id-scoped query and a plain keyword query this pass, unlike Gully Labs where the two methods diverged (147 page-scoped vs 173 keyword-only), so the Lotto reading is the more trustworthy of the two. Both moves clear the module's 20% threshold -- the first real movement recorded since tracking began (prior passes showed Gully flat-to-slightly-down at 227-229, Lotto unchanged at 275). Meta Ad Library's estimated_total_count has known query-time sampling variance (see the 08:49 pass's note on a noisy keyword-only reading) -- raising severity to medium and recommending reconfirmation over the next 1-2 passes before concluding either competitor meaningfully cut ad volume, rather than acting on a single reading. | Reconfirmed 2026-10-22T18:54:11.000Z (page_id-scoped ads_library_search, ACTIVE, country=IN): Gully Labs (107479854297817) estimated_total_count 136, vs 147 at the 10:48 pass (-7.5%) and vs 227 at the original 08:49 baseline -- no longer over the 20% threshold vs the immediately-prior reading. Lotto Sport India (426015150606378) estimated_total_count 214, vs 212 at the 10:48 pass (+0.9%) and vs 275 baseline -- also back under threshold vs the immediately-prior reading. Both counts have stabilized well above their 10:48 lows, supporting the sampling-variance explanation flagged at the time rather than a real competitor pullback. Lowering severity back to low; no further reconfirmation needed unless a new >=20% move appears against this reading.",
+      "severity": "low",
       "dismissed": false,
-      "createdAt": "2026-10-22T10:48:00.000Z"
+      "createdAt": "2026-10-22T10:48:00.000Z",
+      "updatedAt": "2026-10-22T18:54:11.000Z"
     },
     {
       "id": "AL-1939",
@@ -18957,10 +18960,11 @@
       "id": "AL-1942",
       "module": "lookalike-refresh",
       "title": "Lookalike-refresh rate-limited -- 2026-10-22T16:50:00.000Z",
-      "detail": "Last lookalike-refresh attempt on 'Purchasers 180D' (120255823280550159) was 2026-10-22T02:51:44.000Z (~13h58m ago), still inside the max_auto_actions_per_entity_per_day=1 window, so execution was skipped this pass rather than retried. Source audience remains ~20 (unchanged since creation 2026-09-15). The three purchaser-based LALs (1%/2%/5%, built 2026-09-15) and the three Purchase Pixel LALs (built 2026-08-29) are all well past the 14-day lookalike_refresh_days threshold; refresh attempts have been failing on this tiny source size on prior passes.",
+      "detail": "Last lookalike-refresh attempt on 'Purchasers 180D' (120255823280550159) was 2026-10-22T02:51:44.000Z (~13h58m ago), still inside the max_auto_actions_per_entity_per_day=1 window, so execution was skipped this pass rather than retried. Source audience remains ~20 (unchanged since creation 2026-09-15). The three purchaser-based LALs (1%/2%/5%, built 2026-09-15) and the three Purchase Pixel LALs (built 2026-08-29) are all well past the 14-day lookalike_refresh_days threshold; refresh attempts have been failing on this tiny source size on prior passes. | Reconfirmed 2026-10-22T18:54:11.000Z: last attempt still 2026-10-22T02:51:44.000Z (~16h02m ago), still inside the max_auto_actions_per_entity_per_day=1 window -- execution skipped again this pass. Source audience 'Purchasers 180D' still ~20 (unchanged). No write attempted.",
       "severity": "low",
       "dismissed": false,
-      "createdAt": "2026-10-22T16:50:00.000Z"
+      "createdAt": "2026-10-22T16:50:00.000Z",
+      "updatedAt": "2026-10-22T18:54:11.000Z"
     },
     {
       "id": "AL-1943",
@@ -18970,6 +18974,15 @@
       "severity": "high",
       "dismissed": false,
       "createdAt": "2026-10-22T16:50:00.000Z"
+    },
+    {
+      "id": "AL-1944",
+      "module": "self-audit-check",
+      "title": "Routine pass summary -- 2026-10-22T18:54:11.000Z (0 auto-mutations, 0 new proposals, 4 creatives tagged, 6 alerts reconfirmed)",
+      "detail": "Circuit breaker: not tripped this pass (today's account spend Rs0 -- new account-timezone day, no delivery yet). circuitBreaker.tripped remains true from the 2026-10-10 trip (never auto-resumed); A-063 still pending. Pixel gate: passed, EMQ scores unchanged from the 16:50 pass (Purchase 8.1, cod_purchase 8.7, prepaid_purchase 8.8, AddPaymentInfo 8.7, InitiateCheckout 7.0, others 6.1, all well above the 6.1/10 (0.6) floor) -- no new pixel-health alert written since nothing moved. Auto modules: purchaser-exclusion compliant (all 10 active ad sets already exclude 'Purchasers 180D' 120255823280550159, verified via live targeting pull, no write needed); lookalike-refresh rate-limited (last attempt 02:51:44, ~16h ago, inside the 24h window -- AL-1942 reconfirmed, no write); hook-angle-tagging found and tagged 4 newly-active creatives with no prior creativeTags entry (962355770276778, 4574837136138399, 4091541181147969, 1985521318783097 -- all multi-image SHARE creatives on 'Was Rs3,299' discount ads, tagged from their description field since they carry no body/title; Higgsfield vision pass skipped as it is not attached to this run). hard-spend-circuit-breaker: no breach. Approval-tier reconfirmed with fresh pulls: A-039 reactivate-winner now 7.969x ROAS (up from 7.146x); A-048/A-050/A-051 reactivate-winner unchanged (4.326x/6.316x/4.891x); A-063 resume-after-circuit-breaker still stale vs live reality (see AL-1809, reconfirmed -- 2 of the 5 originally-paused campaigns are already ACTIVE again outside this routine). Anomaly: narrow-audience warning on RT_Sneakers_Caps_NoBuyers_v2_11Oct persists unchanged (AL-1934 reconfirmed). Campaign-consolidation-watch: 10 active campaigns now (new: Prospecting_YinYang_Purchase_22Oct, launched today), no duplicate product+audience targeting (AL-1937 updated). Competitor-rescrape: both Gully Labs (136, was 147) and Lotto Sport India (214, was 212) counts have stabilized off their earlier lows -- the prior >=20% move looks like Ad Library sampling noise rather than a real pullback; AL-1938 severity lowered back to low. No new proposals or alerts beyond the reconfirmations above -- no campaign breached pause-kill's ROAS floor (all active campaigns with purchase data are at 4.17x-11.67x last_30d ROAS, and the module is alert-only per the 2026-10-05 user override regardless).",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-10-22T18:54:11.000Z"
     }
   ],
   "log": [
@@ -27938,6 +27951,74 @@
       },
       "tier": "auto",
       "executedAt": "2026-10-22T16:50:00.000Z"
+    },
+    {
+      "proposalId": null,
+      "action": "hook-angle-tagging auto-module: tagged creative 962355770276778 (ad 'Warm_SORA_RootsV3_2499_9Nov', campaign Sneakers_BOF_30Sep-5Oct) from its real description via Meta Ads MCP ads_get_creatives (no body/title on this multi-image SHARE creative). Higgsfield vision pass skipped (not attached to this run) -- no creative description invented.",
+      "result": "success",
+      "previousState": {
+        "creativeTags[962355770276778]": null
+      },
+      "detail": {
+        "ads_get_creatives": {
+          "id": "962355770276778",
+          "description": "Was ₹3,299 · Offer ends 9 Nov",
+          "object_type": "SHARE"
+        }
+      },
+      "tier": "auto",
+      "executedAt": "2026-10-22T18:54:11.000Z"
+    },
+    {
+      "proposalId": null,
+      "action": "hook-angle-tagging auto-module: tagged creative 4574837136138399 (ad 'Warm_YINYANG_RootsV3_2499_9Nov', campaign Sneakers_BOF_30Sep-5Oct) from its real description via Meta Ads MCP ads_get_creatives (no body/title on this multi-image SHARE creative). Higgsfield vision pass skipped (not attached to this run) -- no creative description invented.",
+      "result": "success",
+      "previousState": {
+        "creativeTags[4574837136138399]": null
+      },
+      "detail": {
+        "ads_get_creatives": {
+          "id": "4574837136138399",
+          "description": "Was ₹3,299 · Offer ends 9 Nov",
+          "object_type": "SHARE"
+        }
+      },
+      "tier": "auto",
+      "executedAt": "2026-10-22T18:54:11.000Z"
+    },
+    {
+      "proposalId": null,
+      "action": "hook-angle-tagging auto-module: tagged creative 4091541181147969 (ad 'Prosp_KAGE_Kage2_Lifestyle_22Oct', campaign Prospecting_JP_Purchase_5-9Oct) from its real description via Meta Ads MCP ads_get_creatives (no body/title on this multi-image SHARE creative). Higgsfield vision pass skipped (not attached to this run) -- no creative description invented.",
+      "result": "success",
+      "previousState": {
+        "creativeTags[4091541181147969]": null
+      },
+      "detail": {
+        "ads_get_creatives": {
+          "id": "4091541181147969",
+          "description": "Was ₹3,299 · Prepaid",
+          "object_type": "SHARE"
+        }
+      },
+      "tier": "auto",
+      "executedAt": "2026-10-22T18:54:11.000Z"
+    },
+    {
+      "proposalId": null,
+      "action": "hook-angle-tagging auto-module: tagged creative 1985521318783097 (ad 'Prosp_KAGE_Kage2_2499_22Oct', campaign Prospecting_JP_Purchase_5-9Oct) from its real description via Meta Ads MCP ads_get_creatives (no body/title on this multi-image SHARE creative). Higgsfield vision pass skipped (not attached to this run) -- no creative description invented.",
+      "result": "success",
+      "previousState": {
+        "creativeTags[1985521318783097]": null
+      },
+      "detail": {
+        "ads_get_creatives": {
+          "id": "1985521318783097",
+          "description": "Was ₹3,299 · Prepaid",
+          "object_type": "SHARE"
+        }
+      },
+      "tier": "auto",
+      "executedAt": "2026-10-22T18:54:11.000Z"
     }
   ],
   "creativeTags": {
@@ -32674,6 +32755,50 @@
       "visionPassSkipped": true,
       "note": "Higgsfield vision connection not attached to this run -- image content itself not analyzed, only real ad copy text used. No creative description invented.",
       "taggedAt": "2026-10-22T16:50:00.000Z"
+    },
+    "962355770276778": {
+      "adName": "Warm_SORA_RootsV3_2499_9Nov",
+      "campaign": "Sneakers_BOF_30Sep-5Oct",
+      "format": "Share (2-image)",
+      "angle": "Discount + deadline offer on the SORA silhouette, RootsV3 creative refresh",
+      "hook": "\"Was ₹3,299 · Offer ends 9 Nov\" (description, via ads_get_creatives) -- no body/title on this multi-image SHARE creative, text lives only in the description field",
+      "taggedFrom": "ad description via Meta Ads MCP ads_get_creatives",
+      "visionPassSkipped": true,
+      "note": "Higgsfield vision connection not attached to this run -- image content itself not analyzed, only real ad copy text used. No creative description invented.",
+      "taggedAt": "2026-10-22T18:54:11.000Z"
+    },
+    "4574837136138399": {
+      "adName": "Warm_YINYANG_RootsV3_2499_9Nov",
+      "campaign": "Sneakers_BOF_30Sep-5Oct",
+      "format": "Share (2-image)",
+      "angle": "Discount + deadline offer on the Yin Yang silhouette, RootsV3 creative refresh",
+      "hook": "\"Was ₹3,299 · Offer ends 9 Nov\" (description, via ads_get_creatives) -- no body/title on this multi-image SHARE creative, text lives only in the description field",
+      "taggedFrom": "ad description via Meta Ads MCP ads_get_creatives",
+      "visionPassSkipped": true,
+      "note": "Higgsfield vision connection not attached to this run -- image content itself not analyzed, only real ad copy text used. No creative description invented.",
+      "taggedAt": "2026-10-22T18:54:11.000Z"
+    },
+    "4091541181147969": {
+      "adName": "Prosp_KAGE_Kage2_Lifestyle_22Oct",
+      "campaign": "Prospecting_JP_Purchase_5-9Oct",
+      "format": "Share (3-image)",
+      "angle": "Prepaid discount offer on the KAGE silhouette, lifestyle/Kage2 creative variant",
+      "hook": "\"Was ₹3,299 · Prepaid\" (description, via ads_get_creatives) -- no body/title on this multi-image SHARE creative, text lives only in the description field",
+      "taggedFrom": "ad description via Meta Ads MCP ads_get_creatives",
+      "visionPassSkipped": true,
+      "note": "Higgsfield vision connection not attached to this run -- image content itself not analyzed, only real ad copy text used. No creative description invented.",
+      "taggedAt": "2026-10-22T18:54:11.000Z"
+    },
+    "1985521318783097": {
+      "adName": "Prosp_KAGE_Kage2_2499_22Oct",
+      "campaign": "Prospecting_JP_Purchase_5-9Oct",
+      "format": "Share (3-image)",
+      "angle": "Prepaid discount offer on the KAGE silhouette, price-led Kage2 creative variant (also running as Warm_KAGE_Kage2_2499_22Oct / F_Warm_KAGE_Kage2_2499_22Oct / RT_KAGE_Kage2_2499_22Oct in other campaigns)",
+      "hook": "\"Was ₹3,299 · Prepaid\" (description, via ads_get_creatives) -- no body/title on this multi-image SHARE creative, text lives only in the description field",
+      "taggedFrom": "ad description via Meta Ads MCP ads_get_creatives",
+      "visionPassSkipped": true,
+      "note": "Higgsfield vision connection not attached to this run -- image content itself not analyzed, only real ad copy text used. No creative description invented.",
+      "taggedAt": "2026-10-22T18:54:11.000Z"
     }
   }
 }
