@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-25T20:50:00.000Z",
+  "generatedAt": "2026-10-25T22:50:00.000Z",
   "settings": {
     "kill_roas_threshold": "DISABLED 2026-10-05 by user instruction: the ROAS pause-kill is OFF. Module 16 (pause-kill) must NOT auto-pause any campaign for low ROAS; surface low-ROAS campaigns as alerts only. The hard spend circuit breaker is a separate mechanism and stays ON. Former rule, for reference: pause if ROAS < 1.0x after ₹500 spend on a sales-objective campaign. EXCEPTION until 2026-10-05T23:59+05:30 (user-approved 2026-09-29): for the sneaker-push campaigns 120256091369160159 (Sneakers_BOF_30Sep-5Oct), 120256091370110159 (Sneakers_Prospecting_30Sep-5Oct) and 120256088882780159 (Sneakers_Catalog_Retargeting) the spend floor is ₹1,500, not ₹500.",
     "reactivate_min_historic_roas": "surface for reactivation if a paused campaign's last active-period ROAS >= 3.0x",
@@ -1014,10 +1014,11 @@
           "note": "remove 'whatsapp' from effective_publisher_platforms by setting an explicit targeting.publisher_platforms list (facebook, instagram, audience_network, threads); leave every other targeting parameter unchanged"
         }
       },
-      "status": "pending",
+      "status": "rejected",
       "createdAt": "2026-10-08T04:53:00.000Z",
       "updatedAt": "2026-10-13T04:50:00.000Z",
-      "lastReconfirmedAt": "2026-10-22T22:52:00.000Z"
+      "lastReconfirmedAt": "2026-10-22T22:52:00.000Z",
+      "resolvedAt": "2026-10-25T22:50:00.000Z"
     },
     {
       "id": "A-059",
@@ -1353,9 +1354,10 @@
           }
         }
       },
-      "status": "pending",
+      "status": "rejected",
       "createdAt": "2026-10-20T10:58:00.000Z",
-      "lastReconfirmedAt": "2026-10-23T00:53:00.000Z"
+      "lastReconfirmedAt": "2026-10-23T00:53:00.000Z",
+      "resolvedAt": "2026-10-25T22:50:00.000Z"
     },
     {
       "id": "A-070",
@@ -20387,6 +20389,33 @@
       "severity": "medium",
       "dismissed": false,
       "createdAt": "2026-10-25T20:50:00.000Z"
+    },
+    {
+      "id": "AL-2089",
+      "module": "lookalike-refresh",
+      "title": "Lookalike-refresh skipped this pass -- rate-limited",
+      "detail": "Purchasers 180D (id 120255823280550159) source audience still at approximate size 20 (unchanged since 2026-09-15). Last rebuild attempt was 2026-10-25T14:53:00.000Z (failed with Meta duplicate-lookalike error 2654/1713007); only 7h55m elapsed as of this pass (2026-10-25T22:48 UTC), under the 24h max_auto_actions_per_entity_per_day window -- skipped rather than re-attempted. The 3 existing laddered 1%/2%/5% lookalikes (built 2026-09-15) remain live and serving, unaffected.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-10-25T22:50:00.000Z"
+    },
+    {
+      "id": "AL-2090",
+      "module": "pixel-health",
+      "title": "Pixel/dataset match quality remains above the gate floor",
+      "detail": "ads_get_dataset_quality on dataset 833131719490535 this pass: composite EMQ scores range 6.1-8.8 across all tracked events (PageView 6.1, ViewContent 6.1, InitiateCheckout 6.9, AddToCart 6.1, Search 6.1, AddPaymentInfo 8.8, SubscribedButtonClick 6.1, Purchase 8.1, cod_purchase 8.6, prepaid_purchase 8.8) -- all at/above the pixel_quality_min_match_rate=0.6 gate (interpreted as score>=6.0/10). ROAS-driven modules not suppressed this pass. Note: PageView external_id coverage at 57.9%, lower than other match keys for that event, but composite score unaffected -- not yet alert-worthy on its own.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-10-25T22:50:00.000Z"
+    },
+    {
+      "id": "AL-2091",
+      "module": "self-audit-check",
+      "title": "Hard spend circuit breaker check: today's spend well under ceiling",
+      "detail": "ads_get_ad_entities (level=ad_account, date_preset=today) this pass: today's account spend Rs110.46 against settings.hard_spend_ceiling_inr=Rs7,000 -- no breach, no new pause action. circuitBreaker.tripped remains true (unresolved since 2026-10-10T16:50 UTC trip), still awaiting human review of A-063 (resume-after-circuit-breaker) -- per ROUTINE.md the routine never auto-resumes. Reconfirmed purchaser-exclusion compliant account-wide: of 14 active ad sets, all exclude Purchasers 180D (120255823280550159) in excluded_custom_audiences except Retargeting_Overall (120255851467360159), which is on settings.purchaser_exclusion_exempt_adset_ids by design. hook-angle-tagging: all 37 distinct creative ids across genuinely-active ads already have creativeTags entries -- nothing new to tag. No anomaly signal fired (ads_insights_anomaly_signal, account-wide). No new learning-phase-stuck/threshold-alerts triggers observed in the data pulled this pass.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-10-25T22:50:00.000Z"
     }
   ],
   "log": [
@@ -29955,6 +29984,28 @@
       },
       "tier": "auto",
       "executedAt": "2026-10-25T14:53:00.000Z"
+    },
+    {
+      "proposalId": "A-058",
+      "action": "placement-optimization: BOF_2_Warm_IG365_Engagers_Visitors's parent campaign 'Sneakers_BOF_30Sep-5Oct' (120256091369160159) remains PAUSED as of this pass (2026-10-25) -- still paused by the 2026-10-10 hard-spend circuit breaker trip, unresolved pending human review of A-063. No live delivery to exclude a placement from. Closed as moot.",
+      "result": "rejected",
+      "previousState": {
+        "status": "pending"
+      },
+      "detail": {},
+      "tier": "approval",
+      "executedAt": "2026-10-25T22:50:00.000Z"
+    },
+    {
+      "proposalId": "A-069",
+      "action": "budget-reallocation: Sneakers_BOF_30Sep-5Oct (120256091369160159) remains PAUSED as of this pass (2026-10-25) -- still paused by the 2026-10-10 hard-spend circuit breaker trip, unresolved pending human review of A-063. No active budget to shift from a paused campaign. Closed as moot (already flagged stale on 2026-10-24T16:51 UTC pass; now formally closed).",
+      "result": "rejected",
+      "previousState": {
+        "status": "pending"
+      },
+      "detail": {},
+      "tier": "approval",
+      "executedAt": "2026-10-25T22:50:00.000Z"
     }
   ],
   "creativeTags": {
