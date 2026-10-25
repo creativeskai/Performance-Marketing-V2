@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-25T04:52:00.000Z",
+  "generatedAt": "2026-10-25T06:55:00.000Z",
   "settings": {
     "kill_roas_threshold": "DISABLED 2026-10-05 by user instruction: the ROAS pause-kill is OFF. Module 16 (pause-kill) must NOT auto-pause any campaign for low ROAS; surface low-ROAS campaigns as alerts only. The hard spend circuit breaker is a separate mechanism and stays ON. Former rule, for reference: pause if ROAS < 1.0x after \u20b9500 spend on a sales-objective campaign. EXCEPTION until 2026-10-05T23:59+05:30 (user-approved 2026-09-29): for the sneaker-push campaigns 120256091369160159 (Sneakers_BOF_30Sep-5Oct), 120256091370110159 (Sneakers_Prospecting_30Sep-5Oct) and 120256088882780159 (Sneakers_Catalog_Retargeting) the spend floor is \u20b91,500, not \u20b9500.",
     "reactivate_min_historic_roas": "surface for reactivation if a paused campaign's last active-period ROAS >= 3.0x",
@@ -31,8 +31,8 @@
     "competitor_last_scrape": {
       "gully_labs_active_ads": 127,
       "lotto_sport_india_active_ads": 214,
-      "scraped_at": "2026-10-25T04:52:00.000Z",
-      "note": "2026-10-25T04:52:00.000Z pass: Gully Labs 127 (page_id-scoped on 107479854297817), down from the prior pass's 214 -- a 40.7% drop, past the 20% spike threshold. Lotto Sport India 214 (page_id-scoped on 426015150606378), down from 290 -- a 26.2% drop, also past threshold. See AL-2027 (competitor-spike)."
+      "scraped_at": "2026-10-25T06:55:00.000Z",
+      "note": "2026-10-25T06:55:00.000Z pass: Gully Labs 127 (page_id-scoped on 107479854297817), unchanged from the prior pass's 127. Lotto Sport India 214 (page_id-scoped on 426015150606378), unchanged from 214. No spike this pass."
     },
     "audience_label_corrections": {
       "120249907176770159": "ATC_180D -- NOT a purchaser audience (cart-adders, event=AddToCart, retention 180 days). Verified 2026-09-14, reconfirmed 2026-09-20. Superseded note: earlier passes said the account had NO purchaser audience at all -- that's now out of date. See the 120255823280550159 (Purchasers 180D) entry above, created 2026-09-15, which IS a genuine purchaser audience and is already in use for exclusion + lookalike.",
@@ -19777,6 +19777,123 @@
       "severity": "medium",
       "dismissed": false,
       "createdAt": "2026-10-25T04:52:00.000Z"
+    },
+    {
+      "id": "AL-2028",
+      "module": "hard-spend-circuit-breaker",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-10-25T06:55:00.000Z",
+      "title": "Circuit breaker status -- spend at Rs2,467.80 of Rs7,000 ceiling (35.3%), not tripped",
+      "detail": "ads_get_ad_entities (level=ad_account, date_preset=today) shows today's account spend at Rs2,467.80, well under settings.hard_spend_ceiling_inr (Rs7,000, 35.3%). No new breach this pass. circuitBreaker.tripped remains true from the 2026-10-10T16:50:00.000Z trip per ROUTINE.md -- only a human-approved resume-after-circuit-breaker proposal (A-063, now 14+ days pending) can clear it. 12 campaigns are ACTIVE and spending in reality outside that formal resume flow (stale discrepancy, unchanged from prior passes)."
+    },
+    {
+      "id": "AL-2029",
+      "module": "purchaser-exclusion",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-10-25T06:55:00.000Z",
+      "title": "Purchaser-exclusion compliant across all active ad sets this pass",
+      "detail": "Fresh targeting fetch on all 14 active ad sets (ads_get_ad_entities, level=adset, effective_status=ACTIVE). All 13 non-exempt active ad sets include the account's verified purchaser audience 'Purchasers 180D' (id 120255823280550159) in excluded_custom_audiences, including the newest ones (LAL1_IG90_FeedStories / IG90_Warm_FeedStories under IG90_Warm_BestCreatives_24Oct, launched 2026-10-24; Fudoshin ad set). The 1 remaining active ad set (Retargeting_Overall, id 120255851467360159) is on settings.purchaser_exclusion_exempt_adset_ids by design. No write needed this pass."
+    },
+    {
+      "id": "AL-2030",
+      "module": "lookalike-refresh",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-10-25T06:55:00.000Z",
+      "title": "Lookalike-refresh rate-limited this pass -- skipped, no attempt made",
+      "detail": "Last attempt was 2026-10-24T14:51:17.000Z (failed -- Meta duplicate-lookalike error, source 'Purchasers 180D' audience size unchanged at ~20 since 2026-09-15). settings.max_auto_actions_per_entity_per_day=1 means the next eligible attempt is >=24h after that, i.e. ~2026-10-25T14:51:17Z. This pass (2026-10-25T06:55 UTC) is still inside that window, so skipped per Safety infrastructure rather than silently dropped."
+    },
+    {
+      "id": "AL-2031",
+      "module": "hook-angle-tagging",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-10-25T06:55:00.000Z",
+      "title": "1 new creative tagged this pass -- KAI catalog carousel (2198297457775622)",
+      "detail": "Checked all 37 distinct creative ids behind the 12 genuinely-active campaigns' ads this pass. 36 already had a creativeTags entry; 1 (2198297457775622, a catalog-backed carousel used by 'Warm_RelatedProducts_Catalog' and 'LAL_RelatedProducts_Catalog' under IG90_Warm_BestCreatives_24Oct) did not. Tagged it from its real primary text/headline via ads_get_creatives -- see log. No other active-ad creative was missing a tag."
+    },
+    {
+      "id": "AL-2032",
+      "module": "pixel-health",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-10-25T06:55:00.000Z",
+      "title": "Pixel/dataset match quality remains above the gate floor",
+      "detail": "ads_get_dataset_quality (dataset 833131719490535): composite EMQ scores range 6.1-8.8 across PageView/ViewContent/InitiateCheckout/AddToCart/Search/AddPaymentInfo/Purchase/cod_purchase/prepaid_purchase, all comfortably above settings.pixel_quality_min_match_rate (0.6). Core identifiers (email, phone, ip_address, user_agent) read 95-100% on Purchase/cod_purchase/prepaid_purchase events. ROAS-based modules not suppressed this pass."
+    },
+    {
+      "id": "AL-2033",
+      "module": "learning-phase-stuck",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-10-25T06:55:00.000Z",
+      "title": "No ad sets stuck in learning this pass",
+      "detail": "learning_stage_info checked across all 14 active ad sets -- none reporting a stuck-in-learning state >7 days."
+    },
+    {
+      "id": "AL-2034",
+      "module": "anomaly",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-10-25T06:55:00.000Z",
+      "title": "Anomaly signal: known narrow-audience warning persists",
+      "detail": "ads_insights_anomaly_signal: active_delivery_narrow_audience on ad set RT_Sneakers_Caps_NoBuyers_v2_11Oct (id 120256301241950159, campaign Retargeting_Overall), estimated audience 39,800-46,800. Same warning as the last several passes -- no new anomaly types fired."
+    },
+    {
+      "id": "AL-2035",
+      "module": "anomaly-root-cause",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-10-25T06:55:00.000Z",
+      "title": "Root cause unchanged: retargeting source audience is structurally narrow",
+      "detail": "RT_Sneakers_Caps_NoBuyers_v2_11Oct targets a 30/180D non-buyer engagement pool that is inherently capped in size for this account's traffic volume -- not a targeting misconfiguration or sudden shift. Expanding would require broadening the source window or adding a lookalike layer (see engagement-tier-segmentation proposal A-071, still pending)."
+    },
+    {
+      "id": "AL-2036",
+      "module": "campaign-consolidation-watch",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-10-25T06:55:00.000Z",
+      "title": "No new duplicate-targeting campaigns identified",
+      "detail": "12 active campaigns reviewed (IG90_Warm_BestCreatives_24Oct, Fudoshin, MATCHA_TOF_Traffic_23Oct, Prospecting_YinYang_Purchase_22Oct, Prospecting_LAL1_Purchasers_14Oct, KAGE_TOF_Traffic_13Oct, Sneakers_BOF_v2_Placement_Split_12Oct, Prospecting_JP2_Placement_Split_12Oct, Caps_Only, Prospecting_JP_Purchase_5-9Oct, Retargeting_Overall, Yin Yang_TOF) -- each targets a distinct product/audience/objective combination. No overlap found."
+    },
+    {
+      "id": "AL-2037",
+      "module": "threshold-alerts",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-10-25T06:55:00.000Z",
+      "title": "KAGE_TOF_Traffic_13Oct CPM remains elevated vs historical baseline, but reads healthy",
+      "detail": "last_7d CPM Rs34.52 vs settings.metric_baselines.Kage_TOF (Rs14.36, as_of 2026-08-29), +140%. However CTR is also up sharply (5.76% vs 1.92% baseline) and cost_per_result is Rs0.82/landing-page-view -- an efficient traffic campaign, not a concerning cost spike. No other active campaign breached its CPM/CTR/CPC band this pass."
+    },
+    {
+      "id": "AL-2038",
+      "module": "competitor-rescrape",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-10-25T06:55:00.000Z",
+      "title": "Gully Labs and Lotto Sport India active-ad counts unchanged this pass",
+      "detail": "ads_library_search: Gully Labs (page 107479854297817) 127 active ads, Lotto Sport India (page 426015150606378) 214 active ads -- both identical to the last recorded scrape (2026-10-25T04:52:00.000Z). No spike."
+    },
+    {
+      "id": "AL-2039",
+      "module": "weekly-digest",
+      "severity": "medium",
+      "dismissed": false,
+      "createdAt": "2026-10-25T06:55:00.000Z",
+      "title": "Weekly digest -- week ending 2026-10-25",
+      "detail": "Last 7 days across the 11 revenue-tracked active sales campaigns (excludes 3 traffic-objective campaigns and the brand-new IG90_Warm_BestCreatives_24Oct, launched 2026-10-24 with no spend yet): ~Rs33,780 spend, ~Rs239,300 attributed purchase revenue, blended ROAS ~7.1x, ~155 pixel-tracked purchases. Standouts: Caps_Only 14.03x ROAS on Rs4,604 spend (71 purchases); Sneakers_BOF_v2_Placement_Split_12Oct 7.84x on Rs9,168 (31 purchases, largest spender). Weak spots: none below 3.0x among active sales campaigns. Circuit breaker remained formally tripped all week (since 2026-10-10) though 12 campaigns ran manually outside that flow; closest margin was 2026-10-24 at 99.85% of the then-Rs7,000 ceiling (AL-1943/AL-1977), never breaching. Lookalike-refresh has failed on every attempt this week (duplicate-audience error, source Purchasers 180D audience flat at ~20). Prior weekly digest: AL-1761 (week ending 2026-10-19)."
+    },
+    {
+      "id": "AL-2040",
+      "module": "self-audit-check",
+      "severity": "medium",
+      "dismissed": false,
+      "createdAt": "2026-10-25T06:55:00.000Z",
+      "title": "Routine pass summary -- 2026-10-25T06:55:00.000Z (0 auto-mutations to Meta, 1 creativeTags write, 0 new proposals, 12 recurring monitoring alerts)",
+      "detail": "Circuit breaker: not freshly tripped (today's spend Rs2,467.80 of Rs7,000, 35.3%); circuitBreaker.tripped stays true from 2026-10-10 per ROUTINE.md -- A-063 still pending (14+ days). Pixel gate: CLEAR (EMQ 6.1-8.8). purchaser-exclusion: compliant, 0 writes. lookalike-refresh: rate-limited, skipped. hook-angle-tagging: 1 creative tagged (2198297457775622, catalog carousel) -- no Meta write, queue.json only. No new approval-tier proposal triggered this pass; all existing pending proposals' reasoning already current as of the last 1-2 passes (A-039/A-048 already flagged below-threshold, A-058/A-069 already flagged stale-vs-paused-campaign). Module 16 pause-kill remains policy-disabled -- all active sales campaigns read healthy ROAS (3.0x-14.0x on last_7d). Weekly digest fired this pass (week ending 2026-10-25, see AL immediately prior). index.html's static DATA/WEEKLY_TRENDS snapshot remains ~6 weeks stale (last flagged in detail at AL-1690, 2026-10-13) -- known, unchanged, out of this routine's write scope (only automation/queue.json is updated here)."
     }
   ],
   "log": [
@@ -29314,6 +29431,17 @@
         "note": "No Meta write call -- this module only writes to queue.json.creativeTags, per ROUTINE.md module 14."
       },
       "executedAt": "2026-10-24T16:51:00.000Z"
+    },
+    {
+      "proposalId": null,
+      "action": "hook-angle-tagging auto-module: tagged creative 2198297457775622 (used by ads 'Warm_RelatedProducts_Catalog' and 'LAL_RelatedProducts_Catalog' under campaign IG90_Warm_BestCreatives_24Oct) from its real primary text/headline via Meta Ads MCP ads_get_creatives. Higgsfield vision pass skipped (not attached to this run) -- no creative description invented. Checked all active-ad creative ids this pass (37 distinct creative ids across 12 genuinely-active campaigns); this was the only one missing a creativeTags entry.",
+      "result": "success",
+      "tier": "auto",
+      "previousState": null,
+      "detail": {
+        "note": "No Meta write call -- this module only writes to queue.json.creativeTags, per ROUTINE.md module 14."
+      },
+      "executedAt": "2026-10-25T06:55:00.000Z"
     }
   ],
   "creativeTags": {
@@ -34391,6 +34519,17 @@
       "visionPassSkipped": true,
       "note": "Higgsfield vision connection not attached to this run -- image content itself not analyzed, only real ad copy text used. No creative description invented.",
       "taggedAt": "2026-10-24T16:51:00.000Z"
+    },
+    "2198297457775622": {
+      "adName": "Warm_RelatedProducts_Catalog / LAL_RelatedProducts_Catalog",
+      "campaign": "IG90_Warm_BestCreatives_24Oct",
+      "format": "Catalog carousel (SHARE, Advantage+ catalog-backed, product_set_id 1852761956137676)",
+      "angle": "Multi-product catalog showcase / 'new drops' announcement across the full KAI lineup, not discount-led",
+      "hook": "\"New KAI drops: KAGE, SORA, TSUCHI, YIN YANG, MATCHA and FUDOSHIN. Find your pair.\" (primary text) / \"KAI\" (headline), CTA: Shop Now",
+      "taggedFrom": "ad primary text (body) + headline (title), via Meta Ads MCP ads_get_creatives",
+      "visionPassSkipped": true,
+      "note": "Higgsfield vision connection not attached to this run -- image/carousel content itself not analyzed, only real ad copy text used. No creative description invented. Catalog-backed creative (media sourced from product set at delivery time).",
+      "taggedAt": "2026-10-25T06:55:00.000Z"
     }
   }
 }
