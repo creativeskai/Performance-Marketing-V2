@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-26T00:48:00.000Z",
+  "generatedAt": "2026-10-26T02:51:42.000Z",
   "settings": {
     "kill_roas_threshold": "DISABLED 2026-10-05 by user instruction: the ROAS pause-kill is OFF. Module 16 (pause-kill) must NOT auto-pause any campaign for low ROAS; surface low-ROAS campaigns as alerts only. The hard spend circuit breaker is a separate mechanism and stays ON. Former rule, for reference: pause if ROAS < 1.0x after ₹500 spend on a sales-objective campaign. EXCEPTION until 2026-10-05T23:59+05:30 (user-approved 2026-09-29): for the sneaker-push campaigns 120256091369160159 (Sneakers_BOF_30Sep-5Oct), 120256091370110159 (Sneakers_Prospecting_30Sep-5Oct) and 120256088882780159 (Sneakers_Catalog_Retargeting) the spend floor is ₹1,500, not ₹500.",
     "reactivate_min_historic_roas": "surface for reactivation if a paused campaign's last active-period ROAS >= 3.0x",
@@ -20533,6 +20533,33 @@
       "severity": "medium",
       "dismissed": false,
       "createdAt": "2026-10-26T00:48:00.000Z"
+    },
+    {
+      "id": "AL-2105",
+      "module": "anomaly",
+      "title": "Anomaly signal: known narrow-audience warning reappeared",
+      "detail": "ads_insights_anomaly_signal this pass flagged active_delivery_narrow_audience on RT_Sneakers_Caps_NoBuyers_v2_11Oct (ad set 120256301241950159, campaign Retargeting_Overall): estimated audience 40,900-48,100. This warning has been flapping on/off across recent passes (present AL-2073 at 18:46Z, clear AL-2083/AL-2098 at 20:50Z/00:48Z, now present again) -- same ad set and cause each time, not a new condition. No action taken; the ad set remains ACTIVE and delivering normally per campaign-level spend data.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-10-26T02:51:42.000Z"
+    },
+    {
+      "id": "AL-2106",
+      "module": "anomaly-root-cause",
+      "title": "Root cause unchanged: retargeting source audience is structurally narrow",
+      "detail": "Extends AL-2105. RT_Sneakers_Caps_NoBuyers_v2_11Oct targets a retargeting pool (sneaker/cap non-buyers) that is inherently small -- same structural narrow-audience cause identified in prior passes (AL-2061/AL-2074), not creative fatigue, targeting drift, seasonality, or bid-landscape movement. No fix proposed this pass; this is the expected shape of a bottom-of-funnel retargeting pool, not a delivery problem.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-10-26T02:51:42.000Z"
+    },
+    {
+      "id": "AL-2107",
+      "module": "self-audit-check",
+      "title": "Routine pass summary -- 2026-10-26T02:51 UTC (0 auto-mutations, 0 new proposals, 3 new alerts)",
+      "detail": "Live pull this pass: today's account spend Rs110.47 vs the Rs7,000 hard_spend_ceiling_inr -- no new circuit-breaker concern (breaker remains tripped since 2026-10-10T16:50Z, unresolved, A-063 still awaiting human decision -- 16 days running). Pixel/dataset quality unchanged (composite EMQ 6.1-8.8 across all tracked web events) -- not re-alerted, near-identical to AL-2097 less than 2h old. 12 campaigns / 14 ad sets ACTIVE this pass (added since the 00:48Z pass: none materially -- same roster). Purchaser-exclusion verified compliant on all 12 non-exempt active ad sets checked live via targeting fetch (Retargeting_Overall and the already-fixed MATCHA TOF excluded from this re-check as known-compliant) -- no action needed. Lookalike-refresh remains rate-limited (last attempt 2026-10-25T14:53:00Z, <24h elapsed under max_auto_actions_per_entity_per_day=1) -- not re-attempted, not re-alerted (AL-2096 from 2h ago still accurate). Hook-angle-tagging: all 36 distinct active-ad creative ids already carry creativeTags entries -- nothing to tag. Anomaly signal flapped back on this pass (see AL-2105/AL-2106) -- known narrow-audience condition on RT_Sneakers_Caps_NoBuyers_v2_11Oct, no new root cause. 13 approval-tier proposals remain pending (A-002, A-003, A-039, A-048, A-050, A-051, A-063, A-065, A-067, A-070, A-071, A-072, A-073, A-074); their underlying entities were confirmed still in the described state (active/paused as expected) via this pass's live pulls, so none were touched -- no proposal executes without human approval. No writes to the Meta Ads account were made this pass (no new purchaser-exclusion gap, no lookalike attempt due to rate limiting, no new circuit-breaker trip).",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-10-26T02:51:42.000Z"
     }
   ],
   "log": [
