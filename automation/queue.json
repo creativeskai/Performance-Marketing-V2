@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-27T16:47:00.000Z",
+  "generatedAt": "2026-10-27T18:50:00.000Z",
   "settings": {
     "kill_roas_threshold": "DISABLED 2026-10-05 by user instruction: the ROAS pause-kill is OFF. Module 16 (pause-kill) must NOT auto-pause any campaign for low ROAS; surface low-ROAS campaigns as alerts only. The hard spend circuit breaker is a separate mechanism and stays ON. Former rule, for reference: pause if ROAS < 1.0x after ₹500 spend on a sales-objective campaign. EXCEPTION until 2026-10-05T23:59+05:30 (user-approved 2026-09-29): for the sneaker-push campaigns 120256091369160159 (Sneakers_BOF_30Sep-5Oct), 120256091370110159 (Sneakers_Prospecting_30Sep-5Oct) and 120256088882780159 (Sneakers_Catalog_Retargeting) the spend floor is ₹1,500, not ₹500.",
     "reactivate_min_historic_roas": "surface for reactivation if a paused campaign's last active-period ROAS >= 3.0x",
@@ -29,10 +29,10 @@
       }
     },
     "competitor_last_scrape": {
-      "gully_labs_active_ads": 164,
-      "lotto_sport_india_active_ads": 226,
-      "scraped_at": "2026-10-27T16:47:00.000Z",
-      "note": "2026-10-27T16:47:00.000Z pass: Gully Labs 164 (unchanged), Lotto Sport India 226 (up from 222, +1.8%) -- both under the 20% competitor-spike threshold, no spike alert."
+      "gully_labs_active_ads": 166,
+      "lotto_sport_india_active_ads": 230,
+      "scraped_at": "2026-10-27T18:50:00.000Z",
+      "note": "2026-10-27T18:50:00.000Z pass: Gully Labs 166 (up from 164, +1.2%), Lotto Sport India 230 (up from 226, +1.8%) -- both under the 20% competitor-spike threshold, no spike alert."
     },
     "audience_label_corrections": {
       "120249907176770159": "ATC_180D -- NOT a purchaser audience (cart-adders, event=AddToCart, retention 180 days). Verified 2026-09-14, reconfirmed 2026-09-20. Superseded note: earlier passes said the account had NO purchaser audience at all -- that's now out of date. See the 120255823280550159 (Purchasers 180D) entry above, created 2026-09-15, which IS a genuine purchaser audience and is already in use for exclusion + lookalike.",
@@ -200,7 +200,7 @@
       "module": "catalog-dpa-launch",
       "tier": "approval",
       "title": "Launch a Dynamic Product Ads (DPA) campaign from the connected Shopify catalog",
-      "reasoning": "Shopify catalog 1149969713295773 remains connected with zero DPA/catalog-based campaigns running -- a structural gap, not a performance one. Catalog diagnostics have been trending healthier over recent passes (out-of-stock and unmatched-content-ID counts both falling); the 3-step chain (product set → campaign → ad set, all PAUSED) remains real and executable. Known scope limit unchanged: the actual dynamic template ad (step 4) isn't wired into this automation's creative editor yet. Reasoning history condensed for file-size reasons. Not executed -- approval tier. Reconfirmed 2026-10-09T10:48:00.000Z pass: Shopify catalog still connected with zero DPA/catalog-based campaigns running; proposal remains pending and unchanged. Reconfirmed 2026-10-10T04:47:00.000Z pass: Shopify catalog still connected, zero DPA/catalog-based campaigns running; unchanged. Reconfirmed 2026-10-10T16:50:00.000Z pass: no material change since the prior pass; numbers and recommendation stand.\nPASS 2026-10-20T02:56:00.000Z: Note for human review -- a product set 'Sneakers - In Stock (Catalog Retargeting)' (dynamic_set, 7 products, created 2026-09-29) and a campaign named 'Sneakers_Catalog_Retargeting' (120256088882780159, objective OUTCOME_SALES, currently PAUSED) already exist in the account. Possible overlap with this proposal's 3-step build -- worth confirming whether that existing paused campaign is already the DPA campaign this proposal would create, in which case the right action is reactivate-winner on it (pending its historic ROAS), not a fresh build. Catalog diagnostics this pass: 1 must_fix (21 items out-of-stock, blocks DPA channel), 2 opportunity-level (42 items need a 2nd image; 2 unmatched content IDs).\nPASS 2026-10-20T06:54:00.000Z: Reconfirmed -- Shopify catalog still connected, zero DPA/catalog-based campaigns running; no material change since the 02:56 pass.\nPASS 2026-10-20T12:51:00.000Z: Reconfirmed -- Shopify catalog still connected, zero DPA/catalog-based campaigns running. No new data pulled on the out-of-stock/must_fix diagnostics this pass; no material change since the 06:54 pass. Reconfirmed 2026-10-20T19:35:00.000Z: fresh ads_catalog_get_diagnostics on catalog 1149969713295773 shows 3 open diagnostics -- 21 items out-of-stock (must_fix, dynamic-ads-affecting), 42 items missing a second image (opportunity), 2 unmatched content IDs (opportunity). All 5 catalog data providers report 'succeeded'. Catalog remains connected and healthy enough to launch from; still zero DPA/catalog-based campaigns running. No change to the proposed 3-step chain. Reconfirmed 2026-10-21T10:56:00.000Z: Shopify catalog still connected, zero DPA/catalog-based campaigns running. No fresh ads_catalog_get_diagnostics pull this pass; no material change since the 2026-10-20T19:35 reading. No change to the proposed 3-step chain. Reconfirmed 2026-10-21T18:55:00.000Z: no fresh ads_catalog_get_diagnostics pull this pass; no material change since the 2026-10-21T10:56 reading (Shopify catalog still connected, zero DPA/catalog-based campaigns running). No change to the proposed 3-step chain. | UPDATE 2026-10-25T02:50:00.000Z: note a paused campaign 'Sneakers_Catalog_Retargeting' (120256088882780159, objective OUTCOME_SALES) already exists and appears to be catalog/DPA-flavored by name, though it is currently PAUSED with ₹224.35 lifetime spend and effective_status PAUSED -- not confirmed as a true Advantage+ Catalog Ads campaign without inspecting its ad-level product_set_id. ads_catalog_get_diagnostics on catalog 1149969713295773 shows 3 open issues: 23 items PRODUCT_OUT_OF_STOCK (must_fix, affects Dynamic Ads), 48 items need a 2nd image (opportunity), 10 items with UNMATCHED_EVENTS against the connected pixel (opportunity). Recommend fixing the must_fix stock issue before launching a fresh DPA campaign, and confirming whether Sneakers_Catalog_Retargeting already covers this need before approving. | UPDATE 2026-10-25T14:53:00.000Z: reconfirmed -- 24 items PRODUCT_OUT_OF_STOCK (must_fix, up from 23 last pass), 48 need a 2nd image, 10 UNMATCHED_EVENTS against the connected pixel (both opportunity, unchanged). Zero DPA/catalog-based campaigns running. Recommend excluding/fixing the 24 OOS SKUs from the product set before launch so dynamic ads don't serve for unavailable stock. Proposal remains pending, otherwise unchanged.",
+      "reasoning": "Shopify catalog 1149969713295773 remains connected with zero DPA/catalog-based campaigns running -- a structural gap, not a performance one. Catalog diagnostics have been trending healthier over recent passes (out-of-stock and unmatched-content-ID counts both falling); the 3-step chain (product set → campaign → ad set, all PAUSED) remains real and executable. Known scope limit unchanged: the actual dynamic template ad (step 4) isn't wired into this automation's creative editor yet. Reasoning history condensed for file-size reasons. Not executed -- approval tier. Reconfirmed 2026-10-09T10:48:00.000Z pass: Shopify catalog still connected with zero DPA/catalog-based campaigns running; proposal remains pending and unchanged. Reconfirmed 2026-10-10T04:47:00.000Z pass: Shopify catalog still connected, zero DPA/catalog-based campaigns running; unchanged. Reconfirmed 2026-10-10T16:50:00.000Z pass: no material change since the prior pass; numbers and recommendation stand.\nPASS 2026-10-20T02:56:00.000Z: Note for human review -- a product set 'Sneakers - In Stock (Catalog Retargeting)' (dynamic_set, 7 products, created 2026-09-29) and a campaign named 'Sneakers_Catalog_Retargeting' (120256088882780159, objective OUTCOME_SALES, currently PAUSED) already exist in the account. Possible overlap with this proposal's 3-step build -- worth confirming whether that existing paused campaign is already the DPA campaign this proposal would create, in which case the right action is reactivate-winner on it (pending its historic ROAS), not a fresh build. Catalog diagnostics this pass: 1 must_fix (21 items out-of-stock, blocks DPA channel), 2 opportunity-level (42 items need a 2nd image; 2 unmatched content IDs).\nPASS 2026-10-20T06:54:00.000Z: Reconfirmed -- Shopify catalog still connected, zero DPA/catalog-based campaigns running; no material change since the 02:56 pass.\nPASS 2026-10-20T12:51:00.000Z: Reconfirmed -- Shopify catalog still connected, zero DPA/catalog-based campaigns running. No new data pulled on the out-of-stock/must_fix diagnostics this pass; no material change since the 06:54 pass. Reconfirmed 2026-10-20T19:35:00.000Z: fresh ads_catalog_get_diagnostics on catalog 1149969713295773 shows 3 open diagnostics -- 21 items out-of-stock (must_fix, dynamic-ads-affecting), 42 items missing a second image (opportunity), 2 unmatched content IDs (opportunity). All 5 catalog data providers report 'succeeded'. Catalog remains connected and healthy enough to launch from; still zero DPA/catalog-based campaigns running. No change to the proposed 3-step chain. Reconfirmed 2026-10-21T10:56:00.000Z: Shopify catalog still connected, zero DPA/catalog-based campaigns running. No fresh ads_catalog_get_diagnostics pull this pass; no material change since the 2026-10-20T19:35 reading. No change to the proposed 3-step chain. Reconfirmed 2026-10-21T18:55:00.000Z: no fresh ads_catalog_get_diagnostics pull this pass; no material change since the 2026-10-21T10:56 reading (Shopify catalog still connected, zero DPA/catalog-based campaigns running). No change to the proposed 3-step chain. | UPDATE 2026-10-25T02:50:00.000Z: note a paused campaign 'Sneakers_Catalog_Retargeting' (120256088882780159, objective OUTCOME_SALES) already exists and appears to be catalog/DPA-flavored by name, though it is currently PAUSED with ₹224.35 lifetime spend and effective_status PAUSED -- not confirmed as a true Advantage+ Catalog Ads campaign without inspecting its ad-level product_set_id. ads_catalog_get_diagnostics on catalog 1149969713295773 shows 3 open issues: 23 items PRODUCT_OUT_OF_STOCK (must_fix, affects Dynamic Ads), 48 items need a 2nd image (opportunity), 10 items with UNMATCHED_EVENTS against the connected pixel (opportunity). Recommend fixing the must_fix stock issue before launching a fresh DPA campaign, and confirming whether Sneakers_Catalog_Retargeting already covers this need before approving. | UPDATE 2026-10-25T14:53:00.000Z: reconfirmed -- 24 items PRODUCT_OUT_OF_STOCK (must_fix, up from 23 last pass), 48 need a 2nd image, 10 UNMATCHED_EVENTS against the connected pixel (both opportunity, unchanged). Zero DPA/catalog-based campaigns running. Recommend excluding/fixing the 24 OOS SKUs from the product set before launch so dynamic ads don't serve for unavailable stock. Proposal remains pending, otherwise unchanged.\nPASS 2026-10-27T18:50:00.000Z: Closed as moot -- Sneakers_Catalog_Retargeting (120256088882780159, ad set Sneaker_Viewers_ATC_30D_NoPurchase, ad 'Sneakers_Catalog_Carousel_v2_ProductLinks' using catalog-backed creative 1870110150685602 against product set 1649952510080191) is now ACTIVE and spending (Rs407.78 last_30d, Rs183.43 last_7d) -- the account already has a live catalog/DPA-based campaign, closing the structural gap this proposal was written to fill. No further action -- if a human wants a second, broader DPA campaign built from scratch, that would be a fresh proposal, not a revival of this one.",
       "actionSummary": "3-step chain, each real: (1) create a product set filtered to in-stock items only; (2) create the campaign (OUTCOME_SALES, PAUSED); (3) create the ad set targeting India broadly with Advantage+ audience (matching the account's existing targeting_automation pattern on Kage_sales_1908), promoted_object pointing at the new product set, daily_budget 25000 (that's ₹250/day), PAUSED. Honest scope limit: the 4th step — the actual dynamic template ad (Meta's product-template creative format, distinct from a static image/video ad) — isn't wired into this automation's creative editor yet, which only builds static ads. Approving this proposal completes steps 1-3; the ad set will sit ready with its promoted_object set, and the final template ad needs one more manual step in Ads Manager (or a follow-up once template-creative support is built).",
       "metaAction": {
         "tool": "ads_catalog_create_product_set",
@@ -249,10 +249,11 @@
           }
         }
       },
-      "status": "pending",
+      "status": "rejected",
       "createdAt": "2026-08-27T00:00:00.000Z",
       "updatedAt": "2026-10-10T16:50:00.000Z",
-      "lastReconfirmedAt": "2026-10-21T10:56:00.000Z"
+      "lastReconfirmedAt": "2026-10-21T10:56:00.000Z",
+      "resolvedAt": "2026-10-27T18:50:00.000Z"
     },
     {
       "id": "A-005",
@@ -1502,6 +1503,38 @@
       },
       "status": "pending",
       "createdAt": "2026-10-25T14:53:00.000Z"
+    },
+    {
+      "id": "A-075",
+      "module": "budget-reallocation",
+      "tier": "approval",
+      "title": "Shift ₹300/day from IG90_Warm_BestCreatives_24Oct (1.15x) to Caps_Only (15.1x) -- large rolling-7d ROAS gap",
+      "reasoning": "IG90_Warm_BestCreatives_24Oct (120256539226010159, launched 2026-10-24) has spent Rs2,645.01 over its lifetime so far (last_30d==last_7d, campaign is only ~3 days old) at purchase_roas 1.147897x -- barely above breakeven. Caps_Only (120256301268690159) has spent Rs5,415.93 over the same last_7d window at purchase_roas 15.139514x (Rs11,459.76/11.739107x over last_30d) -- a ~13.2x rolling-7d ROAS gap, far above settings.budget_reallocation_min_roas_gap (shift when one campaign's ROAS is 1.5x+ another's). Both are OUTCOME_SALES campaigns currently ACTIVE with daily budgets of Rs1,000/day and Rs900/day respectively. Proposing a modest Rs300/day shift (not a full reallocation, since IG90 is still new enough that its ROAS may improve past initial learning) -- IG90 to Rs700/day, Caps_Only to Rs1,200/day. kill_roas_threshold (pause-kill) is disabled by user instruction so this is a budget-shift proposal, not a pause recommendation; IG90 remains above 1.0x breakeven so it would not qualify for pause-kill even if that module were enabled.",
+      "actionSummary": "Reduce IG90_Warm_BestCreatives_24Oct's daily budget from Rs1,000 to Rs700 and increase Caps_Only's daily budget from Rs900 to Rs1,200, if approved.",
+      "metaAction": {
+        "tool": "ads_update_entity",
+        "params": {
+          "ad_account_id": "704523148804803",
+          "entity_id": "120256539226010159",
+          "entity_type": "campaign",
+          "fields": {
+            "daily_budget": 70000
+          }
+        },
+        "followUp": {
+          "tool": "ads_update_entity",
+          "params": {
+            "ad_account_id": "704523148804803",
+            "entity_id": "120256301268690159",
+            "entity_type": "campaign",
+            "fields": {
+              "daily_budget": 120000
+            }
+          }
+        }
+      },
+      "status": "pending",
+      "createdAt": "2026-10-27T18:50:00.000Z"
     }
   ],
   "alerts": [
@@ -21579,6 +21612,78 @@
       "severity": "low",
       "dismissed": false,
       "createdAt": "2026-10-27T16:47:00.000Z"
+    },
+    {
+      "id": "AL-2221",
+      "module": "hard-spend-circuit-breaker",
+      "title": "Circuit breaker status -- spend Rs60.30 of Rs7,000 ceiling (0.9%), not tripped this pass",
+      "detail": "ads_get_ad_entities (level=ad_account, date_preset=today) at this pass showed today's account spend at Rs60.30 against settings.hard_spend_ceiling_inr (Rs7,000) -- 0.9% of ceiling (IST day just rolled over). 13 campaigns ACTIVE today. No new trip. Note: circuitBreaker.tripped remains true from the 2026-10-10T16:50 UTC trip -- still unresolved, A-063 (resume-after-circuit-breaker) still pending human review. The 5 campaigns paused by that trip (Sora_BOF_Test_5Oct, Tsuchi_BOF_Test_5Oct, Prospecting_JP_Purchase_5-9Oct, Sneakers_BOF_30Sep-5Oct, Caps + Kage_26 Sept) remain absent from today's active-campaign list, confirming no drift.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-10-27T18:50:00.000Z"
+    },
+    {
+      "id": "AL-2222",
+      "module": "pixel-health",
+      "title": "Pixel/dataset match quality remains above the gate floor",
+      "detail": "ads_get_dataset_quality on pixel 833131719490535: composite EMQ scores range 6.1 (Search/AddToCart/PageView/ViewContent/SubscribedButtonClick) to 8.7 (Purchase, cod_purchase), with prepaid_purchase and AddPaymentInfo at 8.6. All at/above pixel_quality_min_match_rate=0.6 -- ROAS-based modules not suppressed this pass. ads_get_dataset_stats confirms Purchase/cod_purchase/prepaid_purchase events firing every few hours through 2026-10-27T10:00 UTC with no stoppage.",
+      "severity": "medium",
+      "dismissed": false,
+      "createdAt": "2026-10-27T18:50:00.000Z"
+    },
+    {
+      "id": "AL-2223",
+      "module": "lookalike-refresh",
+      "title": "Lookalike rebuild attempted and failed -- duplicate-lookalike error, source audience unchanged",
+      "detail": "Rate limit cleared this pass (last attempt 2026-10-26T16:55, >24h elapsed). Rebuild of the 1% lookalike off 'Purchasers 180D' attempted and failed again with Meta's duplicate-lookalike error (2654/1713007) -- source audience size still ~20, unchanged since 2026-09-15. See log for detail.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-10-27T18:50:00.000Z"
+    },
+    {
+      "id": "AL-2224",
+      "module": "anomaly",
+      "title": "No anomaly signal issues found this pass",
+      "detail": "ads_insights_anomaly_signal checked auction overlap, creative fatigue, and narrow audience across the account -- no issues flagged this pass (the intermittent RT_Sneakers_Caps_NoBuyers_v2_11Oct narrow-audience warning did not fire this time).",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-10-27T18:50:00.000Z"
+    },
+    {
+      "id": "AL-2225",
+      "module": "threshold-alerts",
+      "title": "No campaign CPM/CTR/CPC outside normal bands this pass",
+      "detail": "13 active campaigns compared last_7d vs last_30d CPM/CTR/CPC: all moves were mild (single-digit to ~16%) and mostly favorable (lower CPM/CPC week-over-week); none consistent with an outside-normal-band deviation. Prospecting_JP2_Placement_Split_12Oct and Retargeting_Overall show softer 7d ROAS than their 30d average (6.89x->3.36x and 9.39x->5.71x respectively) but both remain well above breakeven and above the (disabled) pause-kill floor -- not a CPM/CTR/CPC band issue, noted for awareness only.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-10-27T18:50:00.000Z"
+    },
+    {
+      "id": "AL-2226",
+      "module": "competitor-rescrape",
+      "title": "Gully Labs up slightly, Lotto Sport India up slightly -- both under spike threshold",
+      "detail": "ads_library_search (country IN, ad_active_status ACTIVE) this pass: Gully Labs estimated_total_count 166 active ads (was 164, +1.2%); Lotto Sport India estimated_total_count 230 active ads (was 226, +1.8%). Neither moved >=20% since last scrape -- no competitor-spike alert. settings.competitor_last_scrape updated.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-10-27T18:50:00.000Z"
+    },
+    {
+      "id": "AL-2227",
+      "module": "campaign-consolidation-watch",
+      "title": "No new duplicate-targeting campaigns identified",
+      "detail": "13 campaigns ACTIVE, same set as the 16:47 UTC pass -- no new campaign launched since Prospecting_MATCHA_Purchase_27Oct (already assessed as non-duplicate). No consolidation concern.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-10-27T18:50:00.000Z"
+    },
+    {
+      "id": "AL-2228",
+      "module": "self-audit-check",
+      "title": "Routine pass summary -- 0 auto-mutations to live delivery, 1 proposal closed as moot, 1 new proposal, 8 new alerts",
+      "detail": "2026-10-27T18:50:00.000Z pass. Circuit breaker checked first: not tripped fresh (spend Rs60.30/Rs7,000, 0.9%, day just rolled over IST); still stale-tripped from 2026-10-10, A-063 pending human review, no auto-resume per ROUTINE.md. Pixel gate passed on every event (6.1-8.7 >= 0.6 threshold) -- ROAS modules not suppressed. purchaser-exclusion: all 16 active ad sets compliant account-wide (14 excluding Purchasers 180D directly, Sneaker_Viewers_ATC_30D_NoPurchase via its own built-in product_audience_spec Purchase exclusion, Retargeting_Overall exempt by design per settings.purchaser_exclusion_exempt_adset_ids) -- confirmed via fresh targeting fetch, no auto edit needed. lookalike-refresh: rate limit cleared and rebuild attempted, failed again with the duplicate-lookalike error (see AL above) -- source audience still ~20. hook-angle-tagging: all 37 distinct active-ad creative IDs already have creativeTags entries (463 total tagged) -- nothing new. learning-phase-stuck: learning_stage_info empty for all 16 active ad sets -- none stuck. No pause-kill candidates (no active sales-objective campaign has both spend>=Rs500 and ROAS<1.0x; the module stays alert-only regardless per the 2026-10-05 user instruction). catalog-dpa-launch: A-003 closed as moot this pass -- Sneakers_Catalog_Retargeting is now active and spending against a catalog-backed creative, so the zero-DPA-campaigns trigger no longer holds. budget-reallocation: new proposal A-075 written (IG90_Warm_BestCreatives_24Oct 1.15x vs Caps_Only 15.1x rolling-7d ROAS, Rs300/day shift proposed). All other pending approval-tier proposals (A-002, A-039, A-048, A-050, A-051, A-063, A-065, A-067, A-070, A-071, A-072, A-074) carried forward unchanged -- their underlying conditions have not moved materially since the prior pass.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-10-27T18:50:00.000Z"
     }
   ],
   "log": [
@@ -31255,6 +31360,36 @@
       },
       "tier": "approval",
       "executedAt": "2026-10-27T08:47:00.000Z"
+    },
+    {
+      "proposalId": null,
+      "action": "lookalike-refresh auto-module: rate limit cleared (last attempt 2026-10-26T16:55:00.000Z, >24h elapsed) -- attempted to rebuild the 1% lookalike off 'Purchasers 180D' (id 120255823280550159, approximate size unchanged at ~20 since 2026-09-15 creation, verified via ads_get_custom_audience this pass) via ads_create_custom_audience (subtype LOOKALIKE, ratio 0.01, name 'Lookalike (IN 1%) - Purchasers 180D - 2026-10-27'). Failed again with Meta's duplicate-lookalike error (2654/1713007) -- not a bug, a real API constraint until the source audience grows past its current reported size. Not retried this run per the single-retry rule. The existing laddered 2%/5% lookalikes (120255832535610159, 120255832535780159, built 2026-09-15) remain live and serving, unaffected.",
+      "result": "failed",
+      "previousState": {
+        "source_audience_size_lower_bound": 20,
+        "source_audience_size_upper_bound": 20,
+        "last_attempt": "2026-10-26T16:55:00.000Z"
+      },
+      "detail": {
+        "error_category": "VALIDATION",
+        "error_code": "2654",
+        "error_subcode": "1713007",
+        "error_message": "Can't Create a Duplicate Lookalike: You've already created a lookalike audience with the same source, country and size. Please try using a different source or different specifications.",
+        "is_retryable": false
+      },
+      "tier": "auto",
+      "executedAt": "2026-10-27T18:50:00.000Z"
+    },
+    {
+      "proposalId": "A-003",
+      "action": "catalog-dpa-launch: closed as moot -- Sneakers_Catalog_Retargeting (120256088882780159) is now ACTIVE and spending against a catalog-backed creative/product set, so the account no longer has zero DPA/catalog-based campaigns running. See updated reasoning on A-003.",
+      "result": "rejected",
+      "previousState": {
+        "status": "pending"
+      },
+      "detail": null,
+      "tier": "approval",
+      "executedAt": "2026-10-27T18:50:00.000Z"
     }
   ],
   "creativeTags": {
