@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-27T12:52:00.000Z",
+  "generatedAt": "2026-10-27T14:58:00.000Z",
   "settings": {
     "kill_roas_threshold": "DISABLED 2026-10-05 by user instruction: the ROAS pause-kill is OFF. Module 16 (pause-kill) must NOT auto-pause any campaign for low ROAS; surface low-ROAS campaigns as alerts only. The hard spend circuit breaker is a separate mechanism and stays ON. Former rule, for reference: pause if ROAS < 1.0x after ₹500 spend on a sales-objective campaign. EXCEPTION until 2026-10-05T23:59+05:30 (user-approved 2026-09-29): for the sneaker-push campaigns 120256091369160159 (Sneakers_BOF_30Sep-5Oct), 120256091370110159 (Sneakers_Prospecting_30Sep-5Oct) and 120256088882780159 (Sneakers_Catalog_Retargeting) the spend floor is ₹1,500, not ₹500.",
     "reactivate_min_historic_roas": "surface for reactivation if a paused campaign's last active-period ROAS >= 3.0x",
@@ -21417,6 +21417,87 @@
       "severity": "low",
       "dismissed": false,
       "createdAt": "2026-10-27T12:52:00.000Z"
+    },
+    {
+      "id": "AL-2203",
+      "module": "hard-spend-circuit-breaker",
+      "title": "Circuit breaker status -- spend Rs4,889.73 of Rs7,000 ceiling (69.8%), not tripped this pass",
+      "detail": "ads_get_ad_entities (level=ad_account, date_preset=today) at this pass showed today's account spend at Rs4,889.73 against settings.hard_spend_ceiling_inr (Rs7,000) -- 69.8% of ceiling, Rs2,110.27 headroom remaining. 13 campaigns ACTIVE today. No new trip. Note: circuitBreaker.tripped remains true from the 2026-10-10T16:50 UTC trip -- still unresolved, A-063 (resume-after-circuit-breaker) still pending human review. The 5 campaigns paused by that trip (Sora_BOF_Test_5Oct, Tsuchi_BOF_Test_5Oct, Prospecting_JP_Purchase_5-9Oct, Sneakers_BOF_30Sep-5Oct, Caps + Kage_26 Sept) remain absent from today's active-campaign list, confirming no drift.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-10-27T14:58:00.000Z"
+    },
+    {
+      "id": "AL-2204",
+      "module": "pixel-health",
+      "title": "Pixel/dataset match quality remains above the gate floor",
+      "detail": "ads_get_dataset_quality on pixel 833131719490535: composite EMQ scores range 6.1 (Search/AddToCart/PageView/ViewContent/SubscribedButtonClick) to 8.7 (Purchase, cod_purchase), with prepaid_purchase and AddPaymentInfo at 8.6. All at/above pixel_quality_min_match_rate=0.6 -- ROAS-based modules not suppressed this pass.",
+      "severity": "medium",
+      "dismissed": false,
+      "createdAt": "2026-10-27T14:58:00.000Z"
+    },
+    {
+      "id": "AL-2205",
+      "module": "lookalike-refresh",
+      "title": "Lookalike rebuild skipped -- rate limited",
+      "detail": "The laddered 1%/2%/5% lookalikes built 2026-09-15 off 'Purchasers 180D' (source audience still ~20, unchanged since creation) are long past the 14-day lookalike_refresh_days threshold. Last rebuild attempt was 2026-10-26T16:55:00.000Z (failed with Meta's duplicate-lookalike error 2654/1713007, source audience hasn't grown); only ~22h03m have elapsed since, under max_auto_actions_per_entity_per_day's 24h window, so this pass skipped the attempt rather than retrying. Next eligible ~2026-10-27T16:55 UTC. The 3 existing lookalikes (120255832535210159/610159/780159) remain live and serving.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-10-27T14:58:00.000Z"
+    },
+    {
+      "id": "AL-2206",
+      "module": "anomaly",
+      "title": "No anomaly signal issues found this pass",
+      "detail": "ads_insights_anomaly_signal checked auction overlap, creative fatigue, and narrow audience across the account -- no issues flagged.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-10-27T14:58:00.000Z"
+    },
+    {
+      "id": "AL-2207",
+      "module": "threshold-alerts",
+      "title": "No campaign CPM/CTR/CPC outside normal bands this pass",
+      "detail": "13 active campaigns reviewed at today's spend/impressions/CTR/CPM -- none show a CPM/CTR/CPC move consistent with an outside-normal-band deviation; corroborated by the clean anomaly-signal pass (AL-2206). settings.metric_baselines only tracks two legacy campaigns (Kage_sales_1908, Kage_TOF) neither of which is active today.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-10-27T14:58:00.000Z"
+    },
+    {
+      "id": "AL-2208",
+      "module": "competitor-rescrape",
+      "title": "Gully Labs unchanged, Lotto Sport India up slightly -- both under spike threshold",
+      "detail": "ads_library_search: Gully Labs 164 active ads (unchanged from last scrape), Lotto Sport India 222 (up from 220, +0.9%). Both well under the 20% competitor-spike threshold -- no spike alert.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-10-27T14:58:00.000Z"
+    },
+    {
+      "id": "AL-2209",
+      "module": "campaign-consolidation-watch",
+      "title": "New campaign launched this pass -- no duplicate-targeting concern",
+      "detail": "Prospecting_MATCHA_Purchase_27Oct (120256577948390159, ad set Prosp_MATCHA_Men_25-44_Purchase) went active today targeting a new MATCHA product line to men 25-44 in India -- no other active campaign targets this product/audience combination, so no consolidation concern.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-10-27T14:58:00.000Z"
+    },
+    {
+      "id": "AL-2210",
+      "module": "self-audit-check",
+      "title": "purchaser-exclusion, lookalike-refresh, hook-angle-tagging, learning-phase-stuck audited -- account-wide compliant, nothing new",
+      "detail": "purchaser-exclusion: all 15 non-exempt active ad sets (16 total active, 1 -- Retargeting_Overall -- exempt by settings.purchaser_exclusion_exempt_adset_ids) confirmed excluding Purchasers 180D (or, for Sneaker_Viewers_ATC_30D_NoPurchase, carrying its own built-in product_audience_spec Purchase exclusion) via fresh targeting fetch; no auto edit needed. hook-angle-tagging: all 36 distinct creative IDs in use by today's active ads already have creativeTags entries (463 total tagged); nothing new. learning-phase-stuck: learning_stage_info checked on the 9 ad sets old enough (>7d) to qualify -- none returned active learning-phase data, so none are stuck. No drift found versus settings.audience_label_corrections' last full reconfirmation.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-10-27T14:58:00.000Z"
+    },
+    {
+      "id": "AL-2211",
+      "module": "weekly-digest",
+      "title": "Routine pass summary -- 0 auto-mutations, 0 new proposals, 9 new alerts",
+      "detail": "This pass (2026-10-27T14:58 UTC, ~2h06m after the prior 12:52 UTC pass): circuit breaker checked and not tripped (AL-2203); pixel gate clear (AL-2204); lookalike-refresh rate-limited, skipped (AL-2205); purchaser-exclusion and hook-angle-tagging both found fully compliant/up to date, no auto mutation executed; anomaly signal clean (AL-2206); no threshold-alert outliers (AL-2207); competitor counts stable (AL-2208); one new campaign launched with no consolidation concern (AL-2209); no ad set stuck in learning (AL-2210). No approval-tier proposal needed updating or creating this pass -- existing 4 pending reactivate-winner proposals (A-039/048/050/051) and other pending proposals (A-002, A-003, A-065, A-067, A-070, A-071, A-072, A-074, A-063) remain open, none of their underlying campaigns/ad sets changed state. circuitBreaker.tripped remains true (unresolved since 2026-10-10, A-063 pending human review) -- the single highest-priority outstanding item.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-10-27T14:58:00.000Z"
     }
   ],
   "log": [
