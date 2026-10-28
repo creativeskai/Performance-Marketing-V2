@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-28T10:48:00.000Z",
+  "generatedAt": "2026-10-28T12:48:00.000Z",
   "settings": {
     "kill_roas_threshold": "DISABLED 2026-10-05 by user instruction: the ROAS pause-kill is OFF. Module 16 (pause-kill) must NOT auto-pause any campaign for low ROAS; surface low-ROAS campaigns as alerts only. The hard spend circuit breaker is a separate mechanism and stays ON. Former rule, for reference: pause if ROAS < 1.0x after ₹500 spend on a sales-objective campaign. EXCEPTION until 2026-10-05T23:59+05:30 (user-approved 2026-09-29): for the sneaker-push campaigns 120256091369160159 (Sneakers_BOF_30Sep-5Oct), 120256091370110159 (Sneakers_Prospecting_30Sep-5Oct) and 120256088882780159 (Sneakers_Catalog_Retargeting) the spend floor is ₹1,500, not ₹500.",
     "reactivate_min_historic_roas": "surface for reactivation if a paused campaign's last active-period ROAS >= 3.0x",
@@ -29,10 +29,10 @@
       }
     },
     "competitor_last_scrape": {
-      "gully_labs_active_ads": 201,
-      "lotto_sport_india_active_ads": 292,
-      "scraped_at": "2026-10-28T10:48:00.000Z",
-      "note": "2026-10-28T10:48:00.000Z pass: Gully Labs 198->201 (+1.5%, under threshold), Lotto Sport India 285->292 (+2.5%, back under the 20% competitor-spike threshold after the prior pass's +23.9% spike)."
+      "gully_labs_active_ads": 148,
+      "lotto_sport_india_active_ads": 241,
+      "scraped_at": "2026-10-28T12:48:00.000Z",
+      "note": "2026-10-28T12:48:00.000Z pass: Gully Labs 201->148 (-26.4%, at/above the 20% competitor-spike threshold, decrease direction), Lotto Sport India 292->241 (-17.5%, under threshold)."
     },
     "audience_label_corrections": {
       "120249907176770159": "ATC_180D -- NOT a purchaser audience (cart-adders, event=AddToCart, retention 180 days). Verified 2026-09-14, reconfirmed 2026-09-20. Superseded note: earlier passes said the account had NO purchaser audience at all -- that's now out of date. See the 120255823280550159 (Purchasers 180D) entry above, created 2026-09-15, which IS a genuine purchaser audience and is already in use for exclusion + lookalike.",
@@ -1510,7 +1510,7 @@
       "module": "budget-reallocation",
       "tier": "approval",
       "title": "Shift ₹300/day from IG90_Warm_BestCreatives_24Oct (1.15x) to Caps_Only (15.1x) -- large rolling-7d ROAS gap",
-      "reasoning": "IG90_Warm_BestCreatives_24Oct (120256539226010159, launched 2026-10-24) has spent Rs2,645.01 over its lifetime so far (last_30d==last_7d, campaign is only ~3 days old) at purchase_roas 1.147897x -- barely above breakeven. Caps_Only (120256301268690159) has spent Rs5,415.93 over the same last_7d window at purchase_roas 15.139514x (Rs11,459.76/11.739107x over last_30d) -- a ~13.2x rolling-7d ROAS gap, far above settings.budget_reallocation_min_roas_gap (shift when one campaign's ROAS is 1.5x+ another's). Both are OUTCOME_SALES campaigns currently ACTIVE with daily budgets of Rs1,000/day and Rs900/day respectively. Proposing a modest Rs300/day shift (not a full reallocation, since IG90 is still new enough that its ROAS may improve past initial learning) -- IG90 to Rs700/day, Caps_Only to Rs1,200/day. kill_roas_threshold (pause-kill) is disabled by user instruction so this is a budget-shift proposal, not a pause recommendation; IG90 remains above 1.0x breakeven so it would not qualify for pause-kill even if that module were enabled. Reconfirmed 2026-10-28T03:05 UTC: fresh last_14d pull -- IG90_Warm_BestCreatives_24Oct purchase_roas 1.147338x on Rs2,646.30 spend (4 purchases); Caps_Only purchase_roas 11.781366x on Rs9,317.99 spend (125 purchases). Gap now ~10.3x, still far above the 1.5x budget_reallocation_min_roas_gap threshold. No change to the proposed action. | Reconfirmed 2026-10-28T08:50:00.000Z: fresh last_14d pull -- IG90_Warm_BestCreatives_24Oct purchase_roas 1.147338x (Rs2,646.30 spend), Caps_Only purchase_roas 11.781366x (Rs9,317.99 spend), byte-identical to the 2026-10-28T03:05 reading. Gap still ~10.3x, far above the 1.5x threshold. No change to the proposed action.",
+      "reasoning": "IG90_Warm_BestCreatives_24Oct (120256539226010159, launched 2026-10-24) has spent Rs2,645.01 over its lifetime so far (last_30d==last_7d, campaign is only ~3 days old) at purchase_roas 1.147897x -- barely above breakeven. Caps_Only (120256301268690159) has spent Rs5,415.93 over the same last_7d window at purchase_roas 15.139514x (Rs11,459.76/11.739107x over last_30d) -- a ~13.2x rolling-7d ROAS gap, far above settings.budget_reallocation_min_roas_gap (shift when one campaign's ROAS is 1.5x+ another's). Both are OUTCOME_SALES campaigns currently ACTIVE with daily budgets of Rs1,000/day and Rs900/day respectively. Proposing a modest Rs300/day shift (not a full reallocation, since IG90 is still new enough that its ROAS may improve past initial learning) -- IG90 to Rs700/day, Caps_Only to Rs1,200/day. kill_roas_threshold (pause-kill) is disabled by user instruction so this is a budget-shift proposal, not a pause recommendation; IG90 remains above 1.0x breakeven so it would not qualify for pause-kill even if that module were enabled. Reconfirmed 2026-10-28T03:05 UTC: fresh last_14d pull -- IG90_Warm_BestCreatives_24Oct purchase_roas 1.147338x on Rs2,646.30 spend (4 purchases); Caps_Only purchase_roas 11.781366x on Rs9,317.99 spend (125 purchases). Gap now ~10.3x, still far above the 1.5x budget_reallocation_min_roas_gap threshold. No change to the proposed action. | Reconfirmed 2026-10-28T08:50:00.000Z: fresh last_14d pull -- IG90_Warm_BestCreatives_24Oct purchase_roas 1.147338x (Rs2,646.30 spend), Caps_Only purchase_roas 11.781366x (Rs9,317.99 spend), byte-identical to the 2026-10-28T03:05 reading. Gap still ~10.3x, far above the 1.5x threshold. No change to the proposed action. | Reconfirmed 2026-10-28T12:48:00.000Z: fresh last_7d pull -- IG90_Warm_BestCreatives_24Oct purchase_roas 1.147338x (Rs2,646.30 spend), Caps_Only purchase_roas 15.577812x (Rs5,417.42 spend) -- gap now ~13.6x, still far above the 1.5x budget_reallocation_min_roas_gap threshold. No change to the proposed action.",
       "actionSummary": "Reduce IG90_Warm_BestCreatives_24Oct's daily budget from Rs1,000 to Rs700 and increase Caps_Only's daily budget from Rs900 to Rs1,200, if approved.",
       "metaAction": {
         "tool": "ads_update_entity",
@@ -1536,7 +1536,7 @@
       },
       "status": "pending",
       "createdAt": "2026-10-27T18:50:00.000Z",
-      "lastReconfirmedAt": "2026-10-28T08:50:00.000Z"
+      "lastReconfirmedAt": "2026-10-28T12:48:00.000Z"
     }
   ],
   "alerts": [
@@ -22289,6 +22289,114 @@
       "severity": "medium",
       "dismissed": false,
       "createdAt": "2026-10-28T10:48:00.000Z"
+    },
+    {
+      "id": "AL-2296",
+      "module": "hard-spend-circuit-breaker",
+      "title": "Circuit breaker status check -- no new breach",
+      "detail": "ads_get_ad_entities (level=ad_account, date_preset=today) this pass: today's account spend ₹4,089.57 against the ₹7,000 hard_spend_ceiling_inr -- 58.4% of ceiling, no breach. circuitBreaker.tripped remains true from the 2026-10-10 trip, still pending human review of A-063 (resume-after-circuit-breaker) -- no auto-resume this pass.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-10-28T12:48:00.000Z"
+    },
+    {
+      "id": "AL-2297",
+      "module": "pixel-health",
+      "title": "Pixel/dataset match quality check -- all events pass",
+      "detail": "ads_get_dataset_quality (dataset 833131719490535) this pass: composite EMQ scores range 6.1 (PageView/ViewContent/AddToCart/SubscribedButtonClick/Search) to 8.7 (AddPaymentInfo); Purchase 8.6, prepaid_purchase 8.4, cod_purchase 8.6. All at/above the pixel_quality_min_match_rate=0.6 threshold (composite_score/10 convention). ROAS-based modules not suppressed this pass.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-10-28T12:48:00.000Z"
+    },
+    {
+      "id": "AL-2298",
+      "module": "purchaser-exclusion",
+      "title": "Purchaser-exclusion compliance check -- compliant account-wide",
+      "detail": "Fresh targeting fetch on all 15 active ad sets this pass: 14 non-exempt active ad sets all exclude Purchasers 180D (120255823280550159) in excluded_custom_audiences; the 15th (Retargeting_Overall, ad set 120255851467360159) remains on settings.purchaser_exclusion_exempt_adset_ids and deliberately includes it by design. No action needed.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-10-28T12:48:00.000Z"
+    },
+    {
+      "id": "AL-2299",
+      "module": "lookalike-refresh",
+      "title": "Lookalike-refresh rate-limited this pass",
+      "detail": "The laddered lookalikes built 2026-09-15 off Purchasers 180D (source audience still ~20, unchanged since creation) are ~44 days past the 14-day lookalike_refresh_days threshold. Last rebuild attempt was 2026-10-27T18:50 UTC and failed with Meta's duplicate-lookalike error (2654/1713007) -- that attempt is <24h old (~18h elapsed), so this pass is rate-limited under max_auto_actions_per_entity_per_day=1; would have re-attempted otherwise. The 2 existing lookalikes (IN 2%/5% off Purchasers 180D) remain ACTIVE and serving.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-10-28T12:48:00.000Z"
+    },
+    {
+      "id": "AL-2300",
+      "module": "anomaly",
+      "title": "No anomaly signals this pass",
+      "detail": "ads_insights_anomaly_signal (account-wide): no anomaly signal issues found. Checked for auction overlap, creative fatigue, and narrow audience.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-10-28T12:48:00.000Z"
+    },
+    {
+      "id": "AL-2301",
+      "module": "threshold-alerts",
+      "title": "No campaign CPM/CTR/CPC outside normal bands this pass",
+      "detail": "Active-campaign CPM/CTR/CPC checked against settings.metric_baselines and recent trailing history this pass -- nothing outside normal bands.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-10-28T12:48:00.000Z"
+    },
+    {
+      "id": "AL-2302",
+      "module": "learning-phase-stuck",
+      "title": "No ad sets confirmed stuck in learning this pass",
+      "detail": "All 15 active ad sets show learning_stage_info = null (not in active learning) per fresh ads_get_ad_entities pull.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-10-28T12:48:00.000Z"
+    },
+    {
+      "id": "AL-2303",
+      "module": "competitor-rescrape",
+      "title": "Competitor active-ad count rescrape",
+      "detail": "ads_library_search (page_id-scoped, country IN, ad_active_status ACTIVE) this pass: Gully Labs (page_id 107479854297817) estimated_total_count 148, down from 201 at the last scrape (2026-10-28T10:48 UTC) -- -26.4%. Lotto Sport India (page_id 426015150606378) estimated_total_count 241, down from 292 -- -17.5%.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-10-28T12:48:00.000Z"
+    },
+    {
+      "id": "AL-2304",
+      "module": "competitor-spike",
+      "title": "Gully Labs active-ad count dropped -26.4% -- at/above spike threshold (decrease direction)",
+      "detail": "Gully Labs active-ad count moved from 201 to 148 since the last scrape (2026-10-28T10:48 UTC), a -26.4% move, at/above the 20% competitor-spike threshold (this time in the decrease direction). Lotto Sport India's -17.5% move stayed under the threshold. Informational only, no account action taken. settings.competitor_last_scrape updated with these counts.",
+      "severity": "medium",
+      "dismissed": false,
+      "createdAt": "2026-10-28T12:48:00.000Z"
+    },
+    {
+      "id": "AL-2305",
+      "module": "campaign-consolidation-watch",
+      "title": "No new duplicate-targeting campaigns identified",
+      "detail": "Reviewed all 13 active campaigns this pass -- no two target the same product+audience combination closely enough to flag as a consolidation candidate beyond what's already covered by existing proposals.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-10-28T12:48:00.000Z"
+    },
+    {
+      "id": "AL-2306",
+      "module": "creative-fatigue",
+      "title": "No active ad crossed the fatigue frequency threshold",
+      "detail": "Highest frequency observed this pass across active ad sets: BOF2_FeedStories (Sneakers_BOF_v2_Placement_Split_12Oct) at 2.79, Retargeting_Overall ad set at 2.29 -- both under fatigue_frequency_threshold=3. No active ad's CTR dropped >=30% week-over-week in this pull.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-10-28T12:48:00.000Z"
+    },
+    {
+      "id": "AL-2307",
+      "module": "self-audit-check",
+      "title": "Routine pass summary -- 1 auto-mutation, 0 new proposals, 1 proposal reconfirmed, 11 new alerts",
+      "detail": "This pass: 1 auto-tier mutation (hook-angle-tagging tagged creative 953463907493672); 0 new approval proposals; A-075 (budget-reallocation) reconfirmed with fresh last_7d numbers (gap now ~13.6x, still far above threshold); 11 new informational alerts. Circuit breaker remains tripped from 2026-10-10, unresolved pending human review of A-063. Highest-priority item this pass: Gully Labs competitor-spike alert (-26.4%, decrease direction) -- informational only.",
+      "severity": "medium",
+      "dismissed": false,
+      "createdAt": "2026-10-28T12:48:00.000Z"
     }
   ],
   "log": [
@@ -32118,6 +32226,16 @@
       },
       "tier": "auto",
       "executedAt": "2026-10-28T03:05:00.000Z"
+    },
+    {
+      "proposalId": null,
+      "action": "auto-module: tagged creative 953463907493672 (used by ad 'Prosp_YINYANG_RootsV3_2499_28Oct' under new campaign Prospecting_YinYang_Sales_28Oct) from its real primary text/headline via Meta Ads MCP ads_get_creatives. Higgsfield vision pass skipped (not attached to this run) -- no creative description invented. Checked all 33 distinct active-ad creative ids this pass (across 13 active campaigns); this was the only one missing a creativeTags entry.",
+      "result": "success",
+      "previousState": {
+        "creativeTags_entry": null
+      },
+      "tier": "auto",
+      "executedAt": "2026-10-28T12:48:00.000Z"
     }
   ],
   "creativeTags": {
@@ -37283,6 +37401,17 @@
       "visionPassSkipped": true,
       "note": "Higgsfield vision connection not attached to this run -- image content itself not analyzed, only real ad copy text used. No creative description invented.",
       "taggedAt": "2026-10-27T20:53:00.000Z"
+    },
+    "953463907493672": {
+      "adName": "Prosp_YINYANG_RootsV3_2499_28Oct",
+      "campaign": "Prospecting_YinYang_Sales_28Oct",
+      "format": "Static image (SHARE)",
+      "angle": "Discount/urgency-led prepaid offer -- explicit price drop (₹3,299 -> ₹2,499), free shipping, savings callout (₹800), limited-stock urgency",
+      "hook": "\"Meet Yin Yang \nNow ₹2,499 on prepaid orders (was ₹3,299) + FREE SHIPPING.\nSave ₹800. Limited stock.\" (primary text) / \"Yin Yang at ₹2,499 — Prepaid\" (headline), CTA: SHOP_NOW",
+      "taggedFrom": "ad primary text (body) + headline (title), via Meta Ads MCP ads_get_creatives",
+      "visionPassSkipped": true,
+      "note": "Higgsfield vision connection not attached to this run -- image content itself not analyzed, only real ad copy text used. No creative description invented.",
+      "taggedAt": "2026-10-28T12:48:00.000Z"
     }
   }
 }
