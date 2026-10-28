@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-28T03:05:00.000Z",
+  "generatedAt": "2026-10-28T04:47:57.000Z",
   "settings": {
     "kill_roas_threshold": "DISABLED 2026-10-05 by user instruction: the ROAS pause-kill is OFF. Module 16 (pause-kill) must NOT auto-pause any campaign for low ROAS; surface low-ROAS campaigns as alerts only. The hard spend circuit breaker is a separate mechanism and stays ON. Former rule, for reference: pause if ROAS < 1.0x after ₹500 spend on a sales-objective campaign. EXCEPTION until 2026-10-05T23:59+05:30 (user-approved 2026-09-29): for the sneaker-push campaigns 120256091369160159 (Sneakers_BOF_30Sep-5Oct), 120256091370110159 (Sneakers_Prospecting_30Sep-5Oct) and 120256088882780159 (Sneakers_Catalog_Retargeting) the spend floor is ₹1,500, not ₹500.",
     "reactivate_min_historic_roas": "surface for reactivation if a paused campaign's last active-period ROAS >= 3.0x",
@@ -21983,6 +21983,15 @@
       "severity": "medium",
       "dismissed": false,
       "createdAt": "2026-10-28T03:05:00.000Z"
+    },
+    {
+      "id": "AL-2262",
+      "module": "self-audit-check",
+      "title": "Routine pass summary -- 0 auto-mutations to live delivery, 0 new proposals, steady state",
+      "detail": "Full ROUTINE.md pass completed. Circuit breaker: not tripped fresh (today's account spend ₹750.51 of the ₹7,000 ceiling, 10.7%, 9,422 impressions) -- essentially unchanged from the prior pass (03:05 UTC, ₹749.52); remains tripped from 2026-10-10 (18 days, unresolved, A-063 still pending -- 5 originally-paused campaigns confirmed PAUSED again this pass via fresh campaign-level pull: Sora_BOF_Test_5Oct, Tsuchi_BOF_Test_5Oct, Prospecting_JP_Purchase_5-9Oct, Sneakers_BOF_30Sep-5Oct, Caps + Kage_26 Sept). Pixel gate: cleared (EMQ 6.1-8.9 across tracked web events, unchanged from prior pass -- not suppressing ROAS-based modules). purchaser-exclusion: fresh targeting fetch on all 15 active ad sets (14 non-exempt + Retargeting_Overall exempt-by-design) confirms account-wide compliance -- all 14 non-exempt ad sets exclude Purchasers 180D (120255823280550159); no action needed this pass (the one gap found last pass, Sneaker_Viewers_ATC_30D_NoPurchase, was already fixed 03:05 UTC and is now force-paused/inactive, so correctly absent from this pass's active set). lookalike-refresh: still rate-limited (last attempt 2026-10-27T18:50:00.000Z, ~10h elapsed, within max_auto_actions_per_entity_per_day=1) -- source audience 'Purchasers 180D' size unchanged (~20), no new alert written since AL-2247 (00:56 UTC, same day) already covers this unchanged condition. hook-angle-tagging: nothing new to tag -- all 36 distinct active-ad creative IDs across 13 active campaigns already have creativeTags entries. anomaly: ads_insights_anomaly_signal returned no issues this pass (the narrow-audience warning on RT_Sneakers_Caps_NoBuyers_v2_11Oct noted at the 00:56 UTC pass, AL-2252, did not recur on this fresh check -- likely resolved, no action needed either way since that module is alert-only). No live-account Meta API writes were made this pass. 13 campaigns ACTIVE (same set as the 00:56/03:05 UTC passes), no new campaigns, no material spend movement -- the 13 existing pending approval-tier proposals (A-002, A-039, A-048, A-050, A-051, A-063, A-065, A-067, A-070, A-071, A-072, A-074, A-075) were checked against this pass's fresh campaign-level data and none show a material enough change to warrant updated reasoning beyond what the 00:56 UTC pass already recorded (AL-2257 reactivate-winner/A-051, AL-2258 dayparting/A-074) -- left as-is per de-duplication (same underlying numbers, re-confirmed less than 2 hours ago). 0 auto-mutations to live delivery, 0 new proposals, 0 other new alerts this pass.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-10-28T04:47:57.000Z"
     }
   ],
   "log": [
