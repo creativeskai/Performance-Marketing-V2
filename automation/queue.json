@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-28T12:48:00.000Z",
+  "generatedAt": "2026-10-28T14:53:00.000Z",
   "settings": {
     "kill_roas_threshold": "DISABLED 2026-10-05 by user instruction: the ROAS pause-kill is OFF. Module 16 (pause-kill) must NOT auto-pause any campaign for low ROAS; surface low-ROAS campaigns as alerts only. The hard spend circuit breaker is a separate mechanism and stays ON. Former rule, for reference: pause if ROAS < 1.0x after ₹500 spend on a sales-objective campaign. EXCEPTION until 2026-10-05T23:59+05:30 (user-approved 2026-09-29): for the sneaker-push campaigns 120256091369160159 (Sneakers_BOF_30Sep-5Oct), 120256091370110159 (Sneakers_Prospecting_30Sep-5Oct) and 120256088882780159 (Sneakers_Catalog_Retargeting) the spend floor is ₹1,500, not ₹500.",
     "reactivate_min_historic_roas": "surface for reactivation if a paused campaign's last active-period ROAS >= 3.0x",
@@ -22397,6 +22397,87 @@
       "severity": "medium",
       "dismissed": false,
       "createdAt": "2026-10-28T12:48:00.000Z"
+    },
+    {
+      "id": "AL-2308",
+      "module": "purchaser-exclusion",
+      "title": "Purchaser-exclusion compliance check -- compliant account-wide",
+      "detail": "7 ad sets ACTIVE this pass (RT_Sneakers_Only_NoBuyers_27Oct, LAL1_Purchasers180D_FB_IG, PROSP_Reels_Capped, RT_Sneakers_Caps_NoBuyers_v2_11Oct, BOF2_FeedStories, Caps_Only_11Oct, Retargeting_Overall) across 6 active campaigns. Fresh targeting fetch via ads_get_ad_entities: 6 confirm excluded_custom_audiences includes Purchasers 180D (120255823280550159); the 7th, ad set 'Retargeting_Overall' (120255851467360159, same id/name as its parent campaign), is on settings.purchaser_exclusion_exempt_adset_ids and deliberately includes Purchasers 180D by design. purchaser-exclusion remains compliant account-wide, no action needed.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-10-28T14:53:00.000Z"
+    },
+    {
+      "id": "AL-2309",
+      "module": "lookalike-refresh",
+      "title": "Lookalike-refresh rate-limited this pass",
+      "detail": "The laddered 1% lookalike off 'Purchasers 180D' (LAL1_Purchasers180D_FB_IG, built 2026-09-15, source audience still ~20) is well past the 14-day lookalike_refresh_days threshold. Last rebuild attempt was 2026-10-27T18:50:00.000Z (~20h elapsed as of this pass) -- within max_auto_actions_per_entity_per_day=1, so this pass skipped the attempt rather than re-trying. Next eligible attempt ~2026-10-28T18:50 UTC. Would have acted, rate-limited.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-10-28T14:53:00.000Z"
+    },
+    {
+      "id": "AL-2310",
+      "module": "anomaly",
+      "title": "No anomaly signals this pass",
+      "detail": "ads_insights_anomaly_signal: no anomaly signal issues found account-wide. Checked for auction overlap, creative fatigue, and narrow audience.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-10-28T14:53:00.000Z"
+    },
+    {
+      "id": "AL-2311",
+      "module": "threshold-alerts",
+      "title": "No campaign CPM/CTR/CPC outside normal bands this pass",
+      "detail": "Fresh last_7d vs last_30d campaign-level CPM/CTR/CPC pull across all 6 active campaigns: Prospecting_LAL1_Purchasers_14Oct, Sneakers_BOF_v2_Placement_Split_12Oct, Prospecting_JP2_Placement_Split_12Oct, Caps_Only, Retargeting_Overall, and Sneakers_Catalog_Retargeting. All within or better than normal bands (CPM/CPC trending down 4-44% vs the 30d baseline on most; no campaign shows a worsening move outside normal bands). No threshold-alert this pass.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-10-28T14:53:00.000Z"
+    },
+    {
+      "id": "AL-2312",
+      "module": "learning-phase-stuck",
+      "title": "No ad sets confirmed stuck in learning this pass",
+      "detail": "learning_stage_info is null/absent on all 7 active ad sets this pass -- none flagged as in learning for 7+ days.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-10-28T14:53:00.000Z"
+    },
+    {
+      "id": "AL-2313",
+      "module": "campaign-consolidation-watch",
+      "title": "No new duplicate-targeting campaigns identified",
+      "detail": "6 active campaigns this pass target differentiated products/audiences (LAL1 prospecting, placement-split BOF/prospecting, Caps_Only, Retargeting_Overall's 3 retargeting ad sets, Sneakers_Catalog_Retargeting DPA) -- no overlapping product+audience pairs identified.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-10-28T14:53:00.000Z"
+    },
+    {
+      "id": "AL-2314",
+      "module": "pixel-health",
+      "title": "Pixel/dataset quality check -- healthy, ROAS modules not suppressed",
+      "detail": "ads_get_dataset_quality (dataset 833131719490535) this pass: composite EMQ scores range 6.1 (PageView/ViewContent/AddToCart/SubscribedButtonClick/Search) to 8.9 (AddPaymentInfo); Purchase 8.6, prepaid_purchase 8.1, cod_purchase 8.5. All at/above pixel_quality_min_match_rate=0.6. ROAS-based modules not suppressed this pass.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-10-28T14:53:00.000Z"
+    },
+    {
+      "id": "AL-2315",
+      "module": "hook-angle-tagging",
+      "title": "No new creatives to tag this pass",
+      "detail": "26 distinct creative ids across the 7 active ad sets this pass; all 26 already have a creativeTags entry from prior passes. Higgsfield vision connection not attached to this run (unchanged) -- nothing to tag.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-10-28T14:53:00.000Z"
+    },
+    {
+      "id": "AL-2316",
+      "module": "self-audit-check",
+      "title": "Routine pass summary -- 0 auto-mutations, 0 new proposals, 8 new alerts, breaker still tripped (18d, A-063 pending)",
+      "detail": "This pass: purchaser-exclusion compliant (no mutation needed), lookalike-refresh rate-limited (skipped), hook-angle-tagging had nothing new, hard-spend-circuit-breaker not breached today. No approval-tier module trigger produced new numbers materially different from the last pass (2026-10-28T12:48:00.000Z) -- all 13 pending proposals' most-recently-recorded figures remain current (spot-checked Caps_Only last_7d ROAS 15.577812x against A-075's recorded figure: byte-identical). Circuit breaker remains TRIPPED (tripped 2026-10-10T16:50:00.000Z, now 18 days ago) -- resume-after-circuit-breaker proposal A-063 is still pending human approval, per ROUTINE.md the routine never auto-resumes. Today's account spend this pass: Rs4,826.16 against the Rs7,000 ceiling (68.9%) -- no fresh breach. Account has continued normal profitable delivery outside the resume path via newer, separately-created campaigns (6 active this pass, none of the 5 originally-paused campaigns reactivated).",
+      "severity": "medium",
+      "dismissed": false,
+      "createdAt": "2026-10-28T14:53:00.000Z"
     }
   ],
   "log": [
