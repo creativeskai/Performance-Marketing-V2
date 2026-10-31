@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-31T20:49:00.000Z",
+  "generatedAt": "2026-10-31T22:51:00.000Z",
   "settings": {
     "kill_roas_threshold": "DISABLED 2026-10-05 by user instruction: the ROAS pause-kill is OFF. Module 16 (pause-kill) must NOT auto-pause any campaign for low ROAS; surface low-ROAS campaigns as alerts only. The hard spend circuit breaker is a separate mechanism and stays ON. Former rule, for reference: pause if ROAS < 1.0x after ₹500 spend on a sales-objective campaign. EXCEPTION until 2026-10-05T23:59+05:30 (user-approved 2026-09-29): for the sneaker-push campaigns 120256091369160159 (Sneakers_BOF_30Sep-5Oct), 120256091370110159 (Sneakers_Prospecting_30Sep-5Oct) and 120256088882780159 (Sneakers_Catalog_Retargeting) the spend floor is ₹1,500, not ₹500.",
     "reactivate_min_historic_roas": "surface for reactivation if a paused campaign's last active-period ROAS >= 3.0x",
@@ -29,10 +29,10 @@
       }
     },
     "competitor_last_scrape": {
-      "gully_labs_active_ads": 144,
+      "gully_labs_active_ads": 146,
       "lotto_sport_india_active_ads": 217,
-      "scraped_at": "2026-10-31T20:49:00.000Z",
-      "note": "2026-10-31T20:49:00.000Z pass: Gully Labs 143->144 (+0.7%, under threshold), Lotto Sport India 217->217 (0%, under threshold)."
+      "scraped_at": "2026-10-31T22:51:00.000Z",
+      "note": "2026-10-31T22:51:00.000Z pass: Gully Labs 144->146 (+1.4%, under threshold), Lotto Sport India 217->217 (0%, under threshold)."
     },
     "audience_label_corrections": {
       "120249907176770159": "ATC_180D -- NOT a purchaser audience (cart-adders, event=AddToCart, retention 180 days). Verified 2026-09-14, reconfirmed 2026-09-20. Superseded note: earlier passes said the account had NO purchaser audience at all -- that's now out of date. See the 120255823280550159 (Purchasers 180D) entry above, created 2026-09-15, which IS a genuine purchaser audience and is already in use for exclusion + lookalike.",
@@ -23642,6 +23642,15 @@
       "severity": "medium",
       "dismissed": false,
       "createdAt": "2026-10-31T20:49:00.000Z"
+    },
+    {
+      "id": "AL-2437",
+      "module": "self-audit-check",
+      "title": "Routine pass summary -- all-clear, no mutations, breaker still tripped (21d, unresolved)",
+      "detail": "Routine pass summary -- 0 auto-mutations (purchaser-exclusion compliant account-wide across all 14 active ad sets; lookalike-refresh still rate-limited, <24h since last 2026-10-31T14:55Z attempt which failed on the same duplicate-lookalike constraint as prior passes -- source 'Purchasers 180D' audience still ~20, unchanged since 2026-09-15; hook-angle-tagging has nothing new, all 30 distinct active creatives already tagged; hard-spend circuit breaker checked, today's spend Rs31.98 vs Rs7,000 ceiling, no new breach), 0 new proposals, 0 new alerts beyond this summary, 0 proposals closed. circuitBreaker.tripped remains true, unresolved since 2026-10-10T16:50Z (21 days) -- A-063 (resume-after-circuit-breaker) still pending human review; all 5 originally-paused campaigns (Sora_BOF_Test_5Oct, Tsuchi_BOF_Test_5Oct, Prospecting_JP_Purchase_5-9Oct, Sneakers_BOF_30Sep-5Oct, Caps + Kage_26 Sept) reconfirmed still PAUSED. Spot-checked 5 pending-proposal numbers against fresh data, all within noise of their last recorded figures, no update needed: pause-kill/IG90_Warm_BestCreatives_24Oct 0.81x ROAS on Rs3,750.63 (14d, unchanged); device-targeting/A-070 BOF2_FeedStories Android 4.95x vs iPhone 8.64x (14d, ratio ~1.75x, unchanged); budget-reallocation/A-076 Caps_Only 10.32x vs Prospecting_JP2_Placement_Split_12Oct 3.76x (7d, ratio ~2.75x, unchanged); competitor-rescrape Gully Labs 144->146 (+1.4%), Lotto Sport India 217->217 (both under 20% spike threshold); no anomaly signal fired. Per ROUTINE.md's de-duplication rule, this pass withholds a fresh 'no change' alert for every monitoring module that found nothing new (purchaser-exclusion, lookalike-refresh, hook-angle-tagging, threshold-alerts, anomaly, learning-phase-stuck, pixel-health, campaign-consolidation-watch, hard-spend-circuit-breaker) since an equivalent alert for each already exists from the last few hours and the underlying numbers did not move -- this summary is the record of the pass instead.",
+      "severity": "medium",
+      "dismissed": false,
+      "createdAt": "2026-10-31T22:51:00.000Z"
     }
   ],
   "log": [
