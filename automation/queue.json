@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-31T16:47:00.000Z",
+  "generatedAt": "2026-10-31T18:49:00.000Z",
   "settings": {
     "kill_roas_threshold": "DISABLED 2026-10-05 by user instruction: the ROAS pause-kill is OFF. Module 16 (pause-kill) must NOT auto-pause any campaign for low ROAS; surface low-ROAS campaigns as alerts only. The hard spend circuit breaker is a separate mechanism and stays ON. Former rule, for reference: pause if ROAS < 1.0x after ₹500 spend on a sales-objective campaign. EXCEPTION until 2026-10-05T23:59+05:30 (user-approved 2026-09-29): for the sneaker-push campaigns 120256091369160159 (Sneakers_BOF_30Sep-5Oct), 120256091370110159 (Sneakers_Prospecting_30Sep-5Oct) and 120256088882780159 (Sneakers_Catalog_Retargeting) the spend floor is ₹1,500, not ₹500.",
     "reactivate_min_historic_roas": "surface for reactivation if a paused campaign's last active-period ROAS >= 3.0x",
@@ -29,10 +29,10 @@
       }
     },
     "competitor_last_scrape": {
-      "gully_labs_active_ads": 123,
+      "gully_labs_active_ads": 143,
       "lotto_sport_india_active_ads": 217,
-      "scraped_at": "2026-10-31T16:47:00.000Z",
-      "note": "2026-10-31T16:47:00.000Z pass: Gully Labs 142->123 (-13.4%, under threshold), Lotto Sport India 217->217 (0%, under threshold)."
+      "scraped_at": "2026-10-31T18:49:00.000Z",
+      "note": "2026-10-31T18:49:00.000Z pass: Gully Labs 123->143 (+16.3%, under threshold), Lotto Sport India 217->217 (0%, under threshold)."
     },
     "audience_label_corrections": {
       "120249907176770159": "ATC_180D -- NOT a purchaser audience (cart-adders, event=AddToCart, retention 180 days). Verified 2026-09-14, reconfirmed 2026-09-20. Superseded note: earlier passes said the account had NO purchaser audience at all -- that's now out of date. See the 120255823280550159 (Purchasers 180D) entry above, created 2026-09-15, which IS a genuine purchaser audience and is already in use for exclusion + lookalike.",
@@ -1242,7 +1242,7 @@
       "module": "placement-optimization",
       "tier": "approval",
       "title": "Exclude WhatsApp placement from Caps_Only_11Oct (Caps_Only)",
-      "reasoning": "Fresh last_14d publisher_platform breakdown on Caps_Only_11Oct (120256301268680159, the sole ad set under the Caps_Only campaign, live since 2026-10-11): WhatsApp spend ₹6.83 at CPM ₹455.33, 0.00% CTR, 15 impressions, 0 purchases -- vs Instagram ₹1,356.11 at CPM ₹100.53, 1.90% CTR, 12.48x ROAS and Facebook ₹77.50 at CPM ₹257.47, 5.98% CTR, 20.62x ROAS. WhatsApp CPM is 4.5x Instagram's and the highest of the four delivering placements (facebook/instagram/threads/whatsapp), with zero engagement or conversions -- the same near-zero-engagement WhatsApp-placement pattern already flagged and pending exclusion on several other ad sets in this account (A-014, A-026, A-033, A-038, A-056, A-058, A-059, A-060). Spend at risk is small (₹6.83 to date) but the ad set is actively delivering and growing (campaign-level spend ₹1,443.56, 12.83x ROAS last_14d), so fixing it now is cheap and prevents compounding waste. Reconfirmed 2026-10-19T21:00:33.000Z (last_30d publisher_platform breakdown on Caps_Only_11Oct, 120256301268680159, still ACTIVE, sole ad set under Caps_Only): WhatsApp spend now Rs13.03 at CPM Rs342.89, 0.00% CTR, 0 purchases -- vs Instagram Rs4,804.83 at CPM Rs74.92, 1.84% CTR, 9.14x ROAS and Facebook Rs632.47 at CPM Rs87.79, 2.83% CTR, 11.24x ROAS. Same pattern as before, still valid. No change to the proposed action. | Reconfirmed 2026-10-19T22:52:00.000Z: Fresh last_14d publisher_platform breakdown: Caps_Only_11Oct WhatsApp CPM Rs342.89 (spend Rs13.03, 0 purchases) vs Instagram CPM Rs74.92 (ROAS 9.14x) and Facebook CPM Rs87.79 (ROAS 11.24x) -- WhatsApp remains the clear outlier with no attributed purchases. Ad set still ACTIVE under active campaign Caps_Only. Still awaiting human approval. | Reconfirmed 2026-10-20T00:48:00.000Z: fresh targeting fetch on Caps_Only_11Oct (120256301268680159, parent Caps_Only, ACTIVE) confirms effective_publisher_platforms still includes whatsapp -- proposal remains structurally relevant.\nPASS 2026-10-20T02:56:00.000Z: Fresh last_14d WhatsApp spend Rs13.03 (status Rs0.77 + marketing_messages Rs12.26), 0 purchases -- still low materiality, unchanged recommendation.\nPASS 2026-10-20T06:54:00.000Z: Parent campaign Caps_Only is ACTIVE and delivering (today spend Rs74.44); the underlying ad set Caps_Only_11Oct remains live, so this placement exclusion stays actionable. No change to the proposed action.\nPASS 2026-10-20T12:51:00.000Z: Parent campaign Caps_Only remains ACTIVE and delivering (last_7d spend Rs4,023.62, ROAS 7.88x); fresh targeting fetch on Caps_Only_11Oct confirms publisher_platforms still includes whatsapp (along with facebook/instagram/audience_network/threads). No change to the proposed action. | PASS 2026-10-20T14:48:00.000Z: Ad set Caps_Only_11Oct confirmed still ACTIVE under Caps_Only this pass (campaign today spend Rs440.73). WhatsApp placement issue remains unaddressed. No change to proposed action. Reconfirmed 2026-10-21T10:56:00.000Z: parent campaign Caps_Only remains ACTIVE (last_7d spend Rs3,900.57, ROAS 7.12x); ad set Caps_Only_11Oct remains ACTIVE. No fresh WhatsApp-specific placement breakdown pulled this pass; no change to the proposed action. Reconfirmed 2026-10-21T18:55:00.000Z: parent campaign Caps_Only remains ACTIVE -- last_7d spend Rs4,091.61, purchase_roas 7.893458x (up slightly from Rs3,900.57/7.12x). Fresh account-wide placement breakdown (last_14d) confirms the thesis: whatsapp/status + whatsapp_marketing_messages combined is Rs357.56 spend across 37,829 impressions with zero attributed purchases account-wide. No change to the proposed action. Reconfirmed 2026-10-22T22:52:00.000Z: fresh last_30d publisher_platform breakdown on Caps_Only_11Oct: WhatsApp spend ₹15.50 at CPM ₹344.44, 0.00% CTR, 0 purchases, vs Instagram ₹6,411.77 (10.851x ROAS) and Facebook ₹871.83 (11.134x ROAS). Same pattern, fix remains unapplied, pending approval. | CONFIRMED 2026-10-25T03:05:00.000Z: Caps_Only_11Oct (120256301268680159) last_14d WhatsApp placement breakdown still shows real waste -- 50 impressions, ₹15.81 spend, 0% CTR, no ROAS. Small-dollar but consistent with the original proposal; still valid. | UPDATE 2026-10-25T14:53:00.000Z: fresh last_14d -- WhatsApp spend on Caps_Only_11Oct is only ₹15.81 (₹0.89 status + ₹14.92 marketing_messages) against ~₹9k adset spend, under 0.2% of delivery. Recommend downgrading/rejecting rather than approving -- excluding WhatsApp now would have near-zero measurable effect. | Reconfirmed 2026-10-27T20:53:00.000Z pass: fresh last_14d publisher_platform breakdown on Caps_Only_11Oct (120256301268680159) shows WhatsApp spend now only Rs7.17 (29 impressions, 0 clicks, 0 purchases) against ~Rs9,318 total adset spend in the window (<0.1% of delivery) -- vs Facebook Rs1,774.99 (7.38x ROAS) and Instagram Rs7,507.60 (12.88x ROAS). Consistent with the 2026-10-25T14:53 reading; WhatsApp materiality continues to shrink as a share of spend. No change to the standing recommendation to downgrade/reject rather than approve as-is -- excluding WhatsApp now would have near-zero measurable effect. Reconfirmed 2026-10-28T03:05 UTC: fresh last_14d publisher_platform pull on Caps_Only_11Oct -- WhatsApp Rs7.17 spend at CPM Rs247.24, 0.00% CTR, 0 purchases, vs Instagram Rs7,507.60 at 12.877158x ROAS and Facebook Rs1,775.02 at 7.381384x ROAS. WhatsApp's CPM remains roughly 4-5x the delivering placements' with zero engagement -- same pattern, no change to the proposed action. | Reconfirmed 2026-10-28T08:50:00.000Z: fresh last_14d publisher_platform pull on Caps_Only_11Oct -- WhatsApp Rs7.17 spend at CPM Rs247.24, 0 purchases, byte-identical to the 2026-10-28T03:05 reading, vs Instagram Rs7,507.60 and Facebook Rs1,775.02 both delivering normally. Same pattern, no change to the proposed action.",
+      "reasoning": "Fresh last_14d publisher_platform breakdown on Caps_Only_11Oct (120256301268680159, the sole ad set under the Caps_Only campaign, live since 2026-10-11): WhatsApp spend ₹6.83 at CPM ₹455.33, 0.00% CTR, 15 impressions, 0 purchases -- vs Instagram ₹1,356.11 at CPM ₹100.53, 1.90% CTR, 12.48x ROAS and Facebook ₹77.50 at CPM ₹257.47, 5.98% CTR, 20.62x ROAS. WhatsApp CPM is 4.5x Instagram's and the highest of the four delivering placements (facebook/instagram/threads/whatsapp), with zero engagement or conversions -- the same near-zero-engagement WhatsApp-placement pattern already flagged and pending exclusion on several other ad sets in this account (A-014, A-026, A-033, A-038, A-056, A-058, A-059, A-060). Spend at risk is small (₹6.83 to date) but the ad set is actively delivering and growing (campaign-level spend ₹1,443.56, 12.83x ROAS last_14d), so fixing it now is cheap and prevents compounding waste. Reconfirmed 2026-10-19T21:00:33.000Z (last_30d publisher_platform breakdown on Caps_Only_11Oct, 120256301268680159, still ACTIVE, sole ad set under Caps_Only): WhatsApp spend now Rs13.03 at CPM Rs342.89, 0.00% CTR, 0 purchases -- vs Instagram Rs4,804.83 at CPM Rs74.92, 1.84% CTR, 9.14x ROAS and Facebook Rs632.47 at CPM Rs87.79, 2.83% CTR, 11.24x ROAS. Same pattern as before, still valid. No change to the proposed action. | Reconfirmed 2026-10-19T22:52:00.000Z: Fresh last_14d publisher_platform breakdown: Caps_Only_11Oct WhatsApp CPM Rs342.89 (spend Rs13.03, 0 purchases) vs Instagram CPM Rs74.92 (ROAS 9.14x) and Facebook CPM Rs87.79 (ROAS 11.24x) -- WhatsApp remains the clear outlier with no attributed purchases. Ad set still ACTIVE under active campaign Caps_Only. Still awaiting human approval. | Reconfirmed 2026-10-20T00:48:00.000Z: fresh targeting fetch on Caps_Only_11Oct (120256301268680159, parent Caps_Only, ACTIVE) confirms effective_publisher_platforms still includes whatsapp -- proposal remains structurally relevant.\nPASS 2026-10-20T02:56:00.000Z: Fresh last_14d WhatsApp spend Rs13.03 (status Rs0.77 + marketing_messages Rs12.26), 0 purchases -- still low materiality, unchanged recommendation.\nPASS 2026-10-20T06:54:00.000Z: Parent campaign Caps_Only is ACTIVE and delivering (today spend Rs74.44); the underlying ad set Caps_Only_11Oct remains live, so this placement exclusion stays actionable. No change to the proposed action.\nPASS 2026-10-20T12:51:00.000Z: Parent campaign Caps_Only remains ACTIVE and delivering (last_7d spend Rs4,023.62, ROAS 7.88x); fresh targeting fetch on Caps_Only_11Oct confirms publisher_platforms still includes whatsapp (along with facebook/instagram/audience_network/threads). No change to the proposed action. | PASS 2026-10-20T14:48:00.000Z: Ad set Caps_Only_11Oct confirmed still ACTIVE under Caps_Only this pass (campaign today spend Rs440.73). WhatsApp placement issue remains unaddressed. No change to proposed action. Reconfirmed 2026-10-21T10:56:00.000Z: parent campaign Caps_Only remains ACTIVE (last_7d spend Rs3,900.57, ROAS 7.12x); ad set Caps_Only_11Oct remains ACTIVE. No fresh WhatsApp-specific placement breakdown pulled this pass; no change to the proposed action. Reconfirmed 2026-10-21T18:55:00.000Z: parent campaign Caps_Only remains ACTIVE -- last_7d spend Rs4,091.61, purchase_roas 7.893458x (up slightly from Rs3,900.57/7.12x). Fresh account-wide placement breakdown (last_14d) confirms the thesis: whatsapp/status + whatsapp_marketing_messages combined is Rs357.56 spend across 37,829 impressions with zero attributed purchases account-wide. No change to the proposed action. Reconfirmed 2026-10-22T22:52:00.000Z: fresh last_30d publisher_platform breakdown on Caps_Only_11Oct: WhatsApp spend ₹15.50 at CPM ₹344.44, 0.00% CTR, 0 purchases, vs Instagram ₹6,411.77 (10.851x ROAS) and Facebook ₹871.83 (11.134x ROAS). Same pattern, fix remains unapplied, pending approval. | CONFIRMED 2026-10-25T03:05:00.000Z: Caps_Only_11Oct (120256301268680159) last_14d WhatsApp placement breakdown still shows real waste -- 50 impressions, ₹15.81 spend, 0% CTR, no ROAS. Small-dollar but consistent with the original proposal; still valid. | UPDATE 2026-10-25T14:53:00.000Z: fresh last_14d -- WhatsApp spend on Caps_Only_11Oct is only ₹15.81 (₹0.89 status + ₹14.92 marketing_messages) against ~₹9k adset spend, under 0.2% of delivery. Recommend downgrading/rejecting rather than approving -- excluding WhatsApp now would have near-zero measurable effect. | Reconfirmed 2026-10-27T20:53:00.000Z pass: fresh last_14d publisher_platform breakdown on Caps_Only_11Oct (120256301268680159) shows WhatsApp spend now only Rs7.17 (29 impressions, 0 clicks, 0 purchases) against ~Rs9,318 total adset spend in the window (<0.1% of delivery) -- vs Facebook Rs1,774.99 (7.38x ROAS) and Instagram Rs7,507.60 (12.88x ROAS). Consistent with the 2026-10-25T14:53 reading; WhatsApp materiality continues to shrink as a share of spend. No change to the standing recommendation to downgrade/reject rather than approve as-is -- excluding WhatsApp now would have near-zero measurable effect. Reconfirmed 2026-10-28T03:05 UTC: fresh last_14d publisher_platform pull on Caps_Only_11Oct -- WhatsApp Rs7.17 spend at CPM Rs247.24, 0.00% CTR, 0 purchases, vs Instagram Rs7,507.60 at 12.877158x ROAS and Facebook Rs1,775.02 at 7.381384x ROAS. WhatsApp's CPM remains roughly 4-5x the delivering placements' with zero engagement -- same pattern, no change to the proposed action. | Reconfirmed 2026-10-28T08:50:00.000Z: fresh last_14d publisher_platform pull on Caps_Only_11Oct -- WhatsApp Rs7.17 spend at CPM Rs247.24, 0 purchases, byte-identical to the 2026-10-28T03:05 reading, vs Instagram Rs7,507.60 and Facebook Rs1,775.02 both delivering normally. Same pattern, no change to the proposed action. PASS 2026-10-31T18:49:00.000Z: fresh last_14d publisher_platform breakdown on Caps_Only_11Oct -- WhatsApp spend now Rs6.55 (CPM Rs111.01, 0.00% CTR, 0 purchases) vs Instagram Rs8,290.03 (13.31x ROAS) and Facebook Rs2,188.23 (8.45x ROAS). Condition unchanged and still holds; campaign has grown to Rs10,515.85 total spend this window. Left pending -- human has rejected this same WhatsApp-exclusion pattern on 12 other ad sets previously, no status change made here.",
       "actionSummary": "Remove 'whatsapp' from Caps_Only_11Oct's effective placements by setting an explicit targeting.publisher_platforms list covering facebook, instagram, audience_network and threads; every other targeting parameter stays unchanged.",
       "metaAction": {
         "tool": "ads_update_entity",
@@ -1366,7 +1366,7 @@
       "module": "device-targeting",
       "tier": "approval",
       "title": "Restrict BOF2_FeedStories to iOS -- Android ROAS less than half of iPhone's at similar spend",
-      "reasoning": "Restrict BOF2_FeedStories to iOS -- fresh last_14d impression_device breakdown: android_smartphone 5.628x ROAS (Rs3,583.30 spend) vs iphone 7.662x ROAS (Rs4,811.35 spend), gap now only ~1.36x. This has narrowed across several passes (was ~1.61x at the 2026-10-21T20:53:12.000Z pass) and is now materially short of this proposal's original framing ('Android ROAS less than half of iPhone's', i.e. a >=2x gap) -- Android's CPM (Rs79.04) is also actually lower than iPhone's (Rs100.41) this window, which cuts against restricting it. Flagging for human review: the case for this proposal has weakened substantially since creation and may no longer be worth acting on. Left pending rather than auto-closed -- a human should make this call. Reconfirmed 2026-10-21T22:48:00.000Z. Reconfirmed 2026-10-22T10:48:00.000Z: unchanged. Reconfirmed 2026-10-22T12:50:00.000Z: unchanged -- last_14d gap still ~1.36x (android 5.628x on Rs3,583.30 vs iphone 7.662x on Rs4,811.35); still well short of the proposal's original >=2x framing, flagged for human attention rather than auto-closed. Reconfirmed 2026-10-22T14:48:22.000Z: numbers byte-identical to the last recorded pull, no change. | UPDATE 2026-10-25T03:05:00.000Z -- PREMISE NO LONGER SUPPORTED: fresh impression_device breakdown for BOF2_FeedStories (120256322973880159), last_14d: Android 71,866 impr / ₹5,400.48 spend / ROAS 7.58; iPhone 76,818 impr / ₹7,312.23 / ROAS 8.38. Android ROAS is now ~90% of iPhone's, not 'less than half' as originally stated. Recommend standing this down or re-deriving it with fresh numbers rather than approving as-is. | UPDATE 2026-10-25T14:53:00.000Z: last_30d gap has narrowed further -- Android 7.58x (₹5,400.48 spend) vs iPhone 8.38x (₹7,312.23 spend), ~10% gap, down from ~1.36x at the 2026-10-21 reading and far from the original 'less than half' (>=2x) framing. Android CPM (₹79.04) is now actually lower than iPhone's (₹100.41). Recommend rejecting -- the device gap that justified this proposal has closed. | RECONFIRMED 2026-10-28T00:56:00.000Z: fresh last_14d impression_device breakdown on BOF2_FeedStories -- android_smartphone 6.804334x ROAS (Rs6,349.33 spend) vs iphone 9.722501x ROAS (Rs8,953.90 spend), gap now ~1.43x. This remains materially short of the proposal's original framing (Android ROAS 'less than half' of iPhone's, i.e. >=2x gap) and has fluctuated between ~1.36x and ~1.61x across recent passes without ever reaching that bar. Still flagged for human review; the case for restricting BOF2_FeedStories to iOS remains weak at current numbers. Reconfirmed 2026-10-28T03:05 UTC: fresh last_14d impression_device pull on BOF2_FeedStories -- android_smartphone 6.804334x ROAS (Rs6,349.33 spend) vs iphone 9.722501x ROAS (Rs8,953.90 spend), gap now ~1.43x (CPM Rs72.18 vs Rs92.27 -- Android's CPM remains lower). Still well short of this proposal's original '>=2x' framing; the case for restricting Android remains weak. Flagged for human review, no change to recommendation. | Reconfirmed 2026-10-28T08:50:00.000Z: fresh last_14d impression_device pull on BOF2_FeedStories -- android_smartphone 6.804334x ROAS (Rs6,349.33 spend) vs iphone 9.722501x ROAS (Rs8,953.90 spend), byte-identical to the 2026-10-28T03:05 reading. Gap remains ~1.43x, still well short of this proposal's original '>=2x / less than half' framing. Flagged for human review, no change to recommendation. UPDATED 2026-10-31: fresh impression_device breakdown (last_14d) shows iPhone Rs10,335.17 spend / 8.35x purchase_roas vs Android (android_smartphone) Rs6,803.43 spend / 5.96x purchase_roas -- iPhone still outperforms but the gap has narrowed to ~1.4x (not 'less than half' as originally measured 2026-10-20). Still a real, meaningful-spend gap; proposal left pending as-is.",
+      "reasoning": "Restrict BOF2_FeedStories to iOS -- fresh last_14d impression_device breakdown: android_smartphone 5.628x ROAS (Rs3,583.30 spend) vs iphone 7.662x ROAS (Rs4,811.35 spend), gap now only ~1.36x. This has narrowed across several passes (was ~1.61x at the 2026-10-21T20:53:12.000Z pass) and is now materially short of this proposal's original framing ('Android ROAS less than half of iPhone's', i.e. a >=2x gap) -- Android's CPM (Rs79.04) is also actually lower than iPhone's (Rs100.41) this window, which cuts against restricting it. Flagging for human review: the case for this proposal has weakened substantially since creation and may no longer be worth acting on. Left pending rather than auto-closed -- a human should make this call. Reconfirmed 2026-10-21T22:48:00.000Z. Reconfirmed 2026-10-22T10:48:00.000Z: unchanged. Reconfirmed 2026-10-22T12:50:00.000Z: unchanged -- last_14d gap still ~1.36x (android 5.628x on Rs3,583.30 vs iphone 7.662x on Rs4,811.35); still well short of the proposal's original >=2x framing, flagged for human attention rather than auto-closed. Reconfirmed 2026-10-22T14:48:22.000Z: numbers byte-identical to the last recorded pull, no change. | UPDATE 2026-10-25T03:05:00.000Z -- PREMISE NO LONGER SUPPORTED: fresh impression_device breakdown for BOF2_FeedStories (120256322973880159), last_14d: Android 71,866 impr / ₹5,400.48 spend / ROAS 7.58; iPhone 76,818 impr / ₹7,312.23 / ROAS 8.38. Android ROAS is now ~90% of iPhone's, not 'less than half' as originally stated. Recommend standing this down or re-deriving it with fresh numbers rather than approving as-is. | UPDATE 2026-10-25T14:53:00.000Z: last_30d gap has narrowed further -- Android 7.58x (₹5,400.48 spend) vs iPhone 8.38x (₹7,312.23 spend), ~10% gap, down from ~1.36x at the 2026-10-21 reading and far from the original 'less than half' (>=2x) framing. Android CPM (₹79.04) is now actually lower than iPhone's (₹100.41). Recommend rejecting -- the device gap that justified this proposal has closed. | RECONFIRMED 2026-10-28T00:56:00.000Z: fresh last_14d impression_device breakdown on BOF2_FeedStories -- android_smartphone 6.804334x ROAS (Rs6,349.33 spend) vs iphone 9.722501x ROAS (Rs8,953.90 spend), gap now ~1.43x. This remains materially short of the proposal's original framing (Android ROAS 'less than half' of iPhone's, i.e. >=2x gap) and has fluctuated between ~1.36x and ~1.61x across recent passes without ever reaching that bar. Still flagged for human review; the case for restricting BOF2_FeedStories to iOS remains weak at current numbers. Reconfirmed 2026-10-28T03:05 UTC: fresh last_14d impression_device pull on BOF2_FeedStories -- android_smartphone 6.804334x ROAS (Rs6,349.33 spend) vs iphone 9.722501x ROAS (Rs8,953.90 spend), gap now ~1.43x (CPM Rs72.18 vs Rs92.27 -- Android's CPM remains lower). Still well short of this proposal's original '>=2x' framing; the case for restricting Android remains weak. Flagged for human review, no change to recommendation. | Reconfirmed 2026-10-28T08:50:00.000Z: fresh last_14d impression_device pull on BOF2_FeedStories -- android_smartphone 6.804334x ROAS (Rs6,349.33 spend) vs iphone 9.722501x ROAS (Rs8,953.90 spend), byte-identical to the 2026-10-28T03:05 reading. Gap remains ~1.43x, still well short of this proposal's original '>=2x / less than half' framing. Flagged for human review, no change to recommendation. UPDATED 2026-10-31: fresh impression_device breakdown (last_14d) shows iPhone Rs10,335.17 spend / 8.35x purchase_roas vs Android (android_smartphone) Rs6,803.43 spend / 5.96x purchase_roas -- iPhone still outperforms but the gap has narrowed to ~1.4x (not 'less than half' as originally measured 2026-10-20). Still a real, meaningful-spend gap; proposal left pending as-is. PASS 2026-10-31T18:49:00.000Z: fresh last_14d impression_device breakdown -- android_smartphone 4.947158x ROAS (Rs7,183.57 spend) vs iphone 8.155647x ROAS (Rs10,755.47 spend), gap now ~1.65x. Still short of this proposal's original '>=2x (less than half)' framing; left pending for human review, no change to status.",
       "actionSummary": "Restrict BOF2_FeedStories's targeting to iOS only (adds user_os:['iOS'] to the ad set's targeting spec), shifting its budget away from the materially-underperforming Android segment. This is a targeting-only edit; no budget or creative change.",
       "metaAction": {
         "tool": "ads_update_entity",
@@ -23335,6 +23335,141 @@
       "severity": "medium",
       "dismissed": false,
       "createdAt": "2026-10-31T16:47:00.000Z"
+    },
+    {
+      "id": "AL-2403",
+      "module": "pause-kill",
+      "title": "IG90_Warm_BestCreatives_24Oct: 0.81x ROAS on Rs3,750.61 spend (last_14d) -- below kill-ROAS floor, alert only (pause-kill disabled)",
+      "detail": "Fresh last_14d pull: purchase_roas 0.809522x on Rs3,750.61 spend, down from 0.93x on Rs3,255.39 at the prior pass (2026-10-31T16:47). Campaign remains ACTIVE. kill_roas_threshold is DISABLED by user instruction since 2026-10-05 -- surfacing as alert only, no auto-pause taken.",
+      "severity": "medium",
+      "dismissed": false,
+      "createdAt": "2026-10-31T18:49:00.000Z"
+    },
+    {
+      "id": "AL-2404",
+      "module": "geo-scaling",
+      "title": "Region breakdown still returns null purchase ROAS for every state this pass",
+      "detail": "Account-level region breakdown (last_14d) returned non-null amount_spent for all 36 states/territories checked but null purchase_roas for every one -- same limitation as prior passes. geo-scaling/geo-suppression/new-geo-testing have no actionable signal this pass.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-10-31T18:49:00.000Z"
+    },
+    {
+      "id": "AL-2405",
+      "module": "competitor-rescrape",
+      "title": "Competitor active-ad count rescrape",
+      "detail": "Gully Labs: 123 -> 143 active ads (+16.3%, under the 20% spike threshold). Lotto Sport India: 217 -> 217 active ads (0% change). No competitor-spike alert warranted.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-10-31T18:49:00.000Z"
+    },
+    {
+      "id": "AL-2406",
+      "module": "purchaser-exclusion",
+      "title": "Purchaser-exclusion compliance check -- compliant account-wide",
+      "detail": "Checked all 14 active, non-exempt-or-exempt ad sets via fresh targeting fetch: 13 exclude 'Purchasers 180D' (id 120255823280550159) in excluded_custom_audiences; the 14th (Retargeting_Overall, 120255851467360159) is on settings.purchaser_exclusion_exempt_adset_ids and deliberately includes it by design. No action needed.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-10-31T18:49:00.000Z"
+    },
+    {
+      "id": "AL-2407",
+      "module": "lookalike-refresh",
+      "title": "Lookalike-refresh rate-limited this pass -- would have attempted, skipped",
+      "detail": "Last attempt was 2026-10-31T14:55:00.000Z (failed, Meta duplicate-lookalike error 2654/1713007, source audience still ~20 members). Only ~3h54m elapsed since then, under max_auto_actions_per_entity_per_day=1 -- not re-attempted this pass. The 3 existing laddered lookalikes (120255832535210159/610159/780159) remain live and serving.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-10-31T18:49:00.000Z"
+    },
+    {
+      "id": "AL-2408",
+      "module": "hook-angle-tagging",
+      "title": "No new creatives to tag this pass",
+      "detail": "Checked all distinct active-ad creative ids this pass (34 creative ids across 11 active campaigns, including creatives on ads whose campaign is paused) against queue.json.creativeTags -- all already have entries. Nothing new to tag.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-10-31T18:49:00.000Z"
+    },
+    {
+      "id": "AL-2409",
+      "module": "hard-spend-circuit-breaker",
+      "title": "Circuit breaker status check -- no new breach, still tripped 21d",
+      "detail": "Today's account spend (ads_get_ad_entities, level=ad_account, date_preset=today) is Rs11.21 against settings.hard_spend_ceiling_inr (Rs7,000) -- no new breach. circuitBreaker.tripped remains true from the 2026-10-10T16:50:00.000Z trip (now 21 days unresolved); A-063 (resume-after-circuit-breaker) is still pending human review. Per ROUTINE.md, this routine never auto-resumes.",
+      "severity": "medium",
+      "dismissed": false,
+      "createdAt": "2026-10-31T18:49:00.000Z"
+    },
+    {
+      "id": "AL-2410",
+      "module": "pixel-health",
+      "title": "Pixel/dataset quality check -- healthy, ROAS modules not suppressed",
+      "detail": "ads_get_dataset_quality on dataset 833131719490535: composite EMQ scores range 6.1-8.6 across all 9 tracked web events (PageView, ViewContent, AddToCart, InitiateCheckout, AddPaymentInfo, Purchase, prepaid_purchase, cod_purchase, Search, SubscribedButtonClick), all at/above settings.pixel_quality_min_match_rate (0.6). ROAS-driven modules not suppressed this pass.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-10-31T18:49:00.000Z"
+    },
+    {
+      "id": "AL-2411",
+      "module": "threshold-alerts",
+      "title": "No campaign CPM/CTR/CPC outside normal bands this pass",
+      "detail": "The only stored settings.metric_baselines entries (Kage_sales_1908, Kage_TOF) belong to campaigns no longer active -- no usable baseline comparison for the 11 currently active campaigns. No threshold breach surfaced.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-10-31T18:49:00.000Z"
+    },
+    {
+      "id": "AL-2412",
+      "module": "anomaly",
+      "title": "No anomaly signals this pass",
+      "detail": "ads_insights_anomaly_signal (account-wide): 'No anomaly signal issues found in the analyzed ad sets. Checked for auction overlap, creative fatigue, and narrow audience.'",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-10-31T18:49:00.000Z"
+    },
+    {
+      "id": "AL-2413",
+      "module": "learning-phase-stuck",
+      "title": "No ad sets confirmed stuck in learning this pass",
+      "detail": "All 14 active ad sets show learning_stage_info=null (already exited learning or not applicable) in this pass's adset-level fetch -- none flagged as stuck.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-10-31T18:49:00.000Z"
+    },
+    {
+      "id": "AL-2414",
+      "module": "campaign-consolidation-watch",
+      "title": "No new duplicate-targeting campaigns identified",
+      "detail": "Reviewed all 11 active campaigns (Prospecting_MATCHA_Purchase_27Oct, IG90_Warm_BestCreatives_24Oct, Fudoshin, MATCHA_TOF_Traffic_23Oct, Prospecting_LAL1_Purchasers_14Oct, KAGE_TOF_Traffic_13Oct, Sneakers_BOF_v2_Placement_Split_12Oct, Prospecting_JP2_Placement_Split_12Oct, Caps_Only, Sneakers_Catalog_Retargeting, Retargeting_Overall) -- each targets a distinct product/audience/objective combination. No duplicate-targeting flag raised.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-10-31T18:49:00.000Z"
+    },
+    {
+      "id": "AL-2415",
+      "module": "device-targeting",
+      "title": "A-070 refreshed -- Android/iPhone ROAS gap on BOF2_FeedStories now ~1.65x, still below original framing",
+      "detail": "Fresh last_14d impression_device pull: android_smartphone 4.947x ROAS (Rs7,183.57 spend), iphone 8.156x ROAS (Rs10,755.47 spend). Gap ~1.65x -- still short of A-070's original '>=2x' framing. Pending proposal left open for human judgment, reasoning updated with current numbers.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-10-31T18:49:00.000Z"
+    },
+    {
+      "id": "AL-2416",
+      "module": "placement-optimization",
+      "title": "A-065 refreshed -- WhatsApp placement on Caps_Only_11Oct still negligible spend, condition unchanged",
+      "detail": "WhatsApp spend now Rs6.55 (0% CTR) vs Instagram Rs8,290.03 (13.31x ROAS) and Facebook Rs2,188.23 (8.45x ROAS) on Caps_Only_11Oct, last_14d. Same pattern as 12 previously-rejected WhatsApp-exclusion proposals on other ad sets. Pending proposal left open, reasoning refreshed.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-10-31T18:49:00.000Z"
+    },
+    {
+      "id": "AL-2417",
+      "module": "self-audit-check",
+      "title": "Routine pass summary -- 0 auto-mutations, 0 new proposals, 15 new alerts, breaker still tripped (21d, unresolved)",
+      "detail": "Full-module pass. auto tier: purchaser-exclusion compliant (no action), lookalike-refresh rate-limited (skipped), hook-angle-tagging nothing new, hard-spend-circuit-breaker no new breach (today's spend Rs11.21 vs Rs7,000 ceiling). approval tier: all pending proposals re-checked against fresh data; A-070 and A-065 reasoning refreshed with current numbers (status unchanged, still pending); A-076's ROAS gap (Caps_Only 12.25x vs Prospecting_JP2 4.72x, last_14d) remains well above threshold, left as-is; A-077 (created same day at 14:55) still fresh, not re-checked; A-002/A-039/A-048/A-050/A-051/A-063/A-067/A-071/A-072 unchanged. Alerts-only modules (threshold-alerts, anomaly, learning-phase-stuck, pixel-health, competitor-rescrape, campaign-consolidation-watch, geo-scaling) all clean this pass. circuitBreaker.tripped remains true, 21 days unresolved since 2026-10-10T16:50 UTC, A-063 (resume-after-circuit-breaker) still pending human approval -- this routine never auto-resumes per ROUTINE.md.",
+      "severity": "medium",
+      "dismissed": false,
+      "createdAt": "2026-10-31T18:49:00.000Z"
     }
   ],
   "log": [
