@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-29T02:52:55.000Z",
+  "generatedAt": "2026-10-31T14:55:00.000Z",
   "settings": {
     "kill_roas_threshold": "DISABLED 2026-10-05 by user instruction: the ROAS pause-kill is OFF. Module 16 (pause-kill) must NOT auto-pause any campaign for low ROAS; surface low-ROAS campaigns as alerts only. The hard spend circuit breaker is a separate mechanism and stays ON. Former rule, for reference: pause if ROAS < 1.0x after ₹500 spend on a sales-objective campaign. EXCEPTION until 2026-10-05T23:59+05:30 (user-approved 2026-09-29): for the sneaker-push campaigns 120256091369160159 (Sneakers_BOF_30Sep-5Oct), 120256091370110159 (Sneakers_Prospecting_30Sep-5Oct) and 120256088882780159 (Sneakers_Catalog_Retargeting) the spend floor is ₹1,500, not ₹500.",
     "reactivate_min_historic_roas": "surface for reactivation if a paused campaign's last active-period ROAS >= 3.0x",
@@ -29,10 +29,10 @@
       }
     },
     "competitor_last_scrape": {
-      "gully_labs_active_ads": 139,
-      "lotto_sport_india_active_ads": 235,
-      "scraped_at": "2026-10-29T02:52:55.000Z",
-      "note": "2026-10-29T02:52:55.000Z pass: Gully Labs 139->139 (0%, under threshold), Lotto Sport India 235->235 (0%, under threshold)."
+      "gully_labs_active_ads": 142,
+      "lotto_sport_india_active_ads": 217,
+      "scraped_at": "2026-10-31T14:55:00.000Z",
+      "note": "2026-10-31T14:55:00.000Z pass: Gully Labs 139->142 (+2.2%, under threshold), Lotto Sport India 235->217 (-7.7%, under threshold)."
     },
     "audience_label_corrections": {
       "120249907176770159": "ATC_180D -- NOT a purchaser audience (cart-adders, event=AddToCart, retention 180 days). Verified 2026-09-14, reconfirmed 2026-09-20. Superseded note: earlier passes said the account had NO purchaser audience at all -- that's now out of date. See the 120255823280550159 (Purchasers 180D) entry above, created 2026-09-15, which IS a genuine purchaser audience and is already in use for exclusion + lookalike.",
@@ -1299,7 +1299,7 @@
       "module": "age-gender-auto-shift",
       "tier": "approval",
       "title": "Reduce 45-54 male budget share -- ROAS 40% below account average at meaningful spend",
-      "reasoning": "Account-wide age/gender breakdown (last_30d, ads_get_ad_entities level=ad_account breakdowns=age,gender) shows a weighted-average website_purchase_roas of 6.65x across segments with real purchase data (total Rs114,239.89 of the Rs116,842.83 30d spend). The 45-54 male segment spent Rs4,192.99 at only 3.97x ROAS, 40% below that average -- a real, non-trivial spend bucket, not noise. (18-24 female, Rs1,234 at 4.23x/-36%, and 35-44 female / 65+ male, both under Rs650 spend, show similar or worse deviations but are too small to act on confidently.) This breakdown is account-wide, not isolated to one campaign's targeting, so there is no single ad set to edit directly -- the actionable step is to review which active ad sets have 45-54 male in their age/gender targeting and either narrow their age range or add a negative adjustment, which requires picking specific ad set(s) in the approval UI (the Caps_Only, Sneakers_BOF, Retargeting_Overall, and Prospecting_JP_Purchase ad sets are the main contributors to this account-wide total; narrow to 18-44 would be the simplest first change, or a gender/age exclusion where the platform supports it). Reconfirmed 2026-10-19T21:00:33.000Z: fresh account-wide age/gender breakdown (last_30d) now shows a weighted-average website_purchase_roas of 6.784x across segments with real purchase data (total Rs120,884.71 of spend). The 45-54 male segment spent Rs4,724.85 at 4.073x ROAS, ~40% below that average -- same real, non-trivial spend bucket as before, conclusion unchanged. No ad set chosen yet -- still needs human selection before this can be approved.\nPASS 2026-10-20T02:56:00.000Z: Updated figures on the originally-flagged segment -- BOF_2_Warm_IG365_Engagers_Visitors (Sneakers_BOF_30Sep-5Oct) 45-54 male: Rs1,281.93 spend/14d, ROAS 1.95x vs campaign avg 4.07x, 52% below (was reported ~40% below in the prior pass). A second segment also surfaced this pass -- BOF2_FeedStories 25-34 male, Rs3,318.08 spend/14d, ROAS 3.55x vs adset avg 7.99x (56% below) -- but logged as alert-only (AL-1796) given it's still solidly profitable and this account's 6/6 rejection history on age-gender proposals for profitable-but-lower segments.\nPASS 2026-10-20T06:54:00.000Z: No material change since the 02:56 pass (BOF2_FeedStories 25-34 male still trailing adset average but ROAS-positive). Proposal stands.\nPASS 2026-10-20T10:58:00.000Z: fresh last_30d account-wide age/gender pull: weighted-average website_purchase_roas now 6.78x (total ~Rs120,883 of spend with real purchase data). The 45-54 male segment spent Rs4,724.85 at 4.073x ROAS, ~40% below that average -- consistent with the proposal's original finding (previously Rs4,192.99 at 3.97x/-40%). No change to the proposed action.\nPASS 2026-10-20T12:51:00.000Z: No fresh account-wide age/gender breakdown pulled this pass; no material change since the 10:58 reading (45-54 male segment ~40% below account-average ROAS at meaningful spend, still solidly profitable). Proposal stands. Reconfirmed 2026-10-21T10:56:00.000Z: no fresh account-wide age/gender breakdown pulled this pass; no material change since the 2026-10-20T10:58 reading (45-54 male segment ~40% below account-average ROAS at meaningful spend, still solidly profitable). Proposal stands, still needs human ad-set selection before it can be approved. Reconfirmed 2026-10-21T18:55:00.000Z: fresh account-wide age/gender breakdown (last_14d) -- 45-54 male purchase_roas 4.336x on Rs3,719.03 spend vs account-wide average 6.719x (Rs78,160.58 spend) -- 35.5% below account average at meaningful spend, consistent with the segment flagged at creation. Proposal stands, still needs human ad-set selection before it can be approved. Reconfirmed 2026-10-23T00:53:00.000Z: fresh last_14d age/gender breakdown on Sneakers_BOF_30Sep-5Oct (120256091369160159) -- the 45-54/male cell is at purchase_roas 1.523x on ₹1,641.60 spend, still far below the campaign's other major cells (18-24/male 5.18x, 25-34/male 3.13x, 35-44/male 3.06x, 65+/male 9.30x) and well below the account's other active sales campaigns (most running 8x-11x this pass). No change to the proposed action. | UPDATE 2026-10-25T03:05:00.000Z: campaign-level last_30d age/gender breakdown for active campaigns shows almost no 45-54 spend account-wide (data skewed toward 18-34 cells). Adset-level last_7d breakdown for RT_Sneakers_Caps_NoBuyers_v2_11Oct does show a real 45-54 male cell (773 impressions, ₹113.63 spend, 7d) but it's small. Recommend re-verifying the full historical ROAS claim behind this proposal before approving -- the cell exists but is thinner than the original framing suggested. | UPDATE 2026-10-25T14:53:00.000Z: fresh last_30d -- 45-54 male spend ₹6,453.43, ROAS 3.43x vs account avg 6.57x, 48% below average (gap widened from the earlier 40%-below / ₹4,192.99 reading). No other cell clears the meaningful-spend bar this pass (18-24 male ₹22,447 at 5.65x is only ~14% below avg, not material; 35-44 female ₹764.22 at 1.99x is below the ₹1,500 spend bar, too early). | UPDATE 2026-10-26T08:47:05.000Z: fresh last_30d account-wide age/gender pull -- 45-54 male purchase_roas 3.414253x on ₹6,718.34 spend vs a blended account average of ~6.54x, now ~47.8% below average (was ~40% at proposal creation). Trigger remains met; the gap has widened slightly. No change to the proposed action. | RECONFIRMED 2026-10-26T22:50:00.000Z: fresh last_14d account-wide age/gender breakdown shows a weighted-average purchase_roas of 6.37x across segments with real purchase data (Rs85,581.89 of spend). The 45-54 male segment spent Rs4,863.65 at only 2.92x ROAS, now 54.2% below that average (worse than the 40% gap this proposal was originally framed on) -- still a real, non-trivial spend bucket. 55-64 male (Rs1,077.82 at 2.11x, -66.8%) shows an even larger deviation this pass but remains too small a spend bucket to act on confidently on its own, consistent with this proposal's original framing of small buckets as flagged-for-awareness only. No change to the proposed action. | RECONFIRMED 2026-10-28T00:56:00.000Z: fresh account-wide last_30d age/gender pull -- recomputed weighted-average website_purchase_roas across segments with real purchase data is now ~6.35x (total spend Rs161,317.51 across segments with ROAS data, out of Rs161,862+ 30d account spend). The 45-54 male segment: Rs7,037.70 spend, roas 2.804909x, 15 purchases -- now ~56% below the account average, a WIDER gap than the 40% originally cited (both total spend and the deviation have grown since this proposal was written). Still no concrete ad set pre-selected -- human must still pick the specific ad set(s) to narrow in the targeting editor. Case for action has strengthened, not weakened. Reconfirmed 2026-10-28T03:05 UTC: fresh account-wide last_30d age/gender pull (total spend Rs161,620.40) -- weighted-average purchase_roas is now 6.35x. The 45-54 male segment spent Rs7,037.70 at 2.804909x ROAS, now 55.8% below account average (worse than the 40% gap previously recorded) -- still a real, meaningful spend bucket. 25-34 female (-50.1%, Rs1,819.64) and 35-44 female (-69.5%, Rs785.46) show similar or worse deviations but remain too small to act on confidently. No change to the proposed action; the case has strengthened slightly. | Reconfirmed 2026-10-28T08:50:00.000Z: fresh account-wide last_30d age/gender pull -- 45-54 male segment Rs7,037.70 spend at 2.804909x ROAS, byte-identical to the 2026-10-28T03:05 reading, still ~55.8% below the account's 6.35x weighted average. No change to the proposed action.",
+      "reasoning": "Account-wide age/gender breakdown (last_30d, ads_get_ad_entities level=ad_account breakdowns=age,gender) shows a weighted-average website_purchase_roas of 6.65x across segments with real purchase data (total Rs114,239.89 of the Rs116,842.83 30d spend). The 45-54 male segment spent Rs4,192.99 at only 3.97x ROAS, 40% below that average -- a real, non-trivial spend bucket, not noise. (18-24 female, Rs1,234 at 4.23x/-36%, and 35-44 female / 65+ male, both under Rs650 spend, show similar or worse deviations but are too small to act on confidently.) This breakdown is account-wide, not isolated to one campaign's targeting, so there is no single ad set to edit directly -- the actionable step is to review which active ad sets have 45-54 male in their age/gender targeting and either narrow their age range or add a negative adjustment, which requires picking specific ad set(s) in the approval UI (the Caps_Only, Sneakers_BOF, Retargeting_Overall, and Prospecting_JP_Purchase ad sets are the main contributors to this account-wide total; narrow to 18-44 would be the simplest first change, or a gender/age exclusion where the platform supports it). Reconfirmed 2026-10-19T21:00:33.000Z: fresh account-wide age/gender breakdown (last_30d) now shows a weighted-average website_purchase_roas of 6.784x across segments with real purchase data (total Rs120,884.71 of spend). The 45-54 male segment spent Rs4,724.85 at 4.073x ROAS, ~40% below that average -- same real, non-trivial spend bucket as before, conclusion unchanged. No ad set chosen yet -- still needs human selection before this can be approved.\nPASS 2026-10-20T02:56:00.000Z: Updated figures on the originally-flagged segment -- BOF_2_Warm_IG365_Engagers_Visitors (Sneakers_BOF_30Sep-5Oct) 45-54 male: Rs1,281.93 spend/14d, ROAS 1.95x vs campaign avg 4.07x, 52% below (was reported ~40% below in the prior pass). A second segment also surfaced this pass -- BOF2_FeedStories 25-34 male, Rs3,318.08 spend/14d, ROAS 3.55x vs adset avg 7.99x (56% below) -- but logged as alert-only (AL-1796) given it's still solidly profitable and this account's 6/6 rejection history on age-gender proposals for profitable-but-lower segments.\nPASS 2026-10-20T06:54:00.000Z: No material change since the 02:56 pass (BOF2_FeedStories 25-34 male still trailing adset average but ROAS-positive). Proposal stands.\nPASS 2026-10-20T10:58:00.000Z: fresh last_30d account-wide age/gender pull: weighted-average website_purchase_roas now 6.78x (total ~Rs120,883 of spend with real purchase data). The 45-54 male segment spent Rs4,724.85 at 4.073x ROAS, ~40% below that average -- consistent with the proposal's original finding (previously Rs4,192.99 at 3.97x/-40%). No change to the proposed action.\nPASS 2026-10-20T12:51:00.000Z: No fresh account-wide age/gender breakdown pulled this pass; no material change since the 10:58 reading (45-54 male segment ~40% below account-average ROAS at meaningful spend, still solidly profitable). Proposal stands. Reconfirmed 2026-10-21T10:56:00.000Z: no fresh account-wide age/gender breakdown pulled this pass; no material change since the 2026-10-20T10:58 reading (45-54 male segment ~40% below account-average ROAS at meaningful spend, still solidly profitable). Proposal stands, still needs human ad-set selection before it can be approved. Reconfirmed 2026-10-21T18:55:00.000Z: fresh account-wide age/gender breakdown (last_14d) -- 45-54 male purchase_roas 4.336x on Rs3,719.03 spend vs account-wide average 6.719x (Rs78,160.58 spend) -- 35.5% below account average at meaningful spend, consistent with the segment flagged at creation. Proposal stands, still needs human ad-set selection before it can be approved. Reconfirmed 2026-10-23T00:53:00.000Z: fresh last_14d age/gender breakdown on Sneakers_BOF_30Sep-5Oct (120256091369160159) -- the 45-54/male cell is at purchase_roas 1.523x on ₹1,641.60 spend, still far below the campaign's other major cells (18-24/male 5.18x, 25-34/male 3.13x, 35-44/male 3.06x, 65+/male 9.30x) and well below the account's other active sales campaigns (most running 8x-11x this pass). No change to the proposed action. | UPDATE 2026-10-25T03:05:00.000Z: campaign-level last_30d age/gender breakdown for active campaigns shows almost no 45-54 spend account-wide (data skewed toward 18-34 cells). Adset-level last_7d breakdown for RT_Sneakers_Caps_NoBuyers_v2_11Oct does show a real 45-54 male cell (773 impressions, ₹113.63 spend, 7d) but it's small. Recommend re-verifying the full historical ROAS claim behind this proposal before approving -- the cell exists but is thinner than the original framing suggested. | UPDATE 2026-10-25T14:53:00.000Z: fresh last_30d -- 45-54 male spend ₹6,453.43, ROAS 3.43x vs account avg 6.57x, 48% below average (gap widened from the earlier 40%-below / ₹4,192.99 reading). No other cell clears the meaningful-spend bar this pass (18-24 male ₹22,447 at 5.65x is only ~14% below avg, not material; 35-44 female ₹764.22 at 1.99x is below the ₹1,500 spend bar, too early). | UPDATE 2026-10-26T08:47:05.000Z: fresh last_30d account-wide age/gender pull -- 45-54 male purchase_roas 3.414253x on ₹6,718.34 spend vs a blended account average of ~6.54x, now ~47.8% below average (was ~40% at proposal creation). Trigger remains met; the gap has widened slightly. No change to the proposed action. | RECONFIRMED 2026-10-26T22:50:00.000Z: fresh last_14d account-wide age/gender breakdown shows a weighted-average purchase_roas of 6.37x across segments with real purchase data (Rs85,581.89 of spend). The 45-54 male segment spent Rs4,863.65 at only 2.92x ROAS, now 54.2% below that average (worse than the 40% gap this proposal was originally framed on) -- still a real, non-trivial spend bucket. 55-64 male (Rs1,077.82 at 2.11x, -66.8%) shows an even larger deviation this pass but remains too small a spend bucket to act on confidently on its own, consistent with this proposal's original framing of small buckets as flagged-for-awareness only. No change to the proposed action. | RECONFIRMED 2026-10-28T00:56:00.000Z: fresh account-wide last_30d age/gender pull -- recomputed weighted-average website_purchase_roas across segments with real purchase data is now ~6.35x (total spend Rs161,317.51 across segments with ROAS data, out of Rs161,862+ 30d account spend). The 45-54 male segment: Rs7,037.70 spend, roas 2.804909x, 15 purchases -- now ~56% below the account average, a WIDER gap than the 40% originally cited (both total spend and the deviation have grown since this proposal was written). Still no concrete ad set pre-selected -- human must still pick the specific ad set(s) to narrow in the targeting editor. Case for action has strengthened, not weakened. Reconfirmed 2026-10-28T03:05 UTC: fresh account-wide last_30d age/gender pull (total spend Rs161,620.40) -- weighted-average purchase_roas is now 6.35x. The 45-54 male segment spent Rs7,037.70 at 2.804909x ROAS, now 55.8% below account average (worse than the 40% gap previously recorded) -- still a real, meaningful spend bucket. 25-34 female (-50.1%, Rs1,819.64) and 35-44 female (-69.5%, Rs785.46) show similar or worse deviations but remain too small to act on confidently. No change to the proposed action; the case has strengthened slightly. | Reconfirmed 2026-10-28T08:50:00.000Z: fresh account-wide last_30d age/gender pull -- 45-54 male segment Rs7,037.70 spend at 2.804909x ROAS, byte-identical to the 2026-10-28T03:05 reading, still ~55.8% below the account's 6.35x weighted average. No change to the proposed action. UPDATED 2026-10-31: fresh account-wide age/gender breakdown (last_14d) shows 45-54 male at Rs4,311.02 spend / 3.31x purchase_roas, vs. account-dominant cohorts 25-34 male (Rs45,112.29/5.85x), 35-44 male (Rs19,199.26/5.67x), 18-24 male (Rs9,152.58/4.50x) -- still roughly 40% below the spend-weighted account average at meaningful spend. No specific ad set has been pre-chosen for the narrow (per the proposal's existing note); still pending.",
       "actionSummary": "Human picks which active ad set(s) to narrow (likely dropping or capping the 45-54 age bracket, and/or the thin 35-44 female / 65+ male edges) via a targeting edit -- no single pre-built metaAction since the signal is account-wide, not one ad set.",
       "metaAction": {
         "tool": "ads_update_entity",
@@ -1310,7 +1310,7 @@
       },
       "status": "pending",
       "createdAt": "2026-10-18T00:48:27.000Z",
-      "lastReconfirmedAt": "2026-10-28T08:50:00.000Z"
+      "lastReconfirmedAt": "2026-10-31T14:55:00.000Z"
     },
     {
       "id": "A-068",
@@ -1366,7 +1366,7 @@
       "module": "device-targeting",
       "tier": "approval",
       "title": "Restrict BOF2_FeedStories to iOS -- Android ROAS less than half of iPhone's at similar spend",
-      "reasoning": "Restrict BOF2_FeedStories to iOS -- fresh last_14d impression_device breakdown: android_smartphone 5.628x ROAS (Rs3,583.30 spend) vs iphone 7.662x ROAS (Rs4,811.35 spend), gap now only ~1.36x. This has narrowed across several passes (was ~1.61x at the 2026-10-21T20:53:12.000Z pass) and is now materially short of this proposal's original framing ('Android ROAS less than half of iPhone's', i.e. a >=2x gap) -- Android's CPM (Rs79.04) is also actually lower than iPhone's (Rs100.41) this window, which cuts against restricting it. Flagging for human review: the case for this proposal has weakened substantially since creation and may no longer be worth acting on. Left pending rather than auto-closed -- a human should make this call. Reconfirmed 2026-10-21T22:48:00.000Z. Reconfirmed 2026-10-22T10:48:00.000Z: unchanged. Reconfirmed 2026-10-22T12:50:00.000Z: unchanged -- last_14d gap still ~1.36x (android 5.628x on Rs3,583.30 vs iphone 7.662x on Rs4,811.35); still well short of the proposal's original >=2x framing, flagged for human attention rather than auto-closed. Reconfirmed 2026-10-22T14:48:22.000Z: numbers byte-identical to the last recorded pull, no change. | UPDATE 2026-10-25T03:05:00.000Z -- PREMISE NO LONGER SUPPORTED: fresh impression_device breakdown for BOF2_FeedStories (120256322973880159), last_14d: Android 71,866 impr / ₹5,400.48 spend / ROAS 7.58; iPhone 76,818 impr / ₹7,312.23 / ROAS 8.38. Android ROAS is now ~90% of iPhone's, not 'less than half' as originally stated. Recommend standing this down or re-deriving it with fresh numbers rather than approving as-is. | UPDATE 2026-10-25T14:53:00.000Z: last_30d gap has narrowed further -- Android 7.58x (₹5,400.48 spend) vs iPhone 8.38x (₹7,312.23 spend), ~10% gap, down from ~1.36x at the 2026-10-21 reading and far from the original 'less than half' (>=2x) framing. Android CPM (₹79.04) is now actually lower than iPhone's (₹100.41). Recommend rejecting -- the device gap that justified this proposal has closed. | RECONFIRMED 2026-10-28T00:56:00.000Z: fresh last_14d impression_device breakdown on BOF2_FeedStories -- android_smartphone 6.804334x ROAS (Rs6,349.33 spend) vs iphone 9.722501x ROAS (Rs8,953.90 spend), gap now ~1.43x. This remains materially short of the proposal's original framing (Android ROAS 'less than half' of iPhone's, i.e. >=2x gap) and has fluctuated between ~1.36x and ~1.61x across recent passes without ever reaching that bar. Still flagged for human review; the case for restricting BOF2_FeedStories to iOS remains weak at current numbers. Reconfirmed 2026-10-28T03:05 UTC: fresh last_14d impression_device pull on BOF2_FeedStories -- android_smartphone 6.804334x ROAS (Rs6,349.33 spend) vs iphone 9.722501x ROAS (Rs8,953.90 spend), gap now ~1.43x (CPM Rs72.18 vs Rs92.27 -- Android's CPM remains lower). Still well short of this proposal's original '>=2x' framing; the case for restricting Android remains weak. Flagged for human review, no change to recommendation. | Reconfirmed 2026-10-28T08:50:00.000Z: fresh last_14d impression_device pull on BOF2_FeedStories -- android_smartphone 6.804334x ROAS (Rs6,349.33 spend) vs iphone 9.722501x ROAS (Rs8,953.90 spend), byte-identical to the 2026-10-28T03:05 reading. Gap remains ~1.43x, still well short of this proposal's original '>=2x / less than half' framing. Flagged for human review, no change to recommendation.",
+      "reasoning": "Restrict BOF2_FeedStories to iOS -- fresh last_14d impression_device breakdown: android_smartphone 5.628x ROAS (Rs3,583.30 spend) vs iphone 7.662x ROAS (Rs4,811.35 spend), gap now only ~1.36x. This has narrowed across several passes (was ~1.61x at the 2026-10-21T20:53:12.000Z pass) and is now materially short of this proposal's original framing ('Android ROAS less than half of iPhone's', i.e. a >=2x gap) -- Android's CPM (Rs79.04) is also actually lower than iPhone's (Rs100.41) this window, which cuts against restricting it. Flagging for human review: the case for this proposal has weakened substantially since creation and may no longer be worth acting on. Left pending rather than auto-closed -- a human should make this call. Reconfirmed 2026-10-21T22:48:00.000Z. Reconfirmed 2026-10-22T10:48:00.000Z: unchanged. Reconfirmed 2026-10-22T12:50:00.000Z: unchanged -- last_14d gap still ~1.36x (android 5.628x on Rs3,583.30 vs iphone 7.662x on Rs4,811.35); still well short of the proposal's original >=2x framing, flagged for human attention rather than auto-closed. Reconfirmed 2026-10-22T14:48:22.000Z: numbers byte-identical to the last recorded pull, no change. | UPDATE 2026-10-25T03:05:00.000Z -- PREMISE NO LONGER SUPPORTED: fresh impression_device breakdown for BOF2_FeedStories (120256322973880159), last_14d: Android 71,866 impr / ₹5,400.48 spend / ROAS 7.58; iPhone 76,818 impr / ₹7,312.23 / ROAS 8.38. Android ROAS is now ~90% of iPhone's, not 'less than half' as originally stated. Recommend standing this down or re-deriving it with fresh numbers rather than approving as-is. | UPDATE 2026-10-25T14:53:00.000Z: last_30d gap has narrowed further -- Android 7.58x (₹5,400.48 spend) vs iPhone 8.38x (₹7,312.23 spend), ~10% gap, down from ~1.36x at the 2026-10-21 reading and far from the original 'less than half' (>=2x) framing. Android CPM (₹79.04) is now actually lower than iPhone's (₹100.41). Recommend rejecting -- the device gap that justified this proposal has closed. | RECONFIRMED 2026-10-28T00:56:00.000Z: fresh last_14d impression_device breakdown on BOF2_FeedStories -- android_smartphone 6.804334x ROAS (Rs6,349.33 spend) vs iphone 9.722501x ROAS (Rs8,953.90 spend), gap now ~1.43x. This remains materially short of the proposal's original framing (Android ROAS 'less than half' of iPhone's, i.e. >=2x gap) and has fluctuated between ~1.36x and ~1.61x across recent passes without ever reaching that bar. Still flagged for human review; the case for restricting BOF2_FeedStories to iOS remains weak at current numbers. Reconfirmed 2026-10-28T03:05 UTC: fresh last_14d impression_device pull on BOF2_FeedStories -- android_smartphone 6.804334x ROAS (Rs6,349.33 spend) vs iphone 9.722501x ROAS (Rs8,953.90 spend), gap now ~1.43x (CPM Rs72.18 vs Rs92.27 -- Android's CPM remains lower). Still well short of this proposal's original '>=2x' framing; the case for restricting Android remains weak. Flagged for human review, no change to recommendation. | Reconfirmed 2026-10-28T08:50:00.000Z: fresh last_14d impression_device pull on BOF2_FeedStories -- android_smartphone 6.804334x ROAS (Rs6,349.33 spend) vs iphone 9.722501x ROAS (Rs8,953.90 spend), byte-identical to the 2026-10-28T03:05 reading. Gap remains ~1.43x, still well short of this proposal's original '>=2x / less than half' framing. Flagged for human review, no change to recommendation. UPDATED 2026-10-31: fresh impression_device breakdown (last_14d) shows iPhone Rs10,335.17 spend / 8.35x purchase_roas vs Android (android_smartphone) Rs6,803.43 spend / 5.96x purchase_roas -- iPhone still outperforms but the gap has narrowed to ~1.4x (not 'less than half' as originally measured 2026-10-20). Still a real, meaningful-spend gap; proposal left pending as-is.",
       "actionSummary": "Restrict BOF2_FeedStories's targeting to iOS only (adds user_os:['iOS'] to the ad set's targeting spec), shifting its budget away from the materially-underperforming Android segment. This is a targeting-only edit; no budget or creative change.",
       "metaAction": {
         "tool": "ads_update_entity",
@@ -1384,7 +1384,7 @@
           "iOS"
         ]
       },
-      "lastReconfirmedAt": "2026-10-28T08:50:00.000Z"
+      "lastReconfirmedAt": "2026-10-31T14:55:00.000Z"
     },
     {
       "id": "A-071",
@@ -1489,7 +1489,7 @@
       "module": "dayparting",
       "tier": "approval",
       "title": "Reduce delivery 20:00-21:00 IST -- consistently low ROAS hour",
-      "reasoning": "Account-wide last_14d hourly breakdown (hourly_stats_aggregated_by_advertiser_time_zone): the 20:00-20:59 IST hour spent ₹4,302.79 at only 1.76x ROAS, 73% below the account's 14d average of 6.58x -- well above the meaningful-spend bar and a materially different window from A-068 (rejected 2026-10-05, which targeted 01:00-02:00 IST). Secondary weak hours this pass: 00:00-00:59 (2.62x on ₹3,480.58, -60%) and 16:00-16:59 (2.32x on ₹3,293.36, -65%) -- flagged for awareness, not part of this proposal's action. | RECONFIRMED 2026-10-26T22:50:00.000Z: fresh last_14d account-wide hourly breakdown shows the weighted-average purchase_roas is now 6.30x, and the 20:00-20:59 IST hour this proposal targets has moved to Rs5,005.15 spend at 4.87x ROAS -- only 22.7% below that average, a materially weaker case than the -73% this proposal was originally built on. The worst hour this pass is actually 16:00-16:59 IST (Rs3,618.62 spend at 2.11x ROAS, -66.5% vs average), already noted in this proposal's secondary-weak-hours list but not its primary target. Flagging for human review: as currently written, this proposal's named hour (20:00-21:00) no longer clearly qualifies as the account's worst-performing window -- 16:00-17:00 IST would be the stronger candidate if this is re-scoped. Left pending, not auto-rejected, per ROUTINE.md. | RECONFIRMED 2026-10-28T00:56:00.000Z: see AL-2258 -- fresh last_14d hourly breakdown shows the 20:00-20:59 IST hour has recovered to 5.104532x ROAS (Rs4,773.82 spend), only ~17% below the account's recomputed 14d weighted average (6.16x), versus the 1.76x/-73% this proposal was originally built on. TRIGGER LARGELY RESOLVED. Left pending per ROUTINE.md for human review rather than auto-rejected -- the human may still want the schedule exclusion for other reasons, or may prefer to close it now that the gap has closed. Reconfirmed 2026-10-28T03:05 UTC: fresh last_14d account-wide hourly pull -- the 20:00-20:59 IST hour now spends Rs4,773.82 at 5.104532x ROAS, only ~17% below the window's weighted-average ROAS (6.16x) -- essentially normal variance, not a standout low hour anymore. This confirms the trigger has continued to resolve further since the 'largely resolved' note on the prior pass. Recommend this proposal be considered moot/stale at the next human review, though left pending per policy (the routine does not auto-reject approval-tier proposals). | Reconfirmed 2026-10-28T08:50:00.000Z: fresh last_14d hourly breakdown -- the 20:00-20:59 IST hour spent Rs4,773.82 at 5.104532x ROAS, byte-identical to the 2026-10-28T03:05 reading, still only modestly below the account's recomputed average. Trigger remains largely resolved; left pending per ROUTINE.md for human review rather than auto-rejected.",
+      "reasoning": "Account-wide last_14d hourly breakdown (hourly_stats_aggregated_by_advertiser_time_zone): the 20:00-20:59 IST hour spent ₹4,302.79 at only 1.76x ROAS, 73% below the account's 14d average of 6.58x -- well above the meaningful-spend bar and a materially different window from A-068 (rejected 2026-10-05, which targeted 01:00-02:00 IST). Secondary weak hours this pass: 00:00-00:59 (2.62x on ₹3,480.58, -60%) and 16:00-16:59 (2.32x on ₹3,293.36, -65%) -- flagged for awareness, not part of this proposal's action. | RECONFIRMED 2026-10-26T22:50:00.000Z: fresh last_14d account-wide hourly breakdown shows the weighted-average purchase_roas is now 6.30x, and the 20:00-20:59 IST hour this proposal targets has moved to Rs5,005.15 spend at 4.87x ROAS -- only 22.7% below that average, a materially weaker case than the -73% this proposal was originally built on. The worst hour this pass is actually 16:00-16:59 IST (Rs3,618.62 spend at 2.11x ROAS, -66.5% vs average), already noted in this proposal's secondary-weak-hours list but not its primary target. Flagging for human review: as currently written, this proposal's named hour (20:00-21:00) no longer clearly qualifies as the account's worst-performing window -- 16:00-17:00 IST would be the stronger candidate if this is re-scoped. Left pending, not auto-rejected, per ROUTINE.md. | RECONFIRMED 2026-10-28T00:56:00.000Z: see AL-2258 -- fresh last_14d hourly breakdown shows the 20:00-20:59 IST hour has recovered to 5.104532x ROAS (Rs4,773.82 spend), only ~17% below the account's recomputed 14d weighted average (6.16x), versus the 1.76x/-73% this proposal was originally built on. TRIGGER LARGELY RESOLVED. Left pending per ROUTINE.md for human review rather than auto-rejected -- the human may still want the schedule exclusion for other reasons, or may prefer to close it now that the gap has closed. Reconfirmed 2026-10-28T03:05 UTC: fresh last_14d account-wide hourly pull -- the 20:00-20:59 IST hour now spends Rs4,773.82 at 5.104532x ROAS, only ~17% below the window's weighted-average ROAS (6.16x) -- essentially normal variance, not a standout low hour anymore. This confirms the trigger has continued to resolve further since the 'largely resolved' note on the prior pass. Recommend this proposal be considered moot/stale at the next human review, though left pending per policy (the routine does not auto-reject approval-tier proposals). | Reconfirmed 2026-10-28T08:50:00.000Z: fresh last_14d hourly breakdown -- the 20:00-20:59 IST hour spent Rs4,773.82 at 5.104532x ROAS, byte-identical to the 2026-10-28T03:05 reading, still only modestly below the account's recomputed average. Trigger remains largely resolved; left pending per ROUTINE.md for human review rather than auto-rejected. SUPERSEDED 2026-10-31: fresh adset-level hourly breakdown for BOF2_FeedStories (last_14d) now shows 20:00-21:00 IST at 8.61x purchase_roas and 21:00-22:00 at 9.80x -- both strong hours. The premise no longer holds. Closed as moot; see A-077 for the ad set's current real weak window (16:00-17:59 IST).",
       "actionSummary": "Add an ad-set delivery schedule to the top-spending active ad sets (starting with BOF2_FeedStories) that excludes 20:00-21:00 IST. CAVEAT for the human reviewer: Meta ad scheduling (adset_schedule) requires the ad set to run on a lifetime_budget, not a daily budget -- verify the target ad set's budget type before approving/executing this one; it may need converting to a lifetime budget first, or implementing via a bid/budget multiplier instead.",
       "metaAction": {
         "tool": "ads_update_entity",
@@ -1501,9 +1501,10 @@
           "note": "Exclude 20:00-21:00 IST daily. CAVEAT: Meta ad scheduling requires the ad set to run on a lifetime_budget, not a daily budget -- verify this ad set's budget type before executing; it may need converting to a lifetime budget first, or implementing via a bid/budget multiplier instead. Human reviewer should finalize the exact adset_schedule array against the account timezone at approval time."
         }
       },
-      "status": "pending",
+      "status": "rejected",
       "createdAt": "2026-10-25T14:53:00.000Z",
-      "lastReconfirmedAt": "2026-10-28T08:50:00.000Z"
+      "lastReconfirmedAt": "2026-10-28T08:50:00.000Z",
+      "resolvedAt": "2026-10-31T14:55:00.000Z"
     },
     {
       "id": "A-075",
@@ -1544,7 +1545,7 @@
       "module": "budget-reallocation",
       "tier": "approval",
       "title": "Shift Rs200/day from Prospecting_JP2_Placement_Split_12Oct (3.16x) to Caps_Only (14.57x) -- large ROAS gap",
-      "reasoning": "last_7d (this pass, 2026-10-29): Caps_Only is at 14.57x purchase_roas on Rs5,459.11 spend (89 purchases), while Prospecting_JP2_Placement_Split_12Oct is at 3.16x purchase_roas on Rs7,325.64 spend (9 purchases) -- a ~4.6x gap, well past settings.budget_reallocation_min_roas_gap (shift when one active campaign's ROAS is 1.5x+ another's). Both campaigns are currently ACTIVE and healthy in absolute terms (neither is a pause-kill candidate), so this is a reallocation opportunity, not a performance problem. Prospecting_JP2_Placement_Split_12Oct runs ABO with a single ad set (PROSP_Reels_Capped, daily_budget Rs1,320); Caps_Only runs CBO at the campaign level (daily_budget Rs900). Proposing a modest Rs200/day shift to test the reallocation without destabilizing either campaign's delivery. No existing pending or recently-resolved proposal covers this specific pair (A-049/A-064/A-066/A-069/A-073/A-075 all involved different campaigns, since paused).",
+      "reasoning": "last_7d (this pass, 2026-10-29): Caps_Only is at 14.57x purchase_roas on Rs5,459.11 spend (89 purchases), while Prospecting_JP2_Placement_Split_12Oct is at 3.16x purchase_roas on Rs7,325.64 spend (9 purchases) -- a ~4.6x gap, well past settings.budget_reallocation_min_roas_gap (shift when one active campaign's ROAS is 1.5x+ another's). Both campaigns are currently ACTIVE and healthy in absolute terms (neither is a pause-kill candidate), so this is a reallocation opportunity, not a performance problem. Prospecting_JP2_Placement_Split_12Oct runs ABO with a single ad set (PROSP_Reels_Capped, daily_budget Rs1,320); Caps_Only runs CBO at the campaign level (daily_budget Rs900). Proposing a modest Rs200/day shift to test the reallocation without destabilizing either campaign's delivery. No existing pending or recently-resolved proposal covers this specific pair (A-049/A-064/A-066/A-069/A-073/A-075 all involved different campaigns, since paused). UPDATED 2026-10-31: fresh last_7d pull shows Caps_Only at Rs5,824.49 spend / 12.15x purchase_roas (was Rs5,459.11/14.57x) and Prospecting_JP2_Placement_Split_12Oct at Rs7,943.51 spend / 3.25x purchase_roas (was Rs7,325.64/3.16x) -- gap now ~3.7x (was ~4.6x), narrower but still far past the 1.5x+ threshold. Still pending.",
       "actionSummary": "Reduces PROSP_Reels_Capped's (Prospecting_JP2_Placement_Split_12Oct) ad set daily budget from Rs1,320 to Rs1,120, and increases Caps_Only's campaign daily budget from Rs900 to Rs1,100 -- a Rs200/day shift toward the higher-ROAS campaign. Both entities are currently ACTIVE; per Meta API behavior, a non-trivial budget edit on a live entity does not force-pause it (unlike a targeting edit), so delivery should continue uninterrupted under the new budgets.",
       "metaAction": {
         "tool": "ads_update_entity",
@@ -1570,6 +1571,55 @@
       },
       "status": "pending",
       "createdAt": "2026-10-29T00:52:00.000Z"
+    },
+    {
+      "id": "A-077",
+      "module": "dayparting",
+      "tier": "approval",
+      "title": "Reduce delivery 16:00-18:00 IST on BOF2_FeedStories -- new consistently low-ROAS window",
+      "reasoning": "Replaces A-074 (closed as moot this pass -- see log). Fresh adset-level hourly_stats_aggregated_by_advertiser_time_zone pull for BOF2_FeedStories (ad set id 120256322973880159, campaign Sneakers_BOF_v2_Placement_Split_12Oct, last_14d, 2026-10-31 pass) shows two consecutive weak hours: 16:00-16:59 at 2.89x purchase_roas (Rs909.11 spend) and 17:00-17:59 at 2.46x purchase_roas (Rs1,014.61 spend) -- both well below the ad set's other hours, most of which run 4x-19.8x (e.g. 02:00-02:59 at 19.77x, 10:00-10:59 at 18.35x, 19:00-19:59 at 9.83x). This is a real, non-trivial spend window (~Rs1,924 combined over 14d) underperforming the ad set's own baseline, not a single noisy hour.",
+      "actionSummary": "Add an ad set schedule to BOF2_FeedStories that reduces or stops delivery during 16:00-18:00 IST daily, while delivering normally the rest of the day.",
+      "metaAction": {
+        "tool": "ads_update_entity",
+        "params": {
+          "ad_account_id": "704523148804803",
+          "entity_id": "120256322973880159",
+          "entity_type": "ad_set",
+          "fields": {
+            "adset_schedule": [
+              {
+                "start_minute": 0,
+                "end_minute": 960,
+                "days": [
+                  0,
+                  1,
+                  2,
+                  3,
+                  4,
+                  5,
+                  6
+                ]
+              },
+              {
+                "start_minute": 1080,
+                "end_minute": 1440,
+                "days": [
+                  0,
+                  1,
+                  2,
+                  3,
+                  4,
+                  5,
+                  6
+                ]
+              }
+            ]
+          }
+        },
+        "note": "adset_schedule here delivers 00:00-16:00 and 18:00-24:00 IST daily (minutes from midnight, 1440/day), skipping the 16:00-18:00 weak window identified above. Human should confirm minute math and timezone handling in the dashboard's editor before approving -- lifetime_budget / start_time constraints for schedule-based delivery on Meta's API should be re-verified at approval time since this ad set currently runs on a daily_budget."
+      },
+      "status": "pending",
+      "createdAt": "2026-10-31T14:55:00.000Z"
     }
   ],
   "alerts": [
@@ -23033,6 +23083,141 @@
       "severity": "medium",
       "dismissed": false,
       "createdAt": "2026-10-29T02:52:55.000Z"
+    },
+    {
+      "id": "AL-2375",
+      "module": "hard-spend-circuit-breaker",
+      "title": "Circuit breaker status check -- no new breach, still tripped 21d",
+      "detail": "Pass at 2026-10-31T14:55 UTC: ads_get_ad_entities (level=ad_account, date_preset=today) shows today's account spend at Rs5,253.45 against the Rs7,000 ceiling -- no new breach. circuitBreaker.tripped remains true from 2026-10-10T16:50 UTC (21 days unresolved), A-063 (resume-after-circuit-breaker) still pending human review. Per ROUTINE.md the routine never auto-resumes a tripped breaker. Note: scheduled passes appear to have had a gap between 2026-10-29T02:52 UTC and this pass -- no automation-driven account changes occurred in that gap per the log.",
+      "severity": "medium",
+      "dismissed": false,
+      "createdAt": "2026-10-31T14:55:00.000Z"
+    },
+    {
+      "id": "AL-2376",
+      "module": "pixel-health",
+      "title": "Pixel/dataset quality check -- healthy, ROAS modules not suppressed",
+      "detail": "ads_get_dataset_quality on dataset 833131719490535 (Shopify Meta Pixel): composite EMQ scores across all tracked web events range 6.1 (AddToCart/Search/PageView/ViewContent/SubscribedButtonClick) to 8.6 (prepaid_purchase), with Purchase at 8.5 and InitiateCheckout at 6.9 -- all at/above pixel_quality_min_match_rate=0.6 (interpreted as composite_score/10 >= 0.6). ROAS-based modules not suppressed this pass.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-10-31T14:55:00.000Z"
+    },
+    {
+      "id": "AL-2377",
+      "module": "purchaser-exclusion",
+      "title": "Purchaser-exclusion compliance check -- compliant account-wide",
+      "detail": "Checked all 14 active ad sets this pass (fresh targeting fetch, level=adset, effective_status=ACTIVE, across 11 active campaigns). 13 exclude the verified purchaser audience 'Purchasers 180D' (id 120255823280550159) in excluded_custom_audiences. The 14th, 'Retargeting_Overall' ad set (id 120255851467360159, campaign Retargeting_Overall), is on settings.purchaser_exclusion_exempt_adset_ids by design (deliberately targets past purchasers for cross-sell). purchaser-exclusion remains compliant account-wide -- no targeting edit needed this pass.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-10-31T14:55:00.000Z"
+    },
+    {
+      "id": "AL-2378",
+      "module": "lookalike-refresh",
+      "title": "Lookalike-refresh attempted and failed again -- duplicate-lookalike constraint",
+      "detail": "Rate limit cleared (last attempt 2026-10-28T20:50:00.000Z, >48h elapsed over the scheduling gap). ads_get_custom_audience on 'Purchasers 180D' (120255823280550159) confirms size still ~20 (unchanged since 2026-09-15 creation). Attempted ads_create_custom_audience (subtype LOOKALIKE, ratio 0.01, name 'Lookalike (IN 1%) - Purchasers 180D - 2026-10-31') -- failed with Meta's duplicate-lookalike error (2654/1713007), same expected API constraint as every prior attempt since the source audience hasn't grown. The existing laddered 1%/2%/5% lookalikes built 2026-09-15 remain live and serving. Not retried further this pass per the one-attempt rule. See log entry.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-10-31T14:55:00.000Z"
+    },
+    {
+      "id": "AL-2379",
+      "module": "hook-angle-tagging",
+      "title": "No new creatives to tag this pass",
+      "detail": "Checked all 31 distinct creative ids used by genuinely active ads this pass (effective_status=ACTIVE, excluding ad-level ACTIVE-but-CAMPAIGN_PAUSED rows under Sneakers_PROSP_5Line_Oct) across 11 active campaigns -- all 31 already have a creativeTags entry. Nothing new to tag.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-10-31T14:55:00.000Z"
+    },
+    {
+      "id": "AL-2380",
+      "module": "threshold-alerts",
+      "title": "No campaign CPM/CTR/CPC outside normal bands this pass",
+      "detail": "Compared last_7d vs last_30d CPM/CTR/CPC for all 11 active campaigns. Largest single move was Prospecting_LAL1_Purchasers_14Oct's CPM (Rs212.20 last_7d vs Rs171.43 last_30d, +24%) on a small, newer campaign -- not treated as an alertable band breach. All other campaigns within normal variance.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-10-31T14:55:00.000Z"
+    },
+    {
+      "id": "AL-2381",
+      "module": "anomaly",
+      "title": "No anomaly signals this pass",
+      "detail": "ads_insights_anomaly_signal (account-wide): 'No anomaly signal issues found in the analyzed ad sets. Checked for auction overlap, creative fatigue, and narrow audience.'",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-10-31T14:55:00.000Z"
+    },
+    {
+      "id": "AL-2382",
+      "module": "learning-phase-stuck",
+      "title": "No ad sets confirmed stuck in learning this pass",
+      "detail": "learning_stage_info was null/not-in-learning for all 14 active ad sets fetched this pass -- none confirmed stuck in learning phase >7 days.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-10-31T14:55:00.000Z"
+    },
+    {
+      "id": "AL-2383",
+      "module": "competitor-rescrape",
+      "title": "Competitor active-ad count rescrape",
+      "detail": "ads_library_search this pass: Gully Labs 139 -> 142 active ads (+2.2%), Lotto Sport India 235 -> 217 active ads (-7.7%). Both moves under the 20% competitor-spike threshold -- no spike alert.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-10-31T14:55:00.000Z"
+    },
+    {
+      "id": "AL-2384",
+      "module": "campaign-consolidation-watch",
+      "title": "No new duplicate-targeting campaigns identified",
+      "detail": "Reviewed all 11 active campaigns (Prospecting_YinYang_Sales_28Oct, IG90_Warm_BestCreatives_24Oct, Fudoshin, MATCHA_TOF_Traffic_23Oct, Prospecting_LAL1_Purchasers_14Oct, KAGE_TOF_Traffic_13Oct, Sneakers_BOF_v2_Placement_Split_12Oct, Prospecting_JP2_Placement_Split_12Oct, Caps_Only, Sneakers_Catalog_Retargeting, Retargeting_Overall) -- each targets a distinct product/creative concept and audience; no confirmed product+audience duplicates this pass.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-10-31T14:55:00.000Z"
+    },
+    {
+      "id": "AL-2385",
+      "module": "dayparting",
+      "title": "A-074 closed as moot -- the cited low-ROAS hour flipped; new window identified (A-077)",
+      "detail": "A-074 proposed reducing BOF2_FeedStories delivery at 20:00-21:00 IST, citing it as a consistently low-ROAS hour (created 2026-10-25). Fresh adset-level hourly_stats_aggregated_by_advertiser_time_zone pull for BOF2_FeedStories (last_14d) this pass shows 20:00-21:00 now at 8.61x purchase_roas (Rs1,191.09 spend) and 21:00-22:00 at 9.80x -- both strong hours, not weak ones. The real current weak window for this ad set is 16:00-17:59 (16:00: 2.89x on Rs909.11; 17:00: 2.46x on Rs1,014.61), both well below the ad set's other hours (mostly 4x-19x). Closed A-074 as moot (status rejected, no human had acted on it) and opened A-077 for the new window instead.",
+      "severity": "medium",
+      "dismissed": false,
+      "createdAt": "2026-10-31T14:55:00.000Z"
+    },
+    {
+      "id": "AL-2386",
+      "module": "device-targeting",
+      "title": "A-070 reasoning refreshed -- iOS/Android ROAS gap for BOF2_FeedStories has narrowed",
+      "detail": "Fresh impression_device breakdown for BOF2_FeedStories (last_14d): iPhone Rs10,335.17 spend / 8.35x purchase_roas; Android (android_smartphone) Rs6,803.43 spend / 5.96x purchase_roas. iPhone still outperforms, but the gap has narrowed to ~1.4x (not 'less than half' as originally stated when A-070 was created 2026-10-20). Updated A-070's reasoning with current numbers; proposal remains pending -- still a real gap, just smaller than when first raised.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-10-31T14:55:00.000Z"
+    },
+    {
+      "id": "AL-2387",
+      "module": "age-gender-auto-shift",
+      "title": "A-067 reasoning refreshed with current numbers -- still ~40% below account average",
+      "detail": "Fresh account-wide age/gender breakdown (last_14d): 45-54 male at Rs4,311.02 spend / 3.31x purchase_roas, vs. the account's dominant cohorts (25-34 male Rs45,112.29/5.85x, 35-44 male Rs19,199.26/5.67x, 18-24 male Rs9,152.58/4.50x) -- 45-54 male remains roughly 40% below the spend-weighted account average at meaningful spend. A-067's reasoning updated with these current figures; still pending (no specific ad set pre-chosen, per the proposal's own note).",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-10-31T14:55:00.000Z"
+    },
+    {
+      "id": "AL-2388",
+      "module": "budget-reallocation",
+      "title": "A-076 reasoning refreshed -- ROAS gap narrowed slightly but still well above threshold",
+      "detail": "Fresh last_7d pull: Caps_Only Rs5,824.49 spend / 12.15x purchase_roas (was Rs5,459.11/14.57x at creation); Prospecting_JP2_Placement_Split_12Oct Rs7,943.51 spend / 3.25x purchase_roas (was Rs7,325.64/3.16x). Gap is now ~3.7x (was ~4.6x) -- narrower but still far past settings.budget_reallocation_min_roas_gap (1.5x+). A-076 updated with current numbers, still pending.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-10-31T14:55:00.000Z"
+    },
+    {
+      "id": "AL-2389",
+      "module": "self-audit-check",
+      "title": "Routine pass summary -- 1 auto-attempt (failed), 1 proposal closed as moot, 1 new proposal, 15 new alerts, breaker still tripped (21d, unresolved since 2026-10-10)",
+      "detail": "Pass at 2026-10-31T14:55 UTC, following a scheduling gap since the last pass (2026-10-29T02:52 UTC). Circuit breaker: no new breach (today's spend Rs5,253.45 of Rs7,000). Pixel gate: healthy. Auto-tier: purchaser-exclusion compliant (no edit needed), lookalike-refresh attempted and failed again (expected duplicate-lookalike constraint), hook-angle-tagging had nothing new (31/31 active creatives already tagged). Approval-tier: A-074 (dayparting) closed as moot -- its cited low-ROAS hour for BOF2_FeedStories flipped to a strong hour; replaced with A-077 for the ad set's real current weak window (16:00-17:59 IST). A-070, A-067, A-076 reasoning refreshed with current numbers (same underlying direction, no status change). A-039/A-048/A-050/A-051's target campaigns and A-063's 3 breaker-paused campaigns all reconfirmed still PAUSED -- proposals remain valid. No geo-scaling/suppression/new-geo-testing candidates this pass (Meta's region breakdown does not return purchase_roas in this account, so ROAS-based geo analysis isn't possible with available data). No creative-fatigue or bid-strategy-adjustment triggers (max ad set frequency 2.0, below the 3.0 fatigue threshold; all active campaigns run auto-bid 'Highest volume' with no cost cap to drift from). Catalog/DPA already live and spending (Sneakers_Catalog_Retargeting) -- module 35 has nothing to do. index.html's static DATA/INSIGHTS_DATA snapshot remains frozen on 2026-09-13 (already tracked, last dedicated alert AL-2260 on 2026-10-28, within the 3-day dedup window -- not re-flagged today). Competitor rescrape: both tracked pages moved under 20% threshold. Highest-priority item this pass: the dayparting flip (A-074/A-077) since it reverses a previously-pending human ask.",
+      "severity": "medium",
+      "dismissed": false,
+      "createdAt": "2026-10-31T14:55:00.000Z"
     }
   ],
   "log": [
@@ -32927,6 +33112,41 @@
       },
       "tier": "approval",
       "executedAt": "2026-10-28T22:48:43.000Z"
+    },
+    {
+      "proposalId": "A-074",
+      "action": "dayparting: closed A-074 as moot -- BOF2_FeedStories' 20:00-21:00 IST hour, originally flagged as consistently low-ROAS (created 2026-10-25), is now at 8.61x purchase_roas on fresh last_14d data (21:00-22:00 also strong at 9.80x). The underlying condition no longer holds. No human had acted on it. See A-077 for the replacement proposal targeting the ad set's current real weak window.",
+      "result": "rejected",
+      "previousState": {
+        "status": "pending"
+      },
+      "detail": {
+        "note": "Closed due to stale premise, not executed -- no Meta API mutation."
+      },
+      "tier": "approval",
+      "executedAt": "2026-10-31T14:55:00.000Z"
+    },
+    {
+      "proposalId": null,
+      "action": "lookalike-refresh auto-module: rate limit cleared (last attempt 2026-10-28T20:50:00.000Z, >48h elapsed across the scheduling gap) -- attempted to rebuild the 1% lookalike off 'Purchasers 180D' (id 120255823280550159, approximate size confirmed still ~20 via ads_get_custom_audience) via ads_create_custom_audience (subtype LOOKALIKE, ratio 0.01, name 'Lookalike (IN 1%) - Purchasers 180D - 2026-10-31'). Failed again with Meta's duplicate-lookalike error (2654/1713007) -- source audience has not grown past its original ~20 members since 2026-09-15 creation, so the existing laddered 1%/2%/5% lookalikes (120255832535210159/610159/780159) remain the only ones Meta will create from this source. Not retried further this pass per the one-attempt limit.",
+      "result": "failed",
+      "previousState": {
+        "source_audience_size_approx": 20,
+        "existing_lookalikes": [
+          "120255832535210159",
+          "120255832535610159",
+          "120255832535780159"
+        ]
+      },
+      "detail": {
+        "error_category": "VALIDATION",
+        "error_message": "Can't Create a Duplicate Lookalike: You've already created a lookalike audience with the same source, country and size. Please try using a different source or different specifications.",
+        "error_code": "2654",
+        "error_subcode": "1713007",
+        "is_retryable": false
+      },
+      "tier": "auto",
+      "executedAt": "2026-10-31T14:55:00.000Z"
     }
   ],
   "creativeTags": {
