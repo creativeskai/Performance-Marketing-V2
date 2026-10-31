@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-31T14:55:00.000Z",
+  "generatedAt": "2026-10-31T16:47:00.000Z",
   "settings": {
     "kill_roas_threshold": "DISABLED 2026-10-05 by user instruction: the ROAS pause-kill is OFF. Module 16 (pause-kill) must NOT auto-pause any campaign for low ROAS; surface low-ROAS campaigns as alerts only. The hard spend circuit breaker is a separate mechanism and stays ON. Former rule, for reference: pause if ROAS < 1.0x after ₹500 spend on a sales-objective campaign. EXCEPTION until 2026-10-05T23:59+05:30 (user-approved 2026-09-29): for the sneaker-push campaigns 120256091369160159 (Sneakers_BOF_30Sep-5Oct), 120256091370110159 (Sneakers_Prospecting_30Sep-5Oct) and 120256088882780159 (Sneakers_Catalog_Retargeting) the spend floor is ₹1,500, not ₹500.",
     "reactivate_min_historic_roas": "surface for reactivation if a paused campaign's last active-period ROAS >= 3.0x",
@@ -29,10 +29,10 @@
       }
     },
     "competitor_last_scrape": {
-      "gully_labs_active_ads": 142,
+      "gully_labs_active_ads": 123,
       "lotto_sport_india_active_ads": 217,
-      "scraped_at": "2026-10-31T14:55:00.000Z",
-      "note": "2026-10-31T14:55:00.000Z pass: Gully Labs 139->142 (+2.2%, under threshold), Lotto Sport India 235->217 (-7.7%, under threshold)."
+      "scraped_at": "2026-10-31T16:47:00.000Z",
+      "note": "2026-10-31T16:47:00.000Z pass: Gully Labs 142->123 (-13.4%, under threshold), Lotto Sport India 217->217 (0%, under threshold)."
     },
     "audience_label_corrections": {
       "120249907176770159": "ATC_180D -- NOT a purchaser audience (cart-adders, event=AddToCart, retention 180 days). Verified 2026-09-14, reconfirmed 2026-09-20. Superseded note: earlier passes said the account had NO purchaser audience at all -- that's now out of date. See the 120255823280550159 (Purchasers 180D) entry above, created 2026-09-15, which IS a genuine purchaser audience and is already in use for exclusion + lookalike.",
@@ -23218,6 +23218,123 @@
       "severity": "medium",
       "dismissed": false,
       "createdAt": "2026-10-31T14:55:00.000Z"
+    },
+    {
+      "id": "AL-2390",
+      "module": "pause-kill",
+      "title": "IG90_Warm_BestCreatives_24Oct: 0.93x ROAS on Rs3,255.39 spend (last_14d) -- below kill-ROAS floor, alert only (pause-kill disabled)",
+      "detail": "Campaign IG90_Warm_BestCreatives_24Oct (120256539226010159, OUTCOME_SALES) shows purchase_roas 0.932669 on Rs3,255.39 last_14d spend -- below the former 1.0x kill threshold and well above the Rs500 floor. settings.kill_roas_threshold is DISABLED by user instruction since 2026-10-05, so no auto-pause occurs; surfaced for human review only. Within the campaign, ad set LAL1_IG90_FeedStories carries most of the healthy delivery (1.52x last_7d, Rs2,004.01 spend) while IG90_Warm_FeedStories (ad Warm_KAIFEST_SORA_3198_Carousel_20Dec) shows null ROAS on Rs1,251.38 last_7d spend with zero recorded purchases -- the weak ad set looks like the likely driver of the campaign-level sub-1x average.",
+      "severity": "medium",
+      "dismissed": false,
+      "createdAt": "2026-10-31T16:47:00.000Z"
+    },
+    {
+      "id": "AL-2391",
+      "module": "geo-scaling",
+      "title": "Region breakdown still returns null purchase ROAS for every state this pass",
+      "detail": "Account-level last_14d breakdowns=region pull returns purchase_roas:null for all 36 states/UTs with real spend (e.g. Maharashtra Rs19,795.92, Karnataka Rs11,599.27, Delhi Rs5,108.53) -- same limitation first flagged 2026-10-28. geo-scaling/geo-suppression/new-geo-testing (modules 22-24) remain unevaluable on ROAS with this breakdown; CPM/CTR vary by state (e.g. Bihar CPM Rs34.27 vs Goa Rs101.91) but without conversion data this isn't actionable. No proposal written.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-10-31T16:47:00.000Z"
+    },
+    {
+      "id": "AL-2392",
+      "module": "competitor-rescrape",
+      "title": "Competitor active-ad count rescrape",
+      "detail": "ads_library_search (page_id-scoped, country IN, ad_active_status ACTIVE): Gully Labs (page_id 107479854297817) 142 -> 123 active ads (-13.4%), Lotto Sport India (page_id 426015150606378) 217 -> 217 active ads (0%), vs the last recorded scrape (2026-10-31T14:55:00.000Z). Both moves under the 20% competitor-spike threshold -- no spike alert. settings.competitor_last_scrape updated with these counts.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-10-31T16:47:00.000Z"
+    },
+    {
+      "id": "AL-2393",
+      "module": "purchaser-exclusion",
+      "title": "Purchaser-exclusion compliance check -- compliant account-wide",
+      "detail": "14 active ad sets checked via fresh targeting fetch. 13 exclude Purchasers 180D (120255823280550159) directly in excluded_custom_audiences; the 14th, Retargeting_Overall (120255851467360159), is on settings.purchaser_exclusion_exempt_adset_ids and deliberately includes it by design. purchaser-exclusion remains compliant account-wide, no action needed.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-10-31T16:47:00.000Z"
+    },
+    {
+      "id": "AL-2394",
+      "module": "lookalike-refresh",
+      "title": "Lookalike-refresh rate-limited this pass -- would have attempted, skipped",
+      "detail": "The laddered 1%/2%/5% lookalikes built 2026-09-15 off Purchasers 180D remain well past the 14-day lookalike_refresh_days threshold and source audience size is unchanged (~20). Last rebuild attempt was 2026-10-31T14:55:00.000Z (this same calendar day, <2h elapsed) -- max_auto_actions_per_entity_per_day=1 blocks a retry this pass. Will retry once 24h have elapsed since that attempt.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-10-31T16:47:00.000Z"
+    },
+    {
+      "id": "AL-2395",
+      "module": "hook-angle-tagging",
+      "title": "No new creatives to tag this pass",
+      "detail": "All 30 distinct creative IDs in use across the 14 active ad sets' active ads already have creativeTags entries in queue.json.creativeTags -- nothing new to tag. Vision pass still skipped (Higgsfield MCP not attached to this run) -- tagging continues to be text-only (primary text/headline via Meta Ads MCP).",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-10-31T16:47:00.000Z"
+    },
+    {
+      "id": "AL-2396",
+      "module": "hard-spend-circuit-breaker",
+      "title": "Circuit breaker status check -- no new breach, still tripped 21d",
+      "detail": "Today's account spend (level=ad_account, date_preset=today) is Rs6,340.19 against settings.hard_spend_ceiling_inr=Rs7,000 (90.6% of ceiling, Rs659.81 headroom) -- no new breach this pass. circuitBreaker.tripped remains true from the 2026-10-10T16:50:00.000Z trip (~21 days ago); no auto-resume per ROUTINE.md. A-063 (resume-after-circuit-breaker) remains pending human review.",
+      "severity": "medium",
+      "dismissed": false,
+      "createdAt": "2026-10-31T16:47:00.000Z"
+    },
+    {
+      "id": "AL-2397",
+      "module": "pixel-health",
+      "title": "Pixel/dataset quality check -- healthy, ROAS modules not suppressed",
+      "detail": "ads_get_dataset_quality (dataset 833131719490535): composite EMQ scores range 6.1-8.6 across all 9 tracked web events (SubscribedButtonClick, AddToCart, InitiateCheckout, PageView, ViewContent, AddPaymentInfo, Purchase, Search, cod_purchase/prepaid_purchase), all at/above the pixel_quality_min_match_rate=0.6 (i.e. >=6.0/10) threshold. ROAS-based modules not suppressed this pass.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-10-31T16:47:00.000Z"
+    },
+    {
+      "id": "AL-2398",
+      "module": "threshold-alerts",
+      "title": "No campaign CPM/CTR/CPC outside normal bands this pass",
+      "detail": "Active campaigns' last_14d CPM/CTR/purchase_roas reviewed (e.g. Caps_Only 12.04x roas/Rs10,078.87 spend, Sneakers_BOF_v2_Placement_Split_12Oct 7.27x/Rs17,447.55, Retargeting_Overall 5.83x/Rs6,351.66) -- nothing outside normal delivery bands beyond the already-flagged IG90_Warm_BestCreatives_24Oct (see AL-2390, pause-kill).",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-10-31T16:47:00.000Z"
+    },
+    {
+      "id": "AL-2399",
+      "module": "anomaly",
+      "title": "No anomaly signals this pass",
+      "detail": "ads_insights_anomaly_signal (account-wide): no anomaly signal issues found -- checked for auction overlap, creative fatigue, and narrow audience.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-10-31T16:47:00.000Z"
+    },
+    {
+      "id": "AL-2400",
+      "module": "learning-phase-stuck",
+      "title": "No ad sets confirmed stuck in learning this pass",
+      "detail": "learning_stage_info empty (not in active learning) for all 14 active ad sets per fresh fetch.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-10-31T16:47:00.000Z"
+    },
+    {
+      "id": "AL-2401",
+      "module": "campaign-consolidation-watch",
+      "title": "No new duplicate-targeting campaigns identified",
+      "detail": "11 active campaigns reviewed by product/audience -- no two active campaigns found targeting the same product+audience combination.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-10-31T16:47:00.000Z"
+    },
+    {
+      "id": "AL-2402",
+      "module": "self-audit-check",
+      "title": "Routine pass summary -- 0 auto-mutations, 0 new proposals, 13 new alerts, breaker still tripped (21d, unresolved)",
+      "detail": "Pass at 2026-10-31T16:47:00.000Z (generatedAt). 0 Meta API write calls made (purchaser-exclusion compliant, lookalike-refresh rate-limited, hook-angle-tagging nothing new, circuit breaker not newly breached). 0 new/closed proposals -- all 13 pending proposals left unchanged this pass (not re-pulled; most recently refreshed at the 14:55 UTC pass, ~2h ago). 13 new alerts, highest priority: AL-2390 (pause-kill, IG90_Warm_BestCreatives_24Oct at 0.93x ROAS on Rs3,255.39 spend, alert-only since kill_roas_threshold stays disabled). Circuit breaker remains tripped since 2026-10-10 (~21 days), A-063 still pending human review -- no auto-resume. index.html's static DATA/INSIGHTS_DATA snapshot remains the long-known-stale September 2026 build (first flagged 2026-09-01, unchanged assessment); the live Automation tab reads queue.json directly and is unaffected.",
+      "severity": "medium",
+      "dismissed": false,
+      "createdAt": "2026-10-31T16:47:00.000Z"
     }
   ],
   "log": [
