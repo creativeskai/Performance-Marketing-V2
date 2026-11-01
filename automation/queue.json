@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-01T16:50:00.000Z",
+  "generatedAt": "2026-11-01T18:51:00.000Z",
   "settings": {
     "kill_roas_threshold": "DISABLED 2026-10-05 by user instruction: the ROAS pause-kill is OFF. Module 16 (pause-kill) must NOT auto-pause any campaign for low ROAS; surface low-ROAS campaigns as alerts only. The hard spend circuit breaker is a separate mechanism and stays ON. Former rule, for reference: pause if ROAS < 1.0x after ₹500 spend on a sales-objective campaign. EXCEPTION until 2026-10-05T23:59+05:30 (user-approved 2026-09-29): for the sneaker-push campaigns 120256091369160159 (Sneakers_BOF_30Sep-5Oct), 120256091370110159 (Sneakers_Prospecting_30Sep-5Oct) and 120256088882780159 (Sneakers_Catalog_Retargeting) the spend floor is ₹1,500, not ₹500.",
     "reactivate_min_historic_roas": "surface for reactivation if a paused campaign's last active-period ROAS >= 3.0x",
@@ -12,7 +12,8 @@
       "_note": "User-approved 2026-09-29. These ad sets deliberately TARGET past purchasers (cross-sell / all-product retargeting). purchaser-exclusion must NOT add Purchasers 180D to their exclusions and must not edit them (an edit force-pauses a live ad set).",
       "120256091378350159": "BOF_3_CrossSell_Purchasers180D (campaign Sneakers_BOF_30Sep-5Oct) -- includes Purchasers 180D by design",
       "120255851467360159": "Retargeting_Overall (campaign Retargeting_Overall) -- includes Purchasers 180D, Prepaid_Purchasers and COD_purchasers by design",
-      "120256662470710159": "CrossSell_Purchasers180D_FeedStoriesReels (campaign CrossSell_Purchasers_01Nov) -- added 2026-11-01. Verified via direct targeting fetch: custom_audiences INCLUDES 'Purchasers 180D' (120255823280550159) as a deliberate inclusion target (ad name 'XSell_KAGE_Cap_3198' cross-sells to past purchasers), analogous to BOF_3_CrossSell_Purchasers180D and Retargeting_Overall above. Not a prospecting campaign -- purchaser-exclusion must not add this audience to its exclusions (would break the intended targeting and force-pause the live ad set)."
+      "120256662470710159": "CrossSell_Purchasers180D_FeedStoriesReels (campaign CrossSell_Purchasers_01Nov) -- added 2026-11-01. Verified via direct targeting fetch: custom_audiences INCLUDES 'Purchasers 180D' (120255823280550159) as a deliberate inclusion target (ad name 'XSell_KAGE_Cap_3198' cross-sells to past purchasers), analogous to BOF_3_CrossSell_Purchasers180D and Retargeting_Overall above. Not a prospecting campaign -- purchaser-exclusion must not add this audience to its exclusions (would break the intended targeting and force-pause the live ad set).",
+      "120256667272700159": "WARM_T4_XSell_Purchasers180D (campaign Sneakers_BOF_v2_Placement_Split_12Oct) -- added 2026-11-01 (this pass). Verified via direct targeting fetch: custom_audiences INCLUDES 'Purchasers 180D' (120255823280550159) as a deliberate inclusion target (name 'XSell' = cross-sell to past purchasers within the WARM T1-T4 engagement-tier split), analogous to BOF_3_CrossSell_Purchasers180D and CrossSell_Purchasers180D_FeedStoriesReels above. Not a prospecting ad set -- purchaser-exclusion must not add this audience to its exclusions."
     },
     "max_auto_actions_per_entity_per_day": 1,
     "lookalike_refresh_days": 14,
@@ -1380,7 +1381,7 @@
       "module": "engagement-tier-segmentation",
       "tier": "approval",
       "title": "Split RT_Sneakers_Caps_NoBuyers_v2_11Oct by intent depth -- one ad set currently bundles view/ATC/checkout tiers",
-      "reasoning": "Reconfirmed 2026-11-01T10:49Z: RT_Sneakers_Caps_NoBuyers_v2_11Oct (120256301241950159) remains ACTIVE under Retargeting_Overall with a single bid/budget across its targeting -- the view/ATC/checkout intent-mixing issue originally flagged is unchanged. Still pending.",
+      "reasoning": "Reconfirmed 2026-11-01T10:49Z: RT_Sneakers_Caps_NoBuyers_v2_11Oct (120256301241950159) remains ACTIVE under Retargeting_Overall with a single bid/budget across its targeting -- the view/ATC/checkout intent-mixing issue originally flagged is unchanged. Still pending. UPDATE 2026-11-01T18:51 UTC: target ad set RT_Sneakers_Caps_NoBuyers_v2_11Oct is now PAUSED (effective_status confirmed via direct fetch) -- no live delivery to split. Closed as moot.",
       "actionSummary": "Create a new, narrower ad set under Retargeting_Overall scoped to just the checkout/high-intent tier (Add_Payment_Info, Search_Customers, excluding Purchasers/COD/Prepaid as today), launched PAUSED for review, leaving the existing ad set running unchanged for the broader view/ATC tiers. No existing campaign/ad set is modified; this only adds a new, paused ad set for the human to review and activate.",
       "metaAction": {
         "tool": "ads_create_ad_set",
@@ -1395,17 +1396,18 @@
           "note": "Human should confirm budget split (Rs150/day proposed, carved from the Rs400/day Retargeting_Overall campaign budget) and targeting (Add_Payment_Info + Search_Customers custom audiences, excluding Purchasers 180D/COD_purchasers/Prepaid_Purchasers) before activating -- exact targeting spec to be filled in via the dashboard's targeting editor at approval time, not pre-baked here."
         }
       },
-      "status": "pending",
+      "status": "rejected",
       "createdAt": "2026-10-20T19:40:00.000Z",
       "lastReconfirmedAt": "2026-10-21T10:56:00.000Z",
-      "lastRefreshedAt": "2026-11-01T10:49:00.000Z"
+      "lastRefreshedAt": "2026-11-01T10:49:00.000Z",
+      "resolvedAt": "2026-11-01T18:51:00.000Z"
     },
     {
       "id": "A-072",
       "module": "ab-test",
       "tier": "approval",
       "title": "Structure a test for the 4 concurrent cap-color creative variants in RT_Sneakers_Caps_NoBuyers_v2_11Oct",
-      "reasoning": "Reconfirmed 2026-11-01T10:49Z: the 4 cap-color creative variants (RT_Cap_Maroon_Hero_9Nov, RT_Cap_Black_Hero_9Nov, RT_Cap_Indigo_Hero_9Nov, RT_Cap_Grey_Hero_9Nov) all remain ACTIVE under Retargeting_Overall with no structured A/B test running. Still pending.",
+      "reasoning": "Reconfirmed 2026-11-01T10:49Z: the 4 cap-color creative variants (RT_Cap_Maroon_Hero_9Nov, RT_Cap_Black_Hero_9Nov, RT_Cap_Indigo_Hero_9Nov, RT_Cap_Grey_Hero_9Nov) all remain ACTIVE under Retargeting_Overall with no structured A/B test running. Still pending. UPDATE 2026-11-01T18:51 UTC: target ad set RT_Sneakers_Caps_NoBuyers_v2_11Oct is now PAUSED (effective_status confirmed via direct fetch) -- no live creatives delivering to test. Closed as moot.",
       "actionSummary": "Create a split test comparing the 4 cap-color hero creatives on cost_per_result.",
       "metaAction": {
         "tool": "ads_experiment_abtest_create_test",
@@ -1440,9 +1442,10 @@
           "objective": "cost_per_result"
         }
       },
-      "status": "pending",
+      "status": "rejected",
       "createdAt": "2026-10-25T03:05:00.000Z",
-      "lastRefreshedAt": "2026-11-01T10:49:00.000Z"
+      "lastRefreshedAt": "2026-11-01T10:49:00.000Z",
+      "resolvedAt": "2026-11-01T18:51:00.000Z"
     },
     {
       "id": "A-073",
@@ -1536,7 +1539,7 @@
       "module": "budget-reallocation",
       "tier": "approval",
       "title": "Shift Rs200/day from Prospecting_JP2_Placement_Split_12Oct (3.16x) to Caps_Only (14.57x) -- large ROAS gap",
-      "reasoning": "Refreshed 2026-11-01T10:49Z (last_7d): Caps_Only Rs5,913.17 spend @ 10.319x ROAS (71 purchases) vs Prospecting_JP2_Placement_Split_12Oct Rs8,266.45 spend @ 3.756x ROAS (12 purchases). Gap now ~2.75x, still well above the 1.5x+ budget_reallocation_min_roas_gap threshold and consistent with the 2026-10-31T20:49Z refresh (~2.75x). Still pending. [Updated 2026-11-01T16:50:00.000Z]: last_7d purchase_roas now Prospecting_JP2_Placement_Split_12Oct=3.76x (was 3.16x), Caps_Only=10.32x (was 14.57x) -- gap narrowed from ~4.6x to ~2.75x, still above the 1.5x budget_reallocation_min_roas_gap threshold.",
+      "reasoning": "Shift Rs200/day from Prospecting_JP2_Placement_Split_12Oct (3.84x purchase_roas, Rs15,212.99 spend, last_14d) to Caps_Only (12.87x purchase_roas, Rs10,046.67 spend, last_14d) -- gap ~3.35x, well above settings.budget_reallocation_min_roas_gap (1.5x+). Refreshed 2026-11-01T18:51 UTC with fresh last_14d numbers; still valid.",
       "actionSummary": "Reduces PROSP_Reels_Capped's (Prospecting_JP2_Placement_Split_12Oct) ad set daily budget from Rs1,320 to Rs1,120, and increases Caps_Only's campaign daily budget from Rs900 to Rs1,100 -- a Rs200/day shift toward the higher-ROAS campaign. Both entities are currently ACTIVE; per Meta API behavior, a non-trivial budget edit on a live entity does not force-pause it (unlike a targeting edit), so delivery should continue uninterrupted under the new budgets.",
       "metaAction": {
         "tool": "ads_update_entity",
@@ -24381,6 +24384,105 @@
       "severity": "low",
       "dismissed": false,
       "createdAt": "2026-11-01T16:50:00.000Z"
+    },
+    {
+      "id": "AL-2520",
+      "module": "hard-spend-circuit-breaker",
+      "title": "Circuit breaker status check -- no new breach, still tripped 22d",
+      "detail": "Today's account spend at this pass: Rs56.20 (ads_get_ad_entities, level=ad_account, date_preset=today) vs settings.hard_spend_ceiling_inr=Rs7,000 -- far under ceiling, no new trip. circuitBreaker.tripped remains true from the 2026-10-10T16:50 UTC trip, unresolved pending human review of A-063 (resume-after-circuit-breaker). Per ROUTINE.md, never auto-resumed.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-11-01T18:51:00.000Z"
+    },
+    {
+      "id": "AL-2521",
+      "module": "pixel-health",
+      "title": "Pixel quality gate: healthy, ROAS modules not suppressed",
+      "detail": "ads_get_dataset_quality (dataset 833131719490535) this pass: composite EMQ scores 6.1-8.8 across all tracked events (Purchase 8.6, AddToCart 6.1, InitiateCheckout 6.9, ViewContent 6.1, PageView 6.1, prepaid_purchase 8.6, cod_purchase 8.6), all at/above settings.pixel_quality_min_match_rate=0.6. ROAS-based modules not suppressed this pass.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-11-01T18:51:00.000Z"
+    },
+    {
+      "id": "AL-2522",
+      "module": "purchaser-exclusion",
+      "title": "Purchaser-exclusion compliance check -- compliant account-wide; 1 new exempt ad set identified",
+      "detail": "Checked all 16 active ad sets' targeting via direct fetch this pass. 15 non-exempt active ad sets (WARM_T1-T3, MATCHA_LAL_Stack, KAGE_LAL_Stack, B_Men18-24_Broad, A_Men25-44_Broad, Prosp_MATCHA_Men_25-44_Purchase, LAL1_Purchasers180D_FB_IG, PROSP_Reels_Capped, Caps_Only_11Oct, Fudoshin, BOF2_FeedStories, BOF_2_Warm_IG365_Engagers_Visitors) all already exclude 'Purchasers 180D' (120255823280550159) in excluded_custom_audiences -- compliant, no mutation needed. WARM_T4_XSell_Purchasers180D (new ad set under Sneakers_BOF_v2_Placement_Split_12Oct, part of the WARM T1-T4 split) had zero excluded_custom_audiences but its name and included-audiences confirm it deliberately TARGETS Purchasers 180D for cross-sell -- added to settings.purchaser_exclusion_exempt_adset_ids this pass (same pattern as BOF_3_CrossSell_Purchasers180D / CrossSell_Purchasers180D_FeedStoriesReels). Retargeting_Overall remains exempt by design. purchaser-exclusion compliant account-wide, no Meta mutation this pass.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-11-01T18:51:00.000Z"
+    },
+    {
+      "id": "AL-2523",
+      "module": "lookalike-refresh",
+      "title": "Lookalike-refresh: source audience unchanged, no rebuild attempted this pass",
+      "detail": "ads_get_custom_audience on 'Purchasers 180D' (120255823280550159) confirms approximate size still 20/20, unchanged since 2026-09-15 creation. The laddered 1%/2%/5% lookalikes built that date (120255832535210159/610159/780159) remain ACTIVE and serving. Rate limit was clear (last attempt 2026-10-31T14:55:00.000Z, >24h elapsed), but no rebuild was attempted this pass: every attempt since 2026-09-29 has failed identically with Meta's duplicate-lookalike error (2654/1713007) because the source audience has not grown, so a retry carries no new information. Will resume attempting as soon as the source audience's reported size changes.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-11-01T18:51:00.000Z"
+    },
+    {
+      "id": "AL-2524",
+      "module": "resume-after-circuit-breaker",
+      "title": "A-063: only 1 of 5 originally-paused campaigns now ACTIVE outside the automation (down from last pass's count of 2) -- breaker unresolved 22d",
+      "detail": "Fresh fetch this pass of all 5 campaigns paused by the 2026-10-10 circuit breaker trip: Sora_BOF_Test_5Oct (CAMPAIGN_PAUSED), Tsuchi_BOF_Test_5Oct (CAMPAIGN_PAUSED), Prospecting_JP_Purchase_5-9Oct (CAMPAIGN_PAUSED), Caps + Kage_26 Sept (PAUSED) -- all 4 still down. Sneakers_BOF_30Sep-5Oct is ACTIVE again (ad set BOF_2_Warm_IG365_Engagers_Visitors live, Rs7,235.30 spend / 3.74x purchase_roas over last_14d) -- reactivated outside this automation (not via an approved A-063), same campaign flagged already-reactivated in the prior pass's AL-2516 (which had counted 2 campaigns as reactivated; this pass's direct fetch confirms only 1 is currently live). The circuit breaker's purpose is to force a human decision before any paused campaign resumes delivery -- a manual reactivation outside the approval flow bypasses that safeguard. Per ROUTINE.md this routine still never auto-resumes or auto-re-pauses; flagging for human awareness only. A-063 (resume-after-circuit-breaker, covering all 5) remains pending.",
+      "severity": "medium",
+      "dismissed": false,
+      "createdAt": "2026-11-01T18:51:00.000Z"
+    },
+    {
+      "id": "AL-2525",
+      "module": "budget-reallocation",
+      "title": "A-076 refreshed -- Caps_Only vs Prospecting_JP2_Placement_Split_12Oct ROAS gap ~3.35x (last_14d), still well above threshold",
+      "detail": "Fresh last_14d pull this pass: Caps_Only 12.87x purchase_roas on Rs10,046.67 spend; Prospecting_JP2_Placement_Split_12Oct 3.84x purchase_roas on Rs15,212.99 spend -- gap ~3.35x, still well above settings.budget_reallocation_min_roas_gap (1.5x+). A-076 (shift Rs200/day from Prospecting_JP2_Placement_Split_12Oct to Caps_Only) remains pending and valid.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-11-01T18:51:00.000Z"
+    },
+    {
+      "id": "AL-2526",
+      "module": "engagement-tier-segmentation",
+      "title": "A-071 closed as moot -- target ad set RT_Sneakers_Caps_NoBuyers_v2_11Oct is now PAUSED",
+      "detail": "The ad set A-071 proposed splitting by intent depth, RT_Sneakers_Caps_NoBuyers_v2_11Oct (120256301241950159, campaign Retargeting_Overall), is no longer ACTIVE as of this pass's direct fetch -- it shows effective_status=PAUSED. There is no live delivery to split. Closed as moot; would need to be re-raised if the ad set resumes.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-11-01T18:51:00.000Z"
+    },
+    {
+      "id": "AL-2527",
+      "module": "ab-test",
+      "title": "A-072 closed as moot -- target ad set RT_Sneakers_Caps_NoBuyers_v2_11Oct is now PAUSED",
+      "detail": "The ad set A-072 proposed structuring an A/B test for (the 4 cap-color creative variants in RT_Sneakers_Caps_NoBuyers_v2_11Oct, 120256301241950159, campaign Retargeting_Overall) is no longer ACTIVE as of this pass's direct fetch -- it shows effective_status=PAUSED. No live delivery to test. Closed as moot; would need to be re-raised if the ad set resumes.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-11-01T18:51:00.000Z"
+    },
+    {
+      "id": "AL-2528",
+      "module": "campaign-consolidation-watch",
+      "title": "No new duplicate-targeting campaigns identified",
+      "detail": "Reviewed the 11 campaigns showing ACTIVE/PAUSED-but-recent status this pass (MATCHA_TOF_LAL_Purchase_01Nov, KAGE_TOF_LAL_Purchase_01Nov, Sneakers_Cold_Nov, Prospecting_MATCHA_Purchase_27Oct, Fudoshin, Prospecting_LAL1_Purchasers_14Oct, Sneakers_BOF_v2_Placement_Split_12Oct, Prospecting_JP2_Placement_Split_12Oct, Sneakers_BOF_30Sep-5Oct, Retargeting_Overall, Caps_Only) -- no two target the same product+audience combination. No new proposal.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-11-01T18:51:00.000Z"
+    },
+    {
+      "id": "AL-2529",
+      "module": "anomaly",
+      "title": "No anomaly signal fired this pass",
+      "detail": "ads_insights_anomaly_signal (account-wide): 'No anomaly signal issues found in the analyzed ad sets. Checked for auction overlap, creative fatigue, and narrow audience.' No frequency-capping concern either -- all 16 active ad sets' last_7d frequency well under settings.fatigue_frequency_threshold=3 (highest was Retargeting_Overall at 2.01x).",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-11-01T18:51:00.000Z"
+    },
+    {
+      "id": "AL-2530",
+      "module": "self-audit-check",
+      "title": "Routine pass summary -- 0 auto-mutations, 0 creatives tagged, 0 new proposals, 2 proposals closed as moot (A-071, A-072), 1 proposal refreshed (A-076), 1 settings update (new purchaser-exclusion exemption)",
+      "detail": "All 19 distinct active-ad creatives already had creativeTags entries -- nothing new for hook-angle-tagging. purchaser-exclusion and lookalike-refresh both evaluated with no live Meta mutation needed this pass (compliant / rate-limited-equivalent respectively). Highest-priority item this pass: 1 of the 5 circuit-breaker-paused campaigns (Sneakers_BOF_30Sep-5Oct) is running again outside the automation while circuitBreaker.tripped remains true and A-063 unresolved (22 days).",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-11-01T18:51:00.000Z"
     }
   ],
   "log": [
@@ -34534,6 +34636,28 @@
       },
       "tier": "auto",
       "executedAt": "2026-11-01T14:50:00.000Z"
+    },
+    {
+      "proposalId": "A-071",
+      "action": "engagement-tier-segmentation: closed A-071 as moot -- target ad set RT_Sneakers_Caps_NoBuyers_v2_11Oct (120256301241950159, campaign Retargeting_Overall) is now PAUSED as of this pass's direct fetch. No live delivery to split by intent depth.",
+      "result": "rejected",
+      "previousState": {
+        "status": "pending"
+      },
+      "detail": {},
+      "tier": "approval",
+      "executedAt": "2026-11-01T18:51:00.000Z"
+    },
+    {
+      "proposalId": "A-072",
+      "action": "ab-test: closed A-072 as moot -- target ad set RT_Sneakers_Caps_NoBuyers_v2_11Oct (120256301241950159, campaign Retargeting_Overall) is now PAUSED as of this pass's direct fetch. No live creatives delivering to structure a test for.",
+      "result": "rejected",
+      "previousState": {
+        "status": "pending"
+      },
+      "detail": {},
+      "tier": "approval",
+      "executedAt": "2026-11-01T18:51:00.000Z"
     }
   ],
   "creativeTags": {
