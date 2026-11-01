@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-01T20:51:00.000Z",
+  "generatedAt": "2026-11-01T22:51:00.000Z",
   "settings": {
     "kill_roas_threshold": "DISABLED 2026-10-05 by user instruction: the ROAS pause-kill is OFF. Module 16 (pause-kill) must NOT auto-pause any campaign for low ROAS; surface low-ROAS campaigns as alerts only. The hard spend circuit breaker is a separate mechanism and stays ON. Former rule, for reference: pause if ROAS < 1.0x after ₹500 spend on a sales-objective campaign. EXCEPTION until 2026-10-05T23:59+05:30 (user-approved 2026-09-29): for the sneaker-push campaigns 120256091369160159 (Sneakers_BOF_30Sep-5Oct), 120256091370110159 (Sneakers_Prospecting_30Sep-5Oct) and 120256088882780159 (Sneakers_Catalog_Retargeting) the spend floor is ₹1,500, not ₹500.",
     "reactivate_min_historic_roas": "surface for reactivation if a paused campaign's last active-period ROAS >= 3.0x",
@@ -33,8 +33,8 @@
     "competitor_last_scrape": {
       "gully_labs_active_ads": 144,
       "lotto_sport_india_active_ads": 218,
-      "scraped_at": "2026-11-01T20:51:00.000Z",
-      "note": "2026-11-01T20:51:00.000Z pass: Gully Labs 146->144 (-1.4%, under threshold), Lotto Sport India 217->218 (+0.5%, under threshold)."
+      "scraped_at": "2026-11-01T22:51:00.000Z",
+      "note": "2026-11-01T22:51:00.000Z pass: Gully Labs 144->144 (unchanged), Lotto Sport India 218->218 (unchanged). Both under 20% move threshold."
     },
     "audience_label_corrections": {
       "120249907176770159": "ATC_180D -- NOT a purchaser audience (cart-adders, event=AddToCart, retention 180 days). Verified 2026-09-14, reconfirmed 2026-09-20. Superseded note: earlier passes said the account had NO purchaser audience at all -- that's now out of date. See the 120255823280550159 (Purchasers 180D) entry above, created 2026-09-15, which IS a genuine purchaser audience and is already in use for exclusion + lookalike.",
@@ -1142,7 +1142,7 @@
       "module": "resume-after-circuit-breaker",
       "tier": "approval",
       "title": "Resume the 5 campaigns down from the 2026-10-10 circuit breaker trip",
-      "reasoning": "Reconfirmed 2026-11-01T14:50Z: of the 5 campaigns paused by the 2026-10-10 circuit breaker trip, Sora_BOF_Test_5Oct (120256202021140159), Tsuchi_BOF_Test_5Oct (120256202020640159), Caps + Kage_26 Sept (120255693970470159) and Prospecting_JP_Purchase_5-9Oct (120256186544730159) are confirmed still PAUSED via direct fetch. Sneakers_BOF_30Sep-5Oct (120256091369160159) remains manually reactivated outside this resume flow and is still ACTIVE (unchanged since 2026-11-01T08:50Z). Today's account spend Rs3,964.30 vs the Rs7,000 ceiling -- no new breach. Breaker remains tripped, ~22 days unresolved. Still pending; this routine will not auto-resume the remaining 4. [Updated 2026-11-01T16:50:00.000Z]: 3 of the original 5 paused campaigns remain PAUSED/inactive; Sneakers_BOF_30Sep-5Oct and Caps + Kage_26 Sept are now ACTIVE again (resumed outside this automation, not via an auto-resume). circuitBreaker.tripped is still true, 22 days unresolved -- still awaiting human review.",
+      "reasoning": "Reconfirmed 2026-11-01T14:50Z: of the 5 campaigns paused by the 2026-10-10 circuit breaker trip, Sora_BOF_Test_5Oct (120256202021140159), Tsuchi_BOF_Test_5Oct (120256202020640159), Caps + Kage_26 Sept (120255693970470159) and Prospecting_JP_Purchase_5-9Oct (120256186544730159) are confirmed still PAUSED via direct fetch. Sneakers_BOF_30Sep-5Oct (120256091369160159) remains manually reactivated outside this resume flow and is still ACTIVE (unchanged since 2026-11-01T08:50Z). Today's account spend Rs3,964.30 vs the Rs7,000 ceiling -- no new breach. Breaker remains tripped, ~22 days unresolved. Still pending; this routine will not auto-resume the remaining 4. [Updated 2026-11-01T16:50:00.000Z]: 3 of the original 5 paused campaigns remain PAUSED/inactive; Sneakers_BOF_30Sep-5Oct and Caps + Kage_26 Sept are now ACTIVE again (resumed outside this automation, not via an auto-resume). circuitBreaker.tripped is still true, 22 days unresolved -- still awaiting human review. [Updated 2026-11-01T22:51:00.000Z]: Fresh direct fetch confirms the same picture as the 20:51Z pass -- Sora_BOF_Test_5Oct (120256202021140159), Tsuchi_BOF_Test_5Oct (120256202020640159) and Prospecting_JP_Purchase_5-9Oct (120256186544730159) remain PAUSED; Sneakers_BOF_30Sep-5Oct (120256091369160159) and Caps + Kage_26 Sept (120255693970470159) are ACTIVE again, resumed outside this automation. Today's account spend Rs733.29 vs the Rs7,000 ceiling -- no new breach. Breaker remains tripped, ~22 days unresolved. Still pending; this routine will not auto-resume the remaining 3.",
       "actionSummary": "Activates the 3 campaigns still paused from the 2026-10-10 circuit breaker trip (Sora_BOF_Test_5Oct, Tsuchi_BOF_Test_5Oct, Caps + Kage_26 Sept) via ads_activate_entity. The other 2 originally-paused campaigns (Sneakers_BOF_30Sep-5Oct, Prospecting_JP_Purchase_5-9Oct) are already active again outside this proposal and are left untouched.",
       "metaAction": {
         "tool": "ads_activate_entity",
@@ -1189,9 +1189,9 @@
       },
       "status": "pending",
       "createdAt": "2026-10-11T12:50:00.000Z",
-      "lastReconfirmedAt": "2026-10-28T08:50:00.000Z",
+      "lastReconfirmedAt": "2026-11-01T22:51:00.000Z",
       "resolvedAt": null,
-      "lastRefreshedAt": "2026-11-01T10:49:00.000Z"
+      "lastRefreshedAt": "2026-11-01T22:51:00.000Z"
     },
     {
       "id": "A-064",
@@ -1229,7 +1229,7 @@
       "module": "placement-optimization",
       "tier": "approval",
       "title": "Exclude WhatsApp placement from Caps_Only_11Oct (Caps_Only)",
-      "reasoning": "Refreshed 2026-11-01T10:49Z: Caps_Only_11Oct (120256301268680159) last_14d placement breakdown -- WhatsApp (status) spend Rs1.08 total, still negligible. Condition for action remains not materially met; consistent with prior refreshes. Still pending, no change recommended.",
+      "reasoning": "Refreshed 2026-11-01T10:49Z: Caps_Only_11Oct (120256301268680159) last_14d placement breakdown -- WhatsApp (status) spend Rs1.08 total, still negligible. Condition for action remains not materially met; consistent with prior refreshes. Still pending, no change recommended. Refreshed 2026-11-01T22:51Z: Caps_Only_11Oct last_14d placement breakdown -- WhatsApp spend Rs1.05 total, still negligible. Condition for action remains not materially met. Still pending, no change recommended.",
       "actionSummary": "Remove 'whatsapp' from Caps_Only_11Oct's effective placements by setting an explicit targeting.publisher_platforms list covering facebook, instagram, audience_network and threads; every other targeting parameter stays unchanged.",
       "metaAction": {
         "tool": "ads_update_entity",
@@ -1248,8 +1248,8 @@
       },
       "status": "pending",
       "createdAt": "2026-10-13T04:50:00.000Z",
-      "lastReconfirmedAt": "2026-10-28T08:50:00.000Z",
-      "lastRefreshedAt": "2026-11-01T10:49:00.000Z"
+      "lastReconfirmedAt": "2026-11-01T22:51:00.000Z",
+      "lastRefreshedAt": "2026-11-01T22:51:00.000Z"
     },
     {
       "id": "A-066",
@@ -1355,7 +1355,7 @@
       "module": "device-targeting",
       "tier": "approval",
       "title": "Restrict BOF2_FeedStories to iOS -- Android ROAS less than half of iPhone's at similar spend",
-      "reasoning": "Refreshed 2026-11-01T10:49Z: BOF2_FeedStories (120256322973880159) last_14d device breakdown -- iPhone Rs10,756.17 spend @ 8.644x ROAS (38 purchases) vs Android smartphone Rs7,183.72 spend @ 4.947x ROAS (19 purchases). Gap now ~1.75x (iPhone/Android), consistent with the 2026-10-31T20:49Z reconfirmation (~1.75x) -- narrowed from the ~2x+ gap at proposal creation but still a material, persistent gap. Still pending.",
+      "reasoning": "Refreshed 2026-11-01T10:49Z: BOF2_FeedStories (120256322973880159) last_14d device breakdown -- iPhone Rs10,756.17 spend @ 8.644x ROAS (38 purchases) vs Android smartphone Rs7,183.72 spend @ 4.947x ROAS (19 purchases). Gap now ~1.75x (iPhone/Android), consistent with the 2026-10-31T20:49Z reconfirmation (~1.75x) -- narrowed from the ~2x+ gap at proposal creation but still a material, persistent gap. Still pending. Refreshed 2026-11-01T22:51Z: BOF2_FeedStories last_14d device breakdown -- iPhone Rs10,690.63 spend @ 7.738x ROAS vs Android smartphone Rs7,181.43 spend @ 5.433x ROAS. Gap now ~1.42x (iPhone/Android), continuing to narrow from ~1.75x at the 2026-10-31/11-01 reconfirmations. Still a material gap but trending toward parity -- still pending.",
       "actionSummary": "Restrict BOF2_FeedStories's targeting to iOS only (adds user_os:['iOS'] to the ad set's targeting spec), shifting its budget away from the materially-underperforming Android segment. This is a targeting-only edit; no budget or creative change.",
       "metaAction": {
         "tool": "ads_update_entity",
@@ -1373,8 +1373,8 @@
           "iOS"
         ]
       },
-      "lastReconfirmedAt": "2026-10-31T14:55:00.000Z",
-      "lastRefreshedAt": "2026-11-01T10:49:00.000Z"
+      "lastReconfirmedAt": "2026-11-01T22:51:00.000Z",
+      "lastRefreshedAt": "2026-11-01T22:51:00.000Z"
     },
     {
       "id": "A-071",
@@ -1539,7 +1539,7 @@
       "module": "budget-reallocation",
       "tier": "approval",
       "title": "Shift Rs200/day from Prospecting_JP2_Placement_Split_12Oct (3.16x) to Caps_Only (14.57x) -- large ROAS gap",
-      "reasoning": "Shift Rs200/day from Prospecting_JP2_Placement_Split_12Oct (3.84x purchase_roas, Rs15,212.99 spend, last_14d) to Caps_Only (12.87x purchase_roas, Rs10,046.67 spend, last_14d) -- gap ~3.35x, well above settings.budget_reallocation_min_roas_gap (1.5x+). Refreshed 2026-11-01T18:51 UTC with fresh last_14d numbers; still valid.",
+      "reasoning": "Shift Rs200/day from Prospecting_JP2_Placement_Split_12Oct (3.84x purchase_roas, Rs15,212.99 spend, last_14d) to Caps_Only (12.87x purchase_roas, Rs10,046.67 spend, last_14d) -- gap ~3.35x, well above settings.budget_reallocation_min_roas_gap (1.5x+). Refreshed 2026-11-01T18:51 UTC with fresh last_14d numbers; still valid. Refreshed 2026-11-01T22:51Z: Prospecting_JP2_Placement_Split_12Oct last_14d purchase_roas 3.835x on Rs15,214.02 spend; Caps_Only last_14d purchase_roas 12.867x on Rs10,046.67 spend -- gap ~3.35x, consistent with the prior refresh. Still valid, still pending.",
       "actionSummary": "Reduces PROSP_Reels_Capped's (Prospecting_JP2_Placement_Split_12Oct) ad set daily budget from Rs1,320 to Rs1,120, and increases Caps_Only's campaign daily budget from Rs900 to Rs1,100 -- a Rs200/day shift toward the higher-ROAS campaign. Both entities are currently ACTIVE; per Meta API behavior, a non-trivial budget edit on a live entity does not force-pause it (unlike a targeting edit), so delivery should continue uninterrupted under the new budgets.",
       "metaAction": {
         "tool": "ads_update_entity",
@@ -1565,7 +1565,7 @@
       },
       "status": "pending",
       "createdAt": "2026-10-29T00:52:00.000Z",
-      "lastRefreshedAt": "2026-11-01T10:49:00.000Z"
+      "lastRefreshedAt": "2026-11-01T22:51:00.000Z"
     },
     {
       "id": "A-077",
@@ -24564,6 +24564,114 @@
       "severity": "low",
       "dismissed": false,
       "createdAt": "2026-11-01T20:51:00.000Z"
+    },
+    {
+      "module": "hard-spend-circuit-breaker",
+      "title": "Circuit breaker check: no new breach this pass",
+      "detail": "Today's account spend Rs733.29 against the Rs7,000 hard_spend_ceiling_inr (ads_get_ad_entities, level=ad_account, date_preset=today) -- no new breach. circuitBreaker.tripped remains true from the 2026-10-10T16:50Z trip (~22 days unresolved), unchanged by this pass; resume still requires human approval of A-063.",
+      "severity": "low",
+      "id": "AL-2540",
+      "dismissed": false,
+      "createdAt": "2026-11-01T22:51:00.000Z"
+    },
+    {
+      "module": "pixel-health",
+      "title": "Pixel quality gate: healthy, ROAS modules not suppressed",
+      "detail": "ads_get_dataset_quality on pixel 833131719490535: composite EMQ scores 6.1-8.6/10 across tracked events (PageView, ViewContent, AddToCart, InitiateCheckout, AddPaymentInfo, Purchase, prepaid_purchase, cod_purchase, Search, SubscribedButtonClick), all at/above pixel_quality_min_match_rate=0.6 (interpreted as 6.0/10). ROAS-driven modules not suppressed this pass.",
+      "severity": "low",
+      "id": "AL-2541",
+      "dismissed": false,
+      "createdAt": "2026-11-01T22:51:00.000Z"
+    },
+    {
+      "module": "purchaser-exclusion",
+      "title": "Purchaser-exclusion compliance check -- compliant account-wide",
+      "detail": "Direct targeting fetch on all active, non-exempt ad sets (MATCHA_LAL_Stack_Purch3_Video2_IGEng2, KAGE_LAL_Stack_Purch3_Video2_IGEng2, A_Men25-44_Broad, LAL1_Purchasers180D_FB_IG, B_Men18-24_Broad, WARM_T1_HOT_ATC_IC_30D, Caps_FB-B_HighValueGoods, Fudoshin, BOF2_FeedStories, Prosp_MATCHA_Men_25-44_Purchase, PROSP_Reels_Capped) confirms each excludes 'Purchasers 180D' (120255823280550159) in excluded_custom_audiences. The one exempt active ad set (WARM_T4_XSell_Purchasers180D, 120256667272700159, per settings.purchaser_exclusion_exempt_adset_ids) deliberately includes it by design, as expected. No action needed.",
+      "severity": "low",
+      "id": "AL-2542",
+      "dismissed": false,
+      "createdAt": "2026-11-01T22:51:00.000Z"
+    },
+    {
+      "module": "lookalike-refresh",
+      "title": "Lookalike-refresh: rebuild attempted, failed again on Meta's duplicate-lookalike constraint",
+      "detail": "Rate limit cleared since the 2026-10-31T14:55Z attempt; retried the 1% Purchasers 180D lookalike rebuild. Failed again with error 2654/1713007 (duplicate lookalike -- same source/country/size already exists). Source audience still ~20, unchanged. The 3 original laddered lookalikes plus the newer LAL3_Purchasers180D_01Nov remain live and serving, so no functional gap. See log for full detail.",
+      "severity": "low",
+      "id": "AL-2543",
+      "dismissed": false,
+      "createdAt": "2026-11-01T22:51:00.000Z"
+    },
+    {
+      "module": "anomaly",
+      "title": "No anomaly signal fired this pass",
+      "detail": "ads_insights_anomaly_signal checked auction overlap, creative fatigue and narrow audience account-wide -- no issues found (the prior pass's WARM_T2_CONSIDER_PDP_90D narrow-audience flag did not recur).",
+      "severity": "low",
+      "id": "AL-2544",
+      "dismissed": false,
+      "createdAt": "2026-11-01T22:51:00.000Z"
+    },
+    {
+      "module": "competitor-rescrape",
+      "title": "Competitor benchmark refresh -- both unchanged, under threshold",
+      "detail": "ads_library_search: Gully Labs 144 active ads (unchanged from last recorded 144), Lotto Sport India 218 active ads (unchanged from last recorded 218). Neither moved >=20% -- no competitor-spike alert.",
+      "severity": "low",
+      "id": "AL-2545",
+      "dismissed": false,
+      "createdAt": "2026-11-01T22:51:00.000Z"
+    },
+    {
+      "module": "campaign-consolidation-watch",
+      "title": "No new duplicate-targeting campaigns identified",
+      "detail": "12 campaigns ACTIVE this pass, including 3 launched today (MATCHA_TOF_LAL_Purchase_01Nov, KAGE_TOF_LAL_Purchase_01Nov, CrossSell_Purchasers_01Nov [now paused again]) each built off fresh, distinct lookalike audiences (LAL2_IG_Engagers90D_01Nov, LAL2_VideoViewers_01Nov, LAL3_Purchasers180D_01Nov) -- no same-product+same-audience overlap identified vs existing campaigns.",
+      "severity": "low",
+      "id": "AL-2546",
+      "dismissed": false,
+      "createdAt": "2026-11-01T22:51:00.000Z"
+    },
+    {
+      "module": "resume-after-circuit-breaker",
+      "title": "A-063: same 3-of-5 originally-paused campaigns still paused, unchanged this pass",
+      "detail": "Sora_BOF_Test_5Oct, Tsuchi_BOF_Test_5Oct and Prospecting_JP_Purchase_5-9Oct remain PAUSED; Sneakers_BOF_30Sep-5Oct and Caps + Kage_26 Sept remain ACTIVE (resumed outside the automation). circuitBreaker.tripped still true, ~22 days unresolved -- still awaiting human review of A-063.",
+      "severity": "medium",
+      "id": "AL-2547",
+      "dismissed": false,
+      "createdAt": "2026-11-01T22:51:00.000Z"
+    },
+    {
+      "module": "device-targeting",
+      "title": "A-070 refreshed -- BOF2_FeedStories iPhone/Android ROAS gap narrowed to ~1.42x",
+      "detail": "last_14d: iPhone Rs10,690.63 @ 7.738x ROAS vs Android smartphone Rs7,181.43 @ 5.433x ROAS. Gap continues narrowing from ~1.75x at the last couple of reconfirmations. Still pending on A-070.",
+      "severity": "low",
+      "id": "AL-2548",
+      "dismissed": false,
+      "createdAt": "2026-11-01T22:51:00.000Z"
+    },
+    {
+      "module": "budget-reallocation",
+      "title": "A-076 refreshed -- Caps_Only vs Prospecting_JP2_Placement_Split_12Oct ROAS gap ~3.35x (last_14d), still valid",
+      "detail": "Prospecting_JP2_Placement_Split_12Oct: Rs15,214.02 spend @ 3.835x ROAS. Caps_Only: Rs10,046.67 spend @ 12.867x ROAS. Gap unchanged from prior refresh, well above budget_reallocation_min_roas_gap. Still pending on A-076.",
+      "severity": "low",
+      "id": "AL-2549",
+      "dismissed": false,
+      "createdAt": "2026-11-01T22:51:00.000Z"
+    },
+    {
+      "module": "placement-optimization",
+      "title": "A-065 refreshed -- Caps_Only_11Oct WhatsApp spend still negligible",
+      "detail": "last_14d WhatsApp placement spend Rs1.05 total on Caps_Only_11Oct. Still pending on A-065, no change recommended.",
+      "severity": "low",
+      "id": "AL-2550",
+      "dismissed": false,
+      "createdAt": "2026-11-01T22:51:00.000Z"
+    },
+    {
+      "id": "AL-2551",
+      "module": "self-audit-check",
+      "title": "Routine pass summary -- 0 auto-mutations, 0 creatives tagged, 0 new proposals, 1 failed auto-action",
+      "detail": "Pass summary (2026-11-01T22:51Z): circuit breaker not tripped (spend Rs733.29/Rs7,000); pixel quality healthy; purchaser-exclusion compliant account-wide; hook-angle-tagging had nothing new (all active creatives already tagged); lookalike-refresh attempted once, failed on Meta's duplicate-lookalike constraint (expected, logged); no anomaly signal; competitor counts unchanged; no new duplicate-targeting campaigns; 4 pending proposals refreshed with fresh numbers (A-063, A-065, A-070, A-076), 0 new proposals created, 0 closed as moot this pass; 12 new alerts written.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-11-01T22:51:00.000Z"
     }
   ],
   "log": [
@@ -34824,6 +34932,29 @@
       },
       "tier": "auto",
       "executedAt": "2026-11-01T20:51:00.000Z"
+    },
+    {
+      "proposalId": null,
+      "action": "lookalike-refresh auto-module: rate limit cleared (last attempt 2026-10-31T14:55:00.000Z, >24h elapsed) -- attempted to rebuild the 1% lookalike off 'Purchasers 180D' (id 120255823280550159, confirmed still ~20 via ads_get_custom_audience, unchanged) via ads_create_custom_audience (LOOKALIKE, ratio 0.01). Failed with Meta's duplicate-lookalike error (2654/1713007) -- a lookalike off the same origin/ratio already exists (the original laddered 1%/2%/5% set from 2026-09-15, still live and serving, plus a newer 'LAL3_Purchasers180D_01Nov' built outside this automation on 2026-11-01). Not a bug -- a real API constraint until the source audience grows. No further retry this pass per policy.",
+      "result": "failed",
+      "previousState": {
+        "purchasers_180d_audience_size": "~20 (lower=upper=20, unchanged since 2026-09-15)",
+        "existing_lookalikes_off_purchasers_180d": [
+          "120255832535210159 (1%, 2026-09-15, ACTIVE)",
+          "120255832535610159 (2%, 2026-09-15, ACTIVE)",
+          "120255832535780159 (5%, 2026-09-15, ACTIVE)",
+          "120256662640020159 (LAL3_Purchasers180D_01Nov, 2026-11-01, ACTIVE, built outside automation)"
+        ]
+      },
+      "detail": {
+        "error_category": "VALIDATION",
+        "error_message": "Can't Create a Duplicate Lookalike: You've already created a lookalike audience with the same source, country and size. Please try using a different source or different specifications.",
+        "error_code": "2654",
+        "error_subcode": "1713007",
+        "is_retryable": false
+      },
+      "tier": "auto",
+      "executedAt": "2026-11-01T22:51:00.000Z"
     }
   ],
   "creativeTags": {
