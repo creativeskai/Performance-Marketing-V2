@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-01T14:50:00.000Z",
+  "generatedAt": "2026-11-01T16:50:00.000Z",
   "settings": {
     "kill_roas_threshold": "DISABLED 2026-10-05 by user instruction: the ROAS pause-kill is OFF. Module 16 (pause-kill) must NOT auto-pause any campaign for low ROAS; surface low-ROAS campaigns as alerts only. The hard spend circuit breaker is a separate mechanism and stays ON. Former rule, for reference: pause if ROAS < 1.0x after ₹500 spend on a sales-objective campaign. EXCEPTION until 2026-10-05T23:59+05:30 (user-approved 2026-09-29): for the sneaker-push campaigns 120256091369160159 (Sneakers_BOF_30Sep-5Oct), 120256091370110159 (Sneakers_Prospecting_30Sep-5Oct) and 120256088882780159 (Sneakers_Catalog_Retargeting) the spend floor is ₹1,500, not ₹500.",
     "reactivate_min_historic_roas": "surface for reactivation if a paused campaign's last active-period ROAS >= 3.0x",
@@ -1141,7 +1141,7 @@
       "module": "resume-after-circuit-breaker",
       "tier": "approval",
       "title": "Resume the 5 campaigns down from the 2026-10-10 circuit breaker trip",
-      "reasoning": "Reconfirmed 2026-11-01T14:50Z: of the 5 campaigns paused by the 2026-10-10 circuit breaker trip, Sora_BOF_Test_5Oct (120256202021140159), Tsuchi_BOF_Test_5Oct (120256202020640159), Caps + Kage_26 Sept (120255693970470159) and Prospecting_JP_Purchase_5-9Oct (120256186544730159) are confirmed still PAUSED via direct fetch. Sneakers_BOF_30Sep-5Oct (120256091369160159) remains manually reactivated outside this resume flow and is still ACTIVE (unchanged since 2026-11-01T08:50Z). Today's account spend Rs3,964.30 vs the Rs7,000 ceiling -- no new breach. Breaker remains tripped, ~22 days unresolved. Still pending; this routine will not auto-resume the remaining 4.",
+      "reasoning": "Reconfirmed 2026-11-01T14:50Z: of the 5 campaigns paused by the 2026-10-10 circuit breaker trip, Sora_BOF_Test_5Oct (120256202021140159), Tsuchi_BOF_Test_5Oct (120256202020640159), Caps + Kage_26 Sept (120255693970470159) and Prospecting_JP_Purchase_5-9Oct (120256186544730159) are confirmed still PAUSED via direct fetch. Sneakers_BOF_30Sep-5Oct (120256091369160159) remains manually reactivated outside this resume flow and is still ACTIVE (unchanged since 2026-11-01T08:50Z). Today's account spend Rs3,964.30 vs the Rs7,000 ceiling -- no new breach. Breaker remains tripped, ~22 days unresolved. Still pending; this routine will not auto-resume the remaining 4. [Updated 2026-11-01T16:50:00.000Z]: 3 of the original 5 paused campaigns remain PAUSED/inactive; Sneakers_BOF_30Sep-5Oct and Caps + Kage_26 Sept are now ACTIVE again (resumed outside this automation, not via an auto-resume). circuitBreaker.tripped is still true, 22 days unresolved -- still awaiting human review.",
       "actionSummary": "Activates the 3 campaigns still paused from the 2026-10-10 circuit breaker trip (Sora_BOF_Test_5Oct, Tsuchi_BOF_Test_5Oct, Caps + Kage_26 Sept) via ads_activate_entity. The other 2 originally-paused campaigns (Sneakers_BOF_30Sep-5Oct, Prospecting_JP_Purchase_5-9Oct) are already active again outside this proposal and are left untouched.",
       "metaAction": {
         "tool": "ads_activate_entity",
@@ -1536,7 +1536,7 @@
       "module": "budget-reallocation",
       "tier": "approval",
       "title": "Shift Rs200/day from Prospecting_JP2_Placement_Split_12Oct (3.16x) to Caps_Only (14.57x) -- large ROAS gap",
-      "reasoning": "Refreshed 2026-11-01T10:49Z (last_7d): Caps_Only Rs5,913.17 spend @ 10.319x ROAS (71 purchases) vs Prospecting_JP2_Placement_Split_12Oct Rs8,266.45 spend @ 3.756x ROAS (12 purchases). Gap now ~2.75x, still well above the 1.5x+ budget_reallocation_min_roas_gap threshold and consistent with the 2026-10-31T20:49Z refresh (~2.75x). Still pending.",
+      "reasoning": "Refreshed 2026-11-01T10:49Z (last_7d): Caps_Only Rs5,913.17 spend @ 10.319x ROAS (71 purchases) vs Prospecting_JP2_Placement_Split_12Oct Rs8,266.45 spend @ 3.756x ROAS (12 purchases). Gap now ~2.75x, still well above the 1.5x+ budget_reallocation_min_roas_gap threshold and consistent with the 2026-10-31T20:49Z refresh (~2.75x). Still pending. [Updated 2026-11-01T16:50:00.000Z]: last_7d purchase_roas now Prospecting_JP2_Placement_Split_12Oct=3.76x (was 3.16x), Caps_Only=10.32x (was 14.57x) -- gap narrowed from ~4.6x to ~2.75x, still above the 1.5x budget_reallocation_min_roas_gap threshold.",
       "actionSummary": "Reduces PROSP_Reels_Capped's (Prospecting_JP2_Placement_Split_12Oct) ad set daily budget from Rs1,320 to Rs1,120, and increases Caps_Only's campaign daily budget from Rs900 to Rs1,100 -- a Rs200/day shift toward the higher-ROAS campaign. Both entities are currently ACTIVE; per Meta API behavior, a non-trivial budget edit on a live entity does not force-pause it (unlike a targeting edit), so delivery should continue uninterrupted under the new budgets.",
       "metaAction": {
         "tool": "ads_update_entity",
@@ -24309,6 +24309,78 @@
       "severity": "low",
       "dismissed": false,
       "createdAt": "2026-11-01T14:50:00.000Z"
+    },
+    {
+      "id": "AL-2512",
+      "module": "hard-spend-circuit-breaker",
+      "title": "Circuit breaker status check -- no new breach, still tripped 22d",
+      "detail": "ads_get_ad_entities (level=ad_account, date_preset=today) at this pass shows today's account spend at ₹4,695.29, below settings.hard_spend_ceiling_inr (₹7,000) -- no new breach this pass. circuitBreaker.tripped remains true from the 2026-10-10T16:50:00.000Z trip (22 days unresolved); A-063 (resume-after-circuit-breaker) is still pending human review. Per ROUTINE.md the routine never auto-resumes.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-11-01T16:50:00.000Z"
+    },
+    {
+      "id": "AL-2513",
+      "module": "pixel-health",
+      "title": "Pixel quality gate: healthy, ROAS modules not suppressed",
+      "detail": "ads_get_dataset_quality on the active pixel (833131719490535) shows composite EMQ scores between 6.1 and 8.6 across all tracked web events (PageView, ViewContent, AddToCart, InitiateCheckout, AddPaymentInfo, Purchase, prepaid_purchase, cod_purchase, Search, SubscribedButtonClick) -- all at/above the pixel_quality_min_match_rate=0.6 threshold (treating composite_score/10 as the comparable match-rate figure, consistent with prior passes). ROAS-based modules not suppressed this pass.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-11-01T16:50:00.000Z"
+    },
+    {
+      "id": "AL-2514",
+      "module": "purchaser-exclusion",
+      "title": "Purchaser-exclusion compliance check -- compliant account-wide (27 active ad sets)",
+      "detail": "Fresh targeting fetch on all 27 live ad sets: the only two with empty excluded_custom_audiences are CrossSell_Purchasers180D_FeedStoriesReels (120256662470710159) and Retargeting_Overall (120255851467360159), both on settings.purchaser_exclusion_exempt_adset_ids by design (deliberately target/include past purchasers). Every other active ad set excludes Purchasers 180D (120255823280550159) directly. purchaser-exclusion remains compliant account-wide, no action needed this pass.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-11-01T16:50:00.000Z"
+    },
+    {
+      "id": "AL-2515",
+      "module": "lookalike-refresh",
+      "title": "Lookalike-refresh: source audience unchanged, recently-built LALs still fresh -- no action needed",
+      "detail": "Purchasers 180D (120255823280550159) source audience is still ~20 (unchanged since 2026-09-15). The laddered/stacked lookalikes built off it earlier today (LAL3_Purchasers180D_01Nov and siblings LAL2_IG_Engagers90D_01Nov, LAL2_VideoViewers_01Nov, all time_created ~2026-11-01T09:50-10:03 UTC) are well under the 14-day lookalike_refresh_days threshold -- no refresh trigger this pass. Two orphaned duplicate 'Lookalike (IN, 1%) - Purchasers 180D' audiences (120256662744510159/520159) also exist, created the same window, status INACTIVE -- not acted on, no delivery impact.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-11-01T16:50:00.000Z"
+    },
+    {
+      "id": "AL-2516",
+      "module": "resume-after-circuit-breaker",
+      "title": "A-063 reconfirmed -- 3 of 5 originally-paused campaigns still PAUSED; 2 now ACTIVE again outside the automation",
+      "detail": "Of the 5 campaigns paused by the 2026-10-10T16:50:00.000Z circuit-breaker trip (Sora_BOF_Test_5Oct, Tsuchi_BOF_Test_5Oct, Prospecting_JP_Purchase_5-9Oct, Sneakers_BOF_30Sep-5Oct, Caps + Kage_26 Sept), fresh ads_get_ad_entities shows Sneakers_BOF_30Sep-5Oct (120256091369160159) and Caps + Kage_26 Sept (120255693970470159) are now effective_status=ACTIVE again -- resumed outside this automation (manual Ads Manager action, not an auto-resume; ROUTINE.md forbids the routine itself from ever auto-resuming a tripped breaker). The other 3 are not in the current active-campaign list. circuitBreaker.tripped remains true, 22 days unresolved; A-063 stays pending for human review.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-11-01T16:50:00.000Z"
+    },
+    {
+      "id": "AL-2517",
+      "module": "budget-reallocation",
+      "title": "A-076 reconfirmed -- ROAS gap narrowed but still above threshold",
+      "detail": "Prospecting_JP2_Placement_Split_12Oct last_7d purchase_roas is now 3.76x (was 3.16x when A-076 was written) and Caps_Only last_7d purchase_roas is now 10.32x (was 14.57x) -- the gap narrowed from ~4.6x to ~2.75x but remains well above settings.budget_reallocation_min_roas_gap (1.5x). A-076 stays pending with these refreshed numbers.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-11-01T16:50:00.000Z"
+    },
+    {
+      "id": "AL-2518",
+      "module": "campaign-consolidation-watch",
+      "title": "No new duplicate-targeting campaigns identified",
+      "detail": "Reviewed the 18 active campaigns this pass; no newly-identified duplicate product+audience targeting beyond what's already on watch. Sneakers_BOF_30Sep-5Oct remains active with ₹0 spend today/7d alongside the materially-spending Sneakers_BOF_v2_Placement_Split_12Oct -- same dormant-duplicate pattern already on watch from prior passes, not a new finding.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-11-01T16:50:00.000Z"
+    },
+    {
+      "id": "AL-2519",
+      "module": "self-audit-check",
+      "title": "Routine pass summary -- 0 auto-mutations, 0 creatives tagged, 0 new proposals, 2 proposals refreshed",
+      "detail": "This pass: circuit breaker checked (no new breach, still tripped 22d), pixel quality gate healthy, purchaser-exclusion compliant account-wide (no mutation needed), lookalike-refresh has nothing stale to rebuild, hook-angle-tagging found all active-ad creatives already tagged (0 new), no anomaly signal fired, no new learning-phase-stuck ad sets (learning_stage_info empty on all live ad sets), monthly-digest (Nov 1) and weekly-digest (week ending Nov 1) already written earlier today so not repeated. 8 approval-tier proposals remain pending (A-002, A-063, A-065, A-070, A-071, A-072, A-076, A-077); A-063 and A-076 reasoning refreshed with current numbers this pass, no new proposals created.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-11-01T16:50:00.000Z"
     }
   ],
   "log": [
