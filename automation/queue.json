@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-01T04:58:00.000Z",
+  "generatedAt": "2026-11-01T06:54:00.000Z",
   "settings": {
     "kill_roas_threshold": "DISABLED 2026-10-05 by user instruction: the ROAS pause-kill is OFF. Module 16 (pause-kill) must NOT auto-pause any campaign for low ROAS; surface low-ROAS campaigns as alerts only. The hard spend circuit breaker is a separate mechanism and stays ON. Former rule, for reference: pause if ROAS < 1.0x after ₹500 spend on a sales-objective campaign. EXCEPTION until 2026-10-05T23:59+05:30 (user-approved 2026-09-29): for the sneaker-push campaigns 120256091369160159 (Sneakers_BOF_30Sep-5Oct), 120256091370110159 (Sneakers_Prospecting_30Sep-5Oct) and 120256088882780159 (Sneakers_Catalog_Retargeting) the spend floor is ₹1,500, not ₹500.",
     "reactivate_min_historic_roas": "surface for reactivation if a paused campaign's last active-period ROAS >= 3.0x",
@@ -23951,6 +23951,96 @@
       "severity": "low",
       "dismissed": false,
       "createdAt": "2026-11-01T02:53:30.000Z"
+    },
+    {
+      "module": "pixel-health",
+      "title": "Pixel/dataset quality check -- healthy, ROAS modules not suppressed",
+      "detail": "ads_get_dataset_quality on dataset 833131719490535: composite EMQ scores across all tracked web events (PageView/ViewContent/AddToCart/InitiateCheckout/AddPaymentInfo/Purchase/prepaid_purchase/cod_purchase/Search) range 6.1-8.6, at/above pixel_quality_min_match_rate=0.6 -- ROAS-driven modules not suppressed this pass.",
+      "severity": "low",
+      "id": "AL-2471",
+      "dismissed": false,
+      "createdAt": "2026-11-01T06:54:00.000Z"
+    },
+    {
+      "module": "threshold-alerts",
+      "title": "No campaign CPM/CTR/CPC outside normal bands this pass",
+      "detail": "Compared last_7d vs last_14d CPM/CTR/CPC for all 11 ACTIVE campaigns -- all within normal variance, no outlier bands. settings.metric_baselines (Kage_sales_1908, Kage_TOF) map to campaigns no longer active, so no stale-baseline comparison was attempted.",
+      "severity": "low",
+      "id": "AL-2472",
+      "dismissed": false,
+      "createdAt": "2026-11-01T06:54:00.000Z"
+    },
+    {
+      "module": "anomaly",
+      "title": "No anomaly signals this pass",
+      "detail": "ads_insights_anomaly_signal (account-wide): no anomaly signal issues found across auction overlap, creative fatigue, or narrow audience checks.",
+      "severity": "low",
+      "id": "AL-2473",
+      "dismissed": false,
+      "createdAt": "2026-11-01T06:54:00.000Z"
+    },
+    {
+      "module": "learning-phase-stuck",
+      "title": "No ad sets confirmed stuck in learning this pass",
+      "detail": "All 14 currently ACTIVE ad sets show no learning_stage_info status (already exited learning or not applicable) -- none flagged as stuck.",
+      "severity": "low",
+      "id": "AL-2474",
+      "dismissed": false,
+      "createdAt": "2026-11-01T06:54:00.000Z"
+    },
+    {
+      "module": "campaign-consolidation-watch",
+      "title": "No new duplicate-targeting campaigns identified",
+      "detail": "11 ACTIVE campaigns this pass (Prospecting_MATCHA_Purchase_27Oct, IG90_Warm_BestCreatives_24Oct, Fudoshin, MATCHA_TOF_Traffic_23Oct, Prospecting_LAL1_Purchasers_14Oct, KAGE_TOF_Traffic_13Oct, Sneakers_BOF_v2_Placement_Split_12Oct, Prospecting_JP2_Placement_Split_12Oct, Caps_Only, Sneakers_Catalog_Retargeting, Retargeting_Overall) target distinct products/audiences -- no overlap flagged.",
+      "severity": "low",
+      "id": "AL-2475",
+      "dismissed": false,
+      "createdAt": "2026-11-01T06:54:00.000Z"
+    },
+    {
+      "module": "competitor-rescrape",
+      "title": "Gully Labs (146) and Lotto Sport India (217) both unchanged -- under spike threshold",
+      "detail": "ads_library_search (IN, ACTIVE) this pass: Gully Labs 146->146 (0%), Lotto Sport India 217->217 (0%) -- both well under the 20% spike threshold.",
+      "severity": "low",
+      "id": "AL-2476",
+      "dismissed": false,
+      "createdAt": "2026-11-01T06:54:00.000Z"
+    },
+    {
+      "module": "lookalike-refresh",
+      "title": "Lookalike-refresh rate-limited this pass -- would have attempted, skipped",
+      "detail": "Last rebuild attempt was 2026-10-31T14:55:00.000Z (~16h ago), under the 24h max_auto_actions_per_entity_per_day window for this entity -- skipped rather than attempted. Source audience (Purchasers 180D, ~20 people) still unchanged, so the next attempt would likely repeat the duplicate-lookalike error (2654/1713007) anyway.",
+      "severity": "low",
+      "id": "AL-2477",
+      "dismissed": false,
+      "createdAt": "2026-11-01T06:54:00.000Z"
+    },
+    {
+      "module": "hook-angle-tagging",
+      "title": "No new creatives to tag this pass",
+      "detail": "All 30 distinct creative IDs behind currently ACTIVE ads already have creativeTags entries (467 total tags on file). Vision pass remains skipped (Higgsfield not attached to this run).",
+      "severity": "low",
+      "id": "AL-2478",
+      "dismissed": false,
+      "createdAt": "2026-11-01T06:54:00.000Z"
+    },
+    {
+      "module": "resume-after-circuit-breaker",
+      "title": "A-063 reconfirmed -- all 5 originally-paused campaigns still PAUSED, breaker 22d unresolved",
+      "detail": "circuitBreaker.tripped remains true since 2026-10-10T16:50:00.000Z (22 days). Today's account spend this pass: Rs1,031.49 against the Rs7,000 ceiling -- no new breach. A-063 (resume-after-circuit-breaker) stays pending human review; no auto-resume.",
+      "severity": "medium",
+      "id": "AL-2479",
+      "dismissed": false,
+      "createdAt": "2026-11-01T06:54:00.000Z"
+    },
+    {
+      "id": "AL-2480",
+      "module": "self-audit-check",
+      "title": "Routine pass summary -- all-clear, no mutations, breaker still tripped (22d, unresolved)",
+      "detail": "Pass 2026-11-01T06:54:00.000Z: 0 auto-mutations (purchaser-exclusion compliant account-wide across all 14 active ad sets; lookalike-refresh rate-limited; hook-angle-tagging had nothing new; circuit breaker did not trip fresh -- today's spend Rs1,031.49 vs Rs7,000 ceiling), 0 new proposals (all 9 pending proposals -- A-002, A-050, A-063, A-065, A-070, A-071, A-072, A-076, A-077 -- remain relevant against fresh data, no material number movement worth a reasoning update), 9 new alerts this pass. circuitBreaker.tripped remains true (unresolved since 2026-10-10, 22 days), A-063 still pending human review. Pixel quality healthy, no anomaly signal.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-11-01T06:54:00.000Z"
     }
   ],
   "log": [
