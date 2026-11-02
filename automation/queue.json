@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-02T17:10:00.000Z",
+  "generatedAt": "2026-11-02T18:55:00.000Z",
   "settings": {
     "kill_roas_threshold": "DISABLED 2026-10-05 by user instruction: the ROAS pause-kill is OFF. Module 16 (pause-kill) must NOT auto-pause any campaign for low ROAS; surface low-ROAS campaigns as alerts only. The hard spend circuit breaker is a separate mechanism and stays ON. Former rule, for reference: pause if ROAS < 1.0x after ₹500 spend on a sales-objective campaign. EXCEPTION until 2026-10-05T23:59+05:30 (user-approved 2026-09-29): for the sneaker-push campaigns 120256091369160159 (Sneakers_BOF_30Sep-5Oct), 120256091370110159 (Sneakers_Prospecting_30Sep-5Oct) and 120256088882780159 (Sneakers_Catalog_Retargeting) the spend floor is ₹1,500, not ₹500.",
     "reactivate_min_historic_roas": "surface for reactivation if a paused campaign's last active-period ROAS >= 3.0x",
@@ -31,10 +31,10 @@
       }
     },
     "competitor_last_scrape": {
-      "gully_labs_active_ads": 122,
+      "gully_labs_active_ads": 121,
       "lotto_sport_india_active_ads": 193,
-      "scraped_at": "2026-11-02T10:47:00.000Z",
-      "note": "2026-11-02T10:47:00.000Z pass: Gully Labs 124->122 (-1.6%), Lotto Sport India 191->193 (+1.0%). Both under 20% move threshold."
+      "scraped_at": "2026-11-02T18:55:00.000Z",
+      "note": "2026-11-02T18:55:00.000Z pass: Gully Labs 122->121 (-0.8%), Lotto Sport India 193->193 (0%). Both under 20% move threshold."
     },
     "audience_label_corrections": {
       "120249907176770159": "ATC_180D -- NOT a purchaser audience (cart-adders, event=AddToCart, retention 180 days). Verified 2026-09-14, reconfirmed 2026-09-20. Superseded note: earlier passes said the account had NO purchaser audience at all -- that's now out of date. See the 120255823280550159 (Purchasers 180D) entry above, created 2026-09-15, which IS a genuine purchaser audience and is already in use for exclusion + lookalike.",
@@ -25610,6 +25610,42 @@
       "severity": "low",
       "dismissed": false,
       "createdAt": "2026-11-02T17:10:00.000Z"
+    },
+    {
+      "id": "AL-2657",
+      "module": "resume-after-circuit-breaker",
+      "title": "A-063 reconfirmed -- all 5 originally-paused campaigns confirmed PAUSED, breaker remains tripped",
+      "detail": "Circuit breaker tripped 2026-10-10T16:50 UTC remains active, unresolved (A-063 still pending human review since 2026-10-11). This pass: today's account spend is ₹125.96 against the ₹7,000 ceiling (no fresh breach). Direct fetch of the 5 originally-paused campaigns (Sora_BOF_Test_5Oct, Tsuchi_BOF_Test_5Oct, Prospecting_JP_Purchase_5-9Oct, Sneakers_BOF_30Sep-5Oct, Caps + Kage_26 Sept) confirms all 5 still effective_status=PAUSED -- no re-pause action needed this pass. circuitBreaker.trippedAt/reason unchanged.",
+      "severity": "medium",
+      "dismissed": false,
+      "createdAt": "2026-11-02T18:55:00.000Z"
+    },
+    {
+      "id": "AL-2658",
+      "module": "lookalike-refresh",
+      "title": "Rate-limited this pass -- persistent duplicate-lookalike failure loop flagged for review",
+      "detail": "Last auto-attempt was 2026-11-01T22:51:00.000Z, <24h ago (settings.max_auto_actions_per_entity_per_day=1 for source audience 'Purchasers 180D', 120255823280550159), so this pass skipped re-attempting the rebuild rather than acting. Context for human review: this module has now failed 11 consecutive daily attempts (2026-10-22 through 2026-11-01) to rebuild a 1% lookalike off 'Purchasers 180D' because Meta rejects it as a duplicate-lookalike (an active 1% LAL off the same source, built 2026-09-15, already exists). Separately, a fresh purchaser-based lookalike ('LAL3_Purchasers180D_01Nov', 120256662640020159) was built outside this automation on 2026-11-01 and is now live in 2 active ad sets (MATCHA_LAL_Stack_Purch3_Video2_IGEng2, KAGE_LAL_Stack_Purch3_Video2_IGEng2) -- the actual stale audience still in active use is the original 2026-09-15 1% LAL (120255832535210159), targeted by ad set LAL1_Purchasers180D_FB_IG under campaign Prospecting_LAL1_Purchasers_14Oct (48 days old, source audience size unchanged ~20 since creation). Recommend either accepting LAL3_Purchasers180D_01Nov as the de-facto refresh and retargeting LAL1_Purchasers180D_FB_IG onto it, or adjusting this module to try a different ratio/name instead of repeating the same rejected 1% rebuild.",
+      "severity": "medium",
+      "dismissed": false,
+      "createdAt": "2026-11-02T18:55:00.000Z"
+    },
+    {
+      "id": "AL-2659",
+      "module": "hook-angle-tagging",
+      "title": "3 creatives tagged this pass",
+      "detail": "Tagged creatives 1151058697378482 (KAGE_LAL_PAC_3ratio_02Nov), 1709740383911438 (Caps_Only_Archives2_IsBack_winner), and 1632221698356397 (KAGE_MultiImage_NB_01Nov) from real primary text/headline/description via Meta Ads MCP ads_get_creatives. Vision pass skipped for all 3 -- Higgsfield connection not attached this run.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-11-02T18:55:00.000Z"
+    },
+    {
+      "id": "AL-2660",
+      "module": "routine-run-notes",
+      "title": "Run summary -- 2026-11-02T18:55:00.000Z pass",
+      "detail": "Circuit breaker: remains tripped (since 2026-10-10), today's spend ₹125.96 vs ₹7,000 ceiling, no fresh breach, all 5 originally-paused campaigns reconfirmed PAUSED. Pixel gate: clear (EMQ composite scores 6.1-9.0/10, all >= 0.6 convention). purchaser-exclusion: all active prospecting ad sets already exclude Purchasers 180D correctly (incl. the 4 settings-exempt cross-sell ad sets correctly NOT excluding it) -- no action needed. lookalike-refresh: rate-limited (<24h since last attempt), alert written. hook-angle-tagging: 3 untagged creatives found on active ads, all tagged this pass. anomaly: narrow-audience warning on WARM_T2_CONSIDER_PDP_90D reconfirmed (unchanged, already alerted repeatedly today). competitor-rescrape: Gully Labs 122->121 (-0.8%), Lotto Sport India 193->193 (0%), both under 20% threshold, settings.competitor_last_scrape updated, no spike alert. weekly-digest: already written this pass-cycle at 2026-11-02T15:55 (today is Monday) -- not repeated. Pending approval-tier proposals (A-002, A-063, A-070, A-076, A-077, A-78) spot-checked against fresh last_7d/last_30d data -- numbers directionally consistent with existing reasoning, no updates needed. No approval-tier module newly triggered this pass.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-11-02T18:55:00.000Z"
     }
   ],
   "log": [
@@ -36395,6 +36431,54 @@
       },
       "tier": "auto",
       "executedAt": "2026-11-02T17:10:00.000Z"
+    },
+    {
+      "proposalId": null,
+      "action": "hook-angle-tagging auto-module: tagged creative 1151058697378482 ('KAGE_LAL_PAC_3ratio_02Nov' multi-image creative, ad under active ad set KAGE_LAL_Stack_Purch3_Video2_IGEng2 / campaign KAGE_TOF_LAL_Purchase_01Nov) from its description field ('Was ₹3,299 · Prepaid orders') via Meta Ads MCP ads_get_creatives -- body/title unavailable (page-post-backed SHARE creative). Vision pass skipped (Higgsfield not attached this run).",
+      "result": "success",
+      "previousState": {
+        "creativeTags_entry": null
+      },
+      "detail": {
+        "creative_id": "1151058697378482",
+        "object_type": "SHARE",
+        "description": "Was ₹3,299 · Prepaid orders",
+        "images_count": 3
+      },
+      "tier": "auto",
+      "executedAt": "2026-11-02T18:55:00.000Z"
+    },
+    {
+      "proposalId": null,
+      "action": "hook-angle-tagging auto-module: tagged creative 1709740383911438 ('Caps_Only_Archives2_IsBack_winner', ad under active ad set Caps_Only_11Oct / campaign Caps_Only) from its primary text/headline via Meta Ads MCP ads_get_creatives. Vision pass skipped (Higgsfield not attached this run).",
+      "result": "success",
+      "previousState": {
+        "creativeTags_entry": null
+      },
+      "detail": {
+        "creative_id": "1709740383911438",
+        "object_type": "SHARE",
+        "body": "KAI Archives 2.0 is back",
+        "title": "Accessories — KAI"
+      },
+      "tier": "auto",
+      "executedAt": "2026-11-02T18:55:00.000Z"
+    },
+    {
+      "proposalId": null,
+      "action": "hook-angle-tagging auto-module: tagged creative 1632221698356397 ('KAGE_MultiImage_NB_01Nov', ad under active ad set PROSP_Reels_Capped / campaign Prospecting_JP2_Placement_Split_12Oct) from its primary text/headline via Meta Ads MCP ads_get_creatives. Vision pass skipped (Higgsfield not attached this run).",
+      "result": "success",
+      "previousState": {
+        "creativeTags_entry": null
+      },
+      "detail": {
+        "creative_id": "1632221698356397",
+        "object_type": "SHARE",
+        "body": "KAGE — ₹2,499 on prepaid orders (was ₹3,299). Save ₹800. Offer till stocks last.",
+        "title": "KAGE — ₹2,499 Prepaid"
+      },
+      "tier": "auto",
+      "executedAt": "2026-11-02T18:55:00.000Z"
     }
   ],
   "creativeTags": {
@@ -42085,6 +42169,39 @@
       "visionPassSkipped": true,
       "note": "Higgsfield vision connection not attached to this run -- image content itself not analyzed, only real available ad copy text used. No creative description invented.",
       "taggedAt": "2026-11-02T17:10:00.000Z"
+    },
+    "1151058697378482": {
+      "adName": "KAGE_LAL_PAC_3ratio_02Nov",
+      "campaign": "KAGE_TOF_LAL_Purchase_01Nov",
+      "format": "Multi-image (3 images), SHARE (page-post-backed)",
+      "angle": "Prepaid-discount price-anchor push for KAGE product (price-drop framing)",
+      "hook": "\"Was ₹3,299 · Prepaid orders\" (creative description field -- body/title not returned by ads_get_creatives for this page-post-backed SHARE creative)",
+      "taggedFrom": "ad description field + ad/creative naming, via Meta Ads MCP ads_get_creatives (body/title unavailable for this page-post-backed SHARE creative)",
+      "visionPassSkipped": true,
+      "note": "Higgsfield vision connection not attached to this run -- image content itself not analyzed, only real available ad copy text used. No creative description invented.",
+      "taggedAt": "2026-11-02T18:55:00.000Z"
+    },
+    "1709740383911438": {
+      "adName": "Caps_Only_Archives2_IsBack_winner",
+      "campaign": "Caps_Only",
+      "format": "Static image, SHARE",
+      "angle": "Restock announcement, not discount-led",
+      "hook": "\"Accessories — KAI\" (headline/title) / \"KAI Archives 2.0 is back\" (primary text/body)",
+      "taggedFrom": "ad primary text (body) + headline (title), via Meta Ads MCP ads_get_creatives",
+      "visionPassSkipped": true,
+      "note": "Higgsfield vision connection not attached to this run -- image content itself not analyzed, only real ad copy text used. No creative description invented.",
+      "taggedAt": "2026-11-02T18:55:00.000Z"
+    },
+    "1632221698356397": {
+      "adName": "KAGE_MultiImage_NB_01Nov",
+      "campaign": "Prospecting_JP2_Placement_Split_12Oct",
+      "format": "Static image, SHARE",
+      "angle": "Prepaid discount offer (Rs2,499, was Rs3,299)",
+      "hook": "\"KAGE — ₹2,499 Prepaid\" (headline) / \"KAGE — ₹2,499 on prepaid orders (was ₹3,299). Save ₹800. Offer till stocks last.\" (primary text)",
+      "taggedFrom": "ad primary text (body) + headline (title), via Meta Ads MCP ads_get_creatives",
+      "visionPassSkipped": true,
+      "note": "Higgsfield vision connection not attached to this run -- image content itself not analyzed, only real ad copy text used. No creative description invented.",
+      "taggedAt": "2026-11-02T18:55:00.000Z"
     }
   }
 }
