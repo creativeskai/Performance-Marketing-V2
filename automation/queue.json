@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-02T02:51:00.000Z",
+  "generatedAt": "2026-11-02T04:52:00.000Z",
   "settings": {
     "kill_roas_threshold": "DISABLED 2026-10-05 by user instruction: the ROAS pause-kill is OFF. Module 16 (pause-kill) must NOT auto-pause any campaign for low ROAS; surface low-ROAS campaigns as alerts only. The hard spend circuit breaker is a separate mechanism and stays ON. Former rule, for reference: pause if ROAS < 1.0x after ₹500 spend on a sales-objective campaign. EXCEPTION until 2026-10-05T23:59+05:30 (user-approved 2026-09-29): for the sneaker-push campaigns 120256091369160159 (Sneakers_BOF_30Sep-5Oct), 120256091370110159 (Sneakers_Prospecting_30Sep-5Oct) and 120256088882780159 (Sneakers_Catalog_Retargeting) the spend floor is ₹1,500, not ₹500.",
     "reactivate_min_historic_roas": "surface for reactivation if a paused campaign's last active-period ROAS >= 3.0x",
@@ -31,10 +31,10 @@
       }
     },
     "competitor_last_scrape": {
-      "gully_labs_active_ads": 144,
-      "lotto_sport_india_active_ads": 220,
-      "scraped_at": "2026-11-02T02:51:00.000Z",
-      "note": "2026-11-02T02:51:00.000Z pass: Gully Labs 144->144 (unchanged), Lotto Sport India 218->220 (+0.9%). Both under 20% move threshold."
+      "gully_labs_active_ads": 127,
+      "lotto_sport_india_active_ads": 221,
+      "scraped_at": "2026-11-02T04:52:00.000Z",
+      "note": "2026-11-02T04:52:00.000Z pass: Gully Labs 144->127 (-11.8%), Lotto Sport India 220->221 (+0.5%). Both under 20% move threshold."
     },
     "audience_label_corrections": {
       "120249907176770159": "ATC_180D -- NOT a purchaser audience (cart-adders, event=AddToCart, retention 180 days). Verified 2026-09-14, reconfirmed 2026-09-20. Superseded note: earlier passes said the account had NO purchaser audience at all -- that's now out of date. See the 120255823280550159 (Purchasers 180D) entry above, created 2026-09-15, which IS a genuine purchaser audience and is already in use for exclusion + lookalike.",
@@ -1142,7 +1142,7 @@
       "module": "resume-after-circuit-breaker",
       "tier": "approval",
       "title": "Resume the 5 campaigns down from the 2026-10-10 circuit breaker trip",
-      "reasoning": "Reconfirmed 2026-11-01T14:50Z: of the 5 campaigns paused by the 2026-10-10 circuit breaker trip, Sora_BOF_Test_5Oct (120256202021140159), Tsuchi_BOF_Test_5Oct (120256202020640159), Caps + Kage_26 Sept (120255693970470159) and Prospecting_JP_Purchase_5-9Oct (120256186544730159) are confirmed still PAUSED via direct fetch. Sneakers_BOF_30Sep-5Oct (120256091369160159) remains manually reactivated outside this resume flow and is still ACTIVE (unchanged since 2026-11-01T08:50Z). Today's account spend Rs3,964.30 vs the Rs7,000 ceiling -- no new breach. Breaker remains tripped, ~22 days unresolved. Still pending; this routine will not auto-resume the remaining 4. [Updated 2026-11-01T16:50:00.000Z]: 3 of the original 5 paused campaigns remain PAUSED/inactive; Sneakers_BOF_30Sep-5Oct and Caps + Kage_26 Sept are now ACTIVE again (resumed outside this automation, not via an auto-resume). circuitBreaker.tripped is still true, 22 days unresolved -- still awaiting human review. [Updated 2026-11-01T22:51:00.000Z]: Fresh direct fetch confirms the same picture as the 20:51Z pass -- Sora_BOF_Test_5Oct (120256202021140159), Tsuchi_BOF_Test_5Oct (120256202020640159) and Prospecting_JP_Purchase_5-9Oct (120256186544730159) remain PAUSED; Sneakers_BOF_30Sep-5Oct (120256091369160159) and Caps + Kage_26 Sept (120255693970470159) are ACTIVE again, resumed outside this automation. Today's account spend Rs733.29 vs the Rs7,000 ceiling -- no new breach. Breaker remains tripped, ~22 days unresolved. Still pending; this routine will not auto-resume the remaining 3. UPDATE (2026-11-02 pass): 2 of these 5 campaigns -- 'Sneakers_BOF_30Sep-5Oct' and 'Caps + Kage_26 Sept' -- are now confirmed ACTIVE again (effective_status=ACTIVE via direct lookup, both spending and performing well: 4.24x and 7.54x ROAS respectively over last_30d). This happened outside the in-app/chat approval flow (this proposal is still pending, never executed) -- a human appears to have manually reactivated them directly in Ads Manager. The remaining 3 -- Sora_BOF_Test_5Oct and Tsuchi_BOF_Test_5Oct (both already separately resolved PAUSED as duplicate test shells per A-057 campaign-consolidation) and Prospecting_JP_Purchase_5-9Oct (still PAUSED, last_30d ROAS 9.32x if reconsidered) -- remain exactly as the breaker left them.",
+      "reasoning": "Reconfirmed 2026-11-01T14:50Z: of the 5 campaigns paused by the 2026-10-10 circuit breaker trip, Sora_BOF_Test_5Oct (120256202021140159), Tsuchi_BOF_Test_5Oct (120256202020640159), Caps + Kage_26 Sept (120255693970470159) and Prospecting_JP_Purchase_5-9Oct (120256186544730159) are confirmed still PAUSED via direct fetch. Sneakers_BOF_30Sep-5Oct (120256091369160159) remains manually reactivated outside this resume flow and is still ACTIVE (unchanged since 2026-11-01T08:50Z). Today's account spend Rs3,964.30 vs the Rs7,000 ceiling -- no new breach. Breaker remains tripped, ~22 days unresolved. Still pending; this routine will not auto-resume the remaining 4. [Updated 2026-11-01T16:50:00.000Z]: 3 of the original 5 paused campaigns remain PAUSED/inactive; Sneakers_BOF_30Sep-5Oct and Caps + Kage_26 Sept are now ACTIVE again (resumed outside this automation, not via an auto-resume). circuitBreaker.tripped is still true, 22 days unresolved -- still awaiting human review. [Updated 2026-11-01T22:51:00.000Z]: Fresh direct fetch confirms the same picture as the 20:51Z pass -- Sora_BOF_Test_5Oct (120256202021140159), Tsuchi_BOF_Test_5Oct (120256202020640159) and Prospecting_JP_Purchase_5-9Oct (120256186544730159) remain PAUSED; Sneakers_BOF_30Sep-5Oct (120256091369160159) and Caps + Kage_26 Sept (120255693970470159) are ACTIVE again, resumed outside this automation. Today's account spend Rs733.29 vs the Rs7,000 ceiling -- no new breach. Breaker remains tripped, ~22 days unresolved. Still pending; this routine will not auto-resume the remaining 3. UPDATE (2026-11-02 pass): 2 of these 5 campaigns -- 'Sneakers_BOF_30Sep-5Oct' and 'Caps + Kage_26 Sept' -- are now confirmed ACTIVE again (effective_status=ACTIVE via direct lookup, both spending and performing well: 4.24x and 7.54x ROAS respectively over last_30d). This happened outside the in-app/chat approval flow (this proposal is still pending, never executed) -- a human appears to have manually reactivated them directly in Ads Manager. The remaining 3 -- Sora_BOF_Test_5Oct and Tsuchi_BOF_Test_5Oct (both already separately resolved PAUSED as duplicate test shells per A-057 campaign-consolidation) and Prospecting_JP_Purchase_5-9Oct (still PAUSED, last_30d ROAS 9.32x if reconsidered) -- remain exactly as the breaker left them. UPDATE (2026-11-02T04:52Z pass): Fresh direct fetch confirms the exact same picture -- 'Sneakers_BOF_30Sep-5Oct' (120256091369160159, last_14d ROAS 3.74x) and 'Caps + Kage_26 Sept' (120255693970470159) remain ACTIVE (reactivated outside this automation); 'Sora_BOF_Test_5Oct', 'Tsuchi_BOF_Test_5Oct' and 'Prospecting_JP_Purchase_5-9Oct' remain PAUSED, unchanged. Today's account spend Rs1,501.54 vs the Rs7,000 ceiling -- no new breach. Breaker remains tripped, 23 days unresolved. Still pending; this routine will not auto-resume the remaining 3.",
       "actionSummary": "Activates the 3 campaigns still paused from the 2026-10-10 circuit breaker trip (Sora_BOF_Test_5Oct, Tsuchi_BOF_Test_5Oct, Caps + Kage_26 Sept) via ads_activate_entity. The other 2 originally-paused campaigns (Sneakers_BOF_30Sep-5Oct, Prospecting_JP_Purchase_5-9Oct) are already active again outside this proposal and are left untouched.",
       "metaAction": {
         "tool": "ads_activate_entity",
@@ -1191,7 +1191,7 @@
       "createdAt": "2026-10-11T12:50:00.000Z",
       "lastReconfirmedAt": "2026-11-01T22:51:00.000Z",
       "resolvedAt": null,
-      "lastRefreshedAt": "2026-11-01T22:51:00.000Z"
+      "lastRefreshedAt": "2026-11-02T04:52:00.000Z"
     },
     {
       "id": "A-064",
@@ -24798,6 +24798,96 @@
       "severity": "low",
       "dismissed": false,
       "createdAt": "2026-11-02T02:51:00.000Z"
+    },
+    {
+      "id": "AL-2564",
+      "module": "hard-spend-circuit-breaker",
+      "title": "Not breached this pass; stale 2026-10-10 trip remains, 2 of 5 paused campaigns still active outside the approval flow",
+      "detail": "Fresh ads_get_ad_entities (level=ad_account, date_preset=today) pull: today's account spend Rs1,501.54 vs settings.hard_spend_ceiling_inr (Rs7,000) -- no new breach. circuitBreaker.tripped remains true (tripped 2026-10-10T16:50 UTC, now 23 days unresolved, pending human review of A-063). Fresh campaign-level fetch confirms the same drift flagged last pass: 'Sneakers_BOF_30Sep-5Oct' (120256091369160159, last_14d ROAS 3.74x) and 'Caps + Kage_26 Sept' (120255693970470159) are both ACTIVE again -- 2 of the original 5 breaker-paused campaigns, reactivated outside this automation's approval flow, not via an executed resume-after-circuit-breaker proposal. The other 3 (Sora_BOF_Test_5Oct, Tsuchi_BOF_Test_5Oct, Prospecting_JP_Purchase_5-9Oct) remain PAUSED. Per ROUTINE.md, this routine never auto-resumes or auto-re-pauses on its own initiative outside an actual new breach -- flagging for continued human attention via A-063.",
+      "severity": "high",
+      "dismissed": false,
+      "createdAt": "2026-11-02T04:52:00.000Z"
+    },
+    {
+      "id": "AL-2565",
+      "module": "pixel-health",
+      "title": "Pixel EMQ healthy, ROAS-driven modules not suppressed",
+      "detail": "ads_get_dataset_quality (dataset 833131719490535, Shopify Meta Pixel) this pass: Purchase composite EMQ 8.7, cod_purchase 8.8, prepaid_purchase 8.6, AddPaymentInfo 9.0, InitiateCheckout 6.9, AddToCart/ViewContent/PageView/Search ~6.1 -- all events well above settings.pixel_quality_min_match_rate (0.6). ROAS-based modules not suppressed this pass.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-11-02T04:52:00.000Z"
+    },
+    {
+      "id": "AL-2566",
+      "module": "purchaser-exclusion",
+      "title": "Purchaser-exclusion compliance check -- compliant account-wide (28 active ad sets)",
+      "detail": "Fresh targeting fetch on all 28 currently-ACTIVE ad sets: every ad set either (a) excludes 'Purchasers 180D' (120255823280550159) in excluded_custom_audiences, or (b) is on settings.purchaser_exclusion_exempt_adset_ids (WARM_T4_XSell_Purchasers180D, Retargeting_Overall, CrossSell_Purchasers180D_FeedStoriesReels -- all deliberately include/target past purchasers by design). No non-compliant active ad set found; no action needed this pass.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-11-02T04:52:00.000Z"
+    },
+    {
+      "id": "AL-2567",
+      "module": "lookalike-refresh",
+      "title": "Lookalike rebuild rate-limited this pass -- skipped, not attempted",
+      "detail": "Last attempt was 2026-11-01T22:51:00.000Z (failed with Meta's duplicate-lookalike error, source audience 'Purchasers 180D' still ~20, unchanged). Only ~6h elapsed since then, under max_auto_actions_per_entity_per_day=1's 24h window -- rebuild skipped this pass per rate limiting, not re-attempted. 3 fresh lookalikes already built 2026-11-01 off this and other source audiences (LAL2_IG_Engagers90D_01Nov, LAL2_VideoViewers_01Nov, LAL3_Purchasers180D_01Nov, all ACTIVE) remain live and serving.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-11-02T04:52:00.000Z"
+    },
+    {
+      "id": "AL-2568",
+      "module": "hook-angle-tagging",
+      "title": "10 creatives tagged this pass",
+      "detail": "10 active ads' creatives had no creativeTags entry: 2208585413206295, 1001247675597266, 1110457865029088, 1135959446026012, 1664893041698495, 28927673820217621, 1859545351893017, 1894025018488247, 2397618354318526, 1108522575099281 -- all tagged from real primary text/headline via ads_get_creatives (mostly the Nov-1 KAGE/MATCHA prepaid-discount creative set, plus a Caps restock creative and a MATCHA explainer video). No vision pass (Higgsfield not attached to this run); no creative description invented. 497 -> 507 total tagged creatives.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-11-02T04:52:00.000Z"
+    },
+    {
+      "id": "AL-2569",
+      "module": "anomaly",
+      "title": "Anomaly signal reconfirmed -- narrow audience on WARM_T2_CONSIDER_PDP_90D",
+      "detail": "ads_insights_anomaly_signal this pass repeats the same warning as the prior pass (AL-2535): ad set WARM_T2_CONSIDER_PDP_90D (120256667271960159, campaign Sneakers_BOF_v2_Placement_Split_12Oct) is actively delivering with an audience size categorized as narrow (28,000-33,000 estimated). Recommendation: evaluate expanding audience or A/B test using Advantage+ audience. Informational only -- no module currently has a 'narrow audience' trigger wired to an action; flagging for awareness, same as last pass.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-11-02T04:52:00.000Z"
+    },
+    {
+      "id": "AL-2570",
+      "module": "competitor-rescrape",
+      "title": "Competitor benchmark refresh -- Gully Labs down 11.8%, Lotto Sport India +0.5%, both under threshold",
+      "detail": "ads_library_search (country IN, ad_active_status ACTIVE, page-scoped) this pass: Gully Labs (page_id 107479854297817) 144 -> 127 active ads (-11.8%); Lotto Sport India (page_id 426015150606378) 220 -> 221 active ads (+0.5%). Neither move reaches the 20% competitor-spike threshold -- no spike alert. settings.competitor_last_scrape updated.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-11-02T04:52:00.000Z"
+    },
+    {
+      "id": "AL-2571",
+      "module": "threshold-alerts",
+      "title": "Active campaign CPM/CTR within normal variance (no baseline match for current campaigns)",
+      "detail": "Fresh last_7d CPM/CTR/frequency pull across all 11 active campaigns: frequencies range 0-1.5 (well under fatigue threshold 3), CPM Rs48.86-216.06, CTR 0.89%-2.94%. settings.metric_baselines only has stored baselines for Kage_sales_1908 and Kage_TOF, both long-inactive -- none of the 11 currently-active campaigns have a stored baseline to compare against, so no CPM/CTR/CPC threshold breach can be evaluated for them this pass. No action taken.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-11-02T04:52:00.000Z"
+    },
+    {
+      "id": "AL-2572",
+      "module": "resume-after-circuit-breaker",
+      "title": "A-063 reconfirmed -- 2 of 5 originally-paused campaigns still active outside the approval flow, unchanged",
+      "detail": "Fresh direct fetch this pass: 'Sneakers_BOF_30Sep-5Oct' and 'Caps + Kage_26 Sept' remain ACTIVE (reactivated outside this automation, not via an executed resume-after-circuit-breaker approval); 'Sora_BOF_Test_5Oct', 'Tsuchi_BOF_Test_5Oct' and 'Prospecting_JP_Purchase_5-9Oct' remain PAUSED, unchanged from the prior pass. Today's account spend Rs1,501.54 vs the Rs7,000 ceiling -- no new breach. Breaker remains tripped, 23 days unresolved. A-063 proposal reasoning appended with this pass's reconfirmation; still pending, this routine will not auto-resume the remaining 3.",
+      "severity": "medium",
+      "dismissed": false,
+      "createdAt": "2026-11-02T04:52:00.000Z"
+    },
+    {
+      "id": "AL-2573",
+      "module": "self-audit-check",
+      "title": "Routine pass summary -- 0 auto-mutations to delivery, 10 creatives tagged, 0 new proposals, breaker still tripped (23d, unresolved)",
+      "detail": "2026-11-02T04:52:00.000Z pass: circuit breaker checked first (not breached, Rs1,501.54 vs Rs7,000 ceiling), pixel quality gate checked (healthy, not suppressed). Freshly re-pulled this pass: account spend, active campaigns (11) and ad sets (28) with targeting, active ads (84) with creative ids, lookalike audiences, anomaly signal, competitor benchmark, 7d CPM/CTR/frequency. purchaser-exclusion compliant account-wide; lookalike-refresh rate-limited (skipped); hook-angle-tagging tagged 10 new creatives (auto, no Meta write). No new proposals created or closed this pass. A-063 (resume-after-circuit-breaker) and A-076 (budget-reallocation) reconfirmed with fresh numbers -- both unchanged materially from the prior pass, A-063 reasoning appended, A-076 left as-is (gap unchanged ~3.35x). Breakdown-dependent approval modules not re-pulled fresh this pass (geo, age/gender, device, placement, dayparting, bid-strategy, engagement-tier, ab-test, catalog-dpa) -- no indication of material account change since they were last checked within the past few hours; existing pending proposals (A-065, A-070, A-077, A-78) and open alerts for those modules stand unchanged. circuitBreaker.tripped still true, 23 days unresolved, pending human review of A-063.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-11-02T04:52:00.000Z"
     }
   ],
   "log": [
@@ -35353,6 +35443,126 @@
       },
       "tier": "auto",
       "executedAt": "2026-11-02T02:51:00.000Z"
+    },
+    {
+      "proposalId": null,
+      "action": "hook-angle-tagging auto-module: tagged creative 2208585413206295 ('KAGE_LAL_Static_9x16' static image (9x16), share, under active campaign 'KAGE_TOF_LAL_Purchase_01Nov') -- primary text/headline pulled via ads_get_creatives, no vision pass (Higgsfield not attached this run).",
+      "result": "success",
+      "previousState": null,
+      "detail": {
+        "creative_id": "2208585413206295",
+        "tags_written": true
+      },
+      "tier": "auto",
+      "executedAt": "2026-11-02T04:52:00.000Z"
+    },
+    {
+      "proposalId": null,
+      "action": "hook-angle-tagging auto-module: tagged creative 1001247675597266 ('Caps_Grey_Hero' static image, share, under active campaign 'Caps + Kage_26 Sept') -- primary text/headline pulled via ads_get_creatives, no vision pass (Higgsfield not attached this run).",
+      "result": "success",
+      "previousState": null,
+      "detail": {
+        "creative_id": "1001247675597266",
+        "tags_written": true
+      },
+      "tier": "auto",
+      "executedAt": "2026-11-02T04:52:00.000Z"
+    },
+    {
+      "proposalId": null,
+      "action": "hook-angle-tagging auto-module: tagged creative 1110457865029088 ('KAGE_MultiImage_NB_01Nov' static image (ad name says \"multiimage\" but ads_get_creatives returned object_type share with no child_attachments -- single-image creative despite the name), under active campaign 'Sneakers_Cold_Nov') -- primary text/headline pulled via ads_get_creatives, no vision pass (Higgsfield not attached this run).",
+      "result": "success",
+      "previousState": null,
+      "detail": {
+        "creative_id": "1110457865029088",
+        "tags_written": true
+      },
+      "tier": "auto",
+      "executedAt": "2026-11-02T04:52:00.000Z"
+    },
+    {
+      "proposalId": null,
+      "action": "hook-angle-tagging auto-module: tagged creative 1135959446026012 ('MATCHA_MultiImage_01Nov' static image (ad name says \"multiimage\" but ads_get_creatives returned object_type share with no child_attachments -- single-image creative despite the name), under active campaign 'Prospecting_MATCHA_Purchase_27Oct') -- primary text/headline pulled via ads_get_creatives, no vision pass (Higgsfield not attached this run).",
+      "result": "success",
+      "previousState": null,
+      "detail": {
+        "creative_id": "1135959446026012",
+        "tags_written": true
+      },
+      "tier": "auto",
+      "executedAt": "2026-11-02T04:52:00.000Z"
+    },
+    {
+      "proposalId": null,
+      "action": "hook-angle-tagging auto-module: tagged creative 1664893041698495 ('MATCHA_MultiImage_01Nov' static image (ad name says \"multiimage\" but ads_get_creatives returned object_type share with no child_attachments -- single-image creative despite the name), under active campaign 'Retargeting_Overall') -- primary text/headline pulled via ads_get_creatives, no vision pass (Higgsfield not attached this run).",
+      "result": "success",
+      "previousState": null,
+      "detail": {
+        "creative_id": "1664893041698495",
+        "tags_written": true
+      },
+      "tier": "auto",
+      "executedAt": "2026-11-02T04:52:00.000Z"
+    },
+    {
+      "proposalId": null,
+      "action": "hook-angle-tagging auto-module: tagged creative 28927673820217621 ('KAGE_MultiImage_NB_01Nov' static image (ad name says \"multiimage\" but ads_get_creatives returned object_type share with no child_attachments -- single-image creative despite the name), under active campaign 'KAGE_TOF_LAL_Purchase_01Nov') -- primary text/headline pulled via ads_get_creatives, no vision pass (Higgsfield not attached this run).",
+      "result": "success",
+      "previousState": null,
+      "detail": {
+        "creative_id": "28927673820217621",
+        "tags_written": true
+      },
+      "tier": "auto",
+      "executedAt": "2026-11-02T04:52:00.000Z"
+    },
+    {
+      "proposalId": null,
+      "action": "hook-angle-tagging auto-module: tagged creative 1859545351893017 ('MATCHA_LAL_Video' video, under active campaign 'MATCHA_TOF_LAL_Purchase_01Nov') -- primary text/headline pulled via ads_get_creatives, no vision pass (Higgsfield not attached this run).",
+      "result": "success",
+      "previousState": null,
+      "detail": {
+        "creative_id": "1859545351893017",
+        "tags_written": true
+      },
+      "tier": "auto",
+      "executedAt": "2026-11-02T04:52:00.000Z"
+    },
+    {
+      "proposalId": null,
+      "action": "hook-angle-tagging auto-module: tagged creative 1894025018488247 ('A_Kage_9x16' static image (9x16), share, under active campaign 'Sneakers_Cold_Nov') -- primary text/headline pulled via ads_get_creatives, no vision pass (Higgsfield not attached this run).",
+      "result": "success",
+      "previousState": null,
+      "detail": {
+        "creative_id": "1894025018488247",
+        "tags_written": true
+      },
+      "tier": "auto",
+      "executedAt": "2026-11-02T04:52:00.000Z"
+    },
+    {
+      "proposalId": null,
+      "action": "hook-angle-tagging auto-module: tagged creative 2397618354318526 ('A_Kage_4x5' static image (4x5), share, under active campaign 'Sneakers_Cold_Nov') -- primary text/headline pulled via ads_get_creatives, no vision pass (Higgsfield not attached this run).",
+      "result": "success",
+      "previousState": null,
+      "detail": {
+        "creative_id": "2397618354318526",
+        "tags_written": true
+      },
+      "tier": "auto",
+      "executedAt": "2026-11-02T04:52:00.000Z"
+    },
+    {
+      "proposalId": null,
+      "action": "hook-angle-tagging auto-module: tagged creative 1108522575099281 ('A_Kage_1x1' static image (1x1), share, under active campaign 'Sneakers_Cold_Nov') -- primary text/headline pulled via ads_get_creatives, no vision pass (Higgsfield not attached this run).",
+      "result": "success",
+      "previousState": null,
+      "detail": {
+        "creative_id": "1108522575099281",
+        "tags_written": true
+      },
+      "tier": "auto",
+      "executedAt": "2026-11-02T04:52:00.000Z"
     }
   ],
   "creativeTags": {
@@ -40859,6 +41069,116 @@
       "visionPassSkipped": true,
       "note": "Higgsfield vision connection not attached to this run -- image/video content itself not analyzed, only real ad copy text used. No creative description invented.",
       "taggedAt": "2026-11-02T02:51:00.000Z"
+    },
+    "2208585413206295": {
+      "adName": "KAGE_LAL_Static_9x16",
+      "campaign": "KAGE_TOF_LAL_Purchase_01Nov",
+      "format": "Static image (9x16), SHARE",
+      "angle": "Prepaid discount offer (sneaker now Rs2,499, was Rs3,299)",
+      "hook": "\"KAGE — ₹2,499 Prepaid\" (headline) / \"KAGE — the most comfortable sneaker ever. Now ₹2,499 on prepaid orders (was ₹3,299). Save ₹800.\" (primary text)",
+      "taggedFrom": "ad primary text (body) + headline (title), via Meta Ads MCP ads_get_creatives",
+      "visionPassSkipped": true,
+      "note": "Higgsfield vision connection not attached to this run -- image content itself not analyzed, only real ad copy text used. No creative description invented.",
+      "taggedAt": "2026-11-02T04:52:00.000Z"
+    },
+    "1001247675597266": {
+      "adName": "Caps_Grey_Hero",
+      "campaign": "Caps + Kage_26 Sept",
+      "format": "Static image, SHARE",
+      "angle": "Restock announcement, not discount-led",
+      "hook": "\"KAI ARCHIVES 2.0 Restocked - that's the line.\" (headline) / \"SURPRISE SURPRISE SURPRISE! AS YOU CAN SEE IT IS BACK!\" (primary text)",
+      "taggedFrom": "ad primary text (body) + headline (title), via Meta Ads MCP ads_get_creatives",
+      "visionPassSkipped": true,
+      "note": "Higgsfield vision connection not attached to this run -- image content itself not analyzed, only real ad copy text used. No creative description invented.",
+      "taggedAt": "2026-11-02T04:52:00.000Z"
+    },
+    "1110457865029088": {
+      "adName": "KAGE_MultiImage_NB_01Nov",
+      "campaign": "Sneakers_Cold_Nov",
+      "format": "Static image (ad name says \"MultiImage\" but ads_get_creatives returned object_type SHARE with no child_attachments -- single-image creative despite the name)",
+      "angle": "Prepaid discount offer (Rs2,499, was Rs3,299)",
+      "hook": "\"KAGE — ₹2,499 Prepaid\" (headline) / \"KAGE — ₹2,499 on prepaid orders (was ₹3,299). Save ₹800. Offer till stocks last.\" (primary text)",
+      "taggedFrom": "ad primary text (body) + headline (title), via Meta Ads MCP ads_get_creatives",
+      "visionPassSkipped": true,
+      "note": "Higgsfield vision connection not attached to this run -- image content itself not analyzed, only real ad copy text used. No creative description invented.",
+      "taggedAt": "2026-11-02T04:52:00.000Z"
+    },
+    "1135959446026012": {
+      "adName": "MATCHA_MultiImage_01Nov",
+      "campaign": "Prospecting_MATCHA_Purchase_27Oct",
+      "format": "Static image (ad name says \"MultiImage\" but ads_get_creatives returned object_type SHARE with no child_attachments -- single-image creative despite the name)",
+      "angle": "Prepaid discount offer (Rs2,499, was Rs3,299)",
+      "hook": "\"MATCHA — ₹2,499 Prepaid\" (headline) / \"MATCHA — ₹2,499 on prepaid orders (was ₹3,299). Save ₹800. Offer till stocks last.\" (primary text)",
+      "taggedFrom": "ad primary text (body) + headline (title), via Meta Ads MCP ads_get_creatives",
+      "visionPassSkipped": true,
+      "note": "Higgsfield vision connection not attached to this run -- image content itself not analyzed, only real ad copy text used. No creative description invented.",
+      "taggedAt": "2026-11-02T04:52:00.000Z"
+    },
+    "1664893041698495": {
+      "adName": "MATCHA_MultiImage_01Nov",
+      "campaign": "Retargeting_Overall",
+      "format": "Static image (ad name says \"MultiImage\" but ads_get_creatives returned object_type SHARE with no child_attachments -- single-image creative despite the name)",
+      "angle": "Prepaid discount offer (Rs2,499, was Rs3,299)",
+      "hook": "\"MATCHA — ₹2,499 Prepaid\" (headline) / \"MATCHA — ₹2,499 on prepaid orders (was ₹3,299). Save ₹800. Offer till stocks last.\" (primary text)",
+      "taggedFrom": "ad primary text (body) + headline (title), via Meta Ads MCP ads_get_creatives",
+      "visionPassSkipped": true,
+      "note": "Higgsfield vision connection not attached to this run -- image content itself not analyzed, only real ad copy text used. No creative description invented.",
+      "taggedAt": "2026-11-02T04:52:00.000Z"
+    },
+    "28927673820217621": {
+      "adName": "KAGE_MultiImage_NB_01Nov",
+      "campaign": "KAGE_TOF_LAL_Purchase_01Nov",
+      "format": "Static image (ad name says \"MultiImage\" but ads_get_creatives returned object_type SHARE with no child_attachments -- single-image creative despite the name)",
+      "angle": "Prepaid discount offer (Rs2,499, was Rs3,299)",
+      "hook": "\"KAGE — ₹2,499 Prepaid\" (headline) / \"KAGE — ₹2,499 on prepaid orders (was ₹3,299). Save ₹800. Offer till stocks last.\" (primary text)",
+      "taggedFrom": "ad primary text (body) + headline (title), via Meta Ads MCP ads_get_creatives",
+      "visionPassSkipped": true,
+      "note": "Higgsfield vision connection not attached to this run -- image content itself not analyzed, only real ad copy text used. No creative description invented.",
+      "taggedAt": "2026-11-02T04:52:00.000Z"
+    },
+    "1859545351893017": {
+      "adName": "MATCHA_LAL_Video",
+      "campaign": "MATCHA_TOF_LAL_Purchase_01Nov",
+      "format": "Video",
+      "angle": "Brand/product exploration CTA, no explicit discount in body text",
+      "hook": "\"Explore Now\" (headline / CTA) / \"KAI MATCHA\" (primary text)",
+      "taggedFrom": "ad primary text (body) + headline (title) via Meta Ads MCP ads_get_creatives; video_id 1677917600387442 not visually analyzed",
+      "visionPassSkipped": true,
+      "note": "Higgsfield vision connection not attached to this run -- video content itself not analyzed, only real ad copy text used. No creative description invented.",
+      "taggedAt": "2026-11-02T04:52:00.000Z"
+    },
+    "1894025018488247": {
+      "adName": "A_Kage_9x16",
+      "campaign": "Sneakers_Cold_Nov",
+      "format": "Static image (9x16), SHARE",
+      "angle": "Prepaid discount offer (sneaker now Rs2,499, was Rs3,299)",
+      "hook": "\"KAGE — ₹2,499 Prepaid\" (headline) / \"KAGE — the most comfortable sneaker ever. Now ₹2,499 on prepaid orders (was ₹3,299). Save ₹800.\" (primary text)",
+      "taggedFrom": "ad primary text (body) + headline (title), via Meta Ads MCP ads_get_creatives",
+      "visionPassSkipped": true,
+      "note": "Higgsfield vision connection not attached to this run -- image content itself not analyzed, only real ad copy text used. No creative description invented.",
+      "taggedAt": "2026-11-02T04:52:00.000Z"
+    },
+    "2397618354318526": {
+      "adName": "A_Kage_4x5",
+      "campaign": "Sneakers_Cold_Nov",
+      "format": "Static image (4x5), SHARE",
+      "angle": "Prepaid discount offer (sneaker now Rs2,499, was Rs3,299)",
+      "hook": "\"KAGE — ₹2,499 Prepaid\" (headline) / \"KAGE — the most comfortable sneaker ever. Now ₹2,499 on prepaid orders (was ₹3,299). Save ₹800.\" (primary text)",
+      "taggedFrom": "ad primary text (body) + headline (title), via Meta Ads MCP ads_get_creatives",
+      "visionPassSkipped": true,
+      "note": "Higgsfield vision connection not attached to this run -- image content itself not analyzed, only real ad copy text used. No creative description invented.",
+      "taggedAt": "2026-11-02T04:52:00.000Z"
+    },
+    "1108522575099281": {
+      "adName": "A_Kage_1x1",
+      "campaign": "Sneakers_Cold_Nov",
+      "format": "Static image (1x1), SHARE",
+      "angle": "Prepaid discount offer (sneaker now Rs2,499, was Rs3,299)",
+      "hook": "\"KAGE — ₹2,499 Prepaid\" (headline) / \"KAGE — the most comfortable sneaker ever. Now ₹2,499 on prepaid orders (was ₹3,299). Save ₹800.\" (primary text)",
+      "taggedFrom": "ad primary text (body) + headline (title), via Meta Ads MCP ads_get_creatives",
+      "visionPassSkipped": true,
+      "note": "Higgsfield vision connection not attached to this run -- image content itself not analyzed, only real ad copy text used. No creative description invented.",
+      "taggedAt": "2026-11-02T04:52:00.000Z"
     }
   }
 }
