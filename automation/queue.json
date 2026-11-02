@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-02T00:52:00.000Z",
+  "generatedAt": "2026-11-02T02:51:00.000Z",
   "settings": {
     "kill_roas_threshold": "DISABLED 2026-10-05 by user instruction: the ROAS pause-kill is OFF. Module 16 (pause-kill) must NOT auto-pause any campaign for low ROAS; surface low-ROAS campaigns as alerts only. The hard spend circuit breaker is a separate mechanism and stays ON. Former rule, for reference: pause if ROAS < 1.0x after ₹500 spend on a sales-objective campaign. EXCEPTION until 2026-10-05T23:59+05:30 (user-approved 2026-09-29): for the sneaker-push campaigns 120256091369160159 (Sneakers_BOF_30Sep-5Oct), 120256091370110159 (Sneakers_Prospecting_30Sep-5Oct) and 120256088882780159 (Sneakers_Catalog_Retargeting) the spend floor is ₹1,500, not ₹500.",
     "reactivate_min_historic_roas": "surface for reactivation if a paused campaign's last active-period ROAS >= 3.0x",
@@ -32,9 +32,9 @@
     },
     "competitor_last_scrape": {
       "gully_labs_active_ads": 144,
-      "lotto_sport_india_active_ads": 218,
-      "scraped_at": "2026-11-01T22:51:00.000Z",
-      "note": "2026-11-01T22:51:00.000Z pass: Gully Labs 144->144 (unchanged), Lotto Sport India 218->218 (unchanged). Both under 20% move threshold."
+      "lotto_sport_india_active_ads": 220,
+      "scraped_at": "2026-11-02T02:51:00.000Z",
+      "note": "2026-11-02T02:51:00.000Z pass: Gully Labs 144->144 (unchanged), Lotto Sport India 218->220 (+0.9%). Both under 20% move threshold."
     },
     "audience_label_corrections": {
       "120249907176770159": "ATC_180D -- NOT a purchaser audience (cart-adders, event=AddToCart, retention 180 days). Verified 2026-09-14, reconfirmed 2026-09-20. Superseded note: earlier passes said the account had NO purchaser audience at all -- that's now out of date. See the 120255823280550159 (Purchasers 180D) entry above, created 2026-09-15, which IS a genuine purchaser audience and is already in use for exclusion + lookalike.",
@@ -1142,7 +1142,7 @@
       "module": "resume-after-circuit-breaker",
       "tier": "approval",
       "title": "Resume the 5 campaigns down from the 2026-10-10 circuit breaker trip",
-      "reasoning": "Reconfirmed 2026-11-01T14:50Z: of the 5 campaigns paused by the 2026-10-10 circuit breaker trip, Sora_BOF_Test_5Oct (120256202021140159), Tsuchi_BOF_Test_5Oct (120256202020640159), Caps + Kage_26 Sept (120255693970470159) and Prospecting_JP_Purchase_5-9Oct (120256186544730159) are confirmed still PAUSED via direct fetch. Sneakers_BOF_30Sep-5Oct (120256091369160159) remains manually reactivated outside this resume flow and is still ACTIVE (unchanged since 2026-11-01T08:50Z). Today's account spend Rs3,964.30 vs the Rs7,000 ceiling -- no new breach. Breaker remains tripped, ~22 days unresolved. Still pending; this routine will not auto-resume the remaining 4. [Updated 2026-11-01T16:50:00.000Z]: 3 of the original 5 paused campaigns remain PAUSED/inactive; Sneakers_BOF_30Sep-5Oct and Caps + Kage_26 Sept are now ACTIVE again (resumed outside this automation, not via an auto-resume). circuitBreaker.tripped is still true, 22 days unresolved -- still awaiting human review. [Updated 2026-11-01T22:51:00.000Z]: Fresh direct fetch confirms the same picture as the 20:51Z pass -- Sora_BOF_Test_5Oct (120256202021140159), Tsuchi_BOF_Test_5Oct (120256202020640159) and Prospecting_JP_Purchase_5-9Oct (120256186544730159) remain PAUSED; Sneakers_BOF_30Sep-5Oct (120256091369160159) and Caps + Kage_26 Sept (120255693970470159) are ACTIVE again, resumed outside this automation. Today's account spend Rs733.29 vs the Rs7,000 ceiling -- no new breach. Breaker remains tripped, ~22 days unresolved. Still pending; this routine will not auto-resume the remaining 3.",
+      "reasoning": "Reconfirmed 2026-11-01T14:50Z: of the 5 campaigns paused by the 2026-10-10 circuit breaker trip, Sora_BOF_Test_5Oct (120256202021140159), Tsuchi_BOF_Test_5Oct (120256202020640159), Caps + Kage_26 Sept (120255693970470159) and Prospecting_JP_Purchase_5-9Oct (120256186544730159) are confirmed still PAUSED via direct fetch. Sneakers_BOF_30Sep-5Oct (120256091369160159) remains manually reactivated outside this resume flow and is still ACTIVE (unchanged since 2026-11-01T08:50Z). Today's account spend Rs3,964.30 vs the Rs7,000 ceiling -- no new breach. Breaker remains tripped, ~22 days unresolved. Still pending; this routine will not auto-resume the remaining 4. [Updated 2026-11-01T16:50:00.000Z]: 3 of the original 5 paused campaigns remain PAUSED/inactive; Sneakers_BOF_30Sep-5Oct and Caps + Kage_26 Sept are now ACTIVE again (resumed outside this automation, not via an auto-resume). circuitBreaker.tripped is still true, 22 days unresolved -- still awaiting human review. [Updated 2026-11-01T22:51:00.000Z]: Fresh direct fetch confirms the same picture as the 20:51Z pass -- Sora_BOF_Test_5Oct (120256202021140159), Tsuchi_BOF_Test_5Oct (120256202020640159) and Prospecting_JP_Purchase_5-9Oct (120256186544730159) remain PAUSED; Sneakers_BOF_30Sep-5Oct (120256091369160159) and Caps + Kage_26 Sept (120255693970470159) are ACTIVE again, resumed outside this automation. Today's account spend Rs733.29 vs the Rs7,000 ceiling -- no new breach. Breaker remains tripped, ~22 days unresolved. Still pending; this routine will not auto-resume the remaining 3. UPDATE (2026-11-02 pass): 2 of these 5 campaigns -- 'Sneakers_BOF_30Sep-5Oct' and 'Caps + Kage_26 Sept' -- are now confirmed ACTIVE again (effective_status=ACTIVE via direct lookup, both spending and performing well: 4.24x and 7.54x ROAS respectively over last_30d). This happened outside the in-app/chat approval flow (this proposal is still pending, never executed) -- a human appears to have manually reactivated them directly in Ads Manager. The remaining 3 -- Sora_BOF_Test_5Oct and Tsuchi_BOF_Test_5Oct (both already separately resolved PAUSED as duplicate test shells per A-057 campaign-consolidation) and Prospecting_JP_Purchase_5-9Oct (still PAUSED, last_30d ROAS 9.32x if reconsidered) -- remain exactly as the breaker left them.",
       "actionSummary": "Activates the 3 campaigns still paused from the 2026-10-10 circuit breaker trip (Sora_BOF_Test_5Oct, Tsuchi_BOF_Test_5Oct, Caps + Kage_26 Sept) via ads_activate_entity. The other 2 originally-paused campaigns (Sneakers_BOF_30Sep-5Oct, Prospecting_JP_Purchase_5-9Oct) are already active again outside this proposal and are left untouched.",
       "metaAction": {
         "tool": "ads_activate_entity",
@@ -1616,6 +1616,24 @@
       "status": "pending",
       "createdAt": "2026-10-31T14:55:00.000Z",
       "lastRefreshedAt": "2026-11-01T10:49:00.000Z"
+    },
+    {
+      "id": "A-78",
+      "module": "reactivate-winner",
+      "tier": "approval",
+      "title": "Reactivate Sneakers_HOT_Pool_Tiers_12Oct -- 4.93x ROAS (last_30d), above the 3.0x reactivate threshold",
+      "reasoning": "Campaign 120256323097130159 'Sneakers_HOT_Pool_Tiers_12Oct' is PAUSED (confirmed via direct ads_get_ad_entities campaign-level lookup, effective_status=PAUSED/status=PAUSED). last_30d: Rs1,014.98 spend, purchase_roas 4.925023x, 2 purchases at Rs507.49 cost/result -- above settings.reactivate_min_historic_roas (>=3.0x). Not one of the 5 circuit-breaker-paused campaigns (those are covered separately by A-063) and not a known duplicate shell (unlike the Sora_BOF_Test_5Oct/Tsuchi_BOF_Test_5Oct pair resolved via A-057 consolidation). No existing pending or recent (last 3 days) reactivate-winner proposal covers this campaign.",
+      "actionSummary": "Reactivates campaign 120256323097130159 (Sneakers_HOT_Pool_Tiers_12Oct) via ads_activate_entity. Its two ad sets (CONSIDER_PDP_90D_Engaged, HOT_0-30D) and their ads remain at their last-set budgets/targeting -- no budget change bundled in this proposal since spend history is thin (Rs1,014.98 total); review and set an appropriate budget before/after activating if scaling beyond its prior spend level.",
+      "metaAction": {
+        "tool": "ads_activate_entity",
+        "params": {
+          "ad_account_id": "704523148804803",
+          "entity_id": "120256323097130159",
+          "entity_type": "campaign"
+        }
+      },
+      "status": "pending",
+      "createdAt": "2026-11-02T02:51:00.000Z"
     }
   ],
   "alerts": [
@@ -24681,6 +24699,105 @@
       "severity": "medium",
       "dismissed": false,
       "createdAt": "2026-11-02T00:52:00.000Z"
+    },
+    {
+      "id": "AL-2553",
+      "module": "lookalike-refresh",
+      "title": "Lookalike rebuild rate-limited this pass -- skipped, not attempted",
+      "detail": "Last attempt was 2026-11-01T22:51:00.000Z (failed on Meta's duplicate-lookalike constraint, 2654/1713007) -- well under 24h ago, and settings.max_auto_actions_per_entity_per_day=1 for this module+entity (1% lookalike off 'Purchasers 180D', 120255823280550159). Per the rate-limiting safety rule, no rebuild attempt was made this pass -- would have acted (and expected to hit the same duplicate-lookalike constraint again, source audience still ~20, unchanged) but rate-limited. No Meta API call made.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-11-02T02:51:00.000Z"
+    },
+    {
+      "id": "AL-2554",
+      "module": "purchaser-exclusion",
+      "title": "All active ad sets reconfirmed purchaser-exclusion compliant",
+      "detail": "Fresh adset-level targeting fetch across the 22 ad sets whose parent campaign is genuinely ACTIVE (confirmed via direct campaign-level effective_status lookup, since the adset-level filter surfaced some ad sets under now-PAUSED campaigns as well) -- every one either already excludes 'Purchasers 180D' (120255823280550159) or is on the documented purchaser_exclusion_exempt_adset_ids allowlist (WARM_T4_XSell_Purchasers180D, Retargeting_Overall, CrossSell_Purchasers180D_FeedStoriesReels) which deliberately includes it. No edits needed this pass.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-11-02T02:51:00.000Z"
+    },
+    {
+      "id": "AL-2555",
+      "module": "hard-spend-circuit-breaker",
+      "title": "Not breached this pass; stale 2026-10-10 trip remains, 2 of 5 paused campaigns now active again outside the approval flow",
+      "detail": "Today's account spend (ads_get_ad_entities, ad_account, date_preset=today): Rs844.75 vs settings.hard_spend_ceiling_inr=Rs7,000 -- well under, no new trip. circuitBreaker.tripped remains true/stale from 2026-10-10T16:50 UTC pending human review of A-063 (resume-after-circuit-breaker, still pending). New observation this pass: 2 of the 5 originally-paused campaigns -- 'Sneakers_BOF_30Sep-5Oct' (effective_status ACTIVE, updated_time 2026-11-01T13:01, 30d ROAS 4.24x) and 'Caps + Kage_26 Sept' (effective_status ACTIVE, updated_time 2026-11-02T00:23, 30d ROAS 7.54x) -- are now ACTIVE and spending again, confirmed via direct campaign-level fetch. This did not happen through the in-app/chat approval flow (A-063 is still status:pending, never executed) -- it reflects a human manually reactivating them directly in Ads Manager. The remaining 3 (Sora_BOF_Test_5Oct, Tsuchi_BOF_Test_5Oct -- separately paused as duplicate test shells per resolved A-057 consolidation -- and Prospecting_JP_Purchase_5-9Oct) remain PAUSED. A-063's reasoning has been refreshed to reflect this.",
+      "severity": "high",
+      "dismissed": false,
+      "createdAt": "2026-11-02T02:51:00.000Z"
+    },
+    {
+      "id": "AL-2556",
+      "module": "pixel-health",
+      "title": "Pixel EMQ healthy, ROAS-driven modules not suppressed",
+      "detail": "ads_get_dataset_quality on dataset 833131719490535 this pass: composite EMQ scores 6.1-8.8/10 across tracked events (PageView/ViewContent/AddToCart/Search/SubscribedButtonClick 6.1, InitiateCheckout 6.9, prepaid_purchase 8.6, AddPaymentInfo 9, Purchase 8.7, cod_purchase 8.8), all at/above pixel_quality_min_match_rate=0.6 (interpreted as 6.0/10). ROAS-based modules not suppressed this pass.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-11-02T02:51:00.000Z"
+    },
+    {
+      "id": "AL-2557",
+      "module": "threshold-alerts",
+      "title": "Active ad set CPM/CTR within normal variance",
+      "detail": "last_7d CPM (Rs25.81-Rs278.49, outlier end from near-zero-spend ad sets) and CTR (0.95%-8.48%) across the 22 genuinely-active ad sets reviewed -- no sustained deviation outside previously-observed ranges once low-spend (<Rs100) ad sets are excluded. settings.metric_baselines (Kage_sales_1908, Kage_TOF) still map to no currently-active campaign, so no stale-baseline comparison was attempted.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-11-02T02:51:00.000Z"
+    },
+    {
+      "id": "AL-2558",
+      "module": "learning-phase-stuck",
+      "title": "No ad sets flagged as stuck in learning",
+      "detail": "All 22 genuinely-active ad sets (parent campaign confirmed ACTIVE) returned no learning_stage_info indicating a stuck/limited-learning state this pass.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-11-02T02:51:00.000Z"
+    },
+    {
+      "id": "AL-2559",
+      "module": "anomaly",
+      "title": "No anomaly signal this pass",
+      "detail": "ads_insights_anomaly_signal (account-wide): \"No anomaly signal issues found in the analyzed ad sets. Checked for auction overlap, creative fatigue, and narrow audience.\"",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-11-02T02:51:00.000Z"
+    },
+    {
+      "id": "AL-2560",
+      "module": "campaign-consolidation-watch",
+      "title": "No new duplicate-targeting campaigns identified",
+      "detail": "Reviewed the 12 currently-ACTIVE campaigns (confirmed via direct effective_status lookup) -- no two target the same product+audience combination this pass. The MATCHA_TOF_LAL_Purchase_01Nov vs Prospecting_MATCHA_Purchase_27Oct overlap flagged 2026-11-01T10:49 remains differentiated (LAL-audience prospecting vs cold Men25-44 purchase-intent prospecting) and still low/moderate spend on the newer one (Rs0 30d). No new proposal.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-11-02T02:51:00.000Z"
+    },
+    {
+      "id": "AL-2561",
+      "module": "competitor-rescrape",
+      "title": "Competitor benchmark refresh -- both under 20% threshold",
+      "detail": "Gully Labs active ads 144 (unchanged from last scrape). Lotto Sport India active ads 220, up from 218 (+0.9%) -- well under the 20% spike threshold. No competitor-spike alert warranted.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-11-02T02:51:00.000Z"
+    },
+    {
+      "id": "AL-2562",
+      "module": "self-audit-check",
+      "title": "No material drift found this pass",
+      "detail": "This pass (2026-11-02T02:51Z): circuit breaker checked (no new breach, Rs844.75/Rs7,000 today); pixel quality healthy; purchaser-exclusion compliant account-wide; lookalike-refresh rate-limited (skipped, <24h since last attempt); hook-angle-tagging tagged 16 newly-active untagged creatives across the new MATCHA/Sneakers_Cold_Nov/KAGE_TOF_LAL launches; hard-spend-circuit-breaker not triggered; no anomaly signal; competitor counts both under threshold; no new duplicate-targeting campaigns; one new approval-tier proposal (A-078, reactivate-winner for Sneakers_HOT_Pool_Tiers_12Oct, 4.93x ROAS); A-063's reasoning refreshed to note 2 of its 5 campaigns are already manually back ACTIVE outside the approval flow. All other pending proposals (A-002, A-065, A-070, A-076, A-077) reviewed -- no new trigger data pulled this pass that would change their numbers materially.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-11-02T02:51:00.000Z"
+    },
+    {
+      "id": "AL-2563",
+      "module": "routine-run-notes",
+      "title": "Run summary -- 2026-11-02T02:51:00.000Z pass",
+      "detail": "Run summary -- 2026-11-02T02:51:00.000Z pass. 0 Meta API mutations executed (purchaser-exclusion already compliant account-wide; lookalike-refresh rate-limited, skipped; hard-spend-circuit-breaker not breached, Rs844.75/Rs7,000 today). 16 creatives newly tagged by hook-angle-tagging (tier auto, no Meta write, logged individually). 1 new approval-tier proposal: A-078 (reactivate-winner, Sneakers_HOT_Pool_Tiers_12Oct, 4.93x last_30d ROAS). A-063 (resume-after-circuit-breaker) reasoning refreshed -- noted 2 of its 5 campaigns (Sneakers_BOF_30Sep-5Oct, Caps + Kage_26 Sept) are already back ACTIVE via manual Ads Manager action outside the approval flow; remains pending for the other 3. 10 new alerts this pass (lookalike-refresh rate-limit, purchaser-exclusion reconfirm, hard-spend-circuit-breaker stale-trip + manual-reactivation note [high severity], pixel-health, threshold-alerts, learning-phase-stuck, anomaly, campaign-consolidation-watch, competitor-rescrape, self-audit-check) plus this summary. Highest-priority item: circuitBreaker.tripped remains true/stale from 2026-10-10 pending human review of A-063 -- though 2 of its 5 campaigns are already running again outside this system's approval flow.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-11-02T02:51:00.000Z"
     }
   ],
   "log": [
@@ -34964,6 +35081,278 @@
       },
       "tier": "auto",
       "executedAt": "2026-11-01T22:51:00.000Z"
+    },
+    {
+      "proposalId": null,
+      "action": "hook-angle-tagging auto-module: tagged creative 1795481858330987 ('KAGE_LAL_Static_1x1' static image, ad under campaign 'KAGE_TOF_LAL_Purchase_01Nov') -- primary text/headline pulled via ads_get_creatives, no vision pass (Higgsfield not attached this run).",
+      "result": "success",
+      "previousState": {
+        "creativeTags[1795481858330987]": null
+      },
+      "detail": {
+        "tool": "ads_get_creatives",
+        "creative_id": "1795481858330987",
+        "body": "KAI KAGE",
+        "title": "Kage — KAI",
+        "object_type": "SHARE"
+      },
+      "tier": "auto",
+      "executedAt": "2026-11-02T02:51:00.000Z"
+    },
+    {
+      "proposalId": null,
+      "action": "hook-angle-tagging auto-module: tagged creative 2592973507881039 ('KAGE_MultiImage_NB_01Nov' static image (share), ad under campaign 'Sneakers_BOF_v2_Placement_Split_12Oct') -- primary text/headline pulled via ads_get_creatives, no vision pass (Higgsfield not attached this run).",
+      "result": "success",
+      "previousState": {
+        "creativeTags[2592973507881039]": null
+      },
+      "detail": {
+        "tool": "ads_get_creatives",
+        "creative_id": "2592973507881039",
+        "body": "KAGE — ₹2,499 on prepaid orders (was ₹3,299). Save ₹800. Offer till stocks last.",
+        "title": "KAGE — ₹2,499 Prepaid",
+        "object_type": "SHARE"
+      },
+      "tier": "auto",
+      "executedAt": "2026-11-02T02:51:00.000Z"
+    },
+    {
+      "proposalId": null,
+      "action": "hook-angle-tagging auto-module: tagged creative 3656485434525246 ('MATCHA_MultiImage_01Nov' static image (share), ad under campaign 'MATCHA_TOF_LAL_Purchase_01Nov') -- primary text/headline pulled via ads_get_creatives, no vision pass (Higgsfield not attached this run).",
+      "result": "success",
+      "previousState": {
+        "creativeTags[3656485434525246]": null
+      },
+      "detail": {
+        "tool": "ads_get_creatives",
+        "creative_id": "3656485434525246",
+        "body": "MATCHA — ₹2,499 on prepaid orders (was ₹3,299). Save ₹800. Offer till stocks last.",
+        "title": "MATCHA — ₹2,499 Prepaid",
+        "object_type": "SHARE"
+      },
+      "tier": "auto",
+      "executedAt": "2026-11-02T02:51:00.000Z"
+    },
+    {
+      "proposalId": null,
+      "action": "hook-angle-tagging auto-module: tagged creative 1104628899055030 ('MATCHA_MultiImage_01Nov' static image (share), ad under campaign 'Sneakers_Cold_Nov') -- primary text/headline pulled via ads_get_creatives, no vision pass (Higgsfield not attached this run).",
+      "result": "success",
+      "previousState": {
+        "creativeTags[1104628899055030]": null
+      },
+      "detail": {
+        "tool": "ads_get_creatives",
+        "creative_id": "1104628899055030",
+        "body": "MATCHA — ₹2,499 on prepaid orders (was ₹3,299). Save ₹800. Offer till stocks last.",
+        "title": "MATCHA — ₹2,499 Prepaid",
+        "object_type": "SHARE"
+      },
+      "tier": "auto",
+      "executedAt": "2026-11-02T02:51:00.000Z"
+    },
+    {
+      "proposalId": null,
+      "action": "hook-angle-tagging auto-module: tagged creative 1827879115070506 ('MATCHA_MultiImage_01Nov' static image (share), ad under campaign 'Sneakers_Cold_Nov') -- primary text/headline pulled via ads_get_creatives, no vision pass (Higgsfield not attached this run).",
+      "result": "success",
+      "previousState": {
+        "creativeTags[1827879115070506]": null
+      },
+      "detail": {
+        "tool": "ads_get_creatives",
+        "creative_id": "1827879115070506",
+        "body": "MATCHA — ₹2,499 on prepaid orders (was ₹3,299). Save ₹800. Offer till stocks last.",
+        "title": "MATCHA — ₹2,499 Prepaid",
+        "object_type": "SHARE"
+      },
+      "tier": "auto",
+      "executedAt": "2026-11-02T02:51:00.000Z"
+    },
+    {
+      "proposalId": null,
+      "action": "hook-angle-tagging auto-module: tagged creative 1125777316878265 ('MATCHA_LAL_Static_9x16' static image, ad under campaign 'MATCHA_TOF_LAL_Purchase_01Nov') -- primary text/headline pulled via ads_get_creatives, no vision pass (Higgsfield not attached this run).",
+      "result": "success",
+      "previousState": {
+        "creativeTags[1125777316878265]": null
+      },
+      "detail": {
+        "tool": "ads_get_creatives",
+        "creative_id": "1125777316878265",
+        "body": "MATCHA — now ₹2,499 on prepaid orders (was ₹3,299). Save ₹800. Limited stocks available now.",
+        "title": "MATCHA — ₹2,499 Prepaid",
+        "object_type": "SHARE"
+      },
+      "tier": "auto",
+      "executedAt": "2026-11-02T02:51:00.000Z"
+    },
+    {
+      "proposalId": null,
+      "action": "hook-angle-tagging auto-module: tagged creative 2270092050596215 ('B_Kage_9x16' static image, ad under campaign 'Sneakers_Cold_Nov') -- primary text/headline pulled via ads_get_creatives, no vision pass (Higgsfield not attached this run).",
+      "result": "success",
+      "previousState": {
+        "creativeTags[2270092050596215]": null
+      },
+      "detail": {
+        "tool": "ads_get_creatives",
+        "creative_id": "2270092050596215",
+        "body": "KAGE — the most comfortable sneaker ever. Now ₹2,499 on prepaid orders (was ₹3,299). Save ₹800.",
+        "title": "KAGE — ₹2,499 Prepaid",
+        "object_type": "SHARE"
+      },
+      "tier": "auto",
+      "executedAt": "2026-11-02T02:51:00.000Z"
+    },
+    {
+      "proposalId": null,
+      "action": "hook-angle-tagging auto-module: tagged creative 2184545965427096 ('KAGE_MultiImage_NB_01Nov' static image (share), ad under campaign 'Sneakers_BOF_30Sep-5Oct') -- primary text/headline pulled via ads_get_creatives, no vision pass (Higgsfield not attached this run).",
+      "result": "success",
+      "previousState": {
+        "creativeTags[2184545965427096]": null
+      },
+      "detail": {
+        "tool": "ads_get_creatives",
+        "creative_id": "2184545965427096",
+        "body": "KAGE — ₹2,499 on prepaid orders (was ₹3,299). Save ₹800. Offer till stocks last.",
+        "title": "KAGE — ₹2,499 Prepaid",
+        "object_type": "SHARE"
+      },
+      "tier": "auto",
+      "executedAt": "2026-11-02T02:51:00.000Z"
+    },
+    {
+      "proposalId": null,
+      "action": "hook-angle-tagging auto-module: tagged creative 1522964246336102 ('B_Matcha_9x16' static image, ad under campaign 'Sneakers_Cold_Nov') -- primary text/headline pulled via ads_get_creatives, no vision pass (Higgsfield not attached this run).",
+      "result": "success",
+      "previousState": {
+        "creativeTags[1522964246336102]": null
+      },
+      "detail": {
+        "tool": "ads_get_creatives",
+        "creative_id": "1522964246336102",
+        "body": "MATCHA — now ₹2,499 on prepaid orders (was ₹3,299). Save ₹800. Limited stocks available now.",
+        "title": "MATCHA — ₹2,499 Prepaid",
+        "object_type": "SHARE"
+      },
+      "tier": "auto",
+      "executedAt": "2026-11-02T02:51:00.000Z"
+    },
+    {
+      "proposalId": null,
+      "action": "hook-angle-tagging auto-module: tagged creative 2615560192205929 ('Caps_Grey_Hero' static image, ad under campaign 'Caps + Kage_26 Sept') -- primary text/headline pulled via ads_get_creatives, no vision pass (Higgsfield not attached this run).",
+      "result": "success",
+      "previousState": {
+        "creativeTags[2615560192205929]": null
+      },
+      "detail": {
+        "tool": "ads_get_creatives",
+        "creative_id": "2615560192205929",
+        "body": "SURPRISE SURPRISE SURPRISE! AS YOU CAN SEE IT IS BACK!",
+        "title": "KAI ARCHIVES 2.0 Restocked - that's the line.",
+        "object_type": "SHARE"
+      },
+      "tier": "auto",
+      "executedAt": "2026-11-02T02:51:00.000Z"
+    },
+    {
+      "proposalId": null,
+      "action": "hook-angle-tagging auto-module: tagged creative 3293092990895148 ('MATCHA_LAL_Static_4x5' static image, ad under campaign 'MATCHA_TOF_LAL_Purchase_01Nov') -- primary text/headline pulled via ads_get_creatives, no vision pass (Higgsfield not attached this run).",
+      "result": "success",
+      "previousState": {
+        "creativeTags[3293092990895148]": null
+      },
+      "detail": {
+        "tool": "ads_get_creatives",
+        "creative_id": "3293092990895148",
+        "body": "MATCHA — now ₹2,499 on prepaid orders (was ₹3,299). Save ₹800. Limited stocks available now.",
+        "title": "MATCHA — ₹2,499 Prepaid",
+        "object_type": "SHARE"
+      },
+      "tier": "auto",
+      "executedAt": "2026-11-02T02:51:00.000Z"
+    },
+    {
+      "proposalId": null,
+      "action": "hook-angle-tagging auto-module: tagged creative 984729987427925 ('B_Matcha_1x1' static image, ad under campaign 'Sneakers_Cold_Nov') -- primary text/headline pulled via ads_get_creatives, no vision pass (Higgsfield not attached this run).",
+      "result": "success",
+      "previousState": {
+        "creativeTags[984729987427925]": null
+      },
+      "detail": {
+        "tool": "ads_get_creatives",
+        "creative_id": "984729987427925",
+        "body": "MATCHA — now ₹2,499 on prepaid orders (was ₹3,299). Save ₹800. Limited stocks available now.",
+        "title": "MATCHA — ₹2,499 Prepaid",
+        "object_type": "SHARE"
+      },
+      "tier": "auto",
+      "executedAt": "2026-11-02T02:51:00.000Z"
+    },
+    {
+      "proposalId": null,
+      "action": "hook-angle-tagging auto-module: tagged creative 1112007891542328 ('B_Matcha_4x5' static image, ad under campaign 'Sneakers_Cold_Nov') -- primary text/headline pulled via ads_get_creatives, no vision pass (Higgsfield not attached this run).",
+      "result": "success",
+      "previousState": {
+        "creativeTags[1112007891542328]": null
+      },
+      "detail": {
+        "tool": "ads_get_creatives",
+        "creative_id": "1112007891542328",
+        "body": "MATCHA — now ₹2,499 on prepaid orders (was ₹3,299). Save ₹800. Limited stocks available now.",
+        "title": "MATCHA — ₹2,499 Prepaid",
+        "object_type": "SHARE"
+      },
+      "tier": "auto",
+      "executedAt": "2026-11-02T02:51:00.000Z"
+    },
+    {
+      "proposalId": null,
+      "action": "hook-angle-tagging auto-module: tagged creative 2307506960039475 ('MATCHA_LaunchVideo_01Nov' video, ad under campaign 'Sneakers_Cold_Nov') -- primary text/headline pulled via ads_get_creatives, no vision pass (Higgsfield not attached this run).",
+      "result": "success",
+      "previousState": {
+        "creativeTags[2307506960039475]": null
+      },
+      "detail": {
+        "tool": "ads_get_creatives",
+        "creative_id": "2307506960039475",
+        "body": "MATCHA — ₹2,499 on prepaid orders (was ₹3,299). Save ₹800. Offer till stocks last.",
+        "title": "MATCHA — ₹2,499 Prepaid",
+        "object_type": "VIDEO"
+      },
+      "tier": "auto",
+      "executedAt": "2026-11-02T02:51:00.000Z"
+    },
+    {
+      "proposalId": null,
+      "action": "hook-angle-tagging auto-module: tagged creative 988781690328428 ('B_Kage_4x5' static image, ad under campaign 'Sneakers_Cold_Nov') -- primary text/headline pulled via ads_get_creatives, no vision pass (Higgsfield not attached this run).",
+      "result": "success",
+      "previousState": {
+        "creativeTags[988781690328428]": null
+      },
+      "detail": {
+        "tool": "ads_get_creatives",
+        "creative_id": "988781690328428",
+        "body": "KAGE — the most comfortable sneaker ever. Now ₹2,499 on prepaid orders (was ₹3,299). Save ₹800.",
+        "title": "KAGE — ₹2,499 Prepaid",
+        "object_type": "SHARE"
+      },
+      "tier": "auto",
+      "executedAt": "2026-11-02T02:51:00.000Z"
+    },
+    {
+      "proposalId": null,
+      "action": "hook-angle-tagging auto-module: tagged creative 1138814541929673 ('B_Kage_1x1' static image, ad under campaign 'Sneakers_Cold_Nov') -- primary text/headline pulled via ads_get_creatives, no vision pass (Higgsfield not attached this run).",
+      "result": "success",
+      "previousState": {
+        "creativeTags[1138814541929673]": null
+      },
+      "detail": {
+        "tool": "ads_get_creatives",
+        "creative_id": "1138814541929673",
+        "body": "KAGE — the most comfortable sneaker ever. Now ₹2,499 on prepaid orders (was ₹3,299). Save ₹800.",
+        "title": "KAGE — ₹2,499 Prepaid",
+        "object_type": "SHARE"
+      },
+      "tier": "auto",
+      "executedAt": "2026-11-02T02:51:00.000Z"
     }
   ],
   "creativeTags": {
@@ -40294,6 +40683,182 @@
       "visionPassSkipped": true,
       "note": "Higgsfield vision connection not attached to this run -- image content itself not analyzed, only real ad copy text used. No creative description invented.",
       "taggedAt": "2026-11-01T20:51:00.000Z"
+    },
+    "1795481858330987": {
+      "adName": "KAGE_LAL_Static_1x1",
+      "campaign": "KAGE_TOF_LAL_Purchase_01Nov",
+      "format": "Static image",
+      "angle": "Minimal brand/product name callout, no discount or urgency copy",
+      "hook": "\"KAI KAGE\" (primary text) / \"Kage — KAI\" (headline)",
+      "taggedFrom": "ad primary text (body) + headline (title), via Meta Ads MCP ads_get_creatives",
+      "visionPassSkipped": true,
+      "note": "Higgsfield vision connection not attached to this run -- image/video content itself not analyzed, only real ad copy text used. No creative description invented.",
+      "taggedAt": "2026-11-02T02:51:00.000Z"
+    },
+    "2592973507881039": {
+      "adName": "KAGE_MultiImage_NB_01Nov",
+      "campaign": "Sneakers_BOF_v2_Placement_Split_12Oct",
+      "format": "Static image (SHARE) -- ad name says \"MultiImage\" but object_type SHARE / no child_attachments, so single-image creative despite the name",
+      "angle": "Discount/price-drop offer on prepaid orders",
+      "hook": "\"KAGE — ₹2,499 on prepaid orders (was ₹3,299). Save ₹800. Offer till stocks last.\" (primary text) / \"KAGE — ₹2,499 Prepaid\" (headline)",
+      "taggedFrom": "ad primary text (body) + headline (title), via Meta Ads MCP ads_get_creatives",
+      "visionPassSkipped": true,
+      "note": "Higgsfield vision connection not attached to this run -- image/video content itself not analyzed, only real ad copy text used. No creative description invented.",
+      "taggedAt": "2026-11-02T02:51:00.000Z"
+    },
+    "3656485434525246": {
+      "adName": "MATCHA_MultiImage_01Nov",
+      "campaign": "MATCHA_TOF_LAL_Purchase_01Nov",
+      "format": "Static image (SHARE) -- ad name says \"MultiImage\" but object_type SHARE / no child_attachments, so single-image creative despite the name",
+      "angle": "Discount/price-drop offer on prepaid orders",
+      "hook": "\"MATCHA — ₹2,499 on prepaid orders (was ₹3,299). Save ₹800. Offer till stocks last.\" (primary text) / \"MATCHA — ₹2,499 Prepaid\" (headline)",
+      "taggedFrom": "ad primary text (body) + headline (title), via Meta Ads MCP ads_get_creatives",
+      "visionPassSkipped": true,
+      "note": "Higgsfield vision connection not attached to this run -- image/video content itself not analyzed, only real ad copy text used. No creative description invented.",
+      "taggedAt": "2026-11-02T02:51:00.000Z"
+    },
+    "1104628899055030": {
+      "adName": "MATCHA_MultiImage_01Nov",
+      "campaign": "Sneakers_Cold_Nov",
+      "format": "Static image (SHARE) -- ad name says \"MultiImage\" but object_type SHARE / no child_attachments, so single-image creative despite the name",
+      "angle": "Discount/price-drop offer on prepaid orders",
+      "hook": "\"MATCHA — ₹2,499 on prepaid orders (was ₹3,299). Save ₹800. Offer till stocks last.\" (primary text) / \"MATCHA — ₹2,499 Prepaid\" (headline)",
+      "taggedFrom": "ad primary text (body) + headline (title), via Meta Ads MCP ads_get_creatives",
+      "visionPassSkipped": true,
+      "note": "Higgsfield vision connection not attached to this run -- image/video content itself not analyzed, only real ad copy text used. No creative description invented.",
+      "taggedAt": "2026-11-02T02:51:00.000Z"
+    },
+    "1827879115070506": {
+      "adName": "MATCHA_MultiImage_01Nov",
+      "campaign": "Sneakers_Cold_Nov",
+      "format": "Static image (SHARE) -- ad name says \"MultiImage\" but object_type SHARE / no child_attachments, so single-image creative despite the name",
+      "angle": "Discount/price-drop offer on prepaid orders",
+      "hook": "\"MATCHA — ₹2,499 on prepaid orders (was ₹3,299). Save ₹800. Offer till stocks last.\" (primary text) / \"MATCHA — ₹2,499 Prepaid\" (headline)",
+      "taggedFrom": "ad primary text (body) + headline (title), via Meta Ads MCP ads_get_creatives",
+      "visionPassSkipped": true,
+      "note": "Higgsfield vision connection not attached to this run -- image/video content itself not analyzed, only real ad copy text used. No creative description invented.",
+      "taggedAt": "2026-11-02T02:51:00.000Z"
+    },
+    "1125777316878265": {
+      "adName": "MATCHA_LAL_Static_9x16",
+      "campaign": "MATCHA_TOF_LAL_Purchase_01Nov",
+      "format": "Static image",
+      "angle": "Discount/price-drop offer on prepaid orders",
+      "hook": "\"MATCHA — now ₹2,499 on prepaid orders (was ₹3,299). Save ₹800. Limited stocks available now.\" (primary text) / \"MATCHA — ₹2,499 Prepaid\" (headline)",
+      "taggedFrom": "ad primary text (body) + headline (title), via Meta Ads MCP ads_get_creatives",
+      "visionPassSkipped": true,
+      "note": "Higgsfield vision connection not attached to this run -- image/video content itself not analyzed, only real ad copy text used. No creative description invented.",
+      "taggedAt": "2026-11-02T02:51:00.000Z"
+    },
+    "2270092050596215": {
+      "adName": "B_Kage_9x16",
+      "campaign": "Sneakers_Cold_Nov",
+      "format": "Static image",
+      "angle": "Discount/price-drop offer on prepaid orders",
+      "hook": "\"KAGE — the most comfortable sneaker ever. Now ₹2,499 on prepaid orders (was ₹3,299). Save ₹800.\" (primary text) / \"KAGE — ₹2,499 Prepaid\" (headline)",
+      "taggedFrom": "ad primary text (body) + headline (title), via Meta Ads MCP ads_get_creatives",
+      "visionPassSkipped": true,
+      "note": "Higgsfield vision connection not attached to this run -- image/video content itself not analyzed, only real ad copy text used. No creative description invented.",
+      "taggedAt": "2026-11-02T02:51:00.000Z"
+    },
+    "2184545965427096": {
+      "adName": "KAGE_MultiImage_NB_01Nov",
+      "campaign": "Sneakers_BOF_30Sep-5Oct",
+      "format": "Static image (SHARE) -- ad name says \"MultiImage\" but object_type SHARE / no child_attachments, so single-image creative despite the name",
+      "angle": "Discount/price-drop offer on prepaid orders",
+      "hook": "\"KAGE — ₹2,499 on prepaid orders (was ₹3,299). Save ₹800. Offer till stocks last.\" (primary text) / \"KAGE — ₹2,499 Prepaid\" (headline)",
+      "taggedFrom": "ad primary text (body) + headline (title), via Meta Ads MCP ads_get_creatives",
+      "visionPassSkipped": true,
+      "note": "Higgsfield vision connection not attached to this run -- image/video content itself not analyzed, only real ad copy text used. No creative description invented.",
+      "taggedAt": "2026-11-02T02:51:00.000Z"
+    },
+    "1522964246336102": {
+      "adName": "B_Matcha_9x16",
+      "campaign": "Sneakers_Cold_Nov",
+      "format": "Static image",
+      "angle": "Discount/price-drop offer on prepaid orders",
+      "hook": "\"MATCHA — now ₹2,499 on prepaid orders (was ₹3,299). Save ₹800. Limited stocks available now.\" (primary text) / \"MATCHA — ₹2,499 Prepaid\" (headline)",
+      "taggedFrom": "ad primary text (body) + headline (title), via Meta Ads MCP ads_get_creatives",
+      "visionPassSkipped": true,
+      "note": "Higgsfield vision connection not attached to this run -- image/video content itself not analyzed, only real ad copy text used. No creative description invented.",
+      "taggedAt": "2026-11-02T02:51:00.000Z"
+    },
+    "2615560192205929": {
+      "adName": "Caps_Grey_Hero",
+      "campaign": "Caps + Kage_26 Sept",
+      "format": "Static image",
+      "angle": "Restock announcement / scarcity hype, not discount-led",
+      "hook": "\"SURPRISE SURPRISE SURPRISE! AS YOU CAN SEE IT IS BACK!\" (primary text) / \"KAI ARCHIVES 2.0 Restocked - that's the line.\" (headline)",
+      "taggedFrom": "ad primary text (body) + headline (title), via Meta Ads MCP ads_get_creatives",
+      "visionPassSkipped": true,
+      "note": "Higgsfield vision connection not attached to this run -- image/video content itself not analyzed, only real ad copy text used. No creative description invented.",
+      "taggedAt": "2026-11-02T02:51:00.000Z"
+    },
+    "3293092990895148": {
+      "adName": "MATCHA_LAL_Static_4x5",
+      "campaign": "MATCHA_TOF_LAL_Purchase_01Nov",
+      "format": "Static image",
+      "angle": "Discount/price-drop offer on prepaid orders",
+      "hook": "\"MATCHA — now ₹2,499 on prepaid orders (was ₹3,299). Save ₹800. Limited stocks available now.\" (primary text) / \"MATCHA — ₹2,499 Prepaid\" (headline)",
+      "taggedFrom": "ad primary text (body) + headline (title), via Meta Ads MCP ads_get_creatives",
+      "visionPassSkipped": true,
+      "note": "Higgsfield vision connection not attached to this run -- image/video content itself not analyzed, only real ad copy text used. No creative description invented.",
+      "taggedAt": "2026-11-02T02:51:00.000Z"
+    },
+    "984729987427925": {
+      "adName": "B_Matcha_1x1",
+      "campaign": "Sneakers_Cold_Nov",
+      "format": "Static image",
+      "angle": "Discount/price-drop offer on prepaid orders",
+      "hook": "\"MATCHA — now ₹2,499 on prepaid orders (was ₹3,299). Save ₹800. Limited stocks available now.\" (primary text) / \"MATCHA — ₹2,499 Prepaid\" (headline)",
+      "taggedFrom": "ad primary text (body) + headline (title), via Meta Ads MCP ads_get_creatives",
+      "visionPassSkipped": true,
+      "note": "Higgsfield vision connection not attached to this run -- image/video content itself not analyzed, only real ad copy text used. No creative description invented.",
+      "taggedAt": "2026-11-02T02:51:00.000Z"
+    },
+    "1112007891542328": {
+      "adName": "B_Matcha_4x5",
+      "campaign": "Sneakers_Cold_Nov",
+      "format": "Static image",
+      "angle": "Discount/price-drop offer on prepaid orders",
+      "hook": "\"MATCHA — now ₹2,499 on prepaid orders (was ₹3,299). Save ₹800. Limited stocks available now.\" (primary text) / \"MATCHA — ₹2,499 Prepaid\" (headline)",
+      "taggedFrom": "ad primary text (body) + headline (title), via Meta Ads MCP ads_get_creatives",
+      "visionPassSkipped": true,
+      "note": "Higgsfield vision connection not attached to this run -- image/video content itself not analyzed, only real ad copy text used. No creative description invented.",
+      "taggedAt": "2026-11-02T02:51:00.000Z"
+    },
+    "2307506960039475": {
+      "adName": "MATCHA_LaunchVideo_01Nov",
+      "campaign": "Sneakers_Cold_Nov",
+      "format": "Video",
+      "angle": "Discount/price-drop offer on prepaid orders",
+      "hook": "\"MATCHA — ₹2,499 on prepaid orders (was ₹3,299). Save ₹800. Offer till stocks last.\" (primary text) / \"MATCHA — ₹2,499 Prepaid\" (headline)",
+      "taggedFrom": "ad primary text (body) + headline (title), via Meta Ads MCP ads_get_creatives",
+      "visionPassSkipped": true,
+      "note": "Higgsfield vision connection not attached to this run -- image/video content itself not analyzed, only real ad copy text used. No creative description invented.",
+      "taggedAt": "2026-11-02T02:51:00.000Z"
+    },
+    "988781690328428": {
+      "adName": "B_Kage_4x5",
+      "campaign": "Sneakers_Cold_Nov",
+      "format": "Static image",
+      "angle": "Discount/price-drop offer on prepaid orders",
+      "hook": "\"KAGE — the most comfortable sneaker ever. Now ₹2,499 on prepaid orders (was ₹3,299). Save ₹800.\" (primary text) / \"KAGE — ₹2,499 Prepaid\" (headline)",
+      "taggedFrom": "ad primary text (body) + headline (title), via Meta Ads MCP ads_get_creatives",
+      "visionPassSkipped": true,
+      "note": "Higgsfield vision connection not attached to this run -- image/video content itself not analyzed, only real ad copy text used. No creative description invented.",
+      "taggedAt": "2026-11-02T02:51:00.000Z"
+    },
+    "1138814541929673": {
+      "adName": "B_Kage_1x1",
+      "campaign": "Sneakers_Cold_Nov",
+      "format": "Static image",
+      "angle": "Discount/price-drop offer on prepaid orders",
+      "hook": "\"KAGE — the most comfortable sneaker ever. Now ₹2,499 on prepaid orders (was ₹3,299). Save ₹800.\" (primary text) / \"KAGE — ₹2,499 Prepaid\" (headline)",
+      "taggedFrom": "ad primary text (body) + headline (title), via Meta Ads MCP ads_get_creatives",
+      "visionPassSkipped": true,
+      "note": "Higgsfield vision connection not attached to this run -- image/video content itself not analyzed, only real ad copy text used. No creative description invented.",
+      "taggedAt": "2026-11-02T02:51:00.000Z"
     }
   }
 }
