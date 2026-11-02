@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-01T22:51:00.000Z",
+  "generatedAt": "2026-11-02T00:52:00.000Z",
   "settings": {
     "kill_roas_threshold": "DISABLED 2026-10-05 by user instruction: the ROAS pause-kill is OFF. Module 16 (pause-kill) must NOT auto-pause any campaign for low ROAS; surface low-ROAS campaigns as alerts only. The hard spend circuit breaker is a separate mechanism and stays ON. Former rule, for reference: pause if ROAS < 1.0x after ₹500 spend on a sales-objective campaign. EXCEPTION until 2026-10-05T23:59+05:30 (user-approved 2026-09-29): for the sneaker-push campaigns 120256091369160159 (Sneakers_BOF_30Sep-5Oct), 120256091370110159 (Sneakers_Prospecting_30Sep-5Oct) and 120256088882780159 (Sneakers_Catalog_Retargeting) the spend floor is ₹1,500, not ₹500.",
     "reactivate_min_historic_roas": "surface for reactivation if a paused campaign's last active-period ROAS >= 3.0x",
@@ -24672,6 +24672,15 @@
       "severity": "low",
       "dismissed": false,
       "createdAt": "2026-11-01T22:51:00.000Z"
+    },
+    {
+      "id": "AL-2552",
+      "module": "pause-kill",
+      "title": "Prospecting_MATCHA_Purchase_27Oct: zero purchases on ₹633.17 spend (last_14d) -- below kill-ROAS floor, alert only (pause-kill disabled)",
+      "detail": "Campaign Prospecting_MATCHA_Purchase_27Oct (120256577948390159, OUTCOME_SALES, launched 2026-10-27) -- ad set Prosp_MATCHA_Men_25-44_Purchase (120256577964470159) shows last_14d spend ₹633.17 with purchase_roas null (0 recorded purchases, 5920 impressions, 76 clicks, ctr 1.28%, cpm ₹84.63). Spend is above the ₹500 default kill-floor (the sneaker-push ₹1,500 exception expired 2026-10-05 and doesn't apply to this campaign anyway). Per settings.kill_roas_threshold (DISABLED 2026-10-05 by user instruction), module 16 (pause-kill) does not auto-pause -- surfaced as alert only. Targeting is compliant (excludes Purchasers 180D and other post-purchase/engagement audiences). Pixel quality healthy this pass (composite EMQ 6.1-8.8/10), so this isn't a tracking-gap artifact. Worth a human look if it doesn't convert soon.",
+      "severity": "medium",
+      "dismissed": false,
+      "createdAt": "2026-11-02T00:52:00.000Z"
     }
   ],
   "log": [
