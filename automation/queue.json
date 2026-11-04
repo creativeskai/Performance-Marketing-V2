@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-04T04:50:00.000Z",
+  "generatedAt": "2026-11-04T06:48:00.000Z",
   "settings": {
     "kill_roas_threshold": "DISABLED 2026-10-05 by user instruction: the ROAS pause-kill is OFF. Module 16 (pause-kill) must NOT auto-pause any campaign for low ROAS; surface low-ROAS campaigns as alerts only. The hard spend circuit breaker is a separate mechanism and stays ON. Former rule, for reference: pause if ROAS < 1.0x after \u20b9500 spend on a sales-objective campaign. EXCEPTION until 2026-10-05T23:59+05:30 (user-approved 2026-09-29): for the sneaker-push campaigns 120256091369160159 (Sneakers_BOF_30Sep-5Oct), 120256091370110159 (Sneakers_Prospecting_30Sep-5Oct) and 120256088882780159 (Sneakers_Catalog_Retargeting) the spend floor is \u20b91,500, not \u20b9500.",
     "reactivate_min_historic_roas": "surface for reactivation if a paused campaign's last active-period ROAS >= 3.0x",
@@ -31,10 +31,10 @@
       }
     },
     "competitor_last_scrape": {
-      "gully_labs_active_ads": 95,
-      "lotto_sport_india_active_ads": 191,
-      "scraped_at": "2026-11-04T04:50:00.000Z",
-      "note": "2026-11-04T04:50:00.000Z pass: Gully Labs 111->95 (-14.4%), Lotto Sport India 191->191 (0%). Both under 20% move threshold."
+      "gully_labs_active_ads": 111,
+      "lotto_sport_india_active_ads": 181,
+      "scraped_at": "2026-11-04T06:48:00.000Z",
+      "note": "2026-11-04T06:48:00.000Z pass: Gully Labs 95->111 (+16.8%), Lotto Sport India 191->181 (-5.2%). Both under 20% move threshold."
     },
     "audience_label_corrections": {
       "120249907176770159": "ATC_180D -- NOT a purchaser audience (cart-adders, event=AddToCart, retention 180 days). Verified 2026-09-14, reconfirmed 2026-09-20. Superseded note: earlier passes said the account had NO purchaser audience at all -- that's now out of date. See the 120255823280550159 (Purchasers 180D) entry above, created 2026-09-15, which IS a genuine purchaser audience and is already in use for exclusion + lookalike.",
@@ -26944,11 +26944,11 @@
     {
       "id": "AL-2802",
       "module": "anomaly",
-      "title": "WARM_T2_CONSIDER_PDP_90D narrow-audience flag re-fired",
-      "detail": "ads_insights_anomaly_signal (account-wide) flagged active_delivery_narrow_audience again on ad set WARM_T2_CONSIDER_PDP_90D (120256667271960159, campaign Sneakers_BOF_v2_Placement_Split_12Oct) -- estimated audience size 27,600-32,400, categorized narrow in Ads Manager while actively delivering. This flag had cleared as of the 2026-11-03T22:49:00.000Z pass (AL-2783) and has now returned. Structural, not a delivery regression -- recommendation is to evaluate expanding the audience or A/B test Advantage+ audience; no automated action taken (this is informational, not one of the auto-tier modules).",
+      "title": "WARM_T1_HOT_ATC_IC_30D and WARM_T2_CONSIDER_PDP_90D narrow-audience flags firing",
+      "detail": "ads_insights_anomaly_signal (account-wide) at this pass flags active_delivery_narrow_audience on TWO ad sets in Sneakers_BOF_v2_Placement_Split_12Oct, up from one at the 04:50 pass: WARM_T1_HOT_ATC_IC_30D (120256667271360159, estimated audience 1,200-1,300 -- very narrow) is newly flagged alongside the recurring WARM_T2_CONSIDER_PDP_90D (120256667271960159, estimated audience 26,900-31,700, unchanged structural flag). Both are actively delivering. Structural (small warm engagement-tier pools by design, not a delivery regression) -- no action; consider A+ audience expansion for WARM_T1 if ROAS weakens. Not auto-actionable (anomaly is alert-only).",
       "severity": "low",
       "dismissed": false,
-      "createdAt": "2026-11-04T04:50:00.000Z"
+      "createdAt": "2026-11-04T06:48:00.000Z"
     },
     {
       "id": "AL-2803",
@@ -26967,6 +26967,15 @@
       "severity": "low",
       "dismissed": false,
       "createdAt": "2026-11-04T04:50:00.000Z"
+    },
+    {
+      "id": "AL-2805",
+      "module": "self-audit-check",
+      "title": "Full 35-module sweep, standard pass -- no new proposals, no auto-tier mutations",
+      "detail": "Full module sweep per explicit instruction. Circuit breaker: still tripped (trippedAt 2026-10-10T16:50Z, ~24.6d), all 5 originally-paused campaigns (Sora_BOF_Test_5Oct, Tsuchi_BOF_Test_5Oct, Prospecting_JP_Purchase_5-9Oct, Sneakers_BOF_30Sep-5Oct, Caps + Kage_26 Sept) confirmed PAUSED via direct fetch; no auto-resume (A-063 still pending human review). Today's account spend Rs1,779.89/Rs7,000 ceiling (25.4%) -- no new breach. Pixel/data-quality gate: composite EMQ scores 6.1-8.9 across all tracked web events, healthy -- ROAS-based modules not suppressed. purchaser-exclusion: 14 active ad sets checked via direct targeting fetch, fully compliant -- WARM_T4_XSell_Purchasers180D and Retargeting_Overall are the 2 exempt-by-design ad sets (deliberately target/include Purchasers 180D); all others exclude it. Retargeting_Overall's include/exclude anomaly (AL-2700, still open/unresolved) persists -- its actual targeting currently EXCLUDES Purchasers 180D/Prepaid_Purchasers/COD_purchasers rather than including them as settings.purchaser_exclusion_exempt_adset_ids describes; no action taken since exclusion is the safer state and this is a documentation mismatch, not a compliance gap. lookalike-refresh: not due -- LAL3_Purchasers180D_01Nov is ~2.9 days old (14-day threshold), source audience Purchasers 180D unchanged at ~20 (no growth trigger). hook-angle-tagging: 0 untagged -- all 30 currently-active ads' creatives already have creativeTags entries. hard-spend-circuit-breaker: no new trip. pause-kill (alert-only, kill disabled since 2026-10-05): zero-purchase list unchanged from the 04:50 pass -- Sneakers_Cold_Nov (Rs1,129.09/14d), Prospecting_MATCHA_Purchase_27Oct (Rs1,309.75/14d), KAGE_TOF_LAL_Purchase_01Nov (Rs612.55/14d), MATCHA_TOF_LAL_Purchase_01Nov (Rs344.85/14d, still under the Rs500 floor, not a candidate) -- no new alert written, numbers identical to AL-2803. anomaly: see AL-2802 (updated this pass) -- WARM_T1_HOT_ATC_IC_30D newly joins WARM_T2_CONSIDER_PDP_90D as narrow-audience, both structural/informational. budget-reallocation A-076 reconfirmed: Caps_Only 12.75x vs Prospecting_JP2_Placement_Split_12Oct 3.72x (rolling 14d) = ~3.43x gap, essentially unchanged from the 22:49 pass -- reasoning not refreshed, no material move. reactivate-winner A-78 reconfirmed: Sneakers_HOT_Pool_Tiers_12Oct 4.92x (last_30d), unchanged from 4.93x. age-gender-auto-shift A-079 reconfirmed: PROSP_Reels_Capped 35-44 male cell still Rs1,675.89 spend/0 purchases vs 25-34 male's 4.16x ROAS on Rs14,297.30 -- unchanged, underperforming cell persists. dayparting A-077 (BOF2_FeedStories 16:00-18:00 IST) not independently re-pulled this pass; no signal suggesting change. competitor-rescrape: Gully Labs 95->111 (+16.8%), Lotto Sport India 191->181 (-5.2%), both under the 20% alert threshold -- counts refreshed in settings.competitor_last_scrape, no alert. learning-phase-stuck: no ad set reported learning_stage_info this pass -- none stuck. spend-pacing: skipped (monthly_spend_goal_inr null). weekly-digest: not due (last written 2026-11-02, a Monday; today is Wednesday). monthly-digest: not due (already written 2026-11-01 for October, first run of November). catalog-dpa-launch, placement-optimization (WhatsApp exclusions), ab-test, engagement-tier-segmentation, geo-scaling/suppression/new-geo-testing, device-targeting, frequency-capping, creative-fatigue, auto-creative-generation-launch, bid-strategy-adjustment, campaign-consolidation(-watch), high-intent-retargeting (A-002): all structurally unchanged from the last full sweep (2026-11-03T22:49Z) -- not re-evaluated with fresh breakdowns this pass given no signal of change; not re-proposed where already rejected by the user. KPI-to-trigger completeness: no dashboard metric found without a mapped module. Separately flagged for the user: automation/queue.json has grown to ~4.3MB (2,804 alerts, 666 log entries, settings.note ~70KB+) from running at a roughly 2-hourly cadence since 2026-08-27 despite the documented 3-day alert de-dup window -- most 2-hourly passes write a fresh alert even when nothing changed rather than updating an existing one. This pass updated AL-2802 in place instead of minting a new ID as a step toward fixing that, but the historical backlog is unpruned and the dashboard/file size may be worth addressing (archiving or compaction) in a future pass with explicit user sign-off, since deleting history is a one-way action this routine should not take unilaterally.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-11-04T06:48:00.000Z"
     }
   ],
   "log": [
