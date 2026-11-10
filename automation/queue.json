@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-10T10:50:00.000Z",
+  "generatedAt": "2026-11-10T12:50:00.000Z",
   "settings": {
     "kill_roas_threshold": "DISABLED 2026-10-05 by user instruction: the ROAS pause-kill is OFF. Module 16 (pause-kill) must NOT auto-pause any campaign for low ROAS; surface low-ROAS campaigns as alerts only. The hard spend circuit breaker is a separate mechanism and stays ON. Former rule, for reference: pause if ROAS < 1.0x after ₹500 spend on a sales-objective campaign. EXCEPTION until 2026-10-05T23:59+05:30 (user-approved 2026-09-29): for the sneaker-push campaigns 120256091369160159 (Sneakers_BOF_30Sep-5Oct), 120256091370110159 (Sneakers_Prospecting_30Sep-5Oct) and 120256088882780159 (Sneakers_Catalog_Retargeting) the spend floor is ₹1,500, not ₹500.",
     "reactivate_min_historic_roas": "surface for reactivation if a paused campaign's last active-period ROAS >= 3.0x",
@@ -31,10 +31,10 @@
       }
     },
     "competitor_last_scrape": {
-      "gully_labs_active_ads": 86,
-      "lotto_sport_india_active_ads": 252,
-      "scraped_at": "2026-11-10T06:51:13.000Z",
-      "note": "2026-11-10T06:51:13.000Z pass: Gully Labs 54->86 (+59.3%), Lotto Sport India 172->252 (+46.5%). BOTH cross the 20% competitor-spike threshold -- see AL competitor-spike alert this pass, first spike in weeks."
+      "gully_labs_active_ads": 60,
+      "lotto_sport_india_active_ads": 173,
+      "scraped_at": "2026-11-10T12:50:00.000Z",
+      "note": "2026-11-10T12:50:00.000Z pass: Gully Labs 86->60 (-30.2%), Lotto Sport India 252->173 (-31.3%) -- both cross the 20% threshold in the opposite direction from this morning's 06:51 UTC spike (86/252 were themselves up from 54/172). See AL-3034."
     },
     "audience_label_corrections": {
       "120249907176770159": "ATC_180D -- NOT a purchaser audience (cart-adders, event=AddToCart, retention 180 days). Verified 2026-09-14, reconfirmed 2026-09-20. Superseded note: earlier passes said the account had NO purchaser audience at all -- that's now out of date. See the 120255823280550159 (Purchasers 180D) entry above, created 2026-09-15, which IS a genuine purchaser audience and is already in use for exclusion + lookalike.",
@@ -29054,6 +29054,24 @@
       "severity": "low",
       "dismissed": false,
       "createdAt": "2026-11-10T10:50:00.000Z"
+    },
+    {
+      "id": "AL-3034",
+      "module": "competitor-spike",
+      "title": "Both tracked competitors reversed sharply -- active-ad counts down >30% since this morning's scrape",
+      "detail": "Gully Labs active-ad count fell from 86 (2026-11-10T06:51 UTC scrape) to 60 this pass (-30.2%); Lotto Sport India fell from 252 to 173 (-31.3%). Both cross the 20% competitor-spike threshold, this time in the opposite direction from this morning's spike (which was itself up from 54/172, the first spike in weeks). Ad Library active-counts are known to be noisy day-to-day -- this may be normal campaign cycling (ad sets ending/restarting) rather than a real pullback by either competitor. Flagged for visibility only; no action implied.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-11-10T12:50:00.000Z"
+    },
+    {
+      "id": "AL-3035",
+      "module": "self-audit-check",
+      "title": "Full module sweep complete, 2026-11-10T12:50 UTC pass -- no breach, no new proposals, competitor counts reversed sharply",
+      "detail": "Circuit breaker: today's account spend ₹4,495.18/₹7,000 ceiling (64.2%), not breached this pass; the existing 2026-10-10 trip remains tripped and unresolved pending human review of A-063 (5 campaigns reconfirmed still PAUSED). Pixel/data-quality gate: all tracked event composite EMQ scores 6.1-8.7/10, at/above the pixel_quality_min_match_rate=0.6 threshold -- ROAS-based modules not suppressed. Purchaser-exclusion: fresh direct targeting fetch on all 13 active ad sets -- 11 exclude 'Purchasers 180D' directly, WARM_T4_XSell_Purchasers180D and Retargeting_Overall are on settings.purchaser_exclusion_exempt_adset_ids (Retargeting_Overall's live targeting currently excludes rather than includes it, reconfirmed compliant either way per long-standing prior passes) -- compliant account-wide, no mutation needed. Lookalike-refresh: LAL3_Purchasers180D_01Nov (built 2026-11-01) is ~9.1 days old, still under the 14-day threshold; source audience 'Purchasers 180D' unchanged at ~20 members (no growth trigger) -- no rebuild this pass. Hook-angle-tagging: found and tagged 1 new creative (986059037907476, 'Yin Yang at ₹2,499', ad Prosp_YINYANG_RootsV3_2499_22Oct) from its real primary text/headline via the Meta Ads MCP -- Higgsfield vision connection not attached to this run, no creative description invented, per EXECUTION POLICY item E. Anomaly: active_delivery_narrow_audience persists on WARM_T2_CONSIDER_PDP_90D (Sneakers_BOF_v2_Placement_Split_12Oct), unchanged, no new root-cause. Pause-kill: the same 2 campaigns (KAGE_TOF_LAL_Purchase_01Nov ₹2,689.89, Prospecting_MATCHA_Purchase_27Oct ₹3,210.79, both zero purchases on last_14d) remain zero-purchase on real spend; kill_roas_threshold disabled by user instruction, alert-only, see AL-3024 from this morning (not recreated -- same underlying issue). Campaign-consolidation-watch: MATCHA_TOF_LAL_Purchase_01Nov and Prospecting_MATCHA_Purchase_27Oct remain concurrently active, watch persists (see AL-3022). Catalog-dpa-launch: structural gap unchanged, zero DPA/catalog campaigns running. Competitor-spike: see AL-3034 -- both tracked competitors swung >30% the other way since this morning. Approval-tier: re-pulled fresh numbers for all 4 pending proposals this pass -- A-076 (budget-reallocation, Prospecting_JP2 2.96x vs Caps_Only 5.97x last_7d), A-078 (reactivate-winner, Sneakers_HOT_Pool_Tiers_12Oct 4.92x last_30d), A-079 (age-gender-auto-shift, PROSP_Reels_Capped 35-44 male cell still ₹1,780.43/null ROAS vs 25-34 male ₹15,412.56/4.03x), and A-080 (creative-fatigue, ad 120256506949220159 still stalled at ₹0.15/0.00% CTR) -- all four came back byte-for-byte unchanged from the 10:50 UTC pass, so none were re-appended to avoid pointless reasoning-field growth; all remain pending human review. A-002 (high-intent-retargeting) and A-063 (resume-after-circuit-breaker) also remain pending, untouched this pass -- no new data changes their status.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-11-10T12:50:00.000Z"
     }
   ],
   "log": [
@@ -42487,6 +42505,69 @@
       },
       "tier": "auto",
       "executedAt": "2026-11-10T10:50:00.000Z"
+    },
+    {
+      "proposalId": null,
+      "action": "auto-module: hard-spend-circuit-breaker check -- today's account spend ₹4,495.18/₹7,000 ceiling (64.2%), not breached this pass. The existing 2026-10-10 trip remains tripped and unresolved pending human review of A-063; all 5 originally-paused campaigns reconfirmed still PAUSED via direct fetch (9 campaigns / 13 ad sets ACTIVE, same composition as the 10:50 UTC pass). No new pause action taken.",
+      "result": "success",
+      "previousState": {
+        "circuitBreaker.tripped": true,
+        "today_spend_inr_at_prior_pass_1050z": 3492.67
+      },
+      "detail": {
+        "amount_spent_today_inr": 4495.18,
+        "ceiling_inr": 7000,
+        "pct_of_ceiling": 64.2,
+        "active_campaigns": 9,
+        "active_adsets": 13
+      },
+      "tier": "auto",
+      "executedAt": "2026-11-10T12:50:00.000Z"
+    },
+    {
+      "proposalId": null,
+      "action": "auto-module: purchaser-exclusion -- fresh direct targeting fetch on all 13 currently-active ad sets. 11 exclude 'Purchasers 180D' (120255823280550159) in excluded_custom_audiences; WARM_T4_XSell_Purchasers180D (120256667272700159) is on settings.purchaser_exclusion_exempt_adset_ids and deliberately includes it by design; Retargeting_Overall (120255851467360159) is also on the exempt list but its live targeting currently excludes rather than includes Purchasers 180D -- reconfirmed compliant either way per many prior passes. Account-wide compliant, no mutation needed.",
+      "result": "success",
+      "previousState": {
+        "compliant_adsets": "11/13 direct-exclude, 2/13 exempt"
+      },
+      "detail": {
+        "active_adsets_checked": 13,
+        "excluding_directly": 11,
+        "exempt_listed": 2
+      },
+      "tier": "auto",
+      "executedAt": "2026-11-10T12:50:00.000Z"
+    },
+    {
+      "proposalId": null,
+      "action": "auto-module: lookalike-refresh -- baseline LAL3_Purchasers180D_01Nov (120256662640020159) built 2026-11-01T09:50:53Z, ~9.1 days old, still under the 14-day lookalike_refresh_days threshold. Source audience 'Purchasers 180D' (120255823280550159) unchanged at approximate_count 20 (no 20% growth trigger either). No rebuild needed this pass.",
+      "result": "success",
+      "previousState": {
+        "lal_age_days_prior_pass": 8.9,
+        "source_audience_size": 20
+      },
+      "detail": {
+        "lal_age_days": 9.1,
+        "source_audience_size": 20,
+        "lookalike_refresh_days_threshold": 14
+      },
+      "tier": "auto",
+      "executedAt": "2026-11-10T12:50:00.000Z"
+    },
+    {
+      "proposalId": null,
+      "action": "auto-module: hook-angle-tagging -- checked all distinct creative_ids across currently-active/campaign-paused ads (effective_status IN ACTIVE/CAMPAIGN_PAUSED, last_14d); found 1 untagged creative, 986059037907476 (ad Prosp_YINYANG_RootsV3_2499_22Oct, campaign Prospecting_YinYang_Purchase_22Oct), tagged from its real primary text/headline via ads_get_creatives (format: Share static image; angle: prepaid discount offer on Yin Yang silhouette, price-led was/now framing). Per EXECUTION POLICY item E, the Higgsfield vision connection is not attached to this scheduled run, so tagging continues to rely on ad copy/headline only -- no vision-based re-tag pass was performed, no creative description invented.",
+      "result": "success",
+      "previousState": {
+        "creativeTags_entry_986059037907476": null
+      },
+      "detail": {
+        "newly_tagged_creative_id": "986059037907476",
+        "total_creativeTags_entries_after": 518
+      },
+      "tier": "auto",
+      "executedAt": "2026-11-10T12:50:00.000Z"
     }
   ],
   "creativeTags": {
@@ -48221,6 +48302,14 @@
       "visionPassSkipped": true,
       "note": "Higgsfield vision connection not attached to this run -- image content itself not analyzed, only real ad copy text used. No creative description invented.",
       "taggedAt": "2026-11-02T20:48:00.000Z"
+    },
+    "986059037907476": {
+      "adName": "Prosp_YINYANG_RootsV3_2499_22Oct",
+      "campaign": "Prospecting_YinYang_Purchase_22Oct",
+      "format": "Share (static image)",
+      "angle": "Prepaid discount offer on the Yin Yang silhouette, price-led (was/now framing)",
+      "hook": "\"Meet Yin Yang — the new KAI sneaker.\\nNow ₹2,499 on prepaid orders (was ₹3,299) + FREE SHIPPING.\\nSave ₹800. Limited stock.\" (primary text) / \"Yin Yang at ₹2,499\" (headline)",
+      "note": "Tagged 2026-11-10T12:50 UTC pass from real ad copy/headline via Meta Ads MCP (ads_get_creatives, creative_id 986059037907476) -- Higgsfield vision connection not attached to this scheduled run, no creative description invented, per EXECUTION POLICY item E."
     }
   }
 }
