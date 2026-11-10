@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-10T12:50:00.000Z",
+  "generatedAt": "2026-11-10T14:53:18.000Z",
   "settings": {
     "kill_roas_threshold": "DISABLED 2026-10-05 by user instruction: the ROAS pause-kill is OFF. Module 16 (pause-kill) must NOT auto-pause any campaign for low ROAS; surface low-ROAS campaigns as alerts only. The hard spend circuit breaker is a separate mechanism and stays ON. Former rule, for reference: pause if ROAS < 1.0x after ₹500 spend on a sales-objective campaign. EXCEPTION until 2026-10-05T23:59+05:30 (user-approved 2026-09-29): for the sneaker-push campaigns 120256091369160159 (Sneakers_BOF_30Sep-5Oct), 120256091370110159 (Sneakers_Prospecting_30Sep-5Oct) and 120256088882780159 (Sneakers_Catalog_Retargeting) the spend floor is ₹1,500, not ₹500.",
     "reactivate_min_historic_roas": "surface for reactivation if a paused campaign's last active-period ROAS >= 3.0x",
@@ -29072,6 +29072,15 @@
       "severity": "low",
       "dismissed": false,
       "createdAt": "2026-11-10T12:50:00.000Z"
+    },
+    {
+      "id": "AL-3036",
+      "module": "self-audit-check",
+      "title": "Full module sweep complete, 2026-11-10T~14:53 UTC pass -- no breach, no new proposals, no new alerts",
+      "detail": "Circuit breaker: today's spend ₹5,208.92/₹7,000 (74.4%), not breached; 2026-10-10 trip remains unresolved pending A-063. Pixel quality: EMQ 6.1-8.7, passing. Purchaser-exclusion: compliant account-wide (13 active ad sets checked). Lookalike-refresh: not due (~9.6d old, source unchanged ~20). Hook-angle-tagging: all 117 active creatives already tagged, nothing new. Anomaly: active_delivery_narrow_audience persists on WARM_T2_CONSIDER_PDP_90D only (120256667271960159, est. audience 25,700-30,300) -- unchanged from 12:50 pass, no new root cause. Campaign-consolidation-watch: MATCHA_TOF_LAL_Purchase_01Nov vs Prospecting_MATCHA_Purchase_27Oct watch persists, not a confirmed duplicate (different targeting strategies). Pause-kill (disabled, alert-only): KAGE_TOF_LAL_Purchase_01Nov (₹2,689.89/14d, 0 purchases) and Prospecting_MATCHA_Purchase_27Oct (₹3,210.79/14d, 0 purchases) remain zero-purchase, already alerted at AL-3024, not re-alerted (unchanged, within 3-day dedup window). All other active campaigns healthy (Fudoshin 15.2x, Sneakers_BOF_v2 8.76x, Prospecting_JP2 9.99x, Caps_Only 16.69x, Retargeting_Overall 33.5x). Competitor-rescrape: last scrape 2 hours ago (12:50 UTC), skipped this pass. Weekly/monthly-digest: not due. 6 pending proposals (A-002, A-063, A-076, A-078/A-78, A-079, A-080) all reconfirmed within the last 24h or unchanged, left as-is per pass-history hygiene policy -- no new proposals or mutations this pass.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-11-10T14:53:18.000Z"
     }
   ],
   "log": [
@@ -42568,6 +42577,58 @@
       },
       "tier": "auto",
       "executedAt": "2026-11-10T12:50:00.000Z"
+    },
+    {
+      "proposalId": null,
+      "action": "auto-module: purchaser-exclusion -- fresh direct targeting fetch on all 13 active ad sets. 11 exclude 'Purchasers 180D' (120255823280550159) directly; WARM_T4_XSell_Purchasers180D and Retargeting_Overall are on settings.purchaser_exclusion_exempt_adset_ids (Retargeting_Overall's live targeting currently excludes rather than includes it, reconfirmed compliant either way per long-standing prior passes). Compliant account-wide, no mutation needed.",
+      "result": "success",
+      "previousState": null,
+      "detail": {
+        "today_spend_inr": 5208.92,
+        "active_adsets_checked": 13
+      },
+      "tier": "auto",
+      "executedAt": "2026-11-10T14:53:18.000Z"
+    },
+    {
+      "proposalId": null,
+      "action": "auto-module: lookalike-refresh -- baseline LAL3_Purchasers180D_01Nov (120256662640020159, built 2026-11-01) still under 14-day threshold (~9.6 days), source audience 'Purchasers 180D' size unchanged (~20, no 20%-growth trigger). No rebuild this pass.",
+      "result": "success",
+      "previousState": {
+        "lal_age_days": 9.6,
+        "source_audience_size": 20
+      },
+      "detail": {
+        "baseline_audience_id": "120256662640020159"
+      },
+      "tier": "auto",
+      "executedAt": "2026-11-10T14:53:18.000Z"
+    },
+    {
+      "proposalId": null,
+      "action": "auto-module: hook-angle-tagging -- checked all 117 distinct creative_ids across active/campaign-paused ads; all already have creativeTags entries. Nothing new to tag this pass (vision pass skipped, Higgsfield not attached to this run).",
+      "result": "success",
+      "previousState": null,
+      "detail": {
+        "distinct_creatives_checked": 117,
+        "untagged_found": 0
+      },
+      "tier": "auto",
+      "executedAt": "2026-11-10T14:53:18.000Z"
+    },
+    {
+      "proposalId": null,
+      "action": "auto-module: hard-spend-circuit-breaker check -- today's account spend ₹5,208.92/₹7,000 ceiling (74.4%), not breached this pass. The existing 2026-10-10 trip remains tripped and unresolved pending human review of A-063.",
+      "result": "success",
+      "previousState": {
+        "today_spend_inr": 5208.92,
+        "ceiling_inr": 7000
+      },
+      "detail": {
+        "breached": false
+      },
+      "tier": "auto",
+      "executedAt": "2026-11-10T14:53:18.000Z"
     }
   ],
   "creativeTags": {
