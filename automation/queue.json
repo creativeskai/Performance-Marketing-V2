@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-11T18:51:00.000Z",
+  "generatedAt": "2026-11-11T20:52:00.000Z",
   "settings": {
     "kill_roas_threshold": "DISABLED 2026-10-05 by user instruction: the ROAS pause-kill is OFF. Module 16 (pause-kill) must NOT auto-pause any campaign for low ROAS; surface low-ROAS campaigns as alerts only. The hard spend circuit breaker is a separate mechanism and stays ON. Former rule, for reference: pause if ROAS < 1.0x after ₹500 spend on a sales-objective campaign. EXCEPTION until 2026-10-05T23:59+05:30 (user-approved 2026-09-29): for the sneaker-push campaigns 120256091369160159 (Sneakers_BOF_30Sep-5Oct), 120256091370110159 (Sneakers_Prospecting_30Sep-5Oct) and 120256088882780159 (Sneakers_Catalog_Retargeting) the spend floor is ₹1,500, not ₹500.",
     "reactivate_min_historic_roas": "surface for reactivation if a paused campaign's last active-period ROAS >= 3.0x",
@@ -31,10 +31,10 @@
       }
     },
     "competitor_last_scrape": {
-      "gully_labs_active_ads": 69,
-      "lotto_sport_india_active_ads": 173,
-      "scraped_at": "2026-11-11T18:51:00.000Z",
-      "note": "2026-11-11T18:51:00.000Z pass: Gully Labs 88->69 (-21.6%), Lotto Sport India 257->173 (-32.7%) -- both reversed back down past the 20% spike threshold again, continuing the whipsaw pattern seen across AL-3028/AL-3034/AL-3076/AL-3080/AL-3082 (up, down, up, down, up, now down again within ~2h of the last up-swing). Consistent with Ad Library active-ad count volatility for these two pages rather than a durable competitive pullback."
+      "gully_labs_active_ads": 54,
+      "lotto_sport_india_active_ads": 172,
+      "scraped_at": "2026-11-11T20:52:00.000Z",
+      "note": "2026-11-11T20:52:00.000Z pass: Gully Labs 69->54 (-21.7%, crossed spike threshold), Lotto Sport India 173->172 (-0.6%, no crossing). Continuing the whipsaw pattern seen across AL-3028/AL-3034/AL-3076/AL-3080/AL-3082/AL-3086 -- consistent with Ad Library active-ad count volatility for these two pages rather than a durable competitive pullback."
     },
     "audience_label_corrections": {
       "120249907176770159": "ATC_180D -- NOT a purchaser audience (cart-adders, event=AddToCart, retention 180 days). Verified 2026-09-14, reconfirmed 2026-09-20. Superseded note: earlier passes said the account had NO purchaser audience at all -- that's now out of date. See the 120255823280550159 (Purchasers 180D) entry above, created 2026-09-15, which IS a genuine purchaser audience and is already in use for exclusion + lookalike.",
@@ -29389,7 +29389,7 @@
       "id": "AL-3068",
       "module": "threshold-alerts",
       "title": "Retargeting_Overall CPM up ~87% last_7d vs last_30d trailing -- likely tied to a targeting change",
-      "detail": "Campaign Retargeting_Overall (120255851467340159, ad set 120255851467360159) shows last_7d CPM ₹129.53 vs last_30d trailing ₹69.30 (+87%), CTR 2.10% vs 1.68% (+25%) -- the biggest CPM move of any active campaign this pass (all others moved <25%, mostly down). Likely root cause (anomaly-root-cause): a fresh direct targeting fetch this pass shows the ad set now EXCLUDES Purchasers 180D, Prepaid_Purchasers and COD_purchasers (120255823280550159, 120255846193620159, 120255846211510159) instead of INCLUDING them, which settings.purchaser_exclusion_exempt_adset_ids still describes as the deliberate design ('includes ... by design'). That exempt-list note is now stale -- this ad set's targeting was changed outside the routine (most likely in Ads Manager) at some point after it was last verified, shrinking/altering the eligible delivery pool for what was built as a cross-sell-to-past-purchasers retargeting segment, consistent with the CPM/CTR move observed. purchaser-exclusion itself remains compliant (the ad set already excludes the purchaser audience, so no auto edit was made), and last_30d purchase_roas is still a strong 11.01x (lagging, still dominated by days before the apparent change) -- but the live delivery cost has already shifted. Recommend a human confirm whether this targeting change was intentional; if not, revert it in Ads Manager. If intentional, settings.purchaser_exclusion_exempt_adset_ids' note for 120255851467360159 should be corrected to drop the now-inaccurate 'includes by design' language.",
+      "detail": "Campaign Retargeting_Overall (120255851467340159, ad set 120255851467360159) shows last_7d CPM ₹129.53 vs last_30d trailing ₹69.30 (+87%), CTR 2.10% vs 1.68% (+25%) -- the biggest CPM move of any active campaign this pass (all others moved <25%, mostly down). Likely root cause (anomaly-root-cause): a fresh direct targeting fetch this pass shows the ad set now EXCLUDES Purchasers 180D, Prepaid_Purchasers and COD_purchasers (120255823280550159, 120255846193620159, 120255846211510159) instead of INCLUDING them, which settings.purchaser_exclusion_exempt_adset_ids still describes as the deliberate design ('includes ... by design'). That exempt-list note is now stale -- this ad set's targeting was changed outside the routine (most likely in Ads Manager) at some point after it was last verified, shrinking/altering the eligible delivery pool for what was built as a cross-sell-to-past-purchasers retargeting segment, consistent with the CPM/CTR move observed. purchaser-exclusion itself remains compliant (the ad set already excludes the purchaser audience, so no auto edit was made), and last_30d purchase_roas is still a strong 11.01x (lagging, still dominated by days before the apparent change) -- but the live delivery cost has already shifted. Recommend a human confirm whether this targeting change was intentional; if not, revert it in Ads Manager. If intentional, settings.purchaser_exclusion_exempt_adset_ids' note for 120255851467360159 should be corrected to drop the now-inaccurate 'includes by design' language. Updated 2026-11-11T20:52:00.000Z pass (numbers moved slightly, same underlying issue, dedup window <3 days so updated in place rather than recreated): fresh ads_get_ad_entities shows Retargeting_Overall last_7d CPM ₹129.01 vs last_30d trailing ₹68.65 (+88%), CTR 2.17% vs 1.68% (+29%) -- essentially unchanged from this alert's prior numbers. Root cause unchanged: the ad set's live targeting still excludes Purchasers 180D/Prepaid_Purchasers/COD_purchasers instead of including them as settings.purchaser_exclusion_exempt_adset_ids describes; that exempt-list note remains stale. No action taken -- a human should confirm whether the exempt-list note or the live targeting reflects the intended strategy.",
       "severity": "medium",
       "dismissed": false,
       "createdAt": "2026-11-11T08:51:00.000Z"
@@ -29582,6 +29582,42 @@
       "severity": "low",
       "dismissed": false,
       "createdAt": "2026-11-11T18:51:00.000Z"
+    },
+    {
+      "id": "AL-3090",
+      "module": "anomaly",
+      "title": "Narrow-audience warning flaps back to 1 ad set",
+      "detail": "ads_insights_anomaly_signal: active_delivery_narrow_audience warning now covers only WARM_T2_CONSIDER_PDP_90D (120256667271960159, estimated audience 26,200-30,700), down from 2 ad sets (also WARM_T1_HOT_ATC_IC_30D) at the 18:51 UTC pass (AL-3087). This flaps pass to pass as Meta's narrow-audience estimate moves around the threshold -- recommendation unchanged: evaluate expanding audience or A/B test using Advantage+ audience. No action taken (informational).",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-11-11T20:52:00.000Z"
+    },
+    {
+      "id": "AL-3091",
+      "module": "competitor-spike",
+      "title": "Gully Labs active-ad count drops >20%",
+      "detail": "Fresh ads_library_search this pass: Gully Labs (page_id 107479854297817) active-ad count fell 69 -> 54 (-21.7%), crossing the 20% competitor-spike threshold; Lotto Sport India (page_id 426015150606378) held essentially flat at 172 (prior 173, -0.6%), no crossing. Continues the same up-down whipsaw already logged at AL-3028/3034/3076/3080/3082/3086 -- consistent with Ad Library active-ad snapshot volatility for this page rather than a durable pullback in competitor spend; informational only, no account action implied.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-11-11T20:52:00.000Z"
+    },
+    {
+      "id": "AL-3092",
+      "module": "pixel-health",
+      "title": "Pixel EMQ healthy, ROAS modules not suppressed",
+      "detail": "ads_get_dataset_quality on dataset 833131719490535 (Shopify Meta Pixel): composite EMQ scores range 6.1 (PageView/ViewContent/AddToCart/Search/SubscribedButtonClick) to 8.8 (AddPaymentInfo/prepaid_purchase); Purchase 8.1, cod_purchase 8.7; InitiateCheckout 6.9. All at/above settings.pixel_quality_min_match_rate=0.6. Upload freshness hourly on web events. ROAS-based modules not suppressed this pass.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-11-11T20:52:00.000Z"
+    },
+    {
+      "id": "AL-3093",
+      "module": "self-audit-check",
+      "title": "Full-sweep pass summary -- 2026-11-11T20:52 UTC",
+      "detail": "Live re-pull vs dashboard snapshot: 9 campaigns / 13 ad sets ACTIVE (unchanged composition from 18:51 UTC pass), today's spend ₹936.94/₹7,000 (13.4%), circuitBreaker still tripped from 2026-10-10 (A-063 pending, unresolved ~32.2 days). Auto tier: purchaser-exclusion compliant account-wide (no edits), lookalike-refresh not due (LAL3 ~10.46d old, source audience still 20 members), hook-angle-tagging found nothing new (29 distinct creatives across active ads, all already tagged), hard-spend-circuit-breaker not breached (today's spend well under ceiling). Approval tier: no new proposals created this pass. Reconfirmed existing pending proposals with fresh numbers -- A-076 (budget-reallocation, last_14d: Prospecting_JP2_Placement_Split_12Oct 3.89x ROAS/₹17,798.60 spend vs Caps_Only 8.26x ROAS/₹10,941.50 spend, ~2.12x gap, still above the 1.5x threshold, essentially unchanged) and A-78 (reactivate-winner, Sneakers_HOT_Pool_Tiers_12Oct last_30d 5.07x ROAS/₹986.29 spend, still above the 3.0x threshold, unchanged). A-079/A-080/A-081/A-002/A-063 left unchanged (no fresh breakdown data pulled this pass to justify an update). Alerts: pause-kill's recurring zero-purchase finding (KAGE_TOF_LAL_Purchase_01Nov ₹3,281.91, Prospecting_MATCHA_Purchase_27Oct ₹3,595.51, both 0 purchases over last_14d, kill disabled) essentially unchanged from AL-3055's last refresh (<₹0.10 drift) -- left as-is, no update needed. Threshold-alerts: Retargeting_Overall's CPM anomaly (last_7d ₹129.01 vs last_30d ₹68.65, +88%) persists unchanged, same root cause (stale purchaser_exclusion_exempt_adset_ids note) -- AL-3068 updated in place. Competitor tracker: Gully Labs active-ad count dropped >20% again (AL-3091); narrow-audience anomaly flapped back down to 1 ad set (AL-3090). Pixel EMQ healthy, ROAS modules not suppressed. KPI-to-trigger completeness: no dashboard-surfaced metric found without a corresponding module this pass.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-11-11T20:52:00.000Z"
     }
   ],
   "log": [
@@ -43923,6 +43959,35 @@
       "detail": {},
       "tier": "auto",
       "executedAt": "2026-11-11T18:51:00.000Z"
+    },
+    {
+      "proposalId": null,
+      "action": "auto-module: purchaser-exclusion -- fresh direct targeting fetch on all 13 active ad sets. All 13 compliant: 12 directly exclude 'Purchasers 180D' (120255823280550159) in excluded_custom_audiences, and WARM_T4_XSell_Purchasers180D (120256667272700159) is on settings.purchaser_exclusion_exempt_adset_ids and deliberately includes it by design. Retargeting_Overall (120255851467360159) -- also exempt-listed -- still EXCLUDES Purchasers 180D/Prepaid_Purchasers/COD_purchasers in its live targeting instead of including them as its note describes (same stale-note finding as prior passes, unchanged; already flagged in AL-2893/AL-3068). No edit made -- compliant account-wide either way, and editing would force-pause this live ad set with no compliance gain.",
+      "result": "success",
+      "previousState": {
+        "note": "no mutation needed -- all active ad sets already compliant"
+      },
+      "detail": {
+        "active_adsets_checked": 13,
+        "non_compliant": 0
+      },
+      "tier": "auto",
+      "executedAt": "2026-11-11T20:52:00.000Z"
+    },
+    {
+      "proposalId": null,
+      "action": "auto-module: lookalike-refresh -- source audience 'Purchasers 180D' (120255823280550159) still exactly 20 members (unchanged, no growth-based refresh trigger). Baseline LAL3_Purchasers180D_01Nov (120256662640020159, built 2026-11-01T09:50:53Z) is ~10.46 days old, still under the 14-day lookalike_refresh_days threshold. No rebuild needed this pass.",
+      "result": "success",
+      "previousState": {
+        "source_audience_size": 20,
+        "baseline_age_days": 10.37
+      },
+      "detail": {
+        "source_audience_size": 20,
+        "baseline_age_days": 10.46
+      },
+      "tier": "auto",
+      "executedAt": "2026-11-11T20:52:00.000Z"
     }
   ],
   "creativeTags": {
