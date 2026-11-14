@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-14T08:51:00.000Z",
+  "generatedAt": "2026-11-14T10:47:19.000Z",
   "settings": {
     "kill_roas_threshold": "DISABLED 2026-10-05 by user instruction: the ROAS pause-kill is OFF. Module 16 (pause-kill) must NOT auto-pause any campaign for low ROAS; surface low-ROAS campaigns as alerts only. The hard spend circuit breaker is a separate mechanism and stays ON. Former rule, for reference: pause if ROAS < 1.0x after ₹500 spend on a sales-objective campaign. EXCEPTION until 2026-10-05T23:59+05:30 (user-approved 2026-09-29): for the sneaker-push campaigns 120256091369160159 (Sneakers_BOF_30Sep-5Oct), 120256091370110159 (Sneakers_Prospecting_30Sep-5Oct) and 120256088882780159 (Sneakers_Catalog_Retargeting) the spend floor is ₹1,500, not ₹500.",
     "reactivate_min_historic_roas": "surface for reactivation if a paused campaign's last active-period ROAS >= 3.0x",
@@ -31,10 +31,10 @@
       }
     },
     "competitor_last_scrape": {
-      "gully_labs_active_ads": 110,
+      "gully_labs_active_ads": 114,
       "lotto_sport_india_active_ads": 255,
-      "scraped_at": "2026-11-14T08:51:00.000Z",
-      "note": "2026-11-14T08:51:00.000Z pass: Gully Labs at 110 (vs prior 111, within normal count noise). Lotto Sport India at 255 (vs prior 258, within normal count noise). Scraped via exact page_ids (107479854297817 / 426015150606378)."
+      "scraped_at": "2026-11-14T10:47:19.000Z",
+      "note": "2026-11-14T10:47:19.000Z pass: Gully Labs at 114 (vs prior 110, +3.6%, within normal count noise). Lotto Sport India unchanged at 255. Scraped via exact page_ids (107479854297817 / 426015150606378)."
     },
     "audience_label_corrections": {
       "120249907176770159": "ATC_180D -- NOT a purchaser audience (cart-adders, event=AddToCart, retention 180 days). Verified 2026-09-14, reconfirmed 2026-09-20. Superseded note: earlier passes said the account had NO purchaser audience at all -- that's now out of date. See the 120255823280550159 (Purchasers 180D) entry above, created 2026-09-15, which IS a genuine purchaser audience and is already in use for exclusion + lookalike.",
@@ -30360,6 +30360,60 @@
       "severity": "low",
       "dismissed": false,
       "createdAt": "2026-11-14T08:51:00.000Z"
+    },
+    {
+      "id": "AL-3176",
+      "module": "threshold-alerts",
+      "title": "No CPM/CTR/CPC outliers -- no baseline match for current active campaigns",
+      "detail": "settings.metric_baselines only has entries for Kage_sales_1908 and Kage_TOF, neither of which matches any of the 9 currently-active campaign names (MATCHA_TOF_LAL_Purchase_01Nov, KAGE_TOF_LAL_Purchase_01Nov, Prospecting_MATCHA_Purchase_27Oct, Fudoshin, Prospecting_LAL1_Purchasers_14Oct, Sneakers_BOF_v2_Placement_Split_12Oct, Prospecting_JP2_Placement_Split_12Oct, Caps_Only, Retargeting_Overall) -- no trailing-30d-vs-7d baseline comparison possible this pass.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-11-14T10:47:19.000Z"
+    },
+    {
+      "id": "AL-3177",
+      "module": "competitor-rescrape",
+      "title": "Routine competitor rescrape -- Gully Labs up slightly, Lotto steady",
+      "detail": "Gully Labs now at 114 active ads (vs prior recorded 110, +3.6%); Lotto Sport India unchanged at 255. Both well within the 20% competitor-spike threshold -- no competitor-spike alert.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-11-14T10:47:19.000Z"
+    },
+    {
+      "id": "AL-3178",
+      "module": "campaign-consolidation-watch",
+      "title": "Watch persists: two active MATCHA prospecting campaigns still running concurrently",
+      "detail": "MATCHA_TOF_LAL_Purchase_01Nov (120256662647030159, ₹2,467.59 spend last_14d, 2.13x ROAS, LAL-sourced TOF) and Prospecting_MATCHA_Purchase_27Oct (120256577948390159, ₹4,077.28 spend last_14d, ROAS not yet available) both target MATCHA prospecting concurrently. Informational watch only -- not yet flagged for campaign-consolidation (approval tier) since the two use materially different audience sources (lookalike vs broad).",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-11-14T10:47:19.000Z"
+    },
+    {
+      "id": "AL-3179",
+      "module": "pause-kill",
+      "title": "2 campaigns zero-purchase on real spend (last_14d); kill disabled, alert-only",
+      "detail": "KAGE_TOF_LAL_Purchase_01Nov (120256662646110159, ₹4,009.19 spent last_14d, 0 recorded purchases) and Prospecting_MATCHA_Purchase_27Oct (120256577948390159, ₹4,077.28 spent last_14d, 0 recorded purchases) both show null purchase_roas on meaningful spend. settings.kill_roas_threshold has been DISABLED by user instruction since 2026-10-05 -- surfaced as alert only, no auto-pause taken.",
+      "severity": "medium",
+      "dismissed": false,
+      "createdAt": "2026-11-14T10:47:19.000Z"
+    },
+    {
+      "id": "AL-3180",
+      "module": "self-audit-check",
+      "title": "Full-sweep pass summary -- 2026-11-14T10:47:19.000Z",
+      "detail": "All 35 ROUTINE.md modules evaluated. Safety: circuit breaker not newly breached (₹3,570.89 of ₹7,000 today), still tripped/unresolved from 2026-10-10 pending A-063; pixel gate healthy (EMQ 6.1-9.0), ROAS modules not suppressed. Auto tier: purchaser-exclusion compliant 13/13 (12 direct + 1 exempt); lookalike-refresh not due (13.04d/14d, source audience steady at ~20); hook-angle-tagging complete (31/31 active creatives tagged, vision pass skipped per run instructions). Alerts tier: anomaly -- narrow-audience warning for WARM_T2_CONSIDER_PDP_90D and WARM_T4_XSell_Purchasers180D persists unchanged from the 08:51 pass (same audience-size ranges), not re-alerted per de-duplication; threshold-alerts/competitor-rescrape/campaign-consolidation-watch/pause-kill logged separately this pass; learning-phase-stuck -- no ad set in learning this pass; spend-pacing skipped (monthly_spend_goal_inr is null); weekly/monthly-digest not due this pass. Approval tier (16-35): breakdown pulls this pass showed (a) age/gender -- 45-54 male at 3.17x ROAS on ₹2,531 spend vs ~5.8-6x account average, already tracked under pending A-079 (age-gender-auto-shift); (b) device -- iPhone 4.94x vs Android 6.89x on ₹41,907/₹43,433 spend respectively, already tracked under pending A-081 (device-targeting); (c) placement -- facebook_reels underperforming at 2.83x ROAS on ₹2,663.91 spend vs ~6x account average for instagram_reels/feed, consistent with the pattern behind the 13 previously-rejected placement-optimization proposals (A-005/013/014/022/026/032/033/038/056/058/059/060/065) -- not re-raised as a 14th proposal given that rejection history, logged here instead; (d) geo -- region-level purchase_roas came back null for every state this pass (attribution/data limitation at region breakdown), so geo-scaling/geo-suppression/new-geo-testing had no usable signal to act on; (e) dayparting -- hourly ROAS swings widely (2.8x-20.2x) but on small per-hour purchase counts, consistent with the pattern behind already-rejected A-074/A-077, not re-raised; (f) budget-reallocation -- ROAS gaps (e.g. Retargeting_Overall 15.3x vs KAGE_TOF_LAL_Purchase_01Nov null) already tracked under pending A-076; (g) reactivate-winner/engagement-tier-segmentation/bid-strategy-adjustment/frequency-capping/catalog-dpa-launch/ab-test/auto-creative-generation-launch -- no condition distinct from existing pending (A-78) or already-rejected history found this pass. No new approval-tier proposals created; the 7 pending (A-002, A-063, A-076, A-78, A-79, A-80, A-81) remain the live backlog for human review. KPI-to-trigger completeness: no dashboard metric found without a mapped module this pass.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-11-14T10:47:19.000Z"
+    },
+    {
+      "id": "AL-3181",
+      "module": "routine-run-notes",
+      "title": "Run summary -- 2026-11-14T10:47:19.000Z pass",
+      "detail": "9 campaigns / 13 ad sets ACTIVE. Today's spend ₹3,570.89 (49.0% headroom to ₹7,000 ceiling). All auto-tier modules compliant, zero mutations this pass. No new alerts beyond routine monitoring (threshold/competitor/consolidation-watch/pause-kill/self-audit); narrow-audience anomaly unchanged from last pass, not re-alerted. No new approval proposals -- 7 pending remain for human review (A-002, A-063, A-076, A-78, A-79, A-80, A-81).",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-11-14T10:47:19.000Z"
     }
   ],
   "log": [
@@ -46153,6 +46207,82 @@
       },
       "tier": "auto",
       "executedAt": "2026-11-14T08:51:00.000Z"
+    },
+    {
+      "proposalId": null,
+      "action": "auto-module: hard-spend-circuit-breaker check (pre-check, per ROUTINE.md safety infrastructure) -- today's account spend (ads_get_ad_entities, level=ad_account, date_preset=today) is ₹3,570.89 against settings.hard_spend_ceiling_inr (₹7,000), 49.0% headroom remaining. No new breach this pass. circuitBreaker.tripped remains true from the 2026-10-10T16:50 UTC trip -- still unresolved, pending human review of A-063 (resume-after-circuit-breaker); per ROUTINE.md the routine never auto-resumes.",
+      "result": "success",
+      "previousState": {
+        "circuitBreaker.tripped": true,
+        "today_spend_at_last_check": 3466.01
+      },
+      "detail": {
+        "amount_spent_today": "3570.89",
+        "currency": "INR",
+        "ceiling": 7000
+      },
+      "tier": "auto",
+      "executedAt": "2026-11-14T10:47:19.000Z"
+    },
+    {
+      "proposalId": null,
+      "action": "auto-module: pixel-health / pixel-quality-gate check -- dataset 833131719490535 (Shopify Meta Pixel), ads_get_dataset_quality. Composite EMQ scores this pass range 6.1 (PageView/ViewContent/Search/AddToCart/SubscribedButtonClick) to 9.0 (AddPaymentInfo), all at/above settings.pixel_quality_min_match_rate (0.6, i.e. score>=6.0) -- ROAS-based modules NOT suppressed this pass.",
+      "result": "success",
+      "previousState": {
+        "suppressed_last_pass": false
+      },
+      "detail": {
+        "min_composite_score": 6.1,
+        "max_composite_score": 9.0,
+        "threshold": 6.0
+      },
+      "tier": "auto",
+      "executedAt": "2026-11-14T10:47:19.000Z"
+    },
+    {
+      "proposalId": null,
+      "action": "auto-module: purchaser-exclusion -- fresh direct targeting fetch on all 13 active ad sets across the 9 currently-active campaigns (MATCHA_TOF_LAL_Purchase_01Nov, KAGE_TOF_LAL_Purchase_01Nov, Prospecting_MATCHA_Purchase_27Oct, Fudoshin, Prospecting_LAL1_Purchasers_14Oct, Sneakers_BOF_v2_Placement_Split_12Oct, Prospecting_JP2_Placement_Split_12Oct, Caps_Only, Retargeting_Overall). 12 of 13 directly exclude Purchasers 180D (120255823280550159) in excluded_custom_audiences; the 1 exception, WARM_T4_XSell_Purchasers180D (120256667272700159), is on settings.purchaser_exclusion_exempt_adset_ids and deliberately INCLUDES it by design (cross-sell ad set). Noted: Retargeting_Overall's live targeting now EXCLUDES Purchasers 180D directly rather than including it as settings.purchaser_exclusion_exempt_adset_ids' note describes (account composition drifted since the 2026-09-29 note) -- this is still fully compliant (excluding is the compliant state), just flagging the note is stale; not edited since no exclusion fix was needed. purchaser-exclusion remains compliant account-wide, no action needed this pass.",
+      "result": "success",
+      "previousState": {
+        "compliant_adsets_last_check": "12/13 (1 exempt)"
+      },
+      "detail": {
+        "active_adsets_checked": 13,
+        "excluding_directly": 12,
+        "exempt_by_design": 1
+      },
+      "tier": "auto",
+      "executedAt": "2026-11-14T10:47:19.000Z"
+    },
+    {
+      "proposalId": null,
+      "action": "auto-module: lookalike-refresh -- current baseline LAL3_Purchasers180D_01Nov (120256662640020159, ACTIVE, built 2026-11-01T09:50:53Z) is ~13.04 days old, still under the 14-day settings.lookalike_refresh_days threshold. Source audience 'Purchasers 180D' (120255823280550159) size unchanged at ~20 members (lower/upper bound both 20) -- no growth-based refresh trigger either. No rebuild attempted this pass.",
+      "result": "success",
+      "previousState": {
+        "lookalike_age_days_last_check": 12.96,
+        "source_size_last_check": 20
+      },
+      "detail": {
+        "lookalike_age_days": 13.04,
+        "source_size": 20,
+        "threshold_days": 14
+      },
+      "tier": "auto",
+      "executedAt": "2026-11-14T10:47:19.000Z"
+    },
+    {
+      "proposalId": null,
+      "action": "auto-module: hook-angle-tagging -- checked all distinct creative_ids across active-ad-status ads in the 9 genuinely-delivering active campaigns (37 ads returned by the ad-level ACTIVE filter, 31 distinct creative_ids once the 5 zero-spend ads from the CAMPAIGN_PAUSED Sneakers_PROSP_5Line_Oct campaign are excluded). All 31 already have creativeTags entries from prior passes -- nothing new to tag. Higgsfield vision connection not attached to this run, per ROUTINE.md Phase 3 note and this run's explicit instructions -- tagging remains ad-copy/headline-derived only; vision pass skipped as instructed.",
+      "result": "success",
+      "previousState": {
+        "untagged_creatives_last_check": 0
+      },
+      "detail": {
+        "distinct_active_creatives": 31,
+        "untagged": 0
+      },
+      "tier": "auto",
+      "executedAt": "2026-11-14T10:47:19.000Z"
     }
   ],
   "creativeTags": {
