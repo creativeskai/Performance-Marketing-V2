@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-13T22:46:00.000Z",
+  "generatedAt": "2026-11-14T00:48:00.000Z",
   "settings": {
     "kill_roas_threshold": "DISABLED 2026-10-05 by user instruction: the ROAS pause-kill is OFF. Module 16 (pause-kill) must NOT auto-pause any campaign for low ROAS; surface low-ROAS campaigns as alerts only. The hard spend circuit breaker is a separate mechanism and stays ON. Former rule, for reference: pause if ROAS < 1.0x after ₹500 spend on a sales-objective campaign. EXCEPTION until 2026-10-05T23:59+05:30 (user-approved 2026-09-29): for the sneaker-push campaigns 120256091369160159 (Sneakers_BOF_30Sep-5Oct), 120256091370110159 (Sneakers_Prospecting_30Sep-5Oct) and 120256088882780159 (Sneakers_Catalog_Retargeting) the spend floor is ₹1,500, not ₹500.",
     "reactivate_min_historic_roas": "surface for reactivation if a paused campaign's last active-period ROAS >= 3.0x",
@@ -33,8 +33,8 @@
     "competitor_last_scrape": {
       "gully_labs_active_ads": 111,
       "lotto_sport_india_active_ads": 258,
-      "scraped_at": "2026-11-13T22:46:00.000Z",
-      "note": "2026-11-13T22:46:00.000Z pass: Gully Labs 111->111 (no change). Lotto Sport India 258->258 (no change). No new competitor-spike alert this pass."
+      "scraped_at": "2026-11-14T00:48:00.000Z",
+      "note": "2026-11-14T00:48:00.000Z pass: Gully Labs 111->111 (no change). Lotto Sport India 258->258 (no change). Re-verified this pass via exact page_ids (107479854297817 / 426015150606378) rather than free-text search_terms, which had returned noisy mismatched-page counts (104 / 169) due to text-match bleed into other advertisers' creative copy -- page_ids is the reliable method going forward. No new competitor-spike alert this pass."
     },
     "audience_label_corrections": {
       "120249907176770159": "ATC_180D -- NOT a purchaser audience (cart-adders, event=AddToCart, retention 180 days). Verified 2026-09-14, reconfirmed 2026-09-20. Superseded note: earlier passes said the account had NO purchaser audience at all -- that's now out of date. See the 120255823280550159 (Purchasers 180D) entry above, created 2026-09-15, which IS a genuine purchaser audience and is already in use for exclusion + lookalike.",
@@ -81,7 +81,7 @@
       "module": "high-intent-retargeting",
       "tier": "approval",
       "title": "Launch a retargeting campaign against 30d add-to-cart non-purchasers",
-      "reasoning": "Structural ATC/checkout-non-purchaser retargeting gap persists at the account level. Update 2026-11-01T14:50:00.000Z pass: 'Retargeting_Overall' (id 120255851467340159) is ACTIVE (last_30d ROAS 8.607x on Rs10,938.72 spend, 72 purchases -- up from Rs2,250.86/11.18x on 2026-10-02, reflecting a full month of delivery now in the 30d window) and already targets Initiate_Checkout/ATC_180D audiences -- it materially overlaps this proposal's intended segment, so the structural gap this proposal addresses is currently being covered, at least partially, by an existing live campaign. Pixel quality healthy (composite EMQ 6.1-8.6/10, gate cleared). The stored 4-step chain remains real and executable against the account's actual pixel (833131719490535) and Kage_Sales creative (1063318642863205) if a human still wants a dedicated ATC-non-purchaser campaign distinct from Retargeting_Overall's broader audience mix. Reconfirmed 2026-11-04T08:52:00.000Z pass: structural gap unchanged -- Retargeting_Overall (120255851467340159) remains ACTIVE and continues to partially cover this segment (last_30d purchase_roas 8.362338x on Rs10,781.22 spend). Pixel quality healthy (composite EMQ 6.1-8.9/10). Stored 4-step chain remains real and executable if a human wants a dedicated ATC-non-purchaser campaign. Not re-proposing; still pending. Reconfirmed 2026-11-04T14:49:00.000Z pass: structural gap unchanged -- Retargeting_Overall (120255851467340159) remains ACTIVE, last_30d purchase_roas 8.362338x on Rs10,781.22 spend (identical to the 08:52 pass -- no change in the trailing window). Pixel quality still healthy (composite EMQ 6.1-8.9/10, ROAS modules not suppressed). Stored 4-step chain remains real and executable if a human wants a dedicated ATC-non-purchaser campaign. Not re-proposing; still pending. Reconfirmed 2026-11-04T22:49:00.000Z pass (full 35-module sweep): structural gap unchanged -- Retargeting_Overall (120255851467340159) remains ACTIVE and continues to partially cover this segment (last_14d purchase_roas 7.407385x on Rs6,199.84 spend, 33 purchases). Pixel quality healthy (composite EMQ 6.1-8.8/10). Stored 4-step chain remains real and executable if a human wants a dedicated ATC-non-purchaser campaign. Not re-proposing; still pending. Reconfirmed 2026-11-08T10:52:00.000Z pass: Retargeting_Overall (120255851467340159) last_14d: Rs5,867.58 spend, 7.888976x ROAS, 29 purchases -- still ACTIVE and still materially overlapping this proposal's intended ATC/checkout-non-purchaser segment via its Initiate_Checkout/ATC_180D targeting. Structural gap persists; stored 4-step chain remains valid and unexecuted pending human approval. Reconfirmed 2026-11-09T04:56:00.000Z pass: Retargeting_Overall (120255851467340159) last_14d spend ₹1,898.46, purchase_roas 15.07x on the fresh pull -- still ACTIVE and still materially overlapping this proposal's intended ATC/checkout-non-purchaser segment. Structural gap persists; stored 4-step chain remains valid and unexecuted pending human approval. Reconfirmed 2026-11-09T06:58:00.000Z pass: Retargeting_Overall (120255851467340159) remains ACTIVE, last_14d purchase_roas 15.071242x on Rs1,898.46 spend (narrower window than the prior last_30d read, but consistent -- still strong). Pixel quality healthy (composite EMQ 6.1-8.9). Structural gap unchanged; stored 4-step chain remains valid and unexecuted pending human review. Refreshed 2026-11-10T22:45:53.000Z pass: 'Retargeting_Overall' (120255851467340159) last_30d purchase_roas now 11.010x on ₹10,684.14 spend (up from 8.607x/₹10,938.72 at the 2026-11-01 check) -- continues to materially overlap this proposal's intended ATC/checkout-non-purchaser segment. Structural gap assessment unchanged; proposal left pending for human review. Reconfirmed 2026-11-11T00:51:12.000Z pass: Retargeting_Overall last_30d unchanged at 11.01x ROAS on ₹10,684.14 spend, 79 purchases -- structural overlap with this proposal's intended segment persists. No change to proposed action. Reconfirmed 2026-11-11T14:49:00.000Z pass: Retargeting_Overall (120255851467340159) remains ACTIVE; fresh last_7d pull shows purchase_roas 26.196626x on ₹1,135.61 spend (narrower window than the last_30d/14d figures cited above, but consistent with continued strong performance) -- still materially overlaps this proposal's intended ATC/checkout-non-purchaser segment. Structural gap persists; stored 4-step chain remains valid and unexecuted pending human approval. Reconfirmed 2026-11-13T15:50:00.000Z pass: structural gap unchanged -- Retargeting_Overall (120255851467340159) remains ACTIVE, last_14d purchase_roas 13.828481x on ₹3,227.39 spend, 19 purchases. Not re-proposing; still pending. Reconfirmed 2026-11-13T16:50:00.000Z pass: Retargeting_Overall (120255851467340159) remains ACTIVE, last_14d purchase_roas 13.828481x on ₹3,227.39 spend -- identical to the 15:50 UTC pass (no new spend/purchases in the window over the last hour). Not re-proposing; still pending. [Reconfirmed 2026-11-13T18:47:00.000Z pass: Retargeting_Overall campaign last_14d purchase_roas 15.35x on ₹2,908.07 spend -- still ACTIVE, continues to partially cover this segment. Not re-proposing; still pending.]",
+      "reasoning": "Structural ATC/checkout-non-purchaser retargeting gap persists at the account level. Update 2026-11-01T14:50:00.000Z pass: 'Retargeting_Overall' (id 120255851467340159) is ACTIVE (last_30d ROAS 8.607x on Rs10,938.72 spend, 72 purchases -- up from Rs2,250.86/11.18x on 2026-10-02, reflecting a full month of delivery now in the 30d window) and already targets Initiate_Checkout/ATC_180D audiences -- it materially overlaps this proposal's intended segment, so the structural gap this proposal addresses is currently being covered, at least partially, by an existing live campaign. Pixel quality healthy (composite EMQ 6.1-8.6/10, gate cleared). The stored 4-step chain remains real and executable against the account's actual pixel (833131719490535) and Kage_Sales creative (1063318642863205) if a human still wants a dedicated ATC-non-purchaser campaign distinct from Retargeting_Overall's broader audience mix. Reconfirmed 2026-11-04T08:52:00.000Z pass: structural gap unchanged -- Retargeting_Overall (120255851467340159) remains ACTIVE and continues to partially cover this segment (last_30d purchase_roas 8.362338x on Rs10,781.22 spend). Pixel quality healthy (composite EMQ 6.1-8.9/10). Stored 4-step chain remains real and executable if a human wants a dedicated ATC-non-purchaser campaign. Not re-proposing; still pending. Reconfirmed 2026-11-04T14:49:00.000Z pass: structural gap unchanged -- Retargeting_Overall (120255851467340159) remains ACTIVE, last_30d purchase_roas 8.362338x on Rs10,781.22 spend (identical to the 08:52 pass -- no change in the trailing window). Pixel quality still healthy (composite EMQ 6.1-8.9/10, ROAS modules not suppressed). Stored 4-step chain remains real and executable if a human wants a dedicated ATC-non-purchaser campaign. Not re-proposing; still pending. Reconfirmed 2026-11-04T22:49:00.000Z pass (full 35-module sweep): structural gap unchanged -- Retargeting_Overall (120255851467340159) remains ACTIVE and continues to partially cover this segment (last_14d purchase_roas 7.407385x on Rs6,199.84 spend, 33 purchases). Pixel quality healthy (composite EMQ 6.1-8.8/10). Stored 4-step chain remains real and executable if a human wants a dedicated ATC-non-purchaser campaign. Not re-proposing; still pending. Reconfirmed 2026-11-08T10:52:00.000Z pass: Retargeting_Overall (120255851467340159) last_14d: Rs5,867.58 spend, 7.888976x ROAS, 29 purchases -- still ACTIVE and still materially overlapping this proposal's intended ATC/checkout-non-purchaser segment via its Initiate_Checkout/ATC_180D targeting. Structural gap persists; stored 4-step chain remains valid and unexecuted pending human approval. Reconfirmed 2026-11-09T04:56:00.000Z pass: Retargeting_Overall (120255851467340159) last_14d spend ₹1,898.46, purchase_roas 15.07x on the fresh pull -- still ACTIVE and still materially overlapping this proposal's intended ATC/checkout-non-purchaser segment. Structural gap persists; stored 4-step chain remains valid and unexecuted pending human approval. Reconfirmed 2026-11-09T06:58:00.000Z pass: Retargeting_Overall (120255851467340159) remains ACTIVE, last_14d purchase_roas 15.071242x on Rs1,898.46 spend (narrower window than the prior last_30d read, but consistent -- still strong). Pixel quality healthy (composite EMQ 6.1-8.9). Structural gap unchanged; stored 4-step chain remains valid and unexecuted pending human review. Refreshed 2026-11-10T22:45:53.000Z pass: 'Retargeting_Overall' (120255851467340159) last_30d purchase_roas now 11.010x on ₹10,684.14 spend (up from 8.607x/₹10,938.72 at the 2026-11-01 check) -- continues to materially overlap this proposal's intended ATC/checkout-non-purchaser segment. Structural gap assessment unchanged; proposal left pending for human review. Reconfirmed 2026-11-11T00:51:12.000Z pass: Retargeting_Overall last_30d unchanged at 11.01x ROAS on ₹10,684.14 spend, 79 purchases -- structural overlap with this proposal's intended segment persists. No change to proposed action. Reconfirmed 2026-11-11T14:49:00.000Z pass: Retargeting_Overall (120255851467340159) remains ACTIVE; fresh last_7d pull shows purchase_roas 26.196626x on ₹1,135.61 spend (narrower window than the last_30d/14d figures cited above, but consistent with continued strong performance) -- still materially overlaps this proposal's intended ATC/checkout-non-purchaser segment. Structural gap persists; stored 4-step chain remains valid and unexecuted pending human approval. Reconfirmed 2026-11-13T15:50:00.000Z pass: structural gap unchanged -- Retargeting_Overall (120255851467340159) remains ACTIVE, last_14d purchase_roas 13.828481x on ₹3,227.39 spend, 19 purchases. Not re-proposing; still pending. Reconfirmed 2026-11-13T16:50:00.000Z pass: Retargeting_Overall (120255851467340159) remains ACTIVE, last_14d purchase_roas 13.828481x on ₹3,227.39 spend -- identical to the 15:50 UTC pass (no new spend/purchases in the window over the last hour). Not re-proposing; still pending. [Reconfirmed 2026-11-13T18:47:00.000Z pass: Retargeting_Overall campaign last_14d purchase_roas 15.35x on ₹2,908.07 spend -- still ACTIVE, continues to partially cover this segment. Not re-proposing; still pending.] Reconfirmed 2026-11-14T00:48:00.000Z pass: Retargeting_Overall (120255851467340159) remains ACTIVE, last_30d purchase_roas 8.743843x on Rs10,147.13 spend. Structural gap unchanged. Not re-proposing; still pending.",
       "actionSummary": "4-step chain, each step feeding the next real Meta-assigned ID (not guessed): (1) create the WEBSITE pixel audience — AddToCart OR InitiateCheckout in the last 14 days, excluding Purchase; (2) create the campaign (OUTCOME_SALES); (3) create the ad set targeting that new audience, India, Facebook+Instagram, optimizing for purchases, daily_budget 25000 (Meta's minor-currency-unit field — this is ₹250/day, editable via the parameter editor below, same conservative range as A-001's reactivation budget); (4) create the ad reusing the Kage_Sales creative. Every step is created PAUSED — approving this does NOT start spending. You'd review it in Ads Manager and activate manually, or tell Claude to activate once you're satisfied.",
       "metaAction": {
         "tool": "ads_create_custom_audience",
@@ -195,7 +195,7 @@
       "status": "pending",
       "createdAt": "2026-08-29T12:15:00.000Z",
       "updatedAt": "2026-10-10T16:50:00.000Z",
-      "lastReconfirmedAt": "2026-11-13T16:50:00.000Z",
+      "lastReconfirmedAt": "2026-11-14T00:48:00.000Z",
       "lastRefreshedAt": "2026-11-13T16:50:00.000Z"
     },
     {
@@ -1160,7 +1160,7 @@
       },
       "status": "pending",
       "createdAt": "2026-10-11T12:50:00.000Z",
-      "lastReconfirmedAt": "2026-11-13T20:51:00.000Z",
+      "lastReconfirmedAt": "2026-11-14T00:48:00.000Z",
       "resolvedAt": null,
       "lastRefreshedAt": "2026-11-13T20:51:00.000Z"
     },
@@ -1539,7 +1539,7 @@
       "status": "pending",
       "createdAt": "2026-10-29T00:52:00.000Z",
       "lastRefreshedAt": "2026-11-13T16:50:00.000Z",
-      "lastReconfirmedAt": "2026-11-13T20:51:00.000Z"
+      "lastReconfirmedAt": "2026-11-14T00:48:00.000Z"
     },
     {
       "id": "A-077",
@@ -1611,7 +1611,7 @@
       "status": "pending",
       "createdAt": "2026-11-02T02:51:00.000Z",
       "lastRefreshedAt": "2026-11-13T16:50:00.000Z",
-      "lastReconfirmedAt": "2026-11-13T20:51:00.000Z"
+      "lastReconfirmedAt": "2026-11-14T00:48:00.000Z"
     },
     {
       "id": "A-079",
@@ -1636,7 +1636,7 @@
       "status": "pending",
       "createdAt": "2026-11-03T14:49:00.000Z",
       "lastRefreshedAt": "2026-11-13T16:50:00.000Z",
-      "lastReconfirmedAt": "2026-11-13T20:51:00.000Z"
+      "lastReconfirmedAt": "2026-11-14T00:48:00.000Z"
     },
     {
       "id": "A-080",
@@ -1658,7 +1658,7 @@
       },
       "status": "pending",
       "createdAt": "2026-11-09T00:52:00.000Z",
-      "lastReconfirmedAt": "2026-11-13T20:51:00.000Z",
+      "lastReconfirmedAt": "2026-11-14T00:48:00.000Z",
       "lastRefreshedAt": "2026-11-13T16:50:00.000Z"
     },
     {
@@ -1684,7 +1684,7 @@
       "status": "pending",
       "createdAt": "2026-11-11T16:50:00.000Z",
       "lastRefreshedAt": "2026-11-13T16:50:00.000Z",
-      "lastReconfirmedAt": "2026-11-13T20:51:00.000Z"
+      "lastReconfirmedAt": "2026-11-14T00:48:00.000Z"
     }
   ],
   "alerts": [
@@ -30108,6 +30108,15 @@
       "severity": "low",
       "dismissed": false,
       "createdAt": "2026-11-13T22:46:00.000Z"
+    },
+    {
+      "id": "AL-3148",
+      "module": "self-audit-check",
+      "title": "Full-sweep pass summary -- 2026-11-14T00:48:00.000Z",
+      "detail": "Circuit breaker: today's account spend Rs1,154.87/Rs7,000 ceiling (16.5%), not breached. circuitBreaker.tripped remains true from the 2026-10-10T16:50 UTC trip (unresolved, A-063 still pending human review, ~34.33 days outstanding); no auto-resume. 9 campaigns / 13 ad sets ACTIVE (same composition as the 22:46 UTC pass). Pixel/data-quality gate: EMQ composite scores 6.1-9.0 across tracked events, all above threshold -- ROAS modules not suppressed. purchaser-exclusion: all 13 active ad sets compliant (12 direct exclusions + 1 exempt-by-design, WARM_T4_XSell_Purchasers180D) -- no edit needed. lookalike-refresh: LAL3_Purchasers180D_01Nov is ~12.62 days old (threshold 14d, due ~2026-11-15T09:50Z); source audience unchanged at 20 members -- no rebuild. hook-angle-tagging: all 31 distinct active creatives already tagged -- nothing new. learning-phase-stuck: no ad set flagged. spend-pacing: monthly_spend_goal_inr null, module skipped. threshold-alerts: CPM Rs38-122 / CTR 0.94-2.04% / CPC Rs2.43-8.94 (last_14d) within normal-looking ranges -- no alert. anomaly: narrow-audience warning persists, unchanged, on WARM_T2_CONSIDER_PDP_90D and WARM_T4_XSell_Purchasers180D -- see AL-3142 (not re-alerted this pass per de-duplication; same module+entity, unchanged, within the 3-day window). pause-kill (disabled, alert-only): same 2 zero-purchase campaigns as last pass -- KAGE_TOF_LAL_Purchase_01Nov Rs4,009.18/0 purchases, Prospecting_MATCHA_Purchase_27Oct Rs4,076.92/0 purchases (last_14d) -- numbers essentially unchanged from AL-3143 (not re-alerted this pass per de-duplication). competitor-rescrape: Gully Labs 111 (unchanged), Lotto Sport India 258 (unchanged), re-verified via exact page_ids this pass (see settings.competitor_last_scrape) -- no new spike, not re-alerted (see AL-3146). catalog-dpa-launch: fresh ads_catalog_get_diagnostics shows the same 2 open issues -- PRODUCT_OUT_OF_STOCK (must_fix, 24 affected, unchanged) and not_enough_images (opportunity, 48 affected, unchanged); zero-DPA-campaigns trigger remains moot (Sneakers_Catalog_Retargeting already resolved via A-003). No new alert. A-079 (age-gender-auto-shift) reconfirmed: PROSP_Reels_Capped 35-44 male Rs1,974.09/0 purchases vs 25-34 male Rs15,718.30/4.54x (last_14d) -- unchanged. A-081 (device-targeting) reconfirmed: Retargeting_Overall android_smartphone 25.17x/Rs1,440.11 vs iphone 3.33x/Rs789.77 (last_14d) -- unchanged. A-076 (budget-reallocation) reconfirmed: Prospecting_JP2_Placement_Split_12Oct 4.033618x/Rs17,693.87 vs Caps_Only 8.237252x/Rs10,592.27 (last_14d) -- gap ~2.04x, unchanged. A-78 (reactivate-winner) reconfirmed: Sneakers_HOT_Pool_Tiers_12Oct still PAUSED, last_14d 24.110355x/Rs207.33 -- unchanged. A-080 (creative-fatigue) reconfirmed: ad still near-zero delivery, Rs0.13 spent/frequency 1/CTR 0.00% (last_7d) -- unchanged. A-002 (high-intent-retargeting): Retargeting_Overall (120255851467340159) remains ACTIVE, last_30d purchase_roas 8.743843x on Rs10,147.13 spend -- continues to partially cover this segment. Not re-proposing; still pending. A-063 (resume-after-circuit-breaker): all 5 paused campaign IDs reconfirmed PAUSED via direct fetch; today's spend comfortably under the Rs7,000 ceiling. Still pending human review, ~34.33 days outstanding. Geography/placement/hourly/bid-strategy breakdowns not re-pulled this pass (prior passes found nothing actionable at that granularity, account composition unchanged) -- geo-scaling/geo-suppression/new-geo-testing/placement-optimization/dayparting/bid-strategy-adjustment had nothing new to evaluate. engagement-tier-segmentation, frequency-capping, ab-test and campaign-consolidation: no new trigger this pass (account composition unchanged from 22:46 UTC pass). weekly-digest not due (last written 2026-11-08, next due Monday 2026-11-16); monthly-digest not due (already written for November on 2026-11-01). Pending approval-tier proposals reconfirmed this pass: A-002, A-063, A-076, A-78, A-079, A-080, A-081 -- numbers refreshed per above, no material change. None executed -- approval tier never auto-executes. Note on this pass's alert hygiene: narrow-audience, zero-purchase-campaigns and competitor-rescrape were NOT re-written as separate alert objects since each has an existing entry for the same module+entity created within the last 3 days with unchanged numbers (ROUTINE.md de-duplication) -- this full-sweep summary carries their reconfirmed status instead, to curb the alerts array's growth (now 3148 entries / file at ~4.9MB).",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-11-14T00:48:00.000Z"
     }
   ],
   "log": [
@@ -45514,6 +45523,59 @@
       },
       "tier": "auto",
       "executedAt": "2026-11-13T22:46:00.000Z"
+    },
+    {
+      "proposalId": null,
+      "action": "auto-module: hard-spend-circuit-breaker check (pre-check, per ROUTINE.md safety infrastructure) -- today's account spend Rs1,154.87/Rs7,000 ceiling (16.5%), not breached this pass. circuitBreaker remains tripped from the 2026-10-10T16:50 UTC trip (unresolved, A-063 resume-after-circuit-breaker still pending human review, ~34.33 days outstanding); no auto-resume performed. 9 campaigns / 13 ad sets ACTIVE (same composition as the 22:46 UTC pass); all 5 circuit-breaker-paused campaigns (Sora_BOF_Test_5Oct, Tsuchi_BOF_Test_5Oct, Prospecting_JP_Purchase_5-9Oct, Caps + Kage_26 Sept, Sneakers_BOF_30Sep-5Oct) reconfirmed PAUSED via direct fetch.",
+      "result": "success",
+      "previousState": {
+        "circuitBreaker.tripped": true,
+        "todays_spend_inr": 988.59
+      },
+      "tier": "auto",
+      "executedAt": "2026-11-14T00:48:00.000Z"
+    },
+    {
+      "proposalId": null,
+      "action": "auto-module: pixel-health / pixel-quality-gate check -- dataset 833131719490535 (Shopify Meta Pixel) EMQ composite scores this pass: PageView/ViewContent/AddToCart/Search/SubscribedButtonClick 6.1, InitiateCheckout 6.9, AddPaymentInfo 9.0, Purchase 8.7, cod_purchase 8.0, prepaid_purchase 8.8. All above settings.pixel_quality_min_match_rate=0.6 -- ROAS-driven modules not suppressed this pass. No alert written (healthy, unchanged in character from the 22:46 UTC pass).",
+      "result": "success",
+      "previousState": {
+        "suppressed": false
+      },
+      "tier": "auto",
+      "executedAt": "2026-11-14T00:48:00.000Z"
+    },
+    {
+      "proposalId": null,
+      "action": "auto-module: purchaser-exclusion -- fresh direct targeting fetch on all 13 active ad sets. 12 directly exclude 'Purchasers 180D' (120255823280550159) in excluded_custom_audiences (WARM_T3_RT_Viewers_NoBuyers, WARM_T2_CONSIDER_PDP_90D, WARM_T1_HOT_ATC_IC_30D, MATCHA_LAL_Stack_Purch3_Video2_IGEng2, KAGE_LAL_Stack_Purch3_Video2_IGEng2, Prosp_MATCHA_Men_25-44_Purchase, LAL1_Purchasers180D_FB_IG, PROSP_Reels_Capped, Caps_Only_11Oct, Fudoshin, BOF2_FeedStories, Retargeting_Overall). WARM_T4_XSell_Purchasers180D (120256667272700159) is on settings.purchaser_exclusion_exempt_adset_ids and deliberately includes it by design. No edit made this pass -- account compliant, unchanged from the 22:46 UTC pass.",
+      "result": "success",
+      "previousState": {
+        "compliant_adsets": 12,
+        "exempt_adsets": 1
+      },
+      "tier": "auto",
+      "executedAt": "2026-11-14T00:48:00.000Z"
+    },
+    {
+      "proposalId": null,
+      "action": "auto-module: lookalike-refresh -- current baseline LAL3_Purchasers180D_01Nov (120256662640020159, ACTIVE, built 2026-11-01T09:50:53Z) is ~12.62 days old, still under the 14-day lookalike_refresh_days threshold (due ~2026-11-15T09:50Z). Source audience 'Purchasers 180D' (120255823280550159) still exactly 20 members (approximate_count_lower_bound=upper_bound=20), unchanged -- no growth-based refresh trigger either. No action needed.",
+      "result": "success",
+      "previousState": {
+        "lal_age_days": 12.54,
+        "source_audience_size": 20
+      },
+      "tier": "auto",
+      "executedAt": "2026-11-14T00:48:00.000Z"
+    },
+    {
+      "proposalId": null,
+      "action": "auto-module: hook-angle-tagging -- checked all distinct creative_ids across active-ad-status ads (effective_status=ACTIVE at the ad level, 31 distinct). All 31 already have creativeTags entries from prior passes -- nothing new to tag this pass. Higgsfield vision connection not attached to this run (per EXECUTION POLICY item E); no image/video content analyzed, no creative description invented.",
+      "result": "success",
+      "previousState": {
+        "untagged_creative_ids": []
+      },
+      "tier": "auto",
+      "executedAt": "2026-11-14T00:48:00.000Z"
     }
   ],
   "creativeTags": {
