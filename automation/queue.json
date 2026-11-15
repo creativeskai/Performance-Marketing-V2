@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-15T18:50:09.000Z",
+  "generatedAt": "2026-11-15T20:48:00.000Z",
   "settings": {
     "kill_roas_threshold": "DISABLED 2026-10-05 by user instruction: the ROAS pause-kill is OFF. Module 16 (pause-kill) must NOT auto-pause any campaign for low ROAS; surface low-ROAS campaigns as alerts only. The hard spend circuit breaker is a separate mechanism and stays ON. Former rule, for reference: pause if ROAS < 1.0x after ₹500 spend on a sales-objective campaign. EXCEPTION until 2026-10-05T23:59+05:30 (user-approved 2026-09-29): for the sneaker-push campaigns 120256091369160159 (Sneakers_BOF_30Sep-5Oct), 120256091370110159 (Sneakers_Prospecting_30Sep-5Oct) and 120256088882780159 (Sneakers_Catalog_Retargeting) the spend floor is ₹1,500, not ₹500.",
     "reactivate_min_historic_roas": "surface for reactivation if a paused campaign's last active-period ROAS >= 3.0x",
@@ -31,10 +31,10 @@
       }
     },
     "competitor_last_scrape": {
-      "gully_labs_active_ads": 70,
-      "lotto_sport_india_active_ads": 165,
-      "scraped_at": "2026-11-15T16:54:25.000Z",
-      "note": "2026-11-15T16:54:25.000Z pass: Gully Labs reverted to 70 active ads (from the 93 recorded at the 14:53:33 UTC pass, -24.7%) -- back in line with its pre-spike level, crossing the >=20% threshold again in the downward direction. Lotto Sport India steady at 165 (was 166, -0.6%, no spike). Combined estimated_total_count 235 (was 259)."
+      "gully_labs_active_ads": 111,
+      "lotto_sport_india_active_ads": 258,
+      "scraped_at": "2026-11-15T20:48:00.000Z",
+      "note": "2026-11-15T20:48:00.000Z pass: Gully Labs 70->111 (+58.6%), Lotto Sport India 165->258 (+56.4%) since the 2026-11-15T16:54:25.000Z baseline -- both crossing the >=20% threshold together. Per this alert's established history, both pages moving together in one pass reads as likely Ad Library sampling noise, not a confirmed real spend change -- not treated as confirmed pending persistence across the next scrape."
     },
     "audience_label_corrections": {
       "120249907176770159": "ATC_180D -- NOT a purchaser audience (cart-adders, event=AddToCart, retention 180 days). Verified 2026-09-14, reconfirmed 2026-09-20. Superseded note: earlier passes said the account had NO purchaser audience at all -- that's now out of date. See the 120255823280550159 (Purchasers 180D) entry above, created 2026-09-15, which IS a genuine purchaser audience and is already in use for exclusion + lookalike.",
@@ -1512,7 +1512,7 @@
       "module": "budget-reallocation",
       "tier": "approval",
       "title": "Shift Rs200/day from Prospecting_JP2_Placement_Split_12Oct (3.58x) to Caps_Only (8.34x) -- large ROAS gap",
-      "reasoning": "Rolling last_14d ROAS gap between Prospecting_JP2_Placement_Split_12Oct and Caps_Only has narrowed somewhat but remains large. As of this pass (2026-11-14T06:50 UTC): Prospecting_JP2_Placement_Split_12Oct is at 4.03x ROAS (27 purchases, ₹17,695.58 spent last_14d), up from the 3.16x recorded when this proposal was created. Caps_Only is at 8.24x ROAS (87 purchases, ₹10,592.41 spent last_14d), down from the 14.57x recorded when this proposal was created. The gap is now ~2.04x (8.24/4.03), still above settings.budget_reallocation_min_roas_gap (1.5x), so the underlying trigger still holds, but the magnitude has changed materially since the proposal was written -- numbers refreshed here rather than opening a duplicate proposal, per ROUTINE.md's de-duplication rule. Reconfirmed 2026-11-14T18:51:49.000Z pass: Prospecting_JP2_Placement_Split_12Oct now 3.575416x ROAS (Rs17,091.61 spend, 23 purchases, last_14d), Caps_Only now 8.343144x ROAS (Rs10,700.83 spend, 85 purchases, last_14d). Gap ~2.33x, still above the 1.5x threshold. Trigger still holds. Reconfirmed 2026-11-15T00:52:22.000Z pass: Prospecting_JP2_Placement_Split_12Oct 3.575397x ROAS (₹17,091.70 spend, 23 purchases, last_14d), Caps_Only 8.342833x ROAS (₹10,701.23 spend, 85 purchases, last_14d) -- effectively unchanged from the 18:51:49 UTC pass (rounding-level movement only). Gap ~2.33x, still above the 1.5x threshold. Trigger still holds. Still pending human review. Reconfirmed 2026-11-15T02:50:22.000Z pass: Prospecting_JP2_Placement_Split_12Oct now 3.054362x ROAS (₹8,206.50 spend, last_7d), Caps_Only now 10.041127x ROAS (₹5,207.53 spend, last_7d). Gap ~3.29x, still above the 1.5x threshold. Trigger still holds. Still pending human review. Update 2026-11-15T04:53:39.000Z pass: Prospecting_JP2_Placement_Split_12Oct is at 3.575x ROAS (23 purchases, ₹17,091.81 spent last_14d). Caps_Only is at 8.343x ROAS (85 purchases, ₹10,701.29 spent last_14d). Gap now ~2.33x (8.343/3.575), still above settings.budget_reallocation_min_roas_gap -- proposal remains valid, not re-created, reasoning refreshed only. Update 2026-11-15T06:51:00.000Z pass: Prospecting_JP2_Placement_Split_12Oct 3.575x ROAS (₹17,091.81 last_14d, 23 purchases) vs Caps_Only 8.343x ROAS (₹10,701.29 last_14d, 85 purchases) -- gap ~2.33x, unchanged from 2 hours ago. Not re-created, reasoning refreshed only. Reconfirmed 2026-11-15T18:50:09.000Z pass: Prospecting_JP2_Placement_Split_12Oct now 3.451053x ROAS (₹16,907.05 spend, last_14d), Caps_Only now 7.832023x ROAS (₹11,176.48 spend, last_14d). Gap ~2.27x, still above the 1.5x threshold. Trigger still holds. Still pending human review.",
+      "reasoning": "Rolling last_14d ROAS gap between Prospecting_JP2_Placement_Split_12Oct and Caps_Only has narrowed somewhat but remains large. As of this pass (2026-11-14T06:50 UTC): Prospecting_JP2_Placement_Split_12Oct is at 4.03x ROAS (27 purchases, ₹17,695.58 spent last_14d), up from the 3.16x recorded when this proposal was created. Caps_Only is at 8.24x ROAS (87 purchases, ₹10,592.41 spent last_14d), down from the 14.57x recorded when this proposal was created. The gap is now ~2.04x (8.24/4.03), still above settings.budget_reallocation_min_roas_gap (1.5x), so the underlying trigger still holds, but the magnitude has changed materially since the proposal was written -- numbers refreshed here rather than opening a duplicate proposal, per ROUTINE.md's de-duplication rule. Reconfirmed 2026-11-14T18:51:49.000Z pass: Prospecting_JP2_Placement_Split_12Oct now 3.575416x ROAS (Rs17,091.61 spend, 23 purchases, last_14d), Caps_Only now 8.343144x ROAS (Rs10,700.83 spend, 85 purchases, last_14d). Gap ~2.33x, still above the 1.5x threshold. Trigger still holds. Reconfirmed 2026-11-15T00:52:22.000Z pass: Prospecting_JP2_Placement_Split_12Oct 3.575397x ROAS (₹17,091.70 spend, 23 purchases, last_14d), Caps_Only 8.342833x ROAS (₹10,701.23 spend, 85 purchases, last_14d) -- effectively unchanged from the 18:51:49 UTC pass (rounding-level movement only). Gap ~2.33x, still above the 1.5x threshold. Trigger still holds. Still pending human review. Reconfirmed 2026-11-15T02:50:22.000Z pass: Prospecting_JP2_Placement_Split_12Oct now 3.054362x ROAS (₹8,206.50 spend, last_7d), Caps_Only now 10.041127x ROAS (₹5,207.53 spend, last_7d). Gap ~3.29x, still above the 1.5x threshold. Trigger still holds. Still pending human review. Update 2026-11-15T04:53:39.000Z pass: Prospecting_JP2_Placement_Split_12Oct is at 3.575x ROAS (23 purchases, ₹17,091.81 spent last_14d). Caps_Only is at 8.343x ROAS (85 purchases, ₹10,701.29 spent last_14d). Gap now ~2.33x (8.343/3.575), still above settings.budget_reallocation_min_roas_gap -- proposal remains valid, not re-created, reasoning refreshed only. Update 2026-11-15T06:51:00.000Z pass: Prospecting_JP2_Placement_Split_12Oct 3.575x ROAS (₹17,091.81 last_14d, 23 purchases) vs Caps_Only 8.343x ROAS (₹10,701.29 last_14d, 85 purchases) -- gap ~2.33x, unchanged from 2 hours ago. Not re-created, reasoning refreshed only. Reconfirmed 2026-11-15T18:50:09.000Z pass: Prospecting_JP2_Placement_Split_12Oct now 3.451053x ROAS (₹16,907.05 spend, last_14d), Caps_Only now 7.832023x ROAS (₹11,176.48 spend, last_14d). Gap ~2.27x, still above the 1.5x threshold. Trigger still holds. Still pending human review. Reconfirmed 2026-11-15T20:48:00.000Z pass: Prospecting_JP2_Placement_Split_12Oct 3.451053x ROAS (₹16,907.05 spend, last_14d), Caps_Only 7.83168x ROAS (₹11,176.97 spend, last_14d) -- essentially flat vs the 18:50:09 UTC pass. Gap ~2.27x, still above the 1.5x threshold.",
       "actionSummary": "Shift ₹200/day in daily_budget from Prospecting_JP2_Placement_Split_12Oct to Caps_Only, reflecting the still-large but narrowed ROAS gap (4.03x vs 8.24x as of 2026-11-14).",
       "metaAction": {
         "tool": "ads_update_entity",
@@ -1618,7 +1618,7 @@
       "module": "age-gender-auto-shift",
       "tier": "approval",
       "title": "Narrow PROSP_Reels_Capped away from 35-44 males -- underperforming age cell in Prospecting_JP2",
-      "reasoning": "PROSP_Reels_Capped (120256322880690159, campaign Prospecting_JP2_Placement_Split_12Oct) has repeatedly shown its 35-44 male cell with zero recorded purchases (purchase_roas null) at meaningful spend (~₹1,700-1,900 across last_14d reconfirmations since 2026-11-03), while the 25-34 male cell carries the bulk of spend at a strong ROAS (3.9x-4.6x). [Reasoning trimmed 2026-11-13T06:51:00.000Z, collapsing ~11 near-identical reconfirmation paragraphs per the pass-history hygiene policy -- see settings.note.] Reconfirmed 2026-11-13T06:51:00.000Z pass: fresh last_14d age/gender breakdown confirms 35-44 male at ₹1,896.52 spend, purchase_roas still null (zero purchases); 25-34 male at ₹16,011.04 spend, 4.309681x ROAS. Underperforming cell confirmed still live and unprofitable at meaningful spend. No change to proposed action. Still pending human review. Reconfirmed 2026-11-13T12:50:00.000Z pass: fresh last_14d age/gender breakdown (campaign-level, Prospecting_JP2_Placement_Split_12Oct, effectively PROSP_Reels_Capped's delivery since it's the only active ad set in this campaign) confirms 35-44 male cell at ₹1,896.36 spend with purchase_roas null (zero purchases), while 25-34 male carries ₹16,011.20 spend at 4.31x ROAS. Gap unchanged in character from prior passes -- still pending human review. Reconfirmed 2026-11-13T15:50:00.000Z pass: fresh last_14d age/gender breakdown confirms 35-44 male cell at ₹1,896.52 spend, purchase_roas still null (zero purchases); 25-34 male at ₹16,011.04 spend, 4.309681x ROAS. Underperforming cell confirmed still live and unprofitable at meaningful spend. Still pending human review. Reconfirmed 2026-11-13T16:50:00.000Z pass: fresh last_14d age/gender breakdown confirms 35-44 male cell at ₹1,896.52 spend, purchase_roas still null (zero purchases); 25-34 male at ₹16,011.04 spend, 4.309681x ROAS -- identical to the 15:50 UTC pass. Underperforming cell confirmed still live and unprofitable at meaningful spend. Still pending human review. [Reconfirmed 2026-11-13T18:47:00.000Z pass: PROSP_Reels_Capped's 35-44 male cell ₹1,974.02 spend / zero purchases vs 25-34 male cell ₹15,717.60 at 4.54x (last_14d) -- gap persists.] Reconfirmed 2026-11-13T20:51:00.000Z pass (last_14d, fresh age/gender breakdown on Prospecting_JP2_Placement_Split_12Oct): 35-44 male cell still 0 purchases on ₹1,974.09 spent (purchase_roas null), vs 25-34 male at 4.54x ROAS on ₹15,718.15 spent. Underperformance persists -- proposal still valid. Reconfirmed 2026-11-14T02:48:00.000Z pass: fresh last_14d age/gender breakdown confirms 35-44 male cell at Rs1,974.17 spend with purchase_roas null (zero purchases), while 25-34 male carries Rs15,718.30 spend at 4.540588x ROAS. Underperformance persists -- proposal still valid. Reconfirmed 2026-11-14T18:51:49.000Z pass: fresh last_14d age/gender breakdown shows 35-44 male at Rs2,090.61 spend, purchase_roas still null (zero purchases); 25-34 male at Rs14,999.52 spend, 4.074105x ROAS (23 purchases). Underperforming cell confirmed still live and unprofitable at meaningful spend. Reconfirmed 2026-11-15T02:50:22.000Z pass: fresh last_14d age/gender breakdown on PROSP_Reels_Capped (Prospecting_JP2_Placement_Split_12Oct) confirms 35-44 male cell at ₹2,090.63 spend with purchase_roas null (zero purchases), while 25-34 male carries ₹14,999.61 spend at 4.074081x ROAS. Underperforming cell confirmed still live and unprofitable at meaningful spend. No change to proposed action. Still pending human review. Update 2026-11-15T04:53:39.000Z pass: PROSP_Reels_Capped's 35-44 male cell still shows 0 purchases (purchase_roas null) on ₹2,090.66 spend last_14d, while the 25-34 male cell carries ₹14,999.67 spend at 4.074x ROAS (23 purchases). Pattern unchanged; not re-created, reasoning refreshed only. Update 2026-11-15T06:51:00.000Z pass: PROSP_Reels_Capped's 35-44 male cell still 0 purchases (purchase_roas null) on ₹2,090.66 spend last_14d; 25-34 male cell ₹14,999.67 spend at 4.074x ROAS (23 purchases) -- pattern unchanged. Not re-created, reasoning refreshed only. Reconfirmed 2026-11-15T14:53:33.000Z pass: fresh last_14d age/gender breakdown on PROSP_Reels_Capped (Prospecting_JP2_Placement_Split_12Oct) confirms 35-44 male cell at Rs2,090.66 spend, purchase_roas still null (zero purchases), ctr 2.01%; 25-34 male cell at Rs14,999.73 spend, 4.074048x ROAS. Underperforming cell confirmed still live and unprofitable at meaningful spend. No change to the proposed action. Still pending human review.",
+      "reasoning": "PROSP_Reels_Capped (120256322880690159, campaign Prospecting_JP2_Placement_Split_12Oct) has repeatedly shown its 35-44 male cell with zero recorded purchases (purchase_roas null) at meaningful spend (~₹1,700-1,900 across last_14d reconfirmations since 2026-11-03), while the 25-34 male cell carries the bulk of spend at a strong ROAS (3.9x-4.6x). [Reasoning trimmed 2026-11-13T06:51:00.000Z, collapsing ~11 near-identical reconfirmation paragraphs per the pass-history hygiene policy -- see settings.note.] Reconfirmed 2026-11-13T06:51:00.000Z pass: fresh last_14d age/gender breakdown confirms 35-44 male at ₹1,896.52 spend, purchase_roas still null (zero purchases); 25-34 male at ₹16,011.04 spend, 4.309681x ROAS. Underperforming cell confirmed still live and unprofitable at meaningful spend. No change to proposed action. Still pending human review. Reconfirmed 2026-11-13T12:50:00.000Z pass: fresh last_14d age/gender breakdown (campaign-level, Prospecting_JP2_Placement_Split_12Oct, effectively PROSP_Reels_Capped's delivery since it's the only active ad set in this campaign) confirms 35-44 male cell at ₹1,896.36 spend with purchase_roas null (zero purchases), while 25-34 male carries ₹16,011.20 spend at 4.31x ROAS. Gap unchanged in character from prior passes -- still pending human review. Reconfirmed 2026-11-13T15:50:00.000Z pass: fresh last_14d age/gender breakdown confirms 35-44 male cell at ₹1,896.52 spend, purchase_roas still null (zero purchases); 25-34 male at ₹16,011.04 spend, 4.309681x ROAS. Underperforming cell confirmed still live and unprofitable at meaningful spend. Still pending human review. Reconfirmed 2026-11-13T16:50:00.000Z pass: fresh last_14d age/gender breakdown confirms 35-44 male cell at ₹1,896.52 spend, purchase_roas still null (zero purchases); 25-34 male at ₹16,011.04 spend, 4.309681x ROAS -- identical to the 15:50 UTC pass. Underperforming cell confirmed still live and unprofitable at meaningful spend. Still pending human review. [Reconfirmed 2026-11-13T18:47:00.000Z pass: PROSP_Reels_Capped's 35-44 male cell ₹1,974.02 spend / zero purchases vs 25-34 male cell ₹15,717.60 at 4.54x (last_14d) -- gap persists.] Reconfirmed 2026-11-13T20:51:00.000Z pass (last_14d, fresh age/gender breakdown on Prospecting_JP2_Placement_Split_12Oct): 35-44 male cell still 0 purchases on ₹1,974.09 spent (purchase_roas null), vs 25-34 male at 4.54x ROAS on ₹15,718.15 spent. Underperformance persists -- proposal still valid. Reconfirmed 2026-11-14T02:48:00.000Z pass: fresh last_14d age/gender breakdown confirms 35-44 male cell at Rs1,974.17 spend with purchase_roas null (zero purchases), while 25-34 male carries Rs15,718.30 spend at 4.540588x ROAS. Underperformance persists -- proposal still valid. Reconfirmed 2026-11-14T18:51:49.000Z pass: fresh last_14d age/gender breakdown shows 35-44 male at Rs2,090.61 spend, purchase_roas still null (zero purchases); 25-34 male at Rs14,999.52 spend, 4.074105x ROAS (23 purchases). Underperforming cell confirmed still live and unprofitable at meaningful spend. Reconfirmed 2026-11-15T02:50:22.000Z pass: fresh last_14d age/gender breakdown on PROSP_Reels_Capped (Prospecting_JP2_Placement_Split_12Oct) confirms 35-44 male cell at ₹2,090.63 spend with purchase_roas null (zero purchases), while 25-34 male carries ₹14,999.61 spend at 4.074081x ROAS. Underperforming cell confirmed still live and unprofitable at meaningful spend. No change to proposed action. Still pending human review. Update 2026-11-15T04:53:39.000Z pass: PROSP_Reels_Capped's 35-44 male cell still shows 0 purchases (purchase_roas null) on ₹2,090.66 spend last_14d, while the 25-34 male cell carries ₹14,999.67 spend at 4.074x ROAS (23 purchases). Pattern unchanged; not re-created, reasoning refreshed only. Update 2026-11-15T06:51:00.000Z pass: PROSP_Reels_Capped's 35-44 male cell still 0 purchases (purchase_roas null) on ₹2,090.66 spend last_14d; 25-34 male cell ₹14,999.67 spend at 4.074x ROAS (23 purchases) -- pattern unchanged. Not re-created, reasoning refreshed only. Reconfirmed 2026-11-15T14:53:33.000Z pass: fresh last_14d age/gender breakdown on PROSP_Reels_Capped (Prospecting_JP2_Placement_Split_12Oct) confirms 35-44 male cell at Rs2,090.66 spend, purchase_roas still null (zero purchases), ctr 2.01%; 25-34 male cell at Rs14,999.73 spend, 4.074048x ROAS. Underperforming cell confirmed still live and unprofitable at meaningful spend. No change to the proposed action. Still pending human review. Reconfirmed 2026-11-15T20:48:00.000Z pass: fresh last_14d breakdown still shows 35-44 male at ₹2,171.72 spend / 0 purchases vs 25-34 male at ₹14,733.80 spend / 3.960086x ROAS -- trigger still holds.",
       "actionSummary": "Raise PROSP_Reels_Capped's targeting age ceiling down to 34 (narrowing from the current wider range to 18-34), redirecting spend away from the underperforming 35-44 male cell toward the much stronger 25-34 cohort. Advantage+ Audience stays on (age_range is a suggestion under A+A, not a hard exclusion) -- no advantage_audience_off_reason needed. Leave every other targeting parameter (custom audience exclusions, placements, etc.) unchanged.",
       "metaAction": {
         "tool": "ads_update_entity",
@@ -1666,7 +1666,7 @@
       "module": "device-targeting",
       "tier": "approval",
       "title": "Restrict Retargeting_Overall to Android -- iPhone ROAS less than half of Android's at meaningful spend",
-      "reasoning": "Fresh impression_device breakdown this pass (last_30d, campaign Retargeting_Overall / ad set Retargeting_Overall, id 120255851467360159): android_smartphone 14.950966x ROAS on ₹5,678.41 spend vs iphone 6.926008x ROAS on ₹4,725.75 spend -- a ~2.16x gap at meaningful spend on both sides. iPhone's CPM is also 33% higher (₹80.50 vs ₹60.22). No other active campaign shows a comparable device gap this pass (Caps_Only, Sneakers_BOF_v2_Placement_Split_12Oct, Prospecting_JP2_Placement_Split_12Oct, Prospecting_LAL1_Purchasers_14Oct and Fudoshin all show Android/iPhone ROAS within a reasonable range of each other, several favoring iPhone instead). No prior device-targeting proposal exists for this ad set (A-053 and A-070 covered different, now-paused ad sets and were both rejected). Reconfirmed 2026-11-11T22:49:00.000Z pass: fresh last_7d device breakdown on Retargeting_Overall shows android_smartphone at 32.66x ROAS (₹677.36 spend, 10 purchases) vs iphone at 0 recorded purchases on ₹323.12 spend -- the gap persists and is, if anything, starker than when this proposal was written. No change to the proposed restriction. Reconfirmed 2026-11-12T02:50:35.000Z: fresh last_14d device breakdown on Retargeting_Overall confirms android_smartphone at 21.42x ROAS (Rs1,925.61 spend) vs iphone at 2.37x ROAS (Rs1,433.04 spend) -- iPhone's ROAS is less than an eighth of Android's at meaningful spend on both sides, an even wider gap than originally cited. Still pending human review. Reconfirmed 2026-11-13T06:51:00.000Z pass: fresh last_14d device breakdown on Retargeting_Overall shows android_smartphone at 26.121733x ROAS (₹1,387.42 spend) vs iphone at 3.428555x ROAS (₹767.36 spend) -- iPhone's ROAS is about 13% of Android's at meaningful spend on both sides, continuing the persistent gap. No change to the proposed restriction. Still pending human review. Reconfirmed 2026-11-13T10:50:00.000Z pass: fresh last_14d device breakdown on Retargeting_Overall shows android_smartphone at 23.088496x ROAS (₹1,786.17 spend, 17 purchases) vs iphone at 2.838369x ROAS (₹1,194.35 spend, 2 purchases) -- iPhone's ROAS is about 12% of Android's at meaningful spend on both sides, continuing the persistent gap. No change to the proposed restriction. Still pending human review. Reconfirmed 2026-11-13T12:50:00.000Z pass: fresh impression_device breakdown (last_30d, Retargeting_Overall campaign/ad set 120255851467360159): android_smartphone 13.389322x ROAS on ₹5,355.32 spend vs iphone 5.367335x ROAS on ₹4,400.26 spend -- gap now ~2.49x (widened slightly from the 2.16x gap at last reconfirmation). iPhone CPM ₹78.59 vs Android ₹59.56. Still pending human review. Reconfirmed 2026-11-13T15:50:00.000Z pass: fresh last_14d device breakdown on Retargeting_Overall shows android_smartphone at 26.121733x ROAS (₹1,387.42 spend, 15 purchases) vs iphone at 3.428555x ROAS (₹767.36 spend, 1 purchase) -- iPhone's ROAS is about 13% of Android's at meaningful spend on both sides, continuing the persistent gap. No change to the proposed restriction. Still pending human review. Reconfirmed 2026-11-13T16:50:00.000Z pass: fresh last_14d device breakdown on Retargeting_Overall shows android_smartphone at 26.121733x ROAS (₹1,387.42 spend) vs iphone at 3.428555x ROAS (₹767.36 spend) -- identical to the 15:50 UTC pass, continuing the persistent gap. No change to the proposed restriction. Still pending human review. [Reconfirmed 2026-11-13T18:47:00.000Z pass: Retargeting_Overall device breakdown (last_14d) android_smartphone 25.17x ROAS/₹1,440.11 spend vs iphone 3.33x ROAS/₹789.77 spend -- gap persists.] Reconfirmed 2026-11-13T20:51:00.000Z pass (last_14d device breakdown on Retargeting_Overall): Android 24.70x ROAS (₹1,669.81 spent) vs iPhone 3.44x ROAS (₹986.55 spent) -- iPhone gap has widened further (well under half of Android's ROAS). Proposal still valid. Reconfirmed 2026-11-14T02:48:00.000Z pass (last_14d device breakdown on Retargeting_Overall): Android 25.166138x ROAS (Rs1,440.11 spent) vs iPhone 3.331285x ROAS (Rs789.77 spent) -- gap persists (iPhone ~13% of Android's ROAS). Proposal still valid. Reconfirmed 2026-11-14T18:51:49.000Z pass (fresh last_30d window after the IST day rollover): android_smartphone 23.640894x ROAS on Rs1,725.24 spend vs iphone 2.65083x ROAS on Rs992.50 spend -- gap widened to ~8.9x. Both sides at meaningful-for-this-adset spend; trigger still holds. Reconfirmed 2026-11-15T02:50:22.000Z pass: fresh last_14d device breakdown on Retargeting_Overall shows android_smartphone at 26.591898x ROAS (₹1,533.78 spend) vs iphone at 3.181351x ROAS (₹826.99 spend) -- iPhone's ROAS is about 12% of Android's at meaningful spend on both sides, continuing the persistent gap. No change to the proposed restriction. Still pending human review. Update 2026-11-15T04:53:39.000Z pass: fresh last_30d impression_device breakdown on Retargeting_Overall -- android_smartphone now 23.641x ROAS on ₹1,725.26 spend vs iphone 2.651x ROAS on ₹992.50 spend, a ~8.9x gap (widened from the 2.16x gap recorded when this proposal was created). iPhone CPM ₹133.71 vs Android CPM ₹112.30. Still the clearest device gap on the account this pass. Not re-created, reasoning refreshed only. Update 2026-11-15T06:51:00.000Z pass: fresh last_30d impression_device breakdown -- android_smartphone 23.64x ROAS on ₹1,725.26 spend vs iphone 2.65x ROAS on ₹992.50 spend, ~8.9x gap -- unchanged from 2 hours ago. Not re-created, reasoning refreshed only. Reconfirmed 2026-11-15T14:53:33.000Z pass: fresh last_14d impression_device breakdown on Retargeting_Overall (120255851467360159) shows android_smartphone at 26.591898x ROAS (Rs1,533.78 spend, ctr 2.21%) vs iphone at 3.181351x ROAS (Rs826.99 spend, ctr 1.94%) -- gap is now ~8.4x, starker than when this proposal was written. No change to the proposed restriction. Still pending human review.",
+      "reasoning": "Fresh impression_device breakdown this pass (last_30d, campaign Retargeting_Overall / ad set Retargeting_Overall, id 120255851467360159): android_smartphone 14.950966x ROAS on ₹5,678.41 spend vs iphone 6.926008x ROAS on ₹4,725.75 spend -- a ~2.16x gap at meaningful spend on both sides. iPhone's CPM is also 33% higher (₹80.50 vs ₹60.22). No other active campaign shows a comparable device gap this pass (Caps_Only, Sneakers_BOF_v2_Placement_Split_12Oct, Prospecting_JP2_Placement_Split_12Oct, Prospecting_LAL1_Purchasers_14Oct and Fudoshin all show Android/iPhone ROAS within a reasonable range of each other, several favoring iPhone instead). No prior device-targeting proposal exists for this ad set (A-053 and A-070 covered different, now-paused ad sets and were both rejected). Reconfirmed 2026-11-11T22:49:00.000Z pass: fresh last_7d device breakdown on Retargeting_Overall shows android_smartphone at 32.66x ROAS (₹677.36 spend, 10 purchases) vs iphone at 0 recorded purchases on ₹323.12 spend -- the gap persists and is, if anything, starker than when this proposal was written. No change to the proposed restriction. Reconfirmed 2026-11-12T02:50:35.000Z: fresh last_14d device breakdown on Retargeting_Overall confirms android_smartphone at 21.42x ROAS (Rs1,925.61 spend) vs iphone at 2.37x ROAS (Rs1,433.04 spend) -- iPhone's ROAS is less than an eighth of Android's at meaningful spend on both sides, an even wider gap than originally cited. Still pending human review. Reconfirmed 2026-11-13T06:51:00.000Z pass: fresh last_14d device breakdown on Retargeting_Overall shows android_smartphone at 26.121733x ROAS (₹1,387.42 spend) vs iphone at 3.428555x ROAS (₹767.36 spend) -- iPhone's ROAS is about 13% of Android's at meaningful spend on both sides, continuing the persistent gap. No change to the proposed restriction. Still pending human review. Reconfirmed 2026-11-13T10:50:00.000Z pass: fresh last_14d device breakdown on Retargeting_Overall shows android_smartphone at 23.088496x ROAS (₹1,786.17 spend, 17 purchases) vs iphone at 2.838369x ROAS (₹1,194.35 spend, 2 purchases) -- iPhone's ROAS is about 12% of Android's at meaningful spend on both sides, continuing the persistent gap. No change to the proposed restriction. Still pending human review. Reconfirmed 2026-11-13T12:50:00.000Z pass: fresh impression_device breakdown (last_30d, Retargeting_Overall campaign/ad set 120255851467360159): android_smartphone 13.389322x ROAS on ₹5,355.32 spend vs iphone 5.367335x ROAS on ₹4,400.26 spend -- gap now ~2.49x (widened slightly from the 2.16x gap at last reconfirmation). iPhone CPM ₹78.59 vs Android ₹59.56. Still pending human review. Reconfirmed 2026-11-13T15:50:00.000Z pass: fresh last_14d device breakdown on Retargeting_Overall shows android_smartphone at 26.121733x ROAS (₹1,387.42 spend, 15 purchases) vs iphone at 3.428555x ROAS (₹767.36 spend, 1 purchase) -- iPhone's ROAS is about 13% of Android's at meaningful spend on both sides, continuing the persistent gap. No change to the proposed restriction. Still pending human review. Reconfirmed 2026-11-13T16:50:00.000Z pass: fresh last_14d device breakdown on Retargeting_Overall shows android_smartphone at 26.121733x ROAS (₹1,387.42 spend) vs iphone at 3.428555x ROAS (₹767.36 spend) -- identical to the 15:50 UTC pass, continuing the persistent gap. No change to the proposed restriction. Still pending human review. [Reconfirmed 2026-11-13T18:47:00.000Z pass: Retargeting_Overall device breakdown (last_14d) android_smartphone 25.17x ROAS/₹1,440.11 spend vs iphone 3.33x ROAS/₹789.77 spend -- gap persists.] Reconfirmed 2026-11-13T20:51:00.000Z pass (last_14d device breakdown on Retargeting_Overall): Android 24.70x ROAS (₹1,669.81 spent) vs iPhone 3.44x ROAS (₹986.55 spent) -- iPhone gap has widened further (well under half of Android's ROAS). Proposal still valid. Reconfirmed 2026-11-14T02:48:00.000Z pass (last_14d device breakdown on Retargeting_Overall): Android 25.166138x ROAS (Rs1,440.11 spent) vs iPhone 3.331285x ROAS (Rs789.77 spent) -- gap persists (iPhone ~13% of Android's ROAS). Proposal still valid. Reconfirmed 2026-11-14T18:51:49.000Z pass (fresh last_30d window after the IST day rollover): android_smartphone 23.640894x ROAS on Rs1,725.24 spend vs iphone 2.65083x ROAS on Rs992.50 spend -- gap widened to ~8.9x. Both sides at meaningful-for-this-adset spend; trigger still holds. Reconfirmed 2026-11-15T02:50:22.000Z pass: fresh last_14d device breakdown on Retargeting_Overall shows android_smartphone at 26.591898x ROAS (₹1,533.78 spend) vs iphone at 3.181351x ROAS (₹826.99 spend) -- iPhone's ROAS is about 12% of Android's at meaningful spend on both sides, continuing the persistent gap. No change to the proposed restriction. Still pending human review. Update 2026-11-15T04:53:39.000Z pass: fresh last_30d impression_device breakdown on Retargeting_Overall -- android_smartphone now 23.641x ROAS on ₹1,725.26 spend vs iphone 2.651x ROAS on ₹992.50 spend, a ~8.9x gap (widened from the 2.16x gap recorded when this proposal was created). iPhone CPM ₹133.71 vs Android CPM ₹112.30. Still the clearest device gap on the account this pass. Not re-created, reasoning refreshed only. Update 2026-11-15T06:51:00.000Z pass: fresh last_30d impression_device breakdown -- android_smartphone 23.64x ROAS on ₹1,725.26 spend vs iphone 2.65x ROAS on ₹992.50 spend, ~8.9x gap -- unchanged from 2 hours ago. Not re-created, reasoning refreshed only. Reconfirmed 2026-11-15T14:53:33.000Z pass: fresh last_14d impression_device breakdown on Retargeting_Overall (120255851467360159) shows android_smartphone at 26.591898x ROAS (Rs1,533.78 spend, ctr 2.21%) vs iphone at 3.181351x ROAS (Rs826.99 spend, ctr 1.94%) -- gap is now ~8.4x, starker than when this proposal was written. No change to the proposed restriction. Still pending human review. Reconfirmed 2026-11-15T20:48:00.000Z pass: fresh last_14d device breakdown shows android_smartphone 22.622697x ROAS (₹1,505.31 spend) vs iphone 3.491853x ROAS (₹753.45 spend) -- gap widened further, now ~1/6.5 rather than 'less than half'.",
       "actionSummary": "Adds \"user_os\":[\"Android\"] to the Retargeting_Overall ad set's targeting, restricting delivery to Android devices only and stopping spend on the lower-ROAS iPhone segment. Per Meta API behavior, this non-trivial targeting edit on a live ad set will force-pause it; it would need to be manually reactivated after approval.",
       "metaAction": {
         "tool": "ads_update_entity",
@@ -31476,6 +31476,123 @@
       "severity": "low",
       "dismissed": false,
       "createdAt": "2026-11-15T18:50:09.000Z"
+    },
+    {
+      "id": "AL-3300",
+      "module": "anomaly",
+      "title": "Narrow-audience warning widened back to 2 ad sets",
+      "detail": "ads_insights_anomaly_signal: active_delivery_narrow_audience now flags WARM_T2_CONSIDER_PDP_90D (120256667271960159, audience size 25,400-29,900) alongside WARM_T4_XSell_Purchasers180D (120256667272700159, audience size 1,000-1,200) -- WARM_T2 dropped off the signal at the 18:50:09 UTC pass and is back this pass. Both ad sets are actively delivering under campaign Sneakers_BOF_v2_Placement_Split_12Oct. This is a Meta platform warning about estimated reach, not a performance issue -- both ad sets' purchase_roas remain strong (WARM_T2 13.3x, WARM_T4 17.1x on last_7d). Informational only; no action taken.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-11-15T20:48:00.000Z"
+    },
+    {
+      "id": "AL-3301",
+      "module": "competitor-spike",
+      "title": "Both Gully Labs and Lotto Sport India active-ad counts spiked together",
+      "detail": "Page-ID-matched ads_library_search (page_ids 107479854297817 / 426015150606378, ad_active_status=ACTIVE): Gully Labs 70->111 (+58.6%), Lotto Sport India 165->258 (+56.4%) since the 2026-11-15T16:54:25.000Z baseline -- both well past the 20% spike threshold in the same pass. Per this alert's own established history (both pages have repeatedly round-tripped together without a corresponding real-world event, and Gully Labs alone has swung +/-25-33% within the last 24h), this reads as likely Ad Library sampling noise rather than a confirmed real spend change on either competitor -- not treating as confirmed per the standing recommendation to require persistence across two consecutive scrapes. settings.competitor_last_scrape updated to 111/258 (combined 369) for the next comparison; will confirm or walk back next pass depending on whether it holds.",
+      "severity": "medium",
+      "dismissed": false,
+      "createdAt": "2026-11-15T20:48:00.000Z"
+    },
+    {
+      "id": "AL-3302",
+      "module": "pause-kill",
+      "title": "1 sales campaign below the former 1.0x kill floor (pause-kill disabled)",
+      "detail": "KAGE_TOF_LAL_Purchase_01Nov (120256662646110159): 0.164688x ROAS on ₹4,851.59 last_14d spend -- identical spend and ROAS to the 18:50:09 UTC pass (no new delivery in this campaign in the last ~2h). Well past the ₹500 spend floor and below the former 1.0x kill threshold. Module 16 (pause-kill) remains DISABLED per user instruction since 2026-10-05 -- surfaced as an alert only, no auto-pause taken.",
+      "severity": "medium",
+      "dismissed": false,
+      "createdAt": "2026-11-15T20:48:00.000Z"
+    },
+    {
+      "id": "AL-3303",
+      "module": "budget-reallocation",
+      "title": "A-076 reconfirmed -- ROAS gap essentially unchanged",
+      "detail": "Reconfirmed alongside A-076's stored reasoning: Prospecting_JP2_Placement_Split_12Oct 3.451053x ROAS (₹16,907.05 spend, last_14d), Caps_Only 7.83168x ROAS (₹11,176.97 spend, last_14d) -- both essentially flat vs the 18:50:09 UTC pass. Gap ~2.27x, still above settings.budget_reallocation_min_roas_gap=1.5x. Trigger still holds; still pending human review.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-11-15T20:48:00.000Z"
+    },
+    {
+      "id": "AL-3304",
+      "module": "age-gender-auto-shift",
+      "title": "A-079 reconfirmed -- 35-44 male cell still at 0 purchases",
+      "detail": "Fresh last_14d age/gender breakdown on PROSP_Reels_Capped (120256322880690159): 35-44 male ₹2,171.72 spend, purchase_roas null (0 purchases); 25-34 male ₹14,733.80 spend, 3.960086x ROAS. Same pattern as every prior reconfirmation since 2026-11-03 -- trigger still holds, still pending human review.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-11-15T20:48:00.000Z"
+    },
+    {
+      "id": "AL-3305",
+      "module": "device-targeting",
+      "title": "A-081 reconfirmed -- iPhone ROAS still far below Android's on Retargeting_Overall",
+      "detail": "Fresh last_14d impression_device breakdown on Retargeting_Overall (120255851467360159): android_smartphone 22.622697x ROAS on ₹1,505.31 spend vs iphone 3.491853x ROAS on ₹753.45 spend -- gap widened further vs prior passes (iPhone now at ~1/6.5 of Android's ROAS, not just 'less than half'). Trigger still holds, still pending human review.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-11-15T20:48:00.000Z"
+    },
+    {
+      "id": "AL-3306",
+      "module": "threshold-alerts",
+      "title": "No stored CPM/CTR baseline matches a currently-active campaign",
+      "detail": "settings.metric_baselines only has entries for Kage_sales_1908 and Kage_TOF, neither of which is among the 6 currently-active campaigns (KAGE_TOF_LAL_Purchase_01Nov, Prospecting_LAL1_Purchasers_14Oct, Sneakers_BOF_v2_Placement_Split_12Oct, Prospecting_JP2_Placement_Split_12Oct, Caps_Only, Retargeting_Overall). No threshold check possible this pass.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-11-15T20:48:00.000Z"
+    },
+    {
+      "id": "AL-3307",
+      "module": "catalog-dpa-launch",
+      "title": "No DPA/catalog campaigns running (standing alert)",
+      "detail": "Catalog 1149969713295773 remains connected with zero DPA/catalog-based campaigns currently active -- unchanged from every prior pass. module 35 remains a standing, unexecuted approval-tier opportunity.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-11-15T20:48:00.000Z"
+    },
+    {
+      "id": "AL-3308",
+      "module": "ab-test",
+      "title": "No structured A/B test currently running (standing alert)",
+      "detail": "No ads_experiment_abtest study is currently active on the account -- unchanged from every prior pass.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-11-15T20:48:00.000Z"
+    },
+    {
+      "id": "AL-3309",
+      "module": "weekly-digest",
+      "title": "Not due this pass",
+      "detail": "Today (2026-11-15) is a Sunday, not Monday -- weekly-digest not due.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-11-15T20:48:00.000Z"
+    },
+    {
+      "id": "AL-3310",
+      "module": "resume-after-circuit-breaker",
+      "title": "A-063 (resume-after-circuit-breaker) has been pending 35 days",
+      "detail": "The circuit breaker tripped 2026-10-10T16:50:00.000Z and paused 5 campaigns. A-061 (first resume proposal) was rejected 2026-10-11T02:51:00.000Z; its successor A-063 has been status:'pending' since 2026-10-11T12:50:00.000Z -- still 35 days as of this pass. Per ROUTINE.md the breaker never auto-resumes -- this requires a human decision (approve/reject A-063, or submit a fresh resume decision in-app/chat).",
+      "severity": "medium",
+      "dismissed": false,
+      "createdAt": "2026-11-15T20:48:00.000Z"
+    },
+    {
+      "id": "AL-3311",
+      "module": "self-audit-check",
+      "title": "Full 35-module sweep -- no structural change since last pass, one new competitor spike",
+      "detail": "Re-pulled live account/campaign/adset/ad data vs the 18:50:09 UTC pass. Same 6 active campaigns / 10 active ad sets, no new launches or pauses -- purchaser-exclusion (10/10 ad sets compliant), lookalike-refresh (baseline ~10h old, not due) and hook-angle-tagging (24 distinct creative_ids checked, 0 untagged) all confirm no action due. Anomaly narrow-audience warning widened from 1 to 2 ad sets. Competitor-rescrape came due this pass (>2h since last scrape) and found both Gully Labs and Lotto Sport India up >55% together -- flagged as likely noise per standing history, not confirmed. 7 pending proposals (A-002, A-063, A-076, A-078, A-079, A-080, A-081) all reconfirmed, 3 with materially fresh numbers this pass (A-076, A-079, A-081). No dashboard (index.html) drift found against live spend/ROAS/purchase numbers for the current period. KPI-to-trigger completeness: every dashboard metric still maps to a module in ROUTINE.md's table -- no gaps found.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-11-15T20:48:00.000Z"
+    },
+    {
+      "id": "AL-3312",
+      "module": "routine-run-notes",
+      "title": "Run summary -- 2026-11-15T20:48:00.000Z pass",
+      "detail": "Circuit breaker: no new trip (today spend ₹666.15 vs ₹7,000 ceiling); existing trip from 2026-10-10 remains unresumed (A-063 pending 35d, flagged). Pixel gate: clear (composite EMQ 6.1-9.0/10, all ≥ 0.6 threshold), ROAS modules not suppressed. Auto-tier modules (purchaser-exclusion, lookalike-refresh, hook-angle-tagging, hard-spend-circuit-breaker): all checked, 0 mutations executed this pass (fully compliant / nothing due). Approval-tier: 0 new proposals this pass, 7 pending proposals reconfirmed (3 with updated numbers: A-076 budget-reallocation, A-079 age-gender-auto-shift, A-081 device-targeting). Alerts: anomaly narrow-audience widened to 2 ad sets; competitor-spike flagged on both Gully Labs (+58.6%) and Lotto Sport India (+56.4%) together, treated as likely noise pending persistence check; pause-kill still showing KAGE_TOF_LAL_Purchase_01Nov at 0.16x ROAS (disabled, alert-only). Highest-priority open item remains A-063 (resume-after-circuit-breaker), pending 35 days.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-11-15T20:48:00.000Z"
     }
   ],
   "log": [
@@ -48331,6 +48448,74 @@
       },
       "tier": "auto",
       "executedAt": "2026-11-15T18:50:09.000Z"
+    },
+    {
+      "proposalId": null,
+      "action": "auto-module: hard-spend-circuit-breaker check (pre-check, per ROUTINE.md safety infrastructure) -- today's account spend (ads_get_ad_entities, level=ad_account, date_preset=today) is ₹666.15, nowhere near settings.hard_spend_ceiling_inr=₹7,000. No new breach this pass. circuitBreaker remains tripped from the 2026-10-10T16:50:00.000Z trip (never auto-resumed, per policy) -- A-063 (resume-after-circuit-breaker) is still pending human review, now 35 days old.",
+      "result": "success",
+      "previousState": null,
+      "detail": {
+        "today_spend_inr": 666.15,
+        "ceiling_inr": 7000,
+        "breached": false
+      },
+      "tier": "auto",
+      "executedAt": "2026-11-15T20:48:00.000Z"
+    },
+    {
+      "proposalId": null,
+      "action": "auto-module: pixel-health / pixel-quality-gate check -- dataset 833131719490535 (Shopify Meta Pixel): composite EMQ scores 6.1-9.0/10 across all 9 tracked web events (PageView, ViewContent, AddToCart, InitiateCheckout, AddPaymentInfo, Search, Purchase, prepaid_purchase, cod_purchase) plus SubscribedButtonClick, all at/above settings.pixel_quality_min_match_rate=0.6. Gate clear -- ROAS-based modules not suppressed this pass.",
+      "result": "success",
+      "previousState": null,
+      "detail": {
+        "composite_score_range": [
+          6.1,
+          9.0
+        ],
+        "threshold": 0.6,
+        "gate_clear": true
+      },
+      "tier": "auto",
+      "executedAt": "2026-11-15T20:48:00.000Z"
+    },
+    {
+      "proposalId": null,
+      "action": "auto-module: purchaser-exclusion -- fresh active-ad-set listing shows the same 10 active ad sets across the same 6 active campaigns as the 18:50:09 UTC pass (no structural change). All 10 either directly exclude 'Purchasers 180D' (120255823280550159) or are on settings.purchaser_exclusion_exempt_adset_ids by design (WARM_T4_XSell_Purchasers180D deliberately includes it as a cross-sell target; Retargeting_Overall excludes it directly). Fully compliant -- no targeting edits needed this pass.",
+      "result": "success",
+      "previousState": null,
+      "detail": {
+        "active_adsets_checked": 10,
+        "active_campaigns_checked": 6,
+        "compliant": true
+      },
+      "tier": "auto",
+      "executedAt": "2026-11-15T20:48:00.000Z"
+    },
+    {
+      "proposalId": null,
+      "action": "auto-module: lookalike-refresh -- current baseline LAL4_Purchasers180D_15Nov (120256908273510159, ACTIVE, ratio 4%) was built 2026-11-15T10:48:17Z, ~10 hours old -- well under settings.lookalike_refresh_days=14. Source audience 'Purchasers 180D' (120255823280550159) size unchanged since last build. No refresh needed this pass.",
+      "result": "success",
+      "previousState": null,
+      "detail": {
+        "baseline_audience": "LAL4_Purchasers180D_15Nov",
+        "age_hours_approx": 10,
+        "threshold_days": 14,
+        "refresh_needed": false
+      },
+      "tier": "auto",
+      "executedAt": "2026-11-15T20:48:00.000Z"
+    },
+    {
+      "proposalId": null,
+      "action": "auto-module: hook-angle-tagging -- checked all 24 distinct creative_ids across the active-ACTIVE and already-paused-campaign ads returned this pass; every one already has a queue.json.creativeTags entry from a prior pass. Nothing new to tag this pass. Higgsfield vision pass skipped (not attached to this run) -- tagging remains sourced from each ad's real primary-text/headline via the Meta Ads MCP, never invented.",
+      "result": "success",
+      "previousState": null,
+      "detail": {
+        "distinct_creative_ids_checked": 24,
+        "untagged": 0
+      },
+      "tier": "auto",
+      "executedAt": "2026-11-15T20:48:00.000Z"
     }
   ],
   "creativeTags": {
