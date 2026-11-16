@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-16T10:50:00.000Z",
+  "generatedAt": "2026-11-16T12:50:00.000Z",
   "settings": {
     "kill_roas_threshold": "DISABLED 2026-10-05 by user instruction: the ROAS pause-kill is OFF. Module 16 (pause-kill) must NOT auto-pause any campaign for low ROAS; surface low-ROAS campaigns as alerts only. The hard spend circuit breaker is a separate mechanism and stays ON. Former rule, for reference: pause if ROAS < 1.0x after ₹500 spend on a sales-objective campaign. EXCEPTION until 2026-10-05T23:59+05:30 (user-approved 2026-09-29): for the sneaker-push campaigns 120256091369160159 (Sneakers_BOF_30Sep-5Oct), 120256091370110159 (Sneakers_Prospecting_30Sep-5Oct) and 120256088882780159 (Sneakers_Catalog_Retargeting) the spend floor is ₹1,500, not ₹500.",
     "reactivate_min_historic_roas": "surface for reactivation if a paused campaign's last active-period ROAS >= 3.0x",
@@ -31989,6 +31989,33 @@
       "severity": "low",
       "dismissed": false,
       "createdAt": "2026-11-16T10:50:00.000Z"
+    },
+    {
+      "id": "AL-3357",
+      "module": "anomaly",
+      "title": "Narrow-audience warning expands to 3 ad sets -- new InYo ad set included",
+      "detail": "ads_insights_anomaly_signal (active_delivery_narrow_audience) now flags 3 ad sets, up from 2 last pass: WARM_T2_CONSIDER_PDP_90D (audience ~25,000-29,400), WARM_T4_XSell_Purchasers180D (~1,000-1,100, exempt purchaser-targeting ad set, narrow by design), and newly INYO_BOF_PDPViewers_Purchase_Men25-44 (~1,700-2,000, the brand-new In-Yō BOF ad set retargeting 30d PDP viewers of a single just-launched product -- narrow audience is expected for a day-old product-specific retargeting pool, not a configuration error). No action taken; informational only, consistent with this module's standing low-severity classification.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-11-16T12:50:00.000Z"
+    },
+    {
+      "id": "AL-3358",
+      "module": "self-audit-check",
+      "title": "Full 35-module sweep -- new InYo campaign detected and brought into compliance",
+      "detail": "2026-11-16T12:50:00.000Z pass: account composition changed since the 10:50 pass -- InYo_TOF_MOF_BOF_16Nov (120256922049360159) went ACTIVE with 3 ad sets (INYO_BOF_PDPViewers_Purchase_Men25-44, INYO_MOF_IGEngagers_Videos_Purchase_Men25-44, INYO_TOF_LAL4_Purchasers_ATC_Men25-44), all already excluding Purchasers 180D on launch -- purchaser-exclusion compliant, no edit needed. Its 5 ad creatives were untagged and have now been tagged via hook-angle-tagging (text-only, vision pass skipped). No duplicate-campaign targeting detected against this new campaign (different product -- In-Yō yin-yang sneaker -- vs. the active Sneakers/Caps/Retargeting/Fudoshin campaigns), so campaign-consolidation-watch has nothing new to flag. Circuit breaker re-checked: today's spend ₹3,987.27 vs ₹7,000 ceiling, no breach; circuitBreaker.tripped remains true (unresolved 2026-10-10 trip, A-063 still pending, now ~37 days). Pixel-quality gate passes (EMQ 6.1-8.9). Lookalike baseline (LAL4_Purchasers180D_15Nov) still fresh (~26h old). Anomaly signal now flags 3 narrow-audience ad sets (was 2) -- see this pass's anomaly alert; the new entry is the brand-new InYo BOF ad set, expected for a day-old single-product retargeting pool. All 6 pending approval-tier proposals (A-002, A-063, A-076, A-78, A-079, A-080, A-081) remain pending with no material numbers change since the 10:50 sweep given the short interval (~2h) and modest incremental spend (~₹727 account-wide) -- not re-evaluated against fresh breakdowns this pass; geo/placement/device/dayparting/bid-strategy modules were not independently re-pulled this pass since nothing in the account changed that would move those numbers beyond the new campaign handled above.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-11-16T12:50:00.000Z"
+    },
+    {
+      "id": "AL-3359",
+      "module": "routine-run-notes",
+      "title": "Run summary -- 2026-11-16T12:50:00.000Z pass",
+      "detail": "Auto-executed: 0 Meta write actions (purchaser-exclusion and lookalike-refresh both found compliant/not-due; hard-spend-circuit-breaker found no breach). Non-mutating auto-module checks logged: hard-spend-circuit-breaker, pixel-health gate, purchaser-exclusion, lookalike-refresh, hook-angle-tagging (5 new creatives tagged, text-only, on the new InYo campaign). New proposals: 0. New alerts: 2 (anomaly expansion, self-audit-check) plus this run summary. Highest-priority item this pass: the still-unresolved circuit-breaker trip from 2026-10-10 (A-063 pending ~37 days) -- no new trip occurred. Secondary note: new campaign InYo_TOF_MOF_BOF_16Nov went active since the last pass and is now fully compliant/tagged.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-11-16T12:50:00.000Z"
     }
   ],
   "log": [
@@ -49432,6 +49459,93 @@
       },
       "tier": "auto",
       "executedAt": "2026-11-16T10:50:00.000Z"
+    },
+    {
+      "proposalId": null,
+      "action": "auto-module: hard-spend-circuit-breaker check (pre-check, safety infrastructure) -- ads_get_ad_entities (level=ad_account, date_preset=today) shows today's account spend at ₹3,987.27 vs settings.hard_spend_ceiling_inr (₹7,000) -- 57% of ceiling, no breach. circuitBreaker.tripped remains true (unresolved 2026-10-10 trip, A-063 still pending human review) -- no new trip this pass, no auto-resume attempted (never auto-resumes per ROUTINE.md).",
+      "result": "success",
+      "previousState": {
+        "circuitBreaker_tripped": true,
+        "today_spend_at_prior_pass_inr": 3259.25
+      },
+      "detail": {
+        "today_spend_inr": 3987.27,
+        "ceiling_inr": 7000,
+        "breached": false
+      },
+      "tier": "auto",
+      "executedAt": "2026-11-16T12:50:00.000Z"
+    },
+    {
+      "proposalId": null,
+      "action": "auto-module: pixel-health / pixel-quality-gate check -- ads_get_dataset_quality on dataset 833131719490535 shows composite EMQ scores ranging 6.1 (web events: SubscribedButtonClick, Search, AddToCart, PageView, ViewContent) to 8.9 (AddPaymentInfo); Purchase 8.6, cod_purchase 8.6, prepaid_purchase 8.5 -- all at/above settings.pixel_quality_min_match_rate=0.6. ROAS-based modules not suppressed this pass.",
+      "result": "success",
+      "previousState": {
+        "prior_pass_emq_range": "6.1-8.9"
+      },
+      "detail": {
+        "emq_composite_scores": {
+          "SubscribedButtonClick": 6.1,
+          "Search": 6.1,
+          "AddToCart": 6.1,
+          "InitiateCheckout": 7.0,
+          "PageView": 6.1,
+          "ViewContent": 6.1,
+          "AddPaymentInfo": 8.9,
+          "Purchase": 8.6,
+          "cod_purchase": 8.6,
+          "prepaid_purchase": 8.5
+        }
+      },
+      "tier": "auto",
+      "executedAt": "2026-11-16T12:50:00.000Z"
+    },
+    {
+      "proposalId": null,
+      "action": "auto-module: purchaser-exclusion -- fresh direct targeting fetch on all 13 active ad sets across the 6 now-active campaigns (Retargeting_Overall, Caps_Only, Prospecting_JP2_Placement_Split_12Oct, Sneakers_BOF_v2_Placement_Split_12Oct, Fudoshin_MOF_BOF_Carousel_16Nov, and the brand-new InYo_TOF_MOF_BOF_16Nov which went ACTIVE since the 10:50 pass): all 13 already exclude Purchasers 180D (120255823280550159) directly, or are on settings.purchaser_exclusion_exempt_adset_ids (Retargeting_Overall, WARM_T4_XSell_Purchasers180D) and deliberately include it by design. The 3 new InYo ad sets (INYO_BOF_PDPViewers_Purchase_Men25-44, INYO_MOF_IGEngagers_Videos_Purchase_Men25-44, INYO_TOF_LAL4_Purchasers_ATC_Men25-44) were already compliant on launch -- no edit needed, no force-pause risk.",
+      "result": "success",
+      "previousState": {
+        "active_adsets_checked_prior_pass": 10
+      },
+      "detail": {
+        "active_adsets_checked": 13,
+        "non_compliant_found": 0
+      },
+      "tier": "auto",
+      "executedAt": "2026-11-16T12:50:00.000Z"
+    },
+    {
+      "proposalId": null,
+      "action": "auto-module: lookalike-refresh -- current baseline LAL4_Purchasers180D_15Nov (120256908273510159, ACTIVE, size ~1,000) built 2026-11-15T10:48:17Z, now ~26h old, well under the 14-day lookalike_refresh_days threshold. Source audience Purchasers 180D (120255823280550159) still ~20 members, unchanged -- no growth-based refresh trigger either. No action needed.",
+      "result": "success",
+      "previousState": {
+        "lal_age_hours_prior_pass": 24
+      },
+      "detail": {
+        "lal_age_hours": 26,
+        "source_audience_size": 20
+      },
+      "tier": "auto",
+      "executedAt": "2026-11-16T12:50:00.000Z"
+    },
+    {
+      "proposalId": null,
+      "action": "auto-module: hook-angle-tagging -- checked all distinct creative_ids across active-ACTIVE ads this pass; found 5 untagged creatives on the brand-new InYo_TOF_MOF_BOF_16Nov campaign (1087749320907944, 1745017273904087, 1131523082855186, 1813819269949861, 1594804792412446) and tagged all 5 from their real primary-text/headline/carousel-card/asset_feed_spec content via Meta Ads MCP ads_get_creatives (text-only, vision pass skipped -- Higgsfield not attached to this run). Fudoshin's 2 creatives were already tagged last pass (10:50). No other active ad lacks a creativeTags entry.",
+      "result": "success",
+      "previousState": {
+        "untagged_creatives_found": 5
+      },
+      "detail": {
+        "creative_ids_tagged": [
+          "1087749320907944",
+          "1745017273904087",
+          "1131523082855186",
+          "1813819269949861",
+          "1594804792412446"
+        ]
+      },
+      "tier": "auto",
+      "executedAt": "2026-11-16T12:50:00.000Z"
     }
   ],
   "creativeTags": {
@@ -55295,6 +55409,61 @@
       "visionPassSkipped": true,
       "note": "Higgsfield vision connection not attached to this run -- image content itself not analyzed, only real ad copy text used. No creative description invented.",
       "taggedAt": "2026-11-16T10:50:00.000Z"
+    },
+    "1087749320907944": {
+      "adName": "INYO_MOF_StoryCarousel",
+      "campaign": "InYo_TOF_MOF_BOF_16Nov",
+      "format": "Carousel (SHARE, 2 cards)",
+      "angle": "Brand/product story introduction (In-Yō yin-yang balance concept, new sneaker launch) with an introductory-price hook",
+      "hook": "\"The story behind In-Yō: opposites that balance. Light and dark, soft and sharp, worn as one.\" (primary text) / \"KAI\" (headline) / carousel cards: \"Where In-Yō begins\" - \"Balance, built into every pair\" / \"Introductory offer at ₹2,499\"",
+      "taggedFrom": "ad primary text (body) + headline (title) + carousel card name/description, via Meta Ads MCP ads_get_creatives",
+      "visionPassSkipped": true,
+      "note": "Higgsfield vision connection not attached to this run -- image content itself not analyzed, only real ad copy text used. No creative description invented.",
+      "taggedAt": "2026-11-16T12:50:00.000Z"
+    },
+    "1745017273904087": {
+      "adName": "INYO_TOF_Lifestyle1",
+      "campaign": "InYo_TOF_MOF_BOF_16Nov",
+      "format": "Static image",
+      "angle": "Brand/product story (In-Yō balance concept) with introductory price",
+      "hook": "\"In-Yō. Balance, worn. Light and dark, soft and sharp, one pair. ₹2,499, Introductory price\" (primary text) / \"In-Yō Sneakers\" (headline)",
+      "taggedFrom": "ad primary text (body) + headline (title), via Meta Ads MCP ads_get_creatives",
+      "visionPassSkipped": true,
+      "note": "Higgsfield vision connection not attached to this run -- image content itself not analyzed, only real ad copy text used. No creative description invented.",
+      "taggedAt": "2026-11-16T12:50:00.000Z"
+    },
+    "1131523082855186": {
+      "adName": "INYO_TOF_Reel",
+      "campaign": "InYo_TOF_MOF_BOF_16Nov",
+      "format": "Video (Reel placeholder)",
+      "angle": "Brand/product story (In-Yō \"two forces, one stride\" balance concept), prepaid-only price callout",
+      "hook": "\"In-Yō. Two forces. One stride. The sneaker built on balance. ₹2,499, prepaid orders only.\" (primary text) / \"In-Yō Sneakers\" (headline)",
+      "taggedFrom": "ad primary text (body) + headline (title), via Meta Ads MCP ads_get_creatives",
+      "visionPassSkipped": true,
+      "note": "Higgsfield vision connection not attached to this run -- video content itself not analyzed, only real ad copy text used. Creative name flags this as a placeholder pending real media (\"INYO_Reel_PLACEHOLDER_replace_media\"). No creative description invented.",
+      "taggedAt": "2026-11-16T12:50:00.000Z"
+    },
+    "1813819269949861": {
+      "adName": "INYO_BOF_Reel",
+      "campaign": "InYo_TOF_MOF_BOF_16Nov",
+      "format": "Flexible/dynamic creative (asset_feed_spec, 2 videos x 6 primary-text/headline variants)",
+      "angle": "Bottom-of-funnel retargeting mix: balance/product-story variants alongside prepaid-discount urgency variants (\"Limited pairs available\", \"while stocks last\")",
+      "hook": "Representative variants -- primary text: \"Two forces, one stride design. Introducing In-Yō: the sneaker built on balance.\" / \"Prepaid orders only: ₹2,499 for the In-Yō sneaker built on balance.\"; headline: \"In-Yō Sneakers\" / \"Prepaid orders only at ₹2,499\"",
+      "taggedFrom": "asset_feed_spec bodies[]/titles[] (6 text variants each), via Meta Ads MCP ads_get_creatives -- no single fixed body/title on this creative, so all variants were read",
+      "visionPassSkipped": true,
+      "note": "Higgsfield vision connection not attached to this run -- video content itself not analyzed, only real ad copy text used. No creative description invented.",
+      "taggedAt": "2026-11-16T12:50:00.000Z"
+    },
+    "1594804792412446": {
+      "adName": "INYO_BOF_Lifestyle2",
+      "campaign": "InYo_TOF_MOF_BOF_16Nov",
+      "format": "Static image",
+      "angle": "Bottom-of-funnel retargeting nudge -- stock/size urgency on the introductory price",
+      "hook": "\"Still thinking about In-Yō? ₹2,499. Your size is waiting.\" (primary text) / \"In-Yō | ₹2,499\" (headline)",
+      "taggedFrom": "ad primary text (body) + headline (title), via Meta Ads MCP ads_get_creatives",
+      "visionPassSkipped": true,
+      "note": "Higgsfield vision connection not attached to this run -- image content itself not analyzed, only real ad copy text used. No creative description invented.",
+      "taggedAt": "2026-11-16T12:50:00.000Z"
     }
   }
 }
