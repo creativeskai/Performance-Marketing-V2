@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-16T08:55:00.000Z",
+  "generatedAt": "2026-11-16T10:50:00.000Z",
   "settings": {
     "kill_roas_threshold": "DISABLED 2026-10-05 by user instruction: the ROAS pause-kill is OFF. Module 16 (pause-kill) must NOT auto-pause any campaign for low ROAS; surface low-ROAS campaigns as alerts only. The hard spend circuit breaker is a separate mechanism and stays ON. Former rule, for reference: pause if ROAS < 1.0x after ₹500 spend on a sales-objective campaign. EXCEPTION until 2026-10-05T23:59+05:30 (user-approved 2026-09-29): for the sneaker-push campaigns 120256091369160159 (Sneakers_BOF_30Sep-5Oct), 120256091370110159 (Sneakers_Prospecting_30Sep-5Oct) and 120256088882780159 (Sneakers_Catalog_Retargeting) the spend floor is ₹1,500, not ₹500.",
     "reactivate_min_historic_roas": "surface for reactivation if a paused campaign's last active-period ROAS >= 3.0x",
@@ -31971,6 +31971,24 @@
       "severity": "low",
       "dismissed": false,
       "createdAt": "2026-11-16T08:55:00.000Z"
+    },
+    {
+      "id": "AL-3355",
+      "module": "self-audit-check",
+      "title": "Full module sweep -- new campaign detected and brought into compliance",
+      "detail": "2026-11-16T10:50:00.000Z pass: account composition changed since the 08:55 pass -- Fudoshin_MOF_BOF_Carousel_16Nov (120256919246040159) went ACTIVE at 2026-11-16T07:54:03Z with 2 ad sets, both already compliant with purchaser-exclusion on launch; its 2 ad creatives were untagged and have now been tagged via hook-angle-tagging (text-only, vision pass skipped). No duplicate-campaign targeting detected against this new campaign (different product line -- Fudoshin hoodies/sweatshirts -- vs. the active Sneakers/Caps/Retargeting campaigns), so campaign-consolidation-watch has nothing new to flag. Circuit breaker re-checked: today's spend ₹3,259.25 vs ₹7,000 ceiling, no breach; circuitBreaker.tripped remains true (unresolved 2026-10-10 trip, A-063 still pending). Pixel-quality gate passes (EMQ 6.1-8.9). Lookalike baseline (LAL4_Purchasers180D_15Nov) still fresh (~24h old). The active_delivery_narrow_audience anomaly on WARM_T2_CONSIDER_PDP_90D and WARM_T4_XSell_Purchasers180D reconfirmed unchanged from the 06:50 pass, no new alert written (same finding, same day). All 6 pending approval-tier proposals (A-002, A-063, A-076, A-78, A-079, A-080, A-081) remain pending with no material numbers change since the 08:55 sweep given the short interval and low incremental spend (~₹570 since 08:55) -- not re-evaluated against fresh breakdowns this pass; geo/placement/device/dayparting/bid-strategy modules were not independently re-pulled this pass since nothing in the account changed that would move those numbers beyond the new campaign handled above.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-11-16T10:50:00.000Z"
+    },
+    {
+      "id": "AL-3356",
+      "module": "routine-run-notes",
+      "title": "Run summary -- 2026-11-16T10:50:00.000Z pass",
+      "detail": "Auto-executed: 0 Meta write actions (purchaser-exclusion and lookalike-refresh both found compliant/not-due; hard-spend-circuit-breaker found no breach). Non-mutating auto-module checks logged: hard-spend-circuit-breaker, pixel-health gate, purchaser-exclusion, lookalike-refresh, hook-angle-tagging (2 new creatives tagged, text-only). New proposals: 0. New alerts: 1 (this self-audit-check). Highest-priority item this pass: the still-unresolved circuit-breaker trip from 2026-10-10 (A-063 pending ~37 days) -- no new trip occurred. Secondary note: new campaign Fudoshin_MOF_BOF_Carousel_16Nov went active since the last pass and is now fully compliant/tagged.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-11-16T10:50:00.000Z"
     }
   ],
   "log": [
@@ -49335,6 +49353,85 @@
       },
       "tier": "auto",
       "executedAt": "2026-11-16T08:55:00.000Z"
+    },
+    {
+      "proposalId": null,
+      "action": "auto-module: hard-spend-circuit-breaker check (pre-check, safety infrastructure) -- ads_get_ad_entities (account, today) shows today's spend at ₹3,259.25 against settings.hard_spend_ceiling_inr (₹7,000) -- 46.6% of ceiling, well under. No breach this pass. circuitBreaker.tripped remains true from the unresolved 2026-10-10T16:50:00.000Z trip (A-063 resume-after-circuit-breaker still pending human review, now ~37 days) -- per ROUTINE.md the routine never auto-resumes; this is a status re-check only, not a new trip.",
+      "result": "success",
+      "previousState": {
+        "today_spend_inr": null,
+        "circuitBreaker_tripped": true
+      },
+      "detail": {
+        "today_spend_inr": 3259.25,
+        "hard_spend_ceiling_inr": 7000,
+        "pct_of_ceiling": 46.6
+      },
+      "tier": "auto",
+      "executedAt": "2026-11-16T10:50:00.000Z"
+    },
+    {
+      "proposalId": null,
+      "action": "auto-module: pixel-health / pixel-quality-gate check -- ads_get_dataset_quality on dataset 833131719490535 (Shopify Meta Pixel). Composite EMQ scores this pass: web events 6.1 (SubscribedButtonClick/Search/AddToCart/PageView/ViewContent), AddPaymentInfo 8.9, cod_purchase 8.5, prepaid_purchase 8.5 -- all well above settings.pixel_quality_min_match_rate (0.6). Gate passes; ROAS-driven modules not suppressed this pass.",
+      "result": "success",
+      "previousState": {
+        "composite_scores_prior_pass": "6.1-8.9 range (08:55 pass)"
+      },
+      "detail": {
+        "composite_score_range": [
+          6.1,
+          8.9
+        ]
+      },
+      "tier": "auto",
+      "executedAt": "2026-11-16T10:50:00.000Z"
+    },
+    {
+      "proposalId": null,
+      "action": "auto-module: purchaser-exclusion -- fresh direct targeting fetch on all active ad sets across the now-5 currently-active campaigns, including the newly-launched Fudoshin_MOF_BOF_Carousel_16Nov (campaign 120256919246040159, created 2026-11-16T07:54:03Z) which did not exist as of the 2026-11-16T08:55:00.000Z pass. Both of its ad sets (FUD_TierI_Cool_MOF_BOF_Men22-44 120256919304320159, FUD_Metros_Cool_MOF_BOF_Men22-44 120256919302720159) already carry Purchasers 180D (120255823280550159) in excluded_custom_audiences -- compliant on launch, no edit needed (so no force-pause risk). The other 4 active campaigns (Sneakers_BOF_v2_Placement_Split_12Oct, Prospecting_JP2_Placement_Split_12Oct, Caps_Only, Retargeting_Overall) were already confirmed compliant at the 08:55 pass and have not changed. purchaser-exclusion remains compliant account-wide, no action needed this pass.",
+      "result": "success",
+      "previousState": {
+        "fudoshin_adsets_checked": 2,
+        "already_excluding_on_launch": true
+      },
+      "detail": {
+        "excluded_audience_id": "120255823280550159",
+        "excluded_audience_name": "Purchasers 180D"
+      },
+      "tier": "auto",
+      "executedAt": "2026-11-16T10:50:00.000Z"
+    },
+    {
+      "proposalId": null,
+      "action": "auto-module: lookalike-refresh -- current baseline LAL4_Purchasers180D_15Nov (120256908273510159, ACTIVE) was built 2026-11-15T10:48:17Z, ~24.0 hours old -- well under the 14-day lookalike_refresh_days threshold. No size-growth signal checked separately this pass (source audience unchanged per settings.audience_label_corrections history, ~20 members). No refresh due.",
+      "result": "success",
+      "previousState": {
+        "lal_age_hours_prior_pass": "~22h (08:55 pass)"
+      },
+      "detail": {
+        "lal_id": "120256908273510159",
+        "built_at": "2026-11-15T10:48:17Z",
+        "age_hours": 24.0
+      },
+      "tier": "auto",
+      "executedAt": "2026-11-16T10:50:00.000Z"
+    },
+    {
+      "proposalId": null,
+      "action": "auto-module: hook-angle-tagging -- checked all distinct creative_ids across active-ACTIVE ads this pass; found 2 new, untagged creatives on the newly-launched Fudoshin_MOF_BOF_Carousel_16Nov campaign (1824648388784120 on FUD_Carousel_TierI_PLACEHOLDER_replace_images, 1119268934226559 on FUD_Carousel_Metros_PLACEHOLDER_replace_images) -- both missed by the 08:55 pass (campaign had not yet gone ACTIVE in that fetch). Tagged both directly from their real primary text/headline via Meta Ads MCP ads_get_creatives (body: \"Fudoshin. Built with structure...400 GSM heavyweight cotton...Limited Edition: 50 pcs only...\", title: \"KAI\"). Vision pass skipped -- Higgsfield MCP connection not attached to this run; no creative description invented, text-only tagging recorded in queue.json.creativeTags with visionPassSkipped:true. Every other active ad's creative already had a creativeTags entry.",
+      "result": "success",
+      "previousState": {
+        "creativeTags_count_before": 527
+      },
+      "detail": {
+        "newly_tagged_creative_ids": [
+          "1824648388784120",
+          "1119268934226559"
+        ],
+        "creativeTags_count_after": 529
+      },
+      "tier": "auto",
+      "executedAt": "2026-11-16T10:50:00.000Z"
     }
   ],
   "creativeTags": {
@@ -55176,6 +55273,28 @@
       "visionPassSkipped": true,
       "note": "Higgsfield vision connection not attached to this run -- image/video content itself not analyzed, only real ad copy text used. No creative description invented. This creative_id is a freshly Meta-generated Advantage+ text-optimization variant of ad MATCHA_LAL_Video (120256662656200159) that appeared after the 18:47 UTC pass.",
       "taggedAt": "2026-11-13T20:51:00.000Z"
+    },
+    "1824648388784120": {
+      "adName": "FUD_Carousel_TierI_PLACEHOLDER_replace_images",
+      "campaign": "Fudoshin_MOF_BOF_Carousel_16Nov",
+      "format": "Share post (object_type=SHARE; ad name indicates carousel intent but placeholder images not yet swapped in -- child_attachments not fetched this pass)",
+      "angle": "Brand/product story introduction (new Fudoshin hoodie/sweatshirt line) + scarcity (limited run of 50 pcs) + fabric-quality claim, not discount-led",
+      "hook": "\"Fudoshin. Built with structure.\" (primary text) / \"KAI\" (headline) -- \"400 GSM heavyweight cotton with microfibre fleece inside... Limited Edition: 50 pcs only. Hoodies & sweatshirts from ₹1,666.\"",
+      "taggedFrom": "ad primary text (body) + headline (title), via Meta Ads MCP ads_get_creatives",
+      "visionPassSkipped": true,
+      "note": "Higgsfield vision connection not attached to this run -- image content itself not analyzed, only real ad copy text used. No creative description invented.",
+      "taggedAt": "2026-11-16T10:50:00.000Z"
+    },
+    "1119268934226559": {
+      "adName": "FUD_Carousel_Metros_PLACEHOLDER_replace_images",
+      "campaign": "Fudoshin_MOF_BOF_Carousel_16Nov",
+      "format": "Share post (object_type=SHARE; ad name indicates carousel intent but placeholder images not yet swapped in -- child_attachments not fetched this pass)",
+      "angle": "Brand/product story introduction (new Fudoshin hoodie/sweatshirt line) + scarcity (limited run of 50 pcs) + fabric-quality claim, not discount-led",
+      "hook": "\"Fudoshin. Built with structure.\" (primary text) / \"KAI\" (headline) -- \"400 GSM heavyweight cotton with microfibre fleece inside... Limited Edition: 50 pcs only. Hoodies & sweatshirts from ₹1,666.\"",
+      "taggedFrom": "ad primary text (body) + headline (title), via Meta Ads MCP ads_get_creatives",
+      "visionPassSkipped": true,
+      "note": "Higgsfield vision connection not attached to this run -- image content itself not analyzed, only real ad copy text used. No creative description invented.",
+      "taggedAt": "2026-11-16T10:50:00.000Z"
     }
   }
 }
