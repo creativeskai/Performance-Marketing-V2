@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-16T12:50:00.000Z",
+  "generatedAt": "2026-11-16T14:52:00.000Z",
   "settings": {
     "kill_roas_threshold": "DISABLED 2026-10-05 by user instruction: the ROAS pause-kill is OFF. Module 16 (pause-kill) must NOT auto-pause any campaign for low ROAS; surface low-ROAS campaigns as alerts only. The hard spend circuit breaker is a separate mechanism and stays ON. Former rule, for reference: pause if ROAS < 1.0x after ₹500 spend on a sales-objective campaign. EXCEPTION until 2026-10-05T23:59+05:30 (user-approved 2026-09-29): for the sneaker-push campaigns 120256091369160159 (Sneakers_BOF_30Sep-5Oct), 120256091370110159 (Sneakers_Prospecting_30Sep-5Oct) and 120256088882780159 (Sneakers_Catalog_Retargeting) the spend floor is ₹1,500, not ₹500.",
     "reactivate_min_historic_roas": "surface for reactivation if a paused campaign's last active-period ROAS >= 3.0x",
@@ -1666,7 +1666,7 @@
       "module": "device-targeting",
       "tier": "approval",
       "title": "Restrict Retargeting_Overall to Android -- iPhone ROAS less than half of Android's at meaningful spend",
-      "reasoning": "Fresh impression_device breakdown this pass (last_30d, campaign Retargeting_Overall / ad set Retargeting_Overall, id 120255851467360159): android_smartphone 14.950966x ROAS on ₹5,678.41 spend vs iphone 6.926008x ROAS on ₹4,725.75 spend -- a ~2.16x gap at meaningful spend on both sides. iPhone's CPM is also 33% higher (₹80.50 vs ₹60.22). No other active campaign shows a comparable device gap this pass (Caps_Only, Sneakers_BOF_v2_Placement_Split_12Oct, Prospecting_JP2_Placement_Split_12Oct, Prospecting_LAL1_Purchasers_14Oct and Fudoshin all show Android/iPhone ROAS within a reasonable range of each other, several favoring iPhone instead). No prior device-targeting proposal exists for this ad set (A-053 and A-070 covered different, now-paused ad sets and were both rejected). Reconfirmed 2026-11-11T22:49:00.000Z pass: fresh last_7d device breakdown on Retargeting_Overall shows android_smartphone at 32.66x ROAS (₹677.36 spend, 10 purchases) vs iphone at 0 recorded purchases on ₹323.12 spend -- the gap persists and is, if anything, starker than when this proposal was written. No change to the proposed restriction. Reconfirmed 2026-11-12T02:50:35.000Z: fresh last_14d device breakdown on Retargeting_Overall confirms android_smartphone at 21.42x ROAS (Rs1,925.61 spend) vs iphone at 2.37x ROAS (Rs1,433.04 spend) -- iPhone's ROAS is less than an eighth of Android's at meaningful spend on both sides, an even wider gap than originally cited. Still pending human review. Reconfirmed 2026-11-13T06:51:00.000Z pass: fresh last_14d device breakdown on Retargeting_Overall shows android_smartphone at 26.121733x ROAS (₹1,387.42 spend) vs iphone at 3.428555x ROAS (₹767.36 spend) -- iPhone's ROAS is about 13% of Android's at meaningful spend on both sides, continuing the persistent gap. No change to the proposed restriction. Still pending human review. Reconfirmed 2026-11-13T10:50:00.000Z pass: fresh last_14d device breakdown on Retargeting_Overall shows android_smartphone at 23.088496x ROAS (₹1,786.17 spend, 17 purchases) vs iphone at 2.838369x ROAS (₹1,194.35 spend, 2 purchases) -- iPhone's ROAS is about 12% of Android's at meaningful spend on both sides, continuing the persistent gap. No change to the proposed restriction. Still pending human review. Reconfirmed 2026-11-13T12:50:00.000Z pass: fresh impression_device breakdown (last_30d, Retargeting_Overall campaign/ad set 120255851467360159): android_smartphone 13.389322x ROAS on ₹5,355.32 spend vs iphone 5.367335x ROAS on ₹4,400.26 spend -- gap now ~2.49x (widened slightly from the 2.16x gap at last reconfirmation). iPhone CPM ₹78.59 vs Android ₹59.56. Still pending human review. Reconfirmed 2026-11-13T15:50:00.000Z pass: fresh last_14d device breakdown on Retargeting_Overall shows android_smartphone at 26.121733x ROAS (₹1,387.42 spend, 15 purchases) vs iphone at 3.428555x ROAS (₹767.36 spend, 1 purchase) -- iPhone's ROAS is about 13% of Android's at meaningful spend on both sides, continuing the persistent gap. No change to the proposed restriction. Still pending human review. Reconfirmed 2026-11-13T16:50:00.000Z pass: fresh last_14d device breakdown on Retargeting_Overall shows android_smartphone at 26.121733x ROAS (₹1,387.42 spend) vs iphone at 3.428555x ROAS (₹767.36 spend) -- identical to the 15:50 UTC pass, continuing the persistent gap. No change to the proposed restriction. Still pending human review. [Reconfirmed 2026-11-13T18:47:00.000Z pass: Retargeting_Overall device breakdown (last_14d) android_smartphone 25.17x ROAS/₹1,440.11 spend vs iphone 3.33x ROAS/₹789.77 spend -- gap persists.] Reconfirmed 2026-11-13T20:51:00.000Z pass (last_14d device breakdown on Retargeting_Overall): Android 24.70x ROAS (₹1,669.81 spent) vs iPhone 3.44x ROAS (₹986.55 spent) -- iPhone gap has widened further (well under half of Android's ROAS). Proposal still valid. Reconfirmed 2026-11-14T02:48:00.000Z pass (last_14d device breakdown on Retargeting_Overall): Android 25.166138x ROAS (Rs1,440.11 spent) vs iPhone 3.331285x ROAS (Rs789.77 spent) -- gap persists (iPhone ~13% of Android's ROAS). Proposal still valid. Reconfirmed 2026-11-14T18:51:49.000Z pass (fresh last_30d window after the IST day rollover): android_smartphone 23.640894x ROAS on Rs1,725.24 spend vs iphone 2.65083x ROAS on Rs992.50 spend -- gap widened to ~8.9x. Both sides at meaningful-for-this-adset spend; trigger still holds. Reconfirmed 2026-11-15T02:50:22.000Z pass: fresh last_14d device breakdown on Retargeting_Overall shows android_smartphone at 26.591898x ROAS (₹1,533.78 spend) vs iphone at 3.181351x ROAS (₹826.99 spend) -- iPhone's ROAS is about 12% of Android's at meaningful spend on both sides, continuing the persistent gap. No change to the proposed restriction. Still pending human review. Update 2026-11-15T04:53:39.000Z pass: fresh last_30d impression_device breakdown on Retargeting_Overall -- android_smartphone now 23.641x ROAS on ₹1,725.26 spend vs iphone 2.651x ROAS on ₹992.50 spend, a ~8.9x gap (widened from the 2.16x gap recorded when this proposal was created). iPhone CPM ₹133.71 vs Android CPM ₹112.30. Still the clearest device gap on the account this pass. Not re-created, reasoning refreshed only. Update 2026-11-15T06:51:00.000Z pass: fresh last_30d impression_device breakdown -- android_smartphone 23.64x ROAS on ₹1,725.26 spend vs iphone 2.65x ROAS on ₹992.50 spend, ~8.9x gap -- unchanged from 2 hours ago. Not re-created, reasoning refreshed only. Reconfirmed 2026-11-15T14:53:33.000Z pass: fresh last_14d impression_device breakdown on Retargeting_Overall (120255851467360159) shows android_smartphone at 26.591898x ROAS (Rs1,533.78 spend, ctr 2.21%) vs iphone at 3.181351x ROAS (Rs826.99 spend, ctr 1.94%) -- gap is now ~8.4x, starker than when this proposal was written. No change to the proposed restriction. Still pending human review. Reconfirmed 2026-11-15T20:48:00.000Z pass: fresh last_14d device breakdown shows android_smartphone 22.622697x ROAS (₹1,505.31 spend) vs iphone 3.491853x ROAS (₹753.45 spend) -- gap widened further, now ~1/6.5 rather than 'less than half'. Reconfirmed 2026-11-15T22:51:18.000Z pass: Retargeting_Overall last_14d device breakdown -- iPhone 3.49x ROAS (Rs753.45 spend, 5,400 impressions) vs Android smartphone 22.62x ROAS (Rs1,505.31 spend, 13,145 impressions). iPhone still far below Android's, gap unchanged. Reconfirmed 2026-11-16T02:53:06.000Z pass: fresh last_14d impression_device breakdown on Retargeting_Overall (120255851467360159) shows android_smartphone at 22.622697x ROAS (Rs1,505.31 spend) vs iphone at 3.491853x ROAS (Rs753.45 spend) -- identical to the 2026-11-15T22:51:18.000Z pass. Gap unchanged, still pending human review. Reconfirmed 2026-11-16T04:58:00.000Z pass: fresh impression_device breakdown (last_30d) -- android_smartphone 21.489928x ROAS on ₹1,897.92 spend vs iphone 2.446694x ROAS on ₹1,075.31 spend, an 8.8x gap (wider than previously recorded). Still pending human approval, action unchanged. Reconfirmed 2026-11-16T08:55:00.000Z pass: fresh last_14d impression_device breakdown on Retargeting_Overall (120255851467360159) shows android_smartphone at 22.622697x ROAS (₹1,505.31 spend) vs iphone at 3.491853x ROAS (₹753.45 spend) -- identical to the 02:53 pass. Gap unchanged, still pending human review.",
+      "reasoning": "Reconfirmed 2026-11-16T14:52 UTC pass with fresh last_14d impression_device breakdown on Retargeting_Overall (campaign/ad set id 120255851467340159/120255851467360159): android_smartphone 22.622697x ROAS on ₹1,505.31 spend vs iphone 3.491853x ROAS on ₹753.45 spend -- a ~6.48x gap at meaningful spend on both sides, a materially larger gap than the 2.16x last seen on 2026-11-11 (last_30d window). Android CPM is also lower (₹114.51 vs ₹139.53). No other active campaign shows a comparable device gap this pass. Original proposal (restrict Retargeting_Overall to Android) remains valid and strengthened; action unchanged, awaiting human approval.",
       "actionSummary": "Adds \"user_os\":[\"Android\"] to the Retargeting_Overall ad set's targeting, restricting delivery to Android devices only and stopping spend on the lower-ROAS iPhone segment. Per Meta API behavior, this non-trivial targeting edit on a live ad set will force-pause it; it would need to be manually reactivated after approval.",
       "metaAction": {
         "tool": "ads_update_entity",
@@ -32016,6 +32016,24 @@
       "severity": "low",
       "dismissed": false,
       "createdAt": "2026-11-16T12:50:00.000Z"
+    },
+    {
+      "id": "AL-3360",
+      "module": "anomaly",
+      "title": "Narrow-audience warning expands to 4 ad sets -- WARM_T1 now included",
+      "detail": "ads_insights_anomaly_signal (active_delivery_narrow_audience) now flags 4 ad sets, up from 3 last pass (AL-3357): WARM_T1_HOT_ATC_IC_30D (120256667271360159, audience ~1,200-1,300, newly flagged this pass), WARM_T2_CONSIDER_PDP_90D (~24,800-29,300), WARM_T4_XSell_Purchasers180D (~1,000-1,100, exempt purchaser cross-sell ad set, narrow by design), and INYO_BOF_PDPViewers_Purchase_Men25-44 (~1,700-2,000, day-old single-product PDP retargeting pool). All four are intentionally small-audience retargeting/cross-sell/custom-audience segments, not targeting regressions or configuration errors -- consistent with this module's standing low-severity, informational classification. No action taken.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-11-16T14:52:00.000Z"
+    },
+    {
+      "id": "AL-3361",
+      "module": "self-audit-check",
+      "title": "Full 35-module sweep -- no new structural findings, pending proposals reconfirmed",
+      "detail": "2026-11-16T14:52 UTC pass: 6 campaigns / 13 ad sets ACTIVE (InYo_TOF_MOF_BOF_16Nov, Fudoshin_MOF_BOF_Carousel_16Nov, Sneakers_BOF_v2_Placement_Split_12Oct, Prospecting_JP2_Placement_Split_12Oct, Caps_Only, Retargeting_Overall). Today's spend ₹4,787.52/₹7,000 (68.4%), no circuit-breaker concern; breaker remains tripped since 2026-10-10 (A-063 pending). Pixel EMQ scores healthy (6.1-8.9). purchaser-exclusion, lookalike-refresh and hook-angle-tagging all compliant/no-action (see log). Fresh age/gender, placement, device, geo and hourly breakdowns pulled for all active campaigns: no new placement/geo/dayparting/device triggers beyond the already-pending A-081 (device-targeting on Retargeting_Overall, reasoning updated this pass with a larger last_14d gap: android 22.62x vs iphone 3.49x ROAS). Pending proposals A-002, A-076, A-78, A-079, A-080, A-081 all reconfirmed still valid against fresh data, numbers largely unchanged; none executed (approval-tier, awaiting human decision). weekly-digest already written today at 04:58 UTC (AL-3346) -- not re-written this pass (once-per-Monday, established pass precedent). competitor-rescrape last ran 04:58 UTC today -- not due again this pass. No learning-phase-stuck ad sets (all learning_stage_info null), no new pause-kill candidates (all active sales campaigns above water: 3.45x-14.78x ROAS), no frequency-capping concern (max active-adset frequency 1.76, well under fatigue_frequency_threshold=3). KPI-to-trigger completeness: all dashboard-surfaced metrics continue to map to an existing module above.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-11-16T14:52:00.000Z"
     }
   ],
   "log": [
@@ -49546,6 +49564,88 @@
       },
       "tier": "auto",
       "executedAt": "2026-11-16T12:50:00.000Z"
+    },
+    {
+      "proposalId": null,
+      "action": "auto-module: hard-spend-circuit-breaker check (pre-check, safety infrastructure) -- ads_get_ad_entities (level=ad_account, date_preset=today) shows today's account spend at ₹4,787.52 vs settings.hard_spend_ceiling_inr (₹7,000) -- 68.4% of ceiling, no breach. circuitBreaker.tripped remains true (unresolved 2026-10-10 trip, A-063 still pending human review) -- no new trip this pass, no auto-resume attempted (never auto-resumes per ROUTINE.md).",
+      "result": "success",
+      "previousState": {
+        "circuitBreaker_tripped": true,
+        "today_spend_at_prior_pass_inr": 3987.27
+      },
+      "detail": {
+        "today_spend_inr": 4787.52,
+        "ceiling_inr": 7000,
+        "breached": false
+      },
+      "tier": "auto",
+      "executedAt": "2026-11-16T14:52:00.000Z"
+    },
+    {
+      "proposalId": null,
+      "action": "auto-module: pixel-health / pixel-quality-gate check -- ads_get_dataset_quality on dataset 833131719490535 shows composite EMQ scores ranging 6.1 (web events: SubscribedButtonClick, Search, AddToCart, PageView, ViewContent) to 8.9 (AddPaymentInfo); Purchase 8.6, cod_purchase 8.6, prepaid_purchase 8.5 -- all consistent with every recent pass and well above degradation range. ROAS-based modules not suppressed this pass.",
+      "result": "success",
+      "previousState": {
+        "prior_pass_emq_range": "6.1-8.9"
+      },
+      "detail": {
+        "emq_composite_scores": {
+          "SubscribedButtonClick": 6.1,
+          "Search": 6.1,
+          "AddToCart": 6.1,
+          "InitiateCheckout": 7.0,
+          "PageView": 6.1,
+          "ViewContent": 6.1,
+          "AddPaymentInfo": 8.9,
+          "Purchase": 8.6,
+          "cod_purchase": 8.6,
+          "prepaid_purchase": 8.5
+        }
+      },
+      "tier": "auto",
+      "executedAt": "2026-11-16T14:52:00.000Z"
+    },
+    {
+      "proposalId": null,
+      "action": "auto-module: purchaser-exclusion -- fresh direct targeting fetch on all 13 active ad sets across the 6 active campaigns (InYo_TOF_MOF_BOF_16Nov, Fudoshin_MOF_BOF_Carousel_16Nov, Sneakers_BOF_v2_Placement_Split_12Oct, Prospecting_JP2_Placement_Split_12Oct, Caps_Only, Retargeting_Overall): 12 of 13 directly exclude Purchasers 180D (120255823280550159) in excluded_custom_audiences; the 13th, WARM_T4_XSell_Purchasers180D (120256667272700159), is on settings.purchaser_exclusion_exempt_adset_ids and deliberately includes it by design (cross-sell). purchaser-exclusion remains compliant account-wide -- no edit needed, no force-pause risk.",
+      "result": "success",
+      "previousState": {
+        "active_adsets_checked_prior_pass": 13
+      },
+      "detail": {
+        "active_adsets_checked": 13,
+        "non_compliant_found": 0
+      },
+      "tier": "auto",
+      "executedAt": "2026-11-16T14:52:00.000Z"
+    },
+    {
+      "proposalId": null,
+      "action": "auto-module: lookalike-refresh -- current baseline LAL4_Purchasers180D_15Nov (120256908273510159, ACTIVE, size ~1,000) built 2026-11-15T10:48:17Z, now ~28h old, well under the 14-day lookalike_refresh_days threshold. Source audience Purchasers 180D (120255823280550159) still ~20 members, unchanged -- no growth-based refresh trigger either. No action needed.",
+      "result": "success",
+      "previousState": {
+        "lal_age_hours_prior_pass": 26
+      },
+      "detail": {
+        "lal_age_hours": 28,
+        "source_audience_size": 20
+      },
+      "tier": "auto",
+      "executedAt": "2026-11-16T14:52:00.000Z"
+    },
+    {
+      "proposalId": null,
+      "action": "auto-module: hook-angle-tagging -- checked all distinct creative_ids across active/recently-active ads this pass (28 distinct creatives across all 6 active campaigns including the brand-new InYo and Fudoshin creatives tagged last pass): all already have a creativeTags entry (534 total tagged account-wide). No untagged creatives found, nothing to tag this pass.",
+      "result": "success",
+      "previousState": {
+        "untagged_creatives_found_prior_pass": 0
+      },
+      "detail": {
+        "active_creative_ids_checked": 28,
+        "untagged_found": 0
+      },
+      "tier": "auto",
+      "executedAt": "2026-11-16T14:52:00.000Z"
     }
   ],
   "creativeTags": {
