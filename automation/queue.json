@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-24T06:50:07.000Z",
+  "generatedAt": "2026-11-24T08:55:00.000Z",
   "settings": {
     "kill_roas_threshold": "DISABLED 2026-10-05 by user instruction: the ROAS pause-kill is OFF. Module 16 (pause-kill) must NOT auto-pause any campaign for low ROAS; surface low-ROAS campaigns as alerts only. The hard spend circuit breaker is a separate mechanism and stays ON. Former rule, for reference: pause if ROAS < 1.0x after ₹500 spend on a sales-objective campaign. EXCEPTION until 2026-10-05T23:59+05:30 (user-approved 2026-09-29): for the sneaker-push campaigns 120256091369160159 (Sneakers_BOF_30Sep-5Oct), 120256091370110159 (Sneakers_Prospecting_30Sep-5Oct) and 120256088882780159 (Sneakers_Catalog_Retargeting) the spend floor is ₹1,500, not ₹500.",
     "reactivate_min_historic_roas": "surface for reactivation if a paused campaign's last active-period ROAS >= 3.0x",
@@ -33,8 +33,8 @@
     "competitor_last_scrape": {
       "gully_labs_active_ads": 56,
       "lotto_sport_india_active_ads": 150,
-      "scraped_at": "2026-11-24T06:50:07.000Z",
-      "note": "2026-11-24T06:50:07.000Z pass: Gully Labs 56->56 (0%, flat, no breach), Lotto Sport India 150->150 (0%, flat, no breach). Both page-ID-scoped (107479854297817 / 426015150606378), country IN, ad_active_status ACTIVE."
+      "scraped_at": "2026-11-24T08:55:00.000Z",
+      "note": "2026-11-24T08:55:00.000Z pass: Gully Labs 56->56 (0%, flat, no breach), Lotto Sport India 150->150 (0%, flat, no breach). Both page-ID-scoped (107479854297817 / 426015150606378), country IN, ad_active_status ACTIVE."
     },
     "audience_label_corrections": {
       "120249907176770159": "ATC_180D -- NOT a purchaser audience (cart-adders, event=AddToCart, retention 180 days). Verified 2026-09-14, reconfirmed 2026-09-20. Superseded note: earlier passes said the account had NO purchaser audience at all -- that's now out of date. See the 120255823280550159 (Purchasers 180D) entry above, created 2026-09-15, which IS a genuine purchaser audience and is already in use for exclusion + lookalike.",
@@ -1756,7 +1756,7 @@
       "module": "reactivate-winner",
       "tier": "approval",
       "title": "Reactivate Fudoshin -- 7.05x last_30d ROAS on real spend/volume, above the 3.0x reactivate threshold",
-      "reasoning": "Campaign 120256520320990159 (\"Fudoshin\", created 2026-10-23) was PAUSED on 2026-11-16T00:06:51+0530 and has stayed paused since. Fresh last_30d pull: purchase_roas 7.053161x on ₹6,375.72 spend with 28 attributed purchases -- well above the 3.0x reactivate_min_historic_roas threshold, and on real volume/spend (not a thin-window outlier like A-78's Sneakers_HOT_Pool_Tiers_12Oct). This has not been previously surfaced as a reactivate-winner candidate (no prior proposal, alert, or log entry mentions this campaign ID). Context for the human reviewer: a new campaign, Fudoshin_MOF_BOF_Carousel_16Nov (120256919246040159), was created 2026-11-16T13:24:03+0530 -- about 13 hours after this one was paused -- using a carousel format and similar naming, which looks like a deliberate creative-format swap/refresh of the same line rather than a kill for poor performance. That newer campaign has since underperformed (0.67x ROAS, see A-082) and is itself now paused. Reactivating this older, proven campaign alongside or instead of its newer replacement may be worth considering -- left entirely to human judgment. Reconfirmed 2026-11-23T20:51:25.000Z pass: fresh last_30d pull shows purchase_roas 6.848013x on ₹6,031.25 spend (26 purchases) -- down slightly from 7.053161x/₹6,375.72/28 purchases at creation, consistent with the trailing 30-day window rolling off early-Nov spend/purchases for this long-paused campaign (no new spend since it was paused). Still well above the 3.0x reactivate_min_historic_roas threshold. Still pending human review. Reconfirmed 2026-11-24T02:53:00.000Z pass: fresh last_30d pull shows purchase_roas 6.848013x on ₹6,031.25 spend, unchanged from the prior pass (long-paused campaign, no new spend since it was paused). Still well above the 3.0x reactivate_min_historic_roas threshold. Still pending human review.",
+      "reasoning": "Campaign 120256520320990159 (\"Fudoshin\", created 2026-10-23) was PAUSED on 2026-11-16T00:06:51+0530 and has stayed paused since. Fresh last_30d pull: purchase_roas 7.053161x on ₹6,375.72 spend with 28 attributed purchases -- well above the 3.0x reactivate_min_historic_roas threshold, and on real volume/spend (not a thin-window outlier like A-78's Sneakers_HOT_Pool_Tiers_12Oct). This has not been previously surfaced as a reactivate-winner candidate (no prior proposal, alert, or log entry mentions this campaign ID). Context for the human reviewer: a new campaign, Fudoshin_MOF_BOF_Carousel_16Nov (120256919246040159), was created 2026-11-16T13:24:03+0530 -- about 13 hours after this one was paused -- using a carousel format and similar naming, which looks like a deliberate creative-format swap/refresh of the same line rather than a kill for poor performance. That newer campaign has since underperformed (0.67x ROAS, see A-082) and is itself now paused. Reactivating this older, proven campaign alongside or instead of its newer replacement may be worth considering -- left entirely to human judgment. Reconfirmed 2026-11-23T20:51:25.000Z pass: fresh last_30d pull shows purchase_roas 6.848013x on ₹6,031.25 spend (26 purchases) -- down slightly from 7.053161x/₹6,375.72/28 purchases at creation, consistent with the trailing 30-day window rolling off early-Nov spend/purchases for this long-paused campaign (no new spend since it was paused). Still well above the 3.0x reactivate_min_historic_roas threshold. Still pending human review. Reconfirmed 2026-11-24T02:53:00.000Z pass: fresh last_30d pull shows purchase_roas 6.848013x on ₹6,031.25 spend, unchanged from the prior pass (long-paused campaign, no new spend since it was paused). Still well above the 3.0x reactivate_min_historic_roas threshold. Still pending human review. Reconfirmed 2026-11-24T08:55:00.000Z pass: last_30d purchase_roas now 6.848013x on Rs6,031.25 spend, 26 attributed purchases (down slightly from 7.053161x/Rs6,375.72/28 purchases) -- still well above the 3.0x threshold, no change to the recommendation.",
       "actionSummary": "Reactivates campaign 120256520320990159 (Fudoshin) via ads_activate_entity. No budget change bundled -- its ad sets keep their last-set budgets/targeting; review and adjust if scaling beyond its prior spend level.",
       "metaAction": {
         "tool": "ads_activate_entity",
@@ -36934,6 +36934,204 @@
       "severity": "low",
       "dismissed": false,
       "createdAt": "2026-11-24T06:50:07.000Z"
+    },
+    {
+      "id": "AL-3895",
+      "module": "threshold-alerts",
+      "title": "No CPM/CTR/CPC threshold breach",
+      "detail": "Active campaigns' CPM/CTR/CPC this pass within normal bands vs 30d baseline for all 6 active campaigns (Fudoshin_MOF_BOF_Carousel_16Nov, KAGE_TOF_LAL_Purchase_01Nov, Prospecting_LAL1_Purchasers_14Oct, Sneakers_BOF_v2_Placement_Split_12Oct, Caps_Only, Retargeting_Overall). No breach.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-11-24T08:55:00.000Z"
+    },
+    {
+      "id": "AL-3896",
+      "module": "anomaly",
+      "title": "Narrow-audience signal persists on 2 WARM ad sets",
+      "detail": "ads_insights_anomaly_signal: active_delivery_narrow_audience still flagged on WARM_T2_CONSIDER_PDP_90D (120256667271960159, audience 21.1k-24.8k) and WARM_T4_XSell_Purchasers180D (120256667272700159, audience 1.2k-1.4k). Already traced to deliberate engagement-tier segmentation (see anomaly-root-cause history) -- no action.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-11-24T08:55:00.000Z"
+    },
+    {
+      "id": "AL-3897",
+      "module": "anomaly-root-cause",
+      "title": "Narrow-audience driver unchanged -- deliberate engagement-tier segmentation",
+      "detail": "Same two WARM-tier ad sets (WARM_T2_CONSIDER_PDP_90D, WARM_T4_XSell_Purchasers180D) under Sneakers_BOF_v2_Placement_Split_12Oct's engagement-tier split are intentionally narrow by design (T2/T4 of a T1-T4 tier structure) -- not a targeting regression.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-11-24T08:55:00.000Z"
+    },
+    {
+      "id": "AL-3898",
+      "module": "learning-phase-stuck",
+      "title": "No ad set stuck in learning",
+      "detail": "learning_stage_info checked on all 12 active ad sets -- none reporting a stuck/limited learning status.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-11-24T08:55:00.000Z"
+    },
+    {
+      "id": "AL-3899",
+      "module": "pixel-health",
+      "title": "Pixel quality healthy, no gate suppression",
+      "detail": "ads_get_dataset_quality composite EMQ 6.1-8.8 across all tracked events, at/above pixel_quality_min_match_rate=0.6. ROAS-based modules evaluated normally this pass.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-11-24T08:55:00.000Z"
+    },
+    {
+      "id": "AL-3900",
+      "module": "competitor-rescrape",
+      "title": "Gully Labs and Lotto Sport India active-ad counts flat vs last pass",
+      "detail": "ads_library_search (page-ID-scoped, country IN, ACTIVE): Gully Labs 56->56 (0%), Lotto Sport India 150->150 (0%). No breach of the 20% move threshold.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-11-24T08:55:00.000Z"
+    },
+    {
+      "id": "AL-3901",
+      "module": "campaign-consolidation-watch",
+      "title": "No duplicate campaign targeting detected",
+      "detail": "6 active campaigns reviewed (Fudoshin_MOF_BOF_Carousel_16Nov, KAGE_TOF_LAL_Purchase_01Nov, Prospecting_LAL1_Purchasers_14Oct, Sneakers_BOF_v2_Placement_Split_12Oct, Caps_Only, Retargeting_Overall) -- each targets a distinct funnel stage/audience combination, no overlapping product+audience pair found.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-11-24T08:55:00.000Z"
+    },
+    {
+      "id": "AL-3902",
+      "module": "catalog-dpa-launch",
+      "title": "Catalog linked, zero DPA/catalog-based campaigns running",
+      "detail": "No active campaign uses a product_set/catalog-driven creative this pass. Carried forward from prior passes -- not re-queried via ads_catalog_get_diagnostics this pass (standing finding).",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-11-24T08:55:00.000Z"
+    },
+    {
+      "id": "AL-3903",
+      "module": "pause-kill",
+      "title": "1 active sales campaign below the former 1.0x kill floor (pause-kill disabled)",
+      "detail": "Fudoshin_MOF_BOF_Carousel_16Nov last_30d ROAS 0.59x (spend Rs2,945.36) is below the former 1.0x kill floor. kill_roas_threshold is DISABLED by user instruction since 2026-10-05 -- surfaced as alert only, no auto-pause. See budget-reallocation proposal A-082 for the companion shift-budget-away action.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-11-24T08:55:00.000Z"
+    },
+    {
+      "id": "AL-3904",
+      "module": "age-gender-auto-shift",
+      "title": "No new age/gender cell concentrated enough at meaningful spend to act on",
+      "detail": "last_14d age/gender breakdown: 25-34 male (Rs40,469.86, 6.53x), 18-24 male (Rs13,908.53, 5.13x), 35-44 male (Rs14,434.22, 3.63x) -- no cell materially off account average (5.6x blended) at meaningful spend.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-11-24T08:55:00.000Z"
+    },
+    {
+      "id": "AL-3905",
+      "module": "placement-optimization",
+      "title": "IG Reels remains most CPM-efficient placement; FB Feed remains weakest (unchanged)",
+      "detail": "last_14d: instagram_reels Rs41,156.61 spend, CPM Rs49.39, 5.75x ROAS vs facebook feed Rs2,657.13 spend, CPM Rs113.94, 3.24x ROAS. Consistent with prior passes -- no new action.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-11-24T08:55:00.000Z"
+    },
+    {
+      "id": "AL-3906",
+      "module": "geo-scaling",
+      "title": "No new geo-scaling candidate this pass",
+      "detail": "No region breakdown change identified this pass warranting a new scale-up candidate.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-11-24T08:55:00.000Z"
+    },
+    {
+      "id": "AL-3907",
+      "module": "geo-suppression",
+      "title": "No state/city flagged for suppression this pass",
+      "detail": "No region showed poor CTR/ROAS at meaningful spend this pass.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-11-24T08:55:00.000Z"
+    },
+    {
+      "id": "AL-3908",
+      "module": "new-geo-testing",
+      "title": "No new-geo-testing candidate identified this pass",
+      "detail": "No untested geo matching a winning geo's profile identified this pass.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-11-24T08:55:00.000Z"
+    },
+    {
+      "id": "AL-3909",
+      "module": "frequency-capping",
+      "title": "No active ad set approaching the fatigue frequency threshold",
+      "detail": "Max observed last_7d ad frequency across active ads is ~1.5 (T3_RT_Fudoshin), well under fatigue_frequency_threshold=3.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-11-24T08:55:00.000Z"
+    },
+    {
+      "id": "AL-3910",
+      "module": "creative-fatigue",
+      "title": "No active ad at/above the fatigue frequency threshold",
+      "detail": "last_7d ad-level frequency checked across all 31 active ads -- max ~1.5, under threshold of 3. No new fatigue candidate this pass.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-11-24T08:55:00.000Z"
+    },
+    {
+      "id": "AL-3911",
+      "module": "dayparting",
+      "title": "Early-morning ROAS dip -- standing first-pass finding, needs daily-level confirmation",
+      "detail": "Carried forward from prior pass -- hourly breakdown not re-queried this pass; standing finding unconfirmed at daily granularity.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-11-24T08:55:00.000Z"
+    },
+    {
+      "id": "AL-3912",
+      "module": "bid-strategy-adjustment",
+      "title": "No bid-strategy drift evaluated as material this pass",
+      "detail": "No campaign's real CPA drift from its bid/cost cap was evaluated as material this pass.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-11-24T08:55:00.000Z"
+    },
+    {
+      "id": "AL-3913",
+      "module": "ab-test",
+      "title": "No structured A/B test currently running (standing alert)",
+      "detail": "No ads_experiment_abtest currently running across active creatives.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-11-24T08:55:00.000Z"
+    },
+    {
+      "id": "AL-3914",
+      "module": "auto-creative-generation-launch",
+      "title": "Module not actionable this run -- Higgsfield MCP connection not attached",
+      "detail": "auto-creative-generation-launch depends on the Higgsfield MCP connection for generation, which is not attached to this scheduled run.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-11-24T08:55:00.000Z"
+    },
+    {
+      "id": "AL-3915",
+      "module": "engagement-tier-segmentation",
+      "title": "No new mixed-intent-tier ad set identified this pass",
+      "detail": "Existing WARM T1-T4 engagement-tier split under Sneakers_BOF_v2_Placement_Split_12Oct remains the only segmented structure -- no new mixed-intent ad set found.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-11-24T08:55:00.000Z"
+    },
+    {
+      "id": "AL-3916",
+      "module": "device-targeting",
+      "title": "Account-wide device ROAS gap not material this pass",
+      "detail": "last_14d account-level impression_device breakdown: android_smartphone Rs36,561.51 spend, 5.88x ROAS vs iphone Rs37,863.98 spend, 5.01x ROAS -- not a material gap account-wide. Pending proposal A-081 (Retargeting_Overall-specific device restriction) is a narrower, campaign-level finding and is left as-is pending human review.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-11-24T08:55:00.000Z"
     }
   ],
   "log": [
@@ -58139,6 +58337,76 @@
       },
       "tier": "auto",
       "executedAt": "2026-11-24T06:50:07.000Z"
+    },
+    {
+      "proposalId": null,
+      "action": "hard-spend-circuit-breaker check (pre-check, safety infrastructure) -- ads_get_ad_entities (level=ad_account, date_preset=today) showed today's account spend at Rs2,392.53 against settings.hard_spend_ceiling_inr (Rs7,000, 34.2%) -- no breach, no new trip. circuitBreaker.tripped remains true from the 2026-10-10T16:50 UTC trip (unresolved, A-063 resume-after-circuit-breaker still pending human review) -- per ROUTINE.md the routine never auto-resumes.",
+      "result": "success",
+      "previousState": {
+        "today_spend_prior_pass": 1632.05
+      },
+      "detail": {
+        "today_spend": 2392.53,
+        "ceiling": 7000,
+        "pct_of_ceiling": 34.2
+      },
+      "tier": "auto",
+      "executedAt": "2026-11-24T08:55:00.000Z"
+    },
+    {
+      "proposalId": null,
+      "action": "pixel-health / pixel-quality-gate check -- ads_get_dataset_quality on dataset 833131719490535: composite EMQ scores 6.1-8.8 across all tracked web events (prepaid_purchase 8.8, Purchase 8.6, cod_purchase 8.5, AddPaymentInfo 8.7, InitiateCheckout 7.1, PageView/ViewContent/AddToCart/Search/SubscribedButtonClick 6.1), all at/above settings.pixel_quality_min_match_rate (0.6) -- ROAS-based modules not suppressed this pass. Recurring diagnostics (IP-address-multi-user association, IPv4/IPv6 CAPI mismatch on PageView/ViewContent) unchanged from prior passes, not actionable from this routine.",
+      "result": "success",
+      "previousState": {},
+      "detail": {
+        "scores_range": [
+          6.1,
+          8.8
+        ],
+        "threshold": 0.6,
+        "suppressed": false
+      },
+      "tier": "auto",
+      "executedAt": "2026-11-24T08:55:00.000Z"
+    },
+    {
+      "proposalId": null,
+      "action": "purchaser-exclusion -- fresh direct targeting fetch on all 12 currently-active ad sets across the 6 active campaigns (Fudoshin_MOF_BOF_Carousel_16Nov, KAGE_TOF_LAL_Purchase_01Nov, Prospecting_LAL1_Purchasers_14Oct, Sneakers_BOF_v2_Placement_Split_12Oct, Caps_Only, Retargeting_Overall). All 11 non-exempt ad sets exclude Purchasers 180D (120255823280550159) in excluded_custom_audiences. WARM_T4_XSell_Purchasers180D (120256667272700159) is on settings.purchaser_exclusion_exempt_adset_ids and deliberately targets past purchasers by design. Retargeting_Overall (120255851467360159) is also on the exempt list and independently confirmed to already exclude the audience. purchaser-exclusion remains compliant account-wide -- no action needed.",
+      "result": "success",
+      "previousState": {},
+      "detail": {
+        "active_adsets_checked": 12,
+        "compliant": true
+      },
+      "tier": "auto",
+      "executedAt": "2026-11-24T08:55:00.000Z"
+    },
+    {
+      "proposalId": null,
+      "action": "lookalike-refresh -- current baseline LAL4_Purchasers180D_15Nov (120256908273510159, delivery_status ACTIVE) checked via ads_get_custom_audience: built 2026-11-15T10:48 UTC, now ~8.9 days old -- still under the 14-day lookalike_refresh_days threshold. Source audience 'Purchasers 180D' (120255823280550159) size unchanged at ~20. No refresh due this pass.",
+      "result": "success",
+      "previousState": {},
+      "detail": {
+        "lal_age_days": 8.9,
+        "threshold_days": 14,
+        "source_size": 20
+      },
+      "tier": "auto",
+      "executedAt": "2026-11-24T08:55:00.000Z"
+    },
+    {
+      "proposalId": null,
+      "action": "hook-angle-tagging -- checked all 26 distinct creative_ids across the currently-active ads in the 6 active campaigns against queue.json.creativeTags. All 26 already have creativeTags entries -- nothing new to tag this pass. Higgsfield vision connection not attached to this run -- tagging remains text-only (primary text/headline via Meta Ads MCP), per ROUTINE.md Phase 3 notes.",
+      "result": "success",
+      "previousState": {
+        "distinct_active_creatives_prior_pass": 26
+      },
+      "detail": {
+        "distinct_active_creative_ids_checked": 26,
+        "untagged_found": 0
+      },
+      "tier": "auto",
+      "executedAt": "2026-11-24T08:55:00.000Z"
     }
   ],
   "creativeTags": {
