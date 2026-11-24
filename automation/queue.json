@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-24T02:53:00.000Z",
+  "generatedAt": "2026-11-24T04:50:12.000Z",
   "settings": {
     "kill_roas_threshold": "DISABLED 2026-10-05 by user instruction: the ROAS pause-kill is OFF. Module 16 (pause-kill) must NOT auto-pause any campaign for low ROAS; surface low-ROAS campaigns as alerts only. The hard spend circuit breaker is a separate mechanism and stays ON. Former rule, for reference: pause if ROAS < 1.0x after ₹500 spend on a sales-objective campaign. EXCEPTION until 2026-10-05T23:59+05:30 (user-approved 2026-09-29): for the sneaker-push campaigns 120256091369160159 (Sneakers_BOF_30Sep-5Oct), 120256091370110159 (Sneakers_Prospecting_30Sep-5Oct) and 120256088882780159 (Sneakers_Catalog_Retargeting) the spend floor is ₹1,500, not ₹500.",
     "reactivate_min_historic_roas": "surface for reactivation if a paused campaign's last active-period ROAS >= 3.0x",
@@ -1726,7 +1726,7 @@
       "module": "budget-reallocation",
       "tier": "approval",
       "title": "Shift Rs150/day from KAGE_TOF_LAL_Purchase_01Nov (0.27x) to Retargeting_Overall (10.22x)",
-      "reasoning": "KAGE_TOF_LAL_Purchase_01Nov (campaign 120256662646110159) runs well below break-even while Retargeting_Overall (campaign 120255851467340159) runs strongly above account average, a gap far above settings.budget_reallocation_min_roas_gap (1.5x). Fresh pull this pass: KAGE_TOF_LAL_Purchase_01Nov purchase_roas 2.101772x on ₹2,883.71 last_14d spend (3 purchases), 1.08743x on ₹5,573.60 last_30d spend (3 purchases). Retargeting_Overall purchase_roas 11.550724x on ₹2,988.52 last_14d spend (14 purchases), 9.360697x on ₹9,194.90 last_30d spend (45 purchases). Both campaigns remain ACTIVE. Reconfirmed 2026-11-23T22:49:10.000Z pass. Reconfirmed 2026-11-24T02:53:00.000Z pass: numbers unchanged from the prior pass -- KAGE_TOF_LAL_Purchase_01Nov purchase_roas 1.087393x on ₹5,573.79 last_30d spend; Retargeting_Overall purchase_roas 9.360697x on ₹9,194.90 last_30d spend. Both campaigns remain ACTIVE, gap unchanged. Still pending human review.",
+      "reasoning": "KAGE_TOF_LAL_Purchase_01Nov (campaign 120256662646110159) runs well below break-even while Retargeting_Overall (campaign 120255851467340159) runs strongly above account average, a gap far above settings.budget_reallocation_min_roas_gap (1.5x). Fresh pull this pass: KAGE_TOF_LAL_Purchase_01Nov purchase_roas 2.101772x on ₹2,883.71 last_14d spend (3 purchases), 1.08743x on ₹5,573.60 last_30d spend (3 purchases). Retargeting_Overall purchase_roas 11.550724x on ₹2,988.52 last_14d spend (14 purchases), 9.360697x on ₹9,194.90 last_30d spend (45 purchases). Both campaigns remain ACTIVE. Reconfirmed 2026-11-23T22:49:10.000Z pass. Reconfirmed 2026-11-24T02:53:00.000Z pass: numbers unchanged from the prior pass -- KAGE_TOF_LAL_Purchase_01Nov purchase_roas 1.087393x on ₹5,573.79 last_30d spend; Retargeting_Overall purchase_roas 9.360697x on ₹9,194.90 last_30d spend. Both campaigns remain ACTIVE, gap unchanged. Still pending human review. RECONFIRMED 2026-11-24T04:50:12.000Z pass: fresh last_7d pull shows KAGE_TOF_LAL_Purchase_01Nov's purchase_roas at 14.74128x on ₹356.95 spend (2 purchases) -- a sharp recent improvement on a very thin base, higher than Retargeting_Overall's own last_7d figure. last_14d (2.101633x on ₹2,883.90, 3 purchases) and last_30d windows still show it below Retargeting_Overall, so the underlying multi-week gap this proposal is based on still holds, but the trend is volatile on low volume -- flagging for the human reviewer rather than treating the gap as settled either way. No change made (approval-tier, no auto-execution).",
       "actionSummary": "Reduces KAGE_TOF_LAL_Purchase_01Nov campaign daily budget from Rs385 to Rs235, and increases Retargeting_Overall campaign daily budget from Rs250 to Rs400, via two ads_update_entity calls (both campaign-level, CBO).",
       "metaAction": {
         "tool": "ads_update_entity",
@@ -36871,6 +36871,24 @@
       "severity": "medium",
       "dismissed": false,
       "createdAt": "2026-11-24T02:53:00.000Z"
+    },
+    {
+      "id": "AL-3888",
+      "module": "self-audit-check",
+      "title": "Quiet pass -- circuit breaker still tripped (unresolved), no new issues",
+      "detail": "Account composition unchanged from the 2026-11-24T02:53:00.000Z pass: 6 campaigns / 12 ad sets ACTIVE (Fudoshin_MOF_BOF_Carousel_16Nov, KAGE_TOF_LAL_Purchase_01Nov, Prospecting_LAL1_Purchasers_14Oct, Sneakers_BOF_v2_Placement_Split_12Oct, Caps_Only, Retargeting_Overall). purchaser-exclusion, lookalike-refresh and hook-angle-tagging all reconfirmed compliant/not-due (see log). anomaly: active_delivery_narrow_audience warning persists on 2 WARM ad sets (WARM_T2_CONSIDER_PDP_90D, WARM_T4_XSell_Purchasers180D) -- same recurring narrow-audience signal flagged on prior passes, no new action. threshold-alerts, learning-phase-stuck, campaign-consolidation-watch, device-targeting and creative-fatigue all re-checked against fresh data and remain unchanged from the 02:53:00.000Z pass's findings (no breach / no new action) -- not re-alerted separately this pass per the 3-day dedup rule. circuitBreaker.tripped remains true (tripped 2026-10-10T16:50 UTC, A-063 resume-after-circuit-breaker still pending human review -- per ROUTINE.md the routine never auto-resumes). 8 proposals pending (A-002, A-063, A-78, A-081 through A-085); A-083's reasoning updated this pass (KAGE_TOF_LAL_Purchase_01Nov's last_7d ROAS jumped to 14.74x on thin recent spend, though last_14d/30d windows still show it below Retargeting_Overall -- flagged for reviewer as volatile/thin-spend). No circuit breach today (spend ₹1,213.24 of ₹7,000 ceiling, 17.3%).",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-11-24T04:50:12.000Z"
+    },
+    {
+      "id": "AL-3889",
+      "module": "routine-run-notes",
+      "title": "Run summary -- 2026-11-24T04:50:12.000Z pass",
+      "detail": "0 auto-executed mutations (purchaser-exclusion, lookalike-refresh and hook-angle-tagging all found nothing to do; hard-spend-circuit-breaker did not trip, today's spend ₹1,213.24 vs ₹7,000 ceiling). 0 new proposals. 0 new standalone alerts beyond this summary + self-audit-check (recurring no-change findings -- anomaly narrow-audience warning, threshold/learning-phase/consolidation/device/fatigue checks -- deduped against the 02:53:00.000Z pass's same-day entries per the 3-day dedup rule rather than re-alerted). 1 existing proposal (A-083) had its reasoning refreshed with new numbers (KAGE_TOF_LAL_Purchase_01Nov's last_7d ROAS spiked to 14.74x). circuitBreaker remains tripped since 2026-10-10 (unresolved, A-063 pending). 8 proposals pending overall, awaiting human review/approval.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-11-24T04:50:12.000Z"
     }
   ],
   "log": [
@@ -57951,6 +57969,51 @@
       "detail": "0 untagged creatives found -- all 26 already present in queue.json.creativeTags from prior passes. No new tags written. (Higgsfield vision pass not run -- that connection is not attached this run; tagging remains text-based off primary text/headline only, per instruction E.)",
       "tier": "auto",
       "executedAt": "2026-11-24T02:53:00.000Z"
+    },
+    {
+      "proposalId": null,
+      "action": "hard-spend-circuit-breaker check (pre-check, safety infrastructure) -- ads_get_ad_entities (level=ad_account, date_preset=today)",
+      "result": "success",
+      "previousState": null,
+      "detail": "Today's account spend ₹1,213.24 vs settings.hard_spend_ceiling_inr ₹7,000 (17.3%). No breach -- no campaigns paused, circuitBreaker object left unchanged (still reflects the 2026-10-10 historical trip, A-063 unresolved, never auto-resumed).",
+      "tier": "auto",
+      "executedAt": "2026-11-24T04:50:12.000Z"
+    },
+    {
+      "proposalId": null,
+      "action": "pixel-health / pixel-quality-gate check -- ads_get_dataset_quality on dataset 833131719490535",
+      "result": "success",
+      "previousState": null,
+      "detail": "Composite EMQ 6.1-8.8 across tracked web events (Purchase 8.6, AddPaymentInfo 8.7, prepaid_purchase 8.8, cod_purchase 8.4, InitiateCheckout 7.1, PageView/ViewContent/AddToCart/Search/SubscribedButtonClick 6.1), 100% event_coverage on Purchase, 0% events delayed >2h. Above settings.pixel_quality_min_match_rate (0.6) -- ROAS-driven modules not suppressed this pass.",
+      "tier": "auto",
+      "executedAt": "2026-11-24T04:50:12.000Z"
+    },
+    {
+      "proposalId": null,
+      "action": "purchaser-exclusion -- fresh direct targeting fetch on all 12 currently-active ad sets across the 6 active campaigns",
+      "result": "success",
+      "previousState": null,
+      "detail": "10 non-exempt ad sets checked; all 10 already exclude Purchasers 180D (120255823280550159) in their targeting.excluded_custom_audiences. The remaining 2 active ad sets (Retargeting_Overall's 120255851467360159 and WARM_T4_XSell_Purchasers180D 120256667272700159) are on settings.exempt list by design. No targeting updates needed -- account-wide compliant.",
+      "tier": "auto",
+      "executedAt": "2026-11-24T04:50:12.000Z"
+    },
+    {
+      "proposalId": null,
+      "action": "lookalike-refresh -- current baseline LAL4_Purchasers180D_15Nov (120256908273510159, delivery_status ACTIVE) checked via ads_get_custom_audience",
+      "result": "success",
+      "previousState": null,
+      "detail": "Created 2026-11-15T10:48 UTC; ~8.75 days old vs settings.lookalike_refresh_days (14). Source audience 'Purchasers 180D' (120255823280550159) still ~20 members, unchanged -- no size-growth trigger either. Not due for refresh this pass.",
+      "tier": "auto",
+      "executedAt": "2026-11-24T04:50:12.000Z"
+    },
+    {
+      "proposalId": null,
+      "action": "hook-angle-tagging -- checked all 26 distinct creative_ids across the currently-active ads in the 6 active campaigns",
+      "result": "success",
+      "previousState": null,
+      "detail": "0 untagged creatives found -- all 26 already present in queue.json.creativeTags from prior passes. No new tags written. (Higgsfield vision connection not attached this run; tagging remains text-based off primary text/headline only, per instruction E.)",
+      "tier": "auto",
+      "executedAt": "2026-11-24T04:50:12.000Z"
     }
   ],
   "creativeTags": {
