@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-25T06:51:48.000Z",
+  "generatedAt": "2026-11-25T08:52:21.000Z",
   "settings": {
     "kill_roas_threshold": "DISABLED 2026-10-05 by user instruction: the ROAS pause-kill is OFF. Module 16 (pause-kill) must NOT auto-pause any campaign for low ROAS; surface low-ROAS campaigns as alerts only. The hard spend circuit breaker is a separate mechanism and stays ON. Former rule, for reference: pause if ROAS < 1.0x after \u20b9500 spend on a sales-objective campaign. EXCEPTION until 2026-10-05T23:59+05:30 (user-approved 2026-09-29): for the sneaker-push campaigns 120256091369160159 (Sneakers_BOF_30Sep-5Oct), 120256091370110159 (Sneakers_Prospecting_30Sep-5Oct) and 120256088882780159 (Sneakers_Catalog_Retargeting) the spend floor is \u20b91,500, not \u20b9500.",
     "reactivate_min_historic_roas": "surface for reactivation if a paused campaign's last active-period ROAS >= 3.0x",
@@ -31,10 +31,10 @@
       }
     },
     "competitor_last_scrape": {
-      "gully_labs_active_ads": 73,
-      "lotto_sport_india_active_ads": 142,
-      "scraped_at": "2026-11-25T04:54:39.000Z",
-      "note": "2026-11-25T04:54:39.000Z pass: Gully Labs 69->73 (+5.8%, no breach). Lotto Sport India 142->142 (unchanged, no breach). Both page-ID-scoped (107479854297817 / 426015150606378), country IN, ad_active_status ACTIVE."
+      "gully_labs_active_ads": 71,
+      "lotto_sport_india_active_ads": 137,
+      "scraped_at": "2026-11-25T08:52:21.000Z",
+      "note": "2026-11-25T08:52:21.000Z pass: Gully Labs 73->71 (-2.7%, no breach). Lotto Sport India 142->137 (-3.5%, no breach). Both page-ID-scoped (107479854297817 / 426015150606378), country IN, ad_active_status ACTIVE."
     },
     "audience_label_corrections": {
       "120249907176770159": "ATC_180D -- NOT a purchaser audience (cart-adders, event=AddToCart, retention 180 days). Verified 2026-09-14, reconfirmed 2026-09-20. Superseded note: earlier passes said the account had NO purchaser audience at all -- that's now out of date. See the 120255823280550159 (Purchasers 180D) entry above, created 2026-09-15, which IS a genuine purchaser audience and is already in use for exclusion + lookalike.",
@@ -1696,7 +1696,7 @@
       "module": "budget-reallocation",
       "tier": "approval",
       "title": "Shift Rs100/day from Fudoshin_MOF_BOF_Carousel_16Nov (0.98x) to Caps_Only (8.16x)",
-      "reasoning": "Fudoshin_MOF_BOF_Carousel_16Nov (campaign 120256919246040159) remains ACTIVE and below breakeven. Fresh pull 2026-11-25T09:30:00.000Z: purchase_roas 0.978119x on Rs3,451.38 last_14d/last_30d spend (identical window -- all spend is recent, 2 purchases). Caps_Only (campaign 120256301268690159) remains ACTIVE and strong: 7.93997x on Rs11,063.27 last_14d spend (86 purchases), 8.162744x on Rs23,863.76 last_30d (202 purchases). Gap far exceeds settings.budget_reallocation_min_roas_gap (1.5x). CORRECTION this pass: a fresh read of Caps_Only's live campaign daily_budget shows Rs810/day, not the Rs900 this proposal's actionSummary was originally framed against (2026-11-22) -- the budget has moved independently since creation (not via this automation, which never executes approval-tier proposals). The stored metaAction followUp still targets Rs1,000/day; approving as-is would be an Rs190 increase from the current live Rs810, not the originally-framed Rs100 increase from Rs900. Flagging for human review before approval -- re-check the live budget in the dashboard editor at approval time. Reconfirmed 2026-11-25T04:54:39.000Z pass: Fudoshin_MOF_BOF_Carousel_16Nov purchase_roas 0.978119x on Rs3,451.38 last_30d spend (2 purchases), unchanged. Caps_Only purchase_roas 8.162727x on Rs23,863.81 last_30d (202 purchases), essentially unchanged. Caps_Only's live daily_budget is still Rs810/day (not the Rs900 this proposal was originally framed against) -- re-check the live budget in the dashboard editor at approval time. Reconfirmed 2026-11-25T06:51:48.000Z pass (last_7d): Fudoshin_MOF_BOF_Carousel_16Nov purchase_roas 1.079453x on Rs3,127.38 spend; Caps_Only purchase_roas 9.12018x on Rs5,718.49 spend. last_30d: Fudoshin 0.978119x on Rs3,451.38, Caps_Only 8.162727x on Rs23,863.81. Gap holds on both windows, still far exceeds settings.budget_reallocation_min_roas_gap (1.5x) -- premise unchanged, metaAction unchanged.",
+      "reasoning": "Fudoshin_MOF_BOF_Carousel_16Nov (campaign 120256919246040159) remains ACTIVE and below breakeven. Fresh pull 2026-11-25T09:30:00.000Z: purchase_roas 0.978119x on Rs3,451.38 last_14d/last_30d spend (identical window -- all spend is recent, 2 purchases). Caps_Only (campaign 120256301268690159) remains ACTIVE and strong: 7.93997x on Rs11,063.27 last_14d spend (86 purchases), 8.162744x on Rs23,863.76 last_30d (202 purchases). Gap far exceeds settings.budget_reallocation_min_roas_gap (1.5x). CORRECTION this pass: a fresh read of Caps_Only's live campaign daily_budget shows Rs810/day, not the Rs900 this proposal's actionSummary was originally framed against (2026-11-22) -- the budget has moved independently since creation (not via this automation, which never executes approval-tier proposals). The stored metaAction followUp still targets Rs1,000/day; approving as-is would be an Rs190 increase from the current live Rs810, not the originally-framed Rs100 increase from Rs900. Flagging for human review before approval -- re-check the live budget in the dashboard editor at approval time. Reconfirmed 2026-11-25T04:54:39.000Z pass: Fudoshin_MOF_BOF_Carousel_16Nov purchase_roas 0.978119x on Rs3,451.38 last_30d spend (2 purchases), unchanged. Caps_Only purchase_roas 8.162727x on Rs23,863.81 last_30d (202 purchases), essentially unchanged. Caps_Only's live daily_budget is still Rs810/day (not the Rs900 this proposal was originally framed against) -- re-check the live budget in the dashboard editor at approval time. Reconfirmed 2026-11-25T06:51:48.000Z pass (last_7d): Fudoshin_MOF_BOF_Carousel_16Nov purchase_roas 1.079453x on Rs3,127.38 spend; Caps_Only purchase_roas 9.12018x on Rs5,718.49 spend. last_30d: Fudoshin 0.978119x on Rs3,451.38, Caps_Only 8.162727x on Rs23,863.81. Gap holds on both windows, still far exceeds settings.budget_reallocation_min_roas_gap (1.5x) -- premise unchanged, metaAction unchanged. UPDATE (2026-11-25T08:52:21.000Z pass): fresh placement breakdown shows Fudoshin's drag is concentrated in the Instagram Feed placement specifically -- purchase_roas 0.491924x on Rs3,321.81 last_14d spend (most of the campaign's recent spend), vs facebook/feed at 13.443162x on a much smaller Rs129.57 (thin). See AL-3975. The human may prefer excluding/narrowing the Instagram Feed placement on this ad set instead of, or in addition to, the daily-budget cut proposed here.",
       "actionSummary": "Reduces FUD_TierI_Cool_MOF_BOF_Men22-44 ad set daily budget from Rs200 to Rs100, and increases Caps_Only campaign daily budget from Rs900 to Rs1,000, via two ads_update_entity calls.",
       "metaAction": {
         "tool": "ads_update_entity",
@@ -37678,6 +37678,24 @@
       "severity": "low",
       "dismissed": false,
       "createdAt": "2026-11-25T06:51:48.000Z"
+    },
+    {
+      "id": "AL-3975",
+      "module": "placement-optimization",
+      "title": "New finding: Fudoshin's underperformance concentrated in Instagram Feed placement",
+      "detail": "Fudoshin_MOF_BOF_Carousel_16Nov (ad set FUD_India_Cool_MOF_BOF_22-44, 120256919302720159) last_14d publisher_platform/platform_position breakdown: instagram/feed purchase_roas 0.491924x on Rs3,321.81 spend -- the large majority of this campaign's recent spend, and the primary driver of the campaign-level 0.978x last_30d ROAS already captured in pending proposal A-082. By contrast facebook/feed shows 13.443162x, but on a much smaller Rs129.57 spend (thin, directional only, not a reliable counter-signal). No action taken this pass (placement-optimization is approval-tier and this campaign is only 9 days old -- one pass of data). This is additive context for A-082: the human may prefer narrowing/excluding the Instagram Feed placement on this ad set over a blanket daily-budget cut, or may simply approve A-082 as written. Appended to A-082's reasoning as well.",
+      "severity": "medium",
+      "dismissed": false,
+      "createdAt": "2026-11-25T08:52:21.000Z"
+    },
+    {
+      "id": "AL-3976",
+      "module": "self-audit-check",
+      "title": "Full module sweep (2026-11-25T08:52:21.000Z) -- account healthy, no new breach, 1 new placement finding (AL-3975), log-bloat issue still unresolved",
+      "detail": "All 35 modules evaluated via fresh Meta Ads MCP pulls. Safety: today's account spend Rs2,450.21/Rs7,000 hard ceiling (35.0%), no new circuit-breaker trip -- circuitBreaker.tripped remains true from the 2026-10-10 trip, still awaiting human review of A-063 (~45.7 days unresolved). Pixel-quality gate clear (EMQ 6.1-8.9, all >= 0.6 threshold) -- ROAS modules not suppressed. Account composition unchanged: 6 active campaigns, 12 active ad sets, 26 distinct active creatives. Auto-tier: purchaser-exclusion compliant account-wide (no edit), lookalike-refresh not due (LAL4 ~10 days old, 14-day threshold), hook-angle-tagging has nothing new (all 26 active creatives already tagged), hard-spend-circuit-breaker did not trip. Approval-tier: all 8 pending proposals (A-002, A-063, A-78, A-081, A-082, A-083, A-084, A-085) reconfirmed against fresh pulls -- ROAS/spend figures for the reactivate-winner (A-78/A-084/A-085) and device-targeting (A-081) candidates are byte-for-byte unchanged from the prior pass (no new delivery against those paused/thin entities since); A-082/A-083's campaign-level numbers are also unchanged, but A-082 gained a new placement-level root-cause detail this pass (see AL-3975): Fudoshin's drag is concentrated in its Instagram Feed placement specifically. AL-3972's flag on A-083 (premise reverses on 7d data) still holds on fresh numbers -- hold, don't approve as-is. Narrow-audience anomaly signal (WARM_T2_CONSIDER_PDP_90D, WARM_T4_XSell_Purchasers180D) persists, unchanged from AL-3941 earlier this pass-cycle -- already traced to deliberate segmentation, no new alert written (dedup). Competitor rescrape: Gully Labs 73->71 (-2.7%), Lotto Sport India 142->137 (-3.5%), neither breaches the 20% move threshold -- settings.competitor_last_scrape updated, no alert (per ROUTINE.md module 7, which only calls for an alert on a >=20% move; no-breach confirmations are not required and were a source of the bloat below). Catalog-dpa-launch: catalog remains linked, zero DPA campaigns running, A-003 remains rejected -- not re-proposed, not re-alerted this pass (reconfirmed by AL-3947 earlier today). OPERATIONAL NOTE on log/alert bloat (first flagged AL-3963, 2026-11-24T14:52 UTC, severity high, still undismissed, still unresolved): this file has continued growing since that flag -- was ~5.5MB/3,962 alerts/1,397 log entries at AL-3963, is now ~6.2MB/3,976 alerts/1,422 log entries. The root cause: most passes (including several since AL-3963) wrote a near-duplicate 'full module sweep' self-audit-check alert AND a separate 'routine-run-notes' run-summary alert every single pass (often every ~2 hours), plus 4-5 auto-tier log entries every pass even when nothing changed or mutated -- none of which ROUTINE.md actually requires (it only calls for an alert when a module's trigger condition is met, or for the always-on safety-infrastructure log entries). This pass deliberately breaks that pattern: only this one self-audit-check alert was written (not a second 'routine-run-notes' alert -- that module isn't in ROUTINE.md's module table and was dropped this pass), and the only other new alert (AL-3975) represents a genuinely new finding. This slows further growth but does not shrink the existing ~6.2MB file; a human decision on whether/how to prune or archive alerts/log entries older than some retention window is still needed -- flagging again here since AL-3963 remains open after 1+ days unactioned. KPI-to-trigger completeness: dashboard-surfaced metrics (spend, ROAS, purchases, CPM/CTR/CPC, pacing) all map to an existing module in ROUTINE.md's table; no orphaned KPI identified this pass.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-11-25T08:52:21.000Z"
     }
   ],
   "log": [
@@ -59287,6 +59305,75 @@
       },
       "tier": "auto",
       "executedAt": "2026-11-25T06:51:48.000Z"
+    },
+    {
+      "proposalId": null,
+      "action": "hard-spend-circuit-breaker pre-check (safety infrastructure) -- ads_get_ad_entities (level=ad_account, date_preset=today): today's account spend Rs2,450.21 vs settings.hard_spend_ceiling_inr Rs7,000 (35.0%) -- no breach, no new trip this pass. circuitBreaker.tripped remains true (unresolved from the 2026-10-10T16:50 UTC trip; A-063 resume-after-circuit-breaker still pending human review, ~45.7 days unresolved) -- no auto-resume per ROUTINE.md.",
+      "result": "success",
+      "previousState": {
+        "circuitBreaker.tripped": true,
+        "today_spend_inr_at_last_check": 1112.05
+      },
+      "detail": {
+        "account_spend_today_inr": 2450.21,
+        "ceiling_inr": 7000,
+        "active_campaigns": 6
+      },
+      "tier": "auto",
+      "executedAt": "2026-11-25T08:52:21.000Z"
+    },
+    {
+      "proposalId": null,
+      "action": "pixel-health / pixel-quality-gate check -- ads_get_dataset_quality on dataset 833131719490535: composite EMQ scores range 6.1-8.9 across tracked web events (AddToCart, InitiateCheckout, PageView, ViewContent, AddPaymentInfo, Purchase, cod_purchase, prepaid_purchase, Search), all at/above settings.pixel_quality_min_match_rate=0.6 -- ROAS-based modules not suppressed this pass.",
+      "result": "success",
+      "previousState": null,
+      "detail": {
+        "composite_score_range": [
+          6.1,
+          8.9
+        ],
+        "dataset_id": "833131719490535"
+      },
+      "tier": "auto",
+      "executedAt": "2026-11-25T08:52:21.000Z"
+    },
+    {
+      "proposalId": null,
+      "action": "purchaser-exclusion -- fresh direct targeting fetch on all 12 currently-active ad sets across the 6 active campaigns (Fudoshin_MOF_BOF_Carousel_16Nov, KAGE_TOF_LAL_Purchase_01Nov, Prospecting_LAL1_Purchasers_14Oct, Sneakers_BOF_v2_Placement_Split_12Oct, Caps_Only, Retargeting_Overall): all 12 compliant -- 10 directly exclude Purchasers 180D (120255823280550159) in excluded_custom_audiences, 2 (WARM_T4_XSell_Purchasers180D, Retargeting_Overall) are on settings.purchaser_exclusion_exempt_adset_ids and deliberately target/retain it by design. No edit needed.",
+      "result": "success",
+      "previousState": null,
+      "detail": {
+        "active_adsets_checked": 12,
+        "compliant": 12
+      },
+      "tier": "auto",
+      "executedAt": "2026-11-25T08:52:21.000Z"
+    },
+    {
+      "proposalId": null,
+      "action": "lookalike-refresh -- current baseline LAL4_Purchasers180D_15Nov (120256908273510159, ACTIVE, built 2026-11-15) confirmed via ads_get_ad_account_custom_audiences: ~10 days old, under the 14-day lookalike_refresh_days threshold -- no rebuild due yet. Source audience size unchanged.",
+      "result": "success",
+      "previousState": {
+        "lookalike_age_days": 9.8
+      },
+      "detail": {
+        "audience_id": "120256908273510159",
+        "age_days_approx": 10
+      },
+      "tier": "auto",
+      "executedAt": "2026-11-25T08:52:21.000Z"
+    },
+    {
+      "proposalId": null,
+      "action": "hook-angle-tagging -- checked all 26 distinct creative_ids across the 12 currently-active ad sets' active ads against queue.json.creativeTags: all 26 already tagged -- nothing new to tag this pass. Higgsfield vision connection is not attached to this run, so tagging (where it occurs) is sourced from the ad's real primary text/headline via the Meta Ads MCP only, per instruction; no vision pass performed.",
+      "result": "success",
+      "previousState": null,
+      "detail": {
+        "distinct_active_creatives_checked": 26,
+        "missing_tags": 0
+      },
+      "tier": "auto",
+      "executedAt": "2026-11-25T08:52:21.000Z"
     }
   ],
   "creativeTags": {
