@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-25T08:52:21.000Z",
+  "generatedAt": "2026-11-25T10:51:00.000Z",
   "settings": {
     "kill_roas_threshold": "DISABLED 2026-10-05 by user instruction: the ROAS pause-kill is OFF. Module 16 (pause-kill) must NOT auto-pause any campaign for low ROAS; surface low-ROAS campaigns as alerts only. The hard spend circuit breaker is a separate mechanism and stays ON. Former rule, for reference: pause if ROAS < 1.0x after \u20b9500 spend on a sales-objective campaign. EXCEPTION until 2026-10-05T23:59+05:30 (user-approved 2026-09-29): for the sneaker-push campaigns 120256091369160159 (Sneakers_BOF_30Sep-5Oct), 120256091370110159 (Sneakers_Prospecting_30Sep-5Oct) and 120256088882780159 (Sneakers_Catalog_Retargeting) the spend floor is \u20b91,500, not \u20b9500.",
     "reactivate_min_historic_roas": "surface for reactivation if a paused campaign's last active-period ROAS >= 3.0x",
@@ -31,10 +31,10 @@
       }
     },
     "competitor_last_scrape": {
-      "gully_labs_active_ads": 71,
+      "gully_labs_active_ads": 69,
       "lotto_sport_india_active_ads": 137,
-      "scraped_at": "2026-11-25T08:52:21.000Z",
-      "note": "2026-11-25T08:52:21.000Z pass: Gully Labs 73->71 (-2.7%, no breach). Lotto Sport India 142->137 (-3.5%, no breach). Both page-ID-scoped (107479854297817 / 426015150606378), country IN, ad_active_status ACTIVE."
+      "scraped_at": "2026-11-25T10:51:00.000Z",
+      "note": "2026-11-25T10:51:00.000Z pass: Gully Labs 71->69 (-2.8%, no breach). Lotto Sport India 137->137 (unchanged, no breach). Both page-ID-scoped (107479854297817 / 426015150606378), country IN, ad_active_status ACTIVE."
     },
     "audience_label_corrections": {
       "120249907176770159": "ATC_180D -- NOT a purchaser audience (cart-adders, event=AddToCart, retention 180 days). Verified 2026-09-14, reconfirmed 2026-09-20. Superseded note: earlier passes said the account had NO purchaser audience at all -- that's now out of date. See the 120255823280550159 (Purchasers 180D) entry above, created 2026-09-15, which IS a genuine purchaser audience and is already in use for exclusion + lookalike.",
@@ -37696,6 +37696,15 @@
       "severity": "low",
       "dismissed": false,
       "createdAt": "2026-11-25T08:52:21.000Z"
+    },
+    {
+      "id": "AL-3977",
+      "module": "self-audit-check",
+      "title": "Full module sweep (2026-11-25T10:51:00.000Z) -- account healthy, no new breach, no new findings, log-bloat note still unresolved",
+      "detail": "All 35 modules evaluated via fresh Meta Ads MCP pulls. Safety: today's account spend Rs2,625.02/Rs7,000 hard ceiling (37.5%), no new circuit-breaker trip -- circuitBreaker.tripped remains true from the 2026-10-10 trip, still awaiting human review of A-063 (~46.0 days unresolved). Pixel-quality gate clear (EMQ 6.1-8.9, all >= 0.6 threshold) -- ROAS modules not suppressed. Account composition unchanged: 6 active campaigns, 12 active ad sets, 26 distinct active creatives (a 7th campaign, Sneakers_PROSP_5Line_Oct, is PAUSED with Rs0 spend last_7d/last_30d despite some of its ads intermittently surfacing in an ads-level ACTIVE-status query -- likely a brief sync-status lag on Meta's side, not real delivery; excluded from all active-entity counts and compliance checks this pass since it is not actually spending). Auto-tier: purchaser-exclusion compliant account-wide across all 12 active ad sets (direct targeting fetch: 11 exclude Purchasers 180D directly, WARM_T4_XSell_Purchasers180D deliberately includes it per settings.purchaser_exclusion_exempt_adset_ids) -- no edit. Lookalike-refresh not due (LAL4_Purchasers180D_15Nov exactly 10.0 days old, 14-day threshold). Hook-angle-tagging has nothing new (all 26 active creatives already in queue.json.creativeTags). Hard-spend-circuit-breaker did not trip. Approval-tier: all 8 pending proposals (A-002, A-063, A-78, A-081, A-082, A-083, A-084, A-085) reconfirmed against fresh pulls where the underlying entities are live (A-082: Fudoshin_MOF_BOF_Carousel_16Nov 0.978x vs Caps_Only 8.163x, last_30d -- unchanged; A-083: KAGE_TOF_LAL_Purchase_01Nov 1.810x/30d vs 11.485x/7d -- unchanged, and the AL-3972 flag still holds on fresh numbers: Retargeting_Overall's own 7d ROAS is 7.39x, below KAGE_TOF's 11.48x/7d, so the 7d premise for shifting budget away from KAGE_TOF still reverses -- hold, don't approve as-is); the paused/thin entities behind A-78, A-081, A-084, A-085 and A-002 have had no new delivery since the last pass and are unchanged. Narrow-audience anomaly signal (WARM_T2_CONSIDER_PDP_90D, WARM_T4_XSell_Purchasers180D) persists, already traced to deliberate segmentation -- no new alert (dedup). Competitor rescrape: Gully Labs 71->69 (-2.8%), Lotto Sport India 137->137 (unchanged), neither breaches the 20% move threshold -- settings.competitor_last_scrape updated, no alert. Catalog-dpa-launch: catalog remains linked, zero DPA campaigns running, A-003 remains rejected -- not re-proposed. OPERATIONAL NOTE (first flagged AL-3963, still high-severity and undismissed, ~1.3 days unactioned as of this pass): automation/queue.json is now ~6.2MB (3,976 alerts, 1,422 log entries before this pass). This pass wrote nothing for modules with no trigger and no change (per ROUTINE.md step 5, 'produces nothing' is a valid outcome) -- no near-duplicate self-audit alert beyond this one, and no auto-tier log entries for the non-mutating safety pre-checks (circuit breaker, pixel gate, purchaser-exclusion, lookalike-refresh, hook-tagging all found nothing to act on, so nothing was logged for them, consistent with Log schema being for actual actions/mutations, not routine confirmations). This is the second consecutive pass holding that discipline; file size growth should now be close to flat except for genuine new findings. The underlying question from AL-3963 -- whether/how to prune or archive the historical backlog of ~3,900+ old 'no trigger' alerts/log entries -- is still open and still needs a human decision; not performed automatically. Separately, A-063 (resume-after-circuit-breaker) has now been pending essentially unactioned for 46 days while the account has independently launched and run multiple new campaigns since the 2026-10-10 trip with no issue -- worth a human look even if the formal answer is 'leave it tripped, it's just a label at this point.' KPI-to-trigger completeness: dashboard-surfaced metrics (spend, ROAS, purchases, CPM/CTR/CPC, pacing) all map to an existing module in ROUTINE.md's table; no orphaned KPI identified this pass.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-11-25T10:51:00.000Z"
     }
   ],
   "log": [
