@@ -186,6 +186,21 @@ the dashboard like any other field, not a placeholder note.
    the existing one's `reasoning`/data instead if the underlying numbers
    moved. For `auto` modules, rate limiting (above) serves the equivalent
    purpose.
+   **Anti-bloat correction (added 2026-11-26, after AL-3963 flagged
+   automation/queue.json had grown to ~6MB with 4,000+ alerts and 1,400+ log
+   entries):** a module that finds nothing new and nothing changed from the
+   prior pass writes **nothing** — not a fresh "all clear" alert, not an
+   updated timestamp on a standing alert, nothing. `self-audit-check` (module
+   10) only writes an alert when it actually finds drift, a KPI-to-trigger
+   gap, or an operational problem worth a human's attention — it is not a
+   mandatory per-pass run-summary. There is no `routine-run-notes` module in
+   the table below; do not invent one or write a per-pass "run summary"
+   alert — that pattern (alongside unconditional per-pass `self-audit-check`
+   alerts) is what caused the bloat. When updating a proposal's `reasoning`
+   because numbers moved, **replace** the stale numbers with the fresh ones
+   (keep the reasoning to a few sentences) instead of appending another
+   paragraph on top of every prior pass's reconfirmation — the same rule
+   `settings.note` already follows.
 7. Any proposal still `status:"pending"` whose `tier` is now `auto` (e.g.
    left over from before this tiering system existed) should be executed
    immediately this run, same as any other `auto` module, then removed from
