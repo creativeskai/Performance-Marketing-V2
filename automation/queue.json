@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-26T08:49:02.000Z",
+  "generatedAt": "2026-11-28T14:52:08.000Z",
   "settings": {
     "kill_roas_threshold": "DISABLED 2026-10-05 by user instruction: the ROAS pause-kill is OFF. Module 16 (pause-kill) must NOT auto-pause any campaign for low ROAS; surface low-ROAS campaigns as alerts only. The hard spend circuit breaker is a separate mechanism and stays ON. Former rule, for reference: pause if ROAS < 1.0x after ₹500 spend on a sales-objective campaign. EXCEPTION until 2026-10-05T23:59+05:30 (user-approved 2026-09-29): for the sneaker-push campaigns 120256091369160159 (Sneakers_BOF_30Sep-5Oct), 120256091370110159 (Sneakers_Prospecting_30Sep-5Oct) and 120256088882780159 (Sneakers_Catalog_Retargeting) the spend floor is ₹1,500, not ₹500.",
     "reactivate_min_historic_roas": "surface for reactivation if a paused campaign's last active-period ROAS >= 3.0x",
@@ -31,10 +31,10 @@
       }
     },
     "competitor_last_scrape": {
-      "gully_labs_active_ads": 104,
-      "lotto_sport_india_active_ads": 242,
-      "scraped_at": "2026-11-26T00:49:00.000Z",
-      "note": "2026-11-26T00:49:00.000Z pass: Gully Labs 69->104 (+50.7%, breach -- see AL-4031). Lotto Sport India 137->242 (+76.6%, breach -- see AL-4031). Both page-ID-scoped (107479854297817 / 426015150606378), ad_active_status ACTIVE."
+      "gully_labs_active_ads": 94,
+      "lotto_sport_india_active_ads": 218,
+      "scraped_at": "2026-11-28T14:52:08.000Z",
+      "note": "2026-11-28T14:52:08.000Z pass: Gully Labs 104->94 (-9.6%, no breach). Lotto Sport India 242->218 (-9.9%, no breach). Both page-ID-scoped (107479854297817 / 426015150606378), ad_active_status ACTIVE."
     },
     "audience_label_corrections": {
       "120249907176770159": "ATC_180D -- NOT a purchaser audience (cart-adders, event=AddToCart, retention 180 days). Verified 2026-09-14, reconfirmed 2026-09-20. Superseded note: earlier passes said the account had NO purchaser audience at all -- that's now out of date. See the 120255823280550159 (Purchasers 180D) entry above, created 2026-09-15, which IS a genuine purchaser audience and is already in use for exclusion + lookalike.",
@@ -1696,7 +1696,7 @@
       "module": "budget-reallocation",
       "tier": "approval",
       "title": "Shift Rs100/day from Fudoshin_MOF_BOF_Carousel_16Nov (0.98x) to Caps_Only (8.16x)",
-      "reasoning": "Fudoshin_MOF_BOF_Carousel_16Nov (campaign 120256919246040159) remains ACTIVE and well below Caps_Only. Fresh last_30d pull 2026-11-26T06:51Z: purchase_roas 1.233x on Rs3,969.79 spend (4 purchases). Caps_Only (campaign 120256301268690159): purchase_roas 8.122x on Rs23,795.49 last_30d spend (200 purchases). Gap (~6.6x) still far exceeds settings.budget_reallocation_min_roas_gap (1.5x). Caps_Only's live daily_budget should be re-checked in the dashboard editor at approval time, since it has moved independently of this proposal before.",
+      "reasoning": "STALE PREMISE as of 2026-11-28T14:52:08.000Z: fresh campaign-level fetch shows Fudoshin_MOF_BOF_Carousel_16Nov (120256919246040159) is now PAUSED (was ACTIVE when this proposal was written and at the last refresh on 2026-11-26) -- it is no longer actively spending, so shifting budget 'from' it no longer applies as framed. Last live numbers before the pause: purchase_roas 1.0397x on Rs4,707.02 last_30d spend (4 purchases) -- still far below Caps_Only. Caps_Only (campaign 120256301268690159) remains strong: purchase_roas 8.295x on Rs23,755.85 last_30d spend (206 purchases). Recommend rejecting or re-scoping this proposal against a currently-active underperformer instead, since the original source campaign is already stopped.",
       "actionSummary": "Reduces FUD_TierI_Cool_MOF_BOF_Men22-44 ad set daily budget from Rs200 to Rs100, and increases Caps_Only campaign daily budget from Rs900 to Rs1,000, via two ads_update_entity calls.",
       "metaAction": {
         "tool": "ads_update_entity",
@@ -1756,7 +1756,7 @@
       "module": "reactivate-winner",
       "tier": "approval",
       "title": "Reactivate Fudoshin -- 7.05x last_30d ROAS on real spend/volume, above the 3.0x reactivate threshold",
-      "reasoning": "Campaign 120256520320990159 ('Fudoshin', distinct from the active Fudoshin_MOF_BOF_Carousel_16Nov) PAUSED since 2026-11-16. Fresh last_30d pull 2026-11-26T06:51Z: purchase_roas 7.509x on Rs5,500.64 spend (26 purchases) -- well above the 3.0x reactivate_min_historic_roas threshold on real volume, not a thin-window outlier.",
+      "reasoning": "Campaign 120256520320990159 ('Fudoshin', distinct from the now-paused Fudoshin_MOF_BOF_Carousel_16Nov) remains PAUSED. Fresh last_30d pull 2026-11-28T14:52:08.000Z: purchase_roas 8.051x on Rs5,130.02 spend (26 purchases) -- still well above the 3.0x reactivate_min_historic_roas threshold on real volume (spend total/purchase count shifted slightly from the 2026-11-26 pull, 7.509x/Rs5,500.64, as the rolling last_30d window moved forward; direction unchanged, still a strong reactivation candidate).",
       "actionSummary": "Reactivates campaign 120256520320990159 (Fudoshin) via ads_activate_entity. No budget change bundled -- its ad sets keep their last-set budgets/targeting; review and adjust if scaling beyond its prior spend level.",
       "metaAction": {
         "tool": "ads_activate_entity",
@@ -1776,7 +1776,7 @@
       "module": "reactivate-winner",
       "tier": "approval",
       "title": "Reactivate Prospecting_JP2_Placement_Split_12Oct -- 3.73x last_30d ROAS on real spend, above the 3.0x reactivate threshold",
-      "reasoning": "Campaign 120256322877970159 (Prospecting_JP2_Placement_Split_12Oct) PAUSED. Fresh last_30d pull 2026-11-26T06:51Z: purchase_roas 3.658x on Rs27,836.86 spend (39 purchases) -- above the 3.0x reactivate threshold on a large, meaningful spend base.",
+      "reasoning": "Campaign 120256322877970159 (Prospecting_JP2_Placement_Split_12Oct) remains PAUSED. Fresh last_30d pull 2026-11-28T14:52:08.000Z: purchase_roas 3.814x on Rs26,011.71 spend (38 purchases) -- still above the 3.0x reactivate threshold on a large, meaningful spend base (numbers shifted slightly from the 2026-11-26 pull, 3.658x/Rs27,836.86/39 purchases, as the rolling last_30d window moved forward; direction unchanged).",
       "actionSummary": "Reactivates campaign 120256322877970159 (Prospecting_JP2_Placement_Split_12Oct) via ads_activate_entity. No budget change bundled in this proposal -- its ad sets keep their last-set budgets/targeting; review and adjust if scaling beyond its prior spend level.",
       "metaAction": {
         "tool": "ads_activate_entity",
@@ -1795,7 +1795,7 @@
       "module": "placement-optimization",
       "tier": "approval",
       "title": "Restrict Fudoshin_MOF_BOF_Carousel_16Nov's ad set away from Instagram Feed -- 0.49x ROAS on the bulk of its spend",
-      "reasoning": "last_14d publisher_platform/platform_position breakdown for Fudoshin_MOF_BOF_Carousel_16Nov (campaign 120256919246040159, ad set FUD_India_Cool_MOF_BOF_22-44 / 120256919302720159): Instagram Feed purchase_roas 0.49 on ₹3,321.81 spent -- the large majority of the ad set's and campaign's spend. Facebook Feed, by contrast, shows purchase_roas 13.44 on ₹129.57 spent. The campaign's blended last_30d ROAS is 0.978 (right at the former pause-kill floor, surfaced separately in this pass's pause-kill alert) almost entirely because Instagram Feed dominates its delivery mix. No other active campaign shows a comparable placement-level gap. Reconfirmed 2026-11-25T18:53:14.000Z pass: fresh last_14d publisher_platform/platform_position breakdown on FUD_India_Cool_MOF_BOF_22-44 (120256919302720159): Instagram Feed purchase_roas has improved to 1.103172x on Rs2,857.38 spend (up from 0.49x at proposal creation) -- still the large majority of the ad set's spend and still well below Facebook Feed's 15.222586x on Rs114.42 spend. The placement gap persists but has narrowed materially; worth a human noting before approving as-is. RECONFIRMED 2026-11-26T00:49:00.000Z pass: fresh last_14d publisher_platform/platform_position breakdown on FUD_India_Cool_MOF_BOF_22-44 (120256919302720159): Instagram Feed purchase_roas 1.103155x on Rs2,857.42 spend (3 purchases) -- essentially unchanged from last pass, still the large majority of spend and still well below Facebook Feed's 15.216551x on Rs114.47 spend (1 purchase). Gap persists, A-086 still the right fix.",
+      "reasoning": "STALE PREMISE as of 2026-11-28T14:52:08.000Z: fresh campaign-level fetch shows Fudoshin_MOF_BOF_Carousel_16Nov (120256919246040159) is now PAUSED account-wide (not just the one ad set) -- a placement restriction on an already-paused campaign has no effect. Last live last_14d breakdown before the pause: Instagram Feed purchase_roas 0.49 on Rs3,321.81 spent on ad set FUD_India_Cool_MOF_BOF_22-44 (120256919302720159), the bulk of the ad set's and campaign's spend. Recommend rejecting this proposal -- no live placement to restrict.",
       "actionSummary": "Update the FUD_India_Cool_MOF_BOF_22-44 ad set's targeting to remove/restrict Instagram Feed from its placements (keep Instagram Reels/Stories and Facebook placements, which are not showing this problem), via ads_update_entity on field targeting. This is a targeting edit only -- no budget or bid change, no new spend commitment.",
       "metaAction": {
         "tool": "ads_update_entity",
@@ -38217,8 +38217,8 @@
     {
       "id": "AL-4028",
       "module": "anomaly",
-      "title": "Narrow-audience signal on 2 ad sets this pass",
-      "detail": "ads_insights_anomaly_signal: WARM_T2_CONSIDER_PDP_90D (120256667271960159, audience ~18600-21900), WARM_T4_XSell_Purchasers180D (120256667272700159, audience ~1100-1400) flagged active_delivery_narrow_audience this pass (WARM_T1/WARM_T3 not flagged -- audience-size estimate noise around the threshold). Same deliberate engagement-tier (WARM T1-T4) segmentation flagged repeatedly in prior passes (see AL-4005 anomaly-root-cause).",
+      "title": "Narrow-audience signal on 3 ad sets this pass",
+      "detail": "ads_insights_anomaly_signal: WARM_T1_HOT_ATC_IC_30D (120256667271360159, audience ~1100-1300), WARM_T2_CONSIDER_PDP_90D (120256667271960159, audience ~17500-20700), WARM_T4_XSell_Purchasers180D (120256667272700159, audience ~1200-1500) flagged active_delivery_narrow_audience this pass (WARM_T3 not flagged this pass). WARM_T1 is newly flagged since the last pass (was previously only WARM_T2/WARM_T4) -- audience-size estimates near this threshold move pass to pass. Same deliberate engagement-tier (WARM T1-T4) segmentation flagged repeatedly in prior passes (see AL-4005 anomaly-root-cause); reconfirmed 2026-11-28T14:52:08.000Z, no action needed (by-design narrow retargeting tiers).",
       "severity": "low",
       "dismissed": false,
       "createdAt": "2026-11-26T06:51:22.000Z"
@@ -38312,6 +38312,15 @@
       "severity": "medium",
       "dismissed": false,
       "createdAt": "2026-11-26T06:51:22.000Z"
+    },
+    {
+      "id": "AL-4039",
+      "module": "self-audit-check",
+      "title": "New Black Friday campaign live; Fudoshin_MOF_BOF_Carousel_16Nov went ACTIVE->PAUSED (stales A-082/A-086)",
+      "detail": "Full module sweep (2026-11-28T14:52:08.000Z): circuit breaker not breached today (Rs3,581.82/Rs7,000, 51.2%; circuitBreaker.tripped stays true, unresolved since 2026-10-10, pending human review of A-063 -- no change). Pixel quality gate passes (composite EMQ 6.1-8.8, at/above pixel_quality_min_match_rate=0.6) -- ROAS modules not suppressed. purchaser-exclusion: all 10 currently-active ad sets verified compliant (direct targeting fetch) -- 4 are on settings.purchaser_exclusion_exempt_adset_ids and deliberately include Purchasers 180D by design, the rest exclude it. lookalike-refresh: LAL4_Purchasers180D_15Nov is ~13 days old (just under the 14-day threshold) and the source audience is still ~20 members (no growth trigger) -- not due yet. New since the 2026-11-26T08:49Z pass: a 'Black Friday' campaign (120257112383430159) launched 2026-11-27, already compliant on purchaser-exclusion from creation; its 2 new ad creatives were tagged this pass (see log). Fudoshin_MOF_BOF_Carousel_16Nov (120256919246040159), ACTIVE at the last pass and the subject of pending proposals A-082 (budget-reallocation) and A-086 (placement-optimization), is now PAUSED -- both proposals' reasoning has been updated to flag this; a human should reject or re-scope them rather than approve a now-moot action. Reactivate-winner candidates A-078/A-084/A-085 reconfirmed still above the 3.0x threshold, numbers refreshed. Competitor rescrape: Gully Labs 104->94 (-9.6%), Lotto Sport India 242->218 (-9.9%), neither a >=20% move, no new alert. Catalog: still 24 must-fix out-of-stock items, unchanged, blocks DPA launch as before. No learning-phase-stuck ad sets (all active ad sets >7 days old except Black Friday, which is 1 day old). 10 proposals pending.",
+      "severity": "low",
+      "dismissed": false,
+      "createdAt": "2026-11-28T14:52:08.000Z"
     }
   ],
   "log": [
@@ -60279,6 +60288,24 @@
       "detail": null,
       "tier": "auto",
       "executedAt": "2026-11-26T00:49:00.000Z"
+    },
+    {
+      "proposalId": null,
+      "action": "hook-angle-tagging -- 2 new creative_ids found on active ads with no creativeTags entry (Black Friday campaign, launched 2026-11-27): 1512482034062804 (Black Friday Yin Yang) and 1404075105132574 (Black Friday Matcha). Tagged both from real ad copy (asset_feed_spec bodies/titles) via Meta Ads MCP ads_get_creatives -- Higgsfield vision pass skipped (not attached this run), no creative description invented. All other active ads' creative_ids already had creativeTags entries.",
+      "result": "success",
+      "previousState": {
+        "creativeTags_1512482034062804": "absent",
+        "creativeTags_1404075105132574": "absent"
+      },
+      "detail": {
+        "tool": "ads_get_creatives",
+        "creative_ids": [
+          "1512482034062804",
+          "1404075105132574"
+        ]
+      },
+      "tier": "auto",
+      "executedAt": "2026-11-28T14:52:08.000Z"
     }
   ],
   "creativeTags": {
@@ -66285,6 +66312,28 @@
       "visionPassSkipped": true,
       "note": "Higgsfield vision connection not attached to this run -- image content itself not analyzed, only real ad copy text used. No creative description invented.",
       "taggedAt": "2026-11-23T10:51:00.000Z"
+    },
+    "1512482034062804": {
+      "adName": "Black Friday Yin Yang",
+      "campaign": "Black Friday",
+      "format": "Flexible/dynamic creative (2 images, 6 body options, 4 title options, AUTOMATIC_FORMAT with per-placement asset customization)",
+      "angle": "Black Friday flash discount (25% off) on the In-Yo product; older KAGE+Cap bundle copy retained as secondary text options in the same asset pool",
+      "hook": "\"KAI BLACK FRIDAY FEST IS ON 🔥 Flat 25% off Limited time offer KAI In-Yo now at 2,499\" (primary body) / \"KAI In-Yo now at 2,499 plus prepaid discount of 5%\" (primary title)",
+      "taggedFrom": "asset_feed_spec bodies/titles (dynamic creative text options), via Meta Ads MCP ads_get_creatives",
+      "visionPassSkipped": true,
+      "note": "Higgsfield vision connection not attached to this run -- image content itself not analyzed, only real ad copy text used. No creative description invented.",
+      "taggedAt": "2026-11-28T14:52:08.000Z"
+    },
+    "1404075105132574": {
+      "adName": "Black Friday Matcha",
+      "campaign": "Black Friday",
+      "format": "Flexible/dynamic creative (3 images, 6 body options, 6 title options, AUTOMATIC_FORMAT with per-placement asset customization)",
+      "angle": "Black Friday flash discount (25% off) on the Matcha product; older KAGE+Cap bundle copy retained as secondary text options in the same asset pool",
+      "hook": "\"KAI BLACK FRIDAY FEST IS ON 🔥 Flat 25% off Limited time offer KAI Matcha now at 25% off\" (body option) / \"KAI Matcha now at 25% off plus prepaid discount of 5%\" (description/title option)",
+      "taggedFrom": "asset_feed_spec bodies/titles (dynamic creative text options), via Meta Ads MCP ads_get_creatives",
+      "visionPassSkipped": true,
+      "note": "Higgsfield vision connection not attached to this run -- image content itself not analyzed, only real ad copy text used. No creative description invented.",
+      "taggedAt": "2026-11-28T14:52:08.000Z"
     }
   }
 }
